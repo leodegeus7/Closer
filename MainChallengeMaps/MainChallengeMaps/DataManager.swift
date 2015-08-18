@@ -13,6 +13,7 @@ class DataManager: NSObject {
     var nome: NSString!
     var latitude: NSString!
     var longitude: NSString!
+    
     override init() {
         self.nome = ""
         self.latitude = ""
@@ -33,6 +34,14 @@ class DataManager: NSObject {
         return Static.instance!
     }
     
+    func imagemTamanho(image: UIImage, newSize: CGSize) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        [image .drawInRect(CGRectMake(0, 0, newSize.width, newSize.height))]
+        var newImage:UIImage
+        newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsGetCurrentContext()
+        return newImage
+    }
 
     
 }

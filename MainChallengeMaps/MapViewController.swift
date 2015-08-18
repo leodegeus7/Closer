@@ -16,11 +16,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var coreLocation = CLLocationManager()
     var locationAvailability = false
     var ip = "172.16.2.49"
+    var tipo = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.showsUserLocation = true
-        mapView.mapType = MKMapType.Standard
+        mapView.mapType = MKMapType.Hybrid
         mapView.delegate = self
         
         coreLocation.desiredAccuracy = kCLLocationAccuracyBest
@@ -28,7 +29,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         coreLocation.startUpdatingLocation()
         coreLocation.delegate = self
         
-        var timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        //var timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
         
 //        
 //        if (timer != nil) {
@@ -70,6 +71,53 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+        let annotationIdentifier = "minhaIdentificacao"
+        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationIdentifier)
+        if annotation.isKindOfClass(MKUserLocation) {
+            return annotationView
+        }
+        else
+        {
+            if annotationView == nil {
+                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+                if tipo == 4 {
+                    tipo = 0
+                    
+                }
+                
+                let charImage: UIImage!
+                switch tipo {
+                case 0:
+                    charImage = UIImage(named: "ovalVerde.png")
+                    break
+                case 1:
+                    charImage = UIImage(named: "ovalLaranja.png")
+                    break
+                case 2:
+                    charImage = UIImage(named: "ovalVermelho.png")
+                    break
+                case 3:
+                    charImage = UIImage(named: "ovalRosa.png")
+                    break
+                default:
+                    charImage = UIImage(named: "")
+                    break
+                }
+                tipo++
+                println("\(tipo)")
+                var sizedImage = DataManager.sharedInstance.imagemTamanho(charImage, newSize: CGSize(width: 25, height: 25))
+                annotationView.image = sizedImage
+                annotationView.canShowCallout = true
+            }else
+            {
+                annotationView.annotation = annotation
+            }
+        }
+        return annotationView
+    }
+    
+    
     func update() {
         var url = NSURL(string: "http://\(ip):8888/recebe.php")
         var data = NSData(contentsOfURL: url!)
@@ -84,20 +132,25 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             mapView.removeAnnotation(itemConvertido)
         
         }
+        tipo = 0
+        
+    
         
         for item in json {
-            if !(item.key as! NSString == " " || item.key as! NSString == "") {
+            if !(item.key as! NSString == " " || item.key as! NSString == "" || item.key as! NSString == "\(DataManager.sharedInstance.nome)") {
                 var nome = item.key as! NSString
                 var coordenadas: AnyObject = item.value
                 var latitude = coordenadas["latitude"] as! NSString
                 var longitude = coordenadas["longitude"] as! NSString
                 println("\(nome) = \(latitude) e \(longitude)")
                 var annotation = MKPointAnnotation()
-                //annotation.title
-                annotation.title = "\(nome)"
+                               //annotation.title
+                //var nome2 = "\(nome)"
                 var latitudeConvertida = (latitude).doubleValue as CLLocationDegrees
                 var longitudeConvertida = (longitude).doubleValue as CLLocationDegrees
                 annotation.coordinate = CLLocationCoordinate2DMake(latitudeConvertida,longitudeConvertida)
+                annotation.title = nome as String
+                //var annotation2 = Annotation(coordinate: coordenadas2, title: nome2, subtitle: "teste", imagem: "ovalVerde.png")
                 mapView.addAnnotation(annotation)
                 
                 
