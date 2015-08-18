@@ -79,7 +79,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 //        println("\n")
 //        print(DataManager.sharedInstance.latitude)
 //        print(DataManager.sharedInstance.longitude)
+        for item in mapView.annotations {
+            var itemConvertido = item as! MKAnnotation
+            mapView.removeAnnotation(itemConvertido)
         
+        }
         
         for item in json {
             if !(item.key as! NSString == " " || item.key as! NSString == "") {
@@ -90,6 +94,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 println("\(nome) = \(latitude) e \(longitude)")
                 var annotation = MKPointAnnotation()
                 //annotation.title
+                annotation.title = "\(nome)"
                 var latitudeConvertida = (latitude).doubleValue as CLLocationDegrees
                 var longitudeConvertida = (longitude).doubleValue as CLLocationDegrees
                 annotation.coordinate = CLLocationCoordinate2DMake(latitudeConvertida,longitudeConvertida)
