@@ -17,7 +17,7 @@ class DataManager: NSObject {
     override init() {
         self.nome = ""
         self.latitude = ""
-        self.longitude = ""
+        self.longitude = ""  //54.68.89.24:80/
     }
    
     class var sharedInstance:DataManager {
@@ -41,6 +41,51 @@ class DataManager: NSObject {
         newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsGetCurrentContext()
         return newImage
+    }
+    
+    func importData ()
+    {
+        let file = "user.txt"
+        
+        let dirs: [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String]
+        
+        if (dirs != nil)
+        {
+            let directories:[String] = dirs!
+            let dirs = directories[0]; //documents directory
+            let path = dirs.stringByAppendingPathComponent(file);
+            println("Nome  = \(DataManager.sharedInstance.nome)")
+            //reading
+            var error:NSError?
+            let text2 = String(contentsOfFile: path, encoding:NSUTF8StringEncoding, error: &error)
+            if text2 == "" {
+                saveData()
+            }
+            if let theError = error {
+                saveData()
+            }
+            else if error == nil{
+                DataManager.sharedInstance.nome = text2!}
+            
+        }
+    }
+    //
+    func saveData ()
+    {
+        let file = "user.txt"
+        
+        let dirs: [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String]
+        
+        if (dirs != nil)
+        {
+            let directories:[String] = dirs!
+            let dirs = directories[0]; //documents directory
+            let path = dirs.stringByAppendingPathComponent(file);
+            let text = "\(DataManager.sharedInstance.nome)"
+            
+            //writing
+            text.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding, error: nil);
+        }
     }
 
     

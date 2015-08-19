@@ -13,7 +13,14 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        DataManager.sharedInstance.importData()
+        
+        if !(DataManager.sharedInstance.nome == "") {
+            self.performSegueWithIdentifier("showMapView", sender: self)
+        
+        }
+        
         // Do any additional setup after loading the view.
     }
 
@@ -39,6 +46,7 @@ class LoginViewController: UIViewController {
                 errorAlert.show()
             } else {
                 DataManager.sharedInstance.nome = nome as String
+                DataManager.sharedInstance.importData()
                 self.performSegueWithIdentifier("showMapView", sender: self)
             }
             

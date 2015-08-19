@@ -15,7 +15,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBOutlet weak var mapView: MKMapView!
     var coreLocation = CLLocationManager()
     var locationAvailability = false
-    var ip = "172.16.2.49"
+    var ip = "172.16.2.49:8888"
     var tipo = 0
     
     override func viewDidLoad() {
@@ -24,12 +24,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.mapType = MKMapType.Hybrid
         mapView.delegate = self
         
+        DataManager.sharedInstance.importData()
+        
         coreLocation.desiredAccuracy = kCLLocationAccuracyBest
         coreLocation.distanceFilter = 100
         coreLocation.startUpdatingLocation()
         coreLocation.delegate = self
         
-        //var timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        
+        var timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
         
 //        
 //        if (timer != nil) {
@@ -47,7 +50,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBAction func refreshButton(sender: AnyObject) {
         let userLocation = mapView.userLocation.coordinate
         let region = MKCoordinateRegionMakeWithDistance(userLocation, 1000, 1000)
-        
         
         
         if locationAvailability {
@@ -119,11 +121,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     
     func update() {
-        var url = NSURL(string: "http://\(ip):8888/recebe.php")
+        //println("\(coreLocation.location.coordinate)")
+        var url = NSURL(string: "http://\(ip)/recebe.php")
         var data = NSData(contentsOfURL: url!)
         var json = NSJSONSerialization.JSONObjectWithData(data!, options: nil, error: nil) as! NSDictionary
+        println("\(url)")
         checkLOCMAN()
-    //  println("\(json)")
+      println("\(json)")
 //        println("\n")
 //        print(DataManager.sharedInstance.latitude)
 //        print(DataManager.sharedInstance.longitude)
@@ -161,11 +165,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
      
         if locationAvailability {
-            var urlEnvio = NSURL(string: "http://\(ip):8888/recebe.php?id=\(DataManager.sharedInstance.nome)&lat=\(DataManager.sharedInstance.latitude)&long=\(DataManager.sharedInstance.longitude)")
+            var urlEnvio = NSURL(string: "http://\(ip)/recebe.php?id=\(DataManager.sharedInstance.nome)&lat=\(DataManager.sharedInstance.latitude)&long=\(DataManager.sharedInstance.longitude)")
             let request = NSURLRequest(URL: urlEnvio!)
             let response:NSURLResponse?
-            let responseData = NSURLConnection.sendSynchronousRequest(request, returningResponse: nil, error: nil)
-            //println("\(urlEnvio)")
+            var error:NSError?
+            
+            let responseData = NSURLConnection.sendSynchronousRequest(request, returningResponse: nil, error: &error)
+            
+            if let myError = error{
+                println(myError.description)
+            }
+            
+            println("\(urlEnvio)")
             
 
             
