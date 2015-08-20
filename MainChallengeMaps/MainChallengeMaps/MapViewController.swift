@@ -15,13 +15,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBOutlet weak var mapView: MKMapView!
     var coreLocation = CLLocationManager()
     var locationAvailability = false
-    var ip = "172.16.2.49:8888"
+    var ip1 = "172.16.2.49:8888"
+    var ip2 = "54.68.89.24"
+    var ip = "lohannferreira.com.br/api/sotz"
     var tipo = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.showsUserLocation = true
-        mapView.mapType = MKMapType.Hybrid
+        mapView.mapType = MKMapType.Satellite
         mapView.delegate = self
         
         DataManager.sharedInstance.importData()
@@ -31,7 +33,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         coreLocation.startUpdatingLocation()
         coreLocation.delegate = self
         
-        
+
+        update()
         var timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
         
 //        
@@ -49,7 +52,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     @IBAction func refreshButton(sender: AnyObject) {
         let userLocation = mapView.userLocation.coordinate
-        let region = MKCoordinateRegionMakeWithDistance(userLocation, 1000, 1000)
+        let region = MKCoordinateRegionMakeWithDistance(userLocation, 400, 400)
         
         
         if locationAvailability {
@@ -122,7 +125,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func update() {
         //println("\(coreLocation.location.coordinate)")
-        var url = NSURL(string: "http://\(ip)/recebe.php")
+        var url = NSURL(string: "http://\(ip)")
+        println("\(url)")
         var data = NSData(contentsOfURL: url!)
         var json = NSJSONSerialization.JSONObjectWithData(data!, options: nil, error: nil) as! NSDictionary
         println("\(url)")
@@ -143,9 +147,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         for item in json {
             if !(item.key as! NSString == " " || item.key as! NSString == "" || item.key as! NSString == "\(DataManager.sharedInstance.nome)") {
                 var nome = item.key as! NSString
-                var coordenadas: AnyObject = item.value
-                var latitude = coordenadas["latitude"] as! NSString
-                var longitude = coordenadas["longitude"] as! NSString
+                var objetos: AnyObject = item.value
+                var latitude = objetos["latitude"] as! NSString
+                var longitude = objetos["longitude"] as! NSString
+                var date = objetos["date"] as! NSString
                 println("\(nome) = \(latitude) e \(longitude)")
                 var annotation = MKPointAnnotation()
                                //annotation.title
@@ -154,6 +159,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 var longitudeConvertida = (longitude).doubleValue as CLLocationDegrees
                 annotation.coordinate = CLLocationCoordinate2DMake(latitudeConvertida,longitudeConvertida)
                 annotation.title = nome as String
+                annotation.subtitle = date as String
                 //var annotation2 = Annotation(coordinate: coordenadas2, title: nome2, subtitle: "teste", imagem: "ovalVerde.png")
                 mapView.addAnnotation(annotation)
                 
@@ -165,7 +171,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
      
         if locationAvailability {
-            var urlEnvio = NSURL(string: "http://\(ip)/recebe.php?id=\(DataManager.sharedInstance.nome)&lat=\(DataManager.sharedInstance.latitude)&long=\(DataManager.sharedInstance.longitude)")
+            let date = NSDate()
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "HH:mm:ss-dd/MM/yyyy"
+            var dateString = dateFormatter.stringFromDate(date)
+            println("\(dateString)")
+            var urlEnvio = NSURL(string: "http://\(ip)?id=\(DataManager.sharedInstance.nome)&lat=\(DataManager.sharedInstance.latitude)&long=\(DataManager.sharedInstance.longitude)&date=\(dateString)")
             let request = NSURLRequest(URL: urlEnvio!)
             let response:NSURLResponse?
             var error:NSError?
