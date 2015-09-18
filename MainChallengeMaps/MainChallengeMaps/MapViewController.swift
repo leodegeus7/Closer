@@ -11,7 +11,7 @@ import CoreLocation
 import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
-
+    
     @IBOutlet weak var mapView: MKMapView!
     var coreLocation = CLLocationManager()
     var locationAvailability = false
@@ -35,7 +35,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
 
         update()
-        var timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        var timer = NSTimer.scheduledTimerWithTimeInterval(4, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
         
 //        
 //        if (timer != nil) {
@@ -125,7 +125,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func update() {
         //println("\(coreLocation.location.coordinate)")
-        var url = NSURL(string: "http://\(ip)")
+        var stringRandom = randomStringWithLength(10)
+        var url = NSURL(string: "http://\(ip)?cachekey=\(stringRandom)") //?cachekey=\(stringRandom)
         println("\(url)")
         var data = NSData(contentsOfURL: url!)
         var json = NSJSONSerialization.JSONObjectWithData(data!, options: nil, error: nil) as! NSDictionary
@@ -151,7 +152,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 var latitude = objetos["latitude"] as! NSString
                 var longitude = objetos["longitude"] as! NSString
                 var date = objetos["date"] as! NSString
-                println("\(nome) = \(latitude) e \(longitude)")
+                println("\(nome) = \(latitude) e \(longitude) e  \(date)")
                 var annotation = MKPointAnnotation()
                                //annotation.title
                 //var nome2 = "\(nome)"
@@ -176,7 +177,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             dateFormatter.dateFormat = "HH:mm:ss-dd/MM/yyyy"
             var dateString = dateFormatter.stringFromDate(date)
             println("\(dateString)")
-            var urlEnvio = NSURL(string: "http://\(ip)?id=\(DataManager.sharedInstance.nome)&lat=\(DataManager.sharedInstance.latitude)&long=\(DataManager.sharedInstance.longitude)&date=\(dateString)")
+            var stringRandom = randomStringWithLength(10)
+            
+            var urlEnvio = NSURL(string: "http://\(ip)?cachekey=\(stringRandom)&id=\(DataManager.sharedInstance.nome)&lat=\(DataManager.sharedInstance.latitude)&long=\(DataManager.sharedInstance.longitude)&date=\(dateString)")
             let request = NSURLRequest(URL: urlEnvio!)
             let response:NSURLResponse?
             var error:NSError?
@@ -206,6 +209,24 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         } else {
             println("locationManager.location is nil, waiting 2000ms")
         }
+    }
+    
+    
+    
+    
+    func randomStringWithLength (len : Int) -> NSString {
+        
+        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        
+        var randomString : NSMutableString = NSMutableString(capacity: len)
+        
+        for (var i=0; i < len; i++){
+            var length = UInt32 (letters.length)
+            var rand = arc4random_uniform(length)
+            randomString.appendFormat("%C", letters.characterAtIndex(Int(rand)))
+        }
+        
+        return randomString
     }
     /*
     // MARK: - Navigation

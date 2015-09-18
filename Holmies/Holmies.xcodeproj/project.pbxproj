@@ -1,0 +1,644 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CD0B59DD1BAB47720098AD88 /* LocationUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0B59DC1BAB47720098AD88 /* LocationUserTableViewCell.swift */; };
+		CD0B59DF1BAB50360098AD88 /* LocatioUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0B59DE1BAB50360098AD88 /* LocatioUserTableViewController.swift */; };
+		CD0B59E11BAB57750098AD88 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0B59E01BAB57750098AD88 /* Location.swift */; };
+		CD1C03651BA749BD0073524A /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1C03631BA749BD0073524A /* FBSDKCoreKit.framework */; };
+		CD1C03661BA749BD0073524A /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1C03641BA749BD0073524A /* FBSDKLoginKit.framework */; };
+		CD1C03681BA74A590073524A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C03671BA74A590073524A /* LoginViewController.swift */; };
+		CD1C036A1BA74F0B0073524A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD1C03691BA74F0B0073524A /* Info.plist */; };
+		CD1C036C1BA752290073524A /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C036B1BA752290073524A /* DataManager.swift */; };
+		CD1C036E1BA761550073524A /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C036D1BA761550073524A /* FriendsTableViewController.swift */; };
+		CD21002A1B9DE7EF00485126 /* PlaceMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2100291B9DE7EF00485126 /* PlaceMarker.swift */; };
+		CD6BAA551B98D946008614B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA541B98D946008614B0 /* AppDelegate.swift */; };
+		CD6BAA571B98D946008614B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA561B98D946008614B0 /* ViewController.swift */; };
+		CD6BAA5C1B98D946008614B0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAA5B1B98D946008614B0 /* Images.xcassets */; };
+		CD6BAA5F1B98D946008614B0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAA5D1B98D946008614B0 /* LaunchScreen.xib */; };
+		CD6BAA6B1B98D946008614B0 /* HolmiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA6A1B98D946008614B0 /* HolmiesTests.swift */; };
+		CD6BAA751B98DA6D008614B0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6BAA741B98DA6D008614B0 /* AVFoundation.framework */; };
+		CD6BAA771B98DA72008614B0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6BAA761B98DA72008614B0 /* CoreData.framework */; };
+		CD6BAA791B98DA78008614B0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6BAA781B98DA78008614B0 /* CoreLocation.framework */; };
+		CD6BAA7B1B98DA7C008614B0 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6BAA7A1B98DA7C008614B0 /* CoreText.framework */; };
+		CD6BAA7D1B98DA83008614B0 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6BAA7C1B98DA83008614B0 /* GLKit.framework */; };
+		CD6BAA7F1B98DA90008614B0 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6BAA7E1B98DA90008614B0 /* ImageIO.framework */; };
+		CD6BAA811B98DA97008614B0 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6BAA801B98DA97008614B0 /* libc++.dylib */; };
+		CD6BAA831B98DA9E008614B0 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6BAA821B98DA9E008614B0 /* libicucore.dylib */; };
+		CD6BAA851B98DAA5008614B0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6BAA841B98DAA5008614B0 /* libz.dylib */; };
+		CD6BAA871B98DAAB008614B0 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6BAA861B98DAAB008614B0 /* OpenGLES.framework */; };
+		CD6BAA891B98DAB0008614B0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6BAA881B98DAB0008614B0 /* QuartzCore.framework */; };
+		CD6BAA8B1B98DAB6008614B0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6BAA8A1B98DAB6008614B0 /* SystemConfiguration.framework */; };
+		CD6BAA8D1B98DB5F008614B0 /* GoogleDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA8C1B98DB5F008614B0 /* GoogleDataProvider.swift */; };
+		CD6BAA8F1B98DB70008614B0 /* GooglePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA8E1B98DB70008614B0 /* GooglePlace.swift */; };
+		CD6BAA921B98DB7F008614B0 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA901B98DB7F008614B0 /* MapViewController.swift */; };
+		CD6BAA931B98DB7F008614B0 /* TypesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA911B98DB7F008614B0 /* TypesTableViewController.swift */; };
+		CD6BAA971B98DB8A008614B0 /* MarkerInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA941B98DB8A008614B0 /* MarkerInfoView.swift */; };
+		CD6BAA981B98DB8A008614B0 /* MarkerInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAA951B98DB8A008614B0 /* MarkerInfoView.xib */; };
+		CD6BAA991B98DB8A008614B0 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA961B98DB8A008614B0 /* UIViewExtension.swift */; };
+		CD6BAAAA1B98DE23008614B0 /* Holmies-Bridging.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAAA91B98DE23008614B0 /* Holmies-Bridging.m */; };
+		CD6BAAAC1B98DEDA008614B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAAAB1B98DEDA008614B0 /* Main.storyboard */; };
+		CD6BAAB51B98E298008614B0 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6BAAB31B98E298008614B0 /* GoogleMaps.framework */; };
+		CD6BAAB61B98E298008614B0 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAAB41B98E298008614B0 /* GoogleMaps.bundle */; };
+		CDA9A82D1B9DE9E300D93572 /* MapGoogleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CD6BAA651B98D946008614B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD6BAA471B98D946008614B0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD6BAA4E1B98D946008614B0;
+			remoteInfo = Holmies;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		27C29F8694868BB9197FEBBE /* Pods-Holmies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Holmies.release.xcconfig"; path = "Pods/Target Support Files/Pods-Holmies/Pods-Holmies.release.xcconfig"; sourceTree = "<group>"; };
+		B702994F19B9686CF5BEEC1E /* Pods-Holmies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Holmies.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Holmies/Pods-Holmies.debug.xcconfig"; sourceTree = "<group>"; };
+		CD0B59DC1BAB47720098AD88 /* LocationUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationUserTableViewCell.swift; sourceTree = "<group>"; };
+		CD0B59DE1BAB50360098AD88 /* LocatioUserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocatioUserTableViewController.swift; sourceTree = "<group>"; };
+		CD0B59E01BAB57750098AD88 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		CD1C03631BA749BD0073524A /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		CD1C03641BA749BD0073524A /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		CD1C03671BA74A590073524A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CD1C03691BA74F0B0073524A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD1C036B1BA752290073524A /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		CD1C036D1BA761550073524A /* FriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
+		CD2100291B9DE7EF00485126 /* PlaceMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceMarker.swift; sourceTree = "<group>"; };
+		CD6BAA4F1B98D946008614B0 /* Holmies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Holmies.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD6BAA531B98D946008614B0 /* Info2.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info2.plist; sourceTree = "<group>"; };
+		CD6BAA541B98D946008614B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CD6BAA561B98D946008614B0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CD6BAA5B1B98D946008614B0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		CD6BAA5E1B98D946008614B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		CD6BAA641B98D946008614B0 /* HolmiesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HolmiesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD6BAA691B98D946008614B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD6BAA6A1B98D946008614B0 /* HolmiesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolmiesTests.swift; sourceTree = "<group>"; };
+		CD6BAA741B98DA6D008614B0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		CD6BAA761B98DA72008614B0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		CD6BAA781B98DA78008614B0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		CD6BAA7A1B98DA7C008614B0 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		CD6BAA7C1B98DA83008614B0 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		CD6BAA7E1B98DA90008614B0 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		CD6BAA801B98DA97008614B0 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		CD6BAA821B98DA9E008614B0 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		CD6BAA841B98DAA5008614B0 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		CD6BAA861B98DAAB008614B0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		CD6BAA881B98DAB0008614B0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CD6BAA8A1B98DAB6008614B0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		CD6BAA8C1B98DB5F008614B0 /* GoogleDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDataProvider.swift; sourceTree = "<group>"; };
+		CD6BAA8E1B98DB70008614B0 /* GooglePlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlace.swift; sourceTree = "<group>"; };
+		CD6BAA901B98DB7F008614B0 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		CD6BAA911B98DB7F008614B0 /* TypesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypesTableViewController.swift; sourceTree = "<group>"; };
+		CD6BAA941B98DB8A008614B0 /* MarkerInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerInfoView.swift; sourceTree = "<group>"; };
+		CD6BAA951B98DB8A008614B0 /* MarkerInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarkerInfoView.xib; sourceTree = "<group>"; };
+		CD6BAA961B98DB8A008614B0 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		CD6BAAA81B98DE23008614B0 /* Holmies-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Holmies-Bridging-Header.h"; sourceTree = "<group>"; };
+		CD6BAAA91B98DE23008614B0 /* Holmies-Bridging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Holmies-Bridging.m"; sourceTree = "<group>"; };
+		CD6BAAAB1B98DEDA008614B0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		CD6BAAB31B98E298008614B0 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
+		CD6BAAB41B98E298008614B0 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleMaps.bundle; sourceTree = "<group>"; };
+		CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapGoogleViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CD6BAA4C1B98D946008614B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD6BAA8B1B98DAB6008614B0 /* SystemConfiguration.framework in Frameworks */,
+				CD6BAA891B98DAB0008614B0 /* QuartzCore.framework in Frameworks */,
+				CD1C03661BA749BD0073524A /* FBSDKLoginKit.framework in Frameworks */,
+				CD6BAA871B98DAAB008614B0 /* OpenGLES.framework in Frameworks */,
+				CD6BAA851B98DAA5008614B0 /* libz.dylib in Frameworks */,
+				CD6BAA831B98DA9E008614B0 /* libicucore.dylib in Frameworks */,
+				CD6BAA811B98DA97008614B0 /* libc++.dylib in Frameworks */,
+				CD6BAA7F1B98DA90008614B0 /* ImageIO.framework in Frameworks */,
+				CD6BAA7D1B98DA83008614B0 /* GLKit.framework in Frameworks */,
+				CD6BAAB51B98E298008614B0 /* GoogleMaps.framework in Frameworks */,
+				CD6BAA7B1B98DA7C008614B0 /* CoreText.framework in Frameworks */,
+				CD6BAA791B98DA78008614B0 /* CoreLocation.framework in Frameworks */,
+				CD1C03651BA749BD0073524A /* FBSDKCoreKit.framework in Frameworks */,
+				CD6BAA771B98DA72008614B0 /* CoreData.framework in Frameworks */,
+				CD6BAA751B98DA6D008614B0 /* AVFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD6BAA611B98D946008614B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		829AF50CC7B2E6D17F51E270 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B702994F19B9686CF5BEEC1E /* Pods-Holmies.debug.xcconfig */,
+				27C29F8694868BB9197FEBBE /* Pods-Holmies.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		AE38627656BF51DCD0B8AC62 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CD1C03631BA749BD0073524A /* FBSDKCoreKit.framework */,
+				CD1C03641BA749BD0073524A /* FBSDKLoginKit.framework */,
+				CD6BAAB31B98E298008614B0 /* GoogleMaps.framework */,
+				CD6BAAB41B98E298008614B0 /* GoogleMaps.bundle */,
+				CD6BAA8A1B98DAB6008614B0 /* SystemConfiguration.framework */,
+				CD6BAA881B98DAB0008614B0 /* QuartzCore.framework */,
+				CD6BAA861B98DAAB008614B0 /* OpenGLES.framework */,
+				CD6BAA841B98DAA5008614B0 /* libz.dylib */,
+				CD6BAA821B98DA9E008614B0 /* libicucore.dylib */,
+				CD6BAA801B98DA97008614B0 /* libc++.dylib */,
+				CD6BAA7E1B98DA90008614B0 /* ImageIO.framework */,
+				CD6BAA7C1B98DA83008614B0 /* GLKit.framework */,
+				CD6BAA7A1B98DA7C008614B0 /* CoreText.framework */,
+				CD6BAA781B98DA78008614B0 /* CoreLocation.framework */,
+				CD6BAA761B98DA72008614B0 /* CoreData.framework */,
+				CD6BAA741B98DA6D008614B0 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CD6BAA461B98D946008614B0 = {
+			isa = PBXGroup;
+			children = (
+				CD6BAA511B98D946008614B0 /* Holmies */,
+				CD6BAA501B98D946008614B0 /* Products */,
+				829AF50CC7B2E6D17F51E270 /* Pods */,
+				AE38627656BF51DCD0B8AC62 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		CD6BAA501B98D946008614B0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CD6BAA4F1B98D946008614B0 /* Holmies.app */,
+				CD6BAA641B98D946008614B0 /* HolmiesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CD6BAA511B98D946008614B0 /* Holmies */ = {
+			isa = PBXGroup;
+			children = (
+				CD6BAA541B98D946008614B0 /* AppDelegate.swift */,
+				CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */,
+				CD1C036B1BA752290073524A /* DataManager.swift */,
+				CD6BAA8C1B98DB5F008614B0 /* GoogleDataProvider.swift */,
+				CD6BAA8E1B98DB70008614B0 /* GooglePlace.swift */,
+				CD6BAA901B98DB7F008614B0 /* MapViewController.swift */,
+				CD6BAA911B98DB7F008614B0 /* TypesTableViewController.swift */,
+				CD6BAA941B98DB8A008614B0 /* MarkerInfoView.swift */,
+				CD6BAA951B98DB8A008614B0 /* MarkerInfoView.xib */,
+				CD2100291B9DE7EF00485126 /* PlaceMarker.swift */,
+				CD6BAA961B98DB8A008614B0 /* UIViewExtension.swift */,
+				CD6BAA561B98D946008614B0 /* ViewController.swift */,
+				CD6BAA5B1B98D946008614B0 /* Images.xcassets */,
+				CD6BAAAB1B98DEDA008614B0 /* Main.storyboard */,
+				CD6BAA5D1B98D946008614B0 /* LaunchScreen.xib */,
+				CD6BAAA91B98DE23008614B0 /* Holmies-Bridging.m */,
+				CD1C036D1BA761550073524A /* FriendsTableViewController.swift */,
+				CD6BAAA81B98DE23008614B0 /* Holmies-Bridging-Header.h */,
+				CD1C03671BA74A590073524A /* LoginViewController.swift */,
+				CD6BAA671B98D946008614B0 /* HolmiesTests */,
+				CD6BAA521B98D946008614B0 /* Supporting Files */,
+				CD0B59DC1BAB47720098AD88 /* LocationUserTableViewCell.swift */,
+				CD0B59DE1BAB50360098AD88 /* LocatioUserTableViewController.swift */,
+				CD0B59E01BAB57750098AD88 /* Location.swift */,
+			);
+			path = Holmies;
+			sourceTree = "<group>";
+		};
+		CD6BAA521B98D946008614B0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CD1C03691BA74F0B0073524A /* Info.plist */,
+				CD6BAA531B98D946008614B0 /* Info2.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CD6BAA671B98D946008614B0 /* HolmiesTests */ = {
+			isa = PBXGroup;
+			children = (
+				CD6BAA6A1B98D946008614B0 /* HolmiesTests.swift */,
+				CD6BAA681B98D946008614B0 /* Supporting Files */,
+			);
+			path = HolmiesTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		CD6BAA681B98D946008614B0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CD6BAA691B98D946008614B0 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CD6BAA4E1B98D946008614B0 /* Holmies */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD6BAA6E1B98D946008614B0 /* Build configuration list for PBXNativeTarget "Holmies" */;
+			buildPhases = (
+				880202891C1A847D3774D4E6 /* Check Pods Manifest.lock */,
+				CD6BAA4B1B98D946008614B0 /* Sources */,
+				CD6BAA4C1B98D946008614B0 /* Frameworks */,
+				CD6BAA4D1B98D946008614B0 /* Resources */,
+				10C238DE009416F18CAA4FEA /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Holmies;
+			productName = Holmies;
+			productReference = CD6BAA4F1B98D946008614B0 /* Holmies.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CD6BAA631B98D946008614B0 /* HolmiesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD6BAA711B98D946008614B0 /* Build configuration list for PBXNativeTarget "HolmiesTests" */;
+			buildPhases = (
+				CD6BAA601B98D946008614B0 /* Sources */,
+				CD6BAA611B98D946008614B0 /* Frameworks */,
+				CD6BAA621B98D946008614B0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CD6BAA661B98D946008614B0 /* PBXTargetDependency */,
+			);
+			name = HolmiesTests;
+			productName = HolmiesTests;
+			productReference = CD6BAA641B98D946008614B0 /* HolmiesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CD6BAA471B98D946008614B0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = "Leonardo Geus";
+				TargetAttributes = {
+					CD6BAA4E1B98D946008614B0 = {
+						CreatedOnToolsVersion = 6.4;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+						};
+					};
+					CD6BAA631B98D946008614B0 = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = CD6BAA4E1B98D946008614B0;
+					};
+				};
+			};
+			buildConfigurationList = CD6BAA4A1B98D946008614B0 /* Build configuration list for PBXProject "Holmies" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CD6BAA461B98D946008614B0;
+			productRefGroup = CD6BAA501B98D946008614B0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CD6BAA4E1B98D946008614B0 /* Holmies */,
+				CD6BAA631B98D946008614B0 /* HolmiesTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CD6BAA4D1B98D946008614B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD6BAA981B98DB8A008614B0 /* MarkerInfoView.xib in Resources */,
+				CD6BAA5F1B98D946008614B0 /* LaunchScreen.xib in Resources */,
+				CD1C036A1BA74F0B0073524A /* Info.plist in Resources */,
+				CD6BAA5C1B98D946008614B0 /* Images.xcassets in Resources */,
+				CD6BAAAC1B98DEDA008614B0 /* Main.storyboard in Resources */,
+				CD6BAAB61B98E298008614B0 /* GoogleMaps.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD6BAA621B98D946008614B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		10C238DE009416F18CAA4FEA /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Holmies/Pods-Holmies-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		880202891C1A847D3774D4E6 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CD6BAA4B1B98D946008614B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD1C03681BA74A590073524A /* LoginViewController.swift in Sources */,
+				CD6BAA971B98DB8A008614B0 /* MarkerInfoView.swift in Sources */,
+				CD6BAA571B98D946008614B0 /* ViewController.swift in Sources */,
+				CD6BAAAA1B98DE23008614B0 /* Holmies-Bridging.m in Sources */,
+				CD0B59E11BAB57750098AD88 /* Location.swift in Sources */,
+				CD0B59DF1BAB50360098AD88 /* LocatioUserTableViewController.swift in Sources */,
+				CD6BAA8D1B98DB5F008614B0 /* GoogleDataProvider.swift in Sources */,
+				CD0B59DD1BAB47720098AD88 /* LocationUserTableViewCell.swift in Sources */,
+				CD6BAA8F1B98DB70008614B0 /* GooglePlace.swift in Sources */,
+				CDA9A82D1B9DE9E300D93572 /* MapGoogleViewController.swift in Sources */,
+				CD21002A1B9DE7EF00485126 /* PlaceMarker.swift in Sources */,
+				CD6BAA921B98DB7F008614B0 /* MapViewController.swift in Sources */,
+				CD6BAA551B98D946008614B0 /* AppDelegate.swift in Sources */,
+				CD6BAA991B98DB8A008614B0 /* UIViewExtension.swift in Sources */,
+				CD1C036C1BA752290073524A /* DataManager.swift in Sources */,
+				CD1C036E1BA761550073524A /* FriendsTableViewController.swift in Sources */,
+				CD6BAA931B98DB7F008614B0 /* TypesTableViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD6BAA601B98D946008614B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD6BAA6B1B98D946008614B0 /* HolmiesTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CD6BAA661B98D946008614B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD6BAA4E1B98D946008614B0 /* Holmies */;
+			targetProxy = CD6BAA651B98D946008614B0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CD6BAA5D1B98D946008614B0 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CD6BAA5E1B98D946008614B0 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CD6BAA6C1B98D946008614B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CD6BAA6D1B98D946008614B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CD6BAA6F1B98D946008614B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B702994F19B9686CF5BEEC1E /* Pods-Holmies.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/GoogleMaps/Frameworks",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/GoogleMaps",
+				);
+				INFOPLIST_FILE = Holmies/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/GoogleMaps/Frameworks/GoogleMaps.framework",
+				);
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Holmies/Holmies-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CD6BAA701B98D946008614B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 27C29F8694868BB9197FEBBE /* Pods-Holmies.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/GoogleMaps/Frameworks",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/GoogleMaps",
+				);
+				INFOPLIST_FILE = Holmies/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/GoogleMaps/Frameworks/GoogleMaps.framework",
+				);
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Holmies/Holmies-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		CD6BAA721B98D946008614B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = HolmiesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Holmies.app/Holmies";
+			};
+			name = Debug;
+		};
+		CD6BAA731B98D946008614B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = HolmiesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Holmies.app/Holmies";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CD6BAA4A1B98D946008614B0 /* Build configuration list for PBXProject "Holmies" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD6BAA6C1B98D946008614B0 /* Debug */,
+				CD6BAA6D1B98D946008614B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CD6BAA6E1B98D946008614B0 /* Build configuration list for PBXNativeTarget "Holmies" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD6BAA6F1B98D946008614B0 /* Debug */,
+				CD6BAA701B98D946008614B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CD6BAA711B98D946008614B0 /* Build configuration list for PBXNativeTarget "HolmiesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD6BAA721B98D946008614B0 /* Debug */,
+				CD6BAA731B98D946008614B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CD6BAA471B98D946008614B0 /* Project object */;
+}

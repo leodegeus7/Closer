@@ -17,10 +17,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     var window: UIWindow?
     var coreLocation = CLLocationManager()
 
+
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         coreLocation.requestAlwaysAuthorization()
+        
+        
+        let settings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Alert, categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
+        return true;
+        
         // Override point for customization after application launch.
-        return true
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -47,6 +54,63 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         self.saveContext()
     }
 
+    
+    
+    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        println("Complete");
+        completionHandler(UIBackgroundFetchResult.NewData)
+        
+        getData();
+        
+    }
+    
+    
+    func getData() -> Void{
+        
+        let date = NSDate()
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "HH:mm:ss-dd/MM/yyyy"
+        var dateString = dateFormatter.stringFromDate(date)
+        println("\(dateString)")
+        var stringRandom = randomStringWithLength(10)
+        DataManager.sharedInstance.latitude = "\(coreLocation.location.coordinate.latitude)"
+        DataManager.sharedInstance.longitude = "\(coreLocation.location.coordinate.longitude)"
+        
+        var ip = "lohannferreira.com.br/api/sotz"
+        var url = "http://\(ip)?cachekey=\(stringRandom)&id=\(DataManager.sharedInstance.nome)&lat=\(DataManager.sharedInstance.latitude)&long=\(DataManager.sharedInstance.longitude)&date=\(dateString)";
+        var request = NSURLRequest(URL: NSURL(string: url)!);
+        
+        NSURLConnection.sendAsynchronousRequest(request,queue: NSOperationQueue.mainQueue()) {
+            (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+            var moviesResult = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as! NSDictionary;
+            var movies: [NSDictionary]=[];
+            movies = moviesResult["movies"] as! [NSDictionary];
+            var localNotification:UILocalNotification = UILocalNotification()
+            localNotification.alertAction = "Testing notifications on iOS8"
+            localNotification.alertBody = "Movie Count : \(movies.count)"
+            localNotification.fireDate = NSDate(timeIntervalSinceNow: 1)
+            UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+        }
+        
+        
+    }
+    
+    func randomStringWithLength (len : Int) -> NSString {
+        
+        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        
+        var randomString : NSMutableString = NSMutableString(capacity: len)
+        
+        for (var i=0; i < len; i++){
+            var length = UInt32 (letters.length)
+            var rand = arc4random_uniform(length)
+            randomString.appendFormat("%C", letters.characterAtIndex(Int(rand)))
+        }
+        
+        return randomString
+    }
+    
+    
     // MARK: - Core Data stack
 
     lazy var applicationDocumentsDirectory: NSURL = {
