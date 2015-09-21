@@ -9,10 +9,13 @@
 import UIKit
 
 class FriendsTableViewController: UITableViewController {
-
+    var fbImage:UIImage!
     override func viewDidLoad() {
         super.viewDidLoad()
+       
 
+    
+    
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -26,6 +29,17 @@ class FriendsTableViewController: UITableViewController {
         
     }
 
+    func getProfPic(fid: String) -> UIImage? {
+        if (fid != "") {
+            let imgURLString = "http://graph.facebook.com/" + fid + "/picture?type=large" //type=normal
+            let imgURL = NSURL(string: imgURLString)
+            let imageData = NSData(contentsOfURL: imgURL!)
+            fbImage = UIImage(data: imageData!)
+
+        
+        }
+        return nil
+    }
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -42,15 +56,32 @@ class FriendsTableViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) 
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! FriendsTableViewCell
         let name = DataManager.sharedInstance.friendsArray[indexPath.row]["name"] as! String
         let id = DataManager.sharedInstance.friendsArray[indexPath.row]["id"] as! String
-        cell.textLabel?.text = "\(name)   \(id)"
-        // Configure the cell...
+        cell.friendName.text = name
+        cell.friendID.text = id
+        
+        getProfPic(id)
+       // DataManager.sharedInstance.profilePictureOfFriendsArray.append(fbImage)
+        cell.friendPicture.image = fbImage
+        DataManager.sharedInstance.profilePictureOfFriendsArray.append(fbImage)
+        
+        
+        
+        // Configure the)     // Conf?gure the cell...
 
         return cell
     }
-
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if (DataManager.sharedInstance.profilePictureOfFriendsArray == nil) {
+            print("arrayNil")
+        } else{
+        print(DataManager.sharedInstance.profilePictureOfFriendsArray)
+    }
+    }
 
     /*
     // Override to support conditional editing of the table view.
