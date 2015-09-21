@@ -13,7 +13,6 @@
 		CD1C03651BA749BD0073524A /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1C03631BA749BD0073524A /* FBSDKCoreKit.framework */; };
 		CD1C03661BA749BD0073524A /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1C03641BA749BD0073524A /* FBSDKLoginKit.framework */; };
 		CD1C03681BA74A590073524A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C03671BA74A590073524A /* LoginViewController.swift */; };
-		CD1C036A1BA74F0B0073524A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD1C03691BA74F0B0073524A /* Info.plist */; };
 		CD1C036C1BA752290073524A /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C036B1BA752290073524A /* DataManager.swift */; };
 		CD1C036E1BA761550073524A /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C036D1BA761550073524A /* FriendsTableViewController.swift */; };
 		CD21002A1B9DE7EF00485126 /* PlaceMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2100291B9DE7EF00485126 /* PlaceMarker.swift */; };
@@ -36,7 +35,6 @@
 		CD6BAA8B1B98DAB6008614B0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6BAA8A1B98DAB6008614B0 /* SystemConfiguration.framework */; };
 		CD6BAA8D1B98DB5F008614B0 /* GoogleDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA8C1B98DB5F008614B0 /* GoogleDataProvider.swift */; };
 		CD6BAA8F1B98DB70008614B0 /* GooglePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA8E1B98DB70008614B0 /* GooglePlace.swift */; };
-		CD6BAA921B98DB7F008614B0 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA901B98DB7F008614B0 /* MapViewController.swift */; };
 		CD6BAA931B98DB7F008614B0 /* TypesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA911B98DB7F008614B0 /* TypesTableViewController.swift */; };
 		CD6BAA971B98DB8A008614B0 /* MarkerInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA941B98DB8A008614B0 /* MarkerInfoView.swift */; };
 		CD6BAA981B98DB8A008614B0 /* MarkerInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAA951B98DB8A008614B0 /* MarkerInfoView.xib */; };
@@ -94,7 +92,6 @@
 		CD6BAA8A1B98DAB6008614B0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CD6BAA8C1B98DB5F008614B0 /* GoogleDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDataProvider.swift; sourceTree = "<group>"; };
 		CD6BAA8E1B98DB70008614B0 /* GooglePlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlace.swift; sourceTree = "<group>"; };
-		CD6BAA901B98DB7F008614B0 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		CD6BAA911B98DB7F008614B0 /* TypesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypesTableViewController.swift; sourceTree = "<group>"; };
 		CD6BAA941B98DB8A008614B0 /* MarkerInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerInfoView.swift; sourceTree = "<group>"; };
 		CD6BAA951B98DB8A008614B0 /* MarkerInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarkerInfoView.xib; sourceTree = "<group>"; };
@@ -199,7 +196,6 @@
 				CD1C036B1BA752290073524A /* DataManager.swift */,
 				CD6BAA8C1B98DB5F008614B0 /* GoogleDataProvider.swift */,
 				CD6BAA8E1B98DB70008614B0 /* GooglePlace.swift */,
-				CD6BAA901B98DB7F008614B0 /* MapViewController.swift */,
 				CD6BAA911B98DB7F008614B0 /* TypesTableViewController.swift */,
 				CD6BAA941B98DB8A008614B0 /* MarkerInfoView.swift */,
 				CD6BAA951B98DB8A008614B0 /* MarkerInfoView.xib */,
@@ -294,7 +290,9 @@
 		CD6BAA471B98D946008614B0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Leonardo Geus";
 				TargetAttributes = {
 					CD6BAA4E1B98D946008614B0 = {
@@ -340,7 +338,6 @@
 			files = (
 				CD6BAA981B98DB8A008614B0 /* MarkerInfoView.xib in Resources */,
 				CD6BAA5F1B98D946008614B0 /* LaunchScreen.xib in Resources */,
-				CD1C036A1BA74F0B0073524A /* Info.plist in Resources */,
 				CD6BAA5C1B98D946008614B0 /* Images.xcassets in Resources */,
 				CD6BAAAC1B98DEDA008614B0 /* Main.storyboard in Resources */,
 				CD6BAAB61B98E298008614B0 /* GoogleMaps.bundle in Resources */,
@@ -405,7 +402,6 @@
 				CD6BAA8F1B98DB70008614B0 /* GooglePlace.swift in Sources */,
 				CDA9A82D1B9DE9E300D93572 /* MapGoogleViewController.swift in Sources */,
 				CD21002A1B9DE7EF00485126 /* PlaceMarker.swift in Sources */,
-				CD6BAA921B98DB7F008614B0 /* MapViewController.swift in Sources */,
 				CD6BAA551B98D946008614B0 /* AppDelegate.swift in Sources */,
 				CD6BAA991B98DB8A008614B0 /* UIViewExtension.swift in Sources */,
 				CD1C036C1BA752290073524A /* DataManager.swift in Sources */,
@@ -465,6 +461,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -544,6 +541,7 @@
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Frameworks/GoogleMaps.framework",
 				);
 				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bepid.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Holmies/Holmies-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -569,6 +567,7 @@
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Frameworks/GoogleMaps.framework",
 				);
 				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bepid.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Holmies/Holmies-Bridging-Header.h";
 			};
@@ -588,6 +587,7 @@
 				);
 				INFOPLIST_FILE = HolmiesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bepid.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Holmies.app/Holmies";
 			};
@@ -603,6 +603,7 @@
 				);
 				INFOPLIST_FILE = HolmiesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bepid.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Holmies.app/Holmies";
 			};

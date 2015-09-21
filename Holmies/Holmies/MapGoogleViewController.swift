@@ -17,7 +17,6 @@ class MapGoogleViewController: UIViewController, TypesTableViewControllerDelegat
     @IBOutlet weak var mapCenterPinImage: UIImageView!
     @IBOutlet weak var pinImageVerticalConstraint: NSLayoutConstraint!
     
-    
     var searchedTypes = ["bakery", "bar", "cafe", "grocery", "restaurant"]
     var locationFirst:CLLocation!
     let dataProvider = GoogleDataProvider()
@@ -50,16 +49,11 @@ class MapGoogleViewController: UIViewController, TypesTableViewControllerDelegat
         super.viewDidLoad()
         DataManager.sharedInstance.locationManager.delegate = self
         mapView.delegate = self   //delegate das funçoes do google maps
-
+        mapView.mapType = kGMSTypeNormal
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "Types Segue" {
-            let navigationController = segue.destinationViewController as! UINavigationController
-            let controller = segue.destinationViewController.topViewController as! TypesTableViewController
-            controller.selectedTypes = searchedTypes
-            controller.delegate = self
-        }
+
     }
     
     
@@ -67,7 +61,7 @@ class MapGoogleViewController: UIViewController, TypesTableViewControllerDelegat
 // MARK: entra nesse delegate quando recebe novas coordenadas do user
     
     
-    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status ==  .AuthorizedWhenInUse || status == .AuthorizedAlways {    //se a autorizaçao do user estiver sendo pega pelo app
             DataManager.sharedInstance.locationManager.startUpdatingLocation()   //inicia o locationmanager
             mapView.myLocationEnabled = true   //coloca a localizaçao do user no mapa com uma bolinha
@@ -78,42 +72,39 @@ class MapGoogleViewController: UIViewController, TypesTableViewControllerDelegat
 //    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {    SE USAR ESSA FUNCAO NAO PODE USAR A didUpdateToLocation newLocation
 
     
-    func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
+    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
         if locationFirst == nil {
             locationFirst = newLocation
             mapView.camera = GMSCameraPosition(target: newLocation.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)  //posiciona a camera do maps
         }
         else {
             if UIApplication.sharedApplication().applicationState == .Active {
-                println("app aberto, atualizando infor \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
-                var marker = GMSMarker(position: CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude))
+                print("app aberto. Coord: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
+                let marker = GMSMarker(position: CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude))
                 marker.title = "\(newLocation.coordinate.latitude) e \(newLocation.coordinate.longitude)"
                 marker.map = mapView}
             else {
-                println("App em background \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
-                var marker = GMSMarker(position: CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude))
+                print("App em background. Coord: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
+                let marker = GMSMarker(position: CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude))
                 marker.title = "\(newLocation.coordinate.latitude) e \(newLocation.coordinate.longitude)"
                 marker.map = mapView }
 
         }
-        println("\(DataManager.sharedInstance.locationManager.desiredAccuracy)")
-
-        let actualLocation = Location()
-        actualLocation.location = newLocation
-        if DataManager.sharedInstance.end != nil {
-            actualLocation.address = DataManager.sharedInstance.end }
-        else {
-            let msg = "Nao funfa"
-            actualLocation.address.append(msg)
-        }
-        DataManager.sharedInstance.locationUserArray.append(actualLocation)
+       
         
-//        if let address = reverseGeocodeCoordinate(newLocation.coordinate) {
-//            let actualLocation = Location()
-//            actualLocation.location = newLocation
-//            actualLocation.address = address
-//            DataManager.sharedInstance.locationUserArray.append(actualLocation)
-//        }
+        DataManager.sharedInstance.reverseGeocodeCoordinate(newLocation.coordinate) //transforma a coordenada em endereco
+        if DataManager.sharedInstance.end != nil {
+            let actualLocation = Location()
+            actualLocation.location = newLocation
+            actualLocation.address = DataManager.sharedInstance.end
+            DataManager.sharedInstance.locationUserArray.append(actualLocation)}
+        else {
+            _ = "Nao funfa"
+            //actualLocation.address.append(msg)
+        }
+        
+        
+
 
     }
     
@@ -124,7 +115,7 @@ class MapGoogleViewController: UIViewController, TypesTableViewControllerDelegat
     
     // MARK: - Types Controller Delegate
     func typesController(controller: TypesTableViewController, didSelectTypes types: [String]) {
-        searchedTypes = sorted(controller.selectedTypes)
+        searchedTypes = controller.selectedTypes.sort()
         dismissViewControllerAnimated(true, completion: nil)
         fetchNearbyPlaces(mapView.camera.target)
     }
@@ -171,27 +162,19 @@ class MapGoogleViewController: UIViewController, TypesTableViewControllerDelegat
     }
     
     
-    func reverseGeocodeCoordinate(coordinate: CLLocationCoordinate2D) -> [String]? {   //transforma coordenadas em endereço
+    func reverseGeocodeCoordinate(coordinate: CLLocationCoordinate2D) {   //transforma coordenadas em endereço
         let geocoder = GMSGeocoder()
         var lines:[String]!
         geocoder.reverseGeocodeCoordinate(coordinate) { response , error in
             if let address = response?.firstResult() {
                 lines = address.lines as! [String]
-                println("AQUIII \(lines)")
+                
                 
                 if lines != nil {
-                    DataManager.sharedInstance.end = lines }
+                    DataManager.sharedInstance.end = lines}
             }
         }
-        if lines != nil {
-            return lines
-        }
-
-        else {
-            var msgString = [String]()
-            var msg: () = msgString.append("Nao Funcioana")
-            return msgString
-        }
+        
     }
     
     func fetchNearbyPlaces(coordinate: CLLocationCoordinate2D) {

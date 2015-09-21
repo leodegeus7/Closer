@@ -50,11 +50,12 @@ class LocatioUserTableViewController: UITableViewController {
         let long = coord.longitude
         
         let address = DataManager.sharedInstance.locationUserArray[indexPath.row].address
+        print("endereco\(address)")
         
         cell.timeLabel.text = "\(time)"
         cell.latLabel.text = "\(lat)"
         cell.longLabel.text = "\(long)"
-        cell.addressLabel.text = join("\n", address)
+        cell.addressLabel.text = address.joinWithSeparator("\n")
         
         
         return cell

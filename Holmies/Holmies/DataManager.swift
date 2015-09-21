@@ -19,7 +19,7 @@ class DataManager {
         let manager = CLLocationManager()
         manager.desiredAccuracy = kCLLocationAccuracyKilometer
         manager.requestAlwaysAuthorization()
-        manager.distanceFilter = 50
+        manager.distanceFilter = 100
         return manager
         }()
     
@@ -42,26 +42,20 @@ class DataManager {
         return Static.instance!
     }
     
-    
-    func reverseGeocodeCoordinate(coordinate: CLLocationCoordinate2D) -> [String] {   //transforma coordenadas em endereço
+    func reverseGeocodeCoordinate(coordinate: CLLocationCoordinate2D) {   //transforma coordenadas em endereço
         let geocoder = GMSGeocoder()
         var lines:[String]!
-        println("AQUII  \(coordinate.latitude)")
         geocoder.reverseGeocodeCoordinate(coordinate) { response , error in
             if let address = response?.firstResult() {
                 lines = address.lines as! [String]
                 
                 
+                if lines != nil {
+                    DataManager.sharedInstance.end = lines
+                }
             }
         }
-        if lines != nil {
-            return lines}
-        else {
-            var msgString = [String]()
-            var msg: () = msgString.append("Nao Funcioana")
-            return msgString
-        }
-    
+        
     }
     
 }

@@ -27,39 +27,39 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         if (FBSDKAccessToken.currentAccessToken() == nil) {
             
-            println("Nao fez login")
+            print("Nao fez login")
         } else {
             self.performSegueWithIdentifier("mostrarMapa", sender: self)
-            println("Ja logado")
-            var loginButton = FBSDKLoginButton()
+            print("Ja logado")
+            let loginButton = FBSDKLoginButton()
             loginButton.readPermissions = ["id","first_name","last_name","friends{id,name}","email"]
-            var request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name,friends{id,name}"], HTTPMethod: "GET")
+            let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name,friends{id,name}"], HTTPMethod: "GET")
             request.startWithCompletionHandler { (connection, result, error) -> Void in
-                var resultData = result as! NSDictionary
-                var id = 09;
+                let resultData = result as! NSDictionary
+                
                 DataManager.sharedInstance.idFB = resultData["id"] as! String
                 DataManager.sharedInstance.mail = resultData["email"] as! String
                 DataManager.sharedInstance.user = resultData["name"] as! String
-                println("\(DataManager.sharedInstance.idFB) \(DataManager.sharedInstance.mail) \(DataManager.sharedInstance.user)")
+                print("\(DataManager.sharedInstance.idFB) \(DataManager.sharedInstance.mail) \(DataManager.sharedInstance.user)")
             
             }
             
-            var friendRequest = FBSDKGraphRequest(graphPath: "/me/friends", parameters: nil)
+            let friendRequest = FBSDKGraphRequest(graphPath: "/me/friends", parameters: nil)
             friendRequest.startWithCompletionHandler{ (connection: FBSDKGraphRequestConnection!, result:AnyObject!, error:NSError!) -> Void in
                 if error == nil {
                     self.friendsDictionary = result as! Dictionary<String,AnyObject>
                     DataManager.sharedInstance.friendsArray = (self.friendsDictionary["data"]) as! NSArray
-                    println("\(DataManager.sharedInstance.friendsArray)")
+                    print("\(DataManager.sharedInstance.friendsArray)")
                 }
                 else {
-                    println("\(error)")
+                    print("\(error)")
                 }
             }
             
             
         }
         
-        var loginButton = FBSDKLoginButton()
+        let loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_friends"]
         loginButton.center = self.view.center
 
@@ -108,16 +108,16 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         
         if error == nil {
-            println("login complete")
+            print("login complete")
             self.performSegueWithIdentifier("mostrarMapa", sender: self)
         } else {
-            println(error.localizedDescription)
+            print(error.localizedDescription)
         }
         
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
-        println("user logged out")
+        print("user logged out")
     }
     
 }

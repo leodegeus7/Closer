@@ -42,9 +42,9 @@ class FriendsTableViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
-        var name = DataManager.sharedInstance.friendsArray[indexPath.row]["name"] as! String
-        var id = DataManager.sharedInstance.friendsArray[indexPath.row]["id"] as! String
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) 
+        let name = DataManager.sharedInstance.friendsArray[indexPath.row]["name"] as! String
+        let id = DataManager.sharedInstance.friendsArray[indexPath.row]["id"] as! String
         cell.textLabel?.text = "\(name)   \(id)"
         // Configure the cell...
 
