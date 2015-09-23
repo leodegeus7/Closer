@@ -24,10 +24,12 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         
         // Do any additional setup after loading the view, typically from a nib.
+       
         
         if (FBSDKAccessToken.currentAccessToken() == nil) {
             
             print("Nao fez login")
+            
         } else {
             self.performSegueWithIdentifier("mostrarMapa", sender: self)
             print("Ja logado")
@@ -35,6 +37,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             loginButton.readPermissions = ["id","first_name","last_name","friends{id,name}","email"]
             let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name,friends{id,name}"], HTTPMethod: "GET")
             request.startWithCompletionHandler { (connection, result, error) -> Void in
+               // print(error)
                 let resultData = result as! NSDictionary
                 
                 DataManager.sharedInstance.idFB = resultData["id"] as! String
@@ -48,7 +51,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             friendRequest.startWithCompletionHandler{ (connection: FBSDKGraphRequestConnection!, result:AnyObject!, error:NSError!) -> Void in
                 if error == nil {
                     self.friendsDictionary = result as! Dictionary<String,AnyObject>
-                    DataManager.sharedInstance.friendsArray = (self.friendsDictionary["data"]) as! NSArray
+                    DataManager.sharedInstance.friendsArray = (self.friendsDictionary["data"]) as! NSMutableArray
                     print("\(DataManager.sharedInstance.friendsArray)")
                 }
                 else {

@@ -12,8 +12,9 @@ class DataManager {
     var user:String!
     var idFB:String!
     var mail:String!
-    var friendsArray:NSArray!
+    var friendsArray:NSMutableArray!
     var end:[String]!
+    var profilePictureOfFriendsArray:Array<UIImage>!
     var locationUserArray = [Location]()
     lazy var locationManager: CLLocationManager! = {
         let manager = CLLocationManager()
