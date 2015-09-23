@@ -58,4 +58,14 @@ class DataManager {
         
     }
     
+    func createLocalNotification(title:String,body:String,timeAfterClose:NSTimeInterval,userInfo:NSDictionary) {
+        let localNotification:UILocalNotification = UILocalNotification()
+        localNotification.alertAction = title
+        localNotification.alertBody = body
+        localNotification.fireDate = NSDate(timeIntervalSinceNow: timeAfterClose)
+        localNotification.userInfo = userInfo as [NSObject : AnyObject]
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+    }
+    
+
 }

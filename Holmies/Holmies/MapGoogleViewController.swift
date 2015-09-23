@@ -11,13 +11,17 @@
 import UIKit
 import MapKit
 
-class MapGoogleViewController: UIViewController, TypesTableViewControllerDelegate, CLLocationManagerDelegate, GMSMapViewDelegate {
+class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     
     @IBOutlet weak var mapView: GMSMapView!    //outlet do mapa como um mapa do google
     @IBOutlet weak var mapCenterPinImage: UIImageView!
     @IBOutlet weak var pinImageVerticalConstraint: NSLayoutConstraint!
     
-    var searchedTypes = ["bakery", "bar", "cafe", "grocery", "restaurant"]
+    //background whetever
+    var updateTimer: NSTimer?
+    var backgroundTask: UIBackgroundTaskIdentifier = UIBackgroundTaskInvalid
+    var numero = 0
+    
     var locationFirst:CLLocation!
     let dataProvider = GoogleDataProvider()
     var mapRadius: Double {
@@ -39,22 +43,30 @@ class MapGoogleViewController: UIViewController, TypesTableViewControllerDelegat
     
     
     
-    
-    
-    
-    
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         DataManager.sharedInstance.locationManager.delegate = self
         mapView.delegate = self   //delegate das funçoes do google maps
         mapView.mapType = kGMSTypeNormal
+        
+        
+        
+        
+        
+        
+        /*
+        //background 
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("reinstateBackgroundTask"), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        updateTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self,selector: "backgroundCode", userInfo: nil, repeats: true)
+        registerBackgroundTask()
+        */
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 
-    }
+    
     
     
     
@@ -87,7 +99,10 @@ class MapGoogleViewController: UIViewController, TypesTableViewControllerDelegat
                 print("App em background. Coord: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
                 let marker = GMSMarker(position: CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude))
                 marker.title = "\(newLocation.coordinate.latitude) e \(newLocation.coordinate.longitude)"
-                marker.map = mapView }
+                marker.map = mapView
+                let userInfoCoordinate = ["local":newLocation]
+                DataManager.sharedInstance.createLocalNotification("oi", body: "oi", timeAfterClose: 10,userInfo:userInfoCoordinate)
+            }
 
         }
        
@@ -98,13 +113,8 @@ class MapGoogleViewController: UIViewController, TypesTableViewControllerDelegat
             actualLocation.location = newLocation
             actualLocation.address = DataManager.sharedInstance.end
             DataManager.sharedInstance.locationUserArray.append(actualLocation)}
-        else {
-            _ = "Nao funfa"
-            //actualLocation.address.append(msg)
-        }
+       
         
-        
-
 
     }
     
@@ -114,11 +124,7 @@ class MapGoogleViewController: UIViewController, TypesTableViewControllerDelegat
     
     
     // MARK: - Types Controller Delegate
-    func typesController(controller: TypesTableViewController, didSelectTypes types: [String]) {
-        searchedTypes = controller.selectedTypes.sort()
-        dismissViewControllerAnimated(true, completion: nil)
-        fetchNearbyPlaces(mapView.camera.target)
-    }
+
     
     func mapView(mapView: GMSMapView!, willMove gesture: Bool) {
         if (gesture) {
@@ -179,7 +185,7 @@ class MapGoogleViewController: UIViewController, TypesTableViewControllerDelegat
     
     func fetchNearbyPlaces(coordinate: CLLocationCoordinate2D) {
         mapView.clear()
-        dataProvider.fetchPlacesNearCoordinate(coordinate, radius:mapRadius, types: searchedTypes) { places in
+        dataProvider.fetchPlacesNearCoordinate(coordinate, radius:mapRadius, types: ["house"]) { places in
             for place: GooglePlace in places {
                 let marker = PlaceMarker(place: place)
                 marker.map = self.mapView
@@ -237,6 +243,45 @@ class MapGoogleViewController: UIViewController, TypesTableViewControllerDelegat
     }
 
     
+    
+    
+    
+    
+    
+    
+    // MARK: CODIGO PARA BACKGROUND
+    
+    func endBackgroundTask() {
+        NSLog("Background codigos encerrou")
+        UIApplication.sharedApplication().endBackgroundTask(backgroundTask)
+        backgroundTask = UIBackgroundTaskInvalid
+    }
+    func registerBackgroundTask() {
+        backgroundTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler {
+            [unowned self] in
+            self.endBackgroundTask()
+        }
+        assert(backgroundTask != UIBackgroundTaskInvalid)
+    }
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    func reinstateBackgroundTask() {
+        if updateTimer != nil && (backgroundTask == UIBackgroundTaskInvalid) {
+            registerBackgroundTask()
+        }
+    }
+    func backgroundCode() {
+        switch UIApplication.sharedApplication().applicationState {
+        case .Active:
+            print("ativo \(numero++)")
+        case .Background:
+            NSLog("background \(numero++)")
+            NSLog("Background time remaining = %.1f seconds", UIApplication.sharedApplication().backgroundTimeRemaining)
+        case .Inactive:
+            break
+        }
+    }
     
     
     
