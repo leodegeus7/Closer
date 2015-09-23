@@ -65,7 +65,7 @@ class FriendsTableViewController: UITableViewController {
         getProfPic(id)
        // DataManager.sharedInstance.profilePictureOfFriendsArray.append(fbImage)
         cell.friendPicture.image = fbImage
-        DataManager.sharedInstance.profilePictureOfFriendsArray.append(fbImage)
+       // DataManager.sharedInstance.profilePictureOfFriendsArray.append(fbImage)
         
         
         

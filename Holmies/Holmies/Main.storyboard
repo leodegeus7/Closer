@@ -261,15 +261,15 @@
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
+                                            <exclude reference="Cjp-bw-sgk"/>
+                                            <exclude reference="ZGf-If-xdf"/>
+                                            <exclude reference="ayW-iO-twH"/>
+                                            <exclude reference="dty-OZ-bjI"/>
                                             <exclude reference="4RF-Df-3ZJ"/>
                                             <exclude reference="ORP-GQ-xca"/>
                                             <exclude reference="PI3-IN-Cpb"/>
                                             <exclude reference="gfh-LX-nmy"/>
                                             <exclude reference="uaS-Kg-Zen"/>
-                                            <exclude reference="Cjp-bw-sgk"/>
-                                            <exclude reference="ZGf-If-xdf"/>
-                                            <exclude reference="ayW-iO-twH"/>
-                                            <exclude reference="dty-OZ-bjI"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -285,13 +285,7 @@
                             <outlet property="delegate" destination="2fR-e7-j51" id="d4P-vr-ye3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Choose Types" id="gqC-5E-R1t">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="99H-eU-i0O">
-                            <connections>
-                                <action selector="donePressed:" destination="2fR-e7-j51" id="0p9-a4-O5u"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Choose Types" id="gqC-5E-R1t"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l0u-cr-DwW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
