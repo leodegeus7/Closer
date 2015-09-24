@@ -40,6 +40,8 @@
 		CD6BAAAC1B98DEDA008614B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAAAB1B98DEDA008614B0 /* Main.storyboard */; };
 		CD6BAAB51B98E298008614B0 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6BAAB31B98E298008614B0 /* GoogleMaps.framework */; };
 		CD6BAAB61B98E298008614B0 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAAB41B98E298008614B0 /* GoogleMaps.bundle */; };
+		CD8A8BDB1BB479CE00E9D471 /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A8BDA1BB479CE00E9D471 /* GroupsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		CD8A8BDE1BB479E500E9D471 /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A8BDD1BB479E500E9D471 /* UsersTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CDA9A82D1B9DE9E300D93572 /* MapGoogleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */; };
 		CDABC1FD1BB1E88200DE6A98 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDABC1FB1BB1E88200DE6A98 /* Bolts.framework */; settings = {ASSET_TAGS = (); }; };
 		CDABC1FE1BB1E88200DE6A98 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDABC1FC1BB1E88200DE6A98 /* Parse.framework */; settings = {ASSET_TAGS = (); }; };
@@ -106,6 +108,8 @@
 		CD6BAAAB1B98DEDA008614B0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CD6BAAB31B98E298008614B0 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		CD6BAAB41B98E298008614B0 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleMaps.bundle; sourceTree = "<group>"; };
+		CD8A8BDA1BB479CE00E9D471 /* GroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
+		CD8A8BDD1BB479E500E9D471 /* UsersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
 		CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapGoogleViewController.swift; sourceTree = "<group>"; };
 		CDABC1FB1BB1E88200DE6A98 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		CDABC1FC1BB1E88200DE6A98 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
@@ -296,6 +300,8 @@
 				CD1C03671BA74A590073524A /* LoginViewController.swift */,
 				CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */,
 				CD6BAA911B98DB7F008614B0 /* TypesTableViewController.swift */,
+				CD8A8BDA1BB479CE00E9D471 /* GroupsTableViewController.swift */,
+				CD8A8BDD1BB479E500E9D471 /* UsersTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -451,6 +457,7 @@
 			files = (
 				CD1C03681BA74A590073524A /* LoginViewController.swift in Sources */,
 				CD6BAA971B98DB8A008614B0 /* MarkerInfoView.swift in Sources */,
+				CD8A8BDE1BB479E500E9D471 /* UsersTableViewController.swift in Sources */,
 				CD6BAAAA1B98DE23008614B0 /* Holmies-Bridging.m in Sources */,
 				CD0B59E11BAB57750098AD88 /* Location.swift in Sources */,
 				CD0B59DF1BAB50360098AD88 /* LocatioUserTableViewController.swift in Sources */,
@@ -458,6 +465,7 @@
 				CD6BAA8D1B98DB5F008614B0 /* GoogleDataProvider.swift in Sources */,
 				CD0B59DD1BAB47720098AD88 /* LocationUserTableViewCell.swift in Sources */,
 				CD6BAA8F1B98DB70008614B0 /* GooglePlace.swift in Sources */,
+				CD8A8BDB1BB479CE00E9D471 /* GroupsTableViewController.swift in Sources */,
 				CDA9A82D1B9DE9E300D93572 /* MapGoogleViewController.swift in Sources */,
 				CD21002A1B9DE7EF00485126 /* PlaceMarker.swift in Sources */,
 				CD6BAA551B98D946008614B0 /* AppDelegate.swift in Sources */,

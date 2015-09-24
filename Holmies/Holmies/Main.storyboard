@@ -37,7 +37,7 @@
                                 </state>
                                 <connections>
                                     <action selector="ListaLocal:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Lq0-Sq-9nh"/>
-                                    <segue destination="rhh-o3-HK8" kind="show" identifier="locationList" id="YSf-0a-idx"/>
+                                    <segue destination="rhh-o3-HK8" kind="show" identifier="locationList" id="WI9-zK-bRT"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -86,7 +86,7 @@
                         </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="Y8r-sI-zD8">
                             <connections>
-                                <segue destination="2fR-e7-j51" kind="show" id="Voo-AA-4Eh"/>
+                                <segue destination="2fR-e7-j51" kind="show" id="LT7-fB-qPg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -113,7 +113,7 @@
                                 <rect key="frame" x="0.0" y="86" width="600" height="144"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EAl-U3-bE8" id="WQN-j5-W0f">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="144"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="143.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pzE-NE-MBA">
@@ -186,7 +186,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dVW-D4-6jZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1177" y="1482"/>
+            <point key="canvasLocation" x="1980" y="78"/>
         </scene>
         <!--Choose Types-->
         <scene sceneID="gir-OY-7YJ">
@@ -201,7 +201,7 @@
                                 <rect key="frame" x="0.0" y="86" width="600" height="61"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5CI-9I-Br6" id="fpi-6N-QnT">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="61"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="60.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKO-bv-8gC">
@@ -261,15 +261,15 @@
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
+                                            <exclude reference="Cjp-bw-sgk"/>
+                                            <exclude reference="ZGf-If-xdf"/>
+                                            <exclude reference="ayW-iO-twH"/>
+                                            <exclude reference="dty-OZ-bjI"/>
                                             <exclude reference="4RF-Df-3ZJ"/>
                                             <exclude reference="ORP-GQ-xca"/>
                                             <exclude reference="PI3-IN-Cpb"/>
                                             <exclude reference="gfh-LX-nmy"/>
                                             <exclude reference="uaS-Kg-Zen"/>
-                                            <exclude reference="Cjp-bw-sgk"/>
-                                            <exclude reference="ZGf-If-xdf"/>
-                                            <exclude reference="ayW-iO-twH"/>
-                                            <exclude reference="dty-OZ-bjI"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -295,7 +295,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l0u-cr-DwW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1980" y="768"/>
+            <point key="canvasLocation" x="1980" y="764"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="h2C-hD-W4d">
