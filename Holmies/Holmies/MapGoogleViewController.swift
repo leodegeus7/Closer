@@ -10,6 +10,8 @@
 
 import UIKit
 import MapKit
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     
@@ -21,6 +23,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     var updateTimer: NSTimer?
     var backgroundTask: UIBackgroundTaskIdentifier = UIBackgroundTaskInvalid
     var numero = 0
+    var friendsDictionary:Dictionary<String,AnyObject>!
     
     var locationFirst:CLLocation!
     let dataProvider = GoogleDataProvider()
@@ -50,7 +53,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         DataManager.sharedInstance.locationManager.delegate = self
         mapView.delegate = self   //delegate das funçoes do google maps
         mapView.mapType = kGMSTypeNormal
-        
+        DataManager.sharedInstance.requestFacebook()
         
         
         
@@ -66,7 +69,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     }
     
 
-    
+
     
     
     
@@ -160,7 +163,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     
     
     @IBAction func refreshButton(sender: AnyObject) {
-        fetchNearbyPlaces(mapView.camera.target)
+        fetchNearbyPlaces(mapView.camera.target)  //achar lugares
     }
     
     func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {  //pega as coordenadas do centro da tela
@@ -184,6 +187,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     }
     
     func fetchNearbyPlaces(coordinate: CLLocationCoordinate2D) {
+        /*
         mapView.clear()
         dataProvider.fetchPlacesNearCoordinate(coordinate, radius:mapRadius, types: ["house"]) { places in
             for place: GooglePlace in places {
@@ -191,6 +195,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
                 marker.map = self.mapView
             }
         }
+        */
     }
     
     func mapView(mapView: GMSMapView!, markerInfoContents marker: GMSMarker!) -> UIView! {

@@ -37,7 +37,7 @@
                                 </state>
                                 <connections>
                                     <action selector="ListaLocal:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Lq0-Sq-9nh"/>
-                                    <segue destination="rhh-o3-HK8" kind="show" identifier="locationList" id="YSf-0a-idx"/>
+                                    <segue destination="rhh-o3-HK8" kind="show" identifier="locationList" id="WI9-zK-bRT"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -86,7 +86,7 @@
                         </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="Y8r-sI-zD8">
                             <connections>
-                                <segue destination="2fR-e7-j51" kind="show" id="Voo-AA-4Eh"/>
+                                <segue destination="2fR-e7-j51" kind="show" id="LT7-fB-qPg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -186,7 +186,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dVW-D4-6jZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1177" y="1482"/>
+            <point key="canvasLocation" x="1980" y="78"/>
         </scene>
         <!--Choose Types-->
         <scene sceneID="gir-OY-7YJ">
@@ -289,7 +289,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l0u-cr-DwW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1980" y="768"/>
+            <point key="canvasLocation" x="1980" y="764"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="h2C-hD-W4d">

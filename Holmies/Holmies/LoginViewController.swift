@@ -47,17 +47,17 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             }
             
-            let friendRequest = FBSDKGraphRequest(graphPath: "/me/friends", parameters: nil)
-            friendRequest.startWithCompletionHandler{ (connection: FBSDKGraphRequestConnection!, result:AnyObject!, error:NSError!) -> Void in
-                if error == nil {
-                    self.friendsDictionary = result as! Dictionary<String,AnyObject>
-                    DataManager.sharedInstance.friendsArray = (self.friendsDictionary["data"]) as! NSMutableArray
-                    print("\(DataManager.sharedInstance.friendsArray)")
-                }
-                else {
-                    print("\(error)")
-                }
-            }
+//            let friendRequest = FBSDKGraphRequest(graphPath: "/me/friends", parameters: nil)
+//            friendRequest.startWithCompletionHandler{ (connection: FBSDKGraphRequestConnection!, result:AnyObject!, error:NSError!) -> Void in
+//                if error == nil {
+//                    self.friendsDictionary = result as! Dictionary<String,AnyObject>
+//                    DataManager.sharedInstance.friendsArray = (self.friendsDictionary["data"]) as! NSMutableArray
+//                    print("\(DataManager.sharedInstance.friendsArray)")
+//                }
+//                else {
+//                    print("\(error)")
+//                }
+//            }
             
             
         }
