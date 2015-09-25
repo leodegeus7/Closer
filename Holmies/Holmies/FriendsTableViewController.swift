@@ -17,7 +17,8 @@ class FriendsTableViewController: UITableViewController {
         super.viewDidLoad()
        
         print("entrou aqui")
-    
+        DataManager.sharedInstance.convertDicionaryToJson(DataManager.sharedInstance.locationUserArray,nomeArq: "data")
+        DataManager.sharedInstance.loadJsonFromDocuments("data")
     
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

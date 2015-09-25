@@ -156,26 +156,22 @@ class DataManager {
     
     
     func getProfPic(fid: String) -> UIImage? {
-        
         let fileManager = NSFileManager.defaultManager()
         let documentsDirectory = findDocumentsDirectory()
-        let destinationPath = documentsDirectory.stringByAppendingString("\(fid).jpg")
+        let destinationPath = documentsDirectory.stringByAppendingString("/\(fid).jpg")
         var fbImage:UIImage!
-        
-        if fileManager.fileExistsAtPath(destinationPath) {
-            
-        
-        
-        if (fid != "") {
-            let imgURLString = "http://graph.facebook.com/" + fid + "/picture?type=large" //type=normal
-            let imgURL = NSURL(string: imgURLString)
-            let imageData = NSData(contentsOfURL: imgURL!)
-            fbImage = UIImage(data: imageData!)
-            print("entrou aqui2")
-            return fbImage
-        }
-        print("entrou aqui3")
-        return nil
+
+        if !(fileManager.fileExistsAtPath(destinationPath)) {
+            if (fid != "") {
+                let imgURLString = "http://graph.facebook.com/" + fid + "/picture?type=large" //type=normal
+                let imgURL = NSURL(string: imgURLString)
+                let imageData = NSData(contentsOfURL: imgURL!)
+                fbImage = UIImage(data: imageData!)
+                print("entrou aqui2")
+                return fbImage
+            }
+            print("entrou aqui3")
+            return nil
         }
         return nil
     }
@@ -202,6 +198,53 @@ class DataManager {
         return image!
         
     }
+    
+    func convertDicionaryToJson(dic:[Location],nomeArq:String) -> String {
+        print(locationUserArray)
+        
+        
+        var array = Array<Dictionary<String,String>>()
+        
+        for var i = 0 ; i < (friendsArray.count-1) ; i++ {
+            let time = DataManager.sharedInstance.locationUserArray[i].location.timestamp
+            let coord = DataManager.sharedInstance.locationUserArray[i].location.coordinate
+            let lat = coord.latitude
+            let long = coord.longitude
+            
+            let address = DataManager.sharedInstance.locationUserArray[i].address
+            
+            
+            let dicMod = ["tempo":"\(time)","lat":"\(lat)","long":"\(long)","address":"\(address)"]
+            
+            array.append(dicMod)
+            
+        
+        }
+        
+        let documents = findDocumentsDirectory()
+        let path = documents.stringByAppendingString("/\(nomeArq).json")
+        
+        let outputStream = NSOutputStream(toFileAtPath: path, append: true)
+        outputStream?.open()
+        NSJSONSerialization.writeJSONObject(array, toStream: outputStream!, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
+        outputStream?.close()
+        
+        
+        return path
+        
+    }
+    
+    func loadJsonFromDocuments(nomeArq:String) {
+        let documents = findDocumentsDirectory()
+        let path = documents.stringByAppendingString("/\(nomeArq).json")
+        let data = NSData(contentsOfFile: path)
+        let dic = NSKeyedUnarchiver.unarchiveObjectWithData(data!)
+        print(dic)
+        
+        
+    }
+    
+    
 
     
 
