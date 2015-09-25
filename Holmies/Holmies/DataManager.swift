@@ -68,5 +68,13 @@ class DataManager {
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
     
+    func saveImage(image:UIImage) {
+    
+    var image = ....  // However you create/get a UIImage
+    let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+    let destinationPath = documentsPath.stringByAppendingPathComponent("filename.jpg")
+    UIImageJPEGRepresentation(image,1.0).writeToFile(destinationPath, atomically: true)
+    }
+    
 
 }
