@@ -150,20 +150,7 @@ class DataManager {
             }
         }
         
-        for var i = 0; i < friendsArray.count; i++ {
-            let something = friendsArray[i]["id"] as! String
-            getProfPic(something)
-            
-            
-        
-        
-        }
-        
-        
-        
-        
-        
-        
+
     }
     
     func getProfPic(fid: String) -> UIImage? {
