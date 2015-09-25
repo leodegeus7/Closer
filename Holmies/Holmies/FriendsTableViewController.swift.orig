@@ -11,6 +11,7 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 
 class FriendsTableViewController: UITableViewController {
+    var fbImage:UIImage!
     
     
     override func viewDidLoad() {
@@ -57,13 +58,21 @@ class FriendsTableViewController: UITableViewController {
         let id = DataManager.sharedInstance.friendsArray[indexPath.row]["id"] as! String
         cell.friendName.text = name
         cell.friendID.text = id
+<<<<<<< HEAD
         
-        cell.friendPicture.image = DataManager.sharedInstance.findImage("\(id)")
+        getProfPic(id)
+       // DataManager.sharedInstance.profilePictureOfFriendsArray.append(fbImage)
+        cell.friendPicture.image = fbImage
+       // DataManager.sharedInstance.profilePictureOfFriendsArray.append(fbImage)
         
         
         
+        // Configure the)     // Conf?gure the cell...
+=======
         print("entrou aqui4")
+>>>>>>> d85e674415dc8b5ed79cb998873ce7f07cb81660
 
+        cell.friendPicture.image = DataManager.sharedInstance.getProfPic(id)
         return cell
     }
     

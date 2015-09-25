@@ -71,6 +71,14 @@ class DataManager {
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
     
+<<<<<<< HEAD
+    func saveImage(image:UIImage) {
+    
+    var image = ....  // However you create/get a UIImage
+    let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+    let destinationPath = documentsPath.stringByAppendingPathComponent("filename.jpg")
+    UIImageJPEGRepresentation(image,1.0).writeToFile(destinationPath, atomically: true)
+=======
     func findDocumentsDirectory() -> String {
         let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask, true)[0] as String
         return path
@@ -109,10 +117,9 @@ class DataManager {
     func moveJsonFromDocumentsToBundle(nomeArquivo:String) {
         do {
         let fileManager = NSFileManager.defaultManager()
-            
         let documentsDirectory = findDocumentsDirectory()
         let destinationPath = documentsDirectory.stringByAppendingString("\(nomeArquivo).json")
-        
+            
         if fileManager.fileExistsAtPath(destinationPath) {
             return
         }
@@ -130,20 +137,20 @@ class DataManager {
         let dateFormatter:NSDateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy  hh:mm"
         let dateString = dateFormatter.stringFromDate(currDate) as String
-    
         return dateString
     
-    
     }
-   
-    func requestFacebook(completion:(result:NSMutableArray)->Void) {
+    
+    func requestFacebook() {
         let friendRequest = FBSDKGraphRequest(graphPath: "/me/friends", parameters: nil)
         friendRequest.startWithCompletionHandler{ (connection: FBSDKGraphRequestConnection!, result:AnyObject!, error:NSError!) -> Void in
             if error == nil {
                 self.friendsDictionary = result as! Dictionary<String,AnyObject>
                 DataManager.sharedInstance.friendsArray = (self.friendsDictionary["data"]) as! NSMutableArray
                 print("\(DataManager.sharedInstance.friendsArray)")
-                completion(result: self.friendsArray)
+                
+                
+                
                 
             }
             else {
@@ -151,20 +158,24 @@ class DataManager {
             }
         }
         
-
-    }
-    
-    
-    func getProfPic(fid: String) -> UIImage? {
-        
-        let fileManager = NSFileManager.defaultManager()
-        let documentsDirectory = findDocumentsDirectory()
-        let destinationPath = documentsDirectory.stringByAppendingString("\(fid).jpg")
-        var fbImage:UIImage!
-        
-        if fileManager.fileExistsAtPath(destinationPath) {
+        for var i = 0; i < friendsArray.count; i++ {
+            let something = friendsArray[i]["id"] as! String
+            getProfPic(something)
+            
             
         
+        
+        }
+        
+        
+        
+        
+        
+        
+    }
+    
+    func getProfPic(fid: String) -> UIImage? {
+        var fbImage:UIImage!
         
         if (fid != "") {
             let imgURLString = "http://graph.facebook.com/" + fid + "/picture?type=large" //type=normal
@@ -176,33 +187,8 @@ class DataManager {
         }
         print("entrou aqui3")
         return nil
-        }
-        return nil
+>>>>>>> d85e674415dc8b5ed79cb998873ce7f07cb81660
     }
-    
-    func saveImage(image:UIImage?, id:String) -> String {
-        if let _ = image {
-            let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-            let destinationPath = documentsPath.stringByAppendingString("/\(id).jpg")
-            UIImageJPEGRepresentation(image!,1.0)!.writeToFile(destinationPath, atomically: true)
-            
-    
-            print(destinationPath)
-            return destinationPath }
-        else {
-            return ""
-        }
-    }
-    
-    func findImage(id:String) -> UIImage {
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        let destinationPath = documentsPath.stringByAppendingString("/\(id).jpg")
-        print(destinationPath)
-        let image = UIImage(contentsOfFile: destinationPath)
-        return image!
-        
-    }
-
     
 
 }
