@@ -53,7 +53,18 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         DataManager.sharedInstance.locationManager.delegate = self
         mapView.delegate = self   //delegate das funçoes do google maps
         mapView.mapType = kGMSTypeNormal
-        DataManager.sharedInstance.requestFacebook()
+        DataManager.sharedInstance.requestFacebook { (result) -> Void in
+
+        for var i = 0; i < DataManager.sharedInstance.friendsArray.count; i++ {
+            let id = DataManager.sharedInstance.friendsArray[i]["id"] as! String
+            print(id)
+            let image = DataManager.sharedInstance.getProfPic(id)
+            DataManager.sharedInstance.saveImage(image, id: id)
+            }
+
+        }
+        
+        
         
         
         
@@ -68,6 +79,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         */
     }
     
+    
+
 
 
     

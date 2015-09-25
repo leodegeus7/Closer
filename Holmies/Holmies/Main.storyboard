@@ -4,7 +4,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -113,7 +112,7 @@
                                 <rect key="frame" x="0.0" y="86" width="600" height="144"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EAl-U3-bE8" id="WQN-j5-W0f">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="143.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="144"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pzE-NE-MBA">
@@ -201,7 +200,7 @@
                                 <rect key="frame" x="0.0" y="86" width="600" height="61"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5CI-9I-Br6" id="fpi-6N-QnT">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="60.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="61"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKO-bv-8gC">
@@ -219,13 +218,6 @@
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zvA-bU-vpI">
-                                            <rect key="frame" x="24" y="0.0" width="60" height="60"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="zvA-bU-vpI" secondAttribute="height" multiplier="1:1" id="T7E-IV-Pbo"/>
-                                                <constraint firstAttribute="width" constant="60" id="l7u-xi-94r"/>
-                                            </constraints>
-                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwf-Eh-WMV">
                                             <rect key="frame" x="92" y="38" width="330" height="21"/>
                                             <constraints>
@@ -241,22 +233,30 @@
                                                 </mask>
                                             </variation>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vLh-Ae-Jid">
+                                            <rect key="frame" x="17" y="6" width="50" height="50"/>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="BU0-es-MfB"/>
+                                                <constraint firstAttribute="height" constant="50" id="vbC-Gr-cGk"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="kwf-Eh-WMV" firstAttribute="centerX" secondItem="fpi-6N-QnT" secondAttribute="centerX" constant="200" id="4RF-Df-3ZJ"/>
-                                        <constraint firstItem="kwf-Eh-WMV" firstAttribute="leading" secondItem="zvA-bU-vpI" secondAttribute="trailing" constant="8" id="7YP-uk-dlA"/>
                                         <constraint firstItem="WKO-bv-8gC" firstAttribute="leading" secondItem="fpi-6N-QnT" secondAttribute="leadingMargin" constant="114" id="Cjp-bw-sgk"/>
+                                        <constraint firstItem="WKO-bv-8gC" firstAttribute="leading" secondItem="vLh-Ae-Jid" secondAttribute="trailing" constant="25" id="DTZ-2N-Qlb"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="kwf-Eh-WMV" secondAttribute="trailing" constant="334" id="ORP-GQ-xca"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="kwf-Eh-WMV" secondAttribute="trailing" constant="9" id="PI3-IN-Cpb"/>
-                                        <constraint firstItem="zvA-bU-vpI" firstAttribute="centerY" secondItem="fpi-6N-QnT" secondAttribute="centerY" id="PgR-Cj-SWX"/>
+                                        <constraint firstItem="vLh-Ae-Jid" firstAttribute="leading" secondItem="fpi-6N-QnT" secondAttribute="leadingMargin" constant="9" id="QLa-SV-Hev"/>
                                         <constraint firstItem="WKO-bv-8gC" firstAttribute="centerY" secondItem="fpi-6N-QnT" secondAttribute="centerY" constant="-12" id="ZGf-If-xdf"/>
-                                        <constraint firstItem="zvA-bU-vpI" firstAttribute="leading" secondItem="fpi-6N-QnT" secondAttribute="leadingMargin" constant="16" id="ZOK-p2-SE5"/>
                                         <constraint firstItem="kwf-Eh-WMV" firstAttribute="top" secondItem="WKO-bv-8gC" secondAttribute="bottom" constant="8" id="ZYM-mS-jpC"/>
                                         <constraint firstItem="WKO-bv-8gC" firstAttribute="centerX" secondItem="fpi-6N-QnT" secondAttribute="centerX" id="ayW-iO-twH"/>
                                         <constraint firstItem="WKO-bv-8gC" firstAttribute="leading" secondItem="fpi-6N-QnT" secondAttribute="leadingMargin" constant="100" id="dty-OZ-bjI"/>
+                                        <constraint firstItem="vLh-Ae-Jid" firstAttribute="top" secondItem="fpi-6N-QnT" secondAttribute="topMargin" constant="-2" id="fg0-gL-Ua4"/>
                                         <constraint firstItem="kwf-Eh-WMV" firstAttribute="centerX" secondItem="WKO-bv-8gC" secondAttribute="centerX" id="gfh-LX-nmy"/>
                                         <constraint firstItem="WKO-bv-8gC" firstAttribute="top" secondItem="fpi-6N-QnT" secondAttribute="topMargin" constant="1" id="nfG-vp-TEe"/>
-                                        <constraint firstItem="WKO-bv-8gC" firstAttribute="leading" secondItem="zvA-bU-vpI" secondAttribute="trailing" constant="8" id="rNM-P2-CHG"/>
+                                        <constraint firstItem="kwf-Eh-WMV" firstAttribute="leading" secondItem="WKO-bv-8gC" secondAttribute="leading" id="qRR-xH-kW8"/>
                                         <constraint firstItem="kwf-Eh-WMV" firstAttribute="centerY" secondItem="fpi-6N-QnT" secondAttribute="centerY" constant="17" id="uaS-Kg-Zen"/>
                                     </constraints>
                                     <variation key="default">
@@ -276,7 +276,7 @@
                                 <connections>
                                     <outlet property="friendID" destination="kwf-Eh-WMV" id="d9w-Qq-dXW"/>
                                     <outlet property="friendName" destination="WKO-bv-8gC" id="1NI-Gg-Zaj"/>
-                                    <outlet property="friendPicture" destination="zvA-bU-vpI" id="Hx9-vd-YdT"/>
+                                    <outlet property="friendPicture" destination="vLh-Ae-Jid" id="WDI-ex-XPn"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
