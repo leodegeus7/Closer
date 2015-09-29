@@ -12,6 +12,7 @@ import UIKit
 import MapKit
 import FBSDKCoreKit
 import FBSDKLoginKit
+import Alamofire
 
 class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     
@@ -27,6 +28,9 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     
     var locationFirst:CLLocation!
     let dataProvider = GoogleDataProvider()
+    
+    
+    
     var mapRadius: Double {
         get {
             let region = mapView.projection.visibleRegion()
@@ -65,16 +69,11 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         }
         
         
-        //OI TESTE DO GIT
-        
-        
-        
-        
-        
+
         /*
         //background 
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("reinstateBackgroundTask"), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCent er().addObserver(self, selector: Selector("reinstateBackgroundTask"), name: UIApplicationDidBecomeActiveNotification, object: nil)
         updateTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self,selector: "backgroundCode", userInfo: nil, repeats: true)
         registerBackgroundTask()
         */
@@ -111,7 +110,19 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
                 print("app aberto. Coord: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
                 let marker = GMSMarker(position: CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude))
                 marker.title = "\(newLocation.coordinate.latitude) e \(newLocation.coordinate.longitude)"
-                marker.map = mapView}
+                marker.map = mapView
+                Alamofire.request(.GET, "https://tranquil-coast-5554.herokuapp.com/users/lista").responseJSON { response in
+                    
+                    if let JSON = response.result.value {
+                        print("JSON: \(JSON)")
+                        DataManager.sharedInstance.createJsonFile("users", json: JSON)
+                        DataManager.sharedInstance.convertJsonToUser(JSON)
+                        DataManager.sharedInstance.loadJsonFromDocuments("users")
+                    }
+                }
+            
+            
+            }
             else {
                 print("App em background. Coord: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
                 let marker = GMSMarker(position: CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude))
@@ -122,7 +133,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
             }
 
         }
-       
+        let location = "\(newLocation.coordinate.latitude):\(newLocation.coordinate.longitude)"
+        Alamofire.request(.GET, "https://tranquil-coast-5554.herokuapp.com/users/\(DataManager.sharedInstance.idUser)/update_user_location?location=\(location)&altitude=1000")
         
         DataManager.sharedInstance.reverseGeocodeCoordinate(newLocation.coordinate) //transforma a coordenada em endereco
         if DataManager.sharedInstance.end != nil {
@@ -132,6 +144,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
             DataManager.sharedInstance.locationUserArray.append(actualLocation)}
        
         
+        
+        //let array = DataManager.sharedInstance.allUser
 
     }
     
@@ -290,17 +304,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
             registerBackgroundTask()
         }
     }
-    func backgroundCode() {
-        switch UIApplication.sharedApplication().applicationState {
-        case .Active:
-            print("ativo \(numero++)")
-        case .Background:
-            NSLog("background \(numero++)")
-            NSLog("Background time remaining = %.1f seconds", UIApplication.sharedApplication().backgroundTimeRemaining)
-        case .Inactive:
-            break
-        }
-    }
+
     
     
     
