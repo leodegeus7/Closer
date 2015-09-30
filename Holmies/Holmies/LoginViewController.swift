@@ -38,13 +38,25 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name,friends{id,name}"], HTTPMethod: "GET")
             request.startWithCompletionHandler { (connection, result, error) -> Void in
                // print(error)
-                let resultData = result as! NSDictionary
+                if let resultData = result as? NSDictionary {
                 
-                DataManager.sharedInstance.idFB = resultData["id"] as! String
-                DataManager.sharedInstance.mail = resultData["email"] as! String
-                DataManager.sharedInstance.user = resultData["name"] as! String
-                print("\(DataManager.sharedInstance.idFB) \(DataManager.sharedInstance.mail) \(DataManager.sharedInstance.user)")
-            
+                    DataManager.sharedInstance.idFB = resultData["id"] as! String
+                    DataManager.sharedInstance.email = resultData["email"] as! String
+                    DataManager.sharedInstance.user = resultData["name"] as! String
+                    print("\(DataManager.sharedInstance.idFB) \(DataManager.sharedInstance.email) \(DataManager.sharedInstance.user)")
+                    let data = ["id":DataManager.sharedInstance.idFB,"email":DataManager.sharedInstance.email,"user":DataManager.sharedInstance.user]
+                    DataManager.sharedInstance.createJsonFile("myData", json: data)
+                }
+                else {
+                    let myDic = DataManager.sharedInstance.loadJsonFromDocuments("myData") as! NSDictionary
+                    DataManager.sharedInstance.idFB = myDic["id"] as! String
+                    DataManager.sharedInstance.email = myDic["email"] as! String
+                    DataManager.sharedInstance.user = myDic["user"] as! String
+                    print("Informacoes OFFLINE \(DataManager.sharedInstance.idFB) \(DataManager.sharedInstance.email) \(DataManager.sharedInstance.user)")
+                
+                }
+                
+                
             }
             
 //            let friendRequest = FBSDKGraphRequest(graphPath: "/me/friends", parameters: nil)
@@ -68,6 +80,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
         
         loginButton.delegate = self
+        
+        
 //        var request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email"], HTTPMethod: "GET")
 //        request.startWithCompletionHandler { (connection, requestData, error) -> Void in
 //            var result = requestData as! NSDictionary

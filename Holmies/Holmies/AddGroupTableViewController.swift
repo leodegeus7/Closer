@@ -1,24 +1,20 @@
 //
-//  FriendsTableViewController.swift
+//  AddGroupTableViewController.swift
 //  Holmies
 //
-//  Created by Leonardo Geus on 14/09/15.
-//  Copyright (c) 2015 Leonardo Geus. All rights reserved.
+//  Created by Leonardo Geus on 30/09/15.
+//  Copyright © 2015 Leonardo Geus. All rights reserved.
 //
 
 import UIKit
-import FBSDKCoreKit
-import FBSDKLoginKit
 
-class FriendsTableViewController: UITableViewController {
-    
+class AddGroupTableViewController: UITableViewController {
+
+    var selectID = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        DataManager.sharedInstance.convertDicionaryToJson(DataManager.sharedInstance.locationUserArray,nomeArq: "data")
-        DataManager.sharedInstance.loadJsonFromDocuments("data")
-    
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -29,56 +25,60 @@ class FriendsTableViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-        
     }
-
-
-    
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
+        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return DataManager.sharedInstance.friendsArray.count
+        // #warning Incomplete implementation, return the number of rows
+        print(DataManager.sharedInstance.allUser[0].name)
+        
+        return DataManager.sharedInstance.allUser.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! FriendsTableViewCell
-        let name = DataManager.sharedInstance.friendsArray[indexPath.row]["name"] as! String
-        let id = DataManager.sharedInstance.friendsArray[indexPath.row]["id"] as! String
-        cell.friendName.text = name
-        cell.friendID.text = id
-        
-        cell.friendPicture.image = DataManager.sharedInstance.findImage("\(id)")
-        
-        
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! AddGroupTableViewCell
+
+        cell.userName.text = DataManager.sharedInstance.allUser[indexPath.row].name
+        cell.id.text = "\(DataManager.sharedInstance.allUser[indexPath.row].userID)"
 
         return cell
     }
+
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let indexSelect = indexPath.row
         
-        if (DataManager.sharedInstance.profilePictureOfFriendsArray == nil) {
-            print("arrayNil")
-        } else{
-        print(DataManager.sharedInstance.profilePictureOfFriendsArray)
+        selectID.append(DataManager.sharedInstance.allUser[indexSelect].userID)
 
+        print(selectID)
+        
     }
+    
+    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        let indexSelect = indexPath.row
+        let idToErase = DataManager.sharedInstance.allUser[indexSelect].userID
+        var i = 0
+        for index in selectID {
+            
+            if index == idToErase {
+                selectID.removeAtIndex(i)
+            }
+            i++
+        }
+        print(selectID)
     }
 
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
+        // Return false if you do not want the specified item to be editable.
         return true
     }
     */
@@ -105,7 +105,7 @@ class FriendsTableViewController: UITableViewController {
     /*
     // Override to support conditional rearranging of the table view.
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
+        // Return false if you do not want the item to be re-orderable.
         return true
     }
     */
@@ -115,7 +115,7 @@ class FriendsTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
+        // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
     */

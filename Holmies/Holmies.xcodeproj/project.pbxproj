@@ -14,12 +14,20 @@
 		CD0D132B1BB9B9F2000D0656 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD0D13221BB9B9EC000D0656 /* Alamofire.framework */; };
 		CD0D132D1BB9C29D000D0656 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0D132C1BB9C29D000D0656 /* User.swift */; settings = {ASSET_TAGS = (); }; };
 		CD103A6A1BB9D88D0044166F /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD103A691BB9D88D0044166F /* RegisterViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		CD103A741BBB07470044166F /* ovalLaranja.png in Resources */ = {isa = PBXBuildFile; fileRef = CD103A701BBB07470044166F /* ovalLaranja.png */; settings = {ASSET_TAGS = (); }; };
+		CD103A751BBB07470044166F /* ovalRosa.png in Resources */ = {isa = PBXBuildFile; fileRef = CD103A711BBB07470044166F /* ovalRosa.png */; settings = {ASSET_TAGS = (); }; };
+		CD103A761BBB07470044166F /* ovalVerde.png in Resources */ = {isa = PBXBuildFile; fileRef = CD103A721BBB07470044166F /* ovalVerde.png */; settings = {ASSET_TAGS = (); }; };
+		CD103A771BBB07470044166F /* ovalVermelho.png in Resources */ = {isa = PBXBuildFile; fileRef = CD103A731BBB07470044166F /* ovalVermelho.png */; settings = {ASSET_TAGS = (); }; };
+		CD103A831BBB12950044166F /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CD0D13221BB9B9EC000D0656 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CD1C03651BA749BD0073524A /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1C03631BA749BD0073524A /* FBSDKCoreKit.framework */; };
 		CD1C03661BA749BD0073524A /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1C03641BA749BD0073524A /* FBSDKLoginKit.framework */; };
 		CD1C03681BA74A590073524A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C03671BA74A590073524A /* LoginViewController.swift */; };
 		CD1C036C1BA752290073524A /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C036B1BA752290073524A /* DataManager.swift */; };
 		CD1C036E1BA761550073524A /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C036D1BA761550073524A /* FriendsTableViewController.swift */; };
 		CD21002A1B9DE7EF00485126 /* PlaceMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2100291B9DE7EF00485126 /* PlaceMarker.swift */; };
+		CD43673F1BBC531E00309FD0 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD43673E1BBC531E00309FD0 /* Group.swift */; settings = {ASSET_TAGS = (); }; };
+		CD4367491BBC75E200309FD0 /* AddGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4367481BBC75E200309FD0 /* AddGroupTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		CD43674B1BBC771800309FD0 /* AddGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD43674A1BBC771800309FD0 /* AddGroupTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		CD6BAA551B98D946008614B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA541B98D946008614B0 /* AppDelegate.swift */; };
 		CD6BAA5C1B98D946008614B0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAA5B1B98D946008614B0 /* Images.xcassets */; };
 		CD6BAA5F1B98D946008614B0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAA5D1B98D946008614B0 /* LaunchScreen.xib */; };
@@ -104,6 +112,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		CD103A821BBB126C0044166F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CD103A831BBB12950044166F /* Alamofire.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		27C29F8694868BB9197FEBBE /* Pods-Holmies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Holmies.release.xcconfig"; path = "Pods/Target Support Files/Pods-Holmies/Pods-Holmies.release.xcconfig"; sourceTree = "<group>"; };
 		A7049A9D1BB08BA300A2CDCD /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
@@ -114,6 +135,10 @@
 		CD0D13191BB9B9EB000D0656 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = "Alamofire-master/Alamofire.xcodeproj"; sourceTree = "<group>"; };
 		CD0D132C1BB9C29D000D0656 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CD103A691BB9D88D0044166F /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		CD103A701BBB07470044166F /* ovalLaranja.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ovalLaranja.png; sourceTree = "<group>"; };
+		CD103A711BBB07470044166F /* ovalRosa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ovalRosa.png; sourceTree = "<group>"; };
+		CD103A721BBB07470044166F /* ovalVerde.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ovalVerde.png; sourceTree = "<group>"; };
+		CD103A731BBB07470044166F /* ovalVermelho.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ovalVermelho.png; sourceTree = "<group>"; };
 		CD1C03631BA749BD0073524A /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		CD1C03641BA749BD0073524A /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		CD1C03671BA74A590073524A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +146,9 @@
 		CD1C036B1BA752290073524A /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		CD1C036D1BA761550073524A /* FriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		CD2100291B9DE7EF00485126 /* PlaceMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceMarker.swift; sourceTree = "<group>"; };
+		CD43673E1BBC531E00309FD0 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		CD4367481BBC75E200309FD0 /* AddGroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewController.swift; sourceTree = "<group>"; };
+		CD43674A1BBC771800309FD0 /* AddGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewCell.swift; sourceTree = "<group>"; };
 		CD6BAA4F1B98D946008614B0 /* Holmies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Holmies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD6BAA531B98D946008614B0 /* Info2.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info2.plist; sourceTree = "<group>"; };
 		CD6BAA541B98D946008614B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -282,6 +310,10 @@
 		CD6BAA511B98D946008614B0 /* Holmies */ = {
 			isa = PBXGroup;
 			children = (
+				CD103A701BBB07470044166F /* ovalLaranja.png */,
+				CD103A711BBB07470044166F /* ovalRosa.png */,
+				CD103A721BBB07470044166F /* ovalVerde.png */,
+				CD103A731BBB07470044166F /* ovalVermelho.png */,
 				CDE670681BB1D280008D1E18 /* Controller */,
 				CDE670671BB1D27C008D1E18 /* View */,
 				CDE670661BB1D275008D1E18 /* Model */,
@@ -329,6 +361,7 @@
 				CD6BAA941B98DB8A008614B0 /* MarkerInfoView.swift */,
 				CD2100291B9DE7EF00485126 /* PlaceMarker.swift */,
 				CD6BAA961B98DB8A008614B0 /* UIViewExtension.swift */,
+				CD43673E1BBC531E00309FD0 /* Group.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -359,6 +392,8 @@
 				CD8A8BDA1BB479CE00E9D471 /* GroupsTableViewController.swift */,
 				CD8A8BDD1BB479E500E9D471 /* UsersTableViewController.swift */,
 				CD103A691BB9D88D0044166F /* RegisterViewController.swift */,
+				CD4367481BBC75E200309FD0 /* AddGroupTableViewController.swift */,
+				CD43674A1BBC771800309FD0 /* AddGroupTableViewCell.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -375,6 +410,7 @@
 				CD6BAA4C1B98D946008614B0 /* Frameworks */,
 				CD6BAA4D1B98D946008614B0 /* Resources */,
 				10C238DE009416F18CAA4FEA /* Copy Pods Resources */,
+				CD103A821BBB126C0044166F /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -501,11 +537,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD103A761BBB07470044166F /* ovalVerde.png in Resources */,
 				CD6BAA981B98DB8A008614B0 /* MarkerInfoView.xib in Resources */,
 				CD6BAA5F1B98D946008614B0 /* LaunchScreen.xib in Resources */,
 				CD6BAA5C1B98D946008614B0 /* Images.xcassets in Resources */,
 				CD6BAAAC1B98DEDA008614B0 /* Main.storyboard in Resources */,
+				CD103A751BBB07470044166F /* ovalRosa.png in Resources */,
 				CD6BAAB61B98E298008614B0 /* GoogleMaps.bundle in Resources */,
+				CD103A771BBB07470044166F /* ovalVermelho.png in Resources */,
+				CD103A741BBB07470044166F /* ovalLaranja.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,10 +603,12 @@
 				CD0B59E11BAB57750098AD88 /* Location.swift in Sources */,
 				CD0B59DF1BAB50360098AD88 /* LocatioUserTableViewController.swift in Sources */,
 				A7049A9E1BB08BA300A2CDCD /* FriendsTableViewCell.swift in Sources */,
+				CD43674B1BBC771800309FD0 /* AddGroupTableViewCell.swift in Sources */,
 				CD6BAA8D1B98DB5F008614B0 /* GoogleDataProvider.swift in Sources */,
 				CD0B59DD1BAB47720098AD88 /* LocationUserTableViewCell.swift in Sources */,
 				CD6BAA8F1B98DB70008614B0 /* GooglePlace.swift in Sources */,
 				CD8A8BDB1BB479CE00E9D471 /* GroupsTableViewController.swift in Sources */,
+				CD4367491BBC75E200309FD0 /* AddGroupTableViewController.swift in Sources */,
 				CD103A6A1BB9D88D0044166F /* RegisterViewController.swift in Sources */,
 				CDA9A82D1B9DE9E300D93572 /* MapGoogleViewController.swift in Sources */,
 				CD21002A1B9DE7EF00485126 /* PlaceMarker.swift in Sources */,
@@ -576,6 +618,7 @@
 				CD1C036E1BA761550073524A /* FriendsTableViewController.swift in Sources */,
 				CD6BAA931B98DB7F008614B0 /* TypesTableViewController.swift in Sources */,
 				CD0D132D1BB9C29D000D0656 /* User.swift in Sources */,
+				CD43673F1BBC531E00309FD0 /* Group.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
