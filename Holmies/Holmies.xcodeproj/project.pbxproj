@@ -45,7 +45,7 @@
 		CD6BAA981B98DB8A008614B0 /* MarkerInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAA951B98DB8A008614B0 /* MarkerInfoView.xib */; };
 		CD6BAA991B98DB8A008614B0 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA961B98DB8A008614B0 /* UIViewExtension.swift */; };
 		CD6BAAAA1B98DE23008614B0 /* Holmies-Bridging.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAAA91B98DE23008614B0 /* Holmies-Bridging.m */; };
-		CD6BAAAC1B98DEDA008614B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAAAB1B98DEDA008614B0 /* Main.storyboard */; };
+		CD6BAAAC1B98DEDA008614B0 /* Main2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAAAB1B98DEDA008614B0 /* Main2.storyboard */; };
 		CD6BAAB51B98E298008614B0 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6BAAB31B98E298008614B0 /* GoogleMaps.framework */; };
 		CD6BAAB61B98E298008614B0 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAAB41B98E298008614B0 /* GoogleMaps.bundle */; };
 		CD8A8BDB1BB479CE00E9D471 /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A8BDA1BB479CE00E9D471 /* GroupsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -179,7 +179,7 @@
 		CD6BAA961B98DB8A008614B0 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		CD6BAAA81B98DE23008614B0 /* Holmies-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Holmies-Bridging-Header.h"; sourceTree = "<group>"; };
 		CD6BAAA91B98DE23008614B0 /* Holmies-Bridging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Holmies-Bridging.m"; sourceTree = "<group>"; };
-		CD6BAAAB1B98DEDA008614B0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		CD6BAAAB1B98DEDA008614B0 /* Main2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main2.storyboard; sourceTree = "<group>"; };
 		CD6BAAB31B98E298008614B0 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		CD6BAAB41B98E298008614B0 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleMaps.bundle; sourceTree = "<group>"; };
 		CD8A8BDA1BB479CE00E9D471 /* GroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
@@ -392,7 +392,7 @@
 				CD6BAAA91B98DE23008614B0 /* Holmies-Bridging.m */,
 				CD6BAA5B1B98D946008614B0 /* Images.xcassets */,
 				CD6BAA5D1B98D946008614B0 /* LaunchScreen.xib */,
-				CD6BAAAB1B98DEDA008614B0 /* Main.storyboard */,
+				CD6BAAAB1B98DEDA008614B0 /* Main2.storyboard */,
 				CD6BAA951B98DB8A008614B0 /* MarkerInfoView.xib */,
 			);
 			name = View;
@@ -601,7 +601,7 @@
 				CD6BAA981B98DB8A008614B0 /* MarkerInfoView.xib in Resources */,
 				CD6BAA5F1B98D946008614B0 /* LaunchScreen.xib in Resources */,
 				CD6BAA5C1B98D946008614B0 /* Images.xcassets in Resources */,
-				CD6BAAAC1B98DEDA008614B0 /* Main.storyboard in Resources */,
+				CD6BAAAC1B98DEDA008614B0 /* Main2.storyboard in Resources */,
 				CD6BAAB61B98E298008614B0 /* GoogleMaps.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
