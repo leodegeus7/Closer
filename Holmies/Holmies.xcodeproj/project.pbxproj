@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		A7049A9E1BB08BA300A2CDCD /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7049A9D1BB08BA300A2CDCD /* FriendsTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		A74C4AAE1BC31C010000618E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74C4AA91BC31C010000618E /* MainInterface.storyboard */; settings = {ASSET_TAGS = (); }; };
+		A74C4AAF1BC31C010000618E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A74C4AAB1BC31C010000618E /* Info.plist */; settings = {ASSET_TAGS = (); }; };
+		A74C4AB01BC31C010000618E /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74C4AAC1BC31C010000618E /* TodayViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		A74C4AB11BC31C010000618E /* widget.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = A74C4AAD1BC31C010000618E /* widget.entitlements */; settings = {ASSET_TAGS = (); }; };
 		CD0B59DD1BAB47720098AD88 /* LocationUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0B59DC1BAB47720098AD88 /* LocationUserTableViewCell.swift */; };
 		CD0B59DF1BAB50360098AD88 /* LocatioUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0B59DE1BAB50360098AD88 /* LocatioUserTableViewController.swift */; };
 		CD0B59E11BAB57750098AD88 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0B59E01BAB57750098AD88 /* Location.swift */; };
@@ -128,6 +132,10 @@
 /* Begin PBXFileReference section */
 		27C29F8694868BB9197FEBBE /* Pods-Holmies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Holmies.release.xcconfig"; path = "Pods/Target Support Files/Pods-Holmies/Pods-Holmies.release.xcconfig"; sourceTree = "<group>"; };
 		A7049A9D1BB08BA300A2CDCD /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
+		A74C4AAA1BC31C010000618E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		A74C4AAB1BC31C010000618E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A74C4AAC1BC31C010000618E /* TodayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		A74C4AAD1BC31C010000618E /* widget.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = widget.entitlements; sourceTree = "<group>"; };
 		B702994F19B9686CF5BEEC1E /* Pods-Holmies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Holmies.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Holmies/Pods-Holmies.debug.xcconfig"; sourceTree = "<group>"; };
 		CD0B59DC1BAB47720098AD88 /* LocationUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationUserTableViewCell.swift; sourceTree = "<group>"; };
 		CD0B59DE1BAB50360098AD88 /* LocatioUserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocatioUserTableViewController.swift; sourceTree = "<group>"; };
@@ -244,6 +252,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A74C4AA81BC31C010000618E /* widget */ = {
+			isa = PBXGroup;
+			children = (
+				A74C4AA91BC31C010000618E /* MainInterface.storyboard */,
+				A74C4AAB1BC31C010000618E /* Info.plist */,
+				A74C4AAC1BC31C010000618E /* TodayViewController.swift */,
+				A74C4AAD1BC31C010000618E /* widget.entitlements */,
+			);
+			path = widget;
+			sourceTree = "<group>";
+		};
 		AE38627656BF51DCD0B8AC62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -292,6 +311,7 @@
 			children = (
 				CD0D13191BB9B9EB000D0656 /* Alamofire.xcodeproj */,
 				CD6BAA511B98D946008614B0 /* Holmies */,
+				A74C4AA81BC31C010000618E /* widget */,
 				CD6BAA501B98D946008614B0 /* Products */,
 				829AF50CC7B2E6D17F51E270 /* Pods */,
 				AE38627656BF51DCD0B8AC62 /* Frameworks */,
@@ -388,7 +408,6 @@
 				CD0B59DE1BAB50360098AD88 /* LocatioUserTableViewController.swift */,
 				CD1C03671BA74A590073524A /* LoginViewController.swift */,
 				CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */,
-				CD103A691BB9D88D0044166F /* RegisterViewController.swift */,
 				CD6BAA911B98DB7F008614B0 /* TypesTableViewController.swift */,
 				CD8A8BDD1BB479E500E9D471 /* UsersTableViewController.swift */,
 				CD103A691BB9D88D0044166F /* RegisterViewController.swift */,
@@ -538,12 +557,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD103A761BBB07470044166F /* ovalVerde.png in Resources */,
+				A74C4AAE1BC31C010000618E /* MainInterface.storyboard in Resources */,
 				CD6BAA981B98DB8A008614B0 /* MarkerInfoView.xib in Resources */,
 				CD6BAA5F1B98D946008614B0 /* LaunchScreen.xib in Resources */,
 				CD6BAA5C1B98D946008614B0 /* Images.xcassets in Resources */,
+				A74C4AB11BC31C010000618E /* widget.entitlements in Resources */,
 				CD6BAAAC1B98DEDA008614B0 /* Main.storyboard in Resources */,
 				CD103A751BBB07470044166F /* ovalRosa.png in Resources */,
 				CD6BAAB61B98E298008614B0 /* GoogleMaps.bundle in Resources */,
+				A74C4AAF1BC31C010000618E /* Info.plist in Resources */,
 				CD103A771BBB07470044166F /* ovalVermelho.png in Resources */,
 				CD103A741BBB07470044166F /* ovalLaranja.png in Resources */,
 			);
@@ -616,6 +638,7 @@
 				CD6BAA991B98DB8A008614B0 /* UIViewExtension.swift in Sources */,
 				CD1C036C1BA752290073524A /* DataManager.swift in Sources */,
 				CD1C036E1BA761550073524A /* FriendsTableViewController.swift in Sources */,
+				A74C4AB01BC31C010000618E /* TodayViewController.swift in Sources */,
 				CD6BAA931B98DB7F008614B0 /* TypesTableViewController.swift in Sources */,
 				CD0D132D1BB9C29D000D0656 /* User.swift in Sources */,
 				CD43673F1BBC531E00309FD0 /* Group.swift in Sources */,
@@ -641,6 +664,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		A74C4AA91BC31C010000618E /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A74C4AAA1BC31C010000618E /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		CD6BAA5D1B98D946008614B0 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
