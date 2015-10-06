@@ -14,7 +14,7 @@ class User: NSObject {
     var email:String!
     var facebookID:String!
     var userID:Int!
-    var location = (latitude:String(),longitude:String())
+    var location:String!
     var name:String!
     var password:String!
     var photo:String!

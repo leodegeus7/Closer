@@ -2,14 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>FacebookDisplayName</key>
-	<string>Holmies</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.bepid.Holmies</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -24,10 +22,11 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string></string>
+			<string>group.com.bepid.Holmies2</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb916872711703255</string>
+				<string>Holmies</string>
 			</array>
 		</dict>
 	</array>
@@ -35,6 +34,8 @@
 	<string>1</string>
 	<key>FacebookAppID</key>
 	<string>916872711703255</string>
+	<key>FacebookDisplayName</key>
+	<string>Holmies</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -43,6 +44,11 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Usar a local</string>
 	<key>UIBackgroundModes</key>
@@ -72,14 +78,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>NSAppTransportSecurity</key>
-    
-    <dict>
-        
-        <key>NSAllowsArbitraryLoads</key>
-        
-        <true/>
-        
-    </dict>
 </dict>
 </plist>

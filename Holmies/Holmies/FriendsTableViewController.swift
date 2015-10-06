@@ -16,6 +16,7 @@ class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
+        print("entrou aqui")
         DataManager.sharedInstance.convertDicionaryToJson(DataManager.sharedInstance.locationUserArray,nomeArq: "data")
         DataManager.sharedInstance.loadJsonFromDocuments("data")
     
@@ -61,6 +62,8 @@ class FriendsTableViewController: UITableViewController {
         cell.friendPicture.image = DataManager.sharedInstance.findImage("\(id)")
         
         
+        
+        print("entrou aqui4")
 
         return cell
     }
@@ -69,9 +72,10 @@ class FriendsTableViewController: UITableViewController {
         
         if (DataManager.sharedInstance.profilePictureOfFriendsArray == nil) {
             print("arrayNil")
+            print("entrou aqui5")
         } else{
         print(DataManager.sharedInstance.profilePictureOfFriendsArray)
-
+            print("entrou aqui6")
     }
     }
 

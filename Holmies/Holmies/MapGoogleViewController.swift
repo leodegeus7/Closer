@@ -16,14 +16,12 @@ import Alamofire
 
 class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     
-    @IBOutlet weak var controlNet: UILabel!
     @IBOutlet weak var mapView: GMSMapView!    //outlet do mapa como um mapa do google
     @IBOutlet weak var mapCenterPinImage: UIImageView!
     @IBOutlet weak var pinImageVerticalConstraint: NSLayoutConstraint!
     
     //background whetever
     var updateTimer: NSTimer?
-    var updateFriendsTimer: NSTimer?
     var backgroundTask: UIBackgroundTaskIdentifier = UIBackgroundTaskInvalid
     var numero = 0
     var friendsDictionary:Dictionary<String,AnyObject>!
@@ -60,21 +58,15 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         mapView.delegate = self   //delegate das funçoes do google maps
         mapView.mapType = kGMSTypeNormal
         DataManager.sharedInstance.requestFacebook { (result) -> Void in
-        self.controlNet.alpha = 0
-        self.controlNet.enabled = false
-            
+
         for var i = 0; i < DataManager.sharedInstance.friendsArray.count; i++ {
             let id = DataManager.sharedInstance.friendsArray[i]["id"] as! String
             print(id)
             let image = DataManager.sharedInstance.getProfPic(id)
             DataManager.sharedInstance.saveImage(image, id: id)
             }
-        }
 
-        
-        updateFriends()
-        updateFriendsTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "updateFriends", userInfo: nil, repeats: true)
-        
+        }
         
         
 
@@ -105,14 +97,6 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         }
     }
     
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print(error)
-        self.controlNet.alpha = 1
-        self.controlNet.enabled = true
-        self.controlNet.text = "SEM LOCALIZAÇÃO"
-    }
-    
-
 //    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {    SE USAR ESSA FUNCAO NAO PODE USAR A didUpdateToLocation newLocation
 
     
@@ -124,7 +108,18 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         else {
             if UIApplication.sharedApplication().applicationState == .Active {
                 print("app aberto. Coord: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
-                                
+                let marker = GMSMarker(position: CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude))
+                marker.title = "\(newLocation.coordinate.latitude) e \(newLocation.coordinate.longitude)"
+                marker.map = mapView
+                Alamofire.request(.GET, "https://tranquil-coast-5554.herokuapp.com/users/lista").responseJSON { response in
+                    
+                    if let JSON = response.result.value {
+                        print("JSON: \(JSON)")
+                        DataManager.sharedInstance.createJsonFile("users", json: JSON)
+                        DataManager.sharedInstance.convertJsonToUser(JSON)
+                        DataManager.sharedInstance.loadJsonFromDocuments("users")
+                    }
+                }
             
             
             }
@@ -146,10 +141,11 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
             let actualLocation = Location()
             actualLocation.location = newLocation
             actualLocation.address = DataManager.sharedInstance.end
-            DataManager.sharedInstance.locationUserArray.append(actualLocation)
-        }
+            DataManager.sharedInstance.locationUserArray.append(actualLocation)}
        
         
+        
+        //let array = DataManager.sharedInstance.allUser
 
     }
     
@@ -230,49 +226,49 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         */
     }
     
-//    func mapView(mapView: GMSMapView!, markerInfoContents marker: GMSMarker!) -> UIView! {
-//        
-//        let placeMarker = marker as! PlaceMarker
-//        
-//        
-//        if let infoView = UIView.viewFromNibName("MarkerInfoView") as? MarkerInfoView {
-//        
-//            infoView.nameLabel.text = placeMarker.place.name
-//            
-//                if let photo = placeMarker.place.photo {
-//                infoView.placePhoto.image = photo
-//            } else {
-//                infoView.placePhoto.image = UIImage(named: "generic")
-//            }
-//            
-//            return infoView
-//        } else {
-//            return nil
-//        }
-//    }
+    func mapView(mapView: GMSMapView!, markerInfoContents marker: GMSMarker!) -> UIView! {
+        
+        let placeMarker = marker as! PlaceMarker
+        
+        
+        if let infoView = UIView.viewFromNibName("MarkerInfoView") as? MarkerInfoView {
+        
+            infoView.nameLabel.text = placeMarker.place.name
+            
+                if let photo = placeMarker.place.photo {
+                infoView.placePhoto.image = photo
+            } else {
+                infoView.placePhoto.image = UIImage(named: "generic")
+            }
+            
+            return infoView
+        } else {
+            return nil
+        }
+    }
     
-//    func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
-//       
-//        let googleMarker = mapView.selectedMarker as! PlaceMarker
-//       
-//        dataProvider.fetchDirectionsFrom(mapView.myLocation.coordinate, to: googleMarker.place.coordinate) {optionalRoute in
-//            if let encodedRoute = optionalRoute {
-//           
-//                let path = GMSPath(fromEncodedPath: encodedRoute)
-//                let line = GMSPolyline(path: path)
-//                
-//            
-//                line.strokeWidth = 4.0
-//                line.tappable = true
-//                line.map = self.mapView
-//                line.strokeColor = self.randomLineColor
-//                
-//      
-//                mapView.selectedMarker = nil
-//            }
-//        }
-//        
-//    }
+    func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
+       
+        let googleMarker = mapView.selectedMarker as! PlaceMarker
+       
+        dataProvider.fetchDirectionsFrom(mapView.myLocation.coordinate, to: googleMarker.place.coordinate) {optionalRoute in
+            if let encodedRoute = optionalRoute {
+           
+                let path = GMSPath(fromEncodedPath: encodedRoute)
+                let line = GMSPolyline(path: path)
+                
+            
+                line.strokeWidth = 4.0
+                line.tappable = true
+                line.map = self.mapView
+                line.strokeColor = self.randomLineColor
+                
+      
+                mapView.selectedMarker = nil
+            }
+        }
+        
+    }
     
     
     @IBAction func ListaLocal(sender: AnyObject) {
@@ -307,54 +303,6 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         if updateTimer != nil && (backgroundTask == UIBackgroundTaskInvalid) {
             registerBackgroundTask()
         }
-    }
-    
-    func updateFriends () {
-        
-        Alamofire.request(.GET, "https://tranquil-coast-5554.herokuapp.com/users/lista").responseJSON { response in
-            
-            if let JSON = response.result.value {
-                
-                DataManager.sharedInstance.createJsonFile("users", json: JSON)
-                DataManager.sharedInstance.convertJsonToUser(JSON)
-                DataManager.sharedInstance.updateLocationUsers(self.mapView)
-                self.controlNet.alpha = 0
-                self.controlNet.enabled = false
-                
-                
-            } else {
-                let dic = DataManager.sharedInstance.loadJsonFromDocuments("users")
-                DataManager.sharedInstance.convertJsonToUser(dic)
-                DataManager.sharedInstance.updateLocationUsers(self.mapView)
-                self.controlNet.alpha = 1
-                self.controlNet.enabled = true
-                
-            }
-        }
-        requestGroups()
-    }
-    
-    func requestGroups () {
-        Alamofire.request(.GET, "https://tranquil-coast-5554.herokuapp.com/groups/lista").responseJSON { response in
-            
-            if let JSON = response.result.value {
-
-                DataManager.sharedInstance.createJsonFile("groups", json: JSON)
-                DataManager.sharedInstance.convertJsonToGroup(JSON)
-                self.controlNet.alpha = 0
-                self.controlNet.enabled = false
-                
-                
-            } else {
-                let dic = DataManager.sharedInstance.loadJsonFromDocuments("groups")
-                DataManager.sharedInstance.convertJsonToGroup(dic)
-                self.controlNet.alpha = 1
-                self.controlNet.enabled = true
-                
-            }
-        }
-    
-    
     }
 
     

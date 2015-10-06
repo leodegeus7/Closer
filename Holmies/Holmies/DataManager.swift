@@ -9,19 +9,17 @@
 import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
-import MapKit
 
 class DataManager {
     var idUser:String!
     var user:String!
     var idFB:String!
-    var email:String!
+    var mail:String!
     var friendsArray:NSMutableArray!
     var end:[String]!
     var profilePictureOfFriendsArray:Array<UIImage>!
     var locationUserArray = [Location]()
     var allUser = [User]()
-    var allGroup = [Group]()
     var friendsDictionary:Dictionary<String,AnyObject>!
     lazy var locationManager: CLLocationManager! = {
         let manager = CLLocationManager()
@@ -34,7 +32,7 @@ class DataManager {
     init() {
         user = ""
         idFB = ""
-        email = ""
+        mail = ""
         
     }
     class var sharedInstance: DataManager {
@@ -71,7 +69,7 @@ class DataManager {
         localNotification.alertAction = title
         localNotification.alertBody = body
         localNotification.fireDate = NSDate(timeIntervalSinceNow: timeAfterClose)
-        //localNotification.userInfo = userInfo as [NSObject : AnyObject]
+        localNotification.userInfo = userInfo as [NSObject : AnyObject]
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
     
@@ -171,10 +169,10 @@ class DataManager {
                 let imgURL = NSURL(string: imgURLString)
                 let imageData = NSData(contentsOfURL: imgURL!)
                 fbImage = UIImage(data: imageData!)
-               
+                print("entrou aqui2")
                 return fbImage
             }
-
+            print("entrou aqui3")
             return nil
         }
         return nil
@@ -187,6 +185,7 @@ class DataManager {
             UIImageJPEGRepresentation(image!,1.0)!.writeToFile(destinationPath, atomically: true)
             
     
+            print(destinationPath)
             return destinationPath }
         else {
             return ""
@@ -196,13 +195,14 @@ class DataManager {
     func findImage(id:String) -> UIImage {
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
         let destinationPath = documentsPath.stringByAppendingString("/\(id).jpg")
-
+        print(destinationPath)
         let image = UIImage(contentsOfFile: destinationPath)
         return image!
         
     }
     
     func convertDicionaryToJson(dic:[Location],nomeArq:String) -> String {
+        print(locationUserArray)
         
         
         var array = Array<Dictionary<String,String>>()
@@ -240,7 +240,7 @@ class DataManager {
     func createJsonFile(name:String,json:AnyObject) {
         let documents = DataManager.sharedInstance.findDocumentsDirectory()
         let path = documents.stringByAppendingString("/\(name).json")
-        print(path)
+        
         let outputStream = NSOutputStream(toFileAtPath: path, append: false)
         outputStream?.open()
         NSJSONSerialization.writeJSONObject(json, toStream: outputStream!, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
@@ -248,7 +248,7 @@ class DataManager {
     
     }
     
-    func loadJsonFromDocuments(nomeArq:String) -> AnyObject {
+    func loadJsonFromDocuments(nomeArq:String) {
         let documents = findDocumentsDirectory()
         let path = documents.stringByAppendingString("/\(nomeArq).json")
         print(path)
@@ -257,9 +257,7 @@ class DataManager {
             
             do {
                 let parse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) 
-                return parse
-                
-                
+                print(parse)
             }
             catch let error {
                 print(error)
@@ -272,12 +270,11 @@ class DataManager {
         }
         catch _ {
         }
-        return []
 
     }
     
     func convertJsonToUser(json:AnyObject) {
-        if let dic = json as? [NSDictionary] {
+        let dic = json as! [NSDictionary]
         allUser.removeAll()
         for user in dic {
             let newUser = User()
@@ -286,40 +283,13 @@ class DataManager {
             newUser.email = user["email"] as? String
             newUser.facebookID = user["fbid"] as? String
             newUser.userID = user["id"] as? Int
-            if let locationString = user["location"] as? String {
-                if locationString.containsString(":") {
-                    let locationArray = locationString.componentsSeparatedByString(":") as [String]
-                    newUser.location.latitude = locationArray[0]
-                    newUser.location.longitude = locationArray[1]
-                }
-            }
-            
-            
+            newUser.location = user["location"] as? String
             newUser.name = user["name"] as? String
             newUser.password = user["password"] as? String
             newUser.photo = user["photo"] as? String
             newUser.updatedAt = user["updated_at"] as? String
             newUser.username = user["username"] as? String
             allUser.append(newUser)
-            }
-        }
-        
-    }
-    
-    func convertJsonToGroup(json:AnyObject) {
-        if let dic = json as? [NSDictionary] {
-            allGroup.removeAll()
-            for group in dic {
-                let newGroup = Group()
-                newGroup.createdAt = group["created_at"] as? String
-                newGroup.id = group["id"] as? String
-                newGroup.name = group["name"] as? String
-                newGroup.photo = group["photo"] as? String
-                newGroup.updateAt = group["updateAt"] as? String
-                
-                
-                allGroup.append(newGroup)
-            }
         }
         
     }
@@ -353,7 +323,7 @@ class DataManager {
             
         }
     }
-    
+    //
     func saveID ()
     {
         let file = "/id.txt"
@@ -374,30 +344,6 @@ class DataManager {
         }
     }
 
-    func updateLocationUsers(mapView:GMSMapView) {
-        mapView.clear()
-        for user in allUser {
-            let name = user.name
-            let lat = user.location.latitude
-            let long = user.location.longitude
-            let date = user.updatedAt
-            
-            
-            
-            
-            let latitudeConvertida = (lat as NSString).doubleValue as CLLocationDegrees
-            let longitudeConvertida = (long as NSString).doubleValue as CLLocationDegrees
-            let position = CLLocationCoordinate2D(latitude: latitudeConvertida, longitude: longitudeConvertida)
-            let marker = GMSMarker(position: position)
-            marker.title = name
-            marker.snippet = date
-            marker.icon = GMSMarker.markerImageWithColor(UIColor.blueColor())
-            marker.infoWindowAnchor = CGPointMake(0.5, 0.5)
-            marker.map = mapView
-            
-        
-        }
-    }
     
     
 

@@ -16,6 +16,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var currentSize: CGSize = self.preferredContentSize
+        currentSize.height = 100.0
+        self.preferredContentSize = currentSize
         // Do any additional setup after loading the view from its nib.
     }
     
@@ -46,4 +49,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         completionHandler(NCUpdateResult.NewData)
     }
     
+    @IBAction func launchApp(sender: AnyObject) {
+        let url:NSURL = NSURL(string: "Holmies://")!
+        self.extensionContext?.openURL(url, completionHandler: nil)
+        
+        
+        
+    }
 }
+
