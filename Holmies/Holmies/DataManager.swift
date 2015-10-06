@@ -10,6 +10,7 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 import MapKit
+import Alamofire
 
 class DataManager {
     var idUser:String!
@@ -320,6 +321,7 @@ class DataManager {
                 
                 allGroup.append(newGroup)
             }
+            
         }
         
     }
@@ -399,6 +401,26 @@ class DataManager {
         }
     }
     
+    func requestGroups () {
+        Alamofire.request(.GET, "https://tranquil-coast-5554.herokuapp.com/users/\(DataManager.sharedInstance.idUser)/get_user_receiver_groups").responseJSON { response in
+            let view = MapGoogleViewController()
+            if let JSON = response.result.value {
+                
+                DataManager.sharedInstance.createJsonFile("groups", json: JSON)
+                DataManager.sharedInstance.convertJsonToGroup(JSON)
+//                view.controlNet.alpha = 0
+//                view.controlNet.enabled = false
+                
+                
+            } else {
+                let dic = DataManager.sharedInstance.loadJsonFromDocuments("groups")
+                DataManager.sharedInstance.convertJsonToGroup(dic)
+//                view.controlNet.alpha = 1
+//                view.controlNet.enabled = true
+                
+            }
+        }
+    }
     
 
     

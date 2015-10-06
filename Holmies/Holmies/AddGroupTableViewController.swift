@@ -11,10 +11,17 @@ import UIKit
 class AddGroupTableViewController: UITableViewController {
 
     var selectID = [Int]()
-    
+    enum UIBarButtonItemStyle : Int {
+        case Plain
+        case Bordered
+        case Done
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        let buttonContinue = UIBarButtonItem(title: "Continue", style: .Plain, target: self, action: "continueAction")
+        self.navigationItem.rightBarButtonItem = buttonContinue
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -75,6 +82,18 @@ class AddGroupTableViewController: UITableViewController {
         print(selectID)
     }
 
+    func continueAction () {
+        performSegueWithIdentifier("addGroup", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "addGroup" {
+            if let destinationVC = segue.destinationViewController as? AddGroupNameViewController {
+                destinationVC.selectID = selectID
+            }
+        }
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

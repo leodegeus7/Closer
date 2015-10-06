@@ -134,7 +134,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
                 marker.title = "\(newLocation.coordinate.latitude) e \(newLocation.coordinate.longitude)"
                 marker.map = mapView
                 let userInfoCoordinate = ["local":newLocation]
-                DataManager.sharedInstance.createLocalNotification("oi", body: "oi", timeAfterClose: 10,userInfo:userInfoCoordinate)
+                DataManager.sharedInstance.createLocalNotification("oi", body: "\(newLocation.coordinate.latitude)", timeAfterClose: 10,userInfo:userInfoCoordinate)
             }
 
         }
@@ -331,31 +331,12 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
                 
             }
         }
-        requestGroups()
+        DataManager.sharedInstance.requestGroups()
     }
     
-    func requestGroups () {
-        Alamofire.request(.GET, "https://tranquil-coast-5554.herokuapp.com/groups/lista").responseJSON { response in
-            
-            if let JSON = response.result.value {
 
-                DataManager.sharedInstance.createJsonFile("groups", json: JSON)
-                DataManager.sharedInstance.convertJsonToGroup(JSON)
-                self.controlNet.alpha = 0
-                self.controlNet.enabled = false
-                
-                
-            } else {
-                let dic = DataManager.sharedInstance.loadJsonFromDocuments("groups")
-                DataManager.sharedInstance.convertJsonToGroup(dic)
-                self.controlNet.alpha = 1
-                self.controlNet.enabled = true
-                
-            }
-        }
     
     
-    }
 
     
     

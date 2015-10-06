@@ -12,7 +12,9 @@ class GroupsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        reloadData { (result) -> Void in
+            self.tableView.reloadData()
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -29,23 +31,30 @@ class GroupsTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return DataManager.sharedInstance.allGroup.count
     }
 
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
 
-        // Configure the cell...
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! GroupTableViewCell
+
+        cell.groupName.text = DataManager.sharedInstance.allGroup[indexPath.row].name
+        cell.idGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].id
+        cell.createAtGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
 
         return cell
     }
-    */
+    
+    func reloadData(completion:(result:Bool)->Void) {
+        DataManager.sharedInstance.requestGroups()
+        completion(result: true)
+    }
+
 
     /*
     // Override to support conditional editing of the table view.

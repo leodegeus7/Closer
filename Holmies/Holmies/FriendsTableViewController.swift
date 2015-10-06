@@ -52,9 +52,13 @@ class FriendsTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! FriendsTableViewCell
         let name = DataManager.sharedInstance.friendsArray[indexPath.row]["name"] as! String
         let id = DataManager.sharedInstance.friendsArray[indexPath.row]["id"] as! String
+        
+
         cell.friendName.text = name
         cell.friendID.text = id
         
