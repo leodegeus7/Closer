@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		A7049A9E1BB08BA300A2CDCD /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7049A9D1BB08BA300A2CDCD /* FriendsTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		A7FCC50B1BC4CCF600AEDA3F /* WidgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FCC50A1BC4CCF600AEDA3F /* WidgetViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		A7FCC5121BC4CD1D00AEDA3F /* Main2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FCC5111BC4CD1D00AEDA3F /* Main2.storyboard */; settings = {ASSET_TAGS = (); }; };
+		A7FCC5191BC4CE5B00AEDA3F /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7FCC5181BC4CE5B00AEDA3F /* NotificationCenter.framework */; settings = {ASSET_TAGS = (); }; };
+		A7FCC51C1BC4CE5B00AEDA3F /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FCC51B1BC4CE5B00AEDA3F /* TodayViewController.swift */; };
+		A7FCC5231BC4CE5B00AEDA3F /* widget3.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A7FCC5171BC4CE5B00AEDA3F /* widget3.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A7FCC5291BC4CE9B00AEDA3F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FCC5281BC4CE9B00AEDA3F /* MainInterface.storyboard */; settings = {ASSET_TAGS = (); }; };
 		CD0B59DD1BAB47720098AD88 /* LocationUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0B59DC1BAB47720098AD88 /* LocationUserTableViewCell.swift */; };
 		CD0B59DF1BAB50360098AD88 /* LocatioUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0B59DE1BAB50360098AD88 /* LocatioUserTableViewController.swift */; };
 		CD0B59E11BAB57750098AD88 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0B59E01BAB57750098AD88 /* Location.swift */; };
@@ -72,6 +78,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A7FCC5211BC4CE5B00AEDA3F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD6BAA471B98D946008614B0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A7FCC5161BC4CE5B00AEDA3F;
+			remoteInfo = widget3;
+		};
 		CD0D13211BB9B9EC000D0656 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CD0D13191BB9B9EB000D0656 /* Alamofire.xcodeproj */;
@@ -117,6 +130,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		A7FCC5271BC4CE5B00AEDA3F /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A7FCC5231BC4CE5B00AEDA3F /* widget3.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD103A821BBB126C0044166F /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -132,6 +156,15 @@
 /* Begin PBXFileReference section */
 		27C29F8694868BB9197FEBBE /* Pods-Holmies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Holmies.release.xcconfig"; path = "Pods/Target Support Files/Pods-Holmies/Pods-Holmies.release.xcconfig"; sourceTree = "<group>"; };
 		A7049A9D1BB08BA300A2CDCD /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
+		A7FCC50A1BC4CCF600AEDA3F /* WidgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetViewController.swift; sourceTree = "<group>"; };
+		A7FCC5111BC4CD1D00AEDA3F /* Main2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main2.storyboard; sourceTree = "<group>"; };
+		A7FCC5171BC4CE5B00AEDA3F /* widget3.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widget3.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7FCC5181BC4CE5B00AEDA3F /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		A7FCC51B1BC4CE5B00AEDA3F /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		A7FCC5201BC4CE5B00AEDA3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7FCC5281BC4CE9B00AEDA3F /* MainInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		A7FCC52A1BC4CF4100AEDA3F /* Holmies.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Holmies.entitlements; sourceTree = "<group>"; };
+		A7FCC52B1BC4CFEE00AEDA3F /* widget3.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = widget3.entitlements; sourceTree = "<group>"; };
 		B702994F19B9686CF5BEEC1E /* Pods-Holmies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Holmies.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Holmies/Pods-Holmies.debug.xcconfig"; sourceTree = "<group>"; };
 		CD0B59DC1BAB47720098AD88 /* LocationUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationUserTableViewCell.swift; sourceTree = "<group>"; };
 		CD0B59DE1BAB50360098AD88 /* LocatioUserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocatioUserTableViewController.swift; sourceTree = "<group>"; };
@@ -202,6 +235,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A7FCC5141BC4CE5B00AEDA3F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7FCC5191BC4CE5B00AEDA3F /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD6BAA4C1B98D946008614B0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -252,6 +293,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A7FCC51A1BC4CE5B00AEDA3F /* widget3 */ = {
+			isa = PBXGroup;
+			children = (
+				A7FCC52B1BC4CFEE00AEDA3F /* widget3.entitlements */,
+				A7FCC51B1BC4CE5B00AEDA3F /* TodayViewController.swift */,
+				A7FCC5281BC4CE9B00AEDA3F /* MainInterface.storyboard */,
+				A7FCC5201BC4CE5B00AEDA3F /* Info.plist */,
+			);
+			path = widget3;
+			sourceTree = "<group>";
+		};
 		AE38627656BF51DCD0B8AC62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -279,6 +331,7 @@
 				CDABC20D1BB1E9D600DE6A98 /* Security.framework */,
 				CDABC20F1BB1E9DB00DE6A98 /* StoreKit.framework */,
 				CD6BAA8A1B98DAB6008614B0 /* SystemConfiguration.framework */,
+				A7FCC5181BC4CE5B00AEDA3F /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -300,6 +353,7 @@
 			children = (
 				CD0D13191BB9B9EB000D0656 /* Alamofire.xcodeproj */,
 				CD6BAA511B98D946008614B0 /* Holmies */,
+				A7FCC51A1BC4CE5B00AEDA3F /* widget3 */,
 				CD6BAA501B98D946008614B0 /* Products */,
 				829AF50CC7B2E6D17F51E270 /* Pods */,
 				AE38627656BF51DCD0B8AC62 /* Frameworks */,
@@ -311,6 +365,7 @@
 			children = (
 				CD6BAA4F1B98D946008614B0 /* Holmies.app */,
 				CD6BAA641B98D946008614B0 /* HolmiesTests.xctest */,
+				A7FCC5171BC4CE5B00AEDA3F /* widget3.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -318,6 +373,7 @@
 		CD6BAA511B98D946008614B0 /* Holmies */ = {
 			isa = PBXGroup;
 			children = (
+				A7FCC52A1BC4CF4100AEDA3F /* Holmies.entitlements */,
 				CD103A701BBB07470044166F /* ovalLaranja.png */,
 				CD103A711BBB07470044166F /* ovalRosa.png */,
 				CD103A721BBB07470044166F /* ovalVerde.png */,
@@ -383,6 +439,7 @@
 				CD6BAA5B1B98D946008614B0 /* Images.xcassets */,
 				CD6BAA5D1B98D946008614B0 /* LaunchScreen.xib */,
 				CD6BAAAB1B98DEDA008614B0 /* Main.storyboard */,
+				A7FCC5111BC4CD1D00AEDA3F /* Main2.storyboard */,
 				CD6BAA951B98DB8A008614B0 /* MarkerInfoView.xib */,
 			);
 			name = View;
@@ -406,6 +463,7 @@
 				CD4367481BBC75E200309FD0 /* AddGroupTableViewController.swift */,
 				CD43674A1BBC771800309FD0 /* AddGroupTableViewCell.swift */,
 				CDB0FD611BBF0B4500BC6DFA /* AddGroupNameViewController.swift */,
+				A7FCC50A1BC4CCF600AEDA3F /* WidgetViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -413,6 +471,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A7FCC5161BC4CE5B00AEDA3F /* widget3 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7FCC5241BC4CE5B00AEDA3F /* Build configuration list for PBXNativeTarget "widget3" */;
+			buildPhases = (
+				A7FCC5131BC4CE5B00AEDA3F /* Sources */,
+				A7FCC5141BC4CE5B00AEDA3F /* Frameworks */,
+				A7FCC5151BC4CE5B00AEDA3F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = widget3;
+			productName = widget3;
+			productReference = A7FCC5171BC4CE5B00AEDA3F /* widget3.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		CD6BAA4E1B98D946008614B0 /* Holmies */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD6BAA6E1B98D946008614B0 /* Build configuration list for PBXNativeTarget "Holmies" */;
@@ -423,10 +498,12 @@
 				CD6BAA4D1B98D946008614B0 /* Resources */,
 				10C238DE009416F18CAA4FEA /* Copy Pods Resources */,
 				CD103A821BBB126C0044166F /* CopyFiles */,
+				A7FCC5271BC4CE5B00AEDA3F /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A7FCC5221BC4CE5B00AEDA3F /* PBXTargetDependency */,
 			);
 			name = Holmies;
 			productName = Holmies;
@@ -462,10 +539,22 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Leonardo Geus";
 				TargetAttributes = {
+					A7FCC5161BC4CE5B00AEDA3F = {
+						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = H7C2V5GHBN;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					CD6BAA4E1B98D946008614B0 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 4V6XCMA27T;
+						DevelopmentTeam = H7C2V5GHBN;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
@@ -502,6 +591,7 @@
 			targets = (
 				CD6BAA4E1B98D946008614B0 /* Holmies */,
 				CD6BAA631B98D946008614B0 /* HolmiesTests */,
+				A7FCC5161BC4CE5B00AEDA3F /* widget3 */,
 			);
 		};
 /* End PBXProject section */
@@ -545,6 +635,14 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A7FCC5151BC4CE5B00AEDA3F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7FCC5291BC4CE9B00AEDA3F /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD6BAA4D1B98D946008614B0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -559,6 +657,7 @@
 				CD103A751BBB07470044166F /* ovalRosa.png in Resources */,
 				CD6BAAB61B98E298008614B0 /* GoogleMaps.bundle in Resources */,
 				CD103A771BBB07470044166F /* ovalVermelho.png in Resources */,
+				A7FCC5121BC4CD1D00AEDA3F /* Main2.storyboard in Resources */,
 				CD103A741BBB07470044166F /* ovalLaranja.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -606,6 +705,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A7FCC5131BC4CE5B00AEDA3F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7FCC51C1BC4CE5B00AEDA3F /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD6BAA4B1B98D946008614B0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -622,6 +729,7 @@
 				CD0B59DD1BAB47720098AD88 /* LocationUserTableViewCell.swift in Sources */,
 				CD6BAA8F1B98DB70008614B0 /* GooglePlace.swift in Sources */,
 				CD8A8BDB1BB479CE00E9D471 /* GroupsTableViewController.swift in Sources */,
+				A7FCC50B1BC4CCF600AEDA3F /* WidgetViewController.swift in Sources */,
 				CD4367491BBC75E200309FD0 /* AddGroupTableViewController.swift in Sources */,
 				CD103A6A1BB9D88D0044166F /* RegisterViewController.swift in Sources */,
 				CDA9A82D1B9DE9E300D93572 /* MapGoogleViewController.swift in Sources */,
@@ -649,6 +757,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A7FCC5221BC4CE5B00AEDA3F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A7FCC5161BC4CE5B00AEDA3F /* widget3 */;
+			targetProxy = A7FCC5211BC4CE5B00AEDA3F /* PBXContainerItemProxy */;
+		};
 		CD6BAA661B98D946008614B0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CD6BAA4E1B98D946008614B0 /* Holmies */;
@@ -668,6 +781,39 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A7FCC5251BC4CE5B00AEDA3F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = widget3/widget3.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = widget3/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bepid.Holmies2.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A7FCC5261BC4CE5B00AEDA3F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = widget3/widget3.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = widget3/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bepid.Holmies2.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		CD6BAA6C1B98D946008614B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -758,8 +904,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Holmies/Holmies.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -774,7 +922,7 @@
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Frameworks/GoogleMaps.framework",
 				);
 				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bepid.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bepid.Holmies2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Holmies/Holmies-Bridging-Header.h";
@@ -788,8 +936,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Holmies/Holmies.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -804,7 +954,7 @@
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Frameworks/GoogleMaps.framework",
 				);
 				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bepid.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bepid.Holmies2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Holmies/Holmies-Bridging-Header.h";
@@ -856,6 +1006,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A7FCC5241BC4CE5B00AEDA3F /* Build configuration list for PBXNativeTarget "widget3" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7FCC5251BC4CE5B00AEDA3F /* Debug */,
+				A7FCC5261BC4CE5B00AEDA3F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		CD6BAA4A1B98D946008614B0 /* Build configuration list for PBXProject "Holmies" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
