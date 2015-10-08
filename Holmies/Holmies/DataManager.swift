@@ -14,6 +14,7 @@ import Alamofire
 
 class DataManager {
     var idUser:String!
+    var name:String!
     var user:String!
     var idFB:String!
     var email:String!
@@ -34,8 +35,9 @@ class DataManager {
     
     init() {
         user = ""
-        idFB = ""
         email = ""
+        idFB = ""
+        
         
     }
     class var sharedInstance: DataManager {

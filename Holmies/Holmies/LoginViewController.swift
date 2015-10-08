@@ -16,22 +16,29 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     
     var friendsDictionary:Dictionary<String,AnyObject>!
-    
+    var logged = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        DataManager.sharedInstance.importID()
+        print("Aquiii o id user \(DataManager.sharedInstance.idUser)")
+        let idUser = DataManager.sharedInstance.idUser
+        if !(idUser == "nil") {
+            performSegueWithIdentifier("mostrarMapa", sender: self)
+            logged = true
+        }
         
         
         // Do any additional setup after loading the view, typically from a nib.
        
-        
+        print("Aquii \(FBSDKAccessToken.currentAccessToken())")
         if (FBSDKAccessToken.currentAccessToken() == nil) {
             
             print("Nao fez login")
             
         } else {
-            self.performSegueWithIdentifier("mostrarMapa", sender: self)
+            
             print("Ja logado")
             let loginButton = FBSDKLoginButton()
             loginButton.readPermissions = ["id","first_name","last_name","friends{id,name}","email"]
@@ -43,9 +50,12 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                     DataManager.sharedInstance.idFB = resultData["id"] as! String
                     DataManager.sharedInstance.email = resultData["email"] as! String
                     DataManager.sharedInstance.user = resultData["name"] as! String
+                    DataManager.sharedInstance.name = resultData["name"] as! String
                     print("\(DataManager.sharedInstance.idFB) \(DataManager.sharedInstance.email) \(DataManager.sharedInstance.user)")
                     let data = ["id":DataManager.sharedInstance.idFB,"email":DataManager.sharedInstance.email,"user":DataManager.sharedInstance.user]
                     DataManager.sharedInstance.createJsonFile("myData", json: data)
+                    if self.logged == false {
+                        self.performSegueWithIdentifier("showRegister", sender: self)}
                 }
                 else {
                     let myDic = DataManager.sharedInstance.loadJsonFromDocuments("myData") as! NSDictionary
@@ -53,7 +63,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                     DataManager.sharedInstance.email = myDic["email"] as! String
                     DataManager.sharedInstance.user = myDic["user"] as! String
                     print("Informacoes OFFLINE \(DataManager.sharedInstance.idFB) \(DataManager.sharedInstance.email) \(DataManager.sharedInstance.user)")
-                
+                    if self.logged == false {
+                        self.performSegueWithIdentifier("showRegister", sender: self)}
                 }
                 
                 
@@ -126,7 +137,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         if error == nil {
             print("login complete")
-            self.performSegueWithIdentifier("mostrarMapa", sender: self)
+            //self.performSegueWithIdentifier("showRegister", sender: self)
         } else {
             print(error.localizedDescription)
         }
@@ -136,6 +147,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
         print("user logged out")
     }
+    
+    
     
 }
 

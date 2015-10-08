@@ -1013,6 +1013,7 @@
 				A7FCC5261BC4CE5B00AEDA3F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CD6BAA4A1B98D946008614B0 /* Build configuration list for PBXProject "Holmies" */ = {
 			isa = XCConfigurationList;
