@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		A7049A9E1BB08BA300A2CDCD /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7049A9D1BB08BA300A2CDCD /* FriendsTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		A70BF38C1BCE91EE00062246 /* facebookButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A70BF3891BCE91EE00062246 /* facebookButton.png */; settings = {ASSET_TAGS = (); }; };
+		A70BF38D1BCE91EE00062246 /* newUser.png in Resources */ = {isa = PBXBuildFile; fileRef = A70BF38A1BCE91EE00062246 /* newUser.png */; settings = {ASSET_TAGS = (); }; };
+		A70BF38E1BCE91EE00062246 /* connectButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A70BF38B1BCE91EE00062246 /* connectButton.png */; settings = {ASSET_TAGS = (); }; };
+		A73FDB361BCFFCCA00F12CC1 /* certo.png in Resources */ = {isa = PBXBuildFile; fileRef = A73FDB351BCFFCCA00F12CC1 /* certo.png */; settings = {ASSET_TAGS = (); }; };
+		A73FDB3D1BCFFCCF00F12CC1 /* errado.png in Resources */ = {isa = PBXBuildFile; fileRef = A73FDB3C1BCFFCCF00F12CC1 /* errado.png */; settings = {ASSET_TAGS = (); }; };
+		A7D2A4A71BCE8F0E006A55D1 /* Design.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7D2A4A61BCE8F0E006A55D1 /* Design.storyboard */; settings = {ASSET_TAGS = (); }; };
+		A7D2A4B01BCE90E6006A55D1 /* redBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D2A4AF1BCE90E6006A55D1 /* redBackground.png */; settings = {ASSET_TAGS = (); }; };
 		A7FCC50B1BC4CCF600AEDA3F /* WidgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FCC50A1BC4CCF600AEDA3F /* WidgetViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		A7FCC5121BC4CD1D00AEDA3F /* Main2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FCC5111BC4CD1D00AEDA3F /* Main2.storyboard */; settings = {ASSET_TAGS = (); }; };
 		A7FCC5191BC4CE5B00AEDA3F /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7FCC5181BC4CE5B00AEDA3F /* NotificationCenter.framework */; settings = {ASSET_TAGS = (); }; };
@@ -156,6 +163,13 @@
 /* Begin PBXFileReference section */
 		27C29F8694868BB9197FEBBE /* Pods-Holmies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Holmies.release.xcconfig"; path = "Pods/Target Support Files/Pods-Holmies/Pods-Holmies.release.xcconfig"; sourceTree = "<group>"; };
 		A7049A9D1BB08BA300A2CDCD /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
+		A70BF3891BCE91EE00062246 /* facebookButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebookButton.png; sourceTree = "<group>"; };
+		A70BF38A1BCE91EE00062246 /* newUser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newUser.png; sourceTree = "<group>"; };
+		A70BF38B1BCE91EE00062246 /* connectButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = connectButton.png; sourceTree = "<group>"; };
+		A73FDB351BCFFCCA00F12CC1 /* certo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = certo.png; sourceTree = "<group>"; };
+		A73FDB3C1BCFFCCF00F12CC1 /* errado.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = errado.png; sourceTree = "<group>"; };
+		A7D2A4A61BCE8F0E006A55D1 /* Design.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Design.storyboard; sourceTree = "<group>"; };
+		A7D2A4AF1BCE90E6006A55D1 /* redBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redBackground.png; sourceTree = "<group>"; };
 		A7FCC50A1BC4CCF600AEDA3F /* WidgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetViewController.swift; sourceTree = "<group>"; };
 		A7FCC5111BC4CD1D00AEDA3F /* Main2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main2.storyboard; sourceTree = "<group>"; };
 		A7FCC5171BC4CE5B00AEDA3F /* widget3.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widget3.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -291,6 +305,20 @@
 				27C29F8694868BB9197FEBBE /* Pods-Holmies.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		A7D2A4B11BCE90EF006A55D1 /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				A7D2A4A61BCE8F0E006A55D1 /* Design.storyboard */,
+				A73FDB351BCFFCCA00F12CC1 /* certo.png */,
+				A73FDB3C1BCFFCCF00F12CC1 /* errado.png */,
+				A70BF3891BCE91EE00062246 /* facebookButton.png */,
+				A70BF38A1BCE91EE00062246 /* newUser.png */,
+				A70BF38B1BCE91EE00062246 /* connectButton.png */,
+				A7D2A4AF1BCE90E6006A55D1 /* redBackground.png */,
+			);
+			name = Design;
 			sourceTree = "<group>";
 		};
 		A7FCC51A1BC4CE5B00AEDA3F /* widget3 */ = {
@@ -439,6 +467,7 @@
 				CD6BAA5B1B98D946008614B0 /* Images.xcassets */,
 				CD6BAA5D1B98D946008614B0 /* LaunchScreen.xib */,
 				CD6BAAAB1B98DEDA008614B0 /* Main.storyboard */,
+				A7D2A4B11BCE90EF006A55D1 /* Design */,
 				A7FCC5111BC4CD1D00AEDA3F /* Main2.storyboard */,
 				CD6BAA951B98DB8A008614B0 /* MarkerInfoView.xib */,
 			);
@@ -647,14 +676,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7D2A4A71BCE8F0E006A55D1 /* Design.storyboard in Resources */,
 				CDCCCD321BBF84A000A5AD03 /* 2.gpx in Resources */,
+				A70BF38C1BCE91EE00062246 /* facebookButton.png in Resources */,
 				CD103A761BBB07470044166F /* ovalVerde.png in Resources */,
 				CDCCCD2B1BBF83F500A5AD03 /* default.gpx in Resources */,
+				A73FDB3D1BCFFCCF00F12CC1 /* errado.png in Resources */,
 				CD6BAA981B98DB8A008614B0 /* MarkerInfoView.xib in Resources */,
 				CD6BAA5F1B98D946008614B0 /* LaunchScreen.xib in Resources */,
+				A70BF38D1BCE91EE00062246 /* newUser.png in Resources */,
 				CD6BAA5C1B98D946008614B0 /* Images.xcassets in Resources */,
+				A73FDB361BCFFCCA00F12CC1 /* certo.png in Resources */,
+				A70BF38E1BCE91EE00062246 /* connectButton.png in Resources */,
 				CD6BAAAC1B98DEDA008614B0 /* Main.storyboard in Resources */,
 				CD103A751BBB07470044166F /* ovalRosa.png in Resources */,
+				A7D2A4B01BCE90E6006A55D1 /* redBackground.png in Resources */,
 				CD6BAAB61B98E298008614B0 /* GoogleMaps.bundle in Resources */,
 				CD103A771BBB07470044166F /* ovalVermelho.png in Resources */,
 				A7FCC5121BC4CD1D00AEDA3F /* Main2.storyboard in Resources */,
