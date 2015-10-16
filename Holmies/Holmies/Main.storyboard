@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -11,49 +12,99 @@
         <scene sceneID="3aD-Ul-zlc">
             <objects>
                 <tableViewController id="Fhq-D0-MjT" customClass="GroupsTableViewController" customModule="Holmies" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="109" sectionHeaderHeight="28" sectionFooterHeight="28" id="fsZ-PI-Wna">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="213" sectionHeaderHeight="28" sectionFooterHeight="28" id="fsZ-PI-Wna">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="109" id="MIu-sZ-vOV" customClass="GroupTableViewCell" customModule="Holmies" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="109"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="213" id="MIu-sZ-vOV" customClass="GroupTableViewCell" customModule="Holmies" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="213"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MIu-sZ-vOV" id="hZL-wN-3Sw">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="108.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="212.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OrM-Vd-n59">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OrM-Vd-n59">
                                             <rect key="frame" x="8" y="8" width="42" height="21"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqd-B2-ikF">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqd-B2-ikF">
                                             <rect key="frame" x="8" y="66" width="42" height="21"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mw8-Nx-sgV">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mw8-Nx-sgV">
                                             <rect key="frame" x="8" y="37" width="42" height="21"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aJd-L8-jh3" customClass="UserInGroupsCollectionView" customModule="Holmies" customModuleProvider="target">
+                                            <rect key="frame" x="8" y="95" width="579" height="94"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="aJd-L8-jh3" secondAttribute="height" multiplier="579:94" id="8W4-fV-YXi"/>
+                                            </constraints>
+                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Aeu-Hr-Wm7">
+                                                <size key="itemSize" width="70" height="60"/>
+                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            </collectionViewFlowLayout>
+                                            <cells>
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cellUser" id="ItO-3M-WmG" customClass="UsersInGroupsCollectionViewCell" customModule="Holmies" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="60"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                        <rect key="frame" x="0.0" y="0.0" width="70" height="60"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wK6-0k-mQp">
+                                                                <rect key="frame" x="8" y="8" width="57" height="47"/>
+                                                                <animations/>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <animations/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </view>
+                                                    <animations/>
+                                                    <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="wK6-0k-mQp" secondAttribute="bottom" id="5NP-Qn-dRl"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="wK6-0k-mQp" secondAttribute="trailing" id="HGE-6f-7HF"/>
+                                                        <constraint firstAttribute="leadingMargin" secondItem="wK6-0k-mQp" secondAttribute="leading" id="eeb-6n-jXH"/>
+                                                        <constraint firstAttribute="topMargin" secondItem="wK6-0k-mQp" secondAttribute="top" id="hV4-fn-p0b"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <outlet property="imageUser" destination="wK6-0k-mQp" id="DQy-Gk-uU3"/>
+                                                    </connections>
+                                                </collectionViewCell>
+                                            </cells>
+                                            <connections>
+                                                <outlet property="dataSource" destination="MIu-sZ-vOV" id="lvV-nl-mHx"/>
+                                                <outlet property="delegate" destination="MIu-sZ-vOV" id="Qsg-hP-moQ"/>
+                                            </connections>
+                                        </collectionView>
                                     </subviews>
                                     <animations/>
                                     <constraints>
                                         <constraint firstItem="gqd-B2-ikF" firstAttribute="top" secondItem="mw8-Nx-sgV" secondAttribute="bottom" constant="8" id="2Fx-YB-hJb"/>
                                         <constraint firstItem="mw8-Nx-sgV" firstAttribute="top" secondItem="OrM-Vd-n59" secondAttribute="bottom" constant="8" id="3lK-jf-nEs"/>
                                         <constraint firstAttribute="leadingMargin" secondItem="gqd-B2-ikF" secondAttribute="leading" id="6c8-CN-IeQ"/>
+                                        <constraint firstItem="aJd-L8-jh3" firstAttribute="top" secondItem="gqd-B2-ikF" secondAttribute="bottom" constant="8" id="Ugd-cy-jPv"/>
                                         <constraint firstAttribute="topMargin" secondItem="OrM-Vd-n59" secondAttribute="top" id="d5C-Ft-eQe"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="aJd-L8-jh3" secondAttribute="trailing" constant="5" id="dVb-G9-jNg"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="aJd-L8-jh3" secondAttribute="leading" id="f8G-vE-Zoj"/>
                                         <constraint firstAttribute="leadingMargin" secondItem="mw8-Nx-sgV" secondAttribute="leading" id="ggs-M7-iRQ"/>
                                         <constraint firstAttribute="leadingMargin" secondItem="OrM-Vd-n59" secondAttribute="leading" id="la3-Fi-rwE"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="aJd-L8-jh3" secondAttribute="bottom" constant="16" id="uFT-Sx-xkb"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <animations/>
@@ -600,7 +651,7 @@
                                     <action selector="register:" destination="0nG-P8-DFH" eventType="touchUpInside" id="sAa-jw-4Ds"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qeP-tG-HzH">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qeP-tG-HzH">
                                 <rect key="frame" x="225" y="224" width="150" height="30"/>
                                 <animations/>
                                 <constraints>
@@ -636,7 +687,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="flk-lF-vFU">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="flk-lF-vFU">
                                 <rect key="frame" x="218" y="163" width="150" height="30"/>
                                 <animations/>
                                 <constraints>
@@ -645,6 +696,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hcT-qI-pcH">
+                                <rect key="frame" x="270" y="501" width="46" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="TREMETUDOO:" destination="0nG-P8-DFH" eventType="touchUpInside" id="0aN-2d-XWj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -703,6 +762,6 @@
         <image name="icon_me" width="30" height="55"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="otp-YM-IzS"/>
+        <segue reference="gRO-LW-rYa"/>
     </inferredMetricsTieBreakers>
 </document>
