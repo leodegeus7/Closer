@@ -43,10 +43,46 @@ class GroupsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! GroupTableViewCell
 
+        print("grupo \(DataManager.sharedInstance.allGroup)")
         cell.groupName.text = DataManager.sharedInstance.allGroup[indexPath.row].name
         cell.idGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].id
         cell.createAtGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
-
+        //cell.collectionView.numberOfItemsInSection()
+        
+        print(DataManager.sharedInstance.allGroup[indexPath.row].createdAt)
+        
+        
+        
+        
+//        let cellCollection:UserInGroupsCollectionView = cell.collectionView;
+//        
+//        
+//        
+//        for var i=0 ; i < DataManager.sharedInstance.allGroup.count ; i++ {
+//            
+//        let aux:UsersInGroupsCollectionViewCell =  UsersInGroupsCollectionViewCell()
+//        
+//        
+//            
+//        NSIndexSet aaa
+//        
+//        aaa.insertItem(aux)
+//        }
+//        
+//       
+//        aux.imageUser.image = DataManager.sharedInstance.findImage("915791175162407")
+//        
+//        cellCollection.insertSections(aaa)
+//        cellCollection.numberOfItemsInSection(10)
+//        
+//        
+        /*var img:UIImageView = UIImageView()
+        img.image = UIImage(contentsOfFile: "teste")
+        img.addConstraint(NSLayoutConstraint(item: <#T##AnyObject#>, attribute: <#T##NSLayoutAttribute#>, relatedBy: <#T##NSLayoutRelation#>, toItem: <#T##AnyObject?#>, attribute: <#T##NSLayoutAttribute#>, multiplier: <#T##CGFloat#>, constant: <#T##CGFloat#>))
+        cell.contentView.addSubview(img)*/
+        
+        
+        
         return cell
     }
     
@@ -54,6 +90,17 @@ class GroupsTableViewController: UITableViewController {
         DataManager.sharedInstance.requestGroups()
         completion(result: true)
     }
+    
+//    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return 2
+//    }
+//    
+//    
+//    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cellUser", forIndexPath: indexPath) as! UsersInGroupsCollectionViewCell
+//        cell.imageUser.image = DataManager.sharedInstance.findImage("915791175162407")
+//        return cell
+//    }
 
 
     /*

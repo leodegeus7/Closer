@@ -14,4 +14,5 @@ class Group: NSObject {
     var name:String!
     var photo:String!
     var updateAt:String!
+    var users:[User]!
 }

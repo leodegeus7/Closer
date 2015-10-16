@@ -18,6 +18,8 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var password2: UITextField!
+    let helper = HTTPHelper()
+    
     var facebookAuth:Bool!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,17 +77,21 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
                         
                     } else{
                         name.placeholder = "Type your name"
+                        DataManager.sharedInstance.shakeTextField(name)
                     }
                     
                 } else {
                     email.placeholder = "Type a valid e-mail"
+                    DataManager.sharedInstance.shakeTextField(email)
                 }
             } else {
                 email.placeholder = "Type your e-mail"
+                DataManager.sharedInstance.shakeTextField(email)
                 
             }
         } else {
             username.placeholder = "Type your username"
+            DataManager.sharedInstance.shakeTextField(username)
         }
     }
     
@@ -103,46 +109,46 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
                                     
                                 } else {
                                     password2.placeholder = "Passwords must be the same"
+                                    DataManager.sharedInstance.shakeTextField(password2)
                                 }
                             }else {
                                 password2.placeholder = "confirm your password"
+                                DataManager.sharedInstance.shakeTextField(password2)
                             }
                         
                         } else{
                             password.placeholder = "Type your password"
+                            DataManager.sharedInstance.shakeTextField(password)
                         }
                     
                     } else{
                         name.placeholder = "Type your name"
+                        DataManager.sharedInstance.shakeTextField(name)
                     }
                     
                 } else {
                     email.placeholder = "Type a valid e-mail"
+                    DataManager.sharedInstance.shakeTextField(email)
                 }
             } else {
                 email.placeholder = "Type your e-mail"
+                DataManager.sharedInstance.shakeTextField(email)
                 
             }
         } else {
             username.placeholder = "Type your username"
+            DataManager.sharedInstance.shakeTextField(username)
         }
     }
     
     func requestSignUp() {
-        var string = "https://tranquil-coast-5554.herokuapp.com/users/add_new_user?name=\(name.text!)&username=\(username.text!)&email=\(email.text!)&password=\(password2.text!)"
-        if string.containsString(" ") {
-            string = string.stringByReplacingOccurrencesOfString(" ", withString: "%20")
-            
-        }
-        print("LINKcorrigido \(string)")
         
-        Alamofire.request(.GET, string).responseJSON { response in
-            
-            if let JSON = response.result.value {
-                if let dic = JSON as? NSDictionary {
-                    
+        helper.signUpWithName(name.text!, username: username.text!, email: email.text!, password: password2.text!) { (result) -> Void in
+            let JSON = result
+                let dic = JSON as NSDictionary
                     if dic["error"] != nil {
-                        DataManager.sharedInstance.createLocalNotification("Erro", body: "Username ou e-mail ja existem", timeAfterClose: 0, userInfo: ["":""])
+                        
+                        DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: dic["error"] as! String, button1: "Ok")
                         print("existe username ou email ja cadastrado")
                     }
                     else {
@@ -151,27 +157,56 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
                         DataManager.sharedInstance.email = dic["email"] as! String
                         let id = dic["id"]
                         DataManager.sharedInstance.idUser = "\(id!)"
+                        if !(DataManager.sharedInstance.idFB == nil) {
+                            self.helper.updateUserWithID("\(id!)", username: nil, location: nil, altitude: nil, fbid: DataManager.sharedInstance.idFB, photo: nil, name: nil, email: nil, password: nil, completion: { (result) -> Void in
+                                print(result)
+                            })
+                        }
                         DataManager.sharedInstance.saveID()
-                        
                     }
-                }
-            } else {
-                print("Não deu certo o registro ASAOKAPKASPOAKPAOKOPKAOPKOPKOPAKSOPKASPOAKSAPSK LEO TU FEDE")
-            }
             self.performSegueWithIdentifier("showMap", sender: self)
         }
+        
+        
+//        var string = "https://tranquil-coast-5554.herokuapp.com/users/add_new_user?name=\(name.text!)&username=\(username.text!)&email=\(email.text!)&password=\(password2.text!)"
+//        if string.containsString(" ") {
+//            string = string.stringByReplacingOccurrencesOfString(" ", withString: "%20")
+//            
+//        }
+//        print("LINKcorrigido \(string)")
+//        
+//        Alamofire.request(.GET, string).responseJSON { response in
+//            
+//            if let JSON = response.result.value {
+//                if let dic = JSON as? NSDictionary {
+//                    
+//                    if dic["error"] != nil {
+//                        DataManager.sharedInstance.createLocalNotification("Erro", body: "Username ou e-mail ja existem", timeAfterClose: 0, userInfo: ["":""])
+//                        print("existe username ou email ja cadastrado")
+//                    }
+//                    else {
+//                        DataManager.sharedInstance.name = dic["name"] as! String
+//                        DataManager.sharedInstance.user = dic["username"] as! String
+//                        DataManager.sharedInstance.email = dic["email"] as! String
+//                        let id = dic["id"]
+//                        DataManager.sharedInstance.idUser = "\(id!)"
+//                        DataManager.sharedInstance.saveID()
+//                        
+//                    }
+//                }
+//            } else {
+//                print("Não deu certo o registro ASAOKAPKASPOAKPAOKOPKAOPKOPKOPAKSOPKASPOAKSAPSK LEO TU FEDE")
+//            }
+//            self.performSegueWithIdentifier("showMap", sender: self)
+//        }
 
         
     }
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func TREMETUDOO(sender: AnyObject) {
+        DataManager.sharedInstance.shakeTextField(textFieldName)
     }
-    */
 
 }

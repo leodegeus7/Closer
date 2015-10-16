@@ -15,7 +15,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     
     
-    var friendsDictionary:Dictionary<String,AnyObject>!
+    var friendsDictionaryFace:Dictionary<String,AnyObject>!
     var logged = false
     
     override func viewDidLoad() {
@@ -24,10 +24,12 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         DataManager.sharedInstance.importID()
         print("Aquiii o id user \(DataManager.sharedInstance.idUser)")
         let idUser = DataManager.sharedInstance.idUser
-        if !(idUser == "nil") {
+        if !(idUser == "nil" || idUser == nil) {
             performSegueWithIdentifier("mostrarMapa", sender: self)
             logged = true
         }
+        
+
         
         
         // Do any additional setup after loading the view, typically from a nib.

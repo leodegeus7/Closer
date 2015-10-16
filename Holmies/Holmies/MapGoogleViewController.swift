@@ -31,6 +31,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     var locationFirst:CLLocation!
     let dataProvider = GoogleDataProvider()
     
+    let helper = HTTPHelper()
     
     
     var mapRadius: Double {
@@ -63,12 +64,16 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         self.controlNet.alpha = 0
         self.controlNet.enabled = false
             
-        for var i = 0; i < DataManager.sharedInstance.friendsArray.count; i++ {
-            let id = DataManager.sharedInstance.friendsArray[i]["id"] as! String
-            print(id)
-            let image = DataManager.sharedInstance.getProfPic(id)
-            DataManager.sharedInstance.saveImage(image, id: id)
-            }
+        let user = DataManager.sharedInstance.allUser
+
+            
+//        for var i = 0; i < DataManager.sharedInstance.friendsArray.count; i++ {
+//            print(DataManager.sharedInstance.friendsArray)
+//            let id = DataManager.sharedInstance.friendsArray[i]["id"] as! String
+//            print(id)
+//            let image = DataManager.sharedInstance.getProfPic(id)
+//            DataManager.sharedInstance.saveImage(image, id: id)
+//            }
         }
 
         
@@ -311,20 +316,31 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     
     func updateFriends () {
         
+        
+        
+        
         Alamofire.request(.GET, "https://tranquil-coast-5554.herokuapp.com/users/lista").responseJSON { response in
             
             if let JSON = response.result.value {
                 
                 DataManager.sharedInstance.createJsonFile("users", json: JSON)
-                DataManager.sharedInstance.convertJsonToUser(JSON)
+                DataManager.sharedInstance.allUser = DataManager.sharedInstance.convertJsonToUser(JSON)
+                for index in DataManager.sharedInstance.allUser {
+                    let faceId = index.facebookID
+                    let id = "\(index.userID!)"
+                    if !(faceId == nil) {
+                        let image = DataManager.sharedInstance.getProfPic(faceId, serverId: id)
+                        DataManager.sharedInstance.saveImage(image, id: id)
+                    }
+                }
+                
+                
                 DataManager.sharedInstance.updateLocationUsers(self.mapView)
                 self.controlNet.alpha = 0
                 self.controlNet.enabled = false
-                
-                
             } else {
                 let dic = DataManager.sharedInstance.loadJsonFromDocuments("users")
-                DataManager.sharedInstance.convertJsonToUser(dic)
+                DataManager.sharedInstance.allUser = DataManager.sharedInstance.convertJsonToUser(dic)
                 DataManager.sharedInstance.updateLocationUsers(self.mapView)
                 self.controlNet.alpha = 1
                 self.controlNet.enabled = true

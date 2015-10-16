@@ -71,6 +71,7 @@
 		CD8A8BDB1BB479CE00E9D471 /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A8BDA1BB479CE00E9D471 /* GroupsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CD8A8BDE1BB479E500E9D471 /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A8BDD1BB479E500E9D471 /* UsersTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CDA9A82D1B9DE9E300D93572 /* MapGoogleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */; };
+		CDAA87741BD1711300C883B4 /* HTTPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAA87731BD1711300C883B4 /* HTTPHelper.swift */; settings = {ASSET_TAGS = (); }; };
 		CDABC1FD1BB1E88200DE6A98 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDABC1FB1BB1E88200DE6A98 /* Bolts.framework */; settings = {ASSET_TAGS = (); }; };
 		CDABC1FE1BB1E88200DE6A98 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDABC1FC1BB1E88200DE6A98 /* Parse.framework */; settings = {ASSET_TAGS = (); }; };
 		CDABC2001BB1E8EE00DE6A98 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CDABC1FF1BB1E8EE00DE6A98 /* libz.tbd */; };
@@ -82,6 +83,12 @@
 		CDABC20C1BB1E9CD00DE6A98 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDABC20B1BB1E9CD00DE6A98 /* CoreGraphics.framework */; };
 		CDABC20E1BB1E9D600DE6A98 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDABC20D1BB1E9D600DE6A98 /* Security.framework */; };
 		CDABC2101BB1E9DB00DE6A98 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDABC20F1BB1E9DB00DE6A98 /* StoreKit.framework */; };
+		CDB0C94D1BCEE0290020BFB5 /* AESCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB0C9461BCEE0290020BFB5 /* AESCrypt.m */; settings = {ASSET_TAGS = (); }; };
+		CDB0C94E1BCEE0290020BFB5 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB0C9481BCEE0290020BFB5 /* NSData+Base64.m */; settings = {ASSET_TAGS = (); }; };
+		CDB0C94F1BCEE0290020BFB5 /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB0C94A1BCEE0290020BFB5 /* NSData+CommonCrypto.m */; settings = {ASSET_TAGS = (); }; };
+		CDB0C9501BCEE0290020BFB5 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB0C94C1BCEE0290020BFB5 /* NSString+Base64.m */; settings = {ASSET_TAGS = (); }; };
+		CDB0C9581BCEE5340020BFB5 /* UsersInGroupsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB0C9571BCEE5340020BFB5 /* UsersInGroupsCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		CDB0C95A1BCEE8730020BFB5 /* UserInGroupsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB0C9591BCEE8730020BFB5 /* UserInGroupsCollectionView.swift */; settings = {ASSET_TAGS = (); }; };
 		CDB0FD621BBF0B4500BC6DFA /* AddGroupNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB0FD611BBF0B4500BC6DFA /* AddGroupNameViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CDCCCD2B1BBF83F500A5AD03 /* default.gpx in Resources */ = {isa = PBXBuildFile; fileRef = CDCCCD2A1BBF83F500A5AD03 /* default.gpx */; settings = {ASSET_TAGS = (); }; };
 		CDCCCD321BBF84A000A5AD03 /* 2.gpx in Resources */ = {isa = PBXBuildFile; fileRef = CDCCCD311BBF84A000A5AD03 /* 2.gpx */; settings = {ASSET_TAGS = (); }; };
@@ -238,6 +245,7 @@
 		CD8A8BDA1BB479CE00E9D471 /* GroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
 		CD8A8BDD1BB479E500E9D471 /* UsersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
 		CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapGoogleViewController.swift; sourceTree = "<group>"; };
+		CDAA87731BD1711300C883B4 /* HTTPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHelper.swift; sourceTree = "<group>"; };
 		CDABC1FB1BB1E88200DE6A98 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		CDABC1FC1BB1E88200DE6A98 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		CDABC1FF1BB1E8EE00DE6A98 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -249,6 +257,16 @@
 		CDABC20B1BB1E9CD00DE6A98 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CDABC20D1BB1E9D600DE6A98 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		CDABC20F1BB1E9DB00DE6A98 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		CDB0C9451BCEE0290020BFB5 /* AESCrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESCrypt.h; sourceTree = "<group>"; };
+		CDB0C9461BCEE0290020BFB5 /* AESCrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESCrypt.m; sourceTree = "<group>"; };
+		CDB0C9471BCEE0290020BFB5 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		CDB0C9481BCEE0290020BFB5 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		CDB0C9491BCEE0290020BFB5 /* NSData+CommonCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+CommonCrypto.h"; sourceTree = "<group>"; };
+		CDB0C94A1BCEE0290020BFB5 /* NSData+CommonCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+CommonCrypto.m"; sourceTree = "<group>"; };
+		CDB0C94B1BCEE0290020BFB5 /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
+		CDB0C94C1BCEE0290020BFB5 /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
+		CDB0C9571BCEE5340020BFB5 /* UsersInGroupsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersInGroupsCollectionViewCell.swift; sourceTree = "<group>"; };
+		CDB0C9591BCEE8730020BFB5 /* UserInGroupsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInGroupsCollectionView.swift; sourceTree = "<group>"; };
 		CDB0FD611BBF0B4500BC6DFA /* AddGroupNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupNameViewController.swift; sourceTree = "<group>"; };
 		CDCCCD2A1BBF83F500A5AD03 /* default.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = default.gpx; sourceTree = "<group>"; };
 		CDCCCD311BBF84A000A5AD03 /* 2.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2.gpx; sourceTree = "<group>"; };
@@ -410,6 +428,7 @@
 		CD6BAA511B98D946008614B0 /* Holmies */ = {
 			isa = PBXGroup;
 			children = (
+				CDB0C93F1BCEE01D0020BFB5 /* AESCrypt */,
 				A7FCC52A1BC4CF4100AEDA3F /* Holmies.entitlements */,
 				CD103A701BBB07470044166F /* ovalLaranja.png */,
 				CD103A711BBB07470044166F /* ovalRosa.png */,
@@ -450,6 +469,21 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		CDB0C93F1BCEE01D0020BFB5 /* AESCrypt */ = {
+			isa = PBXGroup;
+			children = (
+				CDB0C9451BCEE0290020BFB5 /* AESCrypt.h */,
+				CDB0C9461BCEE0290020BFB5 /* AESCrypt.m */,
+				CDB0C9471BCEE0290020BFB5 /* NSData+Base64.h */,
+				CDB0C9481BCEE0290020BFB5 /* NSData+Base64.m */,
+				CDB0C9491BCEE0290020BFB5 /* NSData+CommonCrypto.h */,
+				CDB0C94A1BCEE0290020BFB5 /* NSData+CommonCrypto.m */,
+				CDB0C94B1BCEE0290020BFB5 /* NSString+Base64.h */,
+				CDB0C94C1BCEE0290020BFB5 /* NSString+Base64.m */,
+			);
+			name = AESCrypt;
+			sourceTree = "<group>";
+		};
 		CDE670661BB1D275008D1E18 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -457,6 +491,7 @@
 				CD1C036B1BA752290073524A /* DataManager.swift */,
 				CD6BAA8C1B98DB5F008614B0 /* GoogleDataProvider.swift */,
 				CD6BAA8E1B98DB70008614B0 /* GooglePlace.swift */,
+				CDAA87731BD1711300C883B4 /* HTTPHelper.swift */,
 				CDCCCD2A1BBF83F500A5AD03 /* default.gpx */,
 				CD0B59E01BAB57750098AD88 /* Location.swift */,
 				CD6BAA941B98DB8A008614B0 /* MarkerInfoView.swift */,
@@ -502,6 +537,8 @@
 				CD43674A1BBC771800309FD0 /* AddGroupTableViewCell.swift */,
 				CDB0FD611BBF0B4500BC6DFA /* AddGroupNameViewController.swift */,
 				A7FCC50A1BC4CCF600AEDA3F /* WidgetViewController.swift */,
+				CDB0C9571BCEE5340020BFB5 /* UsersInGroupsCollectionViewCell.swift */,
+				CDB0C9591BCEE8730020BFB5 /* UserInGroupsCollectionView.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -769,6 +806,7 @@
 				CD8A8BDE1BB479E500E9D471 /* UsersTableViewController.swift in Sources */,
 				CD6BAAAA1B98DE23008614B0 /* Holmies-Bridging.m in Sources */,
 				CD0B59E11BAB57750098AD88 /* Location.swift in Sources */,
+				CDB0C9581BCEE5340020BFB5 /* UsersInGroupsCollectionViewCell.swift in Sources */,
 				CD0B59DF1BAB50360098AD88 /* LocatioUserTableViewController.swift in Sources */,
 				A7049A9E1BB08BA300A2CDCD /* FriendsTableViewCell.swift in Sources */,
 				CD43674B1BBC771800309FD0 /* AddGroupTableViewCell.swift in Sources */,
@@ -781,16 +819,22 @@
 				CD103A6A1BB9D88D0044166F /* RegisterViewController.swift in Sources */,
 				A71F7D171BD0298300652750 /* DesignViewController.swift in Sources */,
 				CDA9A82D1B9DE9E300D93572 /* MapGoogleViewController.swift in Sources */,
+				CDB0C94D1BCEE0290020BFB5 /* AESCrypt.m in Sources */,
+				CDB0C94E1BCEE0290020BFB5 /* NSData+Base64.m in Sources */,
 				CD21002A1B9DE7EF00485126 /* PlaceMarker.swift in Sources */,
 				CD6BAA551B98D946008614B0 /* AppDelegate.swift in Sources */,
 				CD6BAA991B98DB8A008614B0 /* UIViewExtension.swift in Sources */,
 				CDB0FD621BBF0B4500BC6DFA /* AddGroupNameViewController.swift in Sources */,
 				CD1C036C1BA752290073524A /* DataManager.swift in Sources */,
+				CDB0C94F1BCEE0290020BFB5 /* NSData+CommonCrypto.m in Sources */,
+				CDB0C9501BCEE0290020BFB5 /* NSString+Base64.m in Sources */,
 				CD1C036E1BA761550073524A /* FriendsTableViewController.swift in Sources */,
 				CD6BAA931B98DB7F008614B0 /* TypesTableViewController.swift in Sources */,
 				CD0D132D1BB9C29D000D0656 /* User.swift in Sources */,
 				CD43673F1BBC531E00309FD0 /* Group.swift in Sources */,
+				CDB0C95A1BCEE8730020BFB5 /* UserInGroupsCollectionView.swift in Sources */,
 				CD112EC91BC30975000B353C /* GroupTableViewCell.swift in Sources */,
+				CDAA87741BD1711300C883B4 /* HTTPHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

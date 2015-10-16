@@ -12,6 +12,8 @@ import FBSDKLoginKit
 import MapKit
 import Alamofire
 
+
+
 class DataManager {
     var idUser:String!
     var name:String!
@@ -24,7 +26,15 @@ class DataManager {
     var locationUserArray = [Location]()
     var allUser = [User]()
     var allGroup = [Group]()
-    var friendsDictionary:Dictionary<String,AnyObject>!
+    var friendsDictionaryFace:Dictionary<String,AnyObject>!
+    var usersInGroups = [Dictionary<String,AnyObject>]()
+
+    
+    
+    
+    
+    let http = HTTPHelper()
+    
     lazy var locationManager: CLLocationManager! = {
         let manager = CLLocationManager()
         manager.desiredAccuracy = kCLLocationAccuracyKilometer
@@ -37,9 +47,9 @@ class DataManager {
         user = ""
         email = ""
         idFB = ""
-        
-        
+ 
     }
+    
     class var sharedInstance: DataManager {
         struct Static {
             static var instance: DataManager?
@@ -147,8 +157,8 @@ class DataManager {
         let friendRequest = FBSDKGraphRequest(graphPath: "/me/friends", parameters: nil)
         friendRequest.startWithCompletionHandler{ (connection: FBSDKGraphRequestConnection!, result:AnyObject!, error:NSError!) -> Void in
             if error == nil {
-                self.friendsDictionary = result as! Dictionary<String,AnyObject>
-                DataManager.sharedInstance.friendsArray = (self.friendsDictionary["data"]) as! NSMutableArray
+                self.friendsDictionaryFace = result as! Dictionary<String,AnyObject>
+                DataManager.sharedInstance.friendsArray = (self.friendsDictionaryFace["data"]) as! NSMutableArray
                 print("\(DataManager.sharedInstance.friendsArray)")
                 completion(result: self.friendsArray)
                 
@@ -162,26 +172,7 @@ class DataManager {
     }
     
     
-    func getProfPic(fid: String) -> UIImage? {
-        let fileManager = NSFileManager.defaultManager()
-        let documentsDirectory = findDocumentsDirectory()
-        let destinationPath = documentsDirectory.stringByAppendingString("/\(fid).jpg")
-        var fbImage:UIImage!
 
-        if !(fileManager.fileExistsAtPath(destinationPath)) {
-            if (fid != "") {
-                let imgURLString = "http://graph.facebook.com/" + fid + "/picture?type=large" //type=normal
-                let imgURL = NSURL(string: imgURLString)
-                let imageData = NSData(contentsOfURL: imgURL!)
-                fbImage = UIImage(data: imageData!)
-               
-                return fbImage
-            }
-
-            return nil
-        }
-        return nil
-    }
     
     func saveImage(image:UIImage?, id:String) -> String {
         if let _ = image {
@@ -194,6 +185,27 @@ class DataManager {
         else {
             return ""
         }
+    }
+    
+    func getProfPic(fid: String, serverId:String) -> UIImage? {
+        let fileManager = NSFileManager.defaultManager()
+        let documentsDirectory = findDocumentsDirectory()
+        let destinationPath = documentsDirectory.stringByAppendingString("/\(serverId).jpg")
+        var fbImage:UIImage!
+        
+        if !(fileManager.fileExistsAtPath(destinationPath)) {
+            if (fid != "") {
+                let imgURLString = "http://graph.facebook.com/" + fid + "/picture?type=large" //type=normal
+                let imgURL = NSURL(string: imgURLString)
+                let imageData = NSData(contentsOfURL: imgURL!)
+                fbImage = UIImage(data: imageData!)
+                
+                return fbImage
+            }
+            
+            return nil
+        }
+        return nil
     }
     
     func findImage(id:String) -> UIImage {
@@ -279,11 +291,11 @@ class DataManager {
 
     }
     
-    func convertJsonToUser(json:AnyObject) {
+    func convertJsonToUser(json:AnyObject) -> [User] {
+        var userArray = [User]()
         if let dic = json as? [NSDictionary] {
-        allUser.removeAll()
-        for user in dic {
-            let newUser = User()
+            for user in dic {
+                let newUser = User()
             newUser.altitude = user["altitude"] as? String
             newUser.createdAt = user["created_at"] as? String
             newUser.email = user["email"] as? String
@@ -303,10 +315,12 @@ class DataManager {
             newUser.photo = user["photo"] as? String
             newUser.updatedAt = user["updated_at"] as? String
             newUser.username = user["username"] as? String
-            allUser.append(newUser)
+            userArray.append(newUser)
             }
+
         }
         
+        return userArray
     }
     
     func convertJsonToGroup(json:AnyObject) {
@@ -315,7 +329,8 @@ class DataManager {
             for group in dic {
                 let newGroup = Group()
                 newGroup.createdAt = group["created_at"] as? String
-                newGroup.id = group["id"] as? String
+                let id = group["id"]
+                newGroup.id = "\(id!)"
                 newGroup.name = group["name"] as? String
                 newGroup.photo = group["photo"] as? String
                 newGroup.updateAt = group["updateAt"] as? String
@@ -405,11 +420,19 @@ class DataManager {
     
     func requestGroups () {
         Alamofire.request(.GET, "https://tranquil-coast-5554.herokuapp.com/users/\(DataManager.sharedInstance.idUser)/get_user_receiver_groups").responseJSON { response in
-            let view = MapGoogleViewController()
+            
             if let JSON = response.result.value {
                 
+                self.usersInGroups.removeAll()
                 DataManager.sharedInstance.createJsonFile("groups", json: JSON)
                 DataManager.sharedInstance.convertJsonToGroup(JSON)
+                
+                for index in DataManager.sharedInstance.allGroup {
+                    let id = index.id
+                    self.requestUsersInGroupId(id)
+                    
+                }
+                print(self.usersInGroups)
 //                view.controlNet.alpha = 0
 //                view.controlNet.enabled = false
                 
@@ -424,7 +447,33 @@ class DataManager {
         }
     }
     
+    func requestUsersInGroupId(groupId:String) {
+        http.getInfoFromID(groupId, desiredInfo: .groupSenderUsers) { (result) -> Void in
+            DataManager.sharedInstance.createJsonFile("users\(groupId)", json: result)
+            let users = DataManager.sharedInstance.convertJsonToUser(result)
+            print(users)
+            var group = Dictionary<String,AnyObject>()
+            group["groupId"] = groupId
+            group["users"] = users
+            self.usersInGroups.append(group)
 
+        }
+    }
     
-
+    func createSimpleUIAlert (view:UIViewController,title:String,message:String,button1:String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: button1, style: UIAlertActionStyle.Default, handler: nil))
+        view.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    
+    func shakeTextField (textField:UITextField) {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.07
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.fromValue = NSValue(CGPoint: CGPointMake(textField.center.x - 10, textField.center.y))
+        animation.toValue = NSValue(CGPoint: CGPointMake(textField.center.x + 10, textField.center.y))
+        textField.layer.addAnimation(animation, forKey: "position")
+    }
 }
