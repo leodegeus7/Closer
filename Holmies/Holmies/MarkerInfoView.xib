@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,6 +14,7 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qhb-tQ-t8V">
                     <rect key="frame" x="25" y="38" width="100" height="60"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="UGo-tT-nmf"/>
                         <constraint firstAttribute="height" constant="60" id="xZw-Dg-eb3"/>
@@ -20,6 +22,7 @@
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" preferredMaxLayoutWidth="134" translatesAutoresizingMaskIntoConstraints="NO" id="Ggu-GN-94s">
                     <rect key="frame" x="8" y="0.0" width="134" height="38"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="38" id="3yP-OK-bTC"/>
                     </constraints>
@@ -27,10 +30,15 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="walking" translatesAutoresizingMaskIntoConstraints="NO" id="HXI-I9-qMO">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="pin.png" translatesAutoresizingMaskIntoConstraints="NO" id="HXI-I9-qMO">
                     <rect key="frame" x="50" y="100" width="50" height="50"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="HXI-I9-qMO" secondAttribute="height" multiplier="1:1" id="a1j-ph-Ikx"/>
+                    </constraints>
                 </imageView>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="HXI-I9-qMO" secondAttribute="centerX" id="Afr-bj-Twi"/>
@@ -50,6 +58,6 @@
         </view>
     </objects>
     <resources>
-        <image name="walking" width="50" height="50"/>
+        <image name="pin.png" width="133" height="133"/>
     </resources>
 </document>
