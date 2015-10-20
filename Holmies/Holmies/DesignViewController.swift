@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QuartzCore
 
 class DesignViewController: UIViewController {
 
@@ -15,10 +16,6 @@ class DesignViewController: UIViewController {
     @IBOutlet weak var username2: UITextField!
     @IBOutlet weak var password2: UITextField!
     @IBOutlet weak var email: UITextField!
-    
-    let backgroundGradient: CAGradientLayer = CAGradientLayer()
-    let red1 = UIColor(red: 200, green: 12, blue: 37, alpha: 1)
-    let red2 = UIColor(red: 211, green: 0, blue: 43, alpha: 1)
     
     
     override func viewDidLoad() {
@@ -39,8 +36,19 @@ class DesignViewController: UIViewController {
         password.textColor = UIColor.whiteColor()
         password.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
         
-        backgroundGradient.colors = [red1, red2]
-        backgroundGradient.locations = [0.0, 1.0]
+        setUpBacckgrounGradient()
+
+//        backgroundGradient.locations = [0.0, 1.0]
+//        backgroundGradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+//        backgroundGradient.endPoint = CGPoint(x: 1.0, y: 1.0)
+//        backgroundGradient.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: self.view.frame.size.width)
+//        self.view.layer.insertSublayer(backgroundGradient, atIndex: 0)
+        
+        
+//        backgroundGradient.colors = [red3, red4]
+//        backgroundGradient.locations = [0.0, 0,50]
+//        self.view.layer.addSublayer(backgroundGradient)
+        
         
 //
 //        username2.backgroundColor = UIColor.clearColor()
@@ -69,12 +77,35 @@ class DesignViewController: UIViewController {
        
     
         // Do any additional setup after loading the view.
+        
     }
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    
+    func setUpBacckgrounGradient () {
+        
+        let red1 = UIColor(red: 210/255, green: 37/255, blue: 53/255, alpha: 1)
+        let red2 = UIColor(red: 219/255, green: 33/255, blue: 62/255, alpha: 1)
+        
+        let gradientColors: [CGColor] = [red1.CGColor, red2.CGColor]
+        let gradientLocations: [Float] = [0.0, 1.0]
+        
+        let gradientLayer: CAGradientLayer = CAGradientLayer()
+        gradientLayer.colors = gradientColors
+        gradientLayer.locations = gradientLocations
+        
+        gradientLayer.frame = self.view.bounds
+        self.view.layer.insertSublayer(gradientLayer, atIndex: 0)
+        
+        navigationController?.navigationBar.hidden = true
+//        let fontDictionary = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+//        navigationController?.navigationBar.titleTextAttributes = fontDictionary
+        
+        
     }
     
 

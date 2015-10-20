@@ -19,6 +19,7 @@
 		A73FDB361BCFFCCA00F12CC1 /* confirm.png in Resources */ = {isa = PBXBuildFile; fileRef = A73FDB351BCFFCCA00F12CC1 /* confirm.png */; settings = {ASSET_TAGS = (); }; };
 		A73FDB3D1BCFFCCF00F12CC1 /* reject.png in Resources */ = {isa = PBXBuildFile; fileRef = A73FDB3C1BCFFCCF00F12CC1 /* reject.png */; settings = {ASSET_TAGS = (); }; };
 		A7D2A4B01BCE90E6006A55D1 /* redBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D2A4AF1BCE90E6006A55D1 /* redBackground.png */; settings = {ASSET_TAGS = (); }; };
+		A7F3899E1BD56F4500DF2D7C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A7F3899D1BD56F4500DF2D7C /* Info.plist */; settings = {ASSET_TAGS = (); }; };
 		A7FCC50B1BC4CCF600AEDA3F /* WidgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FCC50A1BC4CCF600AEDA3F /* WidgetViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		A7FCC5121BC4CD1D00AEDA3F /* Main2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FCC5111BC4CD1D00AEDA3F /* Main2.storyboard */; settings = {ASSET_TAGS = (); }; };
 		A7FCC5191BC4CE5B00AEDA3F /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7FCC5181BC4CE5B00AEDA3F /* NotificationCenter.framework */; settings = {ASSET_TAGS = (); }; };
@@ -184,6 +185,7 @@
 		A73FDB351BCFFCCA00F12CC1 /* confirm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = confirm.png; sourceTree = "<group>"; };
 		A73FDB3C1BCFFCCF00F12CC1 /* reject.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reject.png; sourceTree = "<group>"; };
 		A7D2A4AF1BCE90E6006A55D1 /* redBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redBackground.png; sourceTree = "<group>"; };
+		A7F3899D1BD56F4500DF2D7C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7FCC50A1BC4CCF600AEDA3F /* WidgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetViewController.swift; sourceTree = "<group>"; };
 		A7FCC5111BC4CD1D00AEDA3F /* Main2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main2.storyboard; sourceTree = "<group>"; };
 		A7FCC5171BC4CE5B00AEDA3F /* widget3.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widget3.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -208,7 +210,6 @@
 		CD1C03631BA749BD0073524A /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		CD1C03641BA749BD0073524A /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		CD1C03671BA74A590073524A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		CD1C03691BA74F0B0073524A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD1C036B1BA752290073524A /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		CD1C036D1BA761550073524A /* FriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		CD2100291B9DE7EF00485126 /* PlaceMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceMarker.swift; sourceTree = "<group>"; };
@@ -446,7 +447,7 @@
 		CD6BAA521B98D946008614B0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				CD1C03691BA74F0B0073524A /* Info.plist */,
+				A7F3899D1BD56F4500DF2D7C /* Info.plist */,
 				CD6BAA531B98D946008614B0 /* Info2.plist */,
 			);
 			name = "Supporting Files";
@@ -730,6 +731,7 @@
 				CDCCCD2B1BBF83F500A5AD03 /* default.gpx in Resources */,
 				A73FDB3D1BCFFCCF00F12CC1 /* reject.png in Resources */,
 				A71F7D1F1BD183C200652750 /* Main.storyboard in Resources */,
+				A7F3899E1BD56F4500DF2D7C /* Info.plist in Resources */,
 				CD6BAA981B98DB8A008614B0 /* MarkerInfoView.xib in Resources */,
 				CD6BAA5F1B98D946008614B0 /* LaunchScreen.xib in Resources */,
 				A70BF38D1BCE91EE00062246 /* newUser.png in Resources */,
