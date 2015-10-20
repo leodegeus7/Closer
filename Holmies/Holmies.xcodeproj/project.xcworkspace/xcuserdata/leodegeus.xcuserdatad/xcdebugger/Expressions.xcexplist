@@ -3,15 +3,12 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "DataManager.(requestGroups(DataManager) -&gt; () -&gt; ()).(closure #1):DataManager.swift">
+         contextName = "GLOBAL">
          <PersistentStrings>
             <PersistentString
-               value = "">
+               value = "isDown">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DataManager.convertJsonToGroup(AnyObject) -&gt; ():DataManager.swift">
       </ContextState>
       <ContextState
          contextName = "HTTPHelper.getInfoFromID(String, desiredInfo : HTTPHelper.DesiredInfo, completion : (result : [[String : AnyObject]]) -&gt; ()) -&gt; ():HTTPHelper.swift">
@@ -21,6 +18,23 @@
       </ContextState>
       <ContextState
          contextName = "DataManager.(requestUsersInGroupId(DataManager) -&gt; (String) -&gt; ()).(closure #1):DataManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DataManager.(requestGroups(DataManager) -&gt; () -&gt; ()).(closure #1):DataManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DataManager.importID() -&gt; ():DataManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DataManager.convertJsonToGroup(AnyObject) -&gt; ():DataManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "LoginViewControllerNew.(animateTextField(LoginViewControllerNew) -&gt; (Bool) -&gt; ()).(closure #1):LoginViewControllerNew.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

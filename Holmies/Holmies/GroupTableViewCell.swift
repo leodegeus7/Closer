@@ -33,7 +33,8 @@ class GroupTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectio
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cellUser", forIndexPath: indexPath) as! UsersInGroupsCollectionViewCell
-                cell.imageUser.image = DataManager.sharedInstance.findImage("915791175162407")
+        
+        cell.imageUser.image = DataManager.sharedInstance.findImage("19")
         return cell
         
     }

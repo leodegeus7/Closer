@@ -153,7 +153,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
             actualLocation.address = DataManager.sharedInstance.end
             DataManager.sharedInstance.locationUserArray.append(actualLocation)
         }
-       
+       DataManager.sharedInstance.funcaosemsentidoquenaofaznadamasocupaespaco()
+        
         
 
     }
