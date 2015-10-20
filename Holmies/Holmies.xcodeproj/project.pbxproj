@@ -73,6 +73,7 @@
 		CD8A8BDE1BB479E500E9D471 /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A8BDD1BB479E500E9D471 /* UsersTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CDA9A82D1B9DE9E300D93572 /* MapGoogleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */; };
 		CDAA87741BD1711300C883B4 /* HTTPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAA87731BD1711300C883B4 /* HTTPHelper.swift */; settings = {ASSET_TAGS = (); }; };
+		CDAA87801BD55CBE00C883B4 /* LoginViewControllerNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAA877F1BD55CBE00C883B4 /* LoginViewControllerNew.swift */; settings = {ASSET_TAGS = (); }; };
 		CDABC1FD1BB1E88200DE6A98 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDABC1FB1BB1E88200DE6A98 /* Bolts.framework */; settings = {ASSET_TAGS = (); }; };
 		CDABC1FE1BB1E88200DE6A98 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDABC1FC1BB1E88200DE6A98 /* Parse.framework */; settings = {ASSET_TAGS = (); }; };
 		CDABC2001BB1E8EE00DE6A98 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CDABC1FF1BB1E8EE00DE6A98 /* libz.tbd */; };
@@ -247,6 +248,7 @@
 		CD8A8BDD1BB479E500E9D471 /* UsersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
 		CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapGoogleViewController.swift; sourceTree = "<group>"; };
 		CDAA87731BD1711300C883B4 /* HTTPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHelper.swift; sourceTree = "<group>"; };
+		CDAA877F1BD55CBE00C883B4 /* LoginViewControllerNew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewControllerNew.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CDABC1FB1BB1E88200DE6A98 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		CDABC1FC1BB1E88200DE6A98 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		CDABC1FF1BB1E8EE00DE6A98 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -435,6 +437,7 @@
 				CD103A711BBB07470044166F /* ovalRosa.png */,
 				CD103A721BBB07470044166F /* ovalVerde.png */,
 				CD103A731BBB07470044166F /* ovalVermelho.png */,
+				CDAA87791BD55C7A00C883B4 /* ControllerNew */,
 				CDE670681BB1D280008D1E18 /* Controller */,
 				CDE670671BB1D27C008D1E18 /* View */,
 				CDE670661BB1D275008D1E18 /* Model */,
@@ -468,6 +471,14 @@
 				CD6BAA691B98D946008614B0 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CDAA87791BD55C7A00C883B4 /* ControllerNew */ = {
+			isa = PBXGroup;
+			children = (
+				CDAA877F1BD55CBE00C883B4 /* LoginViewControllerNew.swift */,
+			);
+			name = ControllerNew;
 			sourceTree = "<group>";
 		};
 		CDB0C93F1BCEE01D0020BFB5 /* AESCrypt */ = {
@@ -834,6 +845,7 @@
 				CD6BAA931B98DB7F008614B0 /* TypesTableViewController.swift in Sources */,
 				CD0D132D1BB9C29D000D0656 /* User.swift in Sources */,
 				CD43673F1BBC531E00309FD0 /* Group.swift in Sources */,
+				CDAA87801BD55CBE00C883B4 /* LoginViewControllerNew.swift in Sources */,
 				CDB0C95A1BCEE8730020BFB5 /* UserInGroupsCollectionView.swift in Sources */,
 				CD112EC91BC30975000B353C /* GroupTableViewCell.swift in Sources */,
 				CDAA87741BD1711300C883B4 /* HTTPHelper.swift in Sources */,

@@ -359,13 +359,16 @@ class DataManager {
             do{
                 let text2 = try String(contentsOfFile: path, encoding:NSUTF8StringEncoding)
                 if text2 == "nil" {
-                    saveID()
+                    //saveID()
                 }
-                text = text2
-                DataManager.sharedInstance.idUser = text!
+                else {
+                    text = text2
+                    DataManager.sharedInstance.idUser = text!
+                }
             }
             catch let error {
-                saveID()
+                if !(text == nil) {
+                    saveID()}
                 print(error)
             }
             
@@ -475,5 +478,10 @@ class DataManager {
         animation.fromValue = NSValue(CGPoint: CGPointMake(textField.center.x - 10, textField.center.y))
         animation.toValue = NSValue(CGPoint: CGPointMake(textField.center.x + 10, textField.center.y))
         textField.layer.addAnimation(animation, forKey: "position")
+    }
+    
+    func funcaosemsentidoquenaofaznadamasocupaespaco() {
+        let leoPassouPoraqui = "leoGeusPassouPoraqui"
+        print(leoPassouPoraqui)
     }
 }
