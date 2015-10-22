@@ -123,6 +123,18 @@ class DataManager {
         }
     }
     
+    func testIfFileExistInDocuments (name:String) -> Bool{
+        let docs = findDocumentsDirectory()
+        let destinationPath = docs.stringByAppendingString("\(name)")
+        let fileManager = NSFileManager.defaultManager()
+        if fileManager.fileExistsAtPath(destinationPath) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    
     func moveJsonFromDocumentsToBundle(nomeArquivo:String) {
         do {
         let fileManager = NSFileManager.defaultManager()
@@ -421,33 +433,41 @@ class DataManager {
         }
     }
     
-    func requestGroups () {
-        Alamofire.request(.GET, "https://tranquil-coast-5554.herokuapp.com/users/\(DataManager.sharedInstance.idUser)/get_user_receiver_groups").responseJSON { response in
-            
-            if let JSON = response.result.value {
-                
-                self.usersInGroups.removeAll()
-                DataManager.sharedInstance.createJsonFile("groups", json: JSON)
-                DataManager.sharedInstance.convertJsonToGroup(JSON)
-                
-                for index in DataManager.sharedInstance.allGroup {
-                    let id = index.id
-                    self.requestUsersInGroupId(id)
-                    
-                }
-                print(self.usersInGroups)
-//                view.controlNet.alpha = 0
-//                view.controlNet.enabled = false
-                
-                
-            } else {
-                let dic = DataManager.sharedInstance.loadJsonFromDocuments("groups")
-                DataManager.sharedInstance.convertJsonToGroup(dic)
-//                view.controlNet.alpha = 1
-//                view.controlNet.enabled = true
-                
+    func requestGroups (completion:(result:NSDictionary)->Void) {
+        http.getInfoFromID(DataManager.sharedInstance.idUser, desiredInfo: .userReceiverGroups) { (result) -> Void in
+            let JSON = result
+            self.usersInGroups.removeAll()
+            DataManager.sharedInstance.createJsonFile("groups", json: JSON)
+            DataManager.sharedInstance.convertJsonToGroup(JSON)
+            for index in DataManager.sharedInstance.allGroup {
+                let id = index.id
+                self.requestUsersInGroupId(id)
             }
+            print(JSON)
+//            } else {
+//                let dic = DataManager.sharedInstance.loadJsonFromDocuments("groups")
+//                DataManager.sharedInstance.convertJsonToGroup(dic)
+//            }
+
         }
+        
+        
+//        
+//        Alamofire.request(.GET, "https://tranquil-coast-5554.herokuapp.com/users/\(DataManager.sharedInstance.idUser)/get_user_receiver_groups").responseJSON { response in
+//            if let JSON = response.result.value {
+//                self.usersInGroups.removeAll()
+//                DataManager.sharedInstance.createJsonFile("groups", json: JSON)
+//                DataManager.sharedInstance.convertJsonToGroup(JSON)
+//                for index in DataManager.sharedInstance.allGroup {
+//                    let id = index.id
+//                    self.requestUsersInGroupId(id)
+//                }
+//                print(self.usersInGroups)
+//            } else {
+//                let dic = DataManager.sharedInstance.loadJsonFromDocuments("groups")
+//                DataManager.sharedInstance.convertJsonToGroup(dic)
+//            }
+//        }
     }
     
     func requestUsersInGroupId(groupId:String) {
