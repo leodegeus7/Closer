@@ -65,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DataManager.sharedInstance.importID()
         let idUser = "\(DataManager.sharedInstance.idUser)"
         let number = Int(idUser)
-    
+
 
         if !(number > 0) {
             let storyboard = UIStoryboard(name: "Design", bundle: nil)

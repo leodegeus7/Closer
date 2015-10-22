@@ -352,7 +352,7 @@
                                                         <fragment content="10">
                                                             <attributes>
                                                                 <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <font key="NSFont" size="18" name="SFUIDisplay-Ultralight"/>
+                                                                <font key="NSFont" metaFont="system" size="18"/>
                                                             </attributes>
                                                         </fragment>
                                                     </attributedString>
@@ -365,7 +365,7 @@
                                                         <fragment content="hours">
                                                             <attributes>
                                                                 <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <font key="NSFont" size="17" name="SFUIDisplay-Light"/>
+                                                                <font key="NSFont" metaFont="system" size="17"/>
                                                             </attributes>
                                                         </fragment>
                                                     </attributedString>
@@ -386,7 +386,7 @@
                                                 <fragment content="Title">
                                                     <attributes>
                                                         <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <font key="NSFont" size="17" name="SFUIText-Medium"/>
+                                                        <font key="NSFont" metaFont="system" size="17"/>
                                                     </attributes>
                                                 </fragment>
                                             </attributedString>

@@ -433,7 +433,7 @@ class DataManager {
         }
     }
     
-    func requestGroups (completion:(result:NSDictionary)->Void) {
+    func requestGroups (completion:(result:[NSDictionary])->Void) {
         http.getInfoFromID(DataManager.sharedInstance.idUser, desiredInfo: .userReceiverGroups) { (result) -> Void in
             let JSON = result
             self.usersInGroups.removeAll()
@@ -443,6 +443,7 @@ class DataManager {
                 let id = index.id
                 self.requestUsersInGroupId(id)
             }
+            completion(result: JSON)
             print(JSON)
 //            } else {
 //                let dic = DataManager.sharedInstance.loadJsonFromDocuments("groups")

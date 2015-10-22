@@ -15,7 +15,10 @@ class CirclesTableViewController: UITableViewController {
         let data = DataManager.sharedInstance.findDocumentsDirectory()
         print(data)
         
-        
+        let refresh = UIRefreshControl()
+        refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refresh.addTarget(self,action:"reloadData",forControlEvents:.ValueChanged)
+        self.refreshControl = refresh
         
     }
 
@@ -47,6 +50,7 @@ class CirclesTableViewController: UITableViewController {
     func reloadData() {
         DataManager.sharedInstance.requestGroups { (result) -> Void in
             self.tableView.reloadData()
+            self.refreshControl!.endRefreshing()
         }
     }
     
@@ -63,6 +67,8 @@ class CirclesTableViewController: UITableViewController {
 
         return cell
     }
+    
+
 
     /*
     // Override to support conditional editing of the table view.
