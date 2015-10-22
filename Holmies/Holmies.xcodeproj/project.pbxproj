@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		A7049A9E1BB08BA300A2CDCD /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7049A9D1BB08BA300A2CDCD /* FriendsTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		A70592171BD6C5B600E737E3 /* DesignGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70592161BD6C5B600E737E3 /* DesignGroupsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		A705921B1BD6C65300E737E3 /* NewGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A705921A1BD6C65300E737E3 /* NewGroupTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		A705921D1BD6C65C00E737E3 /* GroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A705921C1BD6C65C00E737E3 /* GroupsTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		A70BF38C1BCE91EE00062246 /* facebookButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A70BF3891BCE91EE00062246 /* facebookButton.png */; settings = {ASSET_TAGS = (); }; };
 		A70BF38D1BCE91EE00062246 /* newUser.png in Resources */ = {isa = PBXBuildFile; fileRef = A70BF38A1BCE91EE00062246 /* newUser.png */; settings = {ASSET_TAGS = (); }; };
 		A70BF38E1BCE91EE00062246 /* connectButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A70BF38B1BCE91EE00062246 /* connectButton.png */; settings = {ASSET_TAGS = (); }; };
@@ -175,6 +178,9 @@
 /* Begin PBXFileReference section */
 		27C29F8694868BB9197FEBBE /* Pods-Holmies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Holmies.release.xcconfig"; path = "Pods/Target Support Files/Pods-Holmies/Pods-Holmies.release.xcconfig"; sourceTree = "<group>"; };
 		A7049A9D1BB08BA300A2CDCD /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
+		A70592161BD6C5B600E737E3 /* DesignGroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignGroupsTableViewController.swift; sourceTree = "<group>"; };
+		A705921A1BD6C65300E737E3 /* NewGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupTableViewCell.swift; sourceTree = "<group>"; };
+		A705921C1BD6C65C00E737E3 /* GroupsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsTableViewCell.swift; sourceTree = "<group>"; };
 		A70BF3891BCE91EE00062246 /* facebookButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebookButton.png; sourceTree = "<group>"; };
 		A70BF38A1BCE91EE00062246 /* newUser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newUser.png; sourceTree = "<group>"; };
 		A70BF38B1BCE91EE00062246 /* connectButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = connectButton.png; sourceTree = "<group>"; };
@@ -334,11 +340,9 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		A7D2A4B11BCE90EF006A55D1 /* Design */ = {
+		A7CA149B1BD7FF80006E2428 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				A71F7D221BD1864400652750 /* Design.storyboard */,
-				A71F7D161BD0298300652750 /* DesignViewController.swift */,
 				A71F7D141BD0288E00652750 /* photoButton.png */,
 				A71F7D0D1BD0215E00652750 /* pin.png */,
 				A73FDB351BCFFCCA00F12CC1 /* confirm.png */,
@@ -347,6 +351,19 @@
 				A70BF38A1BCE91EE00062246 /* newUser.png */,
 				A70BF38B1BCE91EE00062246 /* connectButton.png */,
 				A7D2A4AF1BCE90E6006A55D1 /* redBackground.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		A7D2A4B11BCE90EF006A55D1 /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				A705921A1BD6C65300E737E3 /* NewGroupTableViewCell.swift */,
+				A705921C1BD6C65C00E737E3 /* GroupsTableViewCell.swift */,
+				A70592161BD6C5B600E737E3 /* DesignGroupsTableViewController.swift */,
+				A71F7D221BD1864400652750 /* Design.storyboard */,
+				A71F7D161BD0298300652750 /* DesignViewController.swift */,
+				A7CA149B1BD7FF80006E2428 /* Images */,
 			);
 			name = Design;
 			sourceTree = "<group>";
@@ -837,8 +854,11 @@
 				CD21002A1B9DE7EF00485126 /* PlaceMarker.swift in Sources */,
 				CD6BAA551B98D946008614B0 /* AppDelegate.swift in Sources */,
 				CD6BAA991B98DB8A008614B0 /* UIViewExtension.swift in Sources */,
+				A705921D1BD6C65C00E737E3 /* GroupsTableViewCell.swift in Sources */,
+				A705921B1BD6C65300E737E3 /* NewGroupTableViewCell.swift in Sources */,
 				CDB0FD621BBF0B4500BC6DFA /* AddGroupNameViewController.swift in Sources */,
 				CD1C036C1BA752290073524A /* DataManager.swift in Sources */,
+				A70592171BD6C5B600E737E3 /* DesignGroupsTableViewController.swift in Sources */,
 				CDB0C94F1BCEE0290020BFB5 /* NSData+CommonCrypto.m in Sources */,
 				CDB0C9501BCEE0290020BFB5 /* NSString+Base64.m in Sources */,
 				CD1C036E1BA761550073524A /* FriendsTableViewController.swift in Sources */,

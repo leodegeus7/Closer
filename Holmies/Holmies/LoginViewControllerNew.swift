@@ -78,6 +78,11 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
         self.view.addSubview(loginButton)
 
         
+        //MARK Design Functions
+        setUpBacckgrounGradient()
+        applyDesignColors()
+ 
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -203,5 +208,49 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
         print("user logged out")
     }
+    
+    func applyDesignColors () {
+        
+        userNameTextField.backgroundColor = UIColor.clearColor()
+        userNameTextField.layer.borderColor = (UIColor.whiteColor()).CGColor
+        userNameTextField.layer.borderWidth = 1
+        userNameTextField.layer.cornerRadius = 8
+        userNameTextField.tintColor = UIColor.whiteColor()
+        userNameTextField.textColor = UIColor.whiteColor()
+        userNameTextField.attributedPlaceholder = NSAttributedString(string: "Username", attributes: [NSForegroundColorAttributeName : UIColor.whiteColor()])
+        
+        passwordTextField.backgroundColor = UIColor.clearColor()
+        passwordTextField.layer.borderColor = (UIColor.whiteColor()).CGColor
+        passwordTextField.layer.borderWidth = 1
+        passwordTextField.layer.cornerRadius = 8
+        passwordTextField.tintColor = UIColor.whiteColor()
+        passwordTextField.textColor = UIColor.whiteColor()
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+        
+    }
 
+    
+    func setUpBacckgrounGradient () {
+        
+        let red1 = UIColor(red: 210/255, green: 37/255, blue: 53/255, alpha: 1)
+        let red2 = UIColor(red: 219/255, green: 33/255, blue: 62/255, alpha: 1)
+        
+        let gradientColors: [CGColor] = [red1.CGColor, red2.CGColor]
+        let gradientLocations: [Float] = [0.0, 1.0]
+        
+        let gradientLayer: CAGradientLayer = CAGradientLayer()
+        gradientLayer.colors = gradientColors
+        gradientLayer.locations = gradientLocations
+        
+        gradientLayer.frame = self.view.bounds
+        self.view.layer.insertSublayer(gradientLayer, atIndex: 0)
+        
+        navigationController?.navigationBar.hidden = true
+        //        let fontDictionary = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+        //        navigationController?.navigationBar.titleTextAttributes = fontDictionary
+        
+        
+    }
+    
+    
 }
