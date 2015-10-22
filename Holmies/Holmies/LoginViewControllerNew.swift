@@ -81,10 +81,10 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
 
         
         //MARK Design Functions
-        setUpBacckgrounGradient()
+        setUpBackgrounGradient()
         applyDesignColors()
  
-        
+    
     }
 
     override func didReceiveMemoryWarning() {
@@ -278,6 +278,12 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
         print("user logged out")
     }
     
+    func createSimpleUIAlert (view:UIViewController,title:String,message:String,button1:String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: button1, style: UIAlertActionStyle.Default, handler: nil))
+        view.presentViewController(alert, animated: true, completion: nil)
+    }
+    
     func applyDesignColors () {
         
         userNameTextField.backgroundColor = UIColor.clearColor()
@@ -295,11 +301,45 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
         passwordTextField.tintColor = UIColor.whiteColor()
         passwordTextField.textColor = UIColor.whiteColor()
         passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
-        
     }
-
     
-    func setUpBacckgrounGradient () {
+    func requestSignUp(name:String,email:String,faceId:String) {
+        let nameArray = name.componentsSeparatedByString(" ")
+        
+       
+        let firstName = nameArray.first!.lowercaseString as String
+        let lastName = nameArray.last!.lowercaseString as String
+        let username = "\(firstName).\(lastName)"
+        
+        helper.signUpWithName(name, username: username, email: email, password: "") { (result) -> Void in
+            let JSON = result
+            let dic = JSON as NSDictionary
+            if dic["error"] != nil {
+                
+                self.createSimpleUIAlert(self, title: "Error", message: dic["error"] as! String, button1: "Ok")
+                print("existe username ou email ja cadastrado")
+            }
+            else {
+                DataManager.sharedInstance.name = dic["name"] as! String
+                DataManager.sharedInstance.user = dic["username"] as! String
+                DataManager.sharedInstance.email = dic["email"] as! String
+                let id = dic["id"]
+                DataManager.sharedInstance.idUser = "\(id!)"
+                self.helper.updateUserWithID("\(id!)", username: nil, location: nil, altitude: nil, fbid: faceId, photo: nil, name: nil, email: nil, password: nil, completion: { (result) -> Void in
+                    
+                    })
+                
+                DataManager.sharedInstance.saveID()
+            }
+            self.performSegueWithIdentifier("showTableView", sender: self)
+        }
+    }
+    
+    func afterLogin() {
+        activityIndicator.stopAnimating()
+    }
+    
+    func setUpBackgrounGradient () {
         
         let red1 = UIColor(red: 210/255, green: 37/255, blue: 53/255, alpha: 1)
         let red2 = UIColor(red: 219/255, green: 33/255, blue: 62/255, alpha: 1)
@@ -322,4 +362,6 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
     }
     
     
+
+        
 }

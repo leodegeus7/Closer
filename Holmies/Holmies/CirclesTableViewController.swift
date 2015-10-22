@@ -52,9 +52,9 @@ class CirclesTableViewController: UITableViewController {
     
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("pendentCell", forIndexPath: indexPath) as! PendentGroupTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("pendentCell", forIndexPath: indexPath) as! NewGroupTableViewCell
         print(DataManager.sharedInstance.allGroup)
-        cell.nameGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].name
+        cell.groupName.text = DataManager.sharedInstance.allGroup[indexPath.row].name
 //        cell.groupName.text = DataManager.sharedInstance.allGroup[indexPath.row].name
 //        cell.idGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].id
 //        cell.createAtGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
