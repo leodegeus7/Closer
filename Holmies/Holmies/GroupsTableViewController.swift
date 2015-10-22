@@ -87,7 +87,7 @@ class GroupsTableViewController: UITableViewController {
     }
     
     func reloadData(completion:(result:Bool)->Void) {
-        DataManager.sharedInstance.requestGroups()
+        //DataManager.sharedInstance.requestGroups(<#T##completion: (result: NSDictionary) -> Void##(result: NSDictionary) -> Void#>)
         completion(result: true)
     }
     

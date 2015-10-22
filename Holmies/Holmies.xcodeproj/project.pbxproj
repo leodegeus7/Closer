@@ -50,6 +50,8 @@
 		CD43673F1BBC531E00309FD0 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD43673E1BBC531E00309FD0 /* Group.swift */; settings = {ASSET_TAGS = (); }; };
 		CD4367491BBC75E200309FD0 /* AddGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4367481BBC75E200309FD0 /* AddGroupTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CD43674B1BBC771800309FD0 /* AddGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD43674A1BBC771800309FD0 /* AddGroupTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		CD56A9D01BD9329200FC3842 /* CirclesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD56A9CF1BD9329200FC3842 /* CirclesTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		CD56A9D71BD9448D00FC3842 /* PendentGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD56A9D61BD9448D00FC3842 /* PendentGroupTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		CD6BAA551B98D946008614B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA541B98D946008614B0 /* AppDelegate.swift */; };
 		CD6BAA5C1B98D946008614B0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAA5B1B98D946008614B0 /* Images.xcassets */; };
 		CD6BAA5F1B98D946008614B0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAA5D1B98D946008614B0 /* LaunchScreen.xib */; };
@@ -223,6 +225,8 @@
 		CD43673E1BBC531E00309FD0 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		CD4367481BBC75E200309FD0 /* AddGroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewController.swift; sourceTree = "<group>"; };
 		CD43674A1BBC771800309FD0 /* AddGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewCell.swift; sourceTree = "<group>"; };
+		CD56A9CF1BD9329200FC3842 /* CirclesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CirclesTableViewController.swift; sourceTree = "<group>"; };
+		CD56A9D61BD9448D00FC3842 /* PendentGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendentGroupTableViewCell.swift; sourceTree = "<group>"; };
 		CD6BAA4F1B98D946008614B0 /* Holmies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Holmies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD6BAA531B98D946008614B0 /* Info2.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info2.plist; sourceTree = "<group>"; };
 		CD6BAA541B98D946008614B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -494,6 +498,8 @@
 			isa = PBXGroup;
 			children = (
 				CDAA877F1BD55CBE00C883B4 /* LoginViewControllerNew.swift */,
+				CD56A9CF1BD9329200FC3842 /* CirclesTableViewController.swift */,
+				CD56A9D61BD9448D00FC3842 /* PendentGroupTableViewCell.swift */,
 			);
 			name = ControllerNew;
 			sourceTree = "<group>";
@@ -837,6 +843,7 @@
 				CD6BAAAA1B98DE23008614B0 /* Holmies-Bridging.m in Sources */,
 				CD0B59E11BAB57750098AD88 /* Location.swift in Sources */,
 				CDB0C9581BCEE5340020BFB5 /* UsersInGroupsCollectionViewCell.swift in Sources */,
+				CD56A9D01BD9329200FC3842 /* CirclesTableViewController.swift in Sources */,
 				CD0B59DF1BAB50360098AD88 /* LocatioUserTableViewController.swift in Sources */,
 				A7049A9E1BB08BA300A2CDCD /* FriendsTableViewCell.swift in Sources */,
 				CD43674B1BBC771800309FD0 /* AddGroupTableViewCell.swift in Sources */,
@@ -864,6 +871,7 @@
 				CD1C036E1BA761550073524A /* FriendsTableViewController.swift in Sources */,
 				CD6BAA931B98DB7F008614B0 /* TypesTableViewController.swift in Sources */,
 				CD0D132D1BB9C29D000D0656 /* User.swift in Sources */,
+				CD56A9D71BD9448D00FC3842 /* PendentGroupTableViewCell.swift in Sources */,
 				CD43673F1BBC531E00309FD0 /* Group.swift in Sources */,
 				CDAA87801BD55CBE00C883B4 /* LoginViewControllerNew.swift in Sources */,
 				CDB0C95A1BCEE8730020BFB5 /* UserInGroupsCollectionView.swift in Sources */,

@@ -348,7 +348,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
                 
             }
         }
-        DataManager.sharedInstance.requestGroups()
+        //DataManager.sharedInstance.requestGroups()
     }
     
 

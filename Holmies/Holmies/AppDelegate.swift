@@ -60,6 +60,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         
+        
+        
+        DataManager.sharedInstance.importID()
+        let idUser = "\(DataManager.sharedInstance.idUser)"
+        let number = Int(idUser)
+        if !(DataManager.sharedInstance.testIfFileExistInDocuments("groups.json")) {
+            let dic = DataManager.sharedInstance.loadJsonFromDocuments("groups")
+            DataManager.sharedInstance.convertJsonToGroup(dic)
+        }
+        DataManager.sharedInstance.requestGroups { (result) -> Void in
+            print(1)
+        }
+        if !(number > 0) {
+            let storyboard = UIStoryboard(name: "Design", bundle: nil)
+            //let dest = storyboard.instantiateViewControllerWithIdentifier("loginVC")
+            let viewController = storyboard.instantiateViewControllerWithIdentifier("loginVC")
+            self.window?.rootViewController = viewController
+            self.window?.makeKeyAndVisible()
+        } else {
+            let storyboard = UIStoryboard(name: "Design", bundle: nil)
+            //let dest = storyboard.instantiateViewControllerWithIdentifier("loginVC")
+            let viewController = storyboard.instantiateViewControllerWithIdentifier("mainTableView")
+            self.window?.rootViewController = viewController
+            self.window?.makeKeyAndVisible()
+        }
+
+        
+        
+        
+        
+        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
