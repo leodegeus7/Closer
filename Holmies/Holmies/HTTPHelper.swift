@@ -16,7 +16,7 @@ class HTTPHelper: NSObject {
     let API_DECRYPT_PW = "LB8ZZB9FLAZ9zMj8fNmL0y1164VlrTKv29B6dZ6vQAADKacTR8EeR4u6Um4DXqx0"
     
     let baseURL = "https://tranquil-coast-5554.herokuapp.com/api" //URL do servidor no HEROKU
-//        let baseURL = "http://localhost:3000/api" //URL do servidor de Teste
+//    let baseURL = "http://localhost:3000/api" //URL do servidor de Teste
     
     internal enum DesiredInfo {
         case userReceiverUsers
@@ -37,6 +37,21 @@ class HTTPHelper: NSObject {
         ]
         
         let url = "\(baseURL)/signin"
+        
+        makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
+            let formattedResult = httpResult as! Dictionary<String,AnyObject>
+            completion(result: formattedResult)
+        }
+        
+    }
+    
+    func signInWithFacebookID(fbid:String ,completion:(result:Dictionary<String,AnyObject>)->Void) {
+        
+        let parameters = [
+            "fbid": fbid
+        ]
+        
+        let url = "\(baseURL)/signin_fb"
         
         makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
             let formattedResult = httpResult as! Dictionary<String,AnyObject>
@@ -142,9 +157,10 @@ class HTTPHelper: NSObject {
     }
     
     
-    func makeHttpPostRequestWithParameters(parameters: Dictionary<String,AnyObject>, url: String, completion:(httpResult:AnyObject)->Void) {
+    func makeHttpPostRequestWithParameters(parameters: Dictionary<String,AnyObject>, url: String, completion:(httpResult:AnyObject?)->Void) {
         Alamofire.request(.POST, url, parameters: parameters).authenticate(user: API_AUTH_NAME, password: API_AUTH_PASSWORD).responseJSON { response in
-            completion(httpResult: response.result.value!)
+            print(response)
+            completion(httpResult: response.result.value)
         }
     }
     

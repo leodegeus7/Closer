@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -306,25 +307,6 @@
             </objects>
             <point key="canvasLocation" x="1174" y="-760"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="Q54-sB-WB4">
-            <objects>
-                <viewController id="1Bt-GH-e6O" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jsg-RQ-bLz"/>
-                        <viewControllerLayoutGuide type="bottom" id="uc1-8K-5lf"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="XO1-3o-6tD">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6OE-vd-bXx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2071" y="748"/>
-        </scene>
         <!--mainTableView-->
         <scene sceneID="dWP-fG-She">
             <objects>
@@ -357,7 +339,8 @@
                                                         <fragment content="10">
                                                             <attributes>
                                                                 <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <font key="NSFont" metaFont="system" size="18"/>
+                                                                <font key="NSFont" metaFont="system" size="36"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
                                                     </attributedString>
@@ -381,6 +364,7 @@
                                                             <attributes>
                                                                 <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <font key="NSFont" metaFont="system" size="17"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
                                                     </attributedString>
@@ -435,7 +419,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oi3-K2-GtL">
-                                            <rect key="frame" x="76" y="46" width="244.5" height="20"/>
+                                            <rect key="frame" x="76" y="46" width="245" height="20"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="oi3-K2-GtL" secondAttribute="height" multiplier="213:62" id="5ra-zn-CKH"/>
@@ -452,7 +436,7 @@
                                             </variation>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oap-xf-Ty4">
-                                            <rect key="frame" x="336.5" y="46" width="244.5" height="20"/>
+                                            <rect key="frame" x="337" y="46" width="244" height="20"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="oap-xf-Ty4" secondAttribute="height" multiplier="213:62" id="uyu-2g-LaO"/>
@@ -565,15 +549,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="zfy-NC-k1J"/>
+                    <connections>
+                        <segue destination="cRu-Sx-wRT" kind="show" identifier="showMap" id="0Zd-nG-6PV"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vwU-Te-0ug" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2010" y="21"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--inicial-->
         <scene sceneID="Yc3-dr-nme">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="e4u-g4-h6t" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="inicial" title="inicial" automaticallyAdjustsScrollViewInsets="NO" id="e4u-g4-h6t" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="CZE-Di-MtH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -589,11 +576,100 @@
             </objects>
             <point key="canvasLocation" x="1174" y="21"/>
         </scene>
+        <!--Delegate-->
+        <scene sceneID="7O1-fQ-cxq">
+            <objects>
+                <viewController id="cRu-Sx-wRT" customClass="MapGoogleViewController" customModule="Holmies" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HYj-1P-qXr"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zhm-6p-L1P"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Z1Z-Ei-5rO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_me" translatesAutoresizingMaskIntoConstraints="NO" id="MdR-2A-Cum">
+                                <rect key="frame" x="285" y="245" width="30" height="55"/>
+                                <animations/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J4n-KI-g0a" userLabel="View" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.98431372549999996" green="0.33814931619999999" blue="0.18755587930000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="cRu-Sx-wRT" id="alY-cG-Ax0"/>
+                                </connections>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sem Internet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y2Z-Pc-wCm">
+                                <rect key="frame" x="200" y="514" width="200" height="36"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="kGN-FN-Y7g"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="MdR-2A-Cum" secondAttribute="centerX" id="Dyy-FK-cQz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="J4n-KI-g0a" secondAttribute="trailing" id="H91-Iz-MRn"/>
+                            <constraint firstItem="Zhm-6p-L1P" firstAttribute="top" secondItem="y2Z-Pc-wCm" secondAttribute="bottom" constant="50" id="WYV-cj-jBJ"/>
+                            <constraint firstItem="y2Z-Pc-wCm" firstAttribute="centerX" secondItem="Z1Z-Ei-5rO" secondAttribute="centerX" id="ZHj-xa-A87"/>
+                            <constraint firstItem="J4n-KI-g0a" firstAttribute="leading" secondItem="Z1Z-Ei-5rO" secondAttribute="leadingMargin" id="adH-AU-pxy"/>
+                            <constraint firstItem="J4n-KI-g0a" firstAttribute="top" secondItem="HYj-1P-qXr" secondAttribute="bottom" id="f5h-hM-fnR"/>
+                            <constraint firstAttribute="trailing" secondItem="J4n-KI-g0a" secondAttribute="trailing" id="hVX-du-s7B"/>
+                            <constraint firstAttribute="centerY" secondItem="MdR-2A-Cum" secondAttribute="bottom" id="hnh-gZ-JAP"/>
+                            <constraint firstItem="J4n-KI-g0a" firstAttribute="top" secondItem="HYj-1P-qXr" secondAttribute="bottom" id="mMr-CE-zXE"/>
+                            <constraint firstItem="Zhm-6p-L1P" firstAttribute="top" secondItem="J4n-KI-g0a" secondAttribute="bottom" id="n7O-l7-yWK"/>
+                            <constraint firstItem="J4n-KI-g0a" firstAttribute="leading" secondItem="Z1Z-Ei-5rO" secondAttribute="leading" id="qcs-m9-94F"/>
+                            <constraint firstItem="Zhm-6p-L1P" firstAttribute="top" secondItem="J4n-KI-g0a" secondAttribute="bottom" constant="160" id="vx4-eX-zhj"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="adH-AU-pxy"/>
+                                <exclude reference="H91-Iz-MRn"/>
+                                <exclude reference="mMr-CE-zXE"/>
+                                <exclude reference="vx4-eX-zhj"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="xS2-lo-lOB">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Hza-0t-ygW">
+                            <rect key="frame" x="180" y="7" width="240" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                            <segments>
+                                <segment title="Normal"/>
+                                <segment title="Satelite"/>
+                                <segment title="Hybrid"/>
+                            </segments>
+                            <connections>
+                                <action selector="mapTypeSegmentPressed:" destination="cRu-Sx-wRT" eventType="valueChanged" id="hep-Sr-qfj"/>
+                            </connections>
+                        </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="Uml-tn-6Yp"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="controlNet" destination="y2Z-Pc-wCm" id="cF8-IK-9Bb"/>
+                        <outlet property="mapCenterPinImage" destination="MdR-2A-Cum" id="mU2-k5-dZ8"/>
+                        <outlet property="mapView" destination="J4n-KI-g0a" id="XNl-w1-vsj"/>
+                        <outlet property="pinImageVerticalConstraint" destination="hnh-gZ-JAP" id="d0e-TY-dDn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N5E-Lx-4XG" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2010" y="728"/>
+        </scene>
     </scenes>
     <resources>
         <image name="confirm.png" width="201" height="62"/>
         <image name="connectButton.png" width="608" height="76"/>
         <image name="facebookButton.png" width="295" height="66"/>
+        <image name="icon_me" width="30" height="55"/>
         <image name="newUser.png" width="295" height="66"/>
         <image name="photoButton.png" width="610" height="309"/>
         <image name="reject.png" width="201" height="62"/>

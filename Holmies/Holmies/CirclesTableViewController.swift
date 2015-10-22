@@ -68,6 +68,11 @@ class CirclesTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        performSegueWithIdentifier("showMap", sender: self)
+        let group = DataManager.sharedInstance.allGroup[indexPath.row]
+        DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
+    }
 
 
     /*

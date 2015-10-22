@@ -28,9 +28,7 @@ class DataManager {
     var allGroup = [Group]()
     var friendsDictionaryFace:Dictionary<String,AnyObject>!
     var usersInGroups = [Dictionary<String,AnyObject>]()
-
-    
-    
+    var activeUsers = [User]()
     
     
     let http = HTTPHelper()
@@ -39,7 +37,7 @@ class DataManager {
         let manager = CLLocationManager()
         manager.desiredAccuracy = kCLLocationAccuracyKilometer
         manager.requestAlwaysAuthorization()
-        manager.distanceFilter = 100
+        manager.distanceFilter = 0.5
         return manager
         }()
     
@@ -410,7 +408,7 @@ class DataManager {
 
     func updateLocationUsers(mapView:GMSMapView) {
         mapView.clear()
-        for user in allUser {
+        for user in activeUsers {
             let name = user.name
             let lat = user.location.latitude
             let long = user.location.longitude
@@ -439,9 +437,11 @@ class DataManager {
             self.usersInGroups.removeAll()
             DataManager.sharedInstance.createJsonFile("groups", json: JSON)
             DataManager.sharedInstance.convertJsonToGroup(JSON)
-            for index in DataManager.sharedInstance.allGroup {
-                let id = index.id
-                self.requestUsersInGroupId(id)
+            for group in DataManager.sharedInstance.allGroup {
+                let id = group.id
+                self.requestUsersInGroupId(id, completion: { (users) -> Void in
+                    group.users = users
+                })
             }
             completion(result: JSON)
             print(JSON)
@@ -471,7 +471,7 @@ class DataManager {
 //        }
     }
     
-    func requestUsersInGroupId(groupId:String) {
+    func requestUsersInGroupId(groupId:String,completion:(users:[User]) -> Void) {
         http.getInfoFromID(groupId, desiredInfo: .groupSenderUsers) { (result) -> Void in
             DataManager.sharedInstance.createJsonFile("users\(groupId)", json: result)
             let users = DataManager.sharedInstance.convertJsonToUser(result)
@@ -480,8 +480,9 @@ class DataManager {
             group["groupId"] = groupId
             group["users"] = users
             self.usersInGroups.append(group)
-
+            completion(users: users)
         }
+        
     }
     
     func createSimpleUIAlert (view:UIViewController,title:String,message:String,button1:String) {
