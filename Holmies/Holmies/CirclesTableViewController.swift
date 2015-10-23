@@ -10,10 +10,14 @@ import UIKit
 
 class CirclesTableViewController: UITableViewController {
 
+    let lightBlue:UIColor = UIColor(red: 61.0/255.0, green: 210.0/255.0, blue: 228.0/255.0, alpha: 1)
+    let red: UIColor = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let data = DataManager.sharedInstance.findDocumentsDirectory()
         print(data)
+        navigationController?.navigationBar.hidden = false
         
         
         
@@ -55,6 +59,10 @@ class CirclesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("pendentCell", forIndexPath: indexPath) as! NewGroupTableViewCell
         print(DataManager.sharedInstance.allGroup)
         cell.groupName.text = DataManager.sharedInstance.allGroup[indexPath.row].name
+        cell.groupName.textColor = red
+        
+        
+        
 //        cell.groupName.text = DataManager.sharedInstance.allGroup[indexPath.row].name
 //        cell.idGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].id
 //        cell.createAtGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
