@@ -81,8 +81,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.makeKeyAndVisible()
             if !(DataManager.sharedInstance.testIfFileExistInDocuments("groups.json")) {
                 let dic = DataManager.sharedInstance.loadJsonFromDocuments("groups")
-                DataManager.sharedInstance.convertJsonToGroup(dic)
+                DataManager.sharedInstance.allGroup = DataManager.sharedInstance.convertJsonToGroup(dic)
+                let groups = DataManager.sharedInstance.allGroup
+                print(groups)
+                
             }
+            if !(DataManager.sharedInstance.testIfFileExistInDocuments("activeGroups.json")) {
+                let dic = DataManager.sharedInstance.loadJsonFromDocuments("activeGroups")
+                DataManager.sharedInstance.activeGroup = DataManager.sharedInstance.convertJsonToGroup(dic)
+            }
+
             DataManager.sharedInstance.requestGroups { (result) -> Void in
                 print(1)
             }

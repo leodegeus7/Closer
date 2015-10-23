@@ -30,6 +30,7 @@ class DataManager {
     var friendsDictionaryFace:Dictionary<String,AnyObject>!
     var usersInGroups = [Dictionary<String,AnyObject>]()
     var activeUsers = [User]()
+    var allFriends = [User]()
     
     
     let http = HTTPHelper()
@@ -334,9 +335,9 @@ class DataManager {
         return userArray
     }
     
-    func convertJsonToGroup(json:AnyObject) {
+    func convertJsonToGroup(json:AnyObject) -> [Group] {
+        var groupDic = [Group]()
         if let dic = json as? [NSDictionary] {
-            allGroup.removeAll()
             for group in dic {
                 let newGroup = Group()
                 newGroup.createdAt = group["created_at"] as? String
@@ -347,10 +348,11 @@ class DataManager {
                 newGroup.updateAt = group["updateAt"] as? String
                 
                 
-                allGroup.append(newGroup)
+                groupDic.append(newGroup)
             }
             
         }
+        return groupDic
         
     }
     
@@ -507,4 +509,27 @@ class DataManager {
         let leoPassouPoraqui = "leoGeusPassouPoraqui"
         print(leoPassouPoraqui)
     }
+    
+    func removeUserFromGroupInBackEnd(groupId:String,completion:(result:String) -> Void) {
+        print("fazer aqui o delete do user em servidor")
+        requestGroups { (result) -> Void in
+            print("fez request do grupos após remover user")
+            completion(result: "terminou")
+        }
+    }
+    
+    func convertGroupToNSDic (groupClass:[Group]) -> [Dictionary<String,AnyObject>] {
+        var groupDic = [Dictionary<String,AnyObject>]()
+        for oneGroup in groupClass {
+            var circle = Dictionary<String,AnyObject>()
+            circle["id"] = oneGroup.id
+            circle["name"] = oneGroup.name
+            circle["updated_at"] = oneGroup.updateAt
+            circle["created_at"] = oneGroup.createdAt
+            circle["photo"] = oneGroup.photo
+            groupDic.append(circle)
+        }
+        return groupDic
+    }
+    
 }
