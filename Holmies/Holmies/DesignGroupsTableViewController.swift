@@ -44,8 +44,8 @@ class DesignGroupsTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("pendingGroup", forIndexPath: indexPath) as! NewGroupTableViewCell
-            cell.backgroundColorView.backgroundColor = lightBlue
-            cell.groupName.textColor = red
+            //cell.backgroundColorView.backgroundColor = lightBlue
+            cell.nameGroup.textColor = red
          //   self.tableView.rowHeight = 100
             
             

@@ -12,10 +12,10 @@ import UIKit
 
 class NewGroupTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var backgroundColorView: UIView!
+    @IBOutlet weak var coloredSquare: UIView!
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var groupName: UILabel!
+    @IBOutlet weak var nameGroup: UILabel!
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     var tapped: ((NewGroupTableViewCell) -> Void)?

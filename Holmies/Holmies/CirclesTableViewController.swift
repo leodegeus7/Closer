@@ -7,22 +7,25 @@
 //
 
 import UIKit
+import QuartzCore
 
 class CirclesTableViewController: UITableViewController {
+    
 
     let lightBlue:UIColor = UIColor(red: 61.0/255.0, green: 210.0/255.0, blue: 228.0/255.0, alpha: 1)
-    let red: UIColor = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
-    
+    let mainRed: UIColor = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         let data = DataManager.sharedInstance.findDocumentsDirectory()
         print(data)
-        navigationController?.navigationBar.hidden = false
         
         let refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refresh.addTarget(self,action:"reloadData",forControlEvents:.ValueChanged)
         self.refreshControl = refresh
+        
+        navigationBarGradient()
         
     }
 
@@ -60,13 +63,34 @@ class CirclesTableViewController: UITableViewController {
     
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("pendentCell", forIndexPath: indexPath) as! NewGroupTableViewCell
-        print(DataManager.sharedInstance.allGroup)
-        cell.groupName.text = DataManager.sharedInstance.allGroup[indexPath.row].name
-        cell.groupName.textColor = red
         
+        let squareRed = UIColor(red: 221.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
         
+        for activeGroup in DataManager.sharedInstance.activeGroup {
+            if activeGroup.id == DataManager.sharedInstance.allGroup[indexPath.row].id {
+                let cellActive = tableView.dequeueReusableCellWithIdentifier("groupCell", forIndexPath: indexPath) as! NewGroupTableViewCell
+                print(DataManager.sharedInstance.allGroup)
+                cellActive.nameGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].name
+                cellActive.nameGroup.textColor = mainRed
+                
+                return cellActive
+            }
+        }
+
+
         
+        let cellPendent = tableView.dequeueReusableCellWithIdentifier("pendentCell", forIndexPath: indexPath) as! NewGroupTableViewCell
+        cellPendent.nameGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].name
+        cellPendent.nameGroup.textColor = mainRed
+        self.tableView.rowHeight = 75
+        cellPendent.coloredSquare.backgroundColor = squareRed 
+        cellPendent.tapped = { [unowned self] (selectedCell) -> Void in
+            let path = tableView.indexPathForRowAtPoint(selectedCell.center)!
+            DataManager.sharedInstance.activeGroup.append(DataManager.sharedInstance.allGroup[path.row])
+            self.reloadData()
+        }
+        return cellPendent
+
 //        cell.groupName.text = DataManager.sharedInstance.allGroup[indexPath.row].name
 //        cell.idGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].id
 //        cell.createAtGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
@@ -80,6 +104,26 @@ class CirclesTableViewController: UITableViewController {
 //            DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
 //        }
 //       
+    }
+    
+    private func imageLayerForGradientBackground() -> UIImage {
+        
+        var updatedFrame = self.navigationController?.navigationBar.bounds
+        updatedFrame!.size.height += 20
+        let layer = CAGradientLayer.gradientLayerForBounds(updatedFrame!)
+        UIGraphicsBeginImageContext(layer.bounds.size)
+        layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+ 
+    func navigationBarGradient () {
+        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        let fontDictionary = [ NSForegroundColorAttributeName:UIColor.whiteColor() ]
+        self.navigationController?.navigationBar.titleTextAttributes = fontDictionary
+        self.navigationController?.navigationBar.setBackgroundImage(imageLayerForGradientBackground(), forBarMetrics: UIBarMetrics.Default)
     }
 
 
@@ -128,4 +172,17 @@ class CirclesTableViewController: UITableViewController {
     }
     */
 
+}
+
+extension CAGradientLayer {
+    class func gradientLayerForBounds(bounds: CGRect) -> CAGradientLayer {
+        var layer = CAGradientLayer()
+        layer.frame = bounds
+        let navigationBarRed1 = UIColor(red: 210.0/255.0, green: 38.0/255.0, blue: 54.0/255.0, alpha: 1.0)
+        let navigationBarRed2 = UIColor(red: 221.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1.0)
+        layer.colors = [navigationBarRed2.CGColor, navigationBarRed1.CGColor]
+        return layer
+        
+        
+    }
 }
