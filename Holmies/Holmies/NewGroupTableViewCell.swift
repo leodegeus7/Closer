@@ -18,7 +18,8 @@ class NewGroupTableViewCell: UITableViewCell {
     @IBOutlet weak var groupName: UILabel!
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
-    var tapped: ((NewGroupTableViewCell) -> Void)?
+    var accepted: ((NewGroupTableViewCell) -> Void)?
+    var rejected: ((NewGroupTableViewCell) -> Void)?
 
     
     override func awakeFromNib() {
@@ -33,15 +34,12 @@ class NewGroupTableViewCell: UITableViewCell {
     }
 
     @IBAction func acceptedButton(sender: AnyObject) {
-        tapped?(self)
+        accepted?(self)
     }
     
     @IBAction func rejectedButton(sender: AnyObject) {
-        
+        rejected?(self)
     }
-    
-    
-    
     
 
 }

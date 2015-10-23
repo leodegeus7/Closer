@@ -474,6 +474,7 @@
 		CDAA87791BD55C7A00C883B4 /* ControllerNew */ = {
 			isa = PBXGroup;
 			children = (
+				CD6BAA541B98D946008614B0 /* AppDelegate.swift */,
 				CDAA877F1BD55CBE00C883B4 /* LoginViewControllerNew.swift */,
 				A705921C1BD6C65C00E737E3 /* GroupsTableViewCell.swift */,
 				A705921A1BD6C65300E737E3 /* NewGroupTableViewCell.swift */,
@@ -535,7 +536,6 @@
 		CDE670681BB1D280008D1E18 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				CD6BAA541B98D946008614B0 /* AppDelegate.swift */,
 				A7049A9D1BB08BA300A2CDCD /* FriendsTableViewCell.swift */,
 				CD1C036D1BA761550073524A /* FriendsTableViewController.swift */,
 				CD8A8BDA1BB479CE00E9D471 /* GroupsTableViewController.swift */,

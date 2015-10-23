@@ -36,7 +36,7 @@ class CirclesTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        
+        let number = DataManager.sharedInstance.allGroup.count
         // #warning Incomplete implementation, return the number of rows
         return DataManager.sharedInstance.allGroup.count
     }
@@ -71,10 +71,23 @@ class CirclesTableViewController: UITableViewController {
         
         let cellPendent = tableView.dequeueReusableCellWithIdentifier("pendentCell", forIndexPath: indexPath) as! NewGroupTableViewCell
         cellPendent.groupName.text = DataManager.sharedInstance.allGroup[indexPath.row].name
-        cellPendent.tapped = { [unowned self] (selectedCell) -> Void in
+        cellPendent.accepted = { [unowned self] (selectedCell) -> Void in
             let path = tableView.indexPathForRowAtPoint(selectedCell.center)!
             DataManager.sharedInstance.activeGroup.append(DataManager.sharedInstance.allGroup[path.row])
+            let group = DataManager.sharedInstance.activeGroup
+            
+            let dic = DataManager.sharedInstance.convertGroupToNSDic(group)
+            
             self.reloadData()
+            DataManager.sharedInstance.createJsonFile("activeGroups", json: dic)
+        }
+        
+        cellPendent.rejected = { [unowned self] (selectedCell) -> Void in
+//            let path = tableView.indexPathForRowAtPoint(selectedCell.center)!
+            DataManager.sharedInstance.removeUserFromGroupInBackEnd(DataManager.sharedInstance.allGroup[indexPath.row].id, completion: { (result) -> Void in
+                self.reloadData()
+            })
+            
         }
         return cellPendent
 
@@ -86,33 +99,42 @@ class CirclesTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        if tableView.cellForRowAtIndexPath(indexPath). == cellPendent {
-//            performSegueWithIdentifier("showMap", sender: self)
-//            DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
-//        }
-//       
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        if cell?.tag == 2 {
+            performSegueWithIdentifier("showMap", sender: self)
+            DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
+        }
+    }
+
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        if cell?.tag == 2 {
+            return UITableViewCellEditingStyle.Delete
+        }
+        else {
+            return UITableViewCellEditingStyle.None
+        }
     }
 
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+
+            if editingStyle == .Delete {
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                DataManager.sharedInstance.removeUserFromGroupInBackEnd(DataManager.sharedInstance.allGroup[indexPath.row].id, completion: { (result) -> Void in
+                    self.reloadData()
+                })
+        
+
+            
+            
+        }
+//        else if editingStyle == .Insert {
+//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+//        }    
     }
-    */
+
 
     /*
     // Override to support rearranging the table view.
