@@ -26,6 +26,7 @@ class DataManager {
     var locationUserArray = [Location]()
     var allUser = [User]()
     var allGroup = [Group]()
+    var activeGroup = [Group]()
     var friendsDictionaryFace:Dictionary<String,AnyObject>!
     var usersInGroups = [Dictionary<String,AnyObject>]()
     var activeUsers = [User]()

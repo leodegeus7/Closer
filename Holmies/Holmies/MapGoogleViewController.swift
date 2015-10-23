@@ -303,6 +303,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         NSLog("Background codigos encerrou")
         UIApplication.sharedApplication().endBackgroundTask(backgroundTask)
         backgroundTask = UIBackgroundTaskInvalid
+        
     }
     func registerBackgroundTask() {
         backgroundTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler {

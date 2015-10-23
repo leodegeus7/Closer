@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class NewGroupTableViewCell: UITableViewCell {
 
     @IBOutlet weak var backgroundColorView: UIView!
@@ -16,7 +18,8 @@ class NewGroupTableViewCell: UITableViewCell {
     @IBOutlet weak var groupName: UILabel!
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
-    
+    var tapped: ((NewGroupTableViewCell) -> Void)?
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,5 +31,17 @@ class NewGroupTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+
+    @IBAction func acceptedButton(sender: AnyObject) {
+        tapped?(self)
+    }
+    
+    @IBAction func rejectedButton(sender: AnyObject) {
+        
+    }
+    
+    
+    
+    
 
 }

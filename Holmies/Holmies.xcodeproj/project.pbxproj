@@ -27,7 +27,6 @@
 		A7FCC5121BC4CD1D00AEDA3F /* Main2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FCC5111BC4CD1D00AEDA3F /* Main2.storyboard */; settings = {ASSET_TAGS = (); }; };
 		A7FCC5191BC4CE5B00AEDA3F /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7FCC5181BC4CE5B00AEDA3F /* NotificationCenter.framework */; settings = {ASSET_TAGS = (); }; };
 		A7FCC51C1BC4CE5B00AEDA3F /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FCC51B1BC4CE5B00AEDA3F /* TodayViewController.swift */; };
-		A7FCC5231BC4CE5B00AEDA3F /* widget3.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A7FCC5171BC4CE5B00AEDA3F /* widget3.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A7FCC5291BC4CE9B00AEDA3F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FCC5281BC4CE9B00AEDA3F /* MainInterface.storyboard */; settings = {ASSET_TAGS = (); }; };
 		CD0B59DD1BAB47720098AD88 /* LocationUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0B59DC1BAB47720098AD88 /* LocationUserTableViewCell.swift */; };
 		CD0B59DF1BAB50360098AD88 /* LocatioUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0B59DE1BAB50360098AD88 /* LocatioUserTableViewController.swift */; };
@@ -52,7 +51,6 @@
 		CD4367491BBC75E200309FD0 /* AddGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4367481BBC75E200309FD0 /* AddGroupTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CD43674B1BBC771800309FD0 /* AddGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD43674A1BBC771800309FD0 /* AddGroupTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		CD56A9D01BD9329200FC3842 /* CirclesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD56A9CF1BD9329200FC3842 /* CirclesTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		CD56A9D71BD9448D00FC3842 /* PendentGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD56A9D61BD9448D00FC3842 /* PendentGroupTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		CD6BAA551B98D946008614B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA541B98D946008614B0 /* AppDelegate.swift */; };
 		CD6BAA5C1B98D946008614B0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAA5B1B98D946008614B0 /* Images.xcassets */; };
 		CD6BAA5F1B98D946008614B0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAA5D1B98D946008614B0 /* LaunchScreen.xib */; };
@@ -102,13 +100,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A7FCC5211BC4CE5B00AEDA3F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CD6BAA471B98D946008614B0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A7FCC5161BC4CE5B00AEDA3F;
-			remoteInfo = widget3;
-		};
 		CD0D13211BB9B9EC000D0656 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CD0D13191BB9B9EB000D0656 /* Alamofire.xcodeproj */;
@@ -154,17 +145,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		A7FCC5271BC4CE5B00AEDA3F /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				A7FCC5231BC4CE5B00AEDA3F /* widget3.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		CD103A821BBB126C0044166F /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -227,7 +207,6 @@
 		CD4367481BBC75E200309FD0 /* AddGroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewController.swift; sourceTree = "<group>"; };
 		CD43674A1BBC771800309FD0 /* AddGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewCell.swift; sourceTree = "<group>"; };
 		CD56A9CF1BD9329200FC3842 /* CirclesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CirclesTableViewController.swift; sourceTree = "<group>"; };
-		CD56A9D61BD9448D00FC3842 /* PendentGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendentGroupTableViewCell.swift; sourceTree = "<group>"; };
 		CD6BAA4F1B98D946008614B0 /* Holmies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Holmies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD6BAA531B98D946008614B0 /* Info2.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info2.plist; sourceTree = "<group>"; };
 		CD6BAA541B98D946008614B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -362,8 +341,6 @@
 		A7D2A4B11BCE90EF006A55D1 /* Design */ = {
 			isa = PBXGroup;
 			children = (
-				A705921A1BD6C65300E737E3 /* NewGroupTableViewCell.swift */,
-				A705921C1BD6C65C00E737E3 /* GroupsTableViewCell.swift */,
 				A70592161BD6C5B600E737E3 /* DesignGroupsTableViewController.swift */,
 				A71F7D221BD1864400652750 /* Design.storyboard */,
 				A71F7D161BD0298300652750 /* DesignViewController.swift */,
@@ -498,9 +475,10 @@
 			isa = PBXGroup;
 			children = (
 				CDAA877F1BD55CBE00C883B4 /* LoginViewControllerNew.swift */,
+				A705921C1BD6C65C00E737E3 /* GroupsTableViewCell.swift */,
+				A705921A1BD6C65300E737E3 /* NewGroupTableViewCell.swift */,
 				CD56A9CF1BD9329200FC3842 /* CirclesTableViewController.swift */,
 				CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */,
-				CD56A9D61BD9448D00FC3842 /* PendentGroupTableViewCell.swift */,
 			);
 			name = ControllerNew;
 			sourceTree = "<group>";
@@ -608,12 +586,10 @@
 				CD6BAA4D1B98D946008614B0 /* Resources */,
 				10C238DE009416F18CAA4FEA /* Copy Pods Resources */,
 				CD103A821BBB126C0044166F /* CopyFiles */,
-				A7FCC5271BC4CE5B00AEDA3F /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A7FCC5221BC4CE5B00AEDA3F /* PBXTargetDependency */,
 			);
 			name = Holmies;
 			productName = Holmies;
@@ -872,7 +848,6 @@
 				CD1C036E1BA761550073524A /* FriendsTableViewController.swift in Sources */,
 				CD6BAA931B98DB7F008614B0 /* TypesTableViewController.swift in Sources */,
 				CD0D132D1BB9C29D000D0656 /* User.swift in Sources */,
-				CD56A9D71BD9448D00FC3842 /* PendentGroupTableViewCell.swift in Sources */,
 				CD43673F1BBC531E00309FD0 /* Group.swift in Sources */,
 				CDAA87801BD55CBE00C883B4 /* LoginViewControllerNew.swift in Sources */,
 				CDB0C95A1BCEE8730020BFB5 /* UserInGroupsCollectionView.swift in Sources */,
@@ -891,11 +866,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A7FCC5221BC4CE5B00AEDA3F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A7FCC5161BC4CE5B00AEDA3F /* widget3 */;
-			targetProxy = A7FCC5211BC4CE5B00AEDA3F /* PBXContainerItemProxy */;
-		};
 		CD6BAA661B98D946008614B0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CD6BAA4E1B98D946008614B0 /* Holmies */;
@@ -1060,6 +1030,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Holmies/Holmies-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1090,6 +1061,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Holmies/Holmies-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

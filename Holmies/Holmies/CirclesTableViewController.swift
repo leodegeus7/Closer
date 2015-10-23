@@ -56,22 +56,41 @@ class CirclesTableViewController: UITableViewController {
     
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("pendentCell", forIndexPath: indexPath) as! NewGroupTableViewCell
-        print(DataManager.sharedInstance.allGroup)
-        cell.groupName.text = DataManager.sharedInstance.allGroup[indexPath.row].name
+        
+        for activeGroup in DataManager.sharedInstance.activeGroup {
+            if activeGroup.id == DataManager.sharedInstance.allGroup[indexPath.row].id {
+                let cellActive = tableView.dequeueReusableCellWithIdentifier("groupCell", forIndexPath: indexPath) as! GroupsTableViewCell
+                print(DataManager.sharedInstance.allGroup)
+                cellActive.nameGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].name
+        
+                return cellActive
+            }
+        }
+
+
+        
+        let cellPendent = tableView.dequeueReusableCellWithIdentifier("pendentCell", forIndexPath: indexPath) as! NewGroupTableViewCell
+        cellPendent.groupName.text = DataManager.sharedInstance.allGroup[indexPath.row].name
+        cellPendent.tapped = { [unowned self] (selectedCell) -> Void in
+            let path = tableView.indexPathForRowAtPoint(selectedCell.center)!
+            DataManager.sharedInstance.activeGroup.append(DataManager.sharedInstance.allGroup[path.row])
+            self.reloadData()
+        }
+        return cellPendent
+
 //        cell.groupName.text = DataManager.sharedInstance.allGroup[indexPath.row].name
 //        cell.idGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].id
 //        cell.createAtGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
         //cell.collectionView.numberOfItemsInSection()
-        
 
-        return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("showMap", sender: self)
-        let group = DataManager.sharedInstance.allGroup[indexPath.row]
-        DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
+//        if tableView.cellForRowAtIndexPath(indexPath). == cellPendent {
+//            performSegueWithIdentifier("showMap", sender: self)
+//            DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
+//        }
+//       
     }
 
 
