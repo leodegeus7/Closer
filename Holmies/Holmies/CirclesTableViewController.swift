@@ -56,6 +56,8 @@ class CirclesTableViewController: UITableViewController {
     
     func reloadData() {
         DataManager.sharedInstance.requestGroups { (result) -> Void in
+            let teste = DataManager.sharedInstance.allGroup
+            DataManager.sharedInstance.allGroup = DataManager.sharedInstance.convertJsonToGroup(result)
             self.tableView.reloadData()
             self.refreshControl!.endRefreshing()
         }
@@ -84,7 +86,7 @@ class CirclesTableViewController: UITableViewController {
         cellPendent.nameGroup.textColor = mainRed
         self.tableView.rowHeight = 75
         cellPendent.coloredSquare.backgroundColor = squareRed 
-        cellPendent.tapped = { [unowned self] (selectedCell) -> Void in
+        cellPendent.accepted = { [unowned self] (selectedCell) -> Void in
             let path = tableView.indexPathForRowAtPoint(selectedCell.center)!
             DataManager.sharedInstance.activeGroup.append(DataManager.sharedInstance.allGroup[path.row])
             let group = DataManager.sharedInstance.activeGroup

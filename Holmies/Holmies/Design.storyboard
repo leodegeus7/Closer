@@ -501,7 +501,7 @@
                                     <outlet property="timeLabel" destination="an2-oo-yaC" id="gBf-cg-R8t"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" tag="2" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="groupCell" rowHeight="100" id="V9L-RL-vae" customClass="GroupsTableViewCell" customModule="Holmies" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" tag="2" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="groupCell" rowHeight="100" id="V9L-RL-vae" customClass="NewGroupTableViewCell" customModule="Holmies" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="212" width="600" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="V9L-RL-vae" id="LP9-Ur-woJ">
