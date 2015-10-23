@@ -27,7 +27,6 @@
 		A7FCC5121BC4CD1D00AEDA3F /* Main2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FCC5111BC4CD1D00AEDA3F /* Main2.storyboard */; settings = {ASSET_TAGS = (); }; };
 		A7FCC5191BC4CE5B00AEDA3F /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7FCC5181BC4CE5B00AEDA3F /* NotificationCenter.framework */; settings = {ASSET_TAGS = (); }; };
 		A7FCC51C1BC4CE5B00AEDA3F /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FCC51B1BC4CE5B00AEDA3F /* TodayViewController.swift */; };
-		A7FCC5231BC4CE5B00AEDA3F /* widget3.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A7FCC5171BC4CE5B00AEDA3F /* widget3.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A7FCC5291BC4CE9B00AEDA3F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FCC5281BC4CE9B00AEDA3F /* MainInterface.storyboard */; settings = {ASSET_TAGS = (); }; };
 		CD0B59DD1BAB47720098AD88 /* LocationUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0B59DC1BAB47720098AD88 /* LocationUserTableViewCell.swift */; };
 		CD0B59DF1BAB50360098AD88 /* LocatioUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0B59DE1BAB50360098AD88 /* LocatioUserTableViewController.swift */; };
@@ -46,12 +45,12 @@
 		CD1C03681BA74A590073524A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C03671BA74A590073524A /* LoginViewController.swift */; };
 		CD1C036C1BA752290073524A /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C036B1BA752290073524A /* DataManager.swift */; };
 		CD1C036E1BA761550073524A /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C036D1BA761550073524A /* FriendsTableViewController.swift */; };
+		CD1E29C81BD95AD800E8C66B /* HTTPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1E29C71BD95AD800E8C66B /* HTTPHelper.swift */; settings = {ASSET_TAGS = (); }; };
 		CD21002A1B9DE7EF00485126 /* PlaceMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2100291B9DE7EF00485126 /* PlaceMarker.swift */; };
 		CD43673F1BBC531E00309FD0 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD43673E1BBC531E00309FD0 /* Group.swift */; settings = {ASSET_TAGS = (); }; };
 		CD4367491BBC75E200309FD0 /* AddGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4367481BBC75E200309FD0 /* AddGroupTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CD43674B1BBC771800309FD0 /* AddGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD43674A1BBC771800309FD0 /* AddGroupTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		CD56A9D01BD9329200FC3842 /* CirclesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD56A9CF1BD9329200FC3842 /* CirclesTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		CD56A9D71BD9448D00FC3842 /* PendentGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD56A9D61BD9448D00FC3842 /* PendentGroupTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		CD6BAA551B98D946008614B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA541B98D946008614B0 /* AppDelegate.swift */; };
 		CD6BAA5C1B98D946008614B0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAA5B1B98D946008614B0 /* Images.xcassets */; };
 		CD6BAA5F1B98D946008614B0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAA5D1B98D946008614B0 /* LaunchScreen.xib */; };
@@ -77,7 +76,6 @@
 		CD8A8BDB1BB479CE00E9D471 /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A8BDA1BB479CE00E9D471 /* GroupsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CD8A8BDE1BB479E500E9D471 /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A8BDD1BB479E500E9D471 /* UsersTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CDA9A82D1B9DE9E300D93572 /* MapGoogleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */; };
-		CDAA87741BD1711300C883B4 /* HTTPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAA87731BD1711300C883B4 /* HTTPHelper.swift */; settings = {ASSET_TAGS = (); }; };
 		CDAA87801BD55CBE00C883B4 /* LoginViewControllerNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAA877F1BD55CBE00C883B4 /* LoginViewControllerNew.swift */; settings = {ASSET_TAGS = (); }; };
 		CDABC1FD1BB1E88200DE6A98 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDABC1FB1BB1E88200DE6A98 /* Bolts.framework */; settings = {ASSET_TAGS = (); }; };
 		CDABC1FE1BB1E88200DE6A98 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDABC1FC1BB1E88200DE6A98 /* Parse.framework */; settings = {ASSET_TAGS = (); }; };
@@ -102,13 +100,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A7FCC5211BC4CE5B00AEDA3F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CD6BAA471B98D946008614B0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A7FCC5161BC4CE5B00AEDA3F;
-			remoteInfo = widget3;
-		};
 		CD0D13211BB9B9EC000D0656 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CD0D13191BB9B9EB000D0656 /* Alamofire.xcodeproj */;
@@ -154,17 +145,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		A7FCC5271BC4CE5B00AEDA3F /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				A7FCC5231BC4CE5B00AEDA3F /* widget3.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		CD103A821BBB126C0044166F /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -221,12 +201,12 @@
 		CD1C03671BA74A590073524A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CD1C036B1BA752290073524A /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		CD1C036D1BA761550073524A /* FriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
+		CD1E29C71BD95AD800E8C66B /* HTTPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHelper.swift; sourceTree = "<group>"; };
 		CD2100291B9DE7EF00485126 /* PlaceMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceMarker.swift; sourceTree = "<group>"; };
 		CD43673E1BBC531E00309FD0 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		CD4367481BBC75E200309FD0 /* AddGroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewController.swift; sourceTree = "<group>"; };
 		CD43674A1BBC771800309FD0 /* AddGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewCell.swift; sourceTree = "<group>"; };
 		CD56A9CF1BD9329200FC3842 /* CirclesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CirclesTableViewController.swift; sourceTree = "<group>"; };
-		CD56A9D61BD9448D00FC3842 /* PendentGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendentGroupTableViewCell.swift; sourceTree = "<group>"; };
 		CD6BAA4F1B98D946008614B0 /* Holmies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Holmies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD6BAA531B98D946008614B0 /* Info2.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info2.plist; sourceTree = "<group>"; };
 		CD6BAA541B98D946008614B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -257,7 +237,6 @@
 		CD8A8BDA1BB479CE00E9D471 /* GroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
 		CD8A8BDD1BB479E500E9D471 /* UsersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
 		CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapGoogleViewController.swift; sourceTree = "<group>"; };
-		CDAA87731BD1711300C883B4 /* HTTPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHelper.swift; sourceTree = "<group>"; };
 		CDAA877F1BD55CBE00C883B4 /* LoginViewControllerNew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewControllerNew.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CDABC1FB1BB1E88200DE6A98 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		CDABC1FC1BB1E88200DE6A98 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
@@ -362,8 +341,6 @@
 		A7D2A4B11BCE90EF006A55D1 /* Design */ = {
 			isa = PBXGroup;
 			children = (
-				A705921A1BD6C65300E737E3 /* NewGroupTableViewCell.swift */,
-				A705921C1BD6C65C00E737E3 /* GroupsTableViewCell.swift */,
 				A70592161BD6C5B600E737E3 /* DesignGroupsTableViewController.swift */,
 				A71F7D221BD1864400652750 /* Design.storyboard */,
 				A71F7D161BD0298300652750 /* DesignViewController.swift */,
@@ -498,8 +475,10 @@
 			isa = PBXGroup;
 			children = (
 				CDAA877F1BD55CBE00C883B4 /* LoginViewControllerNew.swift */,
+				A705921C1BD6C65C00E737E3 /* GroupsTableViewCell.swift */,
+				A705921A1BD6C65300E737E3 /* NewGroupTableViewCell.swift */,
 				CD56A9CF1BD9329200FC3842 /* CirclesTableViewController.swift */,
-				CD56A9D61BD9448D00FC3842 /* PendentGroupTableViewCell.swift */,
+				CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */,
 			);
 			name = ControllerNew;
 			sourceTree = "<group>";
@@ -525,8 +504,8 @@
 				CD6BAAA81B98DE23008614B0 /* Holmies-Bridging-Header.h */,
 				CD1C036B1BA752290073524A /* DataManager.swift */,
 				CD6BAA8C1B98DB5F008614B0 /* GoogleDataProvider.swift */,
+				CD1E29C71BD95AD800E8C66B /* HTTPHelper.swift */,
 				CD6BAA8E1B98DB70008614B0 /* GooglePlace.swift */,
-				CDAA87731BD1711300C883B4 /* HTTPHelper.swift */,
 				CDCCCD2A1BBF83F500A5AD03 /* default.gpx */,
 				CD0B59E01BAB57750098AD88 /* Location.swift */,
 				CD6BAA941B98DB8A008614B0 /* MarkerInfoView.swift */,
@@ -564,7 +543,6 @@
 				CD0B59DC1BAB47720098AD88 /* LocationUserTableViewCell.swift */,
 				CD0B59DE1BAB50360098AD88 /* LocatioUserTableViewController.swift */,
 				CD1C03671BA74A590073524A /* LoginViewController.swift */,
-				CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */,
 				CD6BAA911B98DB7F008614B0 /* TypesTableViewController.swift */,
 				CD8A8BDD1BB479E500E9D471 /* UsersTableViewController.swift */,
 				CD103A691BB9D88D0044166F /* RegisterViewController.swift */,
@@ -608,12 +586,10 @@
 				CD6BAA4D1B98D946008614B0 /* Resources */,
 				10C238DE009416F18CAA4FEA /* Copy Pods Resources */,
 				CD103A821BBB126C0044166F /* CopyFiles */,
-				A7FCC5271BC4CE5B00AEDA3F /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A7FCC5221BC4CE5B00AEDA3F /* PBXTargetDependency */,
 			);
 			name = Holmies;
 			productName = Holmies;
@@ -651,19 +627,19 @@
 				TargetAttributes = {
 					A7FCC5161BC4CE5B00AEDA3F = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = H7C2V5GHBN;
+						DevelopmentTeam = 4V6XCMA27T;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
 					CD6BAA4E1B98D946008614B0 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = H7C2V5GHBN;
+						DevelopmentTeam = 4V6XCMA27T;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -864,6 +840,7 @@
 				A705921D1BD6C65C00E737E3 /* GroupsTableViewCell.swift in Sources */,
 				A705921B1BD6C65300E737E3 /* NewGroupTableViewCell.swift in Sources */,
 				CDB0FD621BBF0B4500BC6DFA /* AddGroupNameViewController.swift in Sources */,
+				CD1E29C81BD95AD800E8C66B /* HTTPHelper.swift in Sources */,
 				CD1C036C1BA752290073524A /* DataManager.swift in Sources */,
 				A70592171BD6C5B600E737E3 /* DesignGroupsTableViewController.swift in Sources */,
 				CDB0C94F1BCEE0290020BFB5 /* NSData+CommonCrypto.m in Sources */,
@@ -871,12 +848,10 @@
 				CD1C036E1BA761550073524A /* FriendsTableViewController.swift in Sources */,
 				CD6BAA931B98DB7F008614B0 /* TypesTableViewController.swift in Sources */,
 				CD0D132D1BB9C29D000D0656 /* User.swift in Sources */,
-				CD56A9D71BD9448D00FC3842 /* PendentGroupTableViewCell.swift in Sources */,
 				CD43673F1BBC531E00309FD0 /* Group.swift in Sources */,
 				CDAA87801BD55CBE00C883B4 /* LoginViewControllerNew.swift in Sources */,
 				CDB0C95A1BCEE8730020BFB5 /* UserInGroupsCollectionView.swift in Sources */,
 				CD112EC91BC30975000B353C /* GroupTableViewCell.swift in Sources */,
-				CDAA87741BD1711300C883B4 /* HTTPHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -891,11 +866,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A7FCC5221BC4CE5B00AEDA3F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A7FCC5161BC4CE5B00AEDA3F /* widget3 */;
-			targetProxy = A7FCC5211BC4CE5B00AEDA3F /* PBXContainerItemProxy */;
-		};
 		CD6BAA661B98D946008614B0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CD6BAA4E1B98D946008614B0 /* Holmies */;
@@ -925,7 +895,7 @@
 				INFOPLIST_FILE = widget3/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bepid.Holmies2.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bepid.Holmies.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -941,7 +911,7 @@
 				INFOPLIST_FILE = widget3/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bepid.Holmies2.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bepid.Holmies.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -1038,7 +1008,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Holmies/Holmies.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -1056,11 +1025,12 @@
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Frameworks/GoogleMaps.framework",
 				);
 				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bepid.Holmies2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bepid.Holmies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Holmies/Holmies-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1070,7 +1040,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Holmies/Holmies.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -1088,10 +1057,11 @@
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Frameworks/GoogleMaps.framework",
 				);
 				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bepid.Holmies2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bepid.Holmies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Holmies/Holmies-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

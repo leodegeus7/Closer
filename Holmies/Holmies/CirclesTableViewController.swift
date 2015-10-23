@@ -19,7 +19,10 @@ class CirclesTableViewController: UITableViewController {
         print(data)
         navigationController?.navigationBar.hidden = false
         
-        
+        let refresh = UIRefreshControl()
+        refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refresh.addTarget(self,action:"reloadData",forControlEvents:.ValueChanged)
+        self.refreshControl = refresh
         
     }
 
@@ -51,6 +54,7 @@ class CirclesTableViewController: UITableViewController {
     func reloadData() {
         DataManager.sharedInstance.requestGroups { (result) -> Void in
             self.tableView.reloadData()
+            self.refreshControl!.endRefreshing()
         }
     }
     
@@ -67,10 +71,17 @@ class CirclesTableViewController: UITableViewController {
 //        cell.idGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].id
 //        cell.createAtGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
         //cell.collectionView.numberOfItemsInSection()
-        
 
-        return cell
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        if tableView.cellForRowAtIndexPath(indexPath). == cellPendent {
+//            performSegueWithIdentifier("showMap", sender: self)
+//            DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
+//        }
+//       
+    }
+
 
     /*
     // Override to support conditional editing of the table view.

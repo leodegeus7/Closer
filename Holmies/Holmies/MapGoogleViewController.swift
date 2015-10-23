@@ -64,7 +64,6 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         self.controlNet.alpha = 0
         self.controlNet.enabled = false
             
-        let user = DataManager.sharedInstance.allUser
 
             
 //        for var i = 0; i < DataManager.sharedInstance.friendsArray.count; i++ {
@@ -144,6 +143,12 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 
         }
         let location = "\(newLocation.coordinate.latitude):\(newLocation.coordinate.longitude)"
+        
+        
+        helper.updateUserWithID(DataManager.sharedInstance.idUser, username: nil, location: location, altitude: nil, fbid: nil, photo: nil, name: nil, email: nil, password: nil) { (result) -> Void in
+            //oi
+        }
+        
         Alamofire.request(.GET, "https://tranquil-coast-5554.herokuapp.com/users/\(DataManager.sharedInstance.idUser)/update_user_location?location=\(location)&altitude=1000")
         
         DataManager.sharedInstance.reverseGeocodeCoordinate(newLocation.coordinate) //transforma a coordenada em endereco
@@ -298,6 +303,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         NSLog("Background codigos encerrou")
         UIApplication.sharedApplication().endBackgroundTask(backgroundTask)
         backgroundTask = UIBackgroundTaskInvalid
+        
     }
     func registerBackgroundTask() {
         backgroundTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler {

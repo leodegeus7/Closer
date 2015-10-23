@@ -137,7 +137,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="icon_me" translatesAutoresizingMaskIntoConstraints="NO" id="Zk1-KE-lC0">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_me" translatesAutoresizingMaskIntoConstraints="NO" id="Zk1-KE-lC0">
                                 <rect key="frame" x="285" y="245" width="30" height="55"/>
                                 <animations/>
                             </imageView>
@@ -487,7 +487,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="61" id="5CI-9I-Br6" customClass="FriendsTableViewCell" customModule="Holmies" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="86" width="600" height="61"/>
+                                <rect key="frame" x="0.0" y="22" width="600" height="61"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5CI-9I-Br6" id="fpi-6N-QnT">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="61"/>
@@ -759,9 +759,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icon_me" width="608" height="76"/>
+        <image name="icon_me" width="30" height="55"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gRO-LW-rYa"/>
+        <segue reference="Gyt-wO-c8k"/>
     </inferredMetricsTieBreakers>
 </document>

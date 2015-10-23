@@ -65,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DataManager.sharedInstance.importID()
         let idUser = "\(DataManager.sharedInstance.idUser)"
         let number = Int(idUser)
-    
+
 
         if !(number > 0) {
             let storyboard = UIStoryboard(name: "Design", bundle: nil)
@@ -76,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             let storyboard = UIStoryboard(name: "Design", bundle: nil)
             //let dest = storyboard.instantiateViewControllerWithIdentifier("loginVC")
-            let viewController = storyboard.instantiateViewControllerWithIdentifier("mainTableView")
+            let viewController = storyboard.instantiateViewControllerWithIdentifier("inicial")
             self.window?.rootViewController = viewController
             self.window?.makeKeyAndVisible()
             if !(DataManager.sharedInstance.testIfFileExistInDocuments("groups.json")) {

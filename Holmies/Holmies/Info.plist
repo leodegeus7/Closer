@@ -22,7 +22,7 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>com.bepid.Holmies2</string>
+			<string>com.bepid.Holmies</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb916872711703255</string>
@@ -55,12 +55,11 @@
 	<array>
 		<string>fetch</string>
 		<string>location</string>
-		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Design</string>
+	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

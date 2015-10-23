@@ -15,6 +15,10 @@ class GroupsTableViewController: UITableViewController {
         reloadData { (result) -> Void in
             self.tableView.reloadData()
         }
+        
+
+        
+    
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -89,6 +93,10 @@ class GroupsTableViewController: UITableViewController {
     func reloadData(completion:(result:Bool)->Void) {
         //DataManager.sharedInstance.requestGroups(<#T##completion: (result: NSDictionary) -> Void##(result: NSDictionary) -> Void#>)
         completion(result: true)
+    }
+    
+    func refreshPulled() {
+        
     }
     
 //    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
