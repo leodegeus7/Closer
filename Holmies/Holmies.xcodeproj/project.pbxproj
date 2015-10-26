@@ -591,7 +591,6 @@
 		CD6BAA511B98D946008614B0 /* Holmies */ = {
 			isa = PBXGroup;
 			children = (
-				CD92FB131BDEBDDF00BEAA8E /* Fonts */,
 				CDB0C93F1BCEE01D0020BFB5 /* AESCrypt */,
 				A7FCC52A1BC4CF4100AEDA3F /* Holmies.entitlements */,
 				CD103A701BBB07470044166F /* ovalLaranja.png */,
@@ -632,13 +631,6 @@
 				CD6BAA691B98D946008614B0 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		CD92FB131BDEBDDF00BEAA8E /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Fonts;
 			sourceTree = "<group>";
 		};
 		CD92FB321BDEBE0700BEAA8E /* Fonts */ = {
