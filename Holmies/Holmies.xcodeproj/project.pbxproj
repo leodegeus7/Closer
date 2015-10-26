@@ -446,6 +446,43 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A73BE4CC1BDEB68E0063C705 /* SF Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A7FEFB5B1BDEAA1200DFEC1E /* SF-Compact-Display-Black.otf */,
+				A7FEFB5C1BDEAA1200DFEC1E /* SF-Compact-Display-Bold.otf */,
+				A7FEFB5D1BDEAA1200DFEC1E /* SF-Compact-Display-Heavy.otf */,
+				A7FEFB5E1BDEAA1200DFEC1E /* SF-Compact-Display-Light.otf */,
+				A7FEFB5F1BDEAA1200DFEC1E /* SF-Compact-Display-Medium.otf */,
+				A7FEFB601BDEAA1200DFEC1E /* SF-Compact-Display-Regular.otf */,
+				A7FEFB611BDEAA1200DFEC1E /* SF-Compact-Display-Semibold.otf */,
+				A7FEFB621BDEAA1200DFEC1E /* SF-Compact-Display-Thin.otf */,
+				A7FEFB631BDEAA1200DFEC1E /* SF-Compact-Display-Ultralight.otf */,
+				A7FEFB641BDEAA1200DFEC1E /* SF-UI-Display-Black.otf */,
+				A7FEFB651BDEAA1200DFEC1E /* SF-UI-Display-Bold.otf */,
+				A7FEFB661BDEAA1200DFEC1E /* SF-UI-Display-Heavy.otf */,
+				A7FEFB671BDEAA1200DFEC1E /* SF-UI-Display-Light.otf */,
+				A7FEFB681BDEAA1200DFEC1E /* SF-UI-Display-Medium.otf */,
+				A7FEFB691BDEAA1200DFEC1E /* SF-UI-Display-Regular.otf */,
+				A7FEFB6A1BDEAA1200DFEC1E /* SF-UI-Display-Semibold.otf */,
+				A7FEFB6B1BDEAA1200DFEC1E /* SF-UI-Display-Thin.otf */,
+				A7FEFB6C1BDEAA1200DFEC1E /* SF-UI-Display-Ultralight.otf */,
+				A7FEFB6D1BDEAA1200DFEC1E /* SF-UI-Text-Bold.otf */,
+				A7FEFB6E1BDEAA1200DFEC1E /* SF-UI-Text-BoldItalic.otf */,
+				A7FEFB6F1BDEAA1200DFEC1E /* SF-UI-Text-Heavy.otf */,
+				A7FEFB701BDEAA1200DFEC1E /* SF-UI-Text-HeavyItalic.otf */,
+				A7FEFB711BDEAA1200DFEC1E /* SF-UI-Text-Italic.otf */,
+				A7FEFB721BDEAA1200DFEC1E /* SF-UI-Text-Light.otf */,
+				A7FEFB731BDEAA1200DFEC1E /* SF-UI-Text-LightItalic.otf */,
+				A7FEFB741BDEAA1200DFEC1E /* SF-UI-Text-Medium.otf */,
+				A7FEFB751BDEAA1200DFEC1E /* SF-UI-Text-MediumItalic.otf */,
+				A7FEFB761BDEAA1200DFEC1E /* SF-UI-Text-Regular.otf */,
+				A7FEFB771BDEAA1200DFEC1E /* SF-UI-Text-Semibold.otf */,
+				A7FEFB781BDEAA1200DFEC1E /* SF-UI-Text-SemiboldItalic.otf */,
+			);
+			name = "SF Fonts";
+			sourceTree = "<group>";
+		};
 		A7CA149B1BD7FF80006E2428 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -465,6 +502,7 @@
 		A7D2A4B11BCE90EF006A55D1 /* Design */ = {
 			isa = PBXGroup;
 			children = (
+				A73BE4CC1BDEB68E0063C705 /* SF Fonts */,
 				A70592161BD6C5B600E737E3 /* DesignGroupsTableViewController.swift */,
 				A78EA4801BDAABA70001E946 /* Design.storyboard */,
 				A7CA149B1BD7FF80006E2428 /* Images */,
