@@ -443,46 +443,7 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		A7CA149B1BD7FF80006E2428 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				A71F7D141BD0288E00652750 /* photoButton.png */,
-				A7FEFB541BDE9E3600DFEC1E /* radialGradient.png */,
-				A71F7D0D1BD0215E00652750 /* pin.png */,
-				A78EA4841BDAB3C30001E946 /* reject.png */,
-				A78EA4851BDAB3C30001E946 /* confirm.png */,
-				A70BF3891BCE91EE00062246 /* facebookButton.png */,
-				A70BF38A1BCE91EE00062246 /* newUser.png */,
-				A70BF38B1BCE91EE00062246 /* connectButton.png */,
-				A7D2A4AF1BCE90E6006A55D1 /* redBackground.png */,
-			);
-			name = Images;
-			sourceTree = "<group>";
-		};
-		A7D2A4B11BCE90EF006A55D1 /* Design */ = {
-			isa = PBXGroup;
-			children = (
-				A70592161BD6C5B600E737E3 /* DesignGroupsTableViewController.swift */,
-				A78EA4801BDAABA70001E946 /* Design.storyboard */,
-				A71F7D161BD0298300652750 /* DesignViewController.swift */,
-				A7FEFB791BDEAA1700DFEC1E /* Fonts */,
-				A7CA149B1BD7FF80006E2428 /* Images */,
-			);
-			name = Design;
-			sourceTree = "<group>";
-		};
-		A7FCC51A1BC4CE5B00AEDA3F /* widget3 */ = {
-			isa = PBXGroup;
-			children = (
-				A7FCC52B1BC4CFEE00AEDA3F /* widget3.entitlements */,
-				A7FCC51B1BC4CE5B00AEDA3F /* TodayViewController.swift */,
-				A7FCC5281BC4CE9B00AEDA3F /* MainInterface.storyboard */,
-				A7FCC5201BC4CE5B00AEDA3F /* Info.plist */,
-			);
-			path = widget3;
-			sourceTree = "<group>";
-		};
-		A7FEFB791BDEAA1700DFEC1E /* Fonts */ = {
+		A73BE4CC1BDEB68E0063C705 /* SF Fonts */ = {
 			isa = PBXGroup;
 			children = (
 				A7FEFB5B1BDEAA1200DFEC1E /* SF-Compact-Display-Black.otf */,
@@ -516,7 +477,46 @@
 				A7FEFB771BDEAA1200DFEC1E /* SF-UI-Text-Semibold.otf */,
 				A7FEFB781BDEAA1200DFEC1E /* SF-UI-Text-SemiboldItalic.otf */,
 			);
-			name = Fonts;
+			name = "SF Fonts";
+			sourceTree = "<group>";
+		};
+		A7CA149B1BD7FF80006E2428 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				A71F7D141BD0288E00652750 /* photoButton.png */,
+				A7FEFB541BDE9E3600DFEC1E /* radialGradient.png */,
+				A71F7D0D1BD0215E00652750 /* pin.png */,
+				A78EA4841BDAB3C30001E946 /* reject.png */,
+				A78EA4851BDAB3C30001E946 /* confirm.png */,
+				A70BF3891BCE91EE00062246 /* facebookButton.png */,
+				A70BF38A1BCE91EE00062246 /* newUser.png */,
+				A70BF38B1BCE91EE00062246 /* connectButton.png */,
+				A7D2A4AF1BCE90E6006A55D1 /* redBackground.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		A7D2A4B11BCE90EF006A55D1 /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				A73BE4CC1BDEB68E0063C705 /* SF Fonts */,
+				A70592161BD6C5B600E737E3 /* DesignGroupsTableViewController.swift */,
+				A78EA4801BDAABA70001E946 /* Design.storyboard */,
+				A71F7D161BD0298300652750 /* DesignViewController.swift */,
+				A7CA149B1BD7FF80006E2428 /* Images */,
+			);
+			name = Design;
+			sourceTree = "<group>";
+		};
+		A7FCC51A1BC4CE5B00AEDA3F /* widget3 */ = {
+			isa = PBXGroup;
+			children = (
+				A7FCC52B1BC4CFEE00AEDA3F /* widget3.entitlements */,
+				A7FCC51B1BC4CE5B00AEDA3F /* TodayViewController.swift */,
+				A7FCC5281BC4CE9B00AEDA3F /* MainInterface.storyboard */,
+				A7FCC5201BC4CE5B00AEDA3F /* Info.plist */,
+			);
+			path = widget3;
 			sourceTree = "<group>";
 		};
 		AE38627656BF51DCD0B8AC62 /* Frameworks */ = {
