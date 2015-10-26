@@ -66,7 +66,7 @@ class CirclesTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let squareRed = UIColor(red: 221.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
+        let squareRed = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
         
         for activeGroup in DataManager.sharedInstance.activeGroup {
             if activeGroup.id == DataManager.sharedInstance.allGroup[indexPath.row].id {
@@ -84,8 +84,25 @@ class CirclesTableViewController: UITableViewController {
         let cellPendent = tableView.dequeueReusableCellWithIdentifier("pendentCell", forIndexPath: indexPath) as! NewGroupTableViewCell
         cellPendent.nameGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].name
         cellPendent.nameGroup.textColor = mainRed
+        cellPendent.nameGroup.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
         self.tableView.rowHeight = 75
-        cellPendent.coloredSquare.backgroundColor = squareRed 
+        cellPendent.coloredSquare.backgroundColor = squareRed
+        cellPendent.numberLabel.font = UIFont(name: "SFUIDisplay-Ultralight", size: 47)
+        cellPendent.timeLabel.font = UIFont(name: "SFUIText-Medium", size: 12)
+        cellPendent.coloredSquare.layer.cornerRadius = 8.0
+        
+        
+
+        for family: String in UIFont.familyNames()
+        {
+            print("\(family)")
+            for names: String in UIFont.fontNamesForFamilyName(family)
+            {
+                print("== \(names)")
+            }
+        }
+
+       // cellPendent.coloredSquare.backgroundColor = UIColor(patternImage: radialGradient!)
         cellPendent.accepted = { [unowned self] (selectedCell) -> Void in
             let path = tableView.indexPathForRowAtPoint(selectedCell.center)!
             DataManager.sharedInstance.activeGroup.append(DataManager.sharedInstance.allGroup[path.row])
@@ -161,15 +178,13 @@ class CirclesTableViewController: UITableViewController {
                     self.reloadData()
                 })
         
-
-            
-            
         }
 //        else if editingStyle == .Insert {
 //            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
 //        }    
     }
 
+    
 
     /*
     // Override to support rearranging the table view.
@@ -194,19 +209,24 @@ class CirclesTableViewController: UITableViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
 
+    */
+    
+    
 }
 
-extension CAGradientLayer {
+
+    extension CAGradientLayer {
     class func gradientLayerForBounds(bounds: CGRect) -> CAGradientLayer {
         var layer = CAGradientLayer()
         layer.frame = bounds
-        let navigationBarRed1 = UIColor(red: 210.0/255.0, green: 38.0/255.0, blue: 54.0/255.0, alpha: 1.0)
-        let navigationBarRed2 = UIColor(red: 221.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1.0)
-        layer.colors = [navigationBarRed2.CGColor, navigationBarRed1.CGColor]
+        let navigationBarRed1 = UIColor(red: 205.0/255.0, green: 16.0/255.0, blue: 34.0/255.0, alpha: 1.0)
+        let navigationBarRed2 = UIColor(red: 213.0/250.0, green: 9.0/255.0, blue: 43.0/255.0, alpha: 1.0)
+        layer.colors = [navigationBarRed1.CGColor, navigationBarRed2.CGColor]
         return layer
-        
-        
     }
+
+
 }
+
+
