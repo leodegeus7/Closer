@@ -77,10 +77,16 @@
 		A73BE4C91BDEABBD0063C705 /* SF-UI-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A7FEFB761BDEAA1200DFEC1E /* SF-UI-Text-Regular.otf */; };
 		A73BE4CA1BDEABBD0063C705 /* SF-UI-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A7FEFB771BDEAA1200DFEC1E /* SF-UI-Text-Semibold.otf */; };
 		A73BE4CB1BDEABBD0063C705 /* SF-UI-Text-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A7FEFB781BDEAA1200DFEC1E /* SF-UI-Text-SemiboldItalic.otf */; };
+		A73BE4CE1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */; };
 		A78EA4811BDAABA70001E946 /* Design.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A78EA4801BDAABA70001E946 /* Design.storyboard */; };
 		A78EA4831BDAABAC0001E946 /* CirclesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78EA4821BDAABAC0001E946 /* CirclesTableViewController.swift */; };
 		A78EA4861BDAB3C30001E946 /* reject.png in Resources */ = {isa = PBXBuildFile; fileRef = A78EA4841BDAB3C30001E946 /* reject.png */; };
 		A78EA4871BDAB3C30001E946 /* confirm.png in Resources */ = {isa = PBXBuildFile; fileRef = A78EA4851BDAB3C30001E946 /* confirm.png */; };
+		A7C37F561BDFF44C00FEE8D2 /* newUser2.png in Resources */ = {isa = PBXBuildFile; fileRef = A7C37F541BDFF44C00FEE8D2 /* newUser2.png */; };
+		A7C37F571BDFF44C00FEE8D2 /* charmButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A7C37F551BDFF44C00FEE8D2 /* charmButton.png */; };
+		A7C37F591BDFF79200FEE8D2 /* EditGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C37F581BDFF79200FEE8D2 /* EditGroupViewController.swift */; };
+		A7C37F5B1BDFF7CD00FEE8D2 /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C37F5A1BDFF7CD00FEE8D2 /* CreateGroupViewController.swift */; };
+		A7C37F5D1BDFF86000FEE8D2 /* newUser3.png in Resources */ = {isa = PBXBuildFile; fileRef = A7C37F5C1BDFF86000FEE8D2 /* newUser3.png */; };
 		A7D2A4B01BCE90E6006A55D1 /* redBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D2A4AF1BCE90E6006A55D1 /* redBackground.png */; };
 		A7F3899E1BD56F4500DF2D7C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A7F3899D1BD56F4500DF2D7C /* Info.plist */; };
 		A7FCC50B1BC4CCF600AEDA3F /* WidgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FCC50A1BC4CCF600AEDA3F /* WidgetViewController.swift */; };
@@ -259,10 +265,16 @@
 		A71F7D141BD0288E00652750 /* photoButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoButton.png; sourceTree = "<group>"; };
 		A71F7D161BD0298300652750 /* DesignViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignViewController.swift; sourceTree = "<group>"; };
 		A71F7D1E1BD183C200652750 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveGroupTableViewCell.swift; sourceTree = "<group>"; };
 		A78EA4801BDAABA70001E946 /* Design.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Design.storyboard; sourceTree = "<group>"; };
 		A78EA4821BDAABAC0001E946 /* CirclesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CirclesTableViewController.swift; sourceTree = "<group>"; };
 		A78EA4841BDAB3C30001E946 /* reject.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reject.png; sourceTree = "<group>"; };
 		A78EA4851BDAB3C30001E946 /* confirm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = confirm.png; sourceTree = "<group>"; };
+		A7C37F541BDFF44C00FEE8D2 /* newUser2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newUser2.png; sourceTree = "<group>"; };
+		A7C37F551BDFF44C00FEE8D2 /* charmButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = charmButton.png; sourceTree = "<group>"; };
+		A7C37F581BDFF79200FEE8D2 /* EditGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditGroupViewController.swift; sourceTree = "<group>"; };
+		A7C37F5A1BDFF7CD00FEE8D2 /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
+		A7C37F5C1BDFF86000FEE8D2 /* newUser3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newUser3.png; sourceTree = "<group>"; };
 		A7D2A4AF1BCE90E6006A55D1 /* redBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redBackground.png; sourceTree = "<group>"; };
 		A7F3899D1BD56F4500DF2D7C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7FCC50A1BC4CCF600AEDA3F /* WidgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetViewController.swift; sourceTree = "<group>"; };
@@ -483,6 +495,9 @@
 		A7CA149B1BD7FF80006E2428 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A7C37F541BDFF44C00FEE8D2 /* newUser2.png */,
+				A7C37F5C1BDFF86000FEE8D2 /* newUser3.png */,
+				A7C37F551BDFF44C00FEE8D2 /* charmButton.png */,
 				A71F7D141BD0288E00652750 /* photoButton.png */,
 				A7FEFB541BDE9E3600DFEC1E /* radialGradient.png */,
 				A71F7D0D1BD0215E00652750 /* pin.png */,
@@ -566,6 +581,8 @@
 		CD6BAA461B98D946008614B0 = {
 			isa = PBXGroup;
 			children = (
+				A7C37F581BDFF79200FEE8D2 /* EditGroupViewController.swift */,
+				A7C37F5A1BDFF7CD00FEE8D2 /* CreateGroupViewController.swift */,
 				CD0D13191BB9B9EB000D0656 /* Alamofire.xcodeproj */,
 				CD6BAA511B98D946008614B0 /* Holmies */,
 				A7FCC51A1BC4CE5B00AEDA3F /* widget3 */,
@@ -638,6 +655,7 @@
 				A78EA4821BDAABAC0001E946 /* CirclesTableViewController.swift */,
 				A705921A1BD6C65300E737E3 /* NewGroupTableViewCell.swift */,
 				CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */,
+				A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */,
 			);
 			name = ControllerNew;
 			sourceTree = "<group>";
@@ -928,6 +946,7 @@
 				A7FEFB961BDEAA8000DFEC1E /* SF-UI-Text-Semibold.otf in Resources */,
 				A7FEFB8A1BDEAA8000DFEC1E /* SF-UI-Display-Thin.otf in Resources */,
 				A70BF38C1BCE91EE00062246 /* facebookButton.png in Resources */,
+				A7C37F571BDFF44C00FEE8D2 /* charmButton.png in Resources */,
 				A7FEFB891BDEAA8000DFEC1E /* SF-UI-Display-Semibold.otf in Resources */,
 				A7FEFB801BDEAA8000DFEC1E /* SF-Compact-Display-Semibold.otf in Resources */,
 				A7FEFB971BDEAA8000DFEC1E /* SF-UI-Text-SemiboldItalic.otf in Resources */,
@@ -935,6 +954,7 @@
 				A78EA4871BDAB3C30001E946 /* confirm.png in Resources */,
 				CDCCCD2B1BBF83F500A5AD03 /* default.gpx in Resources */,
 				A78EA4861BDAB3C30001E946 /* reject.png in Resources */,
+				A7C37F561BDFF44C00FEE8D2 /* newUser2.png in Resources */,
 				A71F7D1F1BD183C200652750 /* Main.storyboard in Resources */,
 				A7F3899E1BD56F4500DF2D7C /* Info.plist in Resources */,
 				CD6BAA981B98DB8A008614B0 /* MarkerInfoView.xib in Resources */,
@@ -970,6 +990,7 @@
 				A7FEFB8B1BDEAA8000DFEC1E /* SF-UI-Display-Ultralight.otf in Resources */,
 				A7FEFB841BDEAA8000DFEC1E /* SF-UI-Display-Bold.otf in Resources */,
 				A7FEFB831BDEAA8000DFEC1E /* SF-UI-Display-Black.otf in Resources */,
+				A7C37F5D1BDFF86000FEE8D2 /* newUser3.png in Resources */,
 				A7FEFB901BDEAA8000DFEC1E /* SF-UI-Text-Italic.otf in Resources */,
 				CD103A741BBB07470044166F /* ovalLaranja.png in Resources */,
 				A7FEFB941BDEAA8000DFEC1E /* SF-UI-Text-MediumItalic.otf in Resources */,
@@ -1063,7 +1084,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD1C03681BA74A590073524A /* LoginViewController.swift in Sources */,
+				A7C37F5B1BDFF7CD00FEE8D2 /* CreateGroupViewController.swift in Sources */,
 				CD6BAA971B98DB8A008614B0 /* MarkerInfoView.swift in Sources */,
+				A7C37F591BDFF79200FEE8D2 /* EditGroupViewController.swift in Sources */,
 				CD8A8BDE1BB479E500E9D471 /* UsersTableViewController.swift in Sources */,
 				CD6BAAAA1B98DE23008614B0 /* Holmies-Bridging.m in Sources */,
 				CD0B59E11BAB57750098AD88 /* Location.swift in Sources */,
@@ -1092,6 +1115,7 @@
 				CD1C036C1BA752290073524A /* DataManager.swift in Sources */,
 				A70592171BD6C5B600E737E3 /* DesignGroupsTableViewController.swift in Sources */,
 				CDB0C94F1BCEE0290020BFB5 /* NSData+CommonCrypto.m in Sources */,
+				A73BE4CE1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift in Sources */,
 				CDB0C9501BCEE0290020BFB5 /* NSString+Base64.m in Sources */,
 				CD1C036E1BA761550073524A /* FriendsTableViewController.swift in Sources */,
 				CD6BAA931B98DB7F008614B0 /* TypesTableViewController.swift in Sources */,

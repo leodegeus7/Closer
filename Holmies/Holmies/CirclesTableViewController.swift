@@ -70,10 +70,19 @@ class CirclesTableViewController: UITableViewController {
         
         for activeGroup in DataManager.sharedInstance.activeGroup {
             if activeGroup.id == DataManager.sharedInstance.allGroup[indexPath.row].id {
-                let cellActive = tableView.dequeueReusableCellWithIdentifier("groupCell", forIndexPath: indexPath) as! NewGroupTableViewCell
+                let cellActive = tableView.dequeueReusableCellWithIdentifier("groupCell", forIndexPath: indexPath) as! ActiveGroupTableViewCell
                 print(DataManager.sharedInstance.allGroup)
+                self.tableView.rowHeight = 75
                 cellActive.nameGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].name
                 cellActive.nameGroup.textColor = mainRed
+                cellActive.nameGroup.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
+                cellActive.coloredSquare.backgroundColor = squareRed
+                cellActive.numberLabel.font = UIFont(name: "SFUIDisplay-Ultralight", size: 47)
+                cellActive.timeLabel.font = UIFont(name: "SFUIText-Medium", size: 12)
+                cellActive.coloredSquare.layer.cornerRadius = 8.0
+
+//                cellActive.coloredSquare.s
+                
                 
                 return cellActive
             }
@@ -82,11 +91,11 @@ class CirclesTableViewController: UITableViewController {
 
         
         let cellPendent = tableView.dequeueReusableCellWithIdentifier("pendentCell", forIndexPath: indexPath) as! NewGroupTableViewCell
+        self.tableView.rowHeight = 75
         cellPendent.nameGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].name
         cellPendent.nameGroup.textColor = mainRed
         cellPendent.nameGroup.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
-        self.tableView.rowHeight = 75
-        cellPendent.coloredSquare.backgroundColor = squareRed
+        cellPendent.coloredSquare.backgroundColor = lightBlue
         cellPendent.numberLabel.font = UIFont(name: "SFUIDisplay-Ultralight", size: 47)
         cellPendent.timeLabel.font = UIFont(name: "SFUIText-Medium", size: 12)
         cellPendent.coloredSquare.layer.cornerRadius = 8.0
