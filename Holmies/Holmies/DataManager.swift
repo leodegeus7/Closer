@@ -484,16 +484,24 @@ class DataManager {
             let usersDic = DataManager.sharedInstance.convertUserToNSDic(users)
             
             DataManager.sharedInstance.createJsonFile("users\(groupId)", json: usersDic)
-            
-            print(users)
-            var group = Dictionary<String,AnyObject>()
-            group["groupId"] = groupId
-            group["users"] = users
-            self.usersInGroups.append(group)
-            completion(users: users)
-//            self.testIfGroupIsEmpty({ (result) -> Void in
-//                //completion do grupo apagado
-//            })
+//            
+//            DataManager.sharedInstance.allGroup.filter({ ($0.id == groupId})
+            var num = 0
+            for group in DataManager.sharedInstance.allGroup {
+                if group.id == groupId {
+                    DataManager.sharedInstance.allGroup[num].users = users
+                }
+                num++
+            }
+//            print(users)
+//            var group = Dictionary<String,AnyObject>()
+//            group["groupId"] = groupId
+//            group["users"] = users
+//            self.usersInGroups.append(group)
+//            completion(users: users)
+            self.testIfGroupIsEmpty({ (result) -> Void in
+                //completion do grupo apagado
+            })
         }
         
     }
@@ -563,8 +571,12 @@ class DataManager {
     
     func testIfGroupIsEmpty(completion:(result:String)->Void) {
         for group in DataManager.sharedInstance.allGroup {
+//            let groupq = group
+//            let usersInGroups = (group["users"] as! NSArray).count
+        
             let users = group.users
             let id = group.id
+            
             if users.count <= 1 {
                 destroyGroup(id)
                 completion(result: "\(id)")

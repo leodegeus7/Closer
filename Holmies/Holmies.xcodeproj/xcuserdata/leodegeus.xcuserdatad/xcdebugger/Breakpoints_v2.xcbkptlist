@@ -54,16 +54,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Holmies/DataManager.swift"
-            timestampString = "467664319.288775"
+            timestampString = "467666375.815283"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "488"
-            endingLineNumber = "488"
-            landmarkName = "requestUsersInGroupId(_:completion:)"
+            startingLineNumber = "575"
+            endingLineNumber = "575"
+            landmarkName = "testIfGroupIsEmpty(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
