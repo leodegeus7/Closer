@@ -84,6 +84,7 @@ class CirclesTableViewController: UITableViewController {
                 cellActive.nameGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].name
                 cellActive.nameGroup.textColor = mainRed
                 cellActive.nameGroup.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
+                print("celula: \(cellActive.nameGroup.font)")
                 cellActive.coloredSquare.backgroundColor = squareRed
                 cellActive.numberLabel.font = UIFont(name: "SFUIDisplay-Ultralight", size: 47)
                 cellActive.timeLabel.font = UIFont(name: "SFUIText-Medium", size: 12)
