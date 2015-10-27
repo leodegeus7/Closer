@@ -8,10 +8,16 @@
 
 import UIKit
 
-class CreateGroupViewController: UIViewController {
+class CreateGroupViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var groupName: UITextField!
+    @IBOutlet weak var upSliderLabel: UILabel!
+    @IBOutlet weak var downSlideLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         // Do any additional setup after loading the view.
     }
@@ -21,6 +27,30 @@ class CreateGroupViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+        
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("friend", forIndexPath: indexPath) as! CreateGroupTableViewCell
+        
+        
+        return cell
+    }
+    
+    
+    
+    
+    @IBAction func addUser(sender: AnyObject) {
+        
+        
+    }
 
     /*
     // MARK: - Navigation
