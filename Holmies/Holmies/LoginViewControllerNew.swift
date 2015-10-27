@@ -354,7 +354,7 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
                 DataManager.sharedInstance.email = dic["email"] as! String
                 let id = dic["id"]
                 DataManager.sharedInstance.idUser = "\(id!)"
-                self.helper.updateUserWithID("\(id!)", username: nil, location: nil, altitude: nil, fbid: faceId, photo: nil, name: nil, email: nil, password: nil, completion: { (result) -> Void in
+                self.helper.updateUserWithID("\(id!)", username: nil, location: nil, altitude: nil, fbid: faceId, photo: nil, name: nil, email: nil, password: "\(DataManager.sharedInstance.randomStringWithLength(64))", completion: { (result) -> Void in
                     
                     })
                 

@@ -16,7 +16,7 @@ class HTTPHelper: NSObject {
     let API_DECRYPT_PW = "LB8ZZB9FLAZ9zMj8fNmL0y1164VlrTKv29B6dZ6vQAADKacTR8EeR4u6Um4DXqx0"
     
     let baseURL = "https://tranquil-coast-5554.herokuapp.com/api" //URL do servidor no HEROKU
-//    let baseURL = "http://localhost:3000/api" //URL do servidor de Teste
+    //    let baseURL = "http://localhost:3000/api" //URL do servidor de Teste
     
     internal enum DesiredInfo {
         case userReceiverUsers
@@ -25,6 +25,10 @@ class HTTPHelper: NSObject {
         case userSenderGroups
         case groupReceiverUsers
         case groupSenderUsers
+    }
+    
+    internal enum SharerType {
+        case userToUser, userToGroup
     }
     
     func signInWithUsername(username:String, password:String,completion:(result:Dictionary<String,AnyObject>)->Void) {
@@ -76,6 +80,19 @@ class HTTPHelper: NSObject {
             completion(result: formattedResult)
         }
         
+    }
+    
+    func findFriendWithUsername(username:String, completion:(result:Dictionary<String,AnyObject>)->Void) {
+        let parameters = [
+            "username":username
+        ]
+        
+        let url = "\(baseURL)/find_friend"
+        
+        makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
+            let formattedResult = httpResult as! Dictionary<String,AnyObject>
+            completion(result: formattedResult)
+        }
     }
     
     func updateUserWithID(userID:String, username:String?, location: String?, altitude: String?,
@@ -156,10 +173,113 @@ class HTTPHelper: NSObject {
         }
     }
     
+    func createNewSharerWithType(sharerType:SharerType, ownerID:String, receiverID:String, until:String, completion:(result:Dictionary<String,AnyObject>)->Void) {
+        
+        var parameters = [
+            "owner_user":ownerID,
+            "until":until
+        ]
+        
+        switch sharerType {
+        case .userToGroup:
+            parameters["receiver_group"] = receiverID
+            break
+        case .userToUser:
+            parameters["receiver_user"] = receiverID
+            break
+        }
+        
+        let url = "\(baseURL)/new_sharer"
+        
+        makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
+            let formattedResult = httpResult as! Dictionary<String, AnyObject>
+            completion(result: formattedResult)
+        }
+        
+    }
+    
+    func createNewGroupWithName(name:String, completion:(result:Dictionary<String,AnyObject>)->Void) {
+        let parameters = [
+            "name":name
+        ]
+        
+        let url = "\(baseURL)/new_group"
+        
+        makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
+            let formattedResult = httpResult as! Dictionary<String, AnyObject>
+            completion(result: formattedResult)
+        }
+    }
+    
+    func updateSharerWithID(id:String, until:String, completion:(result:Dictionary<String,AnyObject>)->Void) {
+        let parameters = [
+            "id":id,
+            "until":until
+        ]
+        
+        let url = "\(baseURL)/update_sharer"
+        
+        makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
+            let formattedResult = httpResult as! Dictionary<String, AnyObject>
+            completion(result: formattedResult)
+        }
+        
+    }
+    
+    func destroySharerWithID(id:String, completion:(result:Dictionary<String,AnyObject>)->Void) {
+        let parameters = [
+            "id":id
+        ]
+        
+        let url = "\(baseURL)/destroy_sharer"
+        
+        makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
+            let formattedResult = httpResult as! Dictionary<String, AnyObject>
+            completion(result: formattedResult)
+        }
+        
+    }
+    
+    func updateGroupWithID(id:String, name:String?, photo:String?, completion:(result:Dictionary<String,AnyObject>)->Void) {
+        var parameters = [
+            "id":id
+        ]
+        
+        if let groupName = name {
+            parameters["name"] = groupName
+        }
+        
+        if let groupPhoto = photo {
+            parameters["photo"] = groupPhoto
+        }
+        
+        let url = "\(baseURL)/update_group"
+        
+        makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
+            let formattedResult = httpResult as! Dictionary<String, AnyObject>
+            completion(result: formattedResult)
+        }
+        
+    }
+    
+    func destroyGroupWithID(id:String, completion:(result:Dictionary<String,AnyObject>)->Void) {
+        let parameters = [
+            "id":id
+        ]
+        
+        let url = "\(baseURL)/destroy_group"
+        
+        makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
+            let formattedResult = httpResult as! Dictionary<String, AnyObject>
+            completion(result: formattedResult)
+        }
+        
+    }
+    
     
     func makeHttpPostRequestWithParameters(parameters: Dictionary<String,AnyObject>, url: String, completion:(httpResult:AnyObject?)->Void) {
         Alamofire.request(.POST, url, parameters: parameters).authenticate(user: API_AUTH_NAME, password: API_AUTH_PASSWORD).responseJSON { response in
-            print(response)
+            //            print(response)
             completion(httpResult: response.result.value)
         }
     }

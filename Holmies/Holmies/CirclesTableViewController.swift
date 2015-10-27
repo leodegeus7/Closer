@@ -18,7 +18,7 @@ class CirclesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let data = DataManager.sharedInstance.findDocumentsDirectory()
-        print(data)
+
         
         let refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -56,11 +56,19 @@ class CirclesTableViewController: UITableViewController {
     
     func reloadData() {
         DataManager.sharedInstance.requestGroups { (result) -> Void in
-            let teste = DataManager.sharedInstance.allGroup
+            
             DataManager.sharedInstance.allGroup = DataManager.sharedInstance.convertJsonToGroup(result)
+            let friends = DataManager.sharedInstance.loadJsonFromDocuments("friends")
+            
+            DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(friends)
+
+            
+            
             self.tableView.reloadData()
             self.refreshControl!.endRefreshing()
+            
         }
+        
     }
     
 
@@ -71,7 +79,7 @@ class CirclesTableViewController: UITableViewController {
         for activeGroup in DataManager.sharedInstance.activeGroup {
             if activeGroup.id == DataManager.sharedInstance.allGroup[indexPath.row].id {
                 let cellActive = tableView.dequeueReusableCellWithIdentifier("groupCell", forIndexPath: indexPath) as! NewGroupTableViewCell
-                print(DataManager.sharedInstance.allGroup)
+
                 cellActive.nameGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].name
                 cellActive.nameGroup.textColor = mainRed
                 
@@ -93,14 +101,14 @@ class CirclesTableViewController: UITableViewController {
         
         
 
-        for family: String in UIFont.familyNames()
-        {
-            print("\(family)")
-            for names: String in UIFont.fontNamesForFamilyName(family)
-            {
-                print("== \(names)")
-            }
-        }
+//        for family: String in UIFont.familyNames()
+//        {
+//            print("\(family)")
+//            for names: String in UIFont.fontNamesForFamilyName(family)
+//            {
+//                print("== \(names)")
+//            }
+//        }
 
        // cellPendent.coloredSquare.backgroundColor = UIColor(patternImage: radialGradient!)
         cellPendent.accepted = { [unowned self] (selectedCell) -> Void in
@@ -115,7 +123,7 @@ class CirclesTableViewController: UITableViewController {
         }
         
         cellPendent.rejected = { [unowned self] (selectedCell) -> Void in
-//            let path = tableView.indexPathForRowAtPoint(selectedCell.center)!
+//            let path = tableVipew.indexPathForRowAtPoint(selectedCell.center)!
             DataManager.sharedInstance.removeUserFromGroupInBackEnd(DataManager.sharedInstance.allGroup[indexPath.row].id, completion: { (result) -> Void in
                 self.reloadData()
             })

@@ -13,6 +13,7 @@ class AddFriendTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var AddFriendTextField: UITextField!
     @IBOutlet weak var labelInfo: UILabel!
     var username = ""
+    let http = HTTPHelper()
     override func viewDidLoad() {
         super.viewDidLoad()
         labelInfo.text = "\(DataManager.sharedInstance.user)\né o seu username"
@@ -68,8 +69,59 @@ class AddFriendTableViewController: UITableViewController, UITextFieldDelegate {
         return true
     }
 
-    func addFriend () {
-        testUsername()
+    func addFriend (completion:(result:String)->Void) {
+        http.findFriendWithUsername("\(username)") { (result) -> Void in
+            let JSON = result
+            let dic = JSON as NSDictionary
+
+            if dic["error"] != nil {
+                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: dic["error"] as! String, button1: "Ok")
+                print("Nao Localizado")
+            }
+            else {
+                
+                let newUser = User()
+                newUser.username = dic["username"] as? String
+                newUser.altitude = dic["altitude"] as? String
+                newUser.createdAt = dic["created_at"] as? String
+                newUser.email = dic["email"] as? String
+                newUser.facebookID = dic["fbid"] as? String
+                newUser.userID = dic["id"] as? Int
+                newUser.name = dic["name"] as? String
+                
+                var friendAlreadyExist = false
+                for friend in DataManager.sharedInstance.allFriends {
+                    if friend.userID == newUser.userID {
+                        DataManager.sharedInstance.createSimpleUIAlert(self, title: "User ja amigo", message: "add outro user", button1: "Ok")
+                        friendAlreadyExist = true
+                    }
+                    
+                }
+                
+                if friendAlreadyExist == false {
+                    DataManager.sharedInstance.allFriends.append(newUser)
+                    
+                    
+                    let alertController = UIAlertController(title: "Sucesso", message: "Amigo \(newUser.username)", preferredStyle: .Alert)
+                    let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+                        UIAlertAction in
+                        self.navigationController!.popViewControllerAnimated(true)
+                    }
+                    
+                    
+                    alertController.addAction(okAction)
+                    
+                    let userdic = DataManager.sharedInstance.convertUserToNSDic(DataManager.sharedInstance.allFriends)
+                    DataManager.sharedInstance.createJsonFile("friends", json: userdic)
+                    
+                    completion(result: "sucesso")
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                }
+                
+
+            }
+        }
+        
     }
     
     func testUsername() {
@@ -77,10 +129,13 @@ class AddFriendTableViewController: UITableViewController, UITextFieldDelegate {
         if (username == "") {
             DataManager.sharedInstance.createSimpleUIAlert(self, title: "Naoo add", message: "Insira um username", button1: "Ok")
         } else {
-            addFriend()
-            navigationController!.popViewControllerAnimated(true)
+            addFriend({ (result) -> Void in
+            })
+            
         }
     }
+    
+
     
 
 

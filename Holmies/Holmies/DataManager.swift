@@ -265,12 +265,13 @@ class DataManager {
     
     
     func createJsonFile(name:String,json:AnyObject) {
+        let dic = json as! [NSDictionary]
         let documents = DataManager.sharedInstance.findDocumentsDirectory()
         let path = documents.stringByAppendingString("/\(name).json")
         print(path)
         let outputStream = NSOutputStream(toFileAtPath: path, append: false)
         outputStream?.open()
-        NSJSONSerialization.writeJSONObject(json, toStream: outputStream!, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
+        NSJSONSerialization.writeJSONObject(dic, toStream: outputStream!, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
         outputStream?.close()
     
     }
@@ -307,7 +308,7 @@ class DataManager {
         var userArray = [User]()
         if let dic = json as? [NSDictionary] {
             for user in dic {
-                let newUser = User()
+            let newUser = User()
             newUser.altitude = user["altitude"] as? String
             newUser.createdAt = user["created_at"] as? String
             newUser.email = user["email"] as? String
@@ -334,6 +335,8 @@ class DataManager {
         
         return userArray
     }
+    
+
     
     func convertJsonToGroup(json:AnyObject) -> [Group] {
         var groupDic = [Group]()
@@ -476,14 +479,21 @@ class DataManager {
     
     func requestUsersInGroupId(groupId:String,completion:(users:[User]) -> Void) {
         http.getInfoFromID(groupId, desiredInfo: .groupSenderUsers) { (result) -> Void in
-            DataManager.sharedInstance.createJsonFile("users\(groupId)", json: result)
+            //DataManager.sharedInstance.createJsonFile("users\(groupId)", json: result)
             let users = DataManager.sharedInstance.convertJsonToUser(result)
+            let usersDic = DataManager.sharedInstance.convertUserToNSDic(users)
+            
+            DataManager.sharedInstance.createJsonFile("users\(groupId)", json: usersDic)
+            
             print(users)
             var group = Dictionary<String,AnyObject>()
             group["groupId"] = groupId
             group["users"] = users
             self.usersInGroups.append(group)
             completion(users: users)
+//            self.testIfGroupIsEmpty({ (result) -> Void in
+//                //completion do grupo apagado
+//            })
         }
         
     }
@@ -530,6 +540,57 @@ class DataManager {
             groupDic.append(circle)
         }
         return groupDic
+    }
+    
+    func convertUserToNSDic (userClass:[User]) -> [Dictionary<String,AnyObject>] {
+        var userDic = [Dictionary<String,AnyObject>]()
+        for user in userClass {
+            var people = Dictionary<String,AnyObject>()
+            people["altitude"] = user.altitude
+            people["createdAt"] = user.createdAt
+            people["email"] = user.email
+            people["facebookID"] = user.facebookID
+            people["id"] = user.userID
+            
+            people["name"] = user.name
+            people["photo"] = user.photo
+            people["updatedAt"] = user.updatedAt
+            people["username"] = user.username
+            userDic.append(people)
+        }
+        return userDic
+    }
+    
+    func testIfGroupIsEmpty(completion:(result:String)->Void) {
+        for group in DataManager.sharedInstance.allGroup {
+            let users = group.users
+            let id = group.id
+            if users.count <= 1 {
+                destroyGroup(id)
+                completion(result: "\(id)")
+            }
+        }
+    }
+    
+    func destroyGroup(idGroup:String) {
+        http.destroyGroupWithID(idGroup) { (result) -> Void in
+            print("apagado grupo \(idGroup)")
+        }
+    }
+    
+    func randomStringWithLength (len : Int) -> NSString {
+        
+        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        
+        let randomString : NSMutableString = NSMutableString(capacity: len)
+        
+        for (var i=0; i < len; i++){
+            let length = UInt32 (letters.length)
+            let rand = arc4random_uniform(length)
+            randomString.appendFormat("%C", letters.characterAtIndex(Int(rand)))
+        }
+        
+        return randomString
     }
     
 }
