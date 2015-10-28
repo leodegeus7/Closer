@@ -27,6 +27,16 @@ class CirclesTableViewController: UITableViewController {
         
         navigationBarGradient()
         
+        for family: String in UIFont.familyNames()
+        {
+            print("\(family)")
+            for names: String in UIFont.fontNamesForFamilyName(family)
+            {
+                print("== \(names)")
+            }
+        }
+
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -111,14 +121,6 @@ class CirclesTableViewController: UITableViewController {
         
         
 
-//        for family: String in UIFont.familyNames()
-//        {
-//            print("\(family)")
-//            for names: String in UIFont.fontNamesForFamilyName(family)
-//            {
-//                print("== \(names)")
-//            }
-//        }
 
        // cellPendent.coloredSquare.backgroundColor = UIColor(patternImage: radialGradient!)
         cellPendent.accepted = { [unowned self] (selectedCell) -> Void in
@@ -202,6 +204,21 @@ class CirclesTableViewController: UITableViewController {
 //        }    
     }
 
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+        if #available(iOS 9.0, *) {
+            tableView.cellLayoutMarginsFollowReadableWidth = false
+        } else {
+            // Fallback on earlier versions
+            tableView.separatorInset = UIEdgeInsetsZero
+            tableView.preservesSuperviewLayoutMargins = false
+            cell.preservesSuperviewLayoutMargins = false
+            cell.separatorInset = UIEdgeInsetsZero
+            cell.layoutMargins = UIEdgeInsetsZero
+        }
+        
+    }
     
 
     /*

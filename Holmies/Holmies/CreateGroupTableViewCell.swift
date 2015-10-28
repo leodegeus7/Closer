@@ -10,6 +10,7 @@ import UIKit
 
 class CreateGroupTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var checkImage: UIImageView!
     @IBOutlet weak var friendPhoto: UIImageView!
     @IBOutlet weak var friendName: UILabel!
     

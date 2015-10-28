@@ -58,6 +58,8 @@
 		A7C37FC11BE00A8500FEE8D2 /* SF-UI-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A7C37FA31BE00A8500FEE8D2 /* SF-UI-Text-Regular.otf */; };
 		A7C37FC21BE00A8500FEE8D2 /* SF-UI-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A7C37FA41BE00A8500FEE8D2 /* SF-UI-Text-Semibold.otf */; };
 		A7C37FC31BE00A8500FEE8D2 /* SF-UI-Text-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A7C37FA51BE00A8500FEE8D2 /* SF-UI-Text-SemiboldItalic.otf */; };
+		A7C37FC71BE11E3600FEE8D2 /* redCheck.png in Resources */ = {isa = PBXBuildFile; fileRef = A7C37FC51BE11E3600FEE8D2 /* redCheck.png */; };
+		A7C37FC81BE11E3600FEE8D2 /* grayCheck.png in Resources */ = {isa = PBXBuildFile; fileRef = A7C37FC61BE11E3600FEE8D2 /* grayCheck.png */; };
 		A7D2A4B01BCE90E6006A55D1 /* redBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D2A4AF1BCE90E6006A55D1 /* redBackground.png */; };
 		A7F3899E1BD56F4500DF2D7C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A7F3899D1BD56F4500DF2D7C /* Info.plist */; };
 		A7FCC50B1BC4CCF600AEDA3F /* WidgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FCC50A1BC4CCF600AEDA3F /* WidgetViewController.swift */; };
@@ -248,6 +250,8 @@
 		A7C37FA31BE00A8500FEE8D2 /* SF-UI-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Regular.otf"; sourceTree = "<group>"; };
 		A7C37FA41BE00A8500FEE8D2 /* SF-UI-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Semibold.otf"; sourceTree = "<group>"; };
 		A7C37FA51BE00A8500FEE8D2 /* SF-UI-Text-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-SemiboldItalic.otf"; sourceTree = "<group>"; };
+		A7C37FC51BE11E3600FEE8D2 /* redCheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redCheck.png; sourceTree = "<group>"; };
+		A7C37FC61BE11E3600FEE8D2 /* grayCheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayCheck.png; sourceTree = "<group>"; };
 		A7D2A4AF1BCE90E6006A55D1 /* redBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redBackground.png; sourceTree = "<group>"; };
 		A7F3899D1BD56F4500DF2D7C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7FCC50A1BC4CCF600AEDA3F /* WidgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetViewController.swift; sourceTree = "<group>"; };
@@ -470,6 +474,8 @@
 		A7CA149B1BD7FF80006E2428 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A7C37FC51BE11E3600FEE8D2 /* redCheck.png */,
+				A7C37FC61BE11E3600FEE8D2 /* grayCheck.png */,
 				A7C37F541BDFF44C00FEE8D2 /* newUser2.png */,
 				A7C37F5C1BDFF86000FEE8D2 /* newUser3.png */,
 				A7C37F551BDFF44C00FEE8D2 /* charmButton.png */,
@@ -925,6 +931,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7C37FC71BE11E3600FEE8D2 /* redCheck.png in Resources */,
 				A71F7D151BD0288E00652750 /* photoButton.png in Resources */,
 				A7C37FA81BE00A8500FEE8D2 /* SF-Compact-Display-Heavy.otf in Resources */,
 				A7C37FAC1BE00A8500FEE8D2 /* SF-Compact-Display-Semibold.otf in Resources */,
@@ -962,6 +969,7 @@
 				A7C37FB11BE00A8500FEE8D2 /* SF-UI-Display-Heavy.otf in Resources */,
 				A7C37FAF1BE00A8500FEE8D2 /* SF-UI-Display-Black.otf in Resources */,
 				A78EA4811BDAABA70001E946 /* Design.storyboard in Resources */,
+				A7C37FC81BE11E3600FEE8D2 /* grayCheck.png in Resources */,
 				A71F7D0E1BD0215E00652750 /* pin.png in Resources */,
 				A7C37FC11BE00A8500FEE8D2 /* SF-UI-Text-Regular.otf in Resources */,
 				CD103A751BBB07470044166F /* ovalRosa.png in Resources */,
