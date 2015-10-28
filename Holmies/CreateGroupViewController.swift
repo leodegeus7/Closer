@@ -14,6 +14,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet weak var upSliderLabel: UILabel!
     @IBOutlet weak var downSlideLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var addUserButton: UIButton!
     
     let redCheck = UIImage(named: "redCheck.png")
     let grayCheck = UIImage(named: "grayCheck.png")
@@ -26,13 +27,11 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         super.viewDidLoad()
         tableView.separatorInset = UIEdgeInsetsZero
         tableView.layoutMargins = UIEdgeInsetsZero
-        
-        
         let buttonContinue = UIBarButtonItem(title: "Continue", style: .Plain, target: self, action: "continueAction")
         self.navigationItem.rightBarButtonItem = buttonContinue
         
         
-        appyDesign()
+        applyDesign()
 
         // Do any additional setup after loading the view.
     }
@@ -66,6 +65,8 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         
         cell.friendName.text = DataManager.sharedInstance.allFriends[indexPath.row].name
         cell.friendPhoto.image = DataManager.sharedInstance.findImage("\(DataManager.sharedInstance.allFriends[indexPath.row].userID)")
+        cell.friendPhoto.layer.cornerRadius = 19
+        cell.friendPhoto.clipsToBounds = true
         cell.checkImage.image = grayCheck
     
         
@@ -73,26 +74,34 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         return cell
     }
     
-    func appyDesign () {
+    func applyDesign () {
        
     //MARK (Criar uma string para povoar o placeholder
-        groupName.attributedPlaceholder = NSAttributedString(string: "Name of Group", attributes: [NSForegroundColorAttributeName: mainRed])
+        groupName.attributedPlaceholder = NSAttributedString(string: "Name of Group", attributes: [NSForegroundColorAttributeName: lightGray])
         groupName.font = UIFont(name: "SFUIText-Medium", size: 17)
         groupName.layer.borderColor = mainRed.CGColor
-        groupName.layer.borderWidth = 1.25
+        groupName.layer.borderWidth = 1
         groupName.layer.cornerRadius = 8
         groupName.tintColor = mainRed
         groupName.textColor = mainRed
        
         tableView.layer.borderColor = mainRed.CGColor
-        tableView.layer.borderWidth = 1.25
+        tableView.layer.borderWidth = 1
         tableView.layer.cornerRadius = 8
+        
+        addUserButton.setTitle("New User", forState: UIControlState.Normal)
+        addUserButton.setTitleColor(mainRed, forState: UIControlState.Normal)
+        addUserButton.setAttributedTitle(NSAttributedString(string: "New User", attributes: [NSFontAttributeName: UIFont(name: "SFUIText-Medium", size: 17)!]), forState: UIControlState.Normal)
+        addUserButton.titleLabel!.textColor = mainRed
+        addUserButton.backgroundColor = UIColor.clearColor()
+        addUserButton.layer.borderColor = mainRed.CGColor
+        addUserButton.layer.borderWidth = 1
+        addUserButton.layer.cornerRadius = 8
+        
         
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        
         if #available(iOS 9.0, *) {
             tableView.cellLayoutMarginsFollowReadableWidth = false
         } else {
@@ -110,6 +119,9 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! CreateGroupTableViewCell
         selectedFriends.append(DataManager.sharedInstance.allFriends[indexPath.row])
         cell.checkImage.image = redCheck
+        cell.friendPhoto.layer.borderColor = mainRed.CGColor
+        cell.friendPhoto.layer.borderWidth = 1
+        cell.friendName.textColor = mainRed
         
     }
     
@@ -125,6 +137,8 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
             i++
         }
         cell.checkImage.image = grayCheck
+        cell.friendPhoto.layer.borderWidth = 0
+        cell.friendName.textColor = lightGray
     }
     
     
@@ -135,7 +149,6 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
 
     
     @IBAction func timeSlider(sender: UISlider) {
-        
         let currentValue = Int(sender.value)
         upSliderLabel.text = "\(currentValue) hours"
         
