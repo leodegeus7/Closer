@@ -15,13 +15,22 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet weak var downSlideLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
+    let redCheck = UIImage(named: "redCheck.png")
+    let grayCheck = UIImage(named: "grayCheck.png")
     let mainRed = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1.0)
     let lightGray = UIColor(red: 170.0/255.0, green: 170.0/255.0, blue: 170.0/255.0, alpha: 1.0)
+    var selectedFriends = [User]()
+    let http = HTTPHelper()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorInset = UIEdgeInsetsZero
         tableView.layoutMargins = UIEdgeInsetsZero
+        
+        
+        let buttonContinue = UIBarButtonItem(title: "Continue", style: .Plain, target: self, action: "continueAction")
+        self.navigationItem.rightBarButtonItem = buttonContinue
+        
         
         appyDesign()
 
@@ -38,38 +47,27 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        tableView.reloadData()
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return DataManager.sharedInstance.allFriends.count
     }
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let redCheck = UIImage(named: "redCheck.png")
-        let grayCheck = UIImage(named: "grayCheck.png")
+
         self.tableView.rowHeight = 45
         
         let cell = tableView.dequeueReusableCellWithIdentifier("friend", forIndexPath: indexPath) as! CreateGroupTableViewCell
         cell.friendName.font = UIFont(name: "SFUIText-Regular", size: 17)
         cell.friendName.textColor = lightGray
+        
+        cell.friendName.text = DataManager.sharedInstance.allFriends[indexPath.row].name
+        cell.friendPhoto.image = DataManager.sharedInstance.findImage("\(DataManager.sharedInstance.allFriends[indexPath.row].userID)")
+        cell.checkImage.image = grayCheck
     
-        
-        
-        switch indexPath.row {
-        case 0:
-            cell.checkImage.image = redCheck
-            cell.friendName.text = "Marie Stevens"
-            break
-        case 1:
-            cell.checkImage.image = redCheck
-            cell.friendName.text = "Evelyn Little"
-            break
-        default:
-            cell.checkImage.image = grayCheck
-            cell.friendName.text = "No name Ø"
-            break
-            
-        }
         
         
         return cell
@@ -108,20 +106,77 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! CreateGroupTableViewCell
+        selectedFriends.append(DataManager.sharedInstance.allFriends[indexPath.row])
+        cell.checkImage.image = redCheck
+        
+    }
+    
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! CreateGroupTableViewCell
+        var i = 0
+        let users = selectedFriends
+        for userSelected in selectedFriends {
+           
+            if DataManager.sharedInstance.allFriends[indexPath.row].userID == userSelected.userID {
+                selectedFriends.removeAtIndex(i)
+                break
+            }
+            i++
+        }
+        cell.checkImage.image = grayCheck
+    }
+    
     
     @IBAction func addUser(sender: AnyObject) {
-        
+        performSegueWithIdentifier("addFriend", sender: self)
         
     }
 
     
     @IBAction func timeSlider(sender: UISlider) {
         
-        var currentValue = Int(sender.value)
+        let currentValue = Int(sender.value)
         upSliderLabel.text = "\(currentValue) hours"
         
     }
+    
+    func continueAction () {
+        
+        if groupName.text?.isEmpty  == true {
+            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Alerta", message: "Digite um nome para o grupo", button1: "Ok")
+        }
+        else {
+            let groupNameText = groupName.text
+            
+            http.createNewGroupWithName("\(groupNameText!)", completion: { (result) -> Void in
+                
+                let dic = result as NSDictionary
+                let id = dic["id"]
+                let formatId = "\(id!)"
+                self.http.createNewSharerWithType(.userToGroup, ownerID: DataManager.sharedInstance.idUser, receiverID: formatId, until: "", completion: { (result) -> Void in
+                })
+                
+                for user in self.selectedFriends {
+                    let userId = user.userID
+                    self.http.createNewSharerWithType(.userToGroup, ownerID: "\(userId)", receiverID: formatId, until: "", completion: { (result) -> Void in
+                        
+                    })
+                   
+                }
+                self.navigationController?.popViewControllerAnimated(true)
+            })
+            
+            
+        
+        }
+        
+        
+        
+    }
 
+    
     /*
     // MARK: - Navigation
 

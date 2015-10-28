@@ -223,9 +223,14 @@ class DataManager {
     func findImage(id:String) -> UIImage {
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
         let destinationPath = documentsPath.stringByAppendingString("/\(id).jpg")
+        if testIfFileExistInDocuments("/\(id).jpg") == true {
+            let image = UIImage(contentsOfFile: destinationPath)
+            return image!
+        }
+        else {
+            return UIImage(named: "ovalVermelho.png")!
+        }
 
-        let image = UIImage(contentsOfFile: destinationPath)
-        return image!
         
     }
     
@@ -577,10 +582,10 @@ class DataManager {
             let users = group.users
             let id = group.id
             
-            if users.count <= 1 {
-                destroyGroup(id)
-                completion(result: "\(id)")
-            }
+//            if users.count <= 1 {
+//                destroyGroup(id)
+//                completion(result: "\(id)")
+//            }
         }
     }
     
