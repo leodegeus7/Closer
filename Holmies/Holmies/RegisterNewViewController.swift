@@ -132,9 +132,12 @@ class RegisterNewViewController: UIViewController {
                 print("existe username ou email ja cadastrado")
             }
             else {
+                
+
                 DataManager.sharedInstance.name = dic["name"] as! String
-                DataManager.sharedInstance.user = dic["username"] as! String
+                DataManager.sharedInstance.username = dic["username"] as! String
                 DataManager.sharedInstance.email = dic["email"] as! String
+                
                 let id = dic["id"]
                 DataManager.sharedInstance.idUser = "\(id!)"
                 if !(DataManager.sharedInstance.idFB == nil) {
@@ -142,6 +145,16 @@ class RegisterNewViewController: UIViewController {
                         print(result)
                     })
                 }
+                
+                var myInfo = Dictionary<String,AnyObject>()
+                myInfo["name"] = DataManager.sharedInstance.name
+                myInfo["id"] = DataManager.sharedInstance.idUser
+                myInfo["email"] = DataManager.sharedInstance.email
+                myInfo["username"] = DataManager.sharedInstance.username
+                myInfo["idFb"] = DataManager.sharedInstance.idFB
+                DataManager.sharedInstance.createJsonFile("myInfo", json: myInfo)
+                
+                
                 DataManager.sharedInstance.saveID()
             }
             self.performSegueWithIdentifier("showMap", sender: self)

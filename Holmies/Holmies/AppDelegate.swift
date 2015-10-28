@@ -79,21 +79,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let viewController = storyboard.instantiateViewControllerWithIdentifier("inicial")
             self.window?.rootViewController = viewController
             self.window?.makeKeyAndVisible()
-            if !(DataManager.sharedInstance.testIfFileExistInDocuments("groups.json")) {
+            if (DataManager.sharedInstance.testIfFileExistInDocuments("/groups.json")) {
                 let dic = DataManager.sharedInstance.loadJsonFromDocuments("groups")
                 DataManager.sharedInstance.allGroup = DataManager.sharedInstance.convertJsonToGroup(dic)
                 let groups = DataManager.sharedInstance.allGroup
                 print(groups)
                 
             }
-            if !(DataManager.sharedInstance.testIfFileExistInDocuments("activeGroups.json")) {
+            if (DataManager.sharedInstance.testIfFileExistInDocuments("/activeGroups.json")) {
                 let dic = DataManager.sharedInstance.loadJsonFromDocuments("activeGroups")
                 DataManager.sharedInstance.activeGroup = DataManager.sharedInstance.convertJsonToGroup(dic)
             }
-
-            DataManager.sharedInstance.requestGroups { (result) -> Void in
-                print(1)
+            
+            if (DataManager.sharedInstance.testIfFileExistInDocuments("/myInfo.json")) {
+                let dic = DataManager.sharedInstance.loadJsonFromDocuments("myInfo")
+                DataManager.sharedInstance.name = dic["name"] as! String
+                DataManager.sharedInstance.username = dic["username"] as! String
+                DataManager.sharedInstance.email = dic["email"] as! String
             }
+
+//            DataManager.sharedInstance.requestGroups { (result) -> Void in
+//                print(1)
+//            }
         }
 
         

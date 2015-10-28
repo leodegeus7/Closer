@@ -114,7 +114,7 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
                     }
                     else {
                         DataManager.sharedInstance.name = dic["name"] as! String
-                        DataManager.sharedInstance.user = dic["username"] as! String
+                        DataManager.sharedInstance.username = dic["username"] as! String
                         DataManager.sharedInstance.email = dic["email"] as! String
                         let id = dic["id"]
                         DataManager.sharedInstance.idUser = "\(id!)"
@@ -176,10 +176,19 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
                         else {
                             
                             DataManager.sharedInstance.name = dic["name"] as! String
-                            DataManager.sharedInstance.user = dic["username"] as! String
+                            DataManager.sharedInstance.username = dic["username"] as! String
                             DataManager.sharedInstance.email = dic["email"] as! String
                             let id = dic["id"]
                             DataManager.sharedInstance.idUser = "\(id!)"
+                            
+                            var myInfo = Dictionary<String,AnyObject>()
+                            myInfo["name"] = DataManager.sharedInstance.name
+                            myInfo["id"] = DataManager.sharedInstance.idUser
+                            myInfo["email"] = DataManager.sharedInstance.email
+                            myInfo["username"] = DataManager.sharedInstance.username
+                            myInfo["idFb"] = DataManager.sharedInstance.idFB
+                            DataManager.sharedInstance.createJsonFile("myInfo", json: myInfo)
+                            
                             DataManager.sharedInstance.saveID()
                             self.performSegueWithIdentifier("showTableView", sender: self)
                         }
@@ -350,13 +359,21 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
             }
             else {
                 DataManager.sharedInstance.name = dic["name"] as! String
-                DataManager.sharedInstance.user = dic["username"] as! String
+                DataManager.sharedInstance.username = dic["username"] as! String
                 DataManager.sharedInstance.email = dic["email"] as! String
                 let id = dic["id"]
                 DataManager.sharedInstance.idUser = "\(id!)"
                 self.helper.updateUserWithID("\(id!)", username: nil, location: nil, altitude: nil, fbid: faceId, photo: nil, name: nil, email: nil, password: "\(DataManager.sharedInstance.randomStringWithLength(64))", completion: { (result) -> Void in
                     
                     })
+                
+                var myInfo = Dictionary<String,AnyObject>()
+                myInfo["name"] = DataManager.sharedInstance.name
+                myInfo["id"] = DataManager.sharedInstance.idUser
+                myInfo["email"] = DataManager.sharedInstance.email
+                myInfo["username"] = DataManager.sharedInstance.username
+                DataManager.sharedInstance.createJsonFile("myInfo", json: myInfo)
+                
                 
                 DataManager.sharedInstance.saveID()
             }
@@ -366,6 +383,7 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
     
     func afterLogin() {
         activityIndicator.stopAnimating()
+        
     }
     
     func setUpBackgrounGradient () {
