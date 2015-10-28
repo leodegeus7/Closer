@@ -17,7 +17,6 @@ class CirclesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let data = DataManager.sharedInstance.findDocumentsDirectory()
 
         
         let refresh = UIRefreshControl()
@@ -256,7 +255,7 @@ class CirclesTableViewController: UITableViewController {
 
     extension CAGradientLayer {
     class func gradientLayerForBounds(bounds: CGRect) -> CAGradientLayer {
-        var layer = CAGradientLayer()
+        let layer = CAGradientLayer()
         layer.frame = bounds
         let navigationBarRed1 = UIColor(red: 205.0/255.0, green: 16.0/255.0, blue: 34.0/255.0, alpha: 1.0)
         let navigationBarRed2 = UIColor(red: 213.0/250.0, green: 9.0/255.0, blue: 43.0/255.0, alpha: 1.0)

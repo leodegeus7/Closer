@@ -22,6 +22,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     let lightGray = UIColor(red: 170.0/255.0, green: 170.0/255.0, blue: 170.0/255.0, alpha: 1.0)
     var selectedFriends = [User]()
     let http = HTTPHelper()
+    var until = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,6 +152,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     @IBAction func timeSlider(sender: UISlider) {
         let currentValue = Int(sender.value)
         upSliderLabel.text = "\(currentValue) hours"
+        until = "\(currentValue)"
         
     }
     
@@ -172,7 +174,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
                 
                 for user in self.selectedFriends {
                     let userId = user.userID
-                    self.http.createNewSharerWithType(.userToGroup, ownerID: "\(userId)", receiverID: formatId, until: "", completion: { (result) -> Void in
+                    self.http.createNewSharerWithType(.userToGroup, ownerID: "\(userId)", receiverID: formatId, until: self.until, completion: { (result) -> Void in
                         
                     })
                    
