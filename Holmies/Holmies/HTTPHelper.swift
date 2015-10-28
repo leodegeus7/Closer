@@ -16,7 +16,7 @@ class HTTPHelper: NSObject {
     let API_DECRYPT_PW = "LB8ZZB9FLAZ9zMj8fNmL0y1164VlrTKv29B6dZ6vQAADKacTR8EeR4u6Um4DXqx0"
     
     let baseURL = "https://tranquil-coast-5554.herokuapp.com/api" //URL do servidor no HEROKU
-    //    let baseURL = "http://localhost:3000/api" //URL do servidor de Teste
+//    let baseURL = "http://localhost:3000/api" //URL do servidor de Teste
     
     internal enum DesiredInfo {
         case userReceiverUsers
@@ -226,10 +226,18 @@ class HTTPHelper: NSObject {
         
     }
     
-    func destroySharerWithID(id:String, completion:(result:Dictionary<String,AnyObject>)->Void) {
-        let parameters = [
-            "id":id
+    func destroySharerWithSharerType(sharerType:SharerType, ownerID:String, receiverID:String, completion:(result:Dictionary<String,AnyObject>)->Void) {
+        var parameters = [
+            "owner_user_id":ownerID
         ]
+        switch sharerType {
+        case .userToGroup:
+            parameters["receiver_group_id"] = receiverID
+            break
+        case .userToUser:
+            parameters["receiver_user_id"] = receiverID
+            break
+        }
         
         let url = "\(baseURL)/destroy_sharer"
         
@@ -237,7 +245,6 @@ class HTTPHelper: NSObject {
             let formattedResult = httpResult as! Dictionary<String, AnyObject>
             completion(result: formattedResult)
         }
-        
     }
     
     func updateGroupWithID(id:String, name:String?, photo:String?, completion:(result:Dictionary<String,AnyObject>)->Void) {
@@ -279,7 +286,7 @@ class HTTPHelper: NSObject {
     
     func makeHttpPostRequestWithParameters(parameters: Dictionary<String,AnyObject>, url: String, completion:(httpResult:AnyObject?)->Void) {
         Alamofire.request(.POST, url, parameters: parameters).authenticate(user: API_AUTH_NAME, password: API_AUTH_PASSWORD).responseJSON { response in
-            //            print(response)
+//            print(response)
             completion(httpResult: response.result.value)
         }
     }

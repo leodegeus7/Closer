@@ -17,7 +17,7 @@ import Alamofire
 class DataManager {
     var idUser:String!
     var name:String!
-    var user:String!
+    var username:String!
     var idFB:String!
     var email:String!
     var friendsArray:NSMutableArray!
@@ -44,7 +44,7 @@ class DataManager {
         }()
     
     init() {
-        user = ""
+        username = ""
         email = ""
         idFB = ""
  
@@ -270,13 +270,13 @@ class DataManager {
     
     
     func createJsonFile(name:String,json:AnyObject) {
-        let dic = json as! [NSDictionary]
+
         let documents = DataManager.sharedInstance.findDocumentsDirectory()
         let path = documents.stringByAppendingString("/\(name).json")
         print(path)
         let outputStream = NSOutputStream(toFileAtPath: path, append: false)
         outputStream?.open()
-        NSJSONSerialization.writeJSONObject(dic, toStream: outputStream!, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
+        NSJSONSerialization.writeJSONObject(json, toStream: outputStream!, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
         outputStream?.close()
     
     }

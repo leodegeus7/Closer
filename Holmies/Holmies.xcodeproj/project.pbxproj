@@ -85,7 +85,6 @@
 		CD1C03681BA74A590073524A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C03671BA74A590073524A /* LoginViewController.swift */; };
 		CD1C036C1BA752290073524A /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C036B1BA752290073524A /* DataManager.swift */; };
 		CD1C036E1BA761550073524A /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C036D1BA761550073524A /* FriendsTableViewController.swift */; };
-		CD1E29C81BD95AD800E8C66B /* HTTPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1E29C71BD95AD800E8C66B /* HTTPHelper.swift */; };
 		CD21002A1B9DE7EF00485126 /* PlaceMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2100291B9DE7EF00485126 /* PlaceMarker.swift */; };
 		CD43673F1BBC531E00309FD0 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD43673E1BBC531E00309FD0 /* Group.swift */; };
 		CD4367491BBC75E200309FD0 /* AddGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4367481BBC75E200309FD0 /* AddGroupTableViewController.swift */; };
@@ -137,6 +136,7 @@
 		CDB0FD621BBF0B4500BC6DFA /* AddGroupNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB0FD611BBF0B4500BC6DFA /* AddGroupNameViewController.swift */; };
 		CDCCCD2B1BBF83F500A5AD03 /* default.gpx in Resources */ = {isa = PBXBuildFile; fileRef = CDCCCD2A1BBF83F500A5AD03 /* default.gpx */; };
 		CDCCCD321BBF84A000A5AD03 /* 2.gpx in Resources */ = {isa = PBXBuildFile; fileRef = CDCCCD311BBF84A000A5AD03 /* 2.gpx */; };
+		CDF84C6B1BE1460E00F91502 /* HTTPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF84C6A1BE1460E00F91502 /* HTTPHelper.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -281,7 +281,6 @@
 		CD1C03671BA74A590073524A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CD1C036B1BA752290073524A /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		CD1C036D1BA761550073524A /* FriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
-		CD1E29C71BD95AD800E8C66B /* HTTPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHelper.swift; sourceTree = "<group>"; };
 		CD2100291B9DE7EF00485126 /* PlaceMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceMarker.swift; sourceTree = "<group>"; };
 		CD43673E1BBC531E00309FD0 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		CD4367481BBC75E200309FD0 /* AddGroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewController.swift; sourceTree = "<group>"; };
@@ -373,6 +372,7 @@
 		CDB0FD611BBF0B4500BC6DFA /* AddGroupNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupNameViewController.swift; sourceTree = "<group>"; };
 		CDCCCD2A1BBF83F500A5AD03 /* default.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = default.gpx; sourceTree = "<group>"; };
 		CDCCCD311BBF84A000A5AD03 /* 2.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2.gpx; sourceTree = "<group>"; };
+		CDF84C6A1BE1460E00F91502 /* HTTPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -702,8 +702,8 @@
 			children = (
 				CD6BAAA81B98DE23008614B0 /* Holmies-Bridging-Header.h */,
 				CD1C036B1BA752290073524A /* DataManager.swift */,
+				CDF84C6A1BE1460E00F91502 /* HTTPHelper.swift */,
 				CD6BAA8C1B98DB5F008614B0 /* GoogleDataProvider.swift */,
-				CD1E29C71BD95AD800E8C66B /* HTTPHelper.swift */,
 				CD6BAA8E1B98DB70008614B0 /* GooglePlace.swift */,
 				CDCCCD2A1BBF83F500A5AD03 /* default.gpx */,
 				CD0B59E01BAB57750098AD88 /* Location.swift */,
@@ -1065,6 +1065,7 @@
 				A7C37F631BE0061000FEE8D2 /* CreateGroupTableViewCell.swift in Sources */,
 				CD8A8BDB1BB479CE00E9D471 /* GroupsTableViewController.swift in Sources */,
 				A7FCC50B1BC4CCF600AEDA3F /* WidgetViewController.swift in Sources */,
+				CDF84C6B1BE1460E00F91502 /* HTTPHelper.swift in Sources */,
 				CD4367491BBC75E200309FD0 /* AddGroupTableViewController.swift in Sources */,
 				CD900F831BDE9F520095CB85 /* AddFriendTableViewController.swift in Sources */,
 				CD103A6A1BB9D88D0044166F /* RegisterViewController.swift in Sources */,
@@ -1077,7 +1078,6 @@
 				CD6BAA991B98DB8A008614B0 /* UIViewExtension.swift in Sources */,
 				A705921B1BD6C65300E737E3 /* NewGroupTableViewCell.swift in Sources */,
 				CDB0FD621BBF0B4500BC6DFA /* AddGroupNameViewController.swift in Sources */,
-				CD1E29C81BD95AD800E8C66B /* HTTPHelper.swift in Sources */,
 				CD1C036C1BA752290073524A /* DataManager.swift in Sources */,
 				A70592171BD6C5B600E737E3 /* DesignGroupsTableViewController.swift in Sources */,
 				CDB0C94F1BCEE0290020BFB5 /* NSData+CommonCrypto.m in Sources */,

@@ -128,7 +128,6 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! CreateGroupTableViewCell
         var i = 0
-        let users = selectedFriends
         for userSelected in selectedFriends {
            
             if DataManager.sharedInstance.allFriends[indexPath.row].userID == userSelected.userID {

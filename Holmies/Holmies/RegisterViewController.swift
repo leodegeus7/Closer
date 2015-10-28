@@ -38,7 +38,7 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
             password2.alpha = 0
             password.enabled = false
             password2.enabled = false
-            username.text = DataManager.sharedInstance.user
+            username.text = DataManager.sharedInstance.username
             name.text = DataManager.sharedInstance.name
             email.text = DataManager.sharedInstance.email
             facebookAuth = true
@@ -153,7 +153,7 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
                     }
                     else {
                         DataManager.sharedInstance.name = dic["name"] as! String
-                        DataManager.sharedInstance.user = dic["username"] as! String
+                        DataManager.sharedInstance.username = dic["username"] as! String
                         DataManager.sharedInstance.email = dic["email"] as! String
                         let id = dic["id"]
                         DataManager.sharedInstance.idUser = "\(id!)"
