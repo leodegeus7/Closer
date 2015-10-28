@@ -11,7 +11,7 @@ import QuartzCore
 
 class CirclesTableViewController: UITableViewController {
     
-
+    let http = HTTPHelper()
     let lightBlue:UIColor = UIColor(red: 61.0/255.0, green: 210.0/255.0, blue: 228.0/255.0, alpha: 1)
     let mainRed: UIColor = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
 
@@ -53,7 +53,6 @@ class CirclesTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        let number = DataManager.sharedInstance.allGroup.count
         // #warning Incomplete implementation, return the number of rows
         return DataManager.sharedInstance.allGroup.count
     }
@@ -136,7 +135,9 @@ class CirclesTableViewController: UITableViewController {
         
         cellPendent.rejected = { [unowned self] (selectedCell) -> Void in
 //            let path = tableVipew.indexPathForRowAtPoint(selectedCell.center)!
-            DataManager.sharedInstance.removeUserFromGroupInBackEnd(DataManager.sharedInstance.allGroup[indexPath.row].id, completion: { (result) -> Void in
+            let path = tableView.indexPathForRowAtPoint(selectedCell.center)!
+            let id = DataManager.sharedInstance.allGroup[path.row].id as String
+            self.http.destroySharerWithSharerType(.userToGroup, ownerID: DataManager.sharedInstance.idUser, receiverID: id, completion: { (result) -> Void in
                 self.reloadData()
             })
             
@@ -193,8 +194,10 @@ class CirclesTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
 
             if editingStyle == .Delete {
-                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                DataManager.sharedInstance.removeUserFromGroupInBackEnd(DataManager.sharedInstance.allGroup[indexPath.row].id, completion: { (result) -> Void in
+                //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                
+                let id = DataManager.sharedInstance.allGroup[indexPath.row].id as String
+                self.http.destroySharerWithSharerType(.userToGroup, ownerID: DataManager.sharedInstance.idUser, receiverID: id, completion: { (result) -> Void in
                     self.reloadData()
                 })
         

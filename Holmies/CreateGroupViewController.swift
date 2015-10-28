@@ -164,6 +164,17 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
                     })
                    
                 }
+                
+                let group = Group()
+                group.id = formatId
+
+                DataManager.sharedInstance.activeGroup.append(group)
+                let activeGroup = DataManager.sharedInstance.activeGroup
+                
+                let dicio = DataManager.sharedInstance.convertGroupToNSDic(activeGroup)
+                
+                DataManager.sharedInstance.createJsonFile("activeGroups", json: dicio)
+                
                 self.navigationController?.popViewControllerAnimated(true)
             })
             
