@@ -22,6 +22,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     let lightGray = UIColor(red: 170.0/255.0, green: 170.0/255.0, blue: 170.0/255.0, alpha: 1.0)
     var selectedFriends = [User]()
     let http = HTTPHelper()
+    var until = ""
     var filteredArray = Array<User>()
     var resultSearchController = UISearchController()
     var chosenHour:Int!
@@ -198,6 +199,8 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     
     @IBAction func timeSlider(sender: UISlider) {
         let currentValue = Int(sender.value)
+        upSliderLabel.text = "\(currentValue) hours"
+        until = "\(currentValue)"
         
         switch currentValue {
         case 0:
