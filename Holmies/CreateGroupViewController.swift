@@ -316,7 +316,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
                 
                 for user in self.selectedFriends {
                     let userId = user.userID
-                    self.http.createNewSharerWithType(.userToGroup, ownerID: "\(userId)", receiverID: formatId, until: "", completion: { (result) -> Void in
+                    self.http.createNewSharerWithType(.userToGroup, ownerID: "\(userId)", receiverID: formatId, until: self.until, completion: { (result) -> Void in
                         
                     })
                    

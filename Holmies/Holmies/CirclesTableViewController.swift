@@ -17,7 +17,6 @@ class CirclesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let data = DataManager.sharedInstance.findDocumentsDirectory()
 
         
         let refresh = UIRefreshControl()
