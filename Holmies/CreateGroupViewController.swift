@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateGroupViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class CreateGroupViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
 
     @IBOutlet weak var groupName: UITextField!
     @IBOutlet weak var upSliderLabel: UILabel!
@@ -22,6 +22,11 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     let lightGray = UIColor(red: 170.0/255.0, green: 170.0/255.0, blue: 170.0/255.0, alpha: 1.0)
     var selectedFriends = [User]()
     let http = HTTPHelper()
+    var filteredArray = Array<User>()
+    var resultSearchController = UISearchController()
+    var chosenHour:Int!
+    var chosenDay:Int!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +37,8 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         
         
         applyDesign()
+        startSearchController()
+
 
         // Do any additional setup after loading the view.
     }
@@ -48,26 +55,45 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     
     override func viewWillAppear(animated: Bool) {
         tableView.reloadData()
+        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (resultSearchController.active) {
+            return filteredArray.count
+        }
+        
         return DataManager.sharedInstance.allFriends.count
     }
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("friend", forIndexPath: indexPath) as! CreateGroupTableViewCell
+        
+        
+        if (resultSearchController.active) {
+            cell.friendName.text = filteredArray[indexPath.row].name
+            cell.friendPhoto.image = DataManager.sharedInstance.findImage("\(filteredArray[indexPath.row].userID)")
+            
+            
+        } else {
+            cell.friendName.text = DataManager.sharedInstance.allFriends[indexPath.row].name
+            cell.friendPhoto.image = DataManager.sharedInstance.findImage("\(DataManager.sharedInstance.allFriends[indexPath.row].userID)")
 
+            
+        }
+        
+        //MARK - CRIAR METODO DE PERSISTIR NO DATAMANAGER PARA DEPOIS ACESSAR E VER SE PERMENECEU PERSISTIDO
+        
         self.tableView.rowHeight = 45
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("friend", forIndexPath: indexPath) as! CreateGroupTableViewCell
         cell.friendName.font = UIFont(name: "SFUIText-Regular", size: 17)
         cell.friendName.textColor = lightGray
-        
-        cell.friendName.text = DataManager.sharedInstance.allFriends[indexPath.row].name
-        cell.friendPhoto.image = DataManager.sharedInstance.findImage("\(DataManager.sharedInstance.allFriends[indexPath.row].userID)")
+    
         cell.friendPhoto.layer.cornerRadius = 19
         cell.friendPhoto.clipsToBounds = true
         cell.checkImage.image = grayCheck
+        cell.friendPhoto.layer.borderWidth = 0
     
         
         
@@ -98,6 +124,12 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         addUserButton.layer.borderWidth = 1
         addUserButton.layer.cornerRadius = 8
         
+        upSliderLabel.textColor = lightGray
+        upSliderLabel.text = "Set duration of group"
+        
+        downSlideLabel.alpha = 0.0
+        downSlideLabel.textColor = mainRed
+
         
     }
     
@@ -141,6 +173,22 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         cell.friendName.textColor = lightGray
     }
     
+    func startSearchController() {
+        resultSearchController = UISearchController(searchResultsController: nil)
+        resultSearchController.searchResultsUpdater = self
+        resultSearchController.dimsBackgroundDuringPresentation = false
+        resultSearchController.searchBar.sizeToFit()
+        resultSearchController.definesPresentationContext = true
+        tableView.tableHeaderView = resultSearchController.searchBar
+        
+    }
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filteredArray.removeAll(keepCapacity: false)
+        let arrayTeste = DataManager.sharedInstance.allFriends.filter({$0.name.lowercaseString.rangeOfString(searchController.searchBar.text!.lowercaseString) != nil})
+        filteredArray = arrayTeste
+        tableView.reloadData()
+    }
     
     @IBAction func addUser(sender: AnyObject) {
         performSegueWithIdentifier("addFriend", sender: self)
@@ -150,7 +198,103 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     
     @IBAction func timeSlider(sender: UISlider) {
         let currentValue = Int(sender.value)
-        upSliderLabel.text = "\(currentValue) hours"
+        
+        switch currentValue {
+        case 0:
+            chosenHour = currentValue
+            chosenDay = chosenHour / 24
+            upSliderLabel.text = "\(chosenHour) hours"
+            upSliderLabel.textColor = mainRed
+            upSliderLabel.fadeIn()
+            downSlideLabel.fadeOut()
+            break
+        case 1:
+            chosenHour = currentValue
+            chosenDay = chosenHour / 24
+            upSliderLabel.text = "\(chosenHour) hour"
+            upSliderLabel.textColor = mainRed
+            upSliderLabel.fadeIn()
+            downSlideLabel.fadeOut()
+            break
+        case 2...23:
+            chosenHour = currentValue
+            chosenDay = chosenHour / 24
+            upSliderLabel.text = "\(chosenHour) hours"
+            upSliderLabel.textColor = mainRed
+            upSliderLabel.fadeIn()
+            downSlideLabel.fadeOut()
+            break
+        case 24...27:
+            chosenHour = 24
+            chosenDay = chosenHour / 24
+            upSliderLabel.text = "\(chosenHour) hours"
+            upSliderLabel.textColor = mainRed
+            upSliderLabel.fadeIn()
+            downSlideLabel.text = "\(chosenDay) day"
+            downSlideLabel.fadeIn()
+            break
+        case 28...30:
+            chosenHour = 48
+            chosenDay = chosenHour / 24
+            upSliderLabel.text = "\(chosenHour) hours"
+            upSliderLabel.textColor = mainRed
+            upSliderLabel.fadeIn()
+            downSlideLabel.text = "\(chosenDay) days"
+            downSlideLabel.fadeIn()
+            break
+        case 31...33:
+            chosenHour = 72
+            chosenDay = chosenHour / 24
+            upSliderLabel.text = "\(chosenHour) hours"
+            upSliderLabel.textColor = mainRed
+            upSliderLabel.fadeIn()
+            downSlideLabel.text = "\(chosenDay) days"
+            downSlideLabel.fadeIn()
+            break
+        case 34...36:
+            chosenHour = 96
+            chosenDay = chosenHour / 24
+            upSliderLabel.text = "\(chosenHour) hours"
+            upSliderLabel.textColor = mainRed
+            upSliderLabel.fadeIn()
+            downSlideLabel.text = "\(chosenDay) days"
+            downSlideLabel.fadeIn()
+            break
+        case 37...39:
+            chosenHour = 120
+            chosenDay = chosenHour / 24
+            upSliderLabel.text = "\(chosenHour) hours"
+            upSliderLabel.textColor = mainRed
+            upSliderLabel.fadeIn()
+            downSlideLabel.text = "\(chosenDay) days"
+            downSlideLabel.fadeIn()
+            break
+        case 40...42:
+            chosenHour = 144
+            chosenDay = chosenHour / 24
+            upSliderLabel.text = "\(chosenHour) hours"
+            upSliderLabel.textColor = mainRed
+            upSliderLabel.fadeIn()
+            downSlideLabel.text = "\(chosenDay) days"
+            downSlideLabel.fadeIn()
+            break
+        case 43...45:
+            chosenHour = 168
+            chosenDay = chosenHour / 24
+            upSliderLabel.text = "\(chosenHour) hours"
+            upSliderLabel.textColor = mainRed
+            upSliderLabel.fadeIn()
+            downSlideLabel.text = "\(chosenDay) days"
+            downSlideLabel.fadeIn()
+            break
+        case 46...48:
+            upSliderLabel.fadeOut()
+            downSlideLabel.text = "Undetermined"
+            downSlideLabel.fadeIn()
+            break
+        default:
+            break
+        }
         
     }
     
@@ -211,3 +355,26 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     */
 
 }
+
+public extension UIView {
+    
+    func fadeIn(duration duration: NSTimeInterval = 0.5){
+        UIView.animateWithDuration(duration, animations: {
+            self.alpha = 1.0
+        })
+    }
+    
+    func fadeOut(duration duration:NSTimeInterval = 0.5){
+        UIView.animateWithDuration(duration, animations: {
+            self.alpha = 0.0
+        })
+    }
+    
+    func turnRed(color:UIColor, label:UILabel, duration:NSTimeInterval = 2){
+        UIView.animateWithDuration(duration, animations: {
+            label.textColor = color
+            
+        })
+    }
+}
+

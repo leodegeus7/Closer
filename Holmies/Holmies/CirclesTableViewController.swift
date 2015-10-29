@@ -27,14 +27,15 @@ class CirclesTableViewController: UITableViewController {
         
         navigationBarGradient()
         
-        for family: String in UIFont.familyNames()
-        {
-            print("\(family)")
-            for names: String in UIFont.fontNamesForFamilyName(family)
-            {
-                print("== \(names)")
-            }
-        }
+        
+//        for family: String in UIFont.familyNames()
+//        {
+//            print("\(family)")
+//            for names: String in UIFont.fontNamesForFamilyName(family)
+//            {
+//                print("== \(names)")
+//            }
+//        }
 
         
     }
@@ -52,7 +53,8 @@ class CirclesTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
+        
+        
         // #warning Incomplete implementation, return the number of rows
         return DataManager.sharedInstance.allGroup.count
     }
@@ -89,8 +91,11 @@ class CirclesTableViewController: UITableViewController {
             if activeGroup.id == DataManager.sharedInstance.allGroup[indexPath.row].id {
                 let cellActive = tableView.dequeueReusableCellWithIdentifier("groupCell", forIndexPath: indexPath) as! ActiveGroupTableViewCell
                 print(DataManager.sharedInstance.allGroup)
-                self.tableView.rowHeight = 75
+                
+                
+               
                 cellActive.nameGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].name
+                self.tableView.rowHeight = 75
                 cellActive.nameGroup.textColor = mainRed
                 cellActive.nameGroup.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
                 print("celula: \(cellActive.nameGroup.font)")
@@ -98,9 +103,6 @@ class CirclesTableViewController: UITableViewController {
                 cellActive.numberLabel.font = UIFont(name: "SFUIDisplay-Ultralight", size: 47)
                 cellActive.timeLabel.font = UIFont(name: "SFUIText-Medium", size: 12)
                 cellActive.coloredSquare.layer.cornerRadius = 8.0
-
-//                cellActive.coloredSquare.s
-                
                 
                 return cellActive
             }
@@ -223,6 +225,9 @@ class CirclesTableViewController: UITableViewController {
         
     }
     
+    
+    
+    
 
     /*
     // Override to support rearranging the table view.
@@ -256,7 +261,7 @@ class CirclesTableViewController: UITableViewController {
 
     extension CAGradientLayer {
     class func gradientLayerForBounds(bounds: CGRect) -> CAGradientLayer {
-        var layer = CAGradientLayer()
+        let layer = CAGradientLayer()
         layer.frame = bounds
         let navigationBarRed1 = UIColor(red: 205.0/255.0, green: 16.0/255.0, blue: 34.0/255.0, alpha: 1.0)
         let navigationBarRed2 = UIColor(red: 213.0/250.0, green: 9.0/255.0, blue: 43.0/255.0, alpha: 1.0)
