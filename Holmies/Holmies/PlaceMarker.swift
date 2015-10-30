@@ -15,8 +15,10 @@ class PlaceMarker: GMSMarker {      // é uma classe de  annotacion do google
     
     init(place: GooglePlace) {
         self.place = place
+        self.latitude = 0
+        self.longitude = 0
         super.init()
-        
+
         position = place.coordinate
         icon = UIImage(named: place.placeType+"_pin")
         groundAnchor = CGPoint(x: 0.5, y: 1)

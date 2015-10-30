@@ -18,7 +18,6 @@
 		A71F7D171BD0298300652750 /* RegisterNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71F7D161BD0298300652750 /* RegisterNewViewController.swift */; };
 		A71F7D1F1BD183C200652750 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A71F7D1E1BD183C200652750 /* Main.storyboard */; };
 		A73BE4CE1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */; };
-		A78EA4811BDAABA70001E946 /* Design.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A78EA4801BDAABA70001E946 /* Design.storyboard */; };
 		A78EA4831BDAABAC0001E946 /* CirclesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78EA4821BDAABAC0001E946 /* CirclesTableViewController.swift */; };
 		A78EA4861BDAB3C30001E946 /* reject.png in Resources */ = {isa = PBXBuildFile; fileRef = A78EA4841BDAB3C30001E946 /* reject.png */; };
 		A78EA4871BDAB3C30001E946 /* confirm.png in Resources */ = {isa = PBXBuildFile; fileRef = A78EA4851BDAB3C30001E946 /* confirm.png */; };
@@ -136,7 +135,9 @@
 		CDB0FD621BBF0B4500BC6DFA /* AddGroupNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB0FD611BBF0B4500BC6DFA /* AddGroupNameViewController.swift */; };
 		CDCCCD2B1BBF83F500A5AD03 /* default.gpx in Resources */ = {isa = PBXBuildFile; fileRef = CDCCCD2A1BBF83F500A5AD03 /* default.gpx */; };
 		CDCCCD321BBF84A000A5AD03 /* 2.gpx in Resources */ = {isa = PBXBuildFile; fileRef = CDCCCD311BBF84A000A5AD03 /* 2.gpx */; };
-		CDF84C6B1BE1460E00F91502 /* HTTPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF84C6A1BE1460E00F91502 /* HTTPHelper.swift */; settings = {ASSET_TAGS = (); }; };
+		CDE102611BE3F4E30042B180 /* Design.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDE102601BE3F4E30042B180 /* Design.storyboard */; settings = {ASSET_TAGS = (); }; };
+		CDF84C6D1BE29C4300F91502 /* Sharer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF84C6C1BE29C4300F91502 /* Sharer.swift */; settings = {ASSET_TAGS = (); }; };
+		CDF84C6F1BE2AB2200F91502 /* HTTPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF84C6E1BE2AB2200F91502 /* HTTPHelper.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -210,7 +211,6 @@
 		A71F7D161BD0298300652750 /* RegisterNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterNewViewController.swift; sourceTree = "<group>"; };
 		A71F7D1E1BD183C200652750 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveGroupTableViewCell.swift; sourceTree = "<group>"; };
-		A78EA4801BDAABA70001E946 /* Design.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Design.storyboard; sourceTree = "<group>"; };
 		A78EA4821BDAABAC0001E946 /* CirclesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CirclesTableViewController.swift; sourceTree = "<group>"; };
 		A78EA4841BDAB3C30001E946 /* reject.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reject.png; sourceTree = "<group>"; };
 		A78EA4851BDAB3C30001E946 /* confirm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = confirm.png; sourceTree = "<group>"; };
@@ -372,7 +372,9 @@
 		CDB0FD611BBF0B4500BC6DFA /* AddGroupNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupNameViewController.swift; sourceTree = "<group>"; };
 		CDCCCD2A1BBF83F500A5AD03 /* default.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = default.gpx; sourceTree = "<group>"; };
 		CDCCCD311BBF84A000A5AD03 /* 2.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2.gpx; sourceTree = "<group>"; };
-		CDF84C6A1BE1460E00F91502 /* HTTPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHelper.swift; sourceTree = "<group>"; };
+		CDE102601BE3F4E30042B180 /* Design.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Design.storyboard; sourceTree = "<group>"; };
+		CDF84C6C1BE29C4300F91502 /* Sharer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sharer.swift; sourceTree = "<group>"; };
+		CDF84C6E1BE2AB2200F91502 /* HTTPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -437,6 +439,7 @@
 		A73BE4CC1BDEB68E0063C705 /* SF Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				CDE102601BE3F4E30042B180 /* Design.storyboard */,
 				A7C37F881BE00A8500FEE8D2 /* SF-Compact-Display-Black.otf */,
 				A7C37F891BE00A8500FEE8D2 /* SF-Compact-Display-Bold.otf */,
 				A7C37F8A1BE00A8500FEE8D2 /* SF-Compact-Display-Heavy.otf */,
@@ -497,7 +500,6 @@
 			children = (
 				A73BE4CC1BDEB68E0063C705 /* SF Fonts */,
 				A70592161BD6C5B600E737E3 /* DesignGroupsTableViewController.swift */,
-				A78EA4801BDAABA70001E946 /* Design.storyboard */,
 				A7CA149B1BD7FF80006E2428 /* Images */,
 			);
 			name = Design;
@@ -702,8 +704,8 @@
 			children = (
 				CD6BAAA81B98DE23008614B0 /* Holmies-Bridging-Header.h */,
 				CD1C036B1BA752290073524A /* DataManager.swift */,
-				CDF84C6A1BE1460E00F91502 /* HTTPHelper.swift */,
 				CD6BAA8C1B98DB5F008614B0 /* GoogleDataProvider.swift */,
+				CDF84C6E1BE2AB2200F91502 /* HTTPHelper.swift */,
 				CD6BAA8E1B98DB70008614B0 /* GooglePlace.swift */,
 				CDCCCD2A1BBF83F500A5AD03 /* default.gpx */,
 				CD0B59E01BAB57750098AD88 /* Location.swift */,
@@ -712,6 +714,7 @@
 				CD6BAA961B98DB8A008614B0 /* UIViewExtension.swift */,
 				CD0D132C1BB9C29D000D0656 /* User.swift */,
 				CD43673E1BBC531E00309FD0 /* Group.swift */,
+				CDF84C6C1BE29C4300F91502 /* Sharer.swift */,
 				CDCCCD311BBF84A000A5AD03 /* 2.gpx */,
 			);
 			name = Model;
@@ -932,6 +935,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7C37FC71BE11E3600FEE8D2 /* redCheck.png in Resources */,
+				CDE102611BE3F4E30042B180 /* Design.storyboard in Resources */,
 				A71F7D151BD0288E00652750 /* photoButton.png in Resources */,
 				A7C37FA81BE00A8500FEE8D2 /* SF-Compact-Display-Heavy.otf in Resources */,
 				A7C37FAC1BE00A8500FEE8D2 /* SF-Compact-Display-Semibold.otf in Resources */,
@@ -968,7 +972,6 @@
 				A7C37FB41BE00A8500FEE8D2 /* SF-UI-Display-Regular.otf in Resources */,
 				A7C37FB11BE00A8500FEE8D2 /* SF-UI-Display-Heavy.otf in Resources */,
 				A7C37FAF1BE00A8500FEE8D2 /* SF-UI-Display-Black.otf in Resources */,
-				A78EA4811BDAABA70001E946 /* Design.storyboard in Resources */,
 				A7C37FC81BE11E3600FEE8D2 /* grayCheck.png in Resources */,
 				A71F7D0E1BD0215E00652750 /* pin.png in Resources */,
 				A7C37FC11BE00A8500FEE8D2 /* SF-UI-Text-Regular.otf in Resources */,
@@ -1058,14 +1061,15 @@
 				A78EA4831BDAABAC0001E946 /* CirclesTableViewController.swift in Sources */,
 				CD0B59DF1BAB50360098AD88 /* LocatioUserTableViewController.swift in Sources */,
 				A7049A9E1BB08BA300A2CDCD /* FriendsTableViewCell.swift in Sources */,
+				CDF84C6F1BE2AB2200F91502 /* HTTPHelper.swift in Sources */,
 				CD43674B1BBC771800309FD0 /* AddGroupTableViewCell.swift in Sources */,
 				CD6BAA8D1B98DB5F008614B0 /* GoogleDataProvider.swift in Sources */,
 				CD0B59DD1BAB47720098AD88 /* LocationUserTableViewCell.swift in Sources */,
+				CDF84C6D1BE29C4300F91502 /* Sharer.swift in Sources */,
 				CD6BAA8F1B98DB70008614B0 /* GooglePlace.swift in Sources */,
 				A7C37F631BE0061000FEE8D2 /* CreateGroupTableViewCell.swift in Sources */,
 				CD8A8BDB1BB479CE00E9D471 /* GroupsTableViewController.swift in Sources */,
 				A7FCC50B1BC4CCF600AEDA3F /* WidgetViewController.swift in Sources */,
-				CDF84C6B1BE1460E00F91502 /* HTTPHelper.swift in Sources */,
 				CD4367491BBC75E200309FD0 /* AddGroupTableViewController.swift in Sources */,
 				CD900F831BDE9F520095CB85 /* AddFriendTableViewController.swift in Sources */,
 				CD103A6A1BB9D88D0044166F /* RegisterViewController.swift in Sources */,

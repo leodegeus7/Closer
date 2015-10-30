@@ -65,19 +65,26 @@ class CirclesTableViewController: UITableViewController {
     }
     
     func reloadData() {
-        DataManager.sharedInstance.requestGroups { (result) -> Void in
-            
-            DataManager.sharedInstance.allGroup = DataManager.sharedInstance.convertJsonToGroup(result)
-            let friends = DataManager.sharedInstance.loadJsonFromDocuments("friends")
-            
-            DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(friends)
-
-            
-            
-            self.tableView.reloadData()
-            self.refreshControl!.endRefreshing()
-            
+        DataManager.sharedInstance.requestSharers { (result) -> Void in
+            DataManager.sharedInstance.requestGroups { (result) -> Void in
+                
+                DataManager.sharedInstance.allGroup = DataManager.sharedInstance.convertJsonToGroup(result)
+                DataManager.sharedInstance.findUntilBETA()
+                
+                
+                let friends = DataManager.sharedInstance.loadJsonFromDocuments("friends")
+                
+                DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(friends)
+                
+                
+                
+                self.tableView.reloadData()
+                self.refreshControl!.endRefreshing()
+                
+            }
         }
+        
+
         
     }
     
@@ -90,10 +97,30 @@ class CirclesTableViewController: UITableViewController {
             if activeGroup.id == DataManager.sharedInstance.allGroup[indexPath.row].id {
                 let cellActive = tableView.dequeueReusableCellWithIdentifier("groupCell", forIndexPath: indexPath) as! ActiveGroupTableViewCell
                 print(DataManager.sharedInstance.allGroup)
+
                 
                 
-               
                 cellActive.nameGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].name
+                cellActive.numberLabel.text = ""
+                if !(DataManager.sharedInstance.allGroup[indexPath.row].until == nil) {
+                    
+                    
+                    let createdHour = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
+                    let dateFormatter = NSDateFormatter()
+                    dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
+                    dateFormatter.timeZone = NSTimeZone(name: "UTC")
+                    let date = dateFormatter.dateFromString(createdHour)
+                    let durationString = DataManager.sharedInstance.allGroup[indexPath.row].until
+                    let durationFloat = Float(durationString)
+                    let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!*3600.0))
+                    
+                    
+                    let duration = finalDate?.timeIntervalSinceNow
+                    let durationHours = Int(duration!/3600)
+                    cellActive.numberLabel.text = "\(durationHours)"
+                }
+                
+
                 self.tableView.rowHeight = 75
                 cellActive.nameGroup.textColor = mainRed
                 cellActive.nameGroup.font = UIFont(name: "SFUIDisplay-Medium", size: 17)

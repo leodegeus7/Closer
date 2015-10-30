@@ -25,6 +25,9 @@ class HTTPHelper: NSObject {
         case userSenderGroups
         case groupReceiverUsers
         case groupSenderUsers
+        case userSenderSharers
+        case userReceiverSharers
+        case groupReceiverSharers
     }
     
     internal enum SharerType {
@@ -78,6 +81,47 @@ class HTTPHelper: NSObject {
         makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
             let formattedResult = httpResult as! Dictionary<String,AnyObject>
             completion(result: formattedResult)
+        }
+        
+    }
+    
+    func uploadUserPhotoWithID(id:String, photo:UIImage, completion:(result:Dictionary<String,AnyObject>)->Void) {
+        let image = resizeImage(photo, newWidth: 512)
+        let imageData = UIImagePNGRepresentation(image)!
+        let base64String = imageData.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+        
+        let parameters = [
+            "id":id,
+            "image":base64String
+        ]
+        
+        let url = "\(baseURL)/user_photo_upload"
+        
+        makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
+            let formattedResult = httpResult as! Dictionary<String,AnyObject>
+            completion(result: formattedResult)
+        }
+        
+    }
+    
+    func downloadPhotoFromUserWithID(id:String, completion:(resultImage:UIImage)->Void) {
+        let destination = Alamofire.Request.suggestedDownloadDestination(directory: .DocumentDirectory, domain: .UserDomainMask)
+        
+        print(destination)
+        
+        let parameters = [
+            "id":id
+        ]
+        
+        let url = "\(baseURL)/user_photo_download"
+        
+        Alamofire.request(.GET, url, parameters: parameters).authenticate(user: API_AUTH_NAME, password: API_AUTH_PASSWORD).responseData { response in
+            
+            print(response.result.value)
+            let data = response.result.value!
+            let image = UIImage(data: data)
+            completion(resultImage: image!)
+            
         }
         
     }
@@ -165,6 +209,12 @@ class HTTPHelper: NSObject {
             url = "\(baseURL)/get_user_sender_groups"
         case .userSenderUsers:
             url = "\(baseURL)/get_user_sender_users"
+        case .userSenderSharers:
+            url = "\(baseURL)/get_user_sender_sharers"
+        case .userReceiverSharers:
+            url = "\(baseURL)/get_user_receiver_sharers"
+        case .groupReceiverSharers:
+            url = "\(baseURL)/get_group_receiver_sharers"
         }
         
         makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
@@ -289,6 +339,18 @@ class HTTPHelper: NSObject {
 //            print(response)
             completion(httpResult: response.result.value)
         }
+    }
+    
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
     }
     
 }
