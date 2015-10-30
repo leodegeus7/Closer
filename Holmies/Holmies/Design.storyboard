@@ -1121,6 +1121,11 @@
                                     <outlet property="delegate" destination="cRu-Sx-wRT" id="alY-cG-Ax0"/>
                                 </connections>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kb0-Q3-BAK">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sem Internet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y2Z-Pc-wCm">
                                 <rect key="frame" x="200" y="514" width="200" height="36"/>
                                 <animations/>
@@ -1135,8 +1140,11 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="kb0-Q3-BAK" firstAttribute="centerX" secondItem="Z1Z-Ei-5rO" secondAttribute="centerX" id="935-Tz-syr"/>
                             <constraint firstAttribute="centerX" secondItem="MdR-2A-Cum" secondAttribute="centerX" id="Dyy-FK-cQz"/>
                             <constraint firstAttribute="trailingMargin" secondItem="J4n-KI-g0a" secondAttribute="trailing" id="H91-Iz-MRn"/>
+                            <constraint firstItem="kb0-Q3-BAK" firstAttribute="centerY" secondItem="Z1Z-Ei-5rO" secondAttribute="centerY" id="PhT-LL-ySV"/>
+                            <constraint firstItem="kb0-Q3-BAK" firstAttribute="height" secondItem="Z1Z-Ei-5rO" secondAttribute="height" id="Pux-kX-5dx"/>
                             <constraint firstItem="Zhm-6p-L1P" firstAttribute="top" secondItem="y2Z-Pc-wCm" secondAttribute="bottom" constant="50" id="WYV-cj-jBJ"/>
                             <constraint firstItem="y2Z-Pc-wCm" firstAttribute="centerX" secondItem="Z1Z-Ei-5rO" secondAttribute="centerX" id="ZHj-xa-A87"/>
                             <constraint firstItem="J4n-KI-g0a" firstAttribute="leading" secondItem="Z1Z-Ei-5rO" secondAttribute="leadingMargin" id="adH-AU-pxy"/>
@@ -1145,6 +1153,7 @@
                             <constraint firstAttribute="centerY" secondItem="MdR-2A-Cum" secondAttribute="bottom" id="hnh-gZ-JAP"/>
                             <constraint firstItem="J4n-KI-g0a" firstAttribute="top" secondItem="HYj-1P-qXr" secondAttribute="bottom" id="mMr-CE-zXE"/>
                             <constraint firstItem="Zhm-6p-L1P" firstAttribute="top" secondItem="J4n-KI-g0a" secondAttribute="bottom" id="n7O-l7-yWK"/>
+                            <constraint firstItem="kb0-Q3-BAK" firstAttribute="width" secondItem="Z1Z-Ei-5rO" secondAttribute="width" id="qXE-OM-Aqs"/>
                             <constraint firstItem="J4n-KI-g0a" firstAttribute="leading" secondItem="Z1Z-Ei-5rO" secondAttribute="leading" id="qcs-m9-94F"/>
                             <constraint firstItem="Zhm-6p-L1P" firstAttribute="top" secondItem="J4n-KI-g0a" secondAttribute="bottom" constant="160" id="vx4-eX-zhj"/>
                         </constraints>
@@ -1175,6 +1184,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="Uml-tn-6Yp"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="compassView" destination="kb0-Q3-BAK" id="Y9x-A1-5Vr"/>
                         <outlet property="controlNet" destination="y2Z-Pc-wCm" id="cF8-IK-9Bb"/>
                         <outlet property="mapCenterPinImage" destination="MdR-2A-Cum" id="mU2-k5-dZ8"/>
                         <outlet property="mapView" destination="J4n-KI-g0a" id="XNl-w1-vsj"/>

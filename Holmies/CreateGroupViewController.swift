@@ -188,6 +188,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         textFieldInsideSearchBar!.textColor = mainRed
         textFieldInsideSearchBar!.font = UIFont(name: "SFUIText-Regular", size: 15)
         textFieldInsideSearchBar!.attributedPlaceholder = NSAttributedString(string: "Search", attributes: [NSForegroundColorAttributeName: lightGray])
+        resultSearchController.searchBar.searchBarStyle = .Minimal
         resultSearchController.searchBar.tintColor = mainRed
         resultSearchController.searchBar.backgroundColor = UIColor.clearColor()
         resultSearchController.hidesNavigationBarDuringPresentation = false
@@ -195,6 +196,8 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         myBounds.origin.y += self.resultSearchController.searchBar.frame.size.height
         self.tableView.bounds = myBounds
         resultSearchController.searchBar.sizeToFit()
+        
+        
         
     }
     

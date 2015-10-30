@@ -13,6 +13,7 @@ import MapKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 import Alamofire
+import QuartzCore
 
 class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     
@@ -20,6 +21,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     @IBOutlet weak var mapView: GMSMapView!    //outlet do mapa como um mapa do google
     @IBOutlet weak var mapCenterPinImage: UIImageView!
     @IBOutlet weak var pinImageVerticalConstraint: NSLayoutConstraint!
+    @IBOutlet weak var compassView: UIView!
+    var gradient:UIImage!
     
     //background whetever
     var updateTimer: NSTimer?
@@ -60,6 +63,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         DataManager.sharedInstance.locationManager.delegate = self
         mapView.delegate = self   //delegate das funçoes do google maps
         mapView.mapType = kGMSTypeNormal
+        self.setUpBackgrounGradient()
         DataManager.sharedInstance.requestFacebook { (result) -> Void in
         self.controlNet.alpha = 0
         self.controlNet.enabled = false
@@ -356,13 +360,38 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         }
         //DataManager.sharedInstance.requestGroups()
     }
-    
 
-    
-    
+    func setUpBackgrounGradient () {
+        navigationController?.navigationBar.hidden = true
+        let red1 = UIColor(red: 210/255, green: 37/255, blue: 53/255, alpha: 1)
+        let red2 = UIColor(red: 219/255, green: 33/255, blue: 62/255, alpha: 1)
+        
+        let gradientColors: [CGColor] = [red1.CGColor, red2.CGColor]
+        let gradientLocations: [Float] = [0.0, 1.0]
+        
+        let gradientLayer: CAGradientLayer = CAGradientLayer()
+        gradientLayer.colors = gradientColors
+        gradientLayer.locations = gradientLocations
+        
+//        let compassViewWithouNavigationBar:CGRect!
+//       compassViewWithouNavigationBar = CGRectMake(0.0, 1.0, compassView.bounds.width, (compassView.bounds.height + (navigationController?.navigationBar.frame.height)!))
+        gradientLayer.frame = compassView.bounds
+        
+        self.automaticallyAdjustsScrollViewInsets = false
+        compassView.layer.insertSublayer(gradientLayer, atIndex: 0)
+        
+//        let fontDictionary = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+//        navigationController?.navigationBar.titleTextAttributes = fontDictionary
+        
+        print("gradienteeeeeeeeee")
+    }
 
-    
-    
-    
+
+
+
+
+
 }
+
+
 
