@@ -291,6 +291,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EBG-5S-xaI">
+                                <rect key="frame" x="30" y="84" width="540" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="70" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="hAh-Vd-gjb">
                                 <rect key="frame" x="30" y="119" width="540" height="298"/>
                                 <animations/>
@@ -384,12 +390,6 @@
                                     <action selector="timeSlider:" destination="Igs-nR-AIz" eventType="valueChanged" id="V4a-4d-X9w"/>
                                 </connections>
                             </slider>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EBG-5S-xaI">
-                                <rect key="frame" x="30" y="84" width="540" height="30"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xem-EK-dkS">
                                 <rect key="frame" x="30" y="513" width="540" height="57"/>
                                 <animations/>
@@ -1199,6 +1199,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="J2K-4A-5cw"/>
-        <segue reference="DV8-7x-9Lm"/>
+        <segue reference="iLs-sp-bRh"/>
     </inferredMetricsTieBreakers>
 </document>

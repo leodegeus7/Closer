@@ -59,6 +59,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         
     }
     
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (resultSearchController.active) {
             return filteredArray.count
@@ -75,7 +76,6 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         if (resultSearchController.active) {
             cell.friendName.text = filteredArray[indexPath.row].name
             cell.friendPhoto.image = DataManager.sharedInstance.findImage("\(filteredArray[indexPath.row].userID)")
-            
             
         } else {
             cell.friendName.text = DataManager.sharedInstance.allFriends[indexPath.row].name
@@ -134,6 +134,9 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         
     }
     
+
+
+    
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if #available(iOS 9.0, *) {
             tableView.cellLayoutMarginsFollowReadableWidth = false
@@ -178,17 +181,39 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         resultSearchController = UISearchController(searchResultsController: nil)
         resultSearchController.searchResultsUpdater = self
         resultSearchController.dimsBackgroundDuringPresentation = false
-        resultSearchController.searchBar.sizeToFit()
         resultSearchController.definesPresentationContext = true
         tableView.tableHeaderView = resultSearchController.searchBar
+        resultSearchController.searchBar.tintColor = mainRed
+        let textFieldInsideSearchBar = resultSearchController.searchBar.valueForKey("searchField") as? UITextField
+        textFieldInsideSearchBar!.textColor = mainRed
+        textFieldInsideSearchBar!.font = UIFont(name: "SFUIText-Regular", size: 15)
+        textFieldInsideSearchBar!.attributedPlaceholder = NSAttributedString(string: "Search", attributes: [NSForegroundColorAttributeName: lightGray])
+        resultSearchController.searchBar.tintColor = mainRed
+        resultSearchController.searchBar.backgroundColor = UIColor.clearColor()
+        resultSearchController.hidesNavigationBarDuringPresentation = false
+        var myBounds = self.tableView.bounds
+        myBounds.origin.y += self.resultSearchController.searchBar.frame.size.height
+        self.tableView.bounds = myBounds
+        resultSearchController.searchBar.sizeToFit()
         
     }
+    
+    override func didMoveToParentViewController(parent: UIViewController?) {
+        if (parent == nil) {
+            resultSearchController.active = false
+            
+        }
+        
+    }
+    
+    
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         filteredArray.removeAll(keepCapacity: false)
         let arrayTeste = DataManager.sharedInstance.allFriends.filter({$0.name.lowercaseString.rangeOfString(searchController.searchBar.text!.lowercaseString) != nil})
         filteredArray = arrayTeste
         tableView.reloadData()
+        
     }
     
     @IBAction func addUser(sender: AnyObject) {
@@ -290,7 +315,8 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
             downSlideLabel.text = "\(chosenDay) days"
             downSlideLabel.fadeIn()
             break
-        case 46...48:
+        case 46...50:
+            upSliderLabel.text = "\(168) hours"
             upSliderLabel.fadeOut()
             downSlideLabel.text = "Undetermined"
             downSlideLabel.fadeIn()
@@ -346,7 +372,11 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         
     }
 
-    
+    override func viewWillDisappear(animated: Bool) {
+        resultSearchController.searchBar.hidden = true
+        
+        
+        }
     /*
     // MARK: - Navigation
 
