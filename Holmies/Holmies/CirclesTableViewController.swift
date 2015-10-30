@@ -98,7 +98,7 @@ class CirclesTableViewController: UITableViewController {
                 let cellActive = tableView.dequeueReusableCellWithIdentifier("groupCell", forIndexPath: indexPath) as! ActiveGroupTableViewCell
                 print(DataManager.sharedInstance.allGroup)
 
-                
+                cellActive.timeLabel.text = ""
                 
                 cellActive.nameGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].name
                 cellActive.numberLabel.text = ""
@@ -116,8 +116,34 @@ class CirclesTableViewController: UITableViewController {
                     
                     
                     let duration = finalDate?.timeIntervalSinceNow
-                    let durationHours = Int(duration!/3600)
-                    cellActive.numberLabel.text = "\(durationHours)"
+                    
+                    if duration <= 3600 {
+                        let newDurationMin = Int(duration!/60)
+                        cellActive.numberLabel.text = "\(newDurationMin)"
+                        cellActive.timeLabel.text = "minutes"
+                    }
+                    else if duration > 3600 && duration <= 360000 {
+                        var newDurationHours = Int(duration!/3600)
+                        newDurationHours++
+                        cellActive.numberLabel.text = "\(newDurationHours)"
+                        cellActive.timeLabel.text = "hours"
+                    } else if duration > 360000 {
+                        let duration2 = duration!/86400
+                        
+                        var newDurationDays = Int(duration2)
+                        newDurationDays++
+                        cellActive.numberLabel.text = "\(newDurationDays)"
+                        cellActive.timeLabel.text = "days"
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+//                    var durationHours = Int(duration!/3600)
+//                    durationHours++
+//                    cellActive.numberLabel.text = "\(durationHours)"
                 }
                 
 
@@ -138,6 +164,30 @@ class CirclesTableViewController: UITableViewController {
         
         let cellPendent = tableView.dequeueReusableCellWithIdentifier("pendentCell", forIndexPath: indexPath) as! NewGroupTableViewCell
         self.tableView.rowHeight = 75
+        
+        cellPendent.timeLabel.text = ""
+        
+        
+        let durationServer = DataManager.sharedInstance.allGroup[indexPath.row].until
+        let duration = Int(durationServer)
+        
+        if duration <= 3600 {
+            let newDurationMin = Int(duration!/60)
+            cellPendent.numberLabel.text = "\(newDurationMin)"
+            cellPendent.timeLabel.text = "minutes"
+        }
+        else if duration > 3600 && duration <= 360000 {
+            var newDurationHours = Int(duration!/3600)
+            newDurationHours++
+            cellPendent.numberLabel.text = "\(newDurationHours)"
+            cellPendent.timeLabel.text = "hours"
+        } else if duration > 360000 {
+            var newDurationDays = Int(duration!/86400)
+            newDurationDays++
+            cellPendent.numberLabel.text = "\(newDurationDays)"
+            cellPendent.timeLabel.text = "days"
+        }
+        
         cellPendent.nameGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].name
         cellPendent.nameGroup.textColor = mainRed
         cellPendent.nameGroup.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
