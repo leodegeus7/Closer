@@ -18,6 +18,7 @@
 		A71F7D171BD0298300652750 /* RegisterNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71F7D161BD0298300652750 /* RegisterNewViewController.swift */; };
 		A71F7D1F1BD183C200652750 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A71F7D1E1BD183C200652750 /* Main.storyboard */; };
 		A73BE4CE1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */; };
+		A78A97F41BE3F7F300D5994B /* Design.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A78A97F31BE3F7F300D5994B /* Design.storyboard */; };
 		A78EA4831BDAABAC0001E946 /* CirclesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78EA4821BDAABAC0001E946 /* CirclesTableViewController.swift */; };
 		A78EA4861BDAB3C30001E946 /* reject.png in Resources */ = {isa = PBXBuildFile; fileRef = A78EA4841BDAB3C30001E946 /* reject.png */; };
 		A78EA4871BDAB3C30001E946 /* confirm.png in Resources */ = {isa = PBXBuildFile; fileRef = A78EA4851BDAB3C30001E946 /* confirm.png */; };
@@ -135,9 +136,9 @@
 		CDB0FD621BBF0B4500BC6DFA /* AddGroupNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB0FD611BBF0B4500BC6DFA /* AddGroupNameViewController.swift */; };
 		CDCCCD2B1BBF83F500A5AD03 /* default.gpx in Resources */ = {isa = PBXBuildFile; fileRef = CDCCCD2A1BBF83F500A5AD03 /* default.gpx */; };
 		CDCCCD321BBF84A000A5AD03 /* 2.gpx in Resources */ = {isa = PBXBuildFile; fileRef = CDCCCD311BBF84A000A5AD03 /* 2.gpx */; };
-		CDE102611BE3F4E30042B180 /* Design.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDE102601BE3F4E30042B180 /* Design.storyboard */; settings = {ASSET_TAGS = (); }; };
-		CDF84C6D1BE29C4300F91502 /* Sharer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF84C6C1BE29C4300F91502 /* Sharer.swift */; settings = {ASSET_TAGS = (); }; };
-		CDF84C6F1BE2AB2200F91502 /* HTTPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF84C6E1BE2AB2200F91502 /* HTTPHelper.swift */; settings = {ASSET_TAGS = (); }; };
+		CDE102611BE3F4E30042B180 /* Design.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDE102601BE3F4E30042B180 /* Design.storyboard */; };
+		CDF84C6D1BE29C4300F91502 /* Sharer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF84C6C1BE29C4300F91502 /* Sharer.swift */; };
+		CDF84C6F1BE2AB2200F91502 /* HTTPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF84C6E1BE2AB2200F91502 /* HTTPHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -211,6 +212,7 @@
 		A71F7D161BD0298300652750 /* RegisterNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterNewViewController.swift; sourceTree = "<group>"; };
 		A71F7D1E1BD183C200652750 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveGroupTableViewCell.swift; sourceTree = "<group>"; };
+		A78A97F31BE3F7F300D5994B /* Design.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Design.storyboard; sourceTree = "<group>"; };
 		A78EA4821BDAABAC0001E946 /* CirclesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CirclesTableViewController.swift; sourceTree = "<group>"; };
 		A78EA4841BDAB3C30001E946 /* reject.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reject.png; sourceTree = "<group>"; };
 		A78EA4851BDAB3C30001E946 /* confirm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = confirm.png; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 			children = (
 				A73BE4CC1BDEB68E0063C705 /* SF Fonts */,
 				A70592161BD6C5B600E737E3 /* DesignGroupsTableViewController.swift */,
+				A78A97F31BE3F7F300D5994B /* Design.storyboard */,
 				A7CA149B1BD7FF80006E2428 /* Images */,
 			);
 			name = Design;
@@ -980,6 +983,7 @@
 				A7C37FA71BE00A8500FEE8D2 /* SF-Compact-Display-Bold.otf in Resources */,
 				A7C37FAD1BE00A8500FEE8D2 /* SF-Compact-Display-Thin.otf in Resources */,
 				A7D2A4B01BCE90E6006A55D1 /* redBackground.png in Resources */,
+				A78A97F41BE3F7F300D5994B /* Design.storyboard in Resources */,
 				CD6BAAB61B98E298008614B0 /* GoogleMaps.bundle in Resources */,
 				CD103A771BBB07470044166F /* ovalVermelho.png in Resources */,
 				A7C37FA61BE00A8500FEE8D2 /* SF-Compact-Display-Black.otf in Resources */,
