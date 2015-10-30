@@ -384,12 +384,6 @@
                                     <action selector="timeSlider:" destination="Igs-nR-AIz" eventType="valueChanged" id="V4a-4d-X9w"/>
                                 </connections>
                             </slider>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EBG-5S-xaI">
-                                <rect key="frame" x="30" y="84" width="540" height="30"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xem-EK-dkS">
                                 <rect key="frame" x="30" y="513" width="540" height="57"/>
                                 <animations/>
@@ -1199,6 +1193,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="J2K-4A-5cw"/>
-        <segue reference="DV8-7x-9Lm"/>
+        <segue reference="iLs-sp-bRh"/>
     </inferredMetricsTieBreakers>
 </document>

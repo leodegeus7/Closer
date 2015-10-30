@@ -10,6 +10,9 @@ import Foundation
 
 class PlaceMarker: GMSMarker {      // é uma classe de  annotacion do google
     let place: GooglePlace
+    var latitude: Double
+    var longitude: Double
+    
     init(place: GooglePlace) {
         self.place = place
         super.init()
