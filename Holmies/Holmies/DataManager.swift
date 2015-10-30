@@ -31,6 +31,8 @@ class DataManager {
     var usersInGroups = [Dictionary<String,AnyObject>]()
     var activeUsers = [User]()
     var allFriends = [User]()
+    var selectedFriends = [User]()
+    var allSharers = [Sharer]()
     
     
     let http = HTTPHelper()
@@ -308,6 +310,8 @@ class DataManager {
         return []
 
     }
+    
+
     
     func convertJsonToUser(json:AnyObject) -> [User] {
         var userArray = [User]()
@@ -608,4 +612,55 @@ class DataManager {
         return randomString
     }
     
+    func requestSharers(completion:(result:String)->Void){
+        http.getInfoFromID(DataManager.sharedInstance.idUser, desiredInfo: .userSenderSharers) { (result) -> Void in
+            let json = result
+            DataManager.sharedInstance.createJsonFile("sharers", json: json)
+            
+            DataManager.sharedInstance.allSharers = self.convertJsonToSharer(json)
+            completion(result: "DEU")
+        }
+    }
+    
+    func convertJsonToSharer(json:AnyObject) -> [Sharer] {
+        var sharers = [Sharer]()
+        if let dic = json as? [NSDictionary] {
+            for sharer in dic {
+                let newSharer = Sharer()
+                newSharer.createdAt = sharer["created_at"] as? String
+                let id = sharer["id"] as! Int
+                
+                newSharer.id = "\(id)"
+                newSharer.until = sharer["until"] as? String
+                if sharer["relation"] as? String == "u2u" {
+                    newSharer.relation = .userToUser
+                }
+                else if sharer["relation"] as? String == "u2g" {
+                    newSharer.relation = .userToGroup
+                }
+                
+                newSharer.updatedAt = sharer["updated_at"] as? String
+                
+                // newSharer.owner = //
+                let receiverId = sharer["receiver_group_id"]
+                let receiverIdFormat = "\(receiverId!)"
+                newSharer.receiver = receiverIdFormat
+                sharers.append(newSharer)
+            }
+            
+        }
+        return sharers
+    }
+    
+    func findUntilBETA () {
+        for sharer in DataManager.sharedInstance.allSharers {
+            for group in DataManager.sharedInstance.allGroup {
+                if sharer.receiver == group.id {
+                    group.until = sharer.until
+                    group.createdAt = sharer.createdAt
+                }
+            }
+        }
+    }
+
 }

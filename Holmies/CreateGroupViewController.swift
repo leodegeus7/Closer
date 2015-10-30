@@ -20,7 +20,6 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     let grayCheck = UIImage(named: "grayCheck.png")
     let mainRed = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1.0)
     let lightGray = UIColor(red: 170.0/255.0, green: 170.0/255.0, blue: 170.0/255.0, alpha: 1.0)
-    var selectedFriends = [User]()
     let http = HTTPHelper()
     var until = ""
     var filteredArray = Array<User>()
@@ -71,7 +70,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("friend", forIndexPath: indexPath) as! CreateGroupTableViewCell
         
-        
+        let data = DataManager.sharedInstance.selectedFriends
         if (resultSearchController.active) {
             cell.friendName.text = filteredArray[indexPath.row].name
             cell.friendPhoto.image = DataManager.sharedInstance.findImage("\(filteredArray[indexPath.row].userID)")
@@ -95,6 +94,94 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         cell.friendPhoto.clipsToBounds = true
         cell.checkImage.image = grayCheck
         cell.friendPhoto.layer.borderWidth = 0
+        var referenceArray = [User]()
+        var index = 0
+        var alreadyExist = false
+        
+        
+        if (resultSearchController.active) {
+            referenceArray = filteredArray
+        }
+        else {
+            referenceArray = DataManager.sharedInstance.allFriends
+        }
+        
+        for friend in DataManager.sharedInstance.selectedFriends {
+            index++
+            if friend.userID == referenceArray[indexPath.row].userID {
+                alreadyExist = true
+                break
+            }
+        }
+        
+        if !(alreadyExist) {
+            cell.checkImage.image = grayCheck
+            cell.friendPhoto.layer.borderWidth = 0
+            cell.friendName.textColor = lightGray
+        }
+            
+        else {
+            cell.checkImage.image = redCheck
+            cell.friendPhoto.layer.borderColor = mainRed.CGColor
+            cell.friendPhoto.layer.borderWidth = 1
+            cell.friendName.textColor = mainRed
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+//        
+//        
+//        var alreadyExist = false
+//        
+//        var index = 0
+//        var indexInAllFriends = 0
+//        
+//        
+//        if (resultSearchController.active) {
+//            let allfriend = DataManager.sharedInstance.allFriends
+//            let selected = DataManager.sharedInstance.selectedFriends
+//            let filtered = filteredArray
+//            for userInUser in DataManager.sharedInstance.allFriends {
+//                if userInUser.userID == filteredArray[indexPath.row].userID {
+//                    indexInAllFriends = index
+//                }
+//                index++
+//            }
+//        }
+//        else {
+//            indexInAllFriends = indexPath.row
+//        }
+//        
+//
+//        
+//        
+//        
+//        for friend in DataManager.sharedInstance.selectedFriends {
+//            if friend.userID == DataManager.sharedInstance.allFriends[indexInAllFriends].userID {
+//                        alreadyExist = true
+//                        break
+//            }
+//            
+//
+//        }
+//        
+//            if alreadyExist {
+//                
+//                self.tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+//                cell.checkImage.image = redCheck
+//                cell.friendPhoto.layer.borderColor = mainRed.CGColor
+//                cell.friendPhoto.layer.borderWidth = 1
+//                cell.friendName.textColor = mainRed
+//                
+//            }
+        
+
+
     
         
         
@@ -150,28 +237,109 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! CreateGroupTableViewCell
-        selectedFriends.append(DataManager.sharedInstance.allFriends[indexPath.row])
-        cell.checkImage.image = redCheck
-        cell.friendPhoto.layer.borderColor = mainRed.CGColor
-        cell.friendPhoto.layer.borderWidth = 1
-        cell.friendName.textColor = mainRed
+        var alreadyExist = false
+        
+        var index = -1
+        
+        var referenceArray = [User]()
+        
+        
+        if (resultSearchController.active) {
+            referenceArray = filteredArray
+        }
+        else {
+            referenceArray = DataManager.sharedInstance.allFriends
+        }
+        for friend in DataManager.sharedInstance.selectedFriends {
+            if !(alreadyExist) {
+                index++
+            }
+ 
+            if friend.userID == referenceArray[indexPath.row].userID {
+                alreadyExist = true
+                break
+            }
+        }
+        
+        if alreadyExist {
+                        cell.checkImage.image = grayCheck
+                        cell.friendPhoto.layer.borderWidth = 0
+                        cell.friendName.textColor = lightGray
+                        DataManager.sharedInstance.selectedFriends.removeAtIndex(index)
+        }
+            
+        else {
+            DataManager.sharedInstance.selectedFriends.append(referenceArray[indexPath.row])
+            cell.checkImage.image = redCheck
+            cell.friendPhoto.layer.borderColor = mainRed.CGColor
+            cell.friendPhoto.layer.borderWidth = 1
+            cell.friendName.textColor = mainRed
+        }
+        
+        
+        
+
         
     }
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! CreateGroupTableViewCell
-        var i = 0
-        for userSelected in selectedFriends {
-           
-            if DataManager.sharedInstance.allFriends[indexPath.row].userID == userSelected.userID {
-                selectedFriends.removeAtIndex(i)
-                break
-            }
-            i++
-        }
-        cell.checkImage.image = grayCheck
-        cell.friendPhoto.layer.borderWidth = 0
-        cell.friendName.textColor = lightGray
+//        let cell = tableView.cellForRowAtIndexPath(indexPath) as! CreateGroupTableViewCell
+//        var i = 0
+//        
+//       
+//        
+//        var alreadyExist = false
+//        
+//        var index = 0
+//        var indexInAllFriends = 0
+//        
+//        if (resultSearchController.active) {
+//            let allfriend = DataManager.sharedInstance.allFriends
+//            let selected = DataManager.sharedInstance.selectedFriends
+//            let filtered = filteredArray
+//            for userInUser in DataManager.sharedInstance.allFriends {
+//                if userInUser.userID == filteredArray[indexInAllFriends].userID {
+//                    indexInAllFriends = index
+//                }
+//                index++
+//            }
+//        }
+//        else {
+//            indexInAllFriends = indexPath.row
+//        }
+//
+//        
+//        for friend in DataManager.sharedInstance.selectedFriends {
+//            if friend.userID == DataManager.sharedInstance.allFriends[indexInAllFriends].userID {
+//                alreadyExist = true
+//                break
+//            }
+//            
+//            
+//        }
+//        
+//        if alreadyExist {
+//            cell.selected = false
+//            
+//            cell.checkImage.image = grayCheck
+//            cell.friendPhoto.layer.borderWidth = 0
+//            cell.friendName.textColor = lightGray
+//            for userSelected in DataManager.sharedInstance.selectedFriends {
+//                
+//                if DataManager.sharedInstance.allFriends[indexPath.row].userID == userSelected.userID {
+//                    DataManager.sharedInstance.selectedFriends.removeAtIndex(i)
+//                    break
+//                }
+//                i++
+//            }
+//            
+//        }
+        
+        
+
+//        cell.checkImage.image = grayCheck
+//        cell.friendPhoto.layer.borderWidth = 0
+//        cell.friendName.textColor = lightGray
     }
     
     func startSearchController() {
@@ -305,6 +473,8 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         
         if groupName.text?.isEmpty  == true {
             DataManager.sharedInstance.createSimpleUIAlert(self, title: "Alerta", message: "Digite um nome para o grupo", button1: "Ok")
+        } else if chosenHour == nil {
+            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Alerta", message: "Selecione uma duraçao", button1: "Ok")
         }
         else {
             let groupNameText = groupName.text
@@ -314,12 +484,12 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
                 let dic = result as NSDictionary
                 let id = dic["id"]
                 let formatId = "\(id!)"
-                self.http.createNewSharerWithType(.userToGroup, ownerID: DataManager.sharedInstance.idUser, receiverID: formatId, until: "", completion: { (result) -> Void in
+                self.http.createNewSharerWithType(.userToGroup, ownerID: DataManager.sharedInstance.idUser, receiverID: formatId, until: "\(self.chosenHour)", completion: { (result) -> Void in
                 })
                 
-                for user in self.selectedFriends {
+                for user in DataManager.sharedInstance.selectedFriends {
                     let userId = user.userID
-                    self.http.createNewSharerWithType(.userToGroup, ownerID: "\(userId)", receiverID: formatId, until: self.until, completion: { (result) -> Void in
+                    self.http.createNewSharerWithType(.userToGroup, ownerID: "\(userId)", receiverID: formatId, until: "\(self.chosenHour)", completion: { (result) -> Void in
                         
                     })
                    

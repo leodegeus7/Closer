@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let idUser = "\(DataManager.sharedInstance.idUser)"
         let number = Int(idUser)
 
-
+        
         if !(number > 0) {
             let storyboard = UIStoryboard(name: "Design", bundle: nil)
             //let dest = storyboard.instantiateViewControllerWithIdentifier("loginVC")
@@ -79,12 +79,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let viewController = storyboard.instantiateViewControllerWithIdentifier("inicial")
             self.window?.rootViewController = viewController
             self.window?.makeKeyAndVisible()
+            
+            if (DataManager.sharedInstance.testIfFileExistInDocuments("/sharers.json")) {
+                let dic = DataManager.sharedInstance.loadJsonFromDocuments("sharers")
+                DataManager.sharedInstance.allSharers = DataManager.sharedInstance.convertJsonToSharer(dic)
+            }
             if (DataManager.sharedInstance.testIfFileExistInDocuments("/groups.json")) {
                 let dic = DataManager.sharedInstance.loadJsonFromDocuments("groups")
                 DataManager.sharedInstance.allGroup = DataManager.sharedInstance.convertJsonToGroup(dic)
-                let groups = DataManager.sharedInstance.allGroup
-                print(groups)
-                
             }
             if (DataManager.sharedInstance.testIfFileExistInDocuments("/activeGroups.json")) {
                 let dic = DataManager.sharedInstance.loadJsonFromDocuments("activeGroups")
@@ -102,6 +104,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                print(1)
 //            }
         }
+        
+
 
         
         
