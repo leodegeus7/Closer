@@ -266,28 +266,28 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 //        }
 //    }
     
-//    func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
-//       
-//        let googleMarker = mapView.selectedMarker as! PlaceMarker
-//       
-//        dataProvider.fetchDirectionsFrom(mapView.myLocation.coordinate, to: googleMarker.place.coordinate) {optionalRoute in
-//            if let encodedRoute = optionalRoute {
-//           
-//                let path = GMSPath(fromEncodedPath: encodedRoute)
-//                let line = GMSPolyline(path: path)
-//                
-//            
-//                line.strokeWidth = 4.0
-//                line.tappable = true
-//                line.map = self.mapView
-//                line.strokeColor = self.randomLineColor
-//                
-//      
-//                mapView.selectedMarker = nil
-//            }
-//        }
-//        
-//    }
+    func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
+       
+        let googleMarker = mapView.selectedMarker as! PlaceMarker
+       
+        dataProvider.fetchDirectionsFrom(mapView.myLocation.coordinate, to: googleMarker.place.coordinate) {optionalRoute in
+            if let encodedRoute = optionalRoute {
+           
+                let path = GMSPath(fromEncodedPath: encodedRoute)
+                let line = GMSPolyline(path: path)
+                
+            
+                line.strokeWidth = 4.0
+                line.tappable = true
+                line.map = self.mapView
+                line.strokeColor = self.randomLineColor
+                
+      
+                mapView.selectedMarker = nil
+            }
+        }
+        
+    }
     
     
     @IBAction func ListaLocal(sender: AnyObject) {
@@ -364,7 +364,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     func setUpBackgrounGradient () {
         navigationController?.navigationBar.hidden = true
         let red1 = UIColor(red: 210/255, green: 37/255, blue: 53/255, alpha: 1)
-        let red2 = UIColor(red: 219/255, green: 33/255, blue: 62/255, alpha: 1)
+        let red2 = UIColor(red: 213/255, green: 44/255, blue: 73/255, alpha: 1)
         
         let gradientColors: [CGColor] = [red1.CGColor, red2.CGColor]
         let gradientLocations: [Float] = [0.0, 1.0]
@@ -375,15 +375,13 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         
 //        let compassViewWithouNavigationBar:CGRect!
 //       compassViewWithouNavigationBar = CGRectMake(0.0, 1.0, compassView.bounds.width, (compassView.bounds.height + (navigationController?.navigationBar.frame.height)!))
-        gradientLayer.frame = compassView.bounds
         
-        self.automaticallyAdjustsScrollViewInsets = false
+        gradientLayer.frame = CGRectMake(0.0, 0.0, compassView.frame.size.width, compassView.frame.size.height*5/4)
         compassView.layer.insertSublayer(gradientLayer, atIndex: 0)
         
 //        let fontDictionary = [NSForegroundColorAttributeName:UIColor.whiteColor()]
 //        navigationController?.navigationBar.titleTextAttributes = fontDictionary
-        
-        print("gradienteeeeeeeeee")
+//        compassView.hidden = true
     }
 
 

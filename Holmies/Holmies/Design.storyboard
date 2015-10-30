@@ -1122,7 +1122,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kb0-Q3-BAK">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="44" width="600" height="576"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -1140,25 +1140,33 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="kb0-Q3-BAK" secondAttribute="trailing" constant="-20" id="8O2-8y-8OL"/>
                             <constraint firstItem="kb0-Q3-BAK" firstAttribute="centerX" secondItem="Z1Z-Ei-5rO" secondAttribute="centerX" id="935-Tz-syr"/>
                             <constraint firstAttribute="centerX" secondItem="MdR-2A-Cum" secondAttribute="centerX" id="Dyy-FK-cQz"/>
                             <constraint firstAttribute="trailingMargin" secondItem="J4n-KI-g0a" secondAttribute="trailing" id="H91-Iz-MRn"/>
+                            <constraint firstItem="kb0-Q3-BAK" firstAttribute="top" secondItem="HYj-1P-qXr" secondAttribute="bottom" constant="-20" id="I3j-Gz-Gzf"/>
                             <constraint firstItem="kb0-Q3-BAK" firstAttribute="centerY" secondItem="Z1Z-Ei-5rO" secondAttribute="centerY" id="PhT-LL-ySV"/>
                             <constraint firstItem="kb0-Q3-BAK" firstAttribute="height" secondItem="Z1Z-Ei-5rO" secondAttribute="height" id="Pux-kX-5dx"/>
                             <constraint firstItem="Zhm-6p-L1P" firstAttribute="top" secondItem="y2Z-Pc-wCm" secondAttribute="bottom" constant="50" id="WYV-cj-jBJ"/>
                             <constraint firstItem="y2Z-Pc-wCm" firstAttribute="centerX" secondItem="Z1Z-Ei-5rO" secondAttribute="centerX" id="ZHj-xa-A87"/>
                             <constraint firstItem="J4n-KI-g0a" firstAttribute="leading" secondItem="Z1Z-Ei-5rO" secondAttribute="leadingMargin" id="adH-AU-pxy"/>
+                            <constraint firstItem="Zhm-6p-L1P" firstAttribute="top" secondItem="kb0-Q3-BAK" secondAttribute="bottom" constant="-20" id="e1p-NB-Jir"/>
                             <constraint firstItem="J4n-KI-g0a" firstAttribute="top" secondItem="HYj-1P-qXr" secondAttribute="bottom" id="f5h-hM-fnR"/>
                             <constraint firstAttribute="trailing" secondItem="J4n-KI-g0a" secondAttribute="trailing" id="hVX-du-s7B"/>
                             <constraint firstAttribute="centerY" secondItem="MdR-2A-Cum" secondAttribute="bottom" id="hnh-gZ-JAP"/>
                             <constraint firstItem="J4n-KI-g0a" firstAttribute="top" secondItem="HYj-1P-qXr" secondAttribute="bottom" id="mMr-CE-zXE"/>
                             <constraint firstItem="Zhm-6p-L1P" firstAttribute="top" secondItem="J4n-KI-g0a" secondAttribute="bottom" id="n7O-l7-yWK"/>
+                            <constraint firstItem="kb0-Q3-BAK" firstAttribute="leading" secondItem="Z1Z-Ei-5rO" secondAttribute="leadingMargin" constant="-20" id="pE6-Qk-Naw"/>
                             <constraint firstItem="kb0-Q3-BAK" firstAttribute="width" secondItem="Z1Z-Ei-5rO" secondAttribute="width" id="qXE-OM-Aqs"/>
                             <constraint firstItem="J4n-KI-g0a" firstAttribute="leading" secondItem="Z1Z-Ei-5rO" secondAttribute="leading" id="qcs-m9-94F"/>
                             <constraint firstItem="Zhm-6p-L1P" firstAttribute="top" secondItem="J4n-KI-g0a" secondAttribute="bottom" constant="160" id="vx4-eX-zhj"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="935-Tz-syr"/>
+                                <exclude reference="PhT-LL-ySV"/>
+                                <exclude reference="Pux-kX-5dx"/>
+                                <exclude reference="qXE-OM-Aqs"/>
                                 <exclude reference="H91-Iz-MRn"/>
                                 <exclude reference="adH-AU-pxy"/>
                                 <exclude reference="mMr-CE-zXE"/>
