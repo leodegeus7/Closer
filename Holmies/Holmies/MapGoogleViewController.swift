@@ -378,10 +378,11 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         
         gradientLayer.frame = CGRectMake(0.0, 0.0, compassView.frame.size.width, compassView.frame.size.height*5/4)
         compassView.layer.insertSublayer(gradientLayer, atIndex: 0)
+
         
 //        let fontDictionary = [NSForegroundColorAttributeName:UIColor.whiteColor()]
 //        navigationController?.navigationBar.titleTextAttributes = fontDictionary
-//        compassView.hidden = true
+        compassView.hidden = true
     }
 
 
