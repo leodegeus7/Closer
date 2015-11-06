@@ -15,11 +15,11 @@ import Alamofire
 
 
 class DataManager {
-    var idUser:String!
-    var name:String!
-    var username:String!
-    var idFB:String!
-    var email:String!
+//    var idUser:String!
+//    var name:String!
+//    var username:String!
+//    var idFB:String!
+//    var email:String!
     var friendsArray:NSMutableArray!
     var end:[String]!
     var profilePictureOfFriendsArray:Array<UIImage>!
@@ -33,8 +33,7 @@ class DataManager {
     var allFriends = [User]()
     var selectedFriends = [User]()
     var allSharers = [Sharer]()
-    
-    
+    var myUser = User()
     let http = HTTPHelper()
     
     lazy var locationManager: CLLocationManager! = {
@@ -45,12 +44,12 @@ class DataManager {
         return manager
         }()
     
-    init() {
-        username = ""
-        email = ""
-        idFB = ""
- 
-    }
+//    init() {
+//        username = ""
+//        email = ""
+//        idFB = ""
+// 
+//    }
     
     class var sharedInstance: DataManager {
         struct Static {
@@ -275,7 +274,19 @@ class DataManager {
 
         let documents = DataManager.sharedInstance.findDocumentsDirectory()
         let path = documents.stringByAppendingString("/\(name).json")
-        print(path)
+        
+        if name == "myInfo" {
+            let pathAppend = documents.stringByAppendingString("/\(name)log.json")
+            print("Arquivo com suas informacoes criado ou atualizado - pode ser atualizacao de coordenadas")
+            let outputStream = NSOutputStream(toFileAtPath: pathAppend, append: true)
+            outputStream?.open()
+            NSJSONSerialization.writeJSONObject(json, toStream: outputStream!, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
+            outputStream?.close()
+        
+        } else {
+            print("Arquivo com nome: \(name) criado")
+        }
+        
         let outputStream = NSOutputStream(toFileAtPath: path, append: false)
         outputStream?.open()
         NSJSONSerialization.writeJSONObject(json, toStream: outputStream!, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
@@ -286,7 +297,7 @@ class DataManager {
     func loadJsonFromDocuments(nomeArq:String) -> AnyObject {
         let documents = findDocumentsDirectory()
         let path = documents.stringByAppendingString("/\(nomeArq).json")
-        print(path)
+        print("Arquivo \(nomeArq) carregado do Docs")
         do {
             let data = try NSData(contentsOfFile: path, options: .DataReadingUncached)
             
@@ -322,7 +333,7 @@ class DataManager {
             newUser.createdAt = user["created_at"] as? String
             newUser.email = user["email"] as? String
             newUser.facebookID = user["fbid"] as? String
-            newUser.userID = user["id"] as? Int
+            newUser.userID = user["id"] as? String
             if let locationString = user["location"] as? String {
                 if locationString.containsString(":") {
                     let locationArray = locationString.componentsSeparatedByString(":") as [String]
@@ -388,7 +399,7 @@ class DataManager {
                 }
                 else {
                     text = text2
-                    DataManager.sharedInstance.idUser = text!
+                    DataManager.sharedInstance.myUser.userID = text!
                 }
             }
             catch let error {
@@ -412,7 +423,7 @@ class DataManager {
             let directories:[String] = dirs!
             let dirs = directories[0]; //documents directory
             let path = dirs.stringByAppendingString(file)
-            let text = "\(DataManager.sharedInstance.idUser)"
+            let text = DataManager.sharedInstance.myUser.userID
             
             //writing
             do {
@@ -441,13 +452,15 @@ class DataManager {
             marker.icon = GMSMarker.markerImageWithColor(UIColor.blueColor())
             marker.infoWindowAnchor = CGPointMake(0.5, 0.5)
             marker.map = mapView
+            marker.userData = user
+            
             
         
         }
     }
     
     func requestGroups (completion:(result:[NSDictionary])->Void) {
-        http.getInfoFromID(DataManager.sharedInstance.idUser, desiredInfo: .userReceiverGroups) { (result) -> Void in
+        http.getInfoFromID(DataManager.sharedInstance.myUser.userID, desiredInfo: .userReceiverGroups) { (result) -> Void in
             let JSON = result
             self.usersInGroups.removeAll()
             DataManager.sharedInstance.createJsonFile("groups", json: JSON)
@@ -498,7 +511,7 @@ class DataManager {
                 if group.id == groupId {
                     DataManager.sharedInstance.allGroup[num].users = users
                     if DataManager.sharedInstance.allGroup[num].users.count <= 1 {
-                        self.destroyGroup(DataManager.sharedInstance.allGroup[num].id)
+                        self.destroyGroupWithGroup(DataManager.sharedInstance.allGroup[num])
                     }
                 }
                 num++
@@ -530,11 +543,7 @@ class DataManager {
         textField.layer.addAnimation(animation, forKey: "position")
     }
     
-    func funcaosemsentidoquenaofaznadamasocupaespaco() {
-        let leoPassouPoraqui = "leoGeusPassouPoraqui"
-        print(leoPassouPoraqui)
-    }
-    
+
     func removeUserFromGroupInBackEnd(groupId:String,completion:(result:String) -> Void) {
         print("fazer aqui o delete do user em servidor")
         requestGroups { (result) -> Void in
@@ -585,13 +594,23 @@ class DataManager {
             let id = group.id
             
             if users.count <= 1 {
-                destroyGroup(id)
+                destroyGroupWithGroup(group)
                 completion(result: "\(id)")
             }
         }
     }
     
-    func destroyGroup(idGroup:String) {
+    func destroyGroupWithNotification(groupObject:Group,view:UIViewController) {
+        let idGroup = groupObject.id
+        createSimpleUIAlert(view, title: "Deletado", message: "O grupo \(groupObject.name) será deletado pois expirou", button1: "Ok")
+        http.destroyGroupWithID(idGroup) { (result) -> Void in
+            print("apagado grupo \(idGroup)")
+        }
+    }
+    
+    func destroyGroupWithGroup(groupObject:Group) {
+        let idGroup = groupObject.id
+        
         http.destroyGroupWithID(idGroup) { (result) -> Void in
             print("apagado grupo \(idGroup)")
         }
@@ -613,7 +632,8 @@ class DataManager {
     }
     
     func requestSharers(completion:(result:String)->Void){
-        http.getInfoFromID(DataManager.sharedInstance.idUser, desiredInfo: .userSenderSharers) { (result) -> Void in
+        let id = DataManager.sharedInstance.myUser.userID
+        http.getInfoFromID(id, desiredInfo: .userSenderSharers) { (result) -> Void in
             let json = result
             DataManager.sharedInstance.createJsonFile("sharers", json: json)
             
@@ -652,15 +672,86 @@ class DataManager {
         return sharers
     }
     
-    func findUntilBETA () {
+//    func findUntilBETA () {
+//        for sharer in DataManager.sharedInstance.allSharers {
+//            for group in DataManager.sharedInstance.allGroup {
+//                if sharer.receiver == group.id {
+//                    group.until = sharer.until
+//                    group.createdAt = sharer.createdAt
+//                }
+//            }
+//        }
+//    }
+    
+    
+//    func linkSharerToGroup () {
+//        for sharer in DataManager.sharedInstance.allSharers {
+//            if sharer.relation == SharerType.userToGroup {
+//                for group in DataManager.sharedInstance.allGroup {
+//                    if sharer.receiver == group.id {
+//                        group.share = sharer
+//                        group.createdAt = sharer.createdAt
+//                    }
+//                }
+//            }
+//        }
+//    }
+    
+    func linkGroupAndUserToSharer () {
         for sharer in DataManager.sharedInstance.allSharers {
-            for group in DataManager.sharedInstance.allGroup {
-                if sharer.receiver == group.id {
-                    group.until = sharer.until
-                    group.createdAt = sharer.createdAt
+            if sharer.relation == SharerType.userToGroup {
+                for group in DataManager.sharedInstance.allGroup {
+                        if sharer.receiver == group.id {
+                            sharer.receiverObject = group
+                            group.share = sharer
+                        }
                 }
+            }
+            else if sharer.relation == SharerType.userToUser {
+                //ainda nao tem
             }
         }
     }
+    
+    func saveMyInfo () {
+        let myInfo = DataManager.sharedInstance.myUser
+        var people = Dictionary<String,AnyObject>()
+        people["altitude"] = myInfo.altitude
+        people["createdAt"] = myInfo.createdAt
+        people["email"] = myInfo.email
+        people["facebookID"] = myInfo.facebookID
+        people["userID"] = myInfo.userID
+        people["name"] = myInfo.name
+        people["photo"] = myInfo.photo
+        people["updatedAt"] = myInfo.updatedAt
+        people["username"] = myInfo.username
+        people["latitude"] = myInfo.location.latitude
+        people["longitude"] = myInfo.location.longitude
+        createJsonFile("myInfo", json: people)
+    }
+    
+    func loadMyInfo () {
+        let json = loadJsonFromDocuments("myInfo")
+        if let dic = json as? NSDictionary {
+            let myInfo = User()
+            myInfo.altitude = dic["altitude"] as? String
+            myInfo.createdAt = dic["createdAt"] as? String
+            myInfo.email = dic["email"] as? String
+            myInfo.facebookID = dic["facebookID"] as? String
+            myInfo.userID = dic["userID"] as? String
+            myInfo.name = dic["name"] as? String
+            myInfo.photo = dic["photo"] as? String
+            myInfo.updatedAt = dic["updatedAt"] as? String
+            myInfo.username = dic["username"] as? String
+            let lat = dic["latitude"] as? String
+            let long = dic["longitude"] as? String
+            myInfo.location.latitude = "\(lat)"
+            myInfo.location.longitude = "\(long)"
+            
+        }
+    }
+    
+
+    
 
 }

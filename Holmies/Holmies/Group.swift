@@ -16,6 +16,4 @@ class Group: NSObject {
     var updateAt:String!
     var users:[User]!
     var share:Sharer!
-    var until:String!
-    var createAt:String!
 }

@@ -14,13 +14,16 @@ public enum SharerType {
     case userToGroup
 }
 
+
+
 class Sharer: NSObject {
     var owner:User!
-    var receiver:String!
-    //var receiver:AnyObject!
+    var receiverObject:AnyObject!
     var relation:SharerType!
     var id:String!
     var createdAt:String!
     var until:String!
-        var updatedAt:String!
+    var updatedAt:String!
+    
+    var receiver:String!
 }

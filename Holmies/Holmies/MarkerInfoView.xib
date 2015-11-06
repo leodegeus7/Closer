@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -30,31 +29,31 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="pin.png" translatesAutoresizingMaskIntoConstraints="NO" id="HXI-I9-qMO">
-                    <rect key="frame" x="50" y="100" width="50" height="50"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hu1-vd-baI">
+                    <rect key="frame" x="54" y="106" width="42" height="44"/>
                     <animations/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="HXI-I9-qMO" secondAttribute="height" multiplier="1:1" id="a1j-ph-Ikx"/>
-                    </constraints>
-                </imageView>
+                    <state key="normal" image="pin.png"/>
+                </button>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="centerX" secondItem="HXI-I9-qMO" secondAttribute="centerX" id="Afr-bj-Twi"/>
                 <constraint firstItem="Ggu-GN-94s" firstAttribute="leading" secondItem="deK-wm-fUY" secondAttribute="leading" constant="8" id="DH9-Ub-EOO"/>
+                <constraint firstAttribute="trailing" secondItem="Hu1-vd-baI" secondAttribute="trailing" constant="54" id="EhN-zv-EWn"/>
                 <constraint firstItem="Ggu-GN-94s" firstAttribute="top" secondItem="deK-wm-fUY" secondAttribute="top" id="GwX-jY-qeK"/>
                 <constraint firstItem="Qhb-tQ-t8V" firstAttribute="top" secondItem="Ggu-GN-94s" secondAttribute="bottom" id="Ifj-Ix-Obn"/>
                 <constraint firstAttribute="centerX" secondItem="Qhb-tQ-t8V" secondAttribute="centerX" id="Uhv-1A-jTX"/>
                 <constraint firstAttribute="trailing" secondItem="Ggu-GN-94s" secondAttribute="trailing" constant="8" id="V0y-lI-b77"/>
-                <constraint firstAttribute="bottom" secondItem="HXI-I9-qMO" secondAttribute="bottom" id="snN-yI-FL9"/>
+                <constraint firstItem="Hu1-vd-baI" firstAttribute="top" secondItem="Qhb-tQ-t8V" secondAttribute="bottom" constant="8" id="VWN-Mp-sJ6"/>
+                <constraint firstItem="Hu1-vd-baI" firstAttribute="leading" secondItem="deK-wm-fUY" secondAttribute="leading" constant="54" id="ZC0-kk-ZI7"/>
+                <constraint firstAttribute="bottom" secondItem="Hu1-vd-baI" secondAttribute="bottom" id="oSx-3H-ixd"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="nameLabel" destination="Ggu-GN-94s" id="bSx-yX-VR7"/>
-                <outlet property="placePhoto" destination="Qhb-tQ-t8V" id="tke-mF-GQL"/>
+                <outlet property="userPhoto" destination="Qhb-tQ-t8V" id="f4A-Bs-Dzv"/>
             </connections>
-            <point key="canvasLocation" x="536" y="378"/>
+            <point key="canvasLocation" x="535" y="381"/>
         </view>
     </objects>
     <resources>

@@ -14,6 +14,8 @@ class ActiveGroupTableViewCell: UITableViewCell {
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var coloredSquare: UIView!
+
+
     @IBOutlet weak var friendsCollection: UICollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()

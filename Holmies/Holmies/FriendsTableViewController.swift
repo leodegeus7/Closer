@@ -74,7 +74,7 @@ class FriendsTableViewController: UITableViewController {
         if (DataManager.sharedInstance.profilePictureOfFriendsArray == nil) {
             print("arrayNil")
         } else{
-        print(DataManager.sharedInstance.profilePictureOfFriendsArray)
+        //print(DataManager.sharedInstance.profilePictureOfFriendsArray)
 
     }
     }

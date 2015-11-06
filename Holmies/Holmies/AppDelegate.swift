@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import FBSDKCoreKit
+import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -59,11 +60,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerForRemoteNotificationTypes([.Alert, .Badge,.Sound])
         }
         
-        
-        
+
         
         DataManager.sharedInstance.importID()
-        let idUser = "\(DataManager.sharedInstance.idUser)"
+        let idUser = "\(DataManager.sharedInstance.myUser.userID)"
         let number = Int(idUser)
 
         
@@ -94,12 +94,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
             if (DataManager.sharedInstance.testIfFileExistInDocuments("/myInfo.json")) {
-                let dic = DataManager.sharedInstance.loadJsonFromDocuments("myInfo")
-                DataManager.sharedInstance.name = dic["name"] as! String
-                DataManager.sharedInstance.username = dic["username"] as! String
-                DataManager.sharedInstance.email = dic["email"] as! String
+                DataManager.sharedInstance.loadMyInfo()
             }
-
+            DataManager.sharedInstance.linkGroupAndUserToSharer()
 //            DataManager.sharedInstance.requestGroups { (result) -> Void in
 //                print(1)
 //            }

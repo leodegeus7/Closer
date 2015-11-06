@@ -31,11 +31,13 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     var numero = 0
     var friendsDictionary:Dictionary<String,AnyObject>!
     
-    var locationFirst:CLLocation!
+    //var locationFirst:CLLocation!
     let dataProvider = GoogleDataProvider()
-    
     let helper = HTTPHelper()
-    
+    //var actualLocation:CLLocation!
+    @IBOutlet weak var arrowCompass: UIImageView!
+    @IBOutlet weak var friendPhoto: UIImageView!
+    @IBOutlet weak var friendDistance: UILabel!
     
     var mapRadius: Double {
         get {
@@ -64,24 +66,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         mapView.delegate = self   //delegate das funçoes do google maps
         mapView.mapType = kGMSTypeNormal
         self.setUpBackgrounGradient()
-        DataManager.sharedInstance.requestFacebook { (result) -> Void in
-        self.controlNet.alpha = 0
-        self.controlNet.enabled = false
-            
-
-            
-//        for var i = 0; i < DataManager.sharedInstance.friendsArray.count; i++ {
-//            print(DataManager.sharedInstance.friendsArray)
-//            let id = DataManager.sharedInstance.friendsArray[i]["id"] as! String
-//            print(id)
-//            let image = DataManager.sharedInstance.getProfPic(id)
-//            DataManager.sharedInstance.saveImage(image, id: id)
-//            }
-        }
-
-        
-        updateFriends()
-        updateFriendsTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "updateFriends", userInfo: nil, repeats: true)
+        self.compassView.hidden = true
+        //updateFriendsTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "updateFriends", userInfo: nil, repeats: true)
         
         
         
@@ -125,52 +111,39 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 
     
     func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
-        if locationFirst == nil {
-            locationFirst = newLocation
-            mapView.camera = GMSCameraPosition(target: newLocation.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)  //posiciona a camera do maps
+        mapView.camera = GMSCameraPosition(target: newLocation.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
+        DataManager.sharedInstance.myUser.location.longitude = "\(newLocation.coordinate.longitude)"
+        DataManager.sharedInstance.myUser.location.latitude = "\(newLocation.coordinate.latitude)"
+        DataManager.sharedInstance.saveMyInfo()
+        if UIApplication.sharedApplication().applicationState == .Active {
+            print("Coord atualizada: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
         }
         else {
-            if UIApplication.sharedApplication().applicationState == .Active {
-                print("app aberto. Coord: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
-                                
-            
-            
-            }
-            else {
-                print("App em background. Coord: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
-                let marker = GMSMarker(position: CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude))
-                marker.title = "\(newLocation.coordinate.latitude) e \(newLocation.coordinate.longitude)"
-                marker.map = mapView
-                let userInfoCoordinate = ["local":newLocation]
-                DataManager.sharedInstance.createLocalNotification("oi", body: "\(newLocation.coordinate.latitude)", timeAfterClose: 10,userInfo:userInfoCoordinate)
-            }
-
+            print("App em background. Coord: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
+            let marker = GMSMarker(position: CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude))
+            marker.title = "\(newLocation.coordinate.latitude) e \(newLocation.coordinate.longitude)"
+            marker.map = mapView
+            let userInfoCoordinate = ["local":newLocation]
+            DataManager.sharedInstance.createLocalNotification("oi", body: "\(newLocation.coordinate.latitude)", timeAfterClose: 10,userInfo:userInfoCoordinate)
         }
+
+
         let location = "\(newLocation.coordinate.latitude):\(newLocation.coordinate.longitude)"
         
-        
-        helper.updateUserWithID(DataManager.sharedInstance.idUser, username: nil, location: location, altitude: nil, fbid: nil, photo: nil, name: nil, email: nil, password: nil) { (result) -> Void in
+        helper.updateUserWithID(DataManager.sharedInstance.myUser.userID, username: nil, location: location, altitude: nil, fbid: nil, photo: nil, name: nil, email: nil, password: nil) { (result) -> Void in
             //oi
         }
         
-        Alamofire.request(.GET, "https://tranquil-coast-5554.herokuapp.com/users/\(DataManager.sharedInstance.idUser)/update_user_location?location=\(location)&altitude=1000")
         
         DataManager.sharedInstance.reverseGeocodeCoordinate(newLocation.coordinate) //transforma a coordenada em endereco
+        
         if DataManager.sharedInstance.end != nil {
             let actualLocation = Location()
             actualLocation.location = newLocation
             actualLocation.address = DataManager.sharedInstance.end
             DataManager.sharedInstance.locationUserArray.append(actualLocation)
         }
-       DataManager.sharedInstance.funcaosemsentidoquenaofaznadamasocupaespaco()
-        
-        
-
     }
-    
-
-
-    
     
     
     // MARK: - Types Controller Delegate
@@ -196,22 +169,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
             mapView.mapType = mapView.mapType
         }
     }
-    
-    func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
-        mapCenterPinImage.fadeOut(0.25)
-        return false
-    }
-    
-    func didTapMyLocationButtonForMapView(mapView: GMSMapView!) -> Bool {
-        mapCenterPinImage.fadeIn(0.25)
-        mapView.selectedMarker = nil
-        return false
-    }
-    
-    
-    @IBAction func refreshButton(sender: AnyObject) {
-        fetchNearbyPlaces(mapView.camera.target)  //achar lugares
-    }
+
     
     func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {  //pega as coordenadas do centro da tela
         //reverseGeocodeCoordinate(position.target)
@@ -232,63 +190,10 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         }
         
     }
-    
-    func fetchNearbyPlaces(coordinate: CLLocationCoordinate2D) {
-        /*
-        mapView.clear()
-        dataProvider.fetchPlacesNearCoordinate(coordinate, radius:mapRadius, types: ["house"]) { places in
-            for place: GooglePlace in places {
-                let marker = PlaceMarker(place: place)
-                marker.map = self.mapView
-            }
-        }
-        */
+
+    @IBAction func xButton(sender: AnyObject) {
+        compassView.hidden = true
     }
-    
-//    func mapView(mapView: GMSMapView!, markerInfoContents marker: GMSMarker!) -> UIView! {
-//        
-//        let placeMarker = marker as! PlaceMarker
-//        
-//        
-//        if let infoView = UIView.viewFromNibName("MarkerInfoView") as? MarkerInfoView {
-//        
-//            infoView.nameLabel.text = placeMarker.place.name
-//            
-//                if let photo = placeMarker.place.photo {
-//                infoView.placePhoto.image = photo
-//            } else {
-//                infoView.placePhoto.image = UIImage(named: "generic")
-//            }
-//            
-//            return infoView
-//        } else {
-//            return nil
-//        }
-//    }
-    
-    func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
-       
-        let googleMarker = mapView.selectedMarker as! PlaceMarker
-       
-        dataProvider.fetchDirectionsFrom(mapView.myLocation.coordinate, to: googleMarker.place.coordinate) {optionalRoute in
-            if let encodedRoute = optionalRoute {
-           
-                let path = GMSPath(fromEncodedPath: encodedRoute)
-                let line = GMSPolyline(path: path)
-                
-            
-                line.strokeWidth = 4.0
-                line.tappable = true
-                line.map = self.mapView
-                line.strokeColor = self.randomLineColor
-                
-      
-                mapView.selectedMarker = nil
-            }
-        }
-        
-    }
-    
     
     @IBAction func ListaLocal(sender: AnyObject) {
         performSegueWithIdentifier("locationList", sender: nil)
@@ -297,11 +202,18 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     
     
     
+    func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
+        let clickedUser = marker.userData as! User
+        print("clicouaquiiiiiiiiiiiii \(clickedUser.name)")
+        return false
+    }
     
     
     
     
-    // MARK: CODIGO PARA BACKGROUND
+    
+    
+// MARK: CODIGO PARA BACKGROUND
     
     func endBackgroundTask() {
         NSLog("Background codigos encerrou")
@@ -309,6 +221,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         backgroundTask = UIBackgroundTaskInvalid
         
     }
+    
+    
     func registerBackgroundTask() {
         backgroundTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler {
             [unowned self] in
@@ -319,50 +233,60 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
+    
+    
+    
     func reinstateBackgroundTask() {
         if updateTimer != nil && (backgroundTask == UIBackgroundTaskInvalid) {
             registerBackgroundTask()
         }
     }
     
-    func updateFriends () {
+// MARK: CODIGO PARA BACKGROUND ATE AQUI
+    
+    func mapView(mapView: GMSMapView!, markerInfoContents marker: GMSMarker!) -> UIView! {
         
-        
-        
-        
-        Alamofire.request(.GET, "https://tranquil-coast-5554.herokuapp.com/users/lista").responseJSON { response in
-            
-            if let JSON = response.result.value {
-                
-                DataManager.sharedInstance.createJsonFile("users", json: JSON)
-                DataManager.sharedInstance.allUser = DataManager.sharedInstance.convertJsonToUser(JSON)
-                for index in DataManager.sharedInstance.allUser {
-                    let faceId = index.facebookID
-                    let id = "\(index.userID!)"
-                    if !(faceId == nil) {
-                        let image = DataManager.sharedInstance.getProfPic(faceId, serverId: id)
-                        DataManager.sharedInstance.saveImage(image, id: id)
-                    }
-                }
-                
-                
-                DataManager.sharedInstance.updateLocationUsers(self.mapView)
-                self.controlNet.alpha = 0
-                self.controlNet.enabled = false
-            } else {
-                let dic = DataManager.sharedInstance.loadJsonFromDocuments("users")
-                DataManager.sharedInstance.allUser = DataManager.sharedInstance.convertJsonToUser(dic)
-                DataManager.sharedInstance.updateLocationUsers(self.mapView)
-                self.controlNet.alpha = 1
-                self.controlNet.enabled = true
-                
-            }
+        if let infoView = UIView.viewFromNibName("MarkerInfoView") as? MarkerInfoView {
+            let userInMarker = marker.userData as! User
+            infoView.nameLabel.text = userInMarker.name
+            infoView.userPhoto.image = DataManager.sharedInstance.findImage("\(userInMarker.userID)")
+            return infoView
+        } else {
+            return nil
         }
-        //DataManager.sharedInstance.requestGroups()
     }
+    
+    
+//    func updateFriends () {
+//        Alamofire.request(.GET, "https://tranquil-coast-5554.herokuapp.com/users/lista").responseJSON { response in
+//            if let JSON = response.result.value {
+//                DataManager.sharedInstance.createJsonFile("users", json: JSON)
+//                DataManager.sharedInstance.allUser = DataManager.sharedInstance.convertJsonToUser(JSON)
+//                for index in DataManager.sharedInstance.allUser {
+//                    let faceId = index.facebookID
+//                    let id = "\(index.userID!)"
+//                    if !(faceId == nil) {
+//                        let image = DataManager.sharedInstance.getProfPic(faceId, serverId: id)
+//                        DataManager.sharedInstance.saveImage(image, id: id)
+//                    }
+//                }
+//                DataManager.sharedInstance.updateLocationUsers(self.mapView)
+//                self.controlNet.alpha = 0
+//                self.controlNet.enabled = false
+//            } else {
+//                let dic = DataManager.sharedInstance.loadJsonFromDocuments("users")
+//                DataManager.sharedInstance.allUser = DataManager.sharedInstance.convertJsonToUser(dic)
+//                DataManager.sharedInstance.updateLocationUsers(self.mapView)
+//                self.controlNet.alpha = 1
+//                self.controlNet.enabled = true
+//                
+//            }
+//        }
+//        //DataManager.sharedInstance.requestGroups()
+//    }
 
     func setUpBackgrounGradient () {
-        navigationController?.navigationBar.hidden = true
+        //navigationController?.navigationBar.hidden = true
         let red1 = UIColor(red: 210/255, green: 37/255, blue: 53/255, alpha: 1)
         let red2 = UIColor(red: 213/255, green: 44/255, blue: 73/255, alpha: 1)
         
@@ -385,12 +309,25 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         compassView.hidden = true
     }
 
+    func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
+        self.compassView.hidden = false
+        let friend = marker.userData as! User
+        let locationFriend = CLLocation(latitude: Double(friend.location.latitude)!, longitude: Double(friend.location.longitude)!)
+        let myCoordinate = CLLocation(latitude: Double(DataManager.sharedInstance.myUser.location.latitude)!, longitude: Double(DataManager.sharedInstance.myUser.location.longitude)!)
+        
+        friendPhoto.image = DataManager.sharedInstance.findImage("\(friend.userID)")
+        updateCompassPosition(myCoordinate, location: locationFriend)
+    }
+    
+    func updateCompassPosition(myLocation:CLLocation,location:CLLocation) {
+        let dx = location.coordinate.longitude - myLocation.coordinate.longitude
+        let dy = location.coordinate.latitude - myLocation.coordinate.latitude
+        let rotationAngle = CGFloat(atan2(-dy, dx))
+        arrowCompass.transform = CGAffineTransformMakeRotation(rotationAngle)
+        let distance = myLocation.distanceFromLocation(location)
+        //let distance = Int(sqrt(pow(dx, 2) + pow(dy, 2))*1000)
+        self.friendDistance.text = "\(distance) meters"
 
-
-
-
+    }
 
 }
-
-
-
