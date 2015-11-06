@@ -16,7 +16,7 @@ class AddFriendTableViewController: UITableViewController, UITextFieldDelegate {
     let http = HTTPHelper()
     override func viewDidLoad() {
         super.viewDidLoad()
-        labelInfo.text = "\(DataManager.sharedInstance.username)\né o seu username"
+        labelInfo.text = "\(DataManager.sharedInstance.myUser.username)\né o seu username"
 
         
         navigationController?.title = "Add Friend by Username"
@@ -86,7 +86,7 @@ class AddFriendTableViewController: UITableViewController, UITextFieldDelegate {
                 newUser.createdAt = dic["created_at"] as? String
                 newUser.email = dic["email"] as? String
                 newUser.facebookID = dic["fbid"] as? String
-                newUser.userID = dic["id"] as? Int
+                newUser.userID = dic["id"] as? String
                 newUser.name = dic["name"] as? String
                 
                 var friendAlreadyExist = false
@@ -129,7 +129,7 @@ class AddFriendTableViewController: UITableViewController, UITextFieldDelegate {
         if (username == "") {
             DataManager.sharedInstance.createSimpleUIAlert(self, title: "Naoo add", message: "Insira um username", button1: "Ok")
         } else {
-            if username == DataManager.sharedInstance.username {
+            if username == DataManager.sharedInstance.myUser.username {
                 DataManager.sharedInstance.createSimpleUIAlert(self, title: "Naoo add", message: "Esse username é você", button1: "Ok")
             }
             else {

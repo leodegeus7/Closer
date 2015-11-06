@@ -26,6 +26,8 @@ class CirclesTableViewController: UITableViewController {
         
         navigationBarGradient()
         
+        DataManager.sharedInstance.requestFacebook { (result) -> Void in
+        }
         
 //        for family: String in UIFont.familyNames()
 //        {
@@ -55,7 +57,7 @@ class CirclesTableViewController: UITableViewController {
         
         
         // #warning Incomplete implementation, return the number of rows
-        return DataManager.sharedInstance.allGroup.count
+        return DataManager.sharedInstance.allSharers.count
     }
 
 
@@ -69,11 +71,18 @@ class CirclesTableViewController: UITableViewController {
             DataManager.sharedInstance.requestGroups { (result) -> Void in
                 
                 DataManager.sharedInstance.allGroup = DataManager.sharedInstance.convertJsonToGroup(result)
-                DataManager.sharedInstance.findUntilBETA()
                 
+                DataManager.sharedInstance.linkGroupAndUserToSharer()
                 
                 let friends = DataManager.sharedInstance.loadJsonFromDocuments("friends")
-                
+                for index in DataManager.sharedInstance.allUser {
+                    let faceId = index.facebookID
+                    let id = "\(index.userID!)"
+                    if !(faceId == nil) {
+                        let image = DataManager.sharedInstance.getProfPic(faceId, serverId: id)
+                        DataManager.sharedInstance.saveImage(image, id: id)
+                    }
+                }
                 DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(friends)
                 
                 
@@ -83,6 +92,8 @@ class CirclesTableViewController: UITableViewController {
                 
             }
         }
+            DataManager.sharedInstance.saveMyInfo()
+
         
 
         
@@ -96,13 +107,34 @@ class CirclesTableViewController: UITableViewController {
         for activeGroup in DataManager.sharedInstance.activeGroup {
             if activeGroup.id == DataManager.sharedInstance.allGroup[indexPath.row].id {
                 let cellActive = tableView.dequeueReusableCellWithIdentifier("groupCell", forIndexPath: indexPath) as! ActiveGroupTableViewCell
-                print(DataManager.sharedInstance.allGroup)
+                //print(DataManager.sharedInstance.allGroup)
 
-                cellActive.timeLabel.text = ""
                 
+                
+                //let sharers = DataManager.sharedInstance.allSharers
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                cellActive.timeLabel.text = ""
                 cellActive.nameGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].name
                 cellActive.numberLabel.text = ""
-                if !(DataManager.sharedInstance.allGroup[indexPath.row].until == nil) {
+                
+                self.tableView.rowHeight = 75
+                cellActive.nameGroup.textColor = mainRed
+                cellActive.nameGroup.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
+                //print("celula: \(cellActive.nameGroup.font)")
+                cellActive.coloredSquare.backgroundColor = squareRed
+                cellActive.numberLabel.font = UIFont(name: "SFUIDisplay-Ultralight", size: 47)
+                cellActive.timeLabel.font = UIFont(name: "SFUIText-Medium", size: 12)
+                cellActive.coloredSquare.layer.cornerRadius = 8.0
+                
+                if !(DataManager.sharedInstance.allGroup[indexPath.row].share.until == nil) {
                     
                     
                     let createdHour = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
@@ -110,14 +142,22 @@ class CirclesTableViewController: UITableViewController {
                     dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
                     dateFormatter.timeZone = NSTimeZone(name: "UTC")
                     let date = dateFormatter.dateFromString(createdHour)
-                    let durationString = DataManager.sharedInstance.allGroup[indexPath.row].until
+                    let durationString = DataManager.sharedInstance.allGroup[indexPath.row].share.until
                     let durationFloat = Float(durationString)
-                    let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!*3600.0))
+                    let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!))
+                    
                     
                     
                     let duration = finalDate?.timeIntervalSinceNow
-                    
-                    if duration <= 3600 {
+                    if duration < 0 {
+                        cellActive.numberLabel.text = "0"
+                        cellActive.timeLabel.text = "expired"
+                        cellActive.selectionStyle = UITableViewCellSelectionStyle.None
+                        // cellActive.userInteractionEnabled = false
+                        cellActive.coloredSquare.backgroundColor = UIColor.grayColor()
+                        
+                    }
+                    else if duration <= 3600 {
                         let newDurationMin = Int(duration!/60)
                         cellActive.numberLabel.text = "\(newDurationMin)"
                         cellActive.timeLabel.text = "minutes"
@@ -146,16 +186,11 @@ class CirclesTableViewController: UITableViewController {
 //                    cellActive.numberLabel.text = "\(durationHours)"
                 }
                 
-
-                self.tableView.rowHeight = 75
-                cellActive.nameGroup.textColor = mainRed
-                cellActive.nameGroup.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
-                print("celula: \(cellActive.nameGroup.font)")
-                cellActive.coloredSquare.backgroundColor = squareRed
-                cellActive.numberLabel.font = UIFont(name: "SFUIDisplay-Ultralight", size: 47)
-                cellActive.timeLabel.font = UIFont(name: "SFUIText-Medium", size: 12)
-                cellActive.coloredSquare.layer.cornerRadius = 8.0
                 
+
+                
+                
+
                 return cellActive
             }
         }
@@ -167,26 +202,45 @@ class CirclesTableViewController: UITableViewController {
         
         cellPendent.timeLabel.text = ""
         
+        let createdHour = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
+        dateFormatter.timeZone = NSTimeZone(name: "UTC")
+        let date = dateFormatter.dateFromString(createdHour)
+        let durationString = DataManager.sharedInstance.allGroup[indexPath.row].share.until
+        let durationFloat = Float(durationString)
+        let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!))
         
-        let durationServer = DataManager.sharedInstance.allGroup[indexPath.row].until
-        let duration = Int(durationServer)
         
-        if duration <= 3600 {
-            let newDurationMin = Int(duration!/60)
-            cellPendent.numberLabel.text = "\(newDurationMin)"
-            cellPendent.timeLabel.text = "minutes"
+        let duration = finalDate?.timeIntervalSinceNow
+        
+        
+        if !(duration == nil) {
+            let duration = Int(duration!)
+            
+            if duration < 0 {
+                cellPendent.numberLabel.text = "0"
+                cellPendent.timeLabel.text = "expired"
+                DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+            }
+            else if duration <= 3600 {
+                let newDurationMin = Int(duration/60)
+                cellPendent.numberLabel.text = "\(newDurationMin)"
+                cellPendent.timeLabel.text = "minutes"
+            }
+            else if duration > 3600 && duration <= 360000 {
+                var newDurationHours = Int(duration/3600)
+                newDurationHours++
+                cellPendent.numberLabel.text = "\(newDurationHours)"
+                cellPendent.timeLabel.text = "hours"
+            } else if duration > 360000 {
+                var newDurationDays = Int(duration/86400)
+                newDurationDays++
+                cellPendent.numberLabel.text = "\(newDurationDays)"
+                cellPendent.timeLabel.text = "days"
+            }
         }
-        else if duration > 3600 && duration <= 360000 {
-            var newDurationHours = Int(duration!/3600)
-            newDurationHours++
-            cellPendent.numberLabel.text = "\(newDurationHours)"
-            cellPendent.timeLabel.text = "hours"
-        } else if duration > 360000 {
-            var newDurationDays = Int(duration!/86400)
-            newDurationDays++
-            cellPendent.numberLabel.text = "\(newDurationDays)"
-            cellPendent.timeLabel.text = "days"
-        }
+
         
         cellPendent.nameGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].name
         cellPendent.nameGroup.textColor = mainRed
@@ -215,7 +269,7 @@ class CirclesTableViewController: UITableViewController {
 //            let path = tableVipew.indexPathForRowAtPoint(selectedCell.center)!
             let path = tableView.indexPathForRowAtPoint(selectedCell.center)!
             let id = DataManager.sharedInstance.allGroup[path.row].id as String
-            self.http.destroySharerWithSharerType(.userToGroup, ownerID: DataManager.sharedInstance.idUser, receiverID: id, completion: { (result) -> Void in
+            self.http.destroySharerWithSharerType(.userToGroup, ownerID: DataManager.sharedInstance.myUser.userID, receiverID: id, completion: { (result) -> Void in
                 self.reloadData()
             })
             
@@ -232,8 +286,16 @@ class CirclesTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         if cell?.tag == 2 {
-            performSegueWithIdentifier("showMap", sender: self)
-            DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
+            if (DataManager.sharedInstance.allGroup[indexPath.row].users == nil) {
+                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Espere", message: "Espere terminar o request", button1: "OK")
+            
+            }
+            else {
+                DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
+                
+                performSegueWithIdentifier("showMap", sender: self)
+            }
+
         }
     }
     
@@ -275,7 +337,7 @@ class CirclesTableViewController: UITableViewController {
                 //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
                 
                 let id = DataManager.sharedInstance.allGroup[indexPath.row].id as String
-                self.http.destroySharerWithSharerType(.userToGroup, ownerID: DataManager.sharedInstance.idUser, receiverID: id, completion: { (result) -> Void in
+                self.http.destroySharerWithSharerType(.userToGroup, ownerID: DataManager.sharedInstance.myUser.userID, receiverID: id, completion: { (result) -> Void in
                     self.reloadData()
                 })
         

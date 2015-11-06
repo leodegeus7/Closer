@@ -22,9 +22,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         super.viewDidLoad()
 
         DataManager.sharedInstance.importID()
-        print("Aquiii o id user \(DataManager.sharedInstance.idUser)")
-        let idUser = DataManager.sharedInstance.idUser
-        if !(idUser == "nil" || idUser == nil) {
+        print("Aquiii o id user \(DataManager.sharedInstance.myUser.userID)")
+        let idUser = DataManager.sharedInstance.myUser.userID
+        if !(idUser == nil) {
             performSegueWithIdentifier("mostrarMapa", sender: self)
             logged = true
         }
@@ -49,22 +49,22 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                // print(error)
                 if let resultData = result as? NSDictionary {
                 
-                    DataManager.sharedInstance.idFB = resultData["id"] as! String
-                    DataManager.sharedInstance.email = resultData["email"] as! String
-                    DataManager.sharedInstance.username = resultData["name"] as! String
-                    DataManager.sharedInstance.name = resultData["name"] as! String
-                    print("\(DataManager.sharedInstance.idFB) \(DataManager.sharedInstance.email) \(DataManager.sharedInstance.username)")
-                    let data = ["id":DataManager.sharedInstance.idFB,"email":DataManager.sharedInstance.email,"user":DataManager.sharedInstance.username]
+                    DataManager.sharedInstance.myUser.facebookID = resultData["id"] as! String
+                    DataManager.sharedInstance.myUser.email = resultData["email"] as! String
+                    DataManager.sharedInstance.myUser.username = resultData["name"] as! String
+                    DataManager.sharedInstance.myUser.name = resultData["name"] as! String
+                    print("\(DataManager.sharedInstance.myUser.facebookID) \(DataManager.sharedInstance.myUser.email) \(DataManager.sharedInstance.myUser.username)")
+                    let data = ["id":DataManager.sharedInstance.myUser.facebookID,"email":DataManager.sharedInstance.myUser.email,"user":DataManager.sharedInstance.myUser.username]
                     DataManager.sharedInstance.createJsonFile("myData", json: data)
                     if self.logged == false {
                         self.performSegueWithIdentifier("showRegister", sender: self)}
                 }
                 else {
                     let myDic = DataManager.sharedInstance.loadJsonFromDocuments("myData") as! NSDictionary
-                    DataManager.sharedInstance.idFB = myDic["id"] as! String
-                    DataManager.sharedInstance.email = myDic["email"] as! String
-                    DataManager.sharedInstance.username = myDic["user"] as! String
-                    print("Informacoes OFFLINE \(DataManager.sharedInstance.idFB) \(DataManager.sharedInstance.email) \(DataManager.sharedInstance.username)")
+                    DataManager.sharedInstance.myUser.facebookID = myDic["id"] as! String
+                    DataManager.sharedInstance.myUser.email = myDic["email"] as! String
+                    DataManager.sharedInstance.myUser.username = myDic["user"] as! String
+                    print("Informacoes OFFLINE \(DataManager.sharedInstance.myUser.facebookID) \(DataManager.sharedInstance.myUser.email) \(DataManager.sharedInstance.myUser.username)")
                     if self.logged == false {
                         self.performSegueWithIdentifier("showRegister", sender: self)}
                 }

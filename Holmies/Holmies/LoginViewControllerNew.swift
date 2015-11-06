@@ -31,7 +31,7 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
         print(documents)
         activityIndicator.stopAnimating()
         DataManager.sharedInstance.importID()
-        let idUser = "\(DataManager.sharedInstance.idUser)"
+        let idUser = "\(DataManager.sharedInstance.myUser.userID)"
         let number = Int(idUser)
         if number > 0 {
             performSegueWithIdentifier("showTableView", sender: self)
@@ -113,11 +113,11 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
                         
                     }
                     else {
-                        DataManager.sharedInstance.name = dic["name"] as! String
-                        DataManager.sharedInstance.username = dic["username"] as! String
-                        DataManager.sharedInstance.email = dic["email"] as! String
+                        DataManager.sharedInstance.myUser.name = dic["name"] as! String
+                        DataManager.sharedInstance.myUser.username = dic["username"] as! String
+                        DataManager.sharedInstance.myUser.email = dic["email"] as! String
                         let id = dic["id"]
-                        DataManager.sharedInstance.idUser = "\(id!)"
+                        DataManager.sharedInstance.myUser.userID = "\(id!)"
                         DataManager.sharedInstance.saveID()
                         self.performSegueWithIdentifier("showTableView", sender: self)
                     }
@@ -175,19 +175,13 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
                         }
                         else {
                             
-                            DataManager.sharedInstance.name = dic["name"] as! String
-                            DataManager.sharedInstance.username = dic["username"] as! String
-                            DataManager.sharedInstance.email = dic["email"] as! String
+                            DataManager.sharedInstance.myUser.name = dic["name"] as! String
+                            DataManager.sharedInstance.myUser.username = dic["username"] as! String
+                            DataManager.sharedInstance.myUser.email = dic["email"] as! String
                             let id = dic["id"]
-                            DataManager.sharedInstance.idUser = "\(id!)"
+                            DataManager.sharedInstance.myUser.userID = "\(id!)"
                             
-                            var myInfo = Dictionary<String,AnyObject>()
-                            myInfo["name"] = DataManager.sharedInstance.name
-                            myInfo["id"] = DataManager.sharedInstance.idUser
-                            myInfo["email"] = DataManager.sharedInstance.email
-                            myInfo["username"] = DataManager.sharedInstance.username
-                            myInfo["idFb"] = DataManager.sharedInstance.idFB
-                            DataManager.sharedInstance.createJsonFile("myInfo", json: myInfo)
+                            DataManager.sharedInstance.saveMyInfo()
                             
                             DataManager.sharedInstance.saveID()
                             self.performSegueWithIdentifier("showTableView", sender: self)
@@ -358,22 +352,16 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
                 print("existe username ou email ja cadastrado")
             }
             else {
-                DataManager.sharedInstance.name = dic["name"] as! String
-                DataManager.sharedInstance.username = dic["username"] as! String
-                DataManager.sharedInstance.email = dic["email"] as! String
+                DataManager.sharedInstance.myUser.name = dic["name"] as! String
+                DataManager.sharedInstance.myUser.username = dic["username"] as! String
+                DataManager.sharedInstance.myUser.email = dic["email"] as! String
                 let id = dic["id"]
-                DataManager.sharedInstance.idUser = "\(id!)"
+                DataManager.sharedInstance.myUser.userID = "\(id!)"
                 self.helper.updateUserWithID("\(id!)", username: nil, location: nil, altitude: nil, fbid: faceId, photo: nil, name: nil, email: nil, password: "\(DataManager.sharedInstance.randomStringWithLength(64))", completion: { (result) -> Void in
                     
                     })
                 
-                var myInfo = Dictionary<String,AnyObject>()
-                myInfo["name"] = DataManager.sharedInstance.name
-                myInfo["id"] = DataManager.sharedInstance.idUser
-                myInfo["email"] = DataManager.sharedInstance.email
-                myInfo["username"] = DataManager.sharedInstance.username
-                DataManager.sharedInstance.createJsonFile("myInfo", json: myInfo)
-                
+                DataManager.sharedInstance.saveMyInfo()
                 
                 DataManager.sharedInstance.saveID()
             }

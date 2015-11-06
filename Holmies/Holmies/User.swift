@@ -13,7 +13,7 @@ class User: NSObject {
     var createdAt:String!
     var email:String!
     var facebookID:String!
-    var userID:Int!
+    var userID:String!
     var location = (latitude:String(),longitude:String())
     var name:String!
     var password:String!

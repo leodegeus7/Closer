@@ -47,13 +47,13 @@ class GroupsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! GroupTableViewCell
 
-        print("grupo \(DataManager.sharedInstance.allGroup)")
+        //print("grupo \(DataManager.sharedInstance.allGroup)")
         cell.groupName.text = DataManager.sharedInstance.allGroup[indexPath.row].name
         cell.idGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].id
         cell.createAtGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
         //cell.collectionView.numberOfItemsInSection()
         
-        print(DataManager.sharedInstance.allGroup[indexPath.row].createdAt)
+        //print(DataManager.sharedInstance.allGroup[indexPath.row].createdAt)
         
         
         

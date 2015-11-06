@@ -134,25 +134,19 @@ class RegisterNewViewController: UIViewController {
             else {
                 
 
-                DataManager.sharedInstance.name = dic["name"] as! String
-                DataManager.sharedInstance.username = dic["username"] as! String
-                DataManager.sharedInstance.email = dic["email"] as! String
+                DataManager.sharedInstance.myUser.name = dic["name"] as! String
+                DataManager.sharedInstance.myUser.username = dic["username"] as! String
+                DataManager.sharedInstance.myUser.email = dic["email"] as! String
                 
                 let id = dic["id"]
-                DataManager.sharedInstance.idUser = "\(id!)"
-                if !(DataManager.sharedInstance.idFB == nil) {
-                    self.helper.updateUserWithID("\(id!)", username: nil, location: nil, altitude: nil, fbid: DataManager.sharedInstance.idFB, photo: nil, name: nil, email: nil, password: nil, completion: { (result) -> Void in
+                DataManager.sharedInstance.myUser.userID = "\(id!)"
+                if !(DataManager.sharedInstance.myUser.facebookID == nil) {
+                    self.helper.updateUserWithID("\(id!)", username: nil, location: nil, altitude: nil, fbid: DataManager.sharedInstance.myUser.facebookID, photo: nil, name: nil, email: nil, password: nil, completion: { (result) -> Void in
                         print(result)
                     })
                 }
                 
-                var myInfo = Dictionary<String,AnyObject>()
-                myInfo["name"] = DataManager.sharedInstance.name
-                myInfo["id"] = DataManager.sharedInstance.idUser
-                myInfo["email"] = DataManager.sharedInstance.email
-                myInfo["username"] = DataManager.sharedInstance.username
-                myInfo["idFb"] = DataManager.sharedInstance.idFB
-                DataManager.sharedInstance.createJsonFile("myInfo", json: myInfo)
+                DataManager.sharedInstance.saveMyInfo()
                 
                 
                 DataManager.sharedInstance.saveID()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateGroupViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
+class CreateGroupViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UITextFieldDelegate {
 
     @IBOutlet weak var groupName: UITextField!
     @IBOutlet weak var upSliderLabel: UILabel!
@@ -71,7 +71,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("friend", forIndexPath: indexPath) as! CreateGroupTableViewCell
         
-        let data = DataManager.sharedInstance.selectedFriends
+        //let data = DataManager.sharedInstance.selectedFriends
         if (resultSearchController.active) {
             cell.friendName.text = filteredArray[indexPath.row].name
             cell.friendPhoto.image = DataManager.sharedInstance.findImage("\(filteredArray[indexPath.row].userID)")
@@ -498,6 +498,11 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     func continueAction () {
         
         if groupName.text?.isEmpty  == true {
@@ -513,12 +518,14 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
                 let dic = result as NSDictionary
                 let id = dic["id"]
                 let formatId = "\(id!)"
-                self.http.createNewSharerWithType(.userToGroup, ownerID: DataManager.sharedInstance.idUser, receiverID: formatId, until: "\(self.chosenHour)", completion: { (result) -> Void in
+                //let hour = self.chosenHour
+                self.http.createNewSharerWithType(.userToGroup, ownerID: DataManager.sharedInstance.myUser.userID, receiverID: formatId, until: "\(self.chosenHour*3600)", completion: { (result) -> Void in
                 })
                 
                 for user in DataManager.sharedInstance.selectedFriends {
                     let userId = user.userID
-                    self.http.createNewSharerWithType(.userToGroup, ownerID: "\(userId)", receiverID: formatId, until: "\(self.chosenHour)", completion: { (result) -> Void in
+                    
+                    self.http.createNewSharerWithType(.userToGroup, ownerID: "\(userId)", receiverID: formatId, until: "\(self.chosenHour*3600)", completion: { (result) -> Void in
                         
                     })
                    
