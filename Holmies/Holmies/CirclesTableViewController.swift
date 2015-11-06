@@ -26,6 +26,8 @@ class CirclesTableViewController: UITableViewController {
         
         navigationBarGradient()
         
+        
+        
         DataManager.sharedInstance.requestFacebook { (result) -> Void in
         }
         
@@ -57,7 +59,7 @@ class CirclesTableViewController: UITableViewController {
         
         
         // #warning Incomplete implementation, return the number of rows
-        return DataManager.sharedInstance.allSharers.count
+        return DataManager.sharedInstance.allGroup.count
     }
 
 
@@ -83,6 +85,9 @@ class CirclesTableViewController: UITableViewController {
                         DataManager.sharedInstance.saveImage(image, id: id)
                     }
                 }
+                let face = DataManager.sharedInstance.myUser.facebookID
+                let id = DataManager.sharedInstance.myUser.userID
+                DataManager.sharedInstance.getProfPic(DataManager.sharedInstance.myUser.facebookID, serverId: DataManager.sharedInstance.myUser.userID)
                 DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(friends)
                 
                 
@@ -93,7 +98,7 @@ class CirclesTableViewController: UITableViewController {
             }
         }
             DataManager.sharedInstance.saveMyInfo()
-
+        
         
 
         

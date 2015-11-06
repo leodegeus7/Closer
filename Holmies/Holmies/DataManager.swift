@@ -15,11 +15,6 @@ import Alamofire
 
 
 class DataManager {
-//    var idUser:String!
-//    var name:String!
-//    var username:String!
-//    var idFB:String!
-//    var email:String!
     var friendsArray:NSMutableArray!
     var end:[String]!
     var profilePictureOfFriendsArray:Array<UIImage>!
@@ -44,12 +39,7 @@ class DataManager {
         return manager
         }()
     
-//    init() {
-//        username = ""
-//        email = ""
-//        idFB = ""
-// 
-//    }
+
     
     class var sharedInstance: DataManager {
         struct Static {
@@ -747,9 +737,37 @@ class DataManager {
             let long = dic["longitude"] as? String
             myInfo.location.latitude = "\(lat)"
             myInfo.location.longitude = "\(long)"
-            
+            DataManager.sharedInstance.myUser = myInfo
         }
     }
+    
+    //    func updateFriends () {
+    //        Alamofire.request(.GET, "https://tranquil-coast-5554.herokuapp.com/users/lista").responseJSON { response in
+    //            if let JSON = response.result.value {
+    //                DataManager.sharedInstance.createJsonFile("users", json: JSON)
+    //                DataManager.sharedInstance.allUser = DataManager.sharedInstance.convertJsonToUser(JSON)
+    //                for index in DataManager.sharedInstance.allUser {
+    //                    let faceId = index.facebookID
+    //                    let id = "\(index.userID!)"
+    //                    if !(faceId == nil) {
+    //                        let image = DataManager.sharedInstance.getProfPic(faceId, serverId: id)
+    //                        DataManager.sharedInstance.saveImage(image, id: id)
+    //                    }
+    //                }
+    //                DataManager.sharedInstance.updateLocationUsers(self.mapView)
+    //                self.controlNet.alpha = 0
+    //                self.controlNet.enabled = false
+    //            } else {
+    //                let dic = DataManager.sharedInstance.loadJsonFromDocuments("users")
+    //                DataManager.sharedInstance.allUser = DataManager.sharedInstance.convertJsonToUser(dic)
+    //                DataManager.sharedInstance.updateLocationUsers(self.mapView)
+    //                self.controlNet.alpha = 1
+    //                self.controlNet.enabled = true
+    //
+    //            }
+    //        }
+    //        //DataManager.sharedInstance.requestGroups()
+    //    }
     
 
     

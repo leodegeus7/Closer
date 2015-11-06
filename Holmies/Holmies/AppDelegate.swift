@@ -11,18 +11,21 @@ import Parse
 import FBSDKCoreKit
 import Alamofire
 
+import CoreLocation
+
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
     let googleMapsApiKey = "AIzaSyAhjTqn1_2HX0FiQ0MW1_O7L1avjPIxP9g"
-    
-
+    let helper = HTTPHelper()
 
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        // Override point for customization after application launch .
         GMSServices.provideAPIKey(googleMapsApiKey)
+        DataManager.sharedInstance.locationManager.delegate = self
+        
         Parse.setApplicationId("52IjYIjvJ5BdIYDXr8SNqeVj5TZb15fnpaJkFDM2",
             clientKey: "ga7aF8AEO1vhF4x7KgTVcUsOk8uigdhXZZrCr5ez")
         
@@ -31,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
 
 
-        
+        print(DataManager.sharedInstance.findDocumentsDirectory())
         
         
         // Register for Push Notitications
@@ -59,6 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //let types = UIRemoteNotificationType.Badge | UIRemoteNotificationType.Alert | UIRemoteNotificationType.Sound
             application.registerForRemoteNotificationTypes([.Alert, .Badge,.Sound])
         }
+        
         
 
         
@@ -166,8 +170,58 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
     }
+    
+    
+    
+    
+    //localizacao
+    
+    
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if status ==  .AuthorizedWhenInUse || status == .AuthorizedAlways {    //se a autorizaçao do user estiver sendo pega pelo app
+            DataManager.sharedInstance.locationManager.startUpdatingLocation()   //inicia o locationmanager
 
-  
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print(error)
+
+    }
+
+    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
+
+        DataManager.sharedInstance.myUser.location.longitude = "\(newLocation.coordinate.longitude)"
+        DataManager.sharedInstance.myUser.location.latitude = "\(newLocation.coordinate.latitude)"
+        DataManager.sharedInstance.saveMyInfo()
+        if UIApplication.sharedApplication().applicationState == .Active {
+            print("Coord atualizada: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
+        }
+        else {
+            print("App em background. Coord: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
+            let userInfoCoordinate = ["local":newLocation]
+            DataManager.sharedInstance.createLocalNotification("oi", body: "\(newLocation.coordinate.latitude)", timeAfterClose: 10,userInfo:userInfoCoordinate)
+        }
+        
+        
+        let location = "\(newLocation.coordinate.latitude):\(newLocation.coordinate.longitude)"
+        
+        helper.updateUserWithID(DataManager.sharedInstance.myUser.userID, username: nil, location: location, altitude: nil, fbid: nil, photo: nil, name: nil, email: nil, password: nil) { (result) -> Void in
+            //oi
+        }
+        
+        
+        DataManager.sharedInstance.reverseGeocodeCoordinate(newLocation.coordinate) //transforma a coordenada em endereco
+        
+        if DataManager.sharedInstance.end != nil {
+            let actualLocation = Location()
+            actualLocation.location = newLocation
+            actualLocation.address = DataManager.sharedInstance.end
+            DataManager.sharedInstance.locationUserArray.append(actualLocation)
+        }
+    }
+    
+
 
 }
 
