@@ -26,7 +26,9 @@ class CirclesTableViewController: UITableViewController {
         
         navigationBarGradient()
         
-        
+        DataManager.sharedInstance.linkGroupAndUserToSharer { (result) -> Void in
+            
+        }
         
         DataManager.sharedInstance.requestFacebook { (result) -> Void in
         }
@@ -74,24 +76,25 @@ class CirclesTableViewController: UITableViewController {
                 
                 DataManager.sharedInstance.allGroup = DataManager.sharedInstance.convertJsonToGroup(result)
                 
-                DataManager.sharedInstance.linkGroupAndUserToSharer()
+                DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
+                    print("\(result)")
+                })
                 
                 let friends = DataManager.sharedInstance.loadJsonFromDocuments("friends")
-                for index in DataManager.sharedInstance.allUser {
-                    let faceId = index.facebookID
-                    let id = "\(index.userID!)"
-                    if !(faceId == nil) {
-                        let image = DataManager.sharedInstance.getProfPic(faceId, serverId: id)
-                        DataManager.sharedInstance.saveImage(image, id: id)
+                let count = DataManager.sharedInstance.allFriends.count
+
+                let myPhoto = DataManager.sharedInstance.getProfPic(DataManager.sharedInstance.myUser.facebookID, serverId: DataManager.sharedInstance.myUser.userID)
+                DataManager.sharedInstance.saveImage(myPhoto, id: DataManager.sharedInstance.myUser.userID)
+                DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(friends)
+                for index in DataManager.sharedInstance.allFriends {
+                    
+                    let fid = index.facebookID
+                    let id = index.userID
+                    if !(index.facebookID == nil) && !(index.userID == nil) {
+                        let image = DataManager.sharedInstance.getProfPic(index.facebookID, serverId: index.userID)
+                        DataManager.sharedInstance.saveImage(image, id: index.userID)
                     }
                 }
-                let face = DataManager.sharedInstance.myUser.facebookID
-                let id = DataManager.sharedInstance.myUser.userID
-                DataManager.sharedInstance.getProfPic(DataManager.sharedInstance.myUser.facebookID, serverId: DataManager.sharedInstance.myUser.userID)
-                DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(friends)
-                
-                
-                
                 self.tableView.reloadData()
                 self.refreshControl!.endRefreshing()
                 
@@ -123,8 +126,9 @@ class CirclesTableViewController: UITableViewController {
                 
                 
                 
-                
-                
+                let allgroup = DataManager.sharedInstance.allGroup
+                let count = DataManager.sharedInstance.allGroup.count
+                let share = DataManager.sharedInstance.allGroup[indexPath.row].share
                 
                 cellActive.timeLabel.text = ""
                 cellActive.nameGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].name

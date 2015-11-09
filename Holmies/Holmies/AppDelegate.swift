@@ -100,7 +100,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             if (DataManager.sharedInstance.testIfFileExistInDocuments("/myInfo.json")) {
                 DataManager.sharedInstance.loadMyInfo()
             }
-            DataManager.sharedInstance.linkGroupAndUserToSharer()
+            DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
+                print(result)
+            })
 //            DataManager.sharedInstance.requestGroups { (result) -> Void in
 //                print(1)
 //            }
@@ -190,6 +192,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
 
     func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
+        if !(DataManager.sharedInstance.myUser.userID == nil) {
 
         DataManager.sharedInstance.myUser.location.longitude = "\(newLocation.coordinate.longitude)"
         DataManager.sharedInstance.myUser.location.latitude = "\(newLocation.coordinate.latitude)"
@@ -218,6 +221,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             actualLocation.location = newLocation
             actualLocation.address = DataManager.sharedInstance.end
             DataManager.sharedInstance.locationUserArray.append(actualLocation)
+        }
         }
     }
     

@@ -701,6 +701,7 @@
 				CD900F821BDE9F520095CB85 /* AddFriendTableViewController.swift */,
 				A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */,
 				CD4FC93F1BED1F810086EC30 /* myInfoViewController.swift */,
+				CDB0C9571BCEE5340020BFB5 /* UsersInGroupsCollectionViewCell.swift */,
 			);
 			name = ControllerNew;
 			sourceTree = "<group>";
@@ -772,7 +773,6 @@
 				CD43674A1BBC771800309FD0 /* AddGroupTableViewCell.swift */,
 				CDB0FD611BBF0B4500BC6DFA /* AddGroupNameViewController.swift */,
 				A7FCC50A1BC4CCF600AEDA3F /* WidgetViewController.swift */,
-				CDB0C9571BCEE5340020BFB5 /* UsersInGroupsCollectionViewCell.swift */,
 				CDB0C9591BCEE8730020BFB5 /* UserInGroupsCollectionView.swift */,
 			);
 			name = Controller;

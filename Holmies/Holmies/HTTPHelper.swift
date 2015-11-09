@@ -240,8 +240,12 @@ class HTTPHelper: NSObject {
         }
         
         let url = "\(baseURL)/new_sharer"
+        print(parameters)
+        print(url)
         
         makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
+            let httpresul = httpResult
+            print(httpresul)
             let formattedResult = httpResult as! Dictionary<String, AnyObject>
             completion(result: formattedResult)
         }
