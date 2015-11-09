@@ -97,6 +97,7 @@
 		CD43673F1BBC531E00309FD0 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD43673E1BBC531E00309FD0 /* Group.swift */; };
 		CD4367491BBC75E200309FD0 /* AddGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4367481BBC75E200309FD0 /* AddGroupTableViewController.swift */; };
 		CD43674B1BBC771800309FD0 /* AddGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD43674A1BBC771800309FD0 /* AddGroupTableViewCell.swift */; };
+		CD4FC9401BED1F810086EC30 /* myInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4FC93F1BED1F810086EC30 /* myInfoViewController.swift */; };
 		CD6BAA551B98D946008614B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA541B98D946008614B0 /* AppDelegate.swift */; };
 		CD6BAA5C1B98D946008614B0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAA5B1B98D946008614B0 /* Images.xcassets */; };
 		CD6BAA6B1B98D946008614B0 /* HolmiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA6A1B98D946008614B0 /* HolmiesTests.swift */; };
@@ -357,6 +358,7 @@
 		CD43673E1BBC531E00309FD0 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		CD4367481BBC75E200309FD0 /* AddGroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewController.swift; sourceTree = "<group>"; };
 		CD43674A1BBC771800309FD0 /* AddGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewCell.swift; sourceTree = "<group>"; };
+		CD4FC93F1BED1F810086EC30 /* myInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myInfoViewController.swift; sourceTree = "<group>"; };
 		CD6BAA4F1B98D946008614B0 /* Holmies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Holmies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD6BAA531B98D946008614B0 /* Info2.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info2.plist; sourceTree = "<group>"; };
 		CD6BAA541B98D946008614B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -779,6 +781,8 @@
 				CD900F801BDE9F260095CB85 /* AddFriendTableViewCell.swift */,
 				CD900F821BDE9F520095CB85 /* AddFriendTableViewController.swift */,
 				A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */,
+				CD4FC93F1BED1F810086EC30 /* myInfoViewController.swift */,
+				CDB0C9571BCEE5340020BFB5 /* UsersInGroupsCollectionViewCell.swift */,
 			);
 			name = ControllerNew;
 			sourceTree = "<group>";
@@ -850,7 +854,6 @@
 				CD43674A1BBC771800309FD0 /* AddGroupTableViewCell.swift */,
 				CDB0FD611BBF0B4500BC6DFA /* AddGroupNameViewController.swift */,
 				A7FCC50A1BC4CCF600AEDA3F /* WidgetViewController.swift */,
-				CDB0C9571BCEE5340020BFB5 /* UsersInGroupsCollectionViewCell.swift */,
 				CDB0C9591BCEE8730020BFB5 /* UserInGroupsCollectionView.swift */,
 			);
 			name = Controller;
@@ -1294,6 +1297,7 @@
 				CDA9A82D1B9DE9E300D93572 /* MapGoogleViewController.swift in Sources */,
 				CDB0C94D1BCEE0290020BFB5 /* AESCrypt.m in Sources */,
 				CDB0C94E1BCEE0290020BFB5 /* NSData+Base64.m in Sources */,
+				CD4FC9401BED1F810086EC30 /* myInfoViewController.swift in Sources */,
 				CD21002A1B9DE7EF00485126 /* PlaceMarker.swift in Sources */,
 				CD6BAA551B98D946008614B0 /* AppDelegate.swift in Sources */,
 				CD6BAA991B98DB8A008614B0 /* UIViewExtension.swift in Sources */,

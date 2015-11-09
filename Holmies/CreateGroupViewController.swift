@@ -377,6 +377,10 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         
     }
     
+    func exitView() {
+        navigationController?.popViewControllerAnimated(true)
+    }
+    
     
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
@@ -540,8 +544,18 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
                 let dicio = DataManager.sharedInstance.convertGroupToNSDic(activeGroup)
                 
                 DataManager.sharedInstance.createJsonFile("activeGroups", json: dicio)
+                let idGroup = id as! Int
                 
-                self.navigationController?.popViewControllerAnimated(true)
+                DataManager.sharedInstance.requestUsersInGroupId("\(idGroup)", completion: { (users) -> Void in
+                    DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
+                        self.exitView()
+                    })
+                    
+                    
+                })
+                
+                
+                
             })
             
             
@@ -557,6 +571,8 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         
         
         }
+    
+    
     /*
     // MARK: - Navigation
 
@@ -568,6 +584,8 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     */
 
 }
+
+
 
 public extension UIView {
     

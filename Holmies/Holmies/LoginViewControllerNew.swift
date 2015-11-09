@@ -174,7 +174,7 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
                             
                         }
                         else {
-                            
+                            DataManager.sharedInstance.myUser.facebookID = fbID
                             DataManager.sharedInstance.myUser.name = dic["name"] as! String
                             DataManager.sharedInstance.myUser.username = dic["username"] as! String
                             DataManager.sharedInstance.myUser.email = dic["email"] as! String

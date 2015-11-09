@@ -15,11 +15,6 @@ import Alamofire
 
 
 class DataManager {
-//    var idUser:String!
-//    var name:String!
-//    var username:String!
-//    var idFB:String!
-//    var email:String!
     var friendsArray:NSMutableArray!
     var end:[String]!
     var profilePictureOfFriendsArray:Array<UIImage>!
@@ -35,6 +30,7 @@ class DataManager {
     var allSharers = [Sharer]()
     var myUser = User()
     let http = HTTPHelper()
+    var actualCell = 0
     
     lazy var locationManager: CLLocationManager! = {
         let manager = CLLocationManager()
@@ -44,12 +40,7 @@ class DataManager {
         return manager
         }()
     
-//    init() {
-//        username = ""
-//        email = ""
-//        idFB = ""
-// 
-//    }
+
     
     class var sharedInstance: DataManager {
         struct Static {
@@ -333,7 +324,8 @@ class DataManager {
             newUser.createdAt = user["created_at"] as? String
             newUser.email = user["email"] as? String
             newUser.facebookID = user["fbid"] as? String
-            newUser.userID = user["id"] as? String
+            let id = user["id"]
+            newUser.userID = "\(id!)"
             if let locationString = user["location"] as? String {
                 if locationString.containsString(":") {
                     let locationArray = locationString.componentsSeparatedByString(":") as [String]
@@ -480,6 +472,8 @@ class DataManager {
 
         }
         
+
+        
         
 //        
 //        Alamofire.request(.GET, "https://tranquil-coast-5554.herokuapp.com/users/\(DataManager.sharedInstance.idUser)/get_user_receiver_groups").responseJSON { response in
@@ -501,6 +495,16 @@ class DataManager {
     
     func requestUsersInGroupId(groupId:String,completion:(users:[User]) -> Void) {
         http.getInfoFromID(groupId, desiredInfo: .groupSenderUsers) { (result) -> Void in
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             //DataManager.sharedInstance.createJsonFile("users\(groupId)", json: result)
             let users = DataManager.sharedInstance.convertJsonToUser(result)
             let usersDic = DataManager.sharedInstance.convertUserToNSDic(users)
@@ -573,7 +577,7 @@ class DataManager {
             people["altitude"] = user.altitude
             people["createdAt"] = user.createdAt
             people["email"] = user.email
-            people["facebookID"] = user.facebookID
+            people["fbid"] = user.facebookID
             people["id"] = user.userID
             
             people["name"] = user.name
@@ -697,20 +701,39 @@ class DataManager {
 //        }
 //    }
     
-    func linkGroupAndUserToSharer () {
+    func linkGroupAndUserToSharer (completion:(result:String)->Void) {
         for sharer in DataManager.sharedInstance.allSharers {
             if sharer.relation == SharerType.userToGroup {
                 for group in DataManager.sharedInstance.allGroup {
                         if sharer.receiver == group.id {
                             sharer.receiverObject = group
                             group.share = sharer
+                            
+                            let fileManager = NSFileManager.defaultManager()
+                            
+                            let documentsDirectory = findDocumentsDirectory()
+                            let destinationPath = documentsDirectory.stringByAppendingString("/users\(group.id).json")
+                            
+                            if fileManager.fileExistsAtPath(destinationPath) {
+                                
+                                let userInGroup = loadJsonFromDocuments("users\(group.id)")
+                                let userInGroupUSER = convertJsonToUser(userInGroup)
+                                group.users = userInGroupUSER
+                                
+                            }
+                            
+                            
+                            
+                            
                         }
                 }
             }
             else if sharer.relation == SharerType.userToUser {
                 //ainda nao tem
             }
+            completion(result: "Linkou tudo")
         }
+        
     }
     
     func saveMyInfo () {
@@ -719,7 +742,7 @@ class DataManager {
         people["altitude"] = myInfo.altitude
         people["createdAt"] = myInfo.createdAt
         people["email"] = myInfo.email
-        people["facebookID"] = myInfo.facebookID
+        people["fbid"] = myInfo.facebookID
         people["userID"] = myInfo.userID
         people["name"] = myInfo.name
         people["photo"] = myInfo.photo
@@ -737,7 +760,7 @@ class DataManager {
             myInfo.altitude = dic["altitude"] as? String
             myInfo.createdAt = dic["createdAt"] as? String
             myInfo.email = dic["email"] as? String
-            myInfo.facebookID = dic["facebookID"] as? String
+            myInfo.facebookID = dic["fbid"] as? String
             myInfo.userID = dic["userID"] as? String
             myInfo.name = dic["name"] as? String
             myInfo.photo = dic["photo"] as? String
@@ -747,9 +770,37 @@ class DataManager {
             let long = dic["longitude"] as? String
             myInfo.location.latitude = "\(lat)"
             myInfo.location.longitude = "\(long)"
-            
+            DataManager.sharedInstance.myUser = myInfo
         }
     }
+    
+    //    func updateFriends () {
+    //        Alamofire.request(.GET, "https://tranquil-coast-5554.herokuapp.com/users/lista").responseJSON { response in
+    //            if let JSON = response.result.value {
+    //                DataManager.sharedInstance.createJsonFile("users", json: JSON)
+    //                DataManager.sharedInstance.allUser = DataManager.sharedInstance.convertJsonToUser(JSON)
+    //                for index in DataManager.sharedInstance.allUser {
+    //                    let faceId = index.facebookID
+    //                    let id = "\(index.userID!)"
+    //                    if !(faceId == nil) {
+    //                        let image = DataManager.sharedInstance.getProfPic(faceId, serverId: id)
+    //                        DataManager.sharedInstance.saveImage(image, id: id)
+    //                    }
+    //                }
+    //                DataManager.sharedInstance.updateLocationUsers(self.mapView)
+    //                self.controlNet.alpha = 0
+    //                self.controlNet.enabled = false
+    //            } else {
+    //                let dic = DataManager.sharedInstance.loadJsonFromDocuments("users")
+    //                DataManager.sharedInstance.allUser = DataManager.sharedInstance.convertJsonToUser(dic)
+    //                DataManager.sharedInstance.updateLocationUsers(self.mapView)
+    //                self.controlNet.alpha = 1
+    //                self.controlNet.enabled = true
+    //
+    //            }
+    //        }
+    //        //DataManager.sharedInstance.requestGroups()
+    //    }
     
 
     

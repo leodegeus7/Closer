@@ -86,7 +86,8 @@ class AddFriendTableViewController: UITableViewController, UITextFieldDelegate {
                 newUser.createdAt = dic["created_at"] as? String
                 newUser.email = dic["email"] as? String
                 newUser.facebookID = dic["fbid"] as? String
-                newUser.userID = dic["id"] as? String
+                let id = dic["id"] as? Int
+                newUser.userID = "\(id!)"
                 newUser.name = dic["name"] as? String
                 
                 var friendAlreadyExist = false
@@ -100,7 +101,7 @@ class AddFriendTableViewController: UITableViewController, UITextFieldDelegate {
                 
                 if friendAlreadyExist == false {
                     DataManager.sharedInstance.allFriends.append(newUser)
-                    
+                    let friends = DataManager.sharedInstance.allFriends
                     
                     let alertController = UIAlertController(title: "Sucesso", message: "Amigo \(newUser.username)", preferredStyle: .Alert)
                     let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {

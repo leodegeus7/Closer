@@ -82,15 +82,6 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     }
     
     
-
-
-
-    
-    
-    
-// MARK: entra nesse delegate quando recebe novas coordenadas do user
-    
-    
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status ==  .AuthorizedWhenInUse || status == .AuthorizedAlways {    //se a autorizaçao do user estiver sendo pega pelo app
             DataManager.sharedInstance.locationManager.startUpdatingLocation()   //inicia o locationmanager
@@ -105,6 +96,16 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         self.controlNet.enabled = true
         self.controlNet.text = "SEM LOCALIZAÇÃO"
     }
+
+
+
+    
+    
+    
+// MARK: entra nesse delegate quando recebe novas coordenadas do user
+    
+    
+
     
 
 //    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {    SE USAR ESSA FUNCAO NAO PODE USAR A didUpdateToLocation newLocation
@@ -257,33 +258,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     }
     
     
-//    func updateFriends () {
-//        Alamofire.request(.GET, "https://tranquil-coast-5554.herokuapp.com/users/lista").responseJSON { response in
-//            if let JSON = response.result.value {
-//                DataManager.sharedInstance.createJsonFile("users", json: JSON)
-//                DataManager.sharedInstance.allUser = DataManager.sharedInstance.convertJsonToUser(JSON)
-//                for index in DataManager.sharedInstance.allUser {
-//                    let faceId = index.facebookID
-//                    let id = "\(index.userID!)"
-//                    if !(faceId == nil) {
-//                        let image = DataManager.sharedInstance.getProfPic(faceId, serverId: id)
-//                        DataManager.sharedInstance.saveImage(image, id: id)
-//                    }
-//                }
-//                DataManager.sharedInstance.updateLocationUsers(self.mapView)
-//                self.controlNet.alpha = 0
-//                self.controlNet.enabled = false
-//            } else {
-//                let dic = DataManager.sharedInstance.loadJsonFromDocuments("users")
-//                DataManager.sharedInstance.allUser = DataManager.sharedInstance.convertJsonToUser(dic)
-//                DataManager.sharedInstance.updateLocationUsers(self.mapView)
-//                self.controlNet.alpha = 1
-//                self.controlNet.enabled = true
-//                
-//            }
-//        }
-//        //DataManager.sharedInstance.requestGroups()
-//    }
+
 
     func setUpBackgrounGradient () {
         //navigationController?.navigationBar.hidden = true
