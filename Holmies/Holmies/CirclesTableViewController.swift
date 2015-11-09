@@ -57,7 +57,7 @@ class CirclesTableViewController: UITableViewController {
         
         
         // #warning Incomplete implementation, return the number of rows
-        return DataManager.sharedInstance.allSharers.count
+        return DataManager.sharedInstance.allGroup.count
     }
 
 
@@ -201,6 +201,9 @@ class CirclesTableViewController: UITableViewController {
         self.tableView.rowHeight = 75
         
         cellPendent.timeLabel.text = ""
+        
+        let groups = DataManager.sharedInstance.allGroup
+        
         
         let createdHour = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
         let dateFormatter = NSDateFormatter()

@@ -4,40 +4,25 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Holmies.xcscheme</key>
+		<key>Alamofire.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>2</integer>
 		</dict>
-		<key>Watch.xcscheme</key>
+		<key>Pods-Holmies.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
-		</dict>
-		<key>widget3.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>A7A27E6C1BED30F300328101</key>
+		<key>20D7AB58455CBB09D2926117C2951834</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A7FCC5161BC4CE5B00AEDA3F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CD6BAA4E1B98D946008614B0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CD6BAA631B98D946008614B0</key>
+		<key>432ECC54282C84882B482CCB4CF227FC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
