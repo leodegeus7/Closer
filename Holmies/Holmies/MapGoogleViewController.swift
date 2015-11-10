@@ -66,14 +66,18 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         mapView.delegate = self   //delegate das funçoes do google maps
         mapView.mapType = kGMSTypeNormal
         self.setUpBackgrounGradient()
+        DataManager.sharedInstance.updateLocationUsers(mapView)
         self.compassView.hidden = true
         //updateFriendsTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "updateFriends", userInfo: nil, repeats: true)
         
         
         
+        
+        
+        
 
         /*
-        //background 
+        //background
         
         NSNotificationCenter.defaultCent er().addObserver(self, selector: Selector("reinstateBackgroundTask"), name: UIApplicationDidBecomeActiveNotification, object: nil)
         updateTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self,selector: "backgroundCode", userInfo: nil, repeats: true)
@@ -81,6 +85,13 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         */
     }
     
+    override func viewDidAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToSelectedFriend:", name: "goToUser", object: nil)
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        //NSNotificationCenter.defaultCenter().removeObserver(self, name: "goToUser", object: nil)
+    }
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status ==  .AuthorizedWhenInUse || status == .AuthorizedAlways {    //se a autorizaçao do user estiver sendo pega pelo app
@@ -112,7 +123,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 
     
     func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
-        mapView.camera = GMSCameraPosition(target: newLocation.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
+        //mapView.camera = GMSCameraPosition(target: newLocation.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
         DataManager.sharedInstance.myUser.location.longitude = "\(newLocation.coordinate.longitude)"
         DataManager.sharedInstance.myUser.location.latitude = "\(newLocation.coordinate.latitude)"
         DataManager.sharedInstance.saveMyInfo()
@@ -174,6 +185,23 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     
     func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {  //pega as coordenadas do centro da tela
         //reverseGeocodeCoordinate(position.target)
+    }
+    
+    func goToSelectedFriend(notification: NSNotification) {
+        if let info = notification.userInfo {
+            if let user = info["user"] as? User {
+                let lat = user.location.latitude as String
+                let long = user.location.longitude as String
+                
+                let latitudeConvertida = (lat as NSString).doubleValue as CLLocationDegrees
+                let longitudeConvertida = (long as NSString).doubleValue as CLLocationDegrees
+                
+                let userLocation = GMSCameraPosition.cameraWithLatitude(latitudeConvertida,longitude: longitudeConvertida, zoom: 15)
+                mapView.camera = userLocation
+            }
+            
+        }
+        
     }
     
     
