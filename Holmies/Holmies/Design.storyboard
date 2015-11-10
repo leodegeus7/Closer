@@ -1405,7 +1405,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N5E-Lx-4XG" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2694" y="788"/>
+            <point key="canvasLocation" x="2686" y="771"/>
         </scene>
         <!--Friends In Map Table View Controller-->
         <scene sceneID="uaB-aA-I2D">

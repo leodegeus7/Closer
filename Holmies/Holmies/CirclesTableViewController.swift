@@ -211,6 +211,9 @@ class CirclesTableViewController: UITableViewController {
         
         cellPendent.timeLabel.text = ""
         
+        let groups = DataManager.sharedInstance.allGroup
+        
+        
         let createdHour = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"

@@ -33,8 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
 
-
         print(DataManager.sharedInstance.findDocumentsDirectory())
+        
         
         
         // Register for Push Notitications
