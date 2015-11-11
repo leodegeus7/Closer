@@ -316,9 +316,12 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         self.compassView.hidden = false
         let friend = marker.userData as! User
         let locationFriend = CLLocation(latitude: Double(friend.location.latitude)!, longitude: Double(friend.location.longitude)!)
+        print("-1")
         let myCoordinate = CLLocation(latitude: Double(DataManager.sharedInstance.myUser.location.latitude)!, longitude: Double(DataManager.sharedInstance.myUser.location.longitude)!)
-        
-        friendPhoto.image = DataManager.sharedInstance.findImage("\(friend.userID)")
+        print("0")
+        let id = friend.userID
+        friendPhoto.image = DataManager.sharedInstance.findImage(friend.userID)
+        print("1")
         updateCompassPosition(myCoordinate, location: locationFriend)
     }
     
