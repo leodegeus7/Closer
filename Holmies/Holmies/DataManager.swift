@@ -196,7 +196,14 @@ class DataManager {
         
         if !(fileManager.fileExistsAtPath(destinationPath)) {
             if (fid != "") {
-                let imgURLString = "http://graph.facebook.com/" + fid + "/picture?type=normal" //type=large
+                let imgURLString:String!
+                if (fid == myUser.facebookID) {
+                    imgURLString = "http://graph.facebook.com/" + fid + "/picture?height=960" //type=normal
+
+                }else{
+                    imgURLString = "http://graph.facebook.com/" + fid + "/picture?type=large" //type=normal
+                }
+                    
                 let imgURL = NSURL(string: imgURLString)
                 let imageData = NSData(contentsOfURL: imgURL!)
                 fbImage = UIImage(data: imageData!)
