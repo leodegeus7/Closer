@@ -1664,6 +1664,7 @@
 				A7A27E8B1BED30F400328101 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A7A27E8E1BED30F400328101 /* Build configuration list for PBXNativeTarget "Watch" */ = {
 			isa = XCConfigurationList;
@@ -1672,6 +1673,7 @@
 				A7A27E891BED30F400328101 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A7FCC5241BC4CE5B00AEDA3F /* Build configuration list for PBXNativeTarget "widget3" */ = {
 			isa = XCConfigurationList;

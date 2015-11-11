@@ -112,7 +112,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 
     
     func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
-        mapView.camera = GMSCameraPosition(target: newLocation.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
+        //mapView.camera = GMSCameraPosition(target: newLocation.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
         DataManager.sharedInstance.myUser.location.longitude = "\(newLocation.coordinate.longitude)"
         DataManager.sharedInstance.myUser.location.latitude = "\(newLocation.coordinate.latitude)"
         DataManager.sharedInstance.saveMyInfo()

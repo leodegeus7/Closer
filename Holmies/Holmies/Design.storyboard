@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DTL-fJ-YqJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DTL-fJ-YqJ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
@@ -631,17 +631,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Is-kA-VzS">
-                                <rect key="frame" x="255" y="497" width="91" height="30"/>
+                                <rect key="frame" x="248" y="497" width="104" height="30"/>
                                 <animations/>
-                                <state key="normal" title="Excluir Conta"/>
+                                <state key="normal" title="Delete account"/>
                                 <connections>
                                     <action selector="deleteAccount:" destination="Hxn-N4-wLc" eventType="touchUpInside" id="9yW-pS-gIF"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RXr-rH-8XI">
-                                <rect key="frame" x="236" y="530" width="128" height="30"/>
+                                <rect key="frame" x="241" y="530" width="119" height="30"/>
                                 <animations/>
-                                <state key="normal" title="Loggout Facebook"/>
+                                <state key="normal" title="Logout Facebook"/>
                                 <connections>
                                     <action selector="loggoutFace:" destination="Hxn-N4-wLc" eventType="touchUpInside" id="BW4-CX-iRs"/>
                                 </connections>
@@ -669,7 +669,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Text here your new Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m3G-ab-qwu">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type here your new Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m3G-ab-qwu">
                                 <rect key="frame" x="70" y="396" width="460" height="30"/>
                                 <animations/>
                                 <constraints>
@@ -713,6 +713,8 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="deleteAccountButton" destination="5Is-kA-VzS" id="XPt-RR-pHf"/>
+                        <outlet property="facebookLogoutButton" destination="RXr-rH-8XI" id="5d7-Rs-wnF"/>
                         <outlet property="myImage" destination="G5L-SA-tsB" id="zPV-Yb-se0"/>
                         <outlet property="myUserName" destination="L1O-Ud-KCE" id="QHk-U7-T9b"/>
                         <outlet property="username" destination="m3G-ab-qwu" id="uEQ-9G-qAz"/>
@@ -933,15 +935,15 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="99.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="56R-Bd-Oqc">
-                                            <rect key="frame" x="108" y="34" width="473" height="61"/>
+                                        <collectionView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="56R-Bd-Oqc">
+                                            <rect key="frame" x="108" y="26" width="473" height="69"/>
                                             <animations/>
-                                            <color key="backgroundColor" red="0.87450980389999999" green="0.20392156859999999" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="475" id="Rk3-9D-MDS"/>
                                                 <constraint firstAttribute="width" secondItem="56R-Bd-Oqc" secondAttribute="height" multiplier="42:5" id="sws-MI-bLx"/>
                                             </constraints>
-                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="euF-M7-IvR">
+                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lhi-xm-xCB">
                                                 <size key="itemSize" width="50" height="50"/>
                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -1052,7 +1054,7 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="l85-2t-YmW" secondAttribute="trailing" constant="11" id="JEf-Nh-lAc"/>
                                         <constraint firstAttribute="leadingMargin" secondItem="lEL-uV-tuF" secondAttribute="leading" id="JEk-dN-nY9"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="56R-Bd-Oqc" secondAttribute="bottom" constant="5" id="JIf-xt-ZfC"/>
-                                        <constraint firstItem="56R-Bd-Oqc" firstAttribute="top" secondItem="l85-2t-YmW" secondAttribute="bottom" constant="8" id="KJE-hD-Xhk"/>
+                                        <constraint firstItem="56R-Bd-Oqc" firstAttribute="top" secondItem="l85-2t-YmW" secondAttribute="bottom" id="KJE-hD-Xhk"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="56R-Bd-Oqc" secondAttribute="trailing" constant="11" id="P5B-Pp-GfV"/>
                                         <constraint firstItem="lEL-uV-tuF" firstAttribute="top" secondItem="l85-2t-YmW" secondAttribute="bottom" constant="-16" id="PC5-Dj-bzY"/>
                                         <constraint firstItem="56R-Bd-Oqc" firstAttribute="top" secondItem="l85-2t-YmW" secondAttribute="bottom" constant="8" id="Qey-oy-kTR"/>

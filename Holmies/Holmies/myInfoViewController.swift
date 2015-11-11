@@ -12,16 +12,40 @@ class myInfoViewController: UIViewController {
 
     @IBOutlet weak var myImage: UIImageView!
     @IBOutlet weak var username: UITextField!
-    
+    @IBOutlet weak var facebookLogoutButton: UIButton!
+    @IBOutlet weak var deleteAccountButton: UIButton!
     @IBOutlet weak var myUserName: UILabel!
+    
     let http = HTTPHelper()
+    let mainRed: UIColor = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
+    let lightGray = UIColor(red: 170.0/255.0, green: 170.0/255.0, blue: 170.0/255.0, alpha: 1.0)
+
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         myImage.image = DataManager.sharedInstance.findImage(DataManager.sharedInstance.myUser.userID)
-        username.text = "\(DataManager.sharedInstance.myUser.username)\né o seu username"
+        myUserName.text = "\(DataManager.sharedInstance.myUser.username)\né o seu username"
         let buttonContinue = UIBarButtonItem(title: "Update Username", style: .Plain, target: self, action: "continueAction")
         self.navigationItem.rightBarButtonItem = buttonContinue
+        myImage.layer.cornerRadius = 100.0
+        myImage.layer.borderColor = mainRed.CGColor
+        myImage.layer.borderWidth = 3.0
+        myImage.clipsToBounds = true
+        myUserName.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
+        myUserName.textColor = mainRed
+        username.layer.borderColor = mainRed.CGColor
+        username.layer.borderWidth = 1
+        username.layer.cornerRadius = 8
+        username.tintColor = mainRed
+        username.textColor = mainRed
+        username.attributedPlaceholder = NSAttributedString(string: "Type your new usename", attributes: [NSForegroundColorAttributeName: lightGray])
+        facebookLogoutButton.tintColor = mainRed
+        facebookLogoutButton.titleLabel!.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
+        deleteAccountButton.tintColor = mainRed
+        deleteAccountButton.titleLabel!.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
+        
+        
 
         // Do any additional setup after loading the view.
     }
