@@ -196,40 +196,44 @@ class CirclesTableViewController: UITableViewController {
                     dateFormatter.timeZone = NSTimeZone(name: "UTC")
                     let date = dateFormatter.dateFromString(createdHour)
                     let durationString = DataManager.sharedInstance.allGroup[indexPath.row].share.until
-                    let durationFloat = Float(durationString)
-                    let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!))
+                    if !(durationString == "0") {
+                        let durationFloat = Float(durationString)
+                        let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!))
                     
                     
-                    let duration = finalDate?.timeIntervalSinceNow
-                    if duration < 0 {
-                        cellActive.numberLabel.text = "0"
-                        cellActive.timeLabel.text = "expired"
-                        cellActive.selectionStyle = UITableViewCellSelectionStyle.None
-                        // cellActive.userInteractionEnabled = false
-                        cellActive.coloredSquare.backgroundColor = UIColor.grayColor()
+                        let duration = finalDate?.timeIntervalSinceNow
+                        if duration < 0 {
+                            cellActive.numberLabel.text = "0"
+                            cellActive.timeLabel.text = "expired"
+                            cellActive.selectionStyle = UITableViewCellSelectionStyle.None
+                            // cellActive.userInteractionEnabled = false
+                            cellActive.coloredSquare.backgroundColor = UIColor.grayColor()
                         
-                    }
-                    else if duration <= 3600 {
-                        let newDurationMin = Int(duration!/60)
-                        cellActive.numberLabel.text = "\(newDurationMin)"
-                        cellActive.timeLabel.text = "minutes"
-                    }
-                    else if duration > 3600 && duration <= 360000 {
-                        var newDurationHours = Int(duration!/3600)
-                        newDurationHours++
-                        cellActive.numberLabel.text = "\(newDurationHours)"
-                        cellActive.timeLabel.text = "hours"
-                    } else if duration > 360000 {
-                        let duration2 = duration!/86400
+                        }
+                        else if duration <= 3600 {
+                            let newDurationMin = Int(duration!/60)
+                            cellActive.numberLabel.text = "\(newDurationMin)"
+                            cellActive.timeLabel.text = "minutes"
+                        }
+                        else if duration > 3600 && duration <= 360000 {
+                            var newDurationHours = Int(duration!/3600)
+                            newDurationHours++
+                            cellActive.numberLabel.text = "\(newDurationHours)"
+                            cellActive.timeLabel.text = "hours"
+                        } else if duration > 360000 {
+                            let duration2 = duration!/86400
                         
-                        var newDurationDays = Int(duration2)
-                        newDurationDays++
-                        cellActive.numberLabel.text = "\(newDurationDays)"
+                            var newDurationDays = Int(duration2)
+                            newDurationDays++
+                            cellActive.numberLabel.text = "\(newDurationDays)"
+                            cellActive.timeLabel.text = "days"
+                        }
+                    
+                    
+                    } else {
+                        cellActive.numberLabel.text = "∞"
                         cellActive.timeLabel.text = "days"
                     }
-                    
-                    
-                    
                     
                     
                     
@@ -263,37 +267,44 @@ class CirclesTableViewController: UITableViewController {
         dateFormatter.timeZone = NSTimeZone(name: "UTC")
         let date = dateFormatter.dateFromString(createdHour)
         let durationString = DataManager.sharedInstance.allGroup[indexPath.row].share.until
-        let durationFloat = Float(durationString)
-        let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!))
+        
+        if !(durationString == "0") {
+            let durationFloat = Float(durationString)
+            let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!))
         
         
-        let duration = finalDate?.timeIntervalSinceNow
+            let duration = finalDate?.timeIntervalSinceNow
         
         
-        if !(duration == nil) {
-            let duration = Int(duration!)
+            if !(duration == nil) {
+                let duration = Int(duration!)
             
-            if duration < 0 {
-                cellPendent.numberLabel.text = "0"
-                cellPendent.timeLabel.text = "expired"
-                DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+                if duration < 0 {
+                    cellPendent.numberLabel.text = "0"
+                    cellPendent.timeLabel.text = "expired"
+                    DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+                }
+                else if duration <= 3600 {
+                    let newDurationMin = Int(duration/60)
+                    cellPendent.numberLabel.text = "\(newDurationMin)"
+                    cellPendent.timeLabel.text = "minutes"
+                }
+                else if duration > 3600 && duration <= 360000 {
+                    var newDurationHours = Int(duration/3600)
+                    newDurationHours++
+                    cellPendent.numberLabel.text = "\(newDurationHours)"
+                    cellPendent.timeLabel.text = "hours"
+                } else if duration > 360000 {
+                    var newDurationDays = Int(duration/86400)
+                    newDurationDays++
+                    cellPendent.numberLabel.text = "\(newDurationDays)"
+                    cellPendent.timeLabel.text = "days"
+                }
             }
-            else if duration <= 3600 {
-                let newDurationMin = Int(duration/60)
-                cellPendent.numberLabel.text = "\(newDurationMin)"
-                cellPendent.timeLabel.text = "minutes"
-            }
-            else if duration > 3600 && duration <= 360000 {
-                var newDurationHours = Int(duration/3600)
-                newDurationHours++
-                cellPendent.numberLabel.text = "\(newDurationHours)"
-                cellPendent.timeLabel.text = "hours"
-            } else if duration > 360000 {
-                var newDurationDays = Int(duration/86400)
-                newDurationDays++
-                cellPendent.numberLabel.text = "\(newDurationDays)"
-                cellPendent.timeLabel.text = "days"
-            }
+        }
+        else {
+            cellPendent.numberLabel.text = "∞"
+            cellPendent.timeLabel.text = "days"
         }
 
         
