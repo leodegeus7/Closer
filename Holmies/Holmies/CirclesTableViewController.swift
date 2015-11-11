@@ -164,9 +164,18 @@ class CirclesTableViewController: UITableViewController {
                 
                 for user in DataManager.sharedInstance.allGroup[indexPath.row].users {
                     let imageName = DataManager.sharedInstance.findImage(user.userID)
+                    
+
+                    
                     let imageView = UIImageView(image: imageName)
                     
+                    imageView.layer.cornerRadius = 20.0
+                    imageView.layer.borderColor = mainRed.CGColor
+                    imageView.layer.borderWidth = 2.0
+                    imageView.clipsToBounds = true
+                    
                     imageView.frame = CGRect(x: imageX, y: 0, width: sizeOfImageWidth, height: sizeOfImageHeight)
+                    
                     
                     cellActive.scrollViewFriends.addSubview(imageView)
                     imageX += sizeOfImageWidth + spaceInCell
