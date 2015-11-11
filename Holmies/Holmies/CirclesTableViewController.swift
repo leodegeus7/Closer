@@ -303,8 +303,9 @@ class CirclesTableViewController: UITableViewController {
             
             }
             else {
+                let users = DataManager.sharedInstance.allGroup[indexPath.row].users
                 DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
-                
+                let active = DataManager.sharedInstance.activeUsers
                 performSegueWithIdentifier("showMap", sender: self)
             }
 

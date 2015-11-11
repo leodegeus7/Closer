@@ -724,8 +724,17 @@ class DataManager {
                             if fileManager.fileExistsAtPath(destinationPath) {
                                 
                                 let userInGroup = loadJsonFromDocuments("users\(group.id)")
-                                let userInGroupUSER = convertJsonToUser(userInGroup)
+                                var userInGroupUSER = convertJsonToUser(userInGroup)
+                                var i = 0
+                                for user in userInGroupUSER {
+                                    if user.userID == DataManager.sharedInstance.myUser.userID {
+                                        userInGroupUSER.removeAtIndex(i)
+                                        break
+                                    }
+                                    i++
+                                }
                                 group.users = userInGroupUSER
+                                
                                 
                             }
                             

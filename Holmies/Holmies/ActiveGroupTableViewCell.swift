@@ -51,8 +51,6 @@ class ActiveGroupTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let groups = DataManager.sharedInstance.allGroup
-        let indexTeste = indexPathCell
         if !(DataManager.sharedInstance.allGroup[indexPathCell].users == nil) {
                 return DataManager.sharedInstance.allGroup[indexPathCell].users.count
         }
@@ -65,10 +63,6 @@ class ActiveGroupTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let userCell = friendsCollection.dequeueReusableCellWithReuseIdentifier("usercell", forIndexPath: indexPath) as! UsersInGroupsCollectionViewCell
-        
-        let i1 = DataManager.sharedInstance.allGroup[indexPathCell]
-        let i2 = DataManager.sharedInstance.allGroup[indexPathCell].users[indexPath.row]
-        let i3 = DataManager.sharedInstance.allGroup[indexPathCell].users[indexPath.row].userID
         
         let id = DataManager.sharedInstance.allGroup[indexPathCell].users[indexPath.row].userID
         print("cell = \(indexPathCell) cellCollection = \(indexPath.row)")
@@ -85,6 +79,13 @@ class ActiveGroupTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
         return CGSize(width: 40, height: 40)
     }
 
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 0
+    }
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 3, left: 0, bottom: 0, right: 0)

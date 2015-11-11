@@ -11,7 +11,7 @@ import Parse
 import FBSDKCoreKit
 import Alamofire
 
-import CoreLocation
+//import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
