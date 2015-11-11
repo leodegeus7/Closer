@@ -14,7 +14,7 @@ class CirclesTableViewController: UITableViewController {
     let http = HTTPHelper()
     let lightBlue:UIColor = UIColor(red: 61.0/255.0, green: 210.0/255.0, blue: 228.0/255.0, alpha: 1)
     let mainRed: UIColor = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
-
+    var imageX = 0.0
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,7 +29,7 @@ class CirclesTableViewController: UITableViewController {
         DataManager.sharedInstance.linkGroupAndUserToSharer { (result) -> Void in
             
         }
-        
+        DataManager.sharedInstance.selectedFriends.removeAll()
         DataManager.sharedInstance.requestFacebook { (result) -> Void in
         }
         
@@ -97,6 +97,8 @@ class CirclesTableViewController: UITableViewController {
                 }
                 self.tableView.reloadData()
                 self.refreshControl!.endRefreshing()
+//
+                
                 
             }
         }
@@ -124,11 +126,7 @@ class CirclesTableViewController: UITableViewController {
                 
                 
                 
-                
-                
-                let allgroup = DataManager.sharedInstance.allGroup
-                let count = DataManager.sharedInstance.allGroup.count
-                let share = DataManager.sharedInstance.allGroup[indexPath.row].share
+
                 
                 cellActive.timeLabel.text = ""
                 cellActive.nameGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].name
@@ -142,8 +140,54 @@ class CirclesTableViewController: UITableViewController {
                 cellActive.numberLabel.font = UIFont(name: "SFUIDisplay-Ultralight", size: 47)
                 cellActive.timeLabel.font = UIFont(name: "SFUIText-Medium", size: 12)
                 cellActive.coloredSquare.layer.cornerRadius = 8.0
+            
+                
+
+                
+                
+                let spaceInCell = 10.0
+                let numbersOfCellsInScrol = 6.0
+                let scrollViewSizeHeight = Double(cellActive.scrollViewFriends.frame.size.height)
+                let scrollViewSizeWidth = Double(cellActive.scrollViewFriends.frame.size.width)
+                let sizeOfImageHeight = scrollViewSizeHeight
+                let sizeOfImageWidth = (scrollViewSizeWidth/numbersOfCellsInScrol) - spaceInCell/2
+
+                
+                
+                
+                
+                let subViews = cellActive.scrollViewFriends.subviews
+                for subview in subViews {
+                    subview.removeFromSuperview()
+                }
+                
+                
+                for user in DataManager.sharedInstance.allGroup[indexPath.row].users {
+                    let imageName = DataManager.sharedInstance.findImage(user.userID)
+                    
+
+                    
+                    let imageView = UIImageView(image: imageName)
+                    
+                    imageView.layer.cornerRadius = 20.0
+                    imageView.layer.borderColor = mainRed.CGColor
+                    imageView.layer.borderWidth = 2.0
+                    imageView.clipsToBounds = true
+                    
+                    imageView.frame = CGRect(x: imageX, y: 0, width: sizeOfImageWidth, height: sizeOfImageHeight)
+                    
+                    
+                    cellActive.scrollViewFriends.addSubview(imageView)
+                    imageX += sizeOfImageWidth + spaceInCell
+                    
+                }
+                imageX = 0
+                
                 
                 if !(DataManager.sharedInstance.allGroup[indexPath.row].share.until == nil) {
+                    
+                    
+                    
                     
                     
                     let createdHour = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
@@ -154,7 +198,6 @@ class CirclesTableViewController: UITableViewController {
                     let durationString = DataManager.sharedInstance.allGroup[indexPath.row].share.until
                     let durationFloat = Float(durationString)
                     let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!))
-                    
                     
                     
                     let duration = finalDate?.timeIntervalSinceNow

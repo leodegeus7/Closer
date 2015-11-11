@@ -8,36 +8,40 @@
 
 import UIKit
 
-class ActiveGroupTableViewCell: UITableViewCell, UICollectionViewDelegate {
+class ActiveGroupTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var nameGroup: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var coloredSquare: UIView!
-//
-//
-//    @IBOutlet weak var friendsCollection: UICollectionView!
+
+
+    @IBOutlet weak var friendsCollection: UICollectionView!
     
-    @IBOutlet weak var scrollViewFriends: UIScrollView!
-    
+    let mainRed: UIColor = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
     var indexPathCell:Int!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         print("2")
-        DataManager.sharedInstance.linkGroupAndUserToSharer { (result) -> Void in
+        indexPathCell = DataManager.sharedInstance.actualCell
+        DataManager.sharedInstance.actualCell++
+        if (indexPathCell == DataManager.sharedInstance.allGroup.count+1) {
+            indexPathCell = 0
         }
-//        indexPathCell = DataManager.sharedInstance.actualCell
-//        DataManager.sharedInstance.actualCell++
-//        if (indexPathCell == DataManager.sharedInstance.allGroup.count+1) {
-//            indexPathCell = 0
-//        }
 
 //        friendsCollection.numberOfItemsInSection(1)
 //        let index = NSIndexPath(forItem: 0, inSection: 0)
 //        let userCell = friendsCollection.dequeueReusableCellWithReuseIdentifier("usercell", forIndexPath: index) as! UsersInGroupsCollectionViewCell
 //        userCell.imageUser.image = DataManager.sharedInstance.findImage(DataManager.sharedInstance.myUser.userID)
         // Initialization code
+    
+//    
+//        let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+//        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+//        layout.itemSize = CGSize(width: 60, height: 60)
+//        
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -86,7 +90,15 @@ class ActiveGroupTableViewCell: UITableViewCell, UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 3, left: 0, bottom: 0, right: 0)
     }
-
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 0
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 0 
+    }
     
     
 }

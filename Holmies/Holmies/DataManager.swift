@@ -175,9 +175,6 @@ class DataManager {
 
     }
     
-    
-
-    
     func saveImage(image:UIImage?, id:String) -> String {
         if let _ = image {
             let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String

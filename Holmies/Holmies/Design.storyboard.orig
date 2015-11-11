@@ -1260,13 +1260,6 @@
                                         <rect key="frame" x="180" y="381" width="240" height="128"/>
                                         <animations/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9CG-qS-3qq">
-                                        <rect key="frame" x="454" y="434" width="42" height="21"/>
-                                        <animations/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1353,8 +1346,6 @@
                         <outlet property="arrowCompass" destination="ZKI-Ms-hG9" id="OFG-fa-pJK"/>
                         <outlet property="compassView" destination="kb0-Q3-BAK" id="Y9x-A1-5Vr"/>
                         <outlet property="controlNet" destination="y2Z-Pc-wCm" id="cF8-IK-9Bb"/>
-                        <outlet property="friendDistance" destination="9CG-qS-3qq" id="c5Y-pf-QMU"/>
-                        <outlet property="friendPhoto" destination="Ec2-Ic-ELG" id="5Hm-aR-lul"/>
                         <outlet property="mapCenterPinImage" destination="MdR-2A-Cum" id="mU2-k5-dZ8"/>
                         <outlet property="mapView" destination="J4n-KI-g0a" id="XNl-w1-vsj"/>
                         <outlet property="pinImageVerticalConstraint" destination="hnh-gZ-JAP" id="d0e-TY-dDn"/>
