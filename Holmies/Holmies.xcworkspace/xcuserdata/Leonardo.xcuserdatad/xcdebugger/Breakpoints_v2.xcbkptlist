@@ -26,11 +26,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Holmies/MapGoogleViewController.swift"
-            timestampString = "468959841.963205"
+            timestampString = "469134868.840963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "320"
-            endingLineNumber = "320"
+            startingLineNumber = "319"
+            endingLineNumber = "319"
+            landmarkName = "mapView(_:didTapInfoWindowOfMarker:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Holmies/MapGoogleViewController.swift"
+            timestampString = "469134868.840963"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "324"
+            endingLineNumber = "324"
+            landmarkName = "mapView(_:didTapInfoWindowOfMarker:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Holmies/MapGoogleViewController.swift"
+            timestampString = "469134868.840963"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "322"
+            endingLineNumber = "322"
             landmarkName = "mapView(_:didTapInfoWindowOfMarker:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -41,13 +73,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Holmies/MapGoogleViewController.swift"
-            timestampString = "468959905.567851"
+            filePath = "Holmies/DataManager.swift"
+            timestampString = "469134861.588863"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "325"
-            endingLineNumber = "325"
-            landmarkName = "mapView(_:didTapInfoWindowOfMarker:)"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
+            landmarkName = "requestFacebook(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,14 +89,62 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Holmies/MapGoogleViewController.swift"
-            timestampString = "468959899.92971"
+            filePath = "Holmies/DataManager.swift"
+            timestampString = "469134862.655192"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "323"
-            endingLineNumber = "323"
-            landmarkName = "mapView(_:didTapInfoWindowOfMarker:)"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
+            landmarkName = "requestFacebook(_:)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Holmies/DataManager.swift"
+            timestampString = "469134879.291738"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "requestFacebook(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Holmies.DataManager.requestFacebook (Holmies.DataManager)((result : __ObjC.NSMutableArray) -&gt; ()) -&gt; ()"
+                  moduleName = "Holmies"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Leonardo/MainChallenge/Holmies/Holmies/DataManager.swift"
+                  timestampString = "469134879.294354"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "173"
+                  endingLineNumber = "173"
+                  offsetFromSymbolStart = "636">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Holmies.DataManager.(requestFacebook (Holmies.DataManager) -&gt; ((result : __ObjC.NSMutableArray) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "Holmies"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Leonardo/MainChallenge/Holmies/Holmies/DataManager.swift"
+                  timestampString = "469134879.294935"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "173"
+                  endingLineNumber = "173"
+                  offsetFromSymbolStart = "1957">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

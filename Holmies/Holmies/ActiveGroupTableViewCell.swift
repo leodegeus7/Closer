@@ -57,35 +57,35 @@ class ActiveGroupTableViewCell: UITableViewCell, UICollectionViewDelegate {
     }
     
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let userCell = friendsCollection.dequeueReusableCellWithReuseIdentifier("usercell", forIndexPath: indexPath) as! UsersInGroupsCollectionViewCell
-        
-        let id = DataManager.sharedInstance.allGroup[indexPathCell].users[indexPath.row].userID
-        print("cell = \(indexPathCell) cellCollection = \(indexPath.row)")
-        userCell.imageUser.image = DataManager.sharedInstance.findImage(id)
-        userCell.imageUser.layer.cornerRadius = 20.0
-        userCell.imageUser.layer.borderColor = mainRed.CGColor
-        userCell.imageUser.layer.borderWidth = 2.0
-        userCell.imageUser.clipsToBounds = true
-        
-        return userCell
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: 40, height: 40)
-    }
-
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 0
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 0
-    }
-
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 3, left: 0, bottom: 0, right: 0)
-    }
+//    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+//        let userCell = friendsCollection.dequeueReusableCellWithReuseIdentifier("usercell", forIndexPath: indexPath) as! UsersInGroupsCollectionViewCell
+//        
+//        let id = DataManager.sharedInstance.allGroup[indexPathCell].users[indexPath.row].userID
+//        print("cell = \(indexPathCell) cellCollection = \(indexPath.row)")
+//        userCell.imageUser.image = DataManager.sharedInstance.findImage(id)
+//        userCell.imageUser.layer.cornerRadius = 20.0
+//        userCell.imageUser.layer.borderColor = mainRed.CGColor
+//        userCell.imageUser.layer.borderWidth = 2.0
+//        userCell.imageUser.clipsToBounds = true
+//        
+//        return userCell
+//    }
+//    
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+//        return CGSize(width: 40, height: 40)
+//    }
+//
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+//        return 0
+//    }
+//    
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+//        return 0
+//    }
+//
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+//        return UIEdgeInsets(top: 3, left: 0, bottom: 0, right: 0)
+//    }
 
     
     
