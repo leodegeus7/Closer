@@ -24,12 +24,17 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     @IBOutlet weak var compassView: UIView!
     var gradient:UIImage!
     
+    
+
+    
+    
     //background whetever
     var updateTimer: NSTimer?
     var updateFriendsTimer: NSTimer?
     var backgroundTask: UIBackgroundTaskIdentifier = UIBackgroundTaskInvalid
     var numero = 0
     var friendsDictionary:Dictionary<String,AnyObject>!
+    var enterInView = true
     
     //var locationFirst:CLLocation!
     let dataProvider = GoogleDataProvider()
@@ -62,7 +67,6 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DataManager.sharedInstance.locationManager.delegate = self
         mapView.delegate = self   //delegate das funçoes do google maps
         mapView.mapType = kGMSTypeNormal
         self.setUpBackgrounGradient()
@@ -71,8 +75,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         //updateFriendsTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "updateFriends", userInfo: nil, repeats: true)
         
         
-        
-        
+
         
         
 
@@ -86,11 +89,22 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     }
     
     override func viewDidAppear(animated: Bool) {
+        DataManager.sharedInstance.locationManager.delegate = self
+        let status = CLLocationManager.authorizationStatus()
+        if status ==  .AuthorizedWhenInUse || status == .AuthorizedAlways {
+            DataManager.sharedInstance.locationManager.startUpdatingLocation()   //inicia o locationmanager
+            mapView.myLocationEnabled = true   //coloca a localizaçao do user no mapa com uma bolinha
+            mapView.settings.myLocationButton = true    //coloca o botão de localizar user
+        }
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToSelectedFriend:", name: "goToUser", object: nil)
+        enterInView = true
     }
     
     override func viewDidDisappear(animated: Bool) {
         //NSNotificationCenter.defaultCenter().removeObserver(self, name: "goToUser", object: nil)
+        DataManager.sharedInstance.locationManager.delegate = nil
+
+        enterInView = false
     }
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -123,7 +137,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 
     
     func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
-        //mapView.camera = GMSCameraPosition(target: newLocation.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
+        if enterInView {mapView.camera = GMSCameraPosition(target: newLocation.coordinate, zoom: 15, bearing: 0, viewingAngle: 0);enterInView = false}
         DataManager.sharedInstance.myUser.location.longitude = "\(newLocation.coordinate.longitude)"
         DataManager.sharedInstance.myUser.location.latitude = "\(newLocation.coordinate.latitude)"
         DataManager.sharedInstance.saveMyInfo()
@@ -285,6 +299,9 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         }
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        print("oi")
+    }
     
 
 

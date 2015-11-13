@@ -60,7 +60,7 @@ class myInfoViewController: UIViewController {
             DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Digite um username para atualizar", button1: "OK")
         }
         else {
-            http.updateUserWithID(DataManager.sharedInstance.myUser.userID, username: "\(myUserName.text!)", location: nil, altitude: nil, fbid: nil, photo: nil, name: nil, email: nil, password: nil, completion: { (result) -> Void in
+            http.updateUserWithID(DataManager.sharedInstance.myUser.userID, username: "\(username.text!)", location: nil, altitude: nil, fbid: nil, photo: nil, name: nil, email: nil, password: nil, completion: { (result) -> Void in
                 let JSON = result
                 let dic = JSON as NSDictionary
                 if dic["error"] != nil {
@@ -68,7 +68,11 @@ class myInfoViewController: UIViewController {
                     print("erro aqui")
                 }
                 else {
-                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Usuário Atualizado: \(self.myUserName.text!)", button1: "Ok")
+                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Usuário Atualizado: \(self.username.text!)", button1: "Ok")
+                    DataManager.sharedInstance.myUser.username = "\(self.username.text!)"
+                    DataManager.sharedInstance.saveMyInfo()
+                    DataManager.sharedInstance.loadMyInfo()
+                    self.myUserName.text = "\(self.username.text!)\né o seu username"
                     self.exitView()
                 }
             })

@@ -3,15 +3,26 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "ActiveGroupTableViewCell.collectionView(UICollectionView, numberOfItemsInSection : Int) -&gt; Int:ActiveGroupTableViewCell.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DataManager.convertJsonToUser(AnyObject) -&gt; [User]:DataManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CirclesTableViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:CirclesTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "DataManager.sharedInstance.allGroup">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "CirclesTableViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:CirclesTableViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "imageX">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ActiveGroupTableViewCell.collectionView(UICollectionView, numberOfItemsInSection : Int) -&gt; Int:ActiveGroupTableViewCell.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

@@ -12,10 +12,10 @@ class GroupsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        reloadData { (result) -> Void in
-            self.tableView.reloadData()
-        }
-        
+//        reloadData { (result) -> Void in
+//            self.tableView.reloadData()
+//        }
+//        
 
         
     

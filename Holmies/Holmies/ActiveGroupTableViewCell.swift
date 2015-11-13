@@ -25,8 +25,7 @@ class ActiveGroupTableViewCell: UITableViewCell, UICollectionViewDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         print("2")
-        DataManager.sharedInstance.linkGroupAndUserToSharer { (result) -> Void in
-        }
+
 //        indexPathCell = DataManager.sharedInstance.actualCell
 //        DataManager.sharedInstance.actualCell++
 //        if (indexPathCell == DataManager.sharedInstance.allGroup.count+1) {
