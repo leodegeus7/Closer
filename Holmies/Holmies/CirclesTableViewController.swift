@@ -21,16 +21,18 @@ class CirclesTableViewController: UITableViewController {
         
         let refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refresh.addTarget(self,action:"reloadData",forControlEvents:.ValueChanged)
+        refresh.addTarget(self,action:"refreshData",forControlEvents:.ValueChanged)
         self.refreshControl = refresh
         
         navigationBarGradient()
         
         DataManager.sharedInstance.linkGroupAndUserToSharer { (result) -> Void in
             
+            
         }
         DataManager.sharedInstance.selectedFriends.removeAll()
         DataManager.sharedInstance.requestFacebook { (result) -> Void in
+            
         }
         
 //        for family: String in UIFont.familyNames()
@@ -70,7 +72,12 @@ class CirclesTableViewController: UITableViewController {
         reloadData()
     }
     
+    func refreshData() {
+        reloadData()
+    }
+    
     func reloadData() {
+        self.tableView.reloadData()
         DataManager.sharedInstance.requestSharers { (result) -> Void in
             DataManager.sharedInstance.requestGroups { (result) -> Void in
                 
@@ -78,24 +85,27 @@ class CirclesTableViewController: UITableViewController {
                 
                 DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
                     print("\(result)")
+//                    self.tableView.reloadData()
                 })
                 
                 let friends = DataManager.sharedInstance.loadJsonFromDocuments("friends")
-                let count = DataManager.sharedInstance.allFriends.count
+
 
                 let myPhoto = DataManager.sharedInstance.getProfPic(DataManager.sharedInstance.myUser.facebookID, serverId: DataManager.sharedInstance.myUser.userID)
                 DataManager.sharedInstance.saveImage(myPhoto, id: DataManager.sharedInstance.myUser.userID)
                 DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(friends)
                 for index in DataManager.sharedInstance.allFriends {
                     
-                    let fid = index.facebookID
-                    let id = index.userID
+
                     if !(index.facebookID == nil) && !(index.userID == nil) {
                         let image = DataManager.sharedInstance.getProfPic(index.facebookID, serverId: index.userID)
                         DataManager.sharedInstance.saveImage(image, id: index.userID)
                     }
                 }
-                self.tableView.reloadData()
+                DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
+                    print("\(result)")
+                    self.tableView.reloadData()
+                })
                 self.refreshControl!.endRefreshing()
 //
                 
@@ -103,7 +113,9 @@ class CirclesTableViewController: UITableViewController {
             }
         }
             DataManager.sharedInstance.saveMyInfo()
-        
+        DataManager.sharedInstance.requestFacebook { (result) -> Void in
+            
+        }
         
 
         
@@ -196,40 +208,44 @@ class CirclesTableViewController: UITableViewController {
                     dateFormatter.timeZone = NSTimeZone(name: "UTC")
                     let date = dateFormatter.dateFromString(createdHour)
                     let durationString = DataManager.sharedInstance.allGroup[indexPath.row].share.until
-                    let durationFloat = Float(durationString)
-                    let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!))
+                    if !(durationString == "0") {
+                        let durationFloat = Float(durationString)
+                        let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!))
                     
                     
-                    let duration = finalDate?.timeIntervalSinceNow
-                    if duration < 0 {
-                        cellActive.numberLabel.text = "0"
-                        cellActive.timeLabel.text = "expired"
-                        cellActive.selectionStyle = UITableViewCellSelectionStyle.None
-                        // cellActive.userInteractionEnabled = false
-                        cellActive.coloredSquare.backgroundColor = UIColor.grayColor()
+                        let duration = finalDate?.timeIntervalSinceNow
+                        if duration < 0 {
+                            cellActive.numberLabel.text = "0"
+                            cellActive.timeLabel.text = "expired"
+                            cellActive.selectionStyle = UITableViewCellSelectionStyle.None
+                            // cellActive.userInteractionEnabled = false
+                            cellActive.coloredSquare.backgroundColor = UIColor.grayColor()
                         
-                    }
-                    else if duration <= 3600 {
-                        let newDurationMin = Int(duration!/60)
-                        cellActive.numberLabel.text = "\(newDurationMin)"
-                        cellActive.timeLabel.text = "minutes"
-                    }
-                    else if duration > 3600 && duration <= 360000 {
-                        var newDurationHours = Int(duration!/3600)
-                        newDurationHours++
-                        cellActive.numberLabel.text = "\(newDurationHours)"
-                        cellActive.timeLabel.text = "hours"
-                    } else if duration > 360000 {
-                        let duration2 = duration!/86400
+                        }
+                        else if duration <= 3600 {
+                            let newDurationMin = Int(duration!/60)
+                            cellActive.numberLabel.text = "\(newDurationMin)"
+                            cellActive.timeLabel.text = "minutes"
+                        }
+                        else if duration > 3600 && duration <= 360000 {
+                            var newDurationHours = Int(duration!/3600)
+                            newDurationHours++
+                            cellActive.numberLabel.text = "\(newDurationHours)"
+                            cellActive.timeLabel.text = "hours"
+                        } else if duration > 360000 {
+                            let duration2 = duration!/86400
                         
-                        var newDurationDays = Int(duration2)
-                        newDurationDays++
-                        cellActive.numberLabel.text = "\(newDurationDays)"
+                            var newDurationDays = Int(duration2)
+                            newDurationDays++
+                            cellActive.numberLabel.text = "\(newDurationDays)"
+                            cellActive.timeLabel.text = "days"
+                        }
+                    
+                    
+                    } else {
+                        cellActive.numberLabel.text = "∞"
                         cellActive.timeLabel.text = "days"
                     }
-                    
-                    
-                    
                     
                     
                     
@@ -263,37 +279,44 @@ class CirclesTableViewController: UITableViewController {
         dateFormatter.timeZone = NSTimeZone(name: "UTC")
         let date = dateFormatter.dateFromString(createdHour)
         let durationString = DataManager.sharedInstance.allGroup[indexPath.row].share.until
-        let durationFloat = Float(durationString)
-        let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!))
+        
+        if !(durationString == "0") {
+            let durationFloat = Float(durationString)
+            let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!))
         
         
-        let duration = finalDate?.timeIntervalSinceNow
+            let duration = finalDate?.timeIntervalSinceNow
         
         
-        if !(duration == nil) {
-            let duration = Int(duration!)
+            if !(duration == nil) {
+                let duration = Int(duration!)
             
-            if duration < 0 {
-                cellPendent.numberLabel.text = "0"
-                cellPendent.timeLabel.text = "expired"
-                DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+                if duration < 0 {
+                    cellPendent.numberLabel.text = "0"
+                    cellPendent.timeLabel.text = "expired"
+                    DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+                }
+                else if duration <= 3600 {
+                    let newDurationMin = Int(duration/60)
+                    cellPendent.numberLabel.text = "\(newDurationMin)"
+                    cellPendent.timeLabel.text = "minutes"
+                }
+                else if duration > 3600 && duration <= 360000 {
+                    var newDurationHours = Int(duration/3600)
+                    newDurationHours++
+                    cellPendent.numberLabel.text = "\(newDurationHours)"
+                    cellPendent.timeLabel.text = "hours"
+                } else if duration > 360000 {
+                    var newDurationDays = Int(duration/86400)
+                    newDurationDays++
+                    cellPendent.numberLabel.text = "\(newDurationDays)"
+                    cellPendent.timeLabel.text = "days"
+                }
             }
-            else if duration <= 3600 {
-                let newDurationMin = Int(duration/60)
-                cellPendent.numberLabel.text = "\(newDurationMin)"
-                cellPendent.timeLabel.text = "minutes"
-            }
-            else if duration > 3600 && duration <= 360000 {
-                var newDurationHours = Int(duration/3600)
-                newDurationHours++
-                cellPendent.numberLabel.text = "\(newDurationHours)"
-                cellPendent.timeLabel.text = "hours"
-            } else if duration > 360000 {
-                var newDurationDays = Int(duration/86400)
-                newDurationDays++
-                cellPendent.numberLabel.text = "\(newDurationDays)"
-                cellPendent.timeLabel.text = "days"
-            }
+        }
+        else {
+            cellPendent.numberLabel.text = "∞"
+            cellPendent.timeLabel.text = "days"
         }
 
         

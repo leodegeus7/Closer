@@ -379,6 +379,9 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     
     func exitView() {
         navigationController?.popViewControllerAnimated(true)
+        navigationController?.dismissViewControllerAnimated(true, completion: { () -> Void in
+            
+        })
     }
     
     
@@ -404,9 +407,9 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         
         switch currentValue {
         case 0:
-            chosenHour = currentValue
+            chosenHour = 1
             chosenDay = chosenHour / 24
-            upSliderLabel.text = "\(chosenHour) hours"
+            upSliderLabel.text = "\(1) hours"
             upSliderLabel.textColor = mainRed
             upSliderLabel.fadeIn()
             downSlideLabel.fadeOut()
@@ -491,6 +494,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
             downSlideLabel.fadeIn()
             break
         case 46...50:
+            chosenHour = 0
             upSliderLabel.text = "\(168) hours"
             upSliderLabel.fadeOut()
             downSlideLabel.text = "Undetermined"

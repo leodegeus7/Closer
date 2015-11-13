@@ -38,7 +38,7 @@ class DataManager {
         manager.requestAlwaysAuthorization()
         manager.distanceFilter = 0.5
         return manager
-        }()
+    }()
     
 
     
@@ -163,7 +163,7 @@ class DataManager {
             if error == nil {
                 self.friendsDictionaryFace = result as! Dictionary<String,AnyObject>
                 DataManager.sharedInstance.friendsArray = (self.friendsDictionaryFace["data"]) as! NSMutableArray
-                print("\(DataManager.sharedInstance.friendsArray)")
+                let amigos = "\(DataManager.sharedInstance.friendsArray)"
                 completion(result: self.friendsArray)
                 
             }
@@ -267,6 +267,7 @@ class DataManager {
     
     func createJsonFile(name:String,json:AnyObject) {
 
+        print("inicio\(name)")
         let documents = DataManager.sharedInstance.findDocumentsDirectory()
         let path = documents.stringByAppendingString("/\(name).json")
         
@@ -286,7 +287,7 @@ class DataManager {
         outputStream?.open()
         NSJSONSerialization.writeJSONObject(json, toStream: outputStream!, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
         outputStream?.close()
-    
+        print("fim\(name)")
     }
     
     func loadJsonFromDocuments(nomeArq:String) -> AnyObject {
@@ -510,13 +511,27 @@ class DataManager {
             
             
             //DataManager.sharedInstance.createJsonFile("users\(groupId)", json: result)
-            let users = DataManager.sharedInstance.convertJsonToUser(result)
+            var users = DataManager.sharedInstance.convertJsonToUser(result)
             let usersDic = DataManager.sharedInstance.convertUserToNSDic(users)
             
             DataManager.sharedInstance.createJsonFile("users\(groupId)", json: usersDic)
             var num = 0
             for group in DataManager.sharedInstance.allGroup {
                 if group.id == groupId {
+                    
+                    
+                    
+                    //retira eu da lista de users dos grupos
+                    var i = 0
+                    for user in users {
+                        if user.userID == DataManager.sharedInstance.myUser.userID {
+                            users.removeAtIndex(i)
+                            break
+                        }
+                        i++
+                    }
+               
+                    
                     DataManager.sharedInstance.allGroup[num].users = users
                     if DataManager.sharedInstance.allGroup[num].users.count <= 1 {
                         self.destroyGroupWithGroup(DataManager.sharedInstance.allGroup[num])
@@ -744,10 +759,12 @@ class DataManager {
             else if sharer.relation == SharerType.userToUser {
                 //ainda nao tem
             }
-            completion(result: "Linkou tudo")
+            
         }
-        
+        completion(result: "Linkou tudo")
     }
+    
+
     
     func saveMyInfo () {
         let myInfo = DataManager.sharedInstance.myUser
