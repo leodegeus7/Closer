@@ -111,8 +111,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "63"
             endingLineNumber = "63"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "5">
+            landmarkName = "MapGoogleViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -175,8 +175,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "64"
             endingLineNumber = "64"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "5">
+            landmarkName = "MapGoogleViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Holmies/CirclesTableViewController.swift"
-            timestampString = "467753150.343376"
+            timestampString = "469135530.530247"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Holmies/CirclesTableViewController.swift"
-            timestampString = "467753150.343376"
+            timestampString = "469135530.530247"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -244,7 +244,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Holmies/CirclesTableViewController.swift"
-            timestampString = "467753150.343376"
+            timestampString = "469135530.530247"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "71"
@@ -260,11 +260,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Holmies/CirclesTableViewController.swift"
-            timestampString = "467753150.343376"
+            timestampString = "469135530.530247"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "viewWillAppear(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Holmies/CirclesTableViewController.swift"
+            timestampString = "469135530.530247"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "reloadData()"
             landmarkType = "5">
          </BreakpointContent>
@@ -276,28 +292,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Holmies/CirclesTableViewController.swift"
-            timestampString = "467753150.343376"
+            timestampString = "469135530.530247"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Holmies/CirclesTableViewController.swift"
-            timestampString = "467753150.343376"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
-            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "reloadData()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -345,7 +345,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "202"
             endingLineNumber = "202"
-            landmarkName = "goToSelectedFriend(_:)"
+            landmarkName = "mapView(_:idleAtCameraPosition:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

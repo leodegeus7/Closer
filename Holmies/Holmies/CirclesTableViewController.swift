@@ -69,6 +69,7 @@ class CirclesTableViewController: UITableViewController {
 
     
     override func viewWillAppear(animated: Bool) {
+                DataManager.sharedInstance.selectedFriends.removeAll()
         reloadData()
     }
     
