@@ -71,6 +71,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         mapView.mapType = kGMSTypeNormal
         self.setUpBackgrounGradient()
         DataManager.sharedInstance.updateLocationUsers(mapView)
+        
         self.compassView.hidden = true
         //updateFriendsTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "updateFriends", userInfo: nil, repeats: true)
         
@@ -236,6 +237,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 
     @IBAction func xButton(sender: AnyObject) {
         compassView.hidden = true
+        navigationController?.navigationBar.hidden = false
     }
     
     @IBAction func ListaLocal(sender: AnyObject) {
@@ -307,8 +309,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 
     func setUpBackgrounGradient () {
         //navigationController?.navigationBar.hidden = true
-        let red1 = UIColor(red: 210/255, green: 37/255, blue: 53/255, alpha: 1)
-        let red2 = UIColor(red: 213/255, green: 44/255, blue: 73/255, alpha: 1)
+        let red1 = UIColor(red: 213/255, green: 45/255, blue: 73/255, alpha: 1)
+        let red2 = UIColor(red: 215/255, green: 35/255, blue: 65/255, alpha: 0.8)
         
         let gradientColors: [CGColor] = [red1.CGColor, red2.CGColor]
         let gradientLocations: [Float] = [0.0, 1.0]
@@ -316,26 +318,26 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         let gradientLayer: CAGradientLayer = CAGradientLayer()
         gradientLayer.colors = gradientColors
         gradientLayer.locations = gradientLocations
-        
-//        let compassViewWithouNavigationBar:CGRect!
-//       compassViewWithouNavigationBar = CGRectMake(0.0, 1.0, compassView.bounds.width, (compassView.bounds.height + (navigationController?.navigationBar.frame.height)!))
+
         
         gradientLayer.frame = CGRectMake(0.0, 0.0, compassView.frame.size.width, compassView.frame.size.height*5/4)
         compassView.layer.insertSublayer(gradientLayer, atIndex: 0)
 
+
         
-//        let fontDictionary = [NSForegroundColorAttributeName:UIColor.whiteColor()]
-//        navigationController?.navigationBar.titleTextAttributes = fontDictionary
-        compassView.hidden = true
     }
 
     func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
         self.compassView.hidden = false
+        navigationController?.navigationBar.hidden = true
         let friend = marker.userData as! User
         let locationFriend = CLLocation(latitude: Double(friend.location.latitude)!, longitude: Double(friend.location.longitude)!)
+        print("-1")
         let myCoordinate = CLLocation(latitude: Double(DataManager.sharedInstance.myUser.location.latitude)!, longitude: Double(DataManager.sharedInstance.myUser.location.longitude)!)
-        
+        print("0")
+        let id = friend.userID
         friendPhoto.image = DataManager.sharedInstance.findImage(friend.userID)
+        print("1")
         updateCompassPosition(myCoordinate, location: locationFriend)
     }
     
