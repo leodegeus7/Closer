@@ -8,6 +8,8 @@
 
 import UIKit
 import QuartzCore
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class CirclesTableViewController: UITableViewController {
     
@@ -17,7 +19,7 @@ class CirclesTableViewController: UITableViewController {
     var imageX = 0.0
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        reloadData()
         
         let refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -31,9 +33,24 @@ class CirclesTableViewController: UITableViewController {
             
         }
         DataManager.sharedInstance.selectedFriends.removeAll()
-        DataManager.sharedInstance.requestFacebook { (result) -> Void in
-            
+        
+        
+        if (FBSDKAccessToken.currentAccessToken() == nil) {
+            print("Nao fez login face")
         }
+        else {
+                    DataManager.sharedInstance.requestFacebook({ (result) -> Void in
+                    })
+        }
+
+        
+        
+        
+        
+        
+//        DataManager.sharedInstance.requestFacebook { (result) -> Void in
+//            
+//        }
         
 //        for family: String in UIFont.familyNames()
 //        {
@@ -46,6 +63,8 @@ class CirclesTableViewController: UITableViewController {
 
         
     }
+    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -113,9 +132,9 @@ class CirclesTableViewController: UITableViewController {
             }
         }
             DataManager.sharedInstance.saveMyInfo()
-        DataManager.sharedInstance.requestFacebook { (result) -> Void in
-            
-        }
+//        DataManager.sharedInstance.requestFacebook { (result) -> Void in
+//            
+//        }
         
 
         
@@ -173,26 +192,29 @@ class CirclesTableViewController: UITableViewController {
                     subview.removeFromSuperview()
                 }
                 
-                
-                for user in DataManager.sharedInstance.allGroup[indexPath.row].users {
-                    let imageName = DataManager.sharedInstance.findImage(user.userID)
-                    
-
-                    
-                    let imageView = UIImageView(image: imageName)
-                    
-                    imageView.layer.cornerRadius = 20.0
-                    imageView.layer.borderColor = mainRed.CGColor
-                    imageView.layer.borderWidth = 2.0
-                    imageView.clipsToBounds = true
-                    
-                    imageView.frame = CGRect(x: imageX, y: 0, width: sizeOfImageWidth, height: sizeOfImageHeight)
-                    
-                    
-                    cellActive.scrollViewFriends.addSubview(imageView)
-                    imageX += sizeOfImageWidth + spaceInCell
-                    
+                if let groupTest = DataManager.sharedInstance.allGroup[indexPath.row].users {
+                    for user in DataManager.sharedInstance.allGroup[indexPath.row].users {
+                        let imageName = DataManager.sharedInstance.findImage(user.userID)
+                        
+                        
+                        
+                        let imageView = UIImageView(image: imageName)
+                        
+                        imageView.layer.cornerRadius = 20.0
+                        imageView.layer.borderColor = mainRed.CGColor
+                        imageView.layer.borderWidth = 2.0
+                        imageView.clipsToBounds = true
+                        
+                        imageView.frame = CGRect(x: imageX, y: 0, width: sizeOfImageWidth, height: sizeOfImageHeight)
+                        
+                        
+                        cellActive.scrollViewFriends.addSubview(imageView)
+                        imageX += sizeOfImageWidth + spaceInCell
+                        
+                    }
                 }
+                
+
                 imageX = 0
                 
                 
@@ -270,7 +292,7 @@ class CirclesTableViewController: UITableViewController {
         
         cellPendent.timeLabel.text = ""
         
-        let groups = DataManager.sharedInstance.allGroup
+        //let groups = DataManager.sharedInstance.allGroup
         
         
         let createdHour = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
@@ -373,6 +395,7 @@ class CirclesTableViewController: UITableViewController {
                 DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
                 let active = DataManager.sharedInstance.activeUsers
                 performSegueWithIdentifier("showMap", sender: self)
+                DataManager.sharedInstance.selectedGroup = DataManager.sharedInstance.allGroup[indexPath.row]
             }
 
         }

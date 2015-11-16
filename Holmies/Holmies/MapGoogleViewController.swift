@@ -335,7 +335,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         let locationFriend = CLLocation(latitude: Double(friend.location.latitude)!, longitude: Double(friend.location.longitude)!)
         let myCoordinate = CLLocation(latitude: Double(DataManager.sharedInstance.myUser.location.latitude)!, longitude: Double(DataManager.sharedInstance.myUser.location.longitude)!)
         
-        friendPhoto.image = DataManager.sharedInstance.findImage("\(friend.userID)")
+        friendPhoto.image = DataManager.sharedInstance.findImage(friend.userID)
         updateCompassPosition(myCoordinate, location: locationFriend)
     }
     

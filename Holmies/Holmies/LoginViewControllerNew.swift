@@ -169,8 +169,11 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
                         let JSON = result
                         let dic = JSON as NSDictionary
                         if dic["error"] != nil {
-                            let error = dic["error"]
-                            self.createSimpleUIAlert(self, title: "Login not conclued", message: "\(error!)", button1: "Ok")
+                            let error = dic["error"] as! String
+                            self.createSimpleUIAlert(self, title: "Login not conclued", message: "\(error)", button1: "Ok")
+                            if error.containsString("User with FacebookID") {
+                                self.requestSignUp(resultData["name"] as! String, email: resultData["name"] as! String, faceId: resultData["id"] as! String)
+                            }
                             
                         }
                         else {
@@ -185,6 +188,18 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
                             
                             DataManager.sharedInstance.saveID()
                             self.performSegueWithIdentifier("showTableView", sender: self)
+                            let friendRequest = FBSDKGraphRequest(graphPath: "/me/friends", parameters: nil)
+                            friendRequest.startWithCompletionHandler{ (connection: FBSDKGraphRequestConnection!, result:AnyObject!, error:NSError!) -> Void in
+                                if error == nil {
+                                    let  friendsDictionaryFace = result as! Dictionary<String,AnyObject>
+                                    DataManager.sharedInstance.friendsArray = (friendsDictionaryFace["data"]) as! NSMutableArray
+                                    
+                                    
+                                }
+                                else {
+                                    print("\(error)")
+                                }
+                            }
                         }
                         self.afterLogin()
                     })
@@ -356,6 +371,7 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
                 DataManager.sharedInstance.myUser.username = dic["username"] as! String
                 DataManager.sharedInstance.myUser.email = dic["email"] as! String
                 let id = dic["id"]
+                DataManager.sharedInstance.myUser.facebookID = faceId
                 DataManager.sharedInstance.myUser.userID = "\(id!)"
                 self.helper.updateUserWithID("\(id!)", username: nil, location: nil, altitude: nil, fbid: faceId, photo: nil, name: nil, email: nil, password: "\(DataManager.sharedInstance.randomStringWithLength(64))", completion: { (result) -> Void in
                     
