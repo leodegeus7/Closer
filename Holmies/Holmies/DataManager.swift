@@ -452,9 +452,45 @@ class DataManager {
             marker.userData = user
             
             
+            let topImage = findImage(user.userID)
+            //let bottomImageView = UIImageView()
+            let bottomImage = UIImage(named: "pin2.png")
+            
+
+            let newSize = CGSizeMake((topImage.size.width), (topImage.size.height))
+            UIGraphicsBeginImageContext(newSize)
+            bottomImage!.drawInRect(CGRectMake(0, 0, newSize.width, newSize.height))
+            topImage.drawInRect(CGRectMake((bottomImage?.size.width)!/2, (bottomImage?.size.width)!/2, 100, 100), blendMode: CGBlendMode.Normal, alpha: 1.0)
+            let newimage = UIGraphicsGetImageFromCurrentImageContext()
+            
+            
+//            bottomImageView.image = bottomImage
+//            bottomImageView.layer.cornerRadius = 100
+            
+//            
+//            let size = CGSize(width: 300, height: 300)
+//            UIGraphicsBeginImageContext(size)
+//            
+//            let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+//            
+//            
+//            bottomImageView.image!.drawInRect(areaSize)
+//            
+//            
+//            topImage!.drawInRect(areaSize, blendMode: CGBlendMode.Normal, alpha: 1)
+//            let newPin:UIImage = UIGraphicsGetImageFromCurrentImageContext()
+//            UIGraphicsEndImageContext()
+            
+            
+            marker.icon = newimage
+        
+            
+            
         
         }
     }
+    
+    
     
     func requestGroups (completion:(result:[NSDictionary])->Void) {
         http.getInfoFromID(DataManager.sharedInstance.myUser.userID, desiredInfo: .userReceiverGroups) { (result) -> Void in

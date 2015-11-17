@@ -174,7 +174,7 @@ class CirclesTableViewController: UITableViewController {
                     subview.removeFromSuperview()
                 }
                 
-                
+                if let groupTest = DataManager.sharedInstance.allGroup[indexPath.row].users {
                 for user in DataManager.sharedInstance.allGroup[indexPath.row].users {
                     let imageName = DataManager.sharedInstance.findImage(user.userID)
                     
@@ -193,6 +193,7 @@ class CirclesTableViewController: UITableViewController {
                     cellActive.scrollViewFriends.addSubview(imageView)
                     imageX += sizeOfImageWidth + spaceInCell
                     
+                }
                 }
                 imageX = 0
                 

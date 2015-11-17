@@ -73,11 +73,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         DataManager.sharedInstance.updateLocationUsers(mapView)
         
         self.compassView.hidden = true
-        //updateFriendsTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "updateFriends", userInfo: nil, repeats: true)
-        
-        
-
-        
+        friendDistance.font = UIFont(name:"SFUIText-Regular", size: 15)
         
 
         /*
@@ -236,8 +232,10 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     }
 
     @IBAction func xButton(sender: AnyObject) {
+        compassView.fadeOut(0.5)
         compassView.hidden = true
         navigationController?.navigationBar.hidden = false
+
     }
     
     @IBAction func ListaLocal(sender: AnyObject) {
@@ -353,3 +351,6 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     }
 
 }
+
+
+
