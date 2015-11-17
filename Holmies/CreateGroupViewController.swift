@@ -16,6 +16,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addUserButton: UIButton!
     
+    
     let redCheck = UIImage(named: "redCheck.png")
     let grayCheck = UIImage(named: "grayCheck.png")
     let mainRed = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1.0)
@@ -35,10 +36,10 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         let buttonContinue = UIBarButtonItem(title: "Continue", style: .Plain, target: self, action: "continueAction")
         self.navigationItem.rightBarButtonItem = buttonContinue
         
-        
+        self.navigationController?.title = "Edit group \(DataManager.sharedInstance.selectedGroup.name)"
         applyDesign()
         startSearchController()
-
+        
 
         // Do any additional setup after loading the view.
     }
@@ -378,10 +379,12 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func exitView() {
-        navigationController?.popViewControllerAnimated(true)
-        navigationController?.dismissViewControllerAnimated(true, completion: { () -> Void in
-            
-        })
+//        navigationController?.popViewControllerAnimated(true)
+//        dismissViewControllerAnimated(true, completion: { () -> Void in
+//            
+//        })
+        //navigationController?.popToViewController(self, animated: true)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     

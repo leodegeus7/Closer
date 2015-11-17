@@ -31,6 +31,7 @@ class DataManager {
     var myUser = User()
     let http = HTTPHelper()
     var actualCell = 0
+    var selectedGroup = Group()
     
     lazy var locationManager: CLLocationManager! = {
         let manager = CLLocationManager()
@@ -163,7 +164,7 @@ class DataManager {
             if error == nil {
                 self.friendsDictionaryFace = result as! Dictionary<String,AnyObject>
                 DataManager.sharedInstance.friendsArray = (self.friendsDictionaryFace["data"]) as! NSMutableArray
-                let amigos = "\(DataManager.sharedInstance.friendsArray)"
+                
                 completion(result: self.friendsArray)
                 
             }
@@ -569,7 +570,7 @@ class DataManager {
                
                     
                     DataManager.sharedInstance.allGroup[num].users = users
-                    if DataManager.sharedInstance.allGroup[num].users.count <= 1 {
+                    if DataManager.sharedInstance.allGroup[num].users.count < 1 {
                         self.destroyGroupWithGroup(DataManager.sharedInstance.allGroup[num])
                     }
                 }
@@ -580,6 +581,12 @@ class DataManager {
 
 //            self.testIfGroupIsEmpty({ (result) -> Void in
 //                //completion do grupo apagado
+            var userForTest = [User()]
+            let user1 = User()
+            
+            user1.name = "Test"
+            userForTest.append(user1)
+            completion(users: userForTest)
 //            })
         }
         
@@ -652,7 +659,7 @@ class DataManager {
             let users = group.users
             let id = group.id
             
-            if users.count <= 1 {
+            if users.count < 1 {
                 destroyGroupWithGroup(group)
                 completion(result: "\(id)")
             }
@@ -661,7 +668,7 @@ class DataManager {
     
     func destroyGroupWithNotification(groupObject:Group,view:UIViewController) {
         let idGroup = groupObject.id
-        createSimpleUIAlert(view, title: "Deletado", message: "O grupo \(groupObject.name) será deletado pois expirou", button1: "Ok")
+        createSimpleUIAlert(view, title: "Deletado", message: "O grupo \(groupObject.name) será deletado pois todos os usuarios sairam", button1: "Ok")
         http.destroyGroupWithID(idGroup) { (result) -> Void in
             print("apagado grupo \(idGroup)")
         }
