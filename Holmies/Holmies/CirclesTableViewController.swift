@@ -107,12 +107,15 @@ class CirclesTableViewController: UITableViewController {
                     print("\(result)")
 //                    self.tableView.reloadData()
                 })
+
+                DataManager.sharedInstance.requestSharerInGroups()
                 
                 let friends = DataManager.sharedInstance.loadJsonFromDocuments("friends")
 
 
                 let myPhoto = DataManager.sharedInstance.getProfPic(DataManager.sharedInstance.myUser.facebookID, serverId: DataManager.sharedInstance.myUser.userID)
                 DataManager.sharedInstance.saveImage(myPhoto, id: DataManager.sharedInstance.myUser.userID)
+                
                 DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(friends)
                 for index in DataManager.sharedInstance.allFriends {
                     
@@ -186,14 +189,16 @@ class CirclesTableViewController: UITableViewController {
 
                 
                 
-                
-                
+                DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
+                    
+                })
+                               
                 let subViews = cellActive.scrollViewFriends.subviews
                 for subview in subViews {
                     subview.removeFromSuperview()
                 }
                 
-                if let groupTest = DataManager.sharedInstance.allGroup[indexPath.row].users {
+                if let _ = DataManager.sharedInstance.allGroup[indexPath.row].users {
                     for user in DataManager.sharedInstance.allGroup[indexPath.row].users {
                         let imageName = DataManager.sharedInstance.findImage(user.userID)
                         
@@ -218,6 +223,11 @@ class CirclesTableViewController: UITableViewController {
 
                 imageX = 0
                 
+                DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
+                    
+                })
+                
+                if let _ = DataManager.sharedInstance.allGroup[indexPath.row].share {
                 
                 if !(DataManager.sharedInstance.allGroup[indexPath.row].share.until == nil) {
                     
@@ -277,7 +287,7 @@ class CirclesTableViewController: UITableViewController {
 //                    cellActive.numberLabel.text = "\(durationHours)"
                 }
                 
-                
+                }
 
                 
                 

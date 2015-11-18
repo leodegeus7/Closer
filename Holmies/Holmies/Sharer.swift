@@ -24,6 +24,6 @@ class Sharer: NSObject {
     var createdAt:String!
     var until:String!
     var updatedAt:String!
-    
+    var status:String!
     var receiver:String!
 }

@@ -91,6 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if (DataManager.sharedInstance.testIfFileExistInDocuments("/groups.json")) {
                 let dic = DataManager.sharedInstance.loadJsonFromDocuments("groups")
                 DataManager.sharedInstance.allGroup = DataManager.sharedInstance.convertJsonToGroup(dic)
+                
             }
             if (DataManager.sharedInstance.testIfFileExistInDocuments("/activeGroups.json")) {
                 let dic = DataManager.sharedInstance.loadJsonFromDocuments("activeGroups")
@@ -103,6 +104,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
                 print(result)
             })
+            
+//            if (DataManager.sharedInstance.testIfFileExistInDocuments("/groups.json")) {
+//                for group in DataManager.sharedInstance.allGroup {
+//                    let dicSharer = DataManager.sharedInstance.loadJsonFromDocuments("/sharers\(group).json")
+//                    let sharerServer = DataManager.sharedInstance.convertJsonToSharerUnique(dicSharer)
+//                    DataManager.sharedInstance.allSharers.append(sharerServer)
+//                }
+//            }
+            
+            
 //            DataManager.sharedInstance.requestGroups { (result) -> Void in
 //                print(1)
 //            }

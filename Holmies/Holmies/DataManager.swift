@@ -32,6 +32,7 @@ class DataManager {
     let http = HTTPHelper()
     var actualCell = 0
     var selectedGroup = Group()
+    var sharesInGroups = [[Sharer]]()
     
     lazy var locationManager: CLLocationManager! = {
         let manager = CLLocationManager()
@@ -503,14 +504,6 @@ class DataManager {
         http.getInfoFromID(groupId, desiredInfo: .groupSenderUsers) { (result) -> Void in
             
             
-            
-            
-            
-            
-            
-            
-            
-            
             //DataManager.sharedInstance.createJsonFile("users\(groupId)", json: result)
             var users = DataManager.sharedInstance.convertJsonToUser(result)
             let usersDic = DataManager.sharedInstance.convertUserToNSDic(users)
@@ -690,7 +683,7 @@ class DataManager {
                 }
                 
                 newSharer.updatedAt = sharer["updated_at"] as? String
-                
+                //newSharer.status = sharer["sharer"] as? String
                 // newSharer.owner = //
                 let receiverId = sharer["receiver_group_id"]
                 let receiverIdFormat = "\(receiverId!)"
@@ -701,6 +694,36 @@ class DataManager {
         }
         return sharers
     }
+    
+    func convertJsonToSharerUnique(json:AnyObject) -> Sharer {
+        let newSharer = Sharer()
+        if let dic = json as? NSDictionary {
+            
+                newSharer.createdAt = dic["created_at"] as? String
+                let id = dic["id"] as! Int
+                
+                newSharer.id = "\(id)"
+                newSharer.until = dic["until"] as? String
+                if dic["relation"] as? String == "u2u" {
+                    newSharer.relation = .userToUser
+                }
+                else if dic["relation"] as? String == "u2g" {
+                    newSharer.relation = .userToGroup
+                }
+                
+                newSharer.updatedAt = dic["updated_at"] as? String
+                newSharer.status = dic["sharer"] as? String
+                // newSharer.owner = //
+                let receiverId = dic["receiver_group_id"]
+                let receiverIdFormat = "\(receiverId!)"
+                newSharer.receiver = receiverIdFormat
+                
+            }
+            
+        
+        return newSharer
+    }
+    
     
 //    func findUntilBETA () {
 //        for sharer in DataManager.sharedInstance.allSharers {
@@ -763,9 +786,9 @@ class DataManager {
                         }
                 }
             }
-            else if sharer.relation == SharerType.userToUser {
+            //else if sharer.relation == SharerType.userToUser {
                 //ainda nao tem
-            }
+            //}
             
         }
         completion(result: "Linkou tudo")
@@ -838,6 +861,21 @@ class DataManager {
     //        }
     //        //DataManager.sharedInstance.requestGroups()
     //    }
+    
+    
+    func requestSharerInGroups() {
+        DataManager.sharedInstance.sharesInGroups.removeAll()
+        print(DataManager.sharedInstance.sharesInGroups.count)
+        for group in DataManager.sharedInstance.allGroup {
+            self.http.getInfoFromID(group.id, desiredInfo: .groupReceiverSharers, completion: { (result) -> Void in
+                let json = result
+                DataManager.sharedInstance.createJsonFile("sharers\(group.id)", json: json)
+                let sharerServer = DataManager.sharedInstance.convertJsonToSharer(json)
+                DataManager.sharedInstance.sharesInGroups.append(sharerServer)
+                print(DataManager.sharedInstance.sharesInGroups.count)
+            })
+        }
+    }
     
 
     
