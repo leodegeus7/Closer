@@ -18,7 +18,7 @@ class HTTPHelper: NSObject {
     let baseURL = "https://tranquil-coast-5554.herokuapp.com/api" //URL do servidor no HEROKU
 //    let baseURL = "http://localhost:3000/api" //URL do servidor de Teste
     
-    internal enum DesiredInfo {
+    enum DesiredInfo {
         case userReceiverUsers
         case userSenderUsers
         case userReceiverGroups
@@ -30,8 +30,12 @@ class HTTPHelper: NSObject {
         case groupReceiverSharers
     }
     
-    internal enum SharerType {
+    enum SharerType {
         case userToUser, userToGroup
+    }
+    
+    enum Model {
+        case user, group
     }
     
     func signInWithUsername(username:String, password:String,completion:(result:Dictionary<String,AnyObject>)->Void) {
@@ -46,8 +50,15 @@ class HTTPHelper: NSObject {
         let url = "\(baseURL)/signin"
         
         makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
-            let formattedResult = httpResult as! Dictionary<String,AnyObject>
-            completion(result: formattedResult)
+            if let formattedResult = httpResult as? Dictionary<String,AnyObject> {
+                completion(result: formattedResult)
+            }
+            else {
+                let error =  [
+                    "error":"Connection Error"
+                ]
+                completion(result: error)
+            }
         }
         
     }
@@ -61,8 +72,15 @@ class HTTPHelper: NSObject {
         let url = "\(baseURL)/signin_fb"
         
         makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
-            let formattedResult = httpResult as! Dictionary<String,AnyObject>
-            completion(result: formattedResult)
+            if let formattedResult = httpResult as? Dictionary<String,AnyObject> {
+                completion(result: formattedResult)
+            }
+            else {
+                let error =  [
+                    "error":"Connection Error"
+                ]
+                completion(result: error)
+            }
         }
         
     }
@@ -79,13 +97,45 @@ class HTTPHelper: NSObject {
         let url = "\(baseURL)/signup"
         
         makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
-            let formattedResult = httpResult as! Dictionary<String,AnyObject>
-            completion(result: formattedResult)
+            if let formattedResult = httpResult as? Dictionary<String,AnyObject> {
+                completion(result: formattedResult)
+            }
+            else {
+                let error =  [
+                    "error":"Connection Error"
+                ]
+                completion(result: error)
+            }
         }
         
     }
     
-    func uploadUserPhotoWithID(id:String, photo:UIImage, completion:(result:Dictionary<String,AnyObject>)->Void) {
+    func destroyUserWithUsername(username:String, password:String,completion:(result:Dictionary<String,AnyObject>)->Void) {
+        
+        let encryptedPassword = AESCrypt.encrypt(password, password: API_DECRYPT_PW)
+        
+        let parameters = [
+            "username": username,
+            "password": encryptedPassword
+        ]
+        
+        let url = "\(baseURL)/destroy_user"
+        
+        makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
+            if let formattedResult = httpResult as? Dictionary<String,AnyObject> {
+                completion(result: formattedResult)
+            }
+            else {
+                let error =  [
+                    "error":"Connection Error"
+                ]
+                completion(result: error)
+            }
+        }
+        
+    }
+    
+    func uploadPhotoToModelWithID(id:String, model:Model, photo:UIImage, completion:(result:Dictionary<String,AnyObject>)->Void) {
         let image = resizeImage(photo, newWidth: 512)
         let imageData = UIImagePNGRepresentation(image)!
         let base64String = imageData.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
@@ -95,34 +145,68 @@ class HTTPHelper: NSObject {
             "image":base64String
         ]
         
-        let url = "\(baseURL)/user_photo_upload"
+        var url = String()
+        
+        switch model {
+        case .user:
+            url = "\(baseURL)/user_photo_upload"
+            break
+        case .group:
+            url = "\(baseURL)/group_photo_upload"
+            break
+        }
         
         makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
-            let formattedResult = httpResult as! Dictionary<String,AnyObject>
-            completion(result: formattedResult)
+            if let formattedResult = httpResult as? Dictionary<String,AnyObject> {
+                completion(result: formattedResult)
+            }
+            else {
+                let error =  [
+                    "error":"Connection Error"
+                ]
+                completion(result: error)
+            }
         }
         
     }
     
-    func downloadPhotoFromUserWithID(id:String, completion:(resultImage:UIImage)->Void) {
-        let destination = Alamofire.Request.suggestedDownloadDestination(directory: .DocumentDirectory, domain: .UserDomainMask)
-        
-        print(destination)
+    func downloadPhotoFromModelWithID(id:String, model:Model, completion:(resultImage:UIImage)->Void) {
         
         let parameters = [
             "id":id
         ]
         
-        let url = "\(baseURL)/user_photo_download"
+        var url = String()
         
-        Alamofire.request(.GET, url, parameters: parameters).authenticate(user: API_AUTH_NAME, password: API_AUTH_PASSWORD).responseData { response in
+        switch model {
+        case .user:
+            url = "\(baseURL)/user_photo_download"
+            break
+        case .group:
+            url = "\(baseURL)/group_photo_download"
+            break
+        }
+        
+        Alamofire.request(.POST, url, parameters: parameters).authenticate(user: API_AUTH_NAME, password: API_AUTH_PASSWORD).responseData { response in
             
             print(response.result.value)
-            let data = response.result.value!
-            let image = UIImage(data: data)
-            completion(resultImage: image!)
+            if let data = response.result.value {
+                if let image = UIImage(data: data) {
+                    completion(resultImage: image)
+                }
+                else {
+                    let image = UIImage(named: "error.png")
+                    completion(resultImage: image!)
+                }
+            }
+            else {
+                let image = UIImage(named: "error.png")
+                completion(resultImage: image!)
+            }
+
             
         }
+        
         
     }
     
@@ -134,8 +218,15 @@ class HTTPHelper: NSObject {
         let url = "\(baseURL)/find_friend"
         
         makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
-            let formattedResult = httpResult as! Dictionary<String,AnyObject>
-            completion(result: formattedResult)
+            if let formattedResult = httpResult as? Dictionary<String,AnyObject> {
+                completion(result: formattedResult)
+            }
+            else {
+                let error =  [
+                    "error":"Connection Error"
+                ]
+                completion(result: error)
+            }
         }
     }
     
@@ -183,8 +274,15 @@ class HTTPHelper: NSObject {
             let url = "\(baseURL)/update_user_info"
             
             makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
-                let formattedResult = httpResult as! Dictionary<String,AnyObject>
-                completion(result: formattedResult)
+                if let formattedResult = httpResult as? Dictionary<String,AnyObject> {
+                    completion(result: formattedResult)
+                }
+                else {
+                    let error =  [
+                        "error":"Connection Error"
+                    ]
+                    completion(result: error)
+                }
             }
             
             
@@ -218,8 +316,14 @@ class HTTPHelper: NSObject {
         }
         
         makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
-            let formattedResult = httpResult as! [Dictionary<String,AnyObject>]
-            completion(result: formattedResult)
+            if let formattedResult = httpResult as? [Dictionary<String,AnyObject>] {
+                completion(result: formattedResult)
+            }
+            else {
+                var errorArray = [Dictionary<String,AnyObject>]()
+                errorArray.append(["error":"Connection Error"])
+                completion(result: errorArray)
+            }
         }
     }
     
@@ -240,14 +344,17 @@ class HTTPHelper: NSObject {
         }
         
         let url = "\(baseURL)/new_sharer"
-        print(parameters)
-        print(url)
         
         makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
-            let httpresul = httpResult
-            print(httpresul)
-            let formattedResult = httpResult as! Dictionary<String, AnyObject>
-            completion(result: formattedResult)
+            if let formattedResult = httpResult as? Dictionary<String,AnyObject> {
+                completion(result: formattedResult)
+            }
+            else {
+                let error =  [
+                    "error":"Connection Error"
+                ]
+                completion(result: error)
+            }
         }
         
     }
@@ -260,22 +367,43 @@ class HTTPHelper: NSObject {
         let url = "\(baseURL)/new_group"
         
         makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
-            let formattedResult = httpResult as! Dictionary<String, AnyObject>
-            completion(result: formattedResult)
+            if let formattedResult = httpResult as? Dictionary<String,AnyObject> {
+                completion(result: formattedResult)
+            }
+            else {
+                let error =  [
+                    "error":"Connection Error"
+                ]
+                completion(result: error)
+            }
         }
     }
     
-    func updateSharerWithID(id:String, until:String, completion:(result:Dictionary<String,AnyObject>)->Void) {
-        let parameters = [
-            "id":id,
-            "until":until
+    func updateSharerWithID(id:String, until:String?,status:String?, completion:(result:Dictionary<String,AnyObject>)->Void) {
+        var parameters = [
+            "id":id
         ]
+        
+        if let newUntil = until {
+            parameters["until"] = newUntil
+        }
+        
+        if let newStatus = status {
+            parameters["status"] = newStatus
+        }
         
         let url = "\(baseURL)/update_sharer"
         
         makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
-            let formattedResult = httpResult as! Dictionary<String, AnyObject>
-            completion(result: formattedResult)
+            if let formattedResult = httpResult as? Dictionary<String,AnyObject> {
+                completion(result: formattedResult)
+            }
+            else {
+                let error =  [
+                    "error":"Connection Error"
+                ]
+                completion(result: error)
+            }
         }
         
     }
@@ -296,8 +424,15 @@ class HTTPHelper: NSObject {
         let url = "\(baseURL)/destroy_sharer"
         
         makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
-            let formattedResult = httpResult as! Dictionary<String, AnyObject>
-            completion(result: formattedResult)
+            if let formattedResult = httpResult as? Dictionary<String,AnyObject> {
+                completion(result: formattedResult)
+            }
+            else {
+                let error =  [
+                    "error":"Connection Error"
+                ]
+                completion(result: error)
+            }
         }
     }
     
@@ -317,8 +452,15 @@ class HTTPHelper: NSObject {
         let url = "\(baseURL)/update_group"
         
         makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
-            let formattedResult = httpResult as! Dictionary<String, AnyObject>
-            completion(result: formattedResult)
+            if let formattedResult = httpResult as? Dictionary<String,AnyObject> {
+                completion(result: formattedResult)
+            }
+            else {
+                let error =  [
+                    "error":"Connection Error"
+                ]
+                completion(result: error)
+            }
         }
         
     }
@@ -331,8 +473,15 @@ class HTTPHelper: NSObject {
         let url = "\(baseURL)/destroy_group"
         
         makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
-            let formattedResult = httpResult as! Dictionary<String, AnyObject>
-            completion(result: formattedResult)
+            if let formattedResult = httpResult as? Dictionary<String,AnyObject> {
+                completion(result: formattedResult)
+            }
+            else {
+                let error =  [
+                    "error":"Connection Error"
+                ]
+                completion(result: error)
+            }
         }
         
     }

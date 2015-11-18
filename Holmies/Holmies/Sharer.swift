@@ -17,7 +17,7 @@ public enum SharerType {
 
 
 class Sharer: NSObject {
-    var owner:User!
+    var owner:String!
     var receiverObject:AnyObject!
     var relation:SharerType!
     var id:String!

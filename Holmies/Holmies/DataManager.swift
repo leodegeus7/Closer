@@ -26,13 +26,17 @@ class DataManager {
     var usersInGroups = [Dictionary<String,AnyObject>]()
     var activeUsers = [User]()
     var allFriends = [User]()
-    var selectedFriends = [User]()
     var allSharers = [Sharer]()
     var myUser = User()
     let http = HTTPHelper()
     var actualCell = 0
-    var selectedGroup = Group()
     var sharesInGroups = [[Sharer]]()
+    
+    
+    var selectedFriends = [User]()
+    var selectedGroup = Group()
+    var selectedSharer = [Sharer]()
+    
     
     lazy var locationManager: CLLocationManager! = {
         let manager = CLLocationManager()
@@ -274,11 +278,24 @@ class DataManager {
         let path = documents.stringByAppendingString("/\(name).json")
         
         if name == "myInfo" {
+            let date = NSDate()
+            let formatter = NSDateFormatter()
+            formatter.timeStyle = .ShortStyle
+            formatter.stringFromDate(date)
+            let lat = json["latitude"]
+            let long = json["longitude"]
+            let time = "\(date)"
+            let dicMod:NSDictionary!
+            if let address = DataManager.sharedInstance.end {
+                dicMod = ["tempo":"\(time)","lat":"\(lat!!)","long":"\(long!!)","address":"\(address)"]
+            }
+            else {
+                dicMod = ["tempo":"\(time)","lat":"\(lat!!)","long":"\(long!!)"]}
             let pathAppend = documents.stringByAppendingString("/\(name)log.json")
             print("Arquivo com suas informacoes criado ou atualizado - pode ser atualizacao de coordenadas")
             let outputStream = NSOutputStream(toFileAtPath: pathAppend, append: true)
             outputStream?.open()
-            NSJSONSerialization.writeJSONObject(json, toStream: outputStream!, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
+            NSJSONSerialization.writeJSONObject(dicMod, toStream: outputStream!, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
             outputStream?.close()
         
         } else {
@@ -434,85 +451,55 @@ class DataManager {
     func updateLocationUsers(mapView:GMSMapView) {
         mapView.clear()
         for user in activeUsers {
-            let name = user.name
-            let lat = user.location.latitude
-            let long = user.location.longitude
-            let date = user.updatedAt
+            var actualSharer = Sharer()
+            for sharer in DataManager.sharedInstance.selectedSharer {
+                if user.userID == sharer.owner {
+                    actualSharer = sharer
+                    break
+                }
+            }
             
             
+            if actualSharer.status == "accepted" {
+                let name = user.name
+                let lat = user.location.latitude
+                let long = user.location.longitude
+                let date = user.updatedAt
+                
+                
+                
+                
+                let latitudeConvertida = (lat as NSString).doubleValue as CLLocationDegrees
+                let longitudeConvertida = (long as NSString).doubleValue as CLLocationDegrees
+                let position = CLLocationCoordinate2D(latitude: latitudeConvertida, longitude: longitudeConvertida)
+                let marker = GMSMarker(position: position)
+                marker.title = name
+                marker.snippet = date
+                marker.icon = GMSMarker.markerImageWithColor(UIColor.blueColor())
+                marker.infoWindowAnchor = CGPointMake(0.5, 0.5)
+                marker.map = mapView
+                marker.userData = user
+                
+                
+                let topImage = findImage(user.userID)
+                let topImageView = UIImageView(image: topImage)
+                let bottomImage = UIImage(named: "pin2.png")
+                topImageView.bounds.size = CGSizeMake(120, 120)
+                topImageView.layer.cornerRadius = 60
+                topImageView.clipsToBounds = true
+                let newSize = CGSizeMake((bottomImage!.size.width), (bottomImage!.size.height))
+                UIGraphicsBeginImageContext(newSize)
+                bottomImage!.drawInRect(CGRectMake(0, 0, newSize.width, newSize.height))
+                UIGraphicsBeginImageContextWithOptions(topImageView.bounds.size, topImageView.opaque, 0.0)
+                topImageView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+                let ui2 = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                ui2.drawAtPoint(CGPointMake(12,15), blendMode: CGBlendMode.Normal, alpha: 1.0)
+                let newImage = UIGraphicsGetImageFromCurrentImageContext()
+                let resizedImage = imageResize(newImage, sizeChange: CGSizeMake(60,80.625))
+                marker.icon = resizedImage
+            }
             
-            
-            let latitudeConvertida = (lat as NSString).doubleValue as CLLocationDegrees
-            let longitudeConvertida = (long as NSString).doubleValue as CLLocationDegrees
-            let position = CLLocationCoordinate2D(latitude: latitudeConvertida, longitude: longitudeConvertida)
-            let marker = GMSMarker(position: position)
-            marker.title = name
-            marker.snippet = date
-            marker.icon = GMSMarker.markerImageWithColor(UIColor.blueColor())
-            marker.infoWindowAnchor = CGPointMake(0.5, 0.5)
-            marker.map = mapView
-            marker.userData = user
-            
-            
-            let topImage = findImage(user.userID)
-            let topImageView = UIImageView(image: topImage)
-            let bottomImage = UIImage(named: "pin2.png")
-            topImageView.bounds.size = CGSizeMake(120, 120)
-            
-            topImageView.layer.cornerRadius = 60
-            topImageView.clipsToBounds = true
-            
-            
-            let newSize = CGSizeMake((bottomImage!.size.width), (bottomImage!.size.height))
-            UIGraphicsBeginImageContext(newSize)
-            
-            bottomImage!.drawInRect(CGRectMake(0, 0, newSize.width, newSize.height))
-            
-            UIGraphicsBeginImageContextWithOptions(topImageView.bounds.size, topImageView.opaque, 0.0)
-            topImageView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
-            
-            let ui2 = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            
-            ui2.drawAtPoint(CGPointMake(12,15), blendMode: CGBlendMode.Normal, alpha: 1.0)
-            let newImage = UIGraphicsGetImageFromCurrentImageContext()
-            let resizedImage = imageResize(newImage, sizeChange: CGSizeMake(60,80.625))
-            
-//            let ui3 = UIImageView(image: newImage)
-//            ui3.bounds.size = CGSizeMake(20,20)
-            
-            
-            marker.icon = resizedImage
-            
-            
-//            topImageView.image!.drawInRect(CGRectMake((bottomImage?.size.width)!/2, (bottomImage?.size.width)!/2, 100, 100), blendMode: CGBlendMode.Normal, alpha: 1.0)
-//            //topImage.drawInRect(CGRectMake((bottomImage?.size.width)!/2, (bottomImage?.size.width)!/2, 100, 100), blendMode: CGBlendMode.Normal, alpha: 1.0)
-//            let newimage = UIGraphicsGetImageFromCurrentImageContext()
-//            
-            
-//            bottomImageView.image = bottomImage
-//            bottomImageView.layer.cornerRadius = 100
-            
-//            
-//            let size = CGSize(width: 300, height: 300)
-//            UIGraphicsBeginImageContext(size)
-//            
-//            let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-//            
-//            
-//            bottomImageView.image!.drawInRect(areaSize)
-//            
-//            
-//            topImage!.drawInRect(areaSize, blendMode: CGBlendMode.Normal, alpha: 1)
-//            let newPin:UIImage = UIGraphicsGetImageFromCurrentImageContext()
-//            UIGraphicsEndImageContext()
-            
-            
-           // marker.icon = topImageView.image
-        
-            
-            
-        
         }
     }
     
@@ -758,6 +745,13 @@ class DataManager {
                 let receiverId = sharer["receiver_group_id"]
                 let receiverIdFormat = "\(receiverId!)"
                 newSharer.receiver = receiverIdFormat
+                let ownerId = sharer["owner_user_id"]
+                let ownerIdFormat = "\(ownerId!)"
+                newSharer.owner = ownerIdFormat
+                
+                let status = sharer["status"]
+                newSharer.status = status as? String
+                
                 sharers.append(newSharer)
             }
             
@@ -787,9 +781,15 @@ class DataManager {
                 let receiverId = dic["receiver_group_id"]
                 let receiverIdFormat = "\(receiverId!)"
                 newSharer.receiver = receiverIdFormat
-                
-            }
+                newSharer.owner = dic["owner_user_id"] as? String
+                let ownerId = dic["owner_user_id"]
+                let ownerIdFormat = "\(ownerId!)"
+                newSharer.owner = ownerIdFormat
             
+                let status = dic["status"]
+                newSharer.status = status as? String
+            }
+        
         
         return newSharer
     }

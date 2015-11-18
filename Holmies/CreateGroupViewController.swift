@@ -526,6 +526,11 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
             
             http.createNewGroupWithName("\(groupNameText!)", completion: { (result) -> Void in
                 
+                
+                
+
+                
+                
                 let dic = result as NSDictionary
                 let id = dic["id"]
                 let formatId = "\(id!)"
@@ -545,6 +550,8 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
                 let group = Group()
                 group.id = formatId
 
+                
+                
                 DataManager.sharedInstance.activeGroup.append(group)
                 let activeGroup = DataManager.sharedInstance.activeGroup
                 
@@ -552,6 +559,14 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
                 
                 DataManager.sharedInstance.createJsonFile("activeGroups", json: dicio)
                 let idGroup = id as! Int
+                
+                for sharer in DataManager.sharedInstance.allSharers {
+                    if sharer.receiver == "\(idGroup)" && sharer.owner == DataManager.sharedInstance.myUser.userID {
+                        self.http.updateSharerWithID(sharer.id, until: nil, status: "accepted", completion: { (result) -> Void in
+                        })
+                    }
+                }
+                
                 
                 DataManager.sharedInstance.requestUsersInGroupId("\(idGroup)", completion: { (users) -> Void in
                     DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in

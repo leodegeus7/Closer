@@ -94,14 +94,12 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
             mapView.settings.myLocationButton = true    //coloca o botão de localizar user
         }
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToSelectedFriend:", name: "goToUser", object: nil)
-        enterInView = true
     }
     
     override func viewDidDisappear(animated: Bool) {
         //NSNotificationCenter.defaultCenter().removeObserver(self, name: "goToUser", object: nil)
         DataManager.sharedInstance.locationManager.delegate = nil
 
-        enterInView = false
     }
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {

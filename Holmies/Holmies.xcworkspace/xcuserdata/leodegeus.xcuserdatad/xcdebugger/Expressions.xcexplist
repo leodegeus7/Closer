@@ -42,6 +42,9 @@
          contextName = "LoginViewControllerNew.(getFBUserData(LoginViewControllerNew) -&gt; () -&gt; ()).(closure #1):LoginViewControllerNew.swift">
       </ContextState>
       <ContextState
+         contextName = "EditGroupViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:EditGroupViewController.swift">
+      </ContextState>
+      <ContextState
          contextName = "DataManager.linkGroupAndUserToSharer((result : String) -&gt; ()) -&gt; ():DataManager.swift">
          <PersistentStrings>
             <PersistentString
@@ -61,6 +64,14 @@
          contextName = "ActiveGroupTableViewCell.collectionView(UICollectionView, numberOfItemsInSection : Int) -&gt; Int:ActiveGroupTableViewCell.swift">
       </ContextState>
       <ContextState
+         contextName = "MapGoogleViewController.locationManager(CLLocationManager, didUpdateToLocation : CLLocation, fromLocation : CLLocation) -&gt; ():MapGoogleViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "DataManager.sharedInstance.end">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "CirclesTableViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:CirclesTableViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -78,6 +89,15 @@
                value = "DataManager.sharedInstance.allGroup">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DataManager.convertJsonToSharer(AnyObject) -&gt; [Sharer]:DataManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DataManager.createJsonFile(String, json : AnyObject) -&gt; ():DataManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DataManager.updateLocationUsers(GMSMapView) -&gt; ():DataManager.swift">
       </ContextState>
       <ContextState
          contextName = "DataManager.(requestUsersInGroupId(DataManager) -&gt; (String, completion : (users : [User]) -&gt; ()) -&gt; ()).(closure #1):DataManager.swift">

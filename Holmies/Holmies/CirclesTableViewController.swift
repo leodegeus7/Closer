@@ -329,7 +329,7 @@ class CirclesTableViewController: UITableViewController {
                 if duration < 0 {
                     cellPendent.numberLabel.text = "0"
                     cellPendent.timeLabel.text = "expired"
-                    DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+                    //DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
                 }
                 else if duration <= 3600 {
                     let newDurationMin = Int(duration/60)
@@ -374,7 +374,18 @@ class CirclesTableViewController: UITableViewController {
             
             let dic = DataManager.sharedInstance.convertGroupToNSDic(group)
             
-            self.reloadData()
+            for sharer in DataManager.sharedInstance.allSharers {
+                if sharer.receiver == group[path.row].id && sharer.owner == DataManager.sharedInstance.myUser.userID {
+                    self.http.updateSharerWithID(sharer.id, until: nil, status: "accepted", completion: { (result) -> Void in
+                                self.reloadData()
+                    })
+                }
+            }
+            
+
+            
+            
+
             DataManager.sharedInstance.createJsonFile("activeGroups", json: dic)
         }
         
@@ -407,10 +418,25 @@ class CirclesTableViewController: UITableViewController {
                 let users = DataManager.sharedInstance.allGroup[indexPath.row].users
                 DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
                 let active = DataManager.sharedInstance.activeUsers
+                
                 performSegueWithIdentifier("showMap", sender: self)
                 DataManager.sharedInstance.selectedGroup = DataManager.sharedInstance.allGroup[indexPath.row]
+                for sharersInMap in DataManager.sharedInstance.sharesInGroups {
+                    if sharersInMap[0].receiver == DataManager.sharedInstance.selectedGroup.id {
+                        DataManager.sharedInstance.selectedSharer = sharersInMap
+                        break
+                    }
+                }
             }
 
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "showMap") {
+            if let viewController: MapGoogleViewController = segue.destinationViewController as? MapGoogleViewController {
+                viewController.enterInView = true
+            }
         }
     }
     

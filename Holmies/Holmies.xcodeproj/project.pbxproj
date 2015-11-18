@@ -97,6 +97,7 @@
 		CD1C03681BA74A590073524A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C03671BA74A590073524A /* LoginViewController.swift */; };
 		CD1C036C1BA752290073524A /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C036B1BA752290073524A /* DataManager.swift */; };
 		CD1C036E1BA761550073524A /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C036D1BA761550073524A /* FriendsTableViewController.swift */; };
+		CD1E19101BFD08F800179D5F /* HTTPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1E190F1BFD08F800179D5F /* HTTPHelper.swift */; };
 		CD21002A1B9DE7EF00485126 /* PlaceMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2100291B9DE7EF00485126 /* PlaceMarker.swift */; };
 		CD43673F1BBC531E00309FD0 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD43673E1BBC531E00309FD0 /* Group.swift */; };
 		CD4367491BBC75E200309FD0 /* AddGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4367481BBC75E200309FD0 /* AddGroupTableViewController.swift */; };
@@ -152,7 +153,6 @@
 		CDCCCD321BBF84A000A5AD03 /* 2.gpx in Resources */ = {isa = PBXBuildFile; fileRef = CDCCCD311BBF84A000A5AD03 /* 2.gpx */; };
 		CDE102611BE3F4E30042B180 /* Design.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDE102601BE3F4E30042B180 /* Design.storyboard */; };
 		CDF84C6D1BE29C4300F91502 /* Sharer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF84C6C1BE29C4300F91502 /* Sharer.swift */; };
-		CDF84C6F1BE2AB2200F91502 /* HTTPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF84C6E1BE2AB2200F91502 /* HTTPHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -363,6 +363,7 @@
 		CD1C03671BA74A590073524A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CD1C036B1BA752290073524A /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		CD1C036D1BA761550073524A /* FriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
+		CD1E190F1BFD08F800179D5F /* HTTPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHelper.swift; sourceTree = "<group>"; };
 		CD2100291B9DE7EF00485126 /* PlaceMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceMarker.swift; sourceTree = "<group>"; };
 		CD43673E1BBC531E00309FD0 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		CD4367481BBC75E200309FD0 /* AddGroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewController.swift; sourceTree = "<group>"; };
@@ -459,7 +460,6 @@
 		CDE102601BE3F4E30042B180 /* Design.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Design.storyboard; sourceTree = "<group>"; };
 		CDE931981BE928F0007DEF95 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = "../../Downloads/Alamofire-master/Alamofire.xcodeproj"; sourceTree = "<group>"; };
 		CDF84C6C1BE29C4300F91502 /* Sharer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sharer.swift; sourceTree = "<group>"; };
-		CDF84C6E1BE2AB2200F91502 /* HTTPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -821,8 +821,8 @@
 			children = (
 				CD6BAAA81B98DE23008614B0 /* Holmies-Bridging-Header.h */,
 				CD1C036B1BA752290073524A /* DataManager.swift */,
+				CD1E190F1BFD08F800179D5F /* HTTPHelper.swift */,
 				CD6BAA8C1B98DB5F008614B0 /* GoogleDataProvider.swift */,
-				CDF84C6E1BE2AB2200F91502 /* HTTPHelper.swift */,
 				CD6BAA8E1B98DB70008614B0 /* GooglePlace.swift */,
 				CDCCCD2A1BBF83F500A5AD03 /* default.gpx */,
 				CD0B59E01BAB57750098AD88 /* Location.swift */,
@@ -1293,6 +1293,7 @@
 				CD6BAA971B98DB8A008614B0 /* MarkerInfoView.swift in Sources */,
 				A7C37F591BDFF79200FEE8D2 /* EditGroupViewController.swift in Sources */,
 				CD8A8BDE1BB479E500E9D471 /* UsersTableViewController.swift in Sources */,
+				CD1E19101BFD08F800179D5F /* HTTPHelper.swift in Sources */,
 				CD6BAAAA1B98DE23008614B0 /* Holmies-Bridging.m in Sources */,
 				CD0B59E11BAB57750098AD88 /* Location.swift in Sources */,
 				CD900F811BDE9F260095CB85 /* AddFriendTableViewCell.swift in Sources */,
@@ -1300,7 +1301,6 @@
 				A78EA4831BDAABAC0001E946 /* CirclesTableViewController.swift in Sources */,
 				CD0B59DF1BAB50360098AD88 /* LocatioUserTableViewController.swift in Sources */,
 				A7049A9E1BB08BA300A2CDCD /* FriendsTableViewCell.swift in Sources */,
-				CDF84C6F1BE2AB2200F91502 /* HTTPHelper.swift in Sources */,
 				CD43674B1BBC771800309FD0 /* AddGroupTableViewCell.swift in Sources */,
 				CD6BAA8D1B98DB5F008614B0 /* GoogleDataProvider.swift in Sources */,
 				CD0B59DD1BAB47720098AD88 /* LocationUserTableViewCell.swift in Sources */,
@@ -1684,6 +1684,7 @@
 				A792A57A1BFCF0BC00D5741C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A792A57D1BFCF0BC00D5741C /* Build configuration list for PBXNativeTarget "Watch" */ = {
 			isa = XCConfigurationList;
@@ -1692,6 +1693,7 @@
 				A792A5781BFCF0BC00D5741C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A7FCC5241BC4CE5B00AEDA3F /* Build configuration list for PBXNativeTarget "widget3" */ = {
 			isa = XCConfigurationList;
