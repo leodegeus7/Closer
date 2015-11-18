@@ -454,16 +454,40 @@ class DataManager {
             
             
             let topImage = findImage(user.userID)
-            //let bottomImageView = UIImageView()
+            let topImageView = UIImageView(image: topImage)
             let bottomImage = UIImage(named: "pin2.png")
+            topImageView.bounds.size = CGSizeMake(120, 120)
             
-
-            let newSize = CGSizeMake((topImage.size.width), (topImage.size.height))
+            topImageView.layer.cornerRadius = 60
+            topImageView.clipsToBounds = true
+            
+            
+            let newSize = CGSizeMake((bottomImage!.size.width), (bottomImage!.size.height))
             UIGraphicsBeginImageContext(newSize)
-            bottomImage!.drawInRect(CGRectMake(0, 0, newSize.width, newSize.height))
-            topImage.drawInRect(CGRectMake((bottomImage?.size.width)!/2, (bottomImage?.size.width)!/2, 100, 100), blendMode: CGBlendMode.Normal, alpha: 1.0)
-            let newimage = UIGraphicsGetImageFromCurrentImageContext()
             
+            bottomImage!.drawInRect(CGRectMake(0, 0, newSize.width, newSize.height))
+            
+            UIGraphicsBeginImageContextWithOptions(topImageView.bounds.size, topImageView.opaque, 0.0)
+            topImageView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+            
+            let ui2 = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            ui2.drawAtPoint(CGPointMake(12,15), blendMode: CGBlendMode.Normal, alpha: 1.0)
+            let newImage = UIGraphicsGetImageFromCurrentImageContext()
+            let resizedImage = imageResize(newImage, sizeChange: CGSizeMake(60,80.625))
+            
+//            let ui3 = UIImageView(image: newImage)
+//            ui3.bounds.size = CGSizeMake(20,20)
+            
+            
+            marker.icon = resizedImage
+            
+            
+//            topImageView.image!.drawInRect(CGRectMake((bottomImage?.size.width)!/2, (bottomImage?.size.width)!/2, 100, 100), blendMode: CGBlendMode.Normal, alpha: 1.0)
+//            //topImage.drawInRect(CGRectMake((bottomImage?.size.width)!/2, (bottomImage?.size.width)!/2, 100, 100), blendMode: CGBlendMode.Normal, alpha: 1.0)
+//            let newimage = UIGraphicsGetImageFromCurrentImageContext()
+//            
             
 //            bottomImageView.image = bottomImage
 //            bottomImageView.layer.cornerRadius = 100
@@ -483,12 +507,22 @@ class DataManager {
 //            UIGraphicsEndImageContext()
             
             
-            marker.icon = newimage
+           // marker.icon = topImageView.image
         
             
             
         
         }
+    }
+    
+    
+    func imageResize(image:UIImage, sizeChange:CGSize) -> UIImage {
+        
+        UIGraphicsBeginImageContext(sizeChange)
+        image.drawInRect(CGRectMake(0, 0, sizeChange.width, sizeChange.height))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return resizedImage
     }
     
     

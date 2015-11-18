@@ -25,8 +25,11 @@ class CirclesTableViewController: UITableViewController {
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refresh.addTarget(self,action:"refreshData",forControlEvents:.ValueChanged)
         self.refreshControl = refresh
-        
         navigationBarGradient()
+//        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdated:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
+
+
         
         DataManager.sharedInstance.linkGroupAndUserToSharer { (result) -> Void in
             
@@ -43,7 +46,6 @@ class CirclesTableViewController: UITableViewController {
                     })
         }
 
-        
         
         
         
@@ -194,26 +196,28 @@ class CirclesTableViewController: UITableViewController {
                 }
                 
                 if let groupTest = DataManager.sharedInstance.allGroup[indexPath.row].users {
-                for user in DataManager.sharedInstance.allGroup[indexPath.row].users {
-                    let imageName = DataManager.sharedInstance.findImage(user.userID)
-                    
+                    for user in DataManager.sharedInstance.allGroup[indexPath.row].users {
+                        let imageName = DataManager.sharedInstance.findImage(user.userID)
+                        
+                        
+                        
+                        let imageView = UIImageView(image: imageName)
+                        
+                        imageView.layer.cornerRadius = 20.0
+                        imageView.layer.borderColor = mainRed.CGColor
+                        imageView.layer.borderWidth = 2.0
+                        imageView.clipsToBounds = true
+                        
+                        imageView.frame = CGRect(x: imageX, y: 0, width: sizeOfImageWidth, height: sizeOfImageHeight)
+                        
+                        
+                        cellActive.scrollViewFriends.addSubview(imageView)
+                        imageX += sizeOfImageWidth + spaceInCell
+                        
+                    }
+                }
+                
 
-                    
-                    let imageView = UIImageView(image: imageName)
-                    
-                    imageView.layer.cornerRadius = 20.0
-                    imageView.layer.borderColor = mainRed.CGColor
-                    imageView.layer.borderWidth = 2.0
-                    imageView.clipsToBounds = true
-                    
-                    imageView.frame = CGRect(x: imageX, y: 0, width: sizeOfImageWidth, height: sizeOfImageHeight)
-                    
-                    
-                    cellActive.scrollViewFriends.addSubview(imageView)
-                    imageX += sizeOfImageWidth + spaceInCell
-                    
-                }
-                }
                 imageX = 0
                 
                 
