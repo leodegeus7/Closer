@@ -73,11 +73,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         DataManager.sharedInstance.updateLocationUsers(mapView)
         
         self.compassView.hidden = true
-        //updateFriendsTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "updateFriends", userInfo: nil, repeats: true)
-        
-        
-
-        
+        friendDistance.font = UIFont(name:"SFUIText-Regular", size: 15)
         
 
         /*
@@ -236,8 +232,10 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     }
 
     @IBAction func xButton(sender: AnyObject) {
+        compassView.fadeOut(0.5)
         compassView.hidden = true
         navigationController?.navigationBar.hidden = false
+
     }
     
     @IBAction func ListaLocal(sender: AnyObject) {
@@ -322,6 +320,11 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         
         gradientLayer.frame = CGRectMake(0.0, 0.0, compassView.frame.size.width, compassView.frame.size.height*5/4)
         compassView.layer.insertSublayer(gradientLayer, atIndex: 0)
+        
+        friendPhoto.layer.cornerRadius = 3
+        friendPhoto.layer.borderWidth = 2
+        friendPhoto.layer.borderColor = UIColor.whiteColor().CGColor
+        
 
 
         
@@ -353,3 +356,6 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     }
 
 }
+
+
+

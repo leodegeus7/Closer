@@ -25,8 +25,11 @@ class CirclesTableViewController: UITableViewController {
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refresh.addTarget(self,action:"refreshData",forControlEvents:.ValueChanged)
         self.refreshControl = refresh
-        
         navigationBarGradient()
+//        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdated:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
+
+
         
         DataManager.sharedInstance.linkGroupAndUserToSharer { (result) -> Void in
             
@@ -43,7 +46,6 @@ class CirclesTableViewController: UITableViewController {
                     })
         }
 
-        
         
         
         

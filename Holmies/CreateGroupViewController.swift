@@ -414,94 +414,94 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
             chosenDay = chosenHour / 24
             upSliderLabel.text = "\(1) hours"
             upSliderLabel.textColor = mainRed
-            upSliderLabel.fadeIn()
-            downSlideLabel.fadeOut()
+            upSliderLabel.fadeIn(0.5)
+            downSlideLabel.fadeOut(0.5)
             break
         case 1:
             chosenHour = currentValue
             chosenDay = chosenHour / 24
             upSliderLabel.text = "\(chosenHour) hour"
             upSliderLabel.textColor = mainRed
-            upSliderLabel.fadeIn()
-            downSlideLabel.fadeOut()
+            upSliderLabel.fadeIn(0.5)
+            downSlideLabel.fadeOut(0.5)
             break
         case 2...23:
             chosenHour = currentValue
             chosenDay = chosenHour / 24
             upSliderLabel.text = "\(chosenHour) hours"
             upSliderLabel.textColor = mainRed
-            upSliderLabel.fadeIn()
-            downSlideLabel.fadeOut()
+            upSliderLabel.fadeIn(0.5)
+            downSlideLabel.fadeOut(0.5)
             break
         case 24...27:
             chosenHour = 24
             chosenDay = chosenHour / 24
             upSliderLabel.text = "\(chosenHour) hours"
             upSliderLabel.textColor = mainRed
-            upSliderLabel.fadeIn()
+            upSliderLabel.fadeIn(0.5)
             downSlideLabel.text = "\(chosenDay) day"
-            downSlideLabel.fadeIn()
+            downSlideLabel.fadeIn(0.5)
             break
         case 28...30:
             chosenHour = 48
             chosenDay = chosenHour / 24
             upSliderLabel.text = "\(chosenHour) hours"
             upSliderLabel.textColor = mainRed
-            upSliderLabel.fadeIn()
+            upSliderLabel.fadeIn(0.5)
             downSlideLabel.text = "\(chosenDay) days"
-            downSlideLabel.fadeIn()
+            downSlideLabel.fadeIn(0.5)
             break
         case 31...33:
             chosenHour = 72
             chosenDay = chosenHour / 24
             upSliderLabel.text = "\(chosenHour) hours"
             upSliderLabel.textColor = mainRed
-            upSliderLabel.fadeIn()
+            upSliderLabel.fadeIn(0.5)
             downSlideLabel.text = "\(chosenDay) days"
-            downSlideLabel.fadeIn()
+            downSlideLabel.fadeIn(0.5)
             break
         case 34...36:
             chosenHour = 96
             chosenDay = chosenHour / 24
             upSliderLabel.text = "\(chosenHour) hours"
             upSliderLabel.textColor = mainRed
-            upSliderLabel.fadeIn()
+            upSliderLabel.fadeIn(0.5)
             downSlideLabel.text = "\(chosenDay) days"
-            downSlideLabel.fadeIn()
+            downSlideLabel.fadeIn(0.5)
             break
         case 37...39:
             chosenHour = 120
             chosenDay = chosenHour / 24
             upSliderLabel.text = "\(chosenHour) hours"
             upSliderLabel.textColor = mainRed
-            upSliderLabel.fadeIn()
+            upSliderLabel.fadeIn(0.5)
             downSlideLabel.text = "\(chosenDay) days"
-            downSlideLabel.fadeIn()
+            downSlideLabel.fadeIn(0.5)
             break
         case 40...42:
             chosenHour = 144
             chosenDay = chosenHour / 24
             upSliderLabel.text = "\(chosenHour) hours"
             upSliderLabel.textColor = mainRed
-            upSliderLabel.fadeIn()
+            upSliderLabel.fadeIn(0.5)
             downSlideLabel.text = "\(chosenDay) days"
-            downSlideLabel.fadeIn()
+            downSlideLabel.fadeIn(0.5)
             break
         case 43...45:
             chosenHour = 168
             chosenDay = chosenHour / 24
             upSliderLabel.text = "\(chosenHour) hours"
             upSliderLabel.textColor = mainRed
-            upSliderLabel.fadeIn()
+            upSliderLabel.fadeIn(0.5)
             downSlideLabel.text = "\(chosenDay) days"
-            downSlideLabel.fadeIn()
+            downSlideLabel.fadeIn(0.5)
             break
         case 46...50:
             chosenHour = 0
             upSliderLabel.text = "\(168) hours"
-            upSliderLabel.fadeOut()
+            upSliderLabel.fadeOut(0.5)
             downSlideLabel.text = "Undetermined"
-            downSlideLabel.fadeIn()
+            downSlideLabel.fadeIn(0.5)
             break
         default:
             break
@@ -596,17 +596,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
 
 public extension UIView {
     
-    func fadeIn(duration duration: NSTimeInterval = 0.5){
-        UIView.animateWithDuration(duration, animations: {
-            self.alpha = 1.0
-        })
-    }
-    
-    func fadeOut(duration duration:NSTimeInterval = 0.5){
-        UIView.animateWithDuration(duration, animations: {
-            self.alpha = 0.0
-        })
-    }
+
     
     func turnRed(color:UIColor, label:UILabel, duration:NSTimeInterval = 2){
         UIView.animateWithDuration(duration, animations: {
