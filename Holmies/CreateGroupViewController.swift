@@ -528,7 +528,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
                 
                 
                 
-
+                
                 
                 
                 let dic = result as NSDictionary
@@ -536,6 +536,15 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
                 let formatId = "\(id!)"
                 //let hour = self.chosenHour
                 self.http.createNewSharerWithType(.userToGroup, ownerID: DataManager.sharedInstance.myUser.userID, receiverID: formatId, until: "\(self.chosenHour*3600)", completion: { (result) -> Void in
+                    
+                    let json = result
+                    
+                    let sharerID = json["id"]
+                    
+                    
+                    self.http.updateSharerWithID("\(sharerID!)", until: nil, status: "accepted", completion: { (result) -> Void in
+                    })
+                    
                 })
                 
                 for user in DataManager.sharedInstance.selectedFriends {

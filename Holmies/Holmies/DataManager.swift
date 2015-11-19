@@ -748,9 +748,12 @@ class DataManager {
                 let ownerId = sharer["owner_user_id"]
                 let ownerIdFormat = "\(ownerId!)"
                 newSharer.owner = ownerIdFormat
+                if let status = sharer["status"] {
+                    let statusString  = status as! String
+                    newSharer.status = statusString
+                }
                 
-                let status = sharer["status"]
-                newSharer.status = status as? String
+                
                 
                 sharers.append(newSharer)
             }
