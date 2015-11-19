@@ -294,7 +294,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Holmies/CirclesTableViewController.swift"
@@ -307,14 +307,14 @@
             landmarkType = "5">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Holmies.CirclesTableViewController.(tableView (Holmies.CirclesTableViewController) -&gt; (__ObjC.UITableView, cellForRowAtIndexPath : __ObjC.NSIndexPath) -&gt; __ObjC.UITableViewCell).(closure #3)"
                   moduleName = "Holmies"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Leonardo/MainChallenge/Holmies/Holmies/CirclesTableViewController.swift"
-                  timestampString = "469648049.500421"
+                  timestampString = "469648366.046471"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "379"
@@ -322,14 +322,14 @@
                   offsetFromSymbolStart = "2979">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Holmies.CirclesTableViewController.(tableView (Holmies.CirclesTableViewController) -&gt; (__ObjC.UITableView, cellForRowAtIndexPath : __ObjC.NSIndexPath) -&gt; __ObjC.UITableViewCell).(closure #3).(closure #1)"
                   moduleName = "Holmies"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Leonardo/MainChallenge/Holmies/Holmies/CirclesTableViewController.swift"
-                  timestampString = "469648049.500667"
+                  timestampString = "469648366.046727"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "380"
