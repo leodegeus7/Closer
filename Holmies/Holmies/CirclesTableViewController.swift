@@ -208,7 +208,7 @@ class CirclesTableViewController: UITableViewController {
                         
                         let imageView = UIImageView(image: imageName)
                         
-                        imageView.layer.cornerRadius = 20.0
+                        imageView.layer.cornerRadius = 19.25
                         imageView.layer.borderColor = mainRed.CGColor
                         imageView.layer.borderWidth = 2.0
                         imageView.clipsToBounds = true
