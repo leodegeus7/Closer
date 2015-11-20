@@ -3,32 +3,19 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "MapGoogleViewController.mapView(GMSMapView!, didTapInfoWindowOfMarker : GMSMarker!) -&gt; ():MapGoogleViewController.swift">
+         contextName = "DataManager.convertJsonToSharer(AnyObject) -&gt; [Sharer]:DataManager.swift">
       </ContextState>
       <ContextState
-         contextName = "DataManager.(requestFacebook(DataManager) -&gt; ((result : NSMutableArray) -&gt; ()) -&gt; ()).(closure #1):DataManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "DataManager.sharedInstance.friendsArray">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "specialized _allocateUninitializedArray&lt;A&gt; (Builtin.Word) -&gt; ([A], Builtin.RawPointer):(null)">
-         <PersistentStrings>
-            <PersistentString
-               value = "DataManager.sharedInstance.sharesInGroups">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DataManager.convertJsonToUser(AnyObject) -&gt; [User]:DataManager.swift">
+         contextName = "LoginViewControllerNew.(getFBUserData(LoginViewControllerNew) -&gt; () -&gt; ()).(closure #1).(closure #1):LoginViewControllerNew.swift">
       </ContextState>
       <ContextState
          contextName = "CirclesTableViewController.(reloadData(CirclesTableViewController) -&gt; () -&gt; ()).(closure #1).(closure #1):CirclesTableViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "DataManager.sharedInstance.sharesInGroups">
+            </PersistentString>
+            <PersistentString
+               value = "DataManager.sharedInstance.myUser">
             </PersistentString>
             <PersistentString
                value = "sharerServer">
@@ -39,37 +26,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "LoginViewControllerNew.(getFBUserData(LoginViewControllerNew) -&gt; () -&gt; ()).(closure #1):LoginViewControllerNew.swift">
-      </ContextState>
-      <ContextState
-         contextName = "EditGroupViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:EditGroupViewController.swift">
-      </ContextState>
-      <ContextState
-         contextName = "DataManager.linkGroupAndUserToSharer((result : String) -&gt; ()) -&gt; ():DataManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "DataManager.sharedInstance.allGroup">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "CirclesTableViewController.(reloadData(CirclesTableViewController) -&gt; () -&gt; ()).(closure #1).(closure #1).(closure #2):CirclesTableViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "DataManager.sharedInstance.sharesInGroups">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "DataManager.createJsonFile(String, json : AnyObject) -&gt; ():DataManager.swift">
       </ContextState>
       <ContextState
          contextName = "ActiveGroupTableViewCell.collectionView(UICollectionView, numberOfItemsInSection : Int) -&gt; Int:ActiveGroupTableViewCell.swift">
-      </ContextState>
-      <ContextState
-         contextName = "MapGoogleViewController.locationManager(CLLocationManager, didUpdateToLocation : CLLocation, fromLocation : CLLocation) -&gt; ():MapGoogleViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "DataManager.sharedInstance.end">
-            </PersistentString>
-         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "CirclesTableViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:CirclesTableViewController.swift">
@@ -83,21 +43,54 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "CirclesTableViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:CirclesTableViewController.swift">
+         contextName = "MapGoogleViewController.mapView(GMSMapView!, didTapInfoWindowOfMarker : GMSMarker!) -&gt; ():MapGoogleViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DataManager.convertJsonToUser(AnyObject) -&gt; [User]:DataManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MapGoogleViewController.locationManager(CLLocationManager, didUpdateToLocation : CLLocation, fromLocation : CLLocation) -&gt; ():MapGoogleViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "DataManager.sharedInstance.allGroup">
+               value = "DataManager.sharedInstance.end">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DataManager.convertJsonToSharer(AnyObject) -&gt; [Sharer]:DataManager.swift">
+         contextName = "CirclesTableViewController.(reloadData(CirclesTableViewController) -&gt; () -&gt; ()).(closure #1).(closure #1).(closure #2):CirclesTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "DataManager.sharedInstance.sharesInGroups">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DataManager.createJsonFile(String, json : AnyObject) -&gt; ():DataManager.swift">
+         contextName = "specialized _allocateUninitializedArray&lt;A&gt; (Builtin.Word) -&gt; ([A], Builtin.RawPointer):(null)">
+         <PersistentStrings>
+            <PersistentString
+               value = "DataManager.sharedInstance.sharesInGroups">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LoginViewControllerNew.(getFBUserData(LoginViewControllerNew) -&gt; () -&gt; ()).(closure #1):LoginViewControllerNew.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DataManager.(requestFacebook(DataManager) -&gt; ((result : NSMutableArray) -&gt; ()) -&gt; ()).(closure #1):DataManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "DataManager.sharedInstance.friendsArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CreateGroupViewController.(continueAction(CreateGroupViewController) -&gt; () -&gt; ()).(closure #1).(closure #1):CreateGroupViewController.swift">
       </ContextState>
       <ContextState
          contextName = "DataManager.updateLocationUsers(GMSMapView) -&gt; ():DataManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "EditGroupViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:EditGroupViewController.swift">
       </ContextState>
       <ContextState
          contextName = "DataManager.(requestUsersInGroupId(DataManager) -&gt; (String, completion : (users : [User]) -&gt; ()) -&gt; ()).(closure #1):DataManager.swift">
@@ -108,7 +101,36 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "LoginViewControllerNew.(getFBUserData(LoginViewControllerNew) -&gt; () -&gt; ()).(closure #1).(closure #1):LoginViewControllerNew.swift">
+         contextName = "CirclesTableViewController.reloadData() -&gt; ():CirclesTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "DataManager.sharedInstance.friendsArray ">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CirclesTableViewController.viewDidLoad() -&gt; ():CirclesTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "DataManager.sharedInstance.friendsArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CirclesTableViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:CirclesTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "DataManager.sharedInstance.allGroup">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DataManager.linkGroupAndUserToSharer((result : String) -&gt; ()) -&gt; ():DataManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "DataManager.sharedInstance.allGroup">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

@@ -37,7 +37,7 @@ class CirclesTableViewController: UITableViewController {
         }
         DataManager.sharedInstance.selectedFriends.removeAll()
         
-        
+        //let ll = FBSDKAccessToken.currentAccessToken().tokenString
         if (FBSDKAccessToken.currentAccessToken() == nil) {
             print("Nao fez login face")
         }
@@ -375,7 +375,9 @@ class CirclesTableViewController: UITableViewController {
             let dic = DataManager.sharedInstance.convertGroupToNSDic(group)
             
             for sharer in DataManager.sharedInstance.allSharers {
-                if sharer.receiver == group[path.row].id && sharer.owner == DataManager.sharedInstance.myUser.userID {
+                let receiver = DataManager.sharedInstance.allGroup[path.row].id
+                let owner = DataManager.sharedInstance.myUser.userID
+                if sharer.receiver == DataManager.sharedInstance.allGroup[path.row].id && sharer.owner == DataManager.sharedInstance.myUser.userID {
                     self.http.updateSharerWithID(sharer.id, until: nil, status: "accepted", completion: { (result) -> Void in
                                 self.reloadData()
                     })

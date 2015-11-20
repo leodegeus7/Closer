@@ -144,7 +144,7 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
                 if(fbloginresult.grantedPermissions.contains("email"))
                 {
                     self.getFBUserData()
-                    fbLoginManager.logOut()
+                    //fbLoginManager.logOut()    //logout face
                 }
             }
         })
