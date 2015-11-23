@@ -31,11 +31,12 @@ class DataManager {
     let http = HTTPHelper()
     var actualCell = 0
     var sharesInGroups = [[Sharer]]()
-    
+    var friendsInFace = [User]()
     
     var selectedFriends = [User]()
     var selectedGroup = Group()
     var selectedSharer = [Sharer]()
+    
     
     
     lazy var locationManager: CLLocationManager! = {
@@ -169,6 +170,39 @@ class DataManager {
             if error == nil {
                 self.friendsDictionaryFace = result as! Dictionary<String,AnyObject>
                 DataManager.sharedInstance.friendsArray = (self.friendsDictionaryFace["data"]) as! NSMutableArray
+                
+                for friend in DataManager.sharedInstance.friendsArray {
+                    let id = friend["id"] as! String
+                    self.http.signInWithFacebookID(id, completion: { (result) -> Void in
+                        let json = result
+                        let user = DataManager.sharedInstance.convertJsonToUserUnique(json)
+                        DataManager.sharedInstance.friendsInFace.append(user)
+                        
+                        var alreadyFriend = false
+                        
+                        for friend in DataManager.sharedInstance.allFriends {
+                            if friend.userID == user.userID {
+                                alreadyFriend = true
+                                break
+                            }
+                            
+                        }
+                        
+                        if !alreadyFriend {
+                            
+                            DataManager.sharedInstance.allFriends.append(user)
+                            let userdic = DataManager.sharedInstance.convertUserToNSDic(DataManager.sharedInstance.allFriends)
+                            DataManager.sharedInstance.createJsonFile("friends", json: userdic)
+
+                        }
+                        
+                        
+                        
+                    })
+                }
+                
+                
+                
                 
                 completion(result: self.friendsArray)
                 
@@ -372,6 +406,36 @@ class DataManager {
         return userArray
     }
     
+    
+    func convertJsonToUserUnique(json:AnyObject) -> User {
+        let newUser = User()
+        if let dic = json as? NSDictionary {
+
+                newUser.altitude = dic["altitude"] as? String
+                newUser.createdAt = dic["created_at"] as? String
+                newUser.email = dic["email"] as? String
+                newUser.facebookID = dic["fbid"] as? String
+                let id = dic["id"]
+                newUser.userID = "\(id!)"
+                if let locationString = dic["location"] as? String {
+                    if locationString.containsString(":") {
+                        let locationArray = locationString.componentsSeparatedByString(":") as [String]
+                        newUser.location.latitude = locationArray[0]
+                        newUser.location.longitude = locationArray[1]
+                    }
+                }
+                
+                
+                newUser.name = dic["name"] as? String
+                newUser.password = dic["password"] as? String
+                newUser.photo = dic["photo"] as? String
+                newUser.updatedAt = dic["updated_at"] as? String
+                newUser.username = dic["username"] as? String
+            
+        }
+        
+        return newUser
+    }
 
     
     func convertJsonToGroup(json:AnyObject) -> [Group] {
@@ -951,6 +1015,23 @@ class DataManager {
     }
     
 
+    func saveSharersInGroup() {
+        
+        
+        for sharers in DataManager.sharedInstance.sharesInGroups {
+            for share in sharers {
+                var groupSharer = Dictionary<String,AnyObject>()
+                groupSharer["owner"] = share.owner
+                groupSharer["receiver"] = share.receiver
+                groupSharer["status"] = share.status
+                groupSharer["updatedAt"] = share.updatedAt
+                groupSharer["until"] = share.until
+                groupSharer["createdAt"] = share.createdAt
+            
+            }
+        }
+        DataManager.sharedInstance.createJsonFile(<#T##name: String##String#>, json: <#T##AnyObject#>)
+    }
     
 
 }

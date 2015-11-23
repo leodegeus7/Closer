@@ -30,8 +30,8 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
         
         tableView.separatorInset = UIEdgeInsetsZero
         tableView.layoutMargins = UIEdgeInsetsZero
-        let buttonContinue = UIBarButtonItem(title: "Update name of Group", style: .Plain, target: self, action: "continueAction")
-        self.navigationItem.rightBarButtonItem = buttonContinue
+//        let buttonContinue = UIBarButtonItem(title: "Update name of Group", style: .Plain, target: self, action: "continueAction")
+//        self.navigationItem.rightBarButtonItem = buttonContinue
         
         
         self.applyDesign()
@@ -109,6 +109,34 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
         
         return cell
     }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if !(groupName.text == DataManager.sharedInstance.selectedGroup.name){
+            if !(groupName.text == ""){
+                http.updateGroupWithID(DataManager.sharedInstance.selectedGroup.id, name: groupName.text, photo: nil, completion: { (result) -> Void in
+                    
+                    self.textFieldDismiss(textField, completion: { (result) -> Void in
+                        DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Nome do grupo mudado para \(self.groupName.text!)", button1: "Ok")
+                    })
+                    
+                })
+            }
+            else {
+                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Novo nome do grupo não deve ser vazio", button1: "Ok")
+            }
+        }
+        else {
+            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Nome do grupo deve ser diferente do anterior", button1: "Ok")
+        }
+        
+        
+        return true
+    }
+    
+    func textFieldDismiss(textField:UITextField,completion:(result:String)->Void) {
+        textField.resignFirstResponder()
+        completion(result: "dismiss")
+    }
 
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if #available(iOS 9.0, *) {
@@ -123,6 +151,7 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
         }
         
     }
+
 
     
     func applyDesign () {

@@ -30,7 +30,7 @@ class AddFriendTableViewController: UITableViewController, UITextFieldDelegate {
     }
 
 
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 
         return 1
