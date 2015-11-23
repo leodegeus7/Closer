@@ -21,7 +21,7 @@ class InterfaceController: WKInterfaceController {
     }
 
     override func willActivate() {
-        //compassImage.setImage(<#T##image: UIImage?##UIImage?#>)
+        compassImage.setImage(UIImage(named: "pin.png"))
         
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
