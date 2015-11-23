@@ -77,6 +77,10 @@
 		A7FCC51C1BC4CE5B00AEDA3F /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FCC51B1BC4CE5B00AEDA3F /* TodayViewController.swift */; };
 		A7FCC5291BC4CE9B00AEDA3F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FCC5281BC4CE9B00AEDA3F /* MainInterface.storyboard */; };
 		A7FEFB551BDE9E3600DFEC1E /* radialGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = A7FEFB541BDE9E3600DFEC1E /* radialGradient.png */; };
+		AF5E10A21C003063003C0B13 /* CharmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5E10A11C003063003C0B13 /* CharmTableViewCell.swift */; };
+		AF5E10A41C003394003C0B13 /* Charm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5E10A31C003394003C0B13 /* Charm.swift */; };
+		AF5F33F41C001EE700BC1622 /* charm.png in Resources */ = {isa = PBXBuildFile; fileRef = AF5F33F31C001EE700BC1622 /* charm.png */; };
+		AF5F33F61C001EED00BC1622 /* group.png in Resources */ = {isa = PBXBuildFile; fileRef = AF5F33F51C001EED00BC1622 /* group.png */; };
 		CD0561D71BE9452E00130656 /* Red_Arrow_Right 3.png in Resources */ = {isa = PBXBuildFile; fileRef = CD0561D61BE9452E00130656 /* Red_Arrow_Right 3.png */; };
 		CD0561DB1BEA700900130656 /* x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD0561DA1BEA700900130656 /* x.png */; };
 		CD0561DD1BEA700E00130656 /* compass.png in Resources */ = {isa = PBXBuildFile; fileRef = CD0561DC1BEA700E00130656 /* compass.png */; };
@@ -342,6 +346,10 @@
 		A7FCC52A1BC4CF4100AEDA3F /* Holmies.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Holmies.entitlements; sourceTree = "<group>"; };
 		A7FCC52B1BC4CFEE00AEDA3F /* widget3.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = widget3.entitlements; sourceTree = "<group>"; };
 		A7FEFB541BDE9E3600DFEC1E /* radialGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radialGradient.png; sourceTree = "<group>"; };
+		AF5E10A11C003063003C0B13 /* CharmTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharmTableViewCell.swift; sourceTree = "<group>"; };
+		AF5E10A31C003394003C0B13 /* Charm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Charm.swift; sourceTree = "<group>"; };
+		AF5F33F31C001EE700BC1622 /* charm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = charm.png; sourceTree = "<group>"; };
+		AF5F33F51C001EED00BC1622 /* group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = group.png; sourceTree = "<group>"; };
 		B702994F19B9686CF5BEEC1E /* Pods-Holmies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Holmies.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Holmies/Pods-Holmies.debug.xcconfig"; sourceTree = "<group>"; };
 		CD0561D61BE9452E00130656 /* Red_Arrow_Right 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Red_Arrow_Right 3.png"; sourceTree = "<group>"; };
 		CD0561DA1BEA700900130656 /* x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = x.png; sourceTree = "<group>"; };
@@ -613,6 +621,8 @@
 		A7D2A4B11BCE90EF006A55D1 /* Design */ = {
 			isa = PBXGroup;
 			children = (
+				AF5F33F51C001EED00BC1622 /* group.png */,
+				AF5F33F31C001EE700BC1622 /* charm.png */,
 				CD0561E01BEA780D00130656 /* photos.png */,
 				A73BE4CC1BDEB68E0063C705 /* SF Fonts */,
 				A70592161BD6C5B600E737E3 /* DesignGroupsTableViewController.swift */,
@@ -832,6 +842,8 @@
 				CD43673E1BBC531E00309FD0 /* Group.swift */,
 				CDF84C6C1BE29C4300F91502 /* Sharer.swift */,
 				CDCCCD311BBF84A000A5AD03 /* 2.gpx */,
+				AF5E10A11C003063003C0B13 /* CharmTableViewCell.swift */,
+				AF5E10A31C003394003C0B13 /* Charm.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1157,6 +1169,7 @@
 				CD103A761BBB07470044166F /* ovalVerde.png in Resources */,
 				CD0561DB1BEA700900130656 /* x.png in Resources */,
 				A78EA4871BDAB3C30001E946 /* confirm.png in Resources */,
+				AF5F33F61C001EED00BC1622 /* group.png in Resources */,
 				CDCCCD2B1BBF83F500A5AD03 /* default.gpx in Resources */,
 				A7C37FAB1BE00A8500FEE8D2 /* SF-Compact-Display-Regular.otf in Resources */,
 				A7C37FB61BE00A8500FEE8D2 /* SF-UI-Display-Thin.otf in Resources */,
@@ -1190,6 +1203,7 @@
 				A7C37FC11BE00A8500FEE8D2 /* SF-UI-Text-Regular.otf in Resources */,
 				CD103A751BBB07470044166F /* ovalRosa.png in Resources */,
 				A7C37FBD1BE00A8500FEE8D2 /* SF-UI-Text-Light.otf in Resources */,
+				AF5F33F41C001EE700BC1622 /* charm.png in Resources */,
 				A760AAB21BFA46DC00214F06 /* pin2.png in Resources */,
 				A7C37FA71BE00A8500FEE8D2 /* SF-Compact-Display-Bold.otf in Resources */,
 				A7C37FAD1BE00A8500FEE8D2 /* SF-Compact-Display-Thin.otf in Resources */,
@@ -1321,6 +1335,7 @@
 				CD6BAA551B98D946008614B0 /* AppDelegate.swift in Sources */,
 				CD721F911BF2641A0013A3C5 /* FriendsInMapTableViewController.swift in Sources */,
 				CD6BAA991B98DB8A008614B0 /* UIViewExtension.swift in Sources */,
+				AF5E10A21C003063003C0B13 /* CharmTableViewCell.swift in Sources */,
 				A705921B1BD6C65300E737E3 /* NewGroupTableViewCell.swift in Sources */,
 				CDB0FD621BBF0B4500BC6DFA /* AddGroupNameViewController.swift in Sources */,
 				CD1C036C1BA752290073524A /* DataManager.swift in Sources */,
@@ -1330,6 +1345,7 @@
 				CDB0C9501BCEE0290020BFB5 /* NSString+Base64.m in Sources */,
 				CD1C036E1BA761550073524A /* FriendsTableViewController.swift in Sources */,
 				CD6BAA931B98DB7F008614B0 /* TypesTableViewController.swift in Sources */,
+				AF5E10A41C003394003C0B13 /* Charm.swift in Sources */,
 				CD0D132D1BB9C29D000D0656 /* User.swift in Sources */,
 				CD43673F1BBC531E00309FD0 /* Group.swift in Sources */,
 				CDAA87801BD55CBE00C883B4 /* LoginViewControllerNew.swift in Sources */,
