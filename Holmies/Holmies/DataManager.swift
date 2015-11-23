@@ -27,6 +27,7 @@ class DataManager {
     var activeUsers = [User]()
     var allFriends = [User]()
     var allSharers = [Sharer]()
+    var myCharms = [Charm]()
     var myUser = User()
     let http = HTTPHelper()
     var actualCell = 0
@@ -776,13 +777,42 @@ class DataManager {
     }
     
     func requestSharers(completion:(result:String)->Void){
+        var completedFirst = false
         let id = DataManager.sharedInstance.myUser.userID
+        var sharersArray = DataManager.sharedInstance.allSharers
+        sharersArray.removeAll()
         http.getInfoFromID(id, desiredInfo: .userSenderSharers) { (result) -> Void in
             let json = result
             DataManager.sharedInstance.createJsonFile("sharers", json: json)
             
-            DataManager.sharedInstance.allSharers = self.convertJsonToSharer(json)
-            completion(result: "DEU")
+//            DataManager.sharedInstance.allSharers = self.convertJsonToSharer(json)
+            let senderSharers = self.convertJsonToSharer(json)
+            sharersArray = sharersArray + senderSharers
+            if completedFirst {
+                DataManager.sharedInstance.allSharers = sharersArray
+                DataManager.sharedInstance.myCharms = self.selectCharmsFromSharersArray(DataManager.sharedInstance.allSharers)
+                completion(result: "DEU")
+            }
+            else {
+                completedFirst = true
+            }
+
+        }
+        http.getInfoFromID(id, desiredInfo: HTTPHelper.DesiredInfo.userReceiverSharers) { (result) -> Void in
+            let json = result
+            DataManager.sharedInstance.createJsonFile("receiverSharers", json: json)
+            
+            //            DataManager.sharedInstance.allSharers = self.convertJsonToSharer(json)
+            let receiverSharers = self.convertJsonToSharer(json)
+            sharersArray = sharersArray + receiverSharers
+            if completedFirst {
+                DataManager.sharedInstance.allSharers = sharersArray
+                DataManager.sharedInstance.myCharms = self.selectCharmsFromSharersArray(DataManager.sharedInstance.allSharers)
+                completion(result: "DEU")
+            }
+            else {
+                completedFirst = true
+            }
         }
     }
     
@@ -798,17 +828,19 @@ class DataManager {
                 newSharer.until = sharer["until"] as? String
                 if sharer["relation"] as? String == "u2u" {
                     newSharer.relation = .userToUser
+                    let receiverId = sharer["receiver_user_id"]
+                    let receiverIdFormat = "\(receiverId!)"
+                    newSharer.receiver = receiverIdFormat
                 }
                 else if sharer["relation"] as? String == "u2g" {
                     newSharer.relation = .userToGroup
+                    let receiverId = sharer["receiver_group_id"]
+                    let receiverIdFormat = "\(receiverId!)"
+                    newSharer.receiver = receiverIdFormat
                 }
                 
                 newSharer.updatedAt = sharer["updated_at"] as? String
-                //newSharer.status = sharer["sharer"] as? String
-                // newSharer.owner = //
-                let receiverId = sharer["receiver_group_id"]
-                let receiverIdFormat = "\(receiverId!)"
-                newSharer.receiver = receiverIdFormat
+
                 let ownerId = sharer["owner_user_id"]
                 let ownerIdFormat = "\(ownerId!)"
                 newSharer.owner = ownerIdFormat
@@ -1030,7 +1062,25 @@ class DataManager {
             
             }
         }
-        DataManager.sharedInstance.createJsonFile(<#T##name: String##String#>, json: <#T##AnyObject#>)
+//        DataManager.sharedInstance.createJsonFile(<#T##name: String##String#>, json: <#T##AnyObject#>)
+    }
+    
+    func selectCharmsFromSharersArray(sharersArray:[Sharer]) -> [Charm] {
+        var charmsArray = [Charm]()
+        for sharer in sharersArray {
+            if sharer.relation == SharerType.userToUser {
+//                charmsArray.append(sharer)
+                for friend in allFriends {
+                    if sharer.owner == friend.userID || sharer.receiver == friend.userID {
+                        let newCharm = Charm()
+                        newCharm.friend = friend
+                        newCharm.sharer = sharer
+                        charmsArray.append(newCharm)
+                    }
+                }
+            }
+        }
+        return charmsArray
     }
     
 

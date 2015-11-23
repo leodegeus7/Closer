@@ -10,8 +10,7 @@ import Foundation
 
 
 public enum SharerType {
-    case userToUser
-    case userToGroup
+    case userToUser, userToGroup
 }
 
 
