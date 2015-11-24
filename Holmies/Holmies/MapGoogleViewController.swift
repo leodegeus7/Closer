@@ -70,6 +70,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         mapView.delegate = self   //delegate das funçoes do google maps
         mapView.mapType = kGMSTypeNormal
         self.setUpBackgrounGradient()
+        
+        
         DataManager.sharedInstance.updateLocationUsers(mapView)
         
         self.compassView.hidden = true

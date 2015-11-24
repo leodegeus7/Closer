@@ -215,9 +215,7 @@ class CirclesTableViewController: UITableViewController {
                     
                     
                     
-                    DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
-                        
-                    })
+
                     
                     let subViews = cellActive.scrollViewFriends.subviews
                     for subview in subViews {
