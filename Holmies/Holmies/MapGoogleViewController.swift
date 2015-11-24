@@ -62,7 +62,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     }
     
     
-    
+
 
     
     override func viewDidLoad() {
@@ -71,11 +71,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         mapView.mapType = kGMSTypeNormal
         self.setUpBackgrounGradient()
         DataManager.sharedInstance.updateLocationUsers(mapView)
-        mapView.settings.compassButton = true
         self.compassView.hidden = true
         friendDistance.font = UIFont(name:"SFUIText-Regular", size: 15)
-        
-        
         
 
         /*
@@ -109,6 +106,9 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
             DataManager.sharedInstance.locationManager.startUpdatingLocation()   //inicia o locationmanager
             mapView.myLocationEnabled = true   //coloca a localizaçao do user no mapa com uma bolinha
             mapView.settings.myLocationButton = true    //coloca o botão de localizar user
+            mapView.settings.compassButton = true
+            
+
         }
     }
     
@@ -121,7 +121,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 
 
 
-    
+
     
     
 // MARK: entra nesse delegate quando recebe novas coordenadas do user
@@ -296,6 +296,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
             infoView.userPhoto.image = DataManager.sharedInstance.findImage("\(userInMarker.userID)")
             return infoView
         } else {
+            
+            marker.icon = UIImage(named: "compass.png")
             return nil
         }
     }
@@ -304,6 +306,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         print("oi")
     }
     
+    
+
 
 
     func setUpBackgrounGradient () {

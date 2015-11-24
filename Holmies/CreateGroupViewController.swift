@@ -66,6 +66,8 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     
     override func viewWillAppear(animated: Bool) {
         tableView.reloadData()
+        resultSearchController.searchBar.hidden = false
+
         
     }
     
