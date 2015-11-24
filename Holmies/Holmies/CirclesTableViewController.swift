@@ -397,8 +397,6 @@ class CirclesTableViewController: UITableViewController {
                 let dic = DataManager.sharedInstance.convertGroupToNSDic(group)
                 
                 for sharer in DataManager.sharedInstance.allSharers {
-                    let receiver = DataManager.sharedInstance.allGroup[path.row].id
-                    let owner = DataManager.sharedInstance.myUser.userID
                     if sharer.receiver == DataManager.sharedInstance.allGroup[path.row].id && sharer.owner == DataManager.sharedInstance.myUser.userID {
                         self.http.updateSharerWithID(sharer.id, until: nil, status: "accepted", completion: { (result) -> Void in
                             self.reloadData()
@@ -492,7 +490,7 @@ class CirclesTableViewController: UITableViewController {
             }
             else {
                 if shareTypeSegmentedControl.selectedSegmentIndex == 0 {
-                    let users = DataManager.sharedInstance.allGroup[indexPath.row].users
+                   
                     DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
                     DataManager.sharedInstance.selectedGroup = DataManager.sharedInstance.allGroup[indexPath.row]
                     for sharersInMap in DataManager.sharedInstance.sharesInGroups {

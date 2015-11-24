@@ -338,17 +338,21 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     }
 
     func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
-        self.compassView.hidden = false
-        navigationController?.navigationBar.hidden = true
-        let friend = marker.userData as! User
-        let locationFriend = CLLocation(latitude: Double(friend.location.latitude)!, longitude: Double(friend.location.longitude)!)
-        print("-1")
-        let myCoordinate = CLLocation(latitude: Double(DataManager.sharedInstance.myUser.location.latitude)!, longitude: Double(DataManager.sharedInstance.myUser.location.longitude)!)
-        print("0")
-        let id = friend.userID
-        friendPhoto.image = DataManager.sharedInstance.findImage(friend.userID)
-        print("1")
-        updateCompassPosition(myCoordinate, location: locationFriend)
+        if navigationController?.navigationBar.hidden == false {
+            self.compassView.hidden = false
+            compassView.fadeIn(0.5)
+
+            navigationController?.navigationBar.hidden = true
+            let friend = marker.userData as! User
+            let locationFriend = CLLocation(latitude: Double(friend.location.latitude)!, longitude: Double(friend.location.longitude)!)
+            print("-1")
+            let myCoordinate = CLLocation(latitude: Double(DataManager.sharedInstance.myUser.location.latitude)!, longitude: Double(DataManager.sharedInstance.myUser.location.longitude)!)
+            print("0")
+            let id = friend.userID
+            friendPhoto.image = DataManager.sharedInstance.findImage(friend.userID)
+            print("1")
+            updateCompassPosition(myCoordinate, location: locationFriend)
+        }
     }
     
     func updateCompassPosition(myLocation:CLLocation,location:CLLocation) {
