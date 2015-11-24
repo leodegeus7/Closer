@@ -48,7 +48,7 @@ class DataManager {
         return manager
     }()
     
-
+    
     
     class var sharedInstance: DataManager {
         struct Static {
@@ -137,15 +137,15 @@ class DataManager {
     
     func moveJsonFromDocumentsToBundle(nomeArquivo:String) {
         do {
-        let fileManager = NSFileManager.defaultManager()
+            let fileManager = NSFileManager.defaultManager()
             
-        let documentsDirectory = findDocumentsDirectory()
-        let destinationPath = documentsDirectory.stringByAppendingString("\(nomeArquivo).json")
-        
-        if fileManager.fileExistsAtPath(destinationPath) {
-            return
-        }
-        let sourcePath = (NSBundle.mainBundle().resourcePath)?.stringByAppendingString("\(nomeArquivo).json")
+            let documentsDirectory = findDocumentsDirectory()
+            let destinationPath = documentsDirectory.stringByAppendingString("\(nomeArquivo).json")
+            
+            if fileManager.fileExistsAtPath(destinationPath) {
+                return
+            }
+            let sourcePath = (NSBundle.mainBundle().resourcePath)?.stringByAppendingString("\(nomeArquivo).json")
             try fileManager.copyItemAtPath(sourcePath!, toPath: destinationPath) }
         catch let error {
             print("\(error)")
@@ -159,12 +159,12 @@ class DataManager {
         let dateFormatter:NSDateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy  hh:mm"
         let dateString = dateFormatter.stringFromDate(currDate) as String
-    
+        
         return dateString
-    
-    
+        
+        
     }
-   
+    
     func requestFacebook(completion:(result:NSMutableArray)->Void) {
         let friendRequest = FBSDKGraphRequest(graphPath: "/me/friends", parameters: nil)
         friendRequest.startWithCompletionHandler{ (connection: FBSDKGraphRequestConnection!, result:AnyObject!, error:NSError!) -> Void in
@@ -194,7 +194,7 @@ class DataManager {
                             DataManager.sharedInstance.allFriends.append(user)
                             let userdic = DataManager.sharedInstance.convertUserToNSDic(DataManager.sharedInstance.allFriends)
                             DataManager.sharedInstance.createJsonFile("friends", json: userdic)
-
+                            
                         }
                         
                         
@@ -213,7 +213,7 @@ class DataManager {
             }
         }
         
-
+        
     }
     
     func saveImage(image:UIImage?, id:String) -> String {
@@ -222,7 +222,7 @@ class DataManager {
             let destinationPath = documentsPath.stringByAppendingString("/\(id).jpg")
             UIImageJPEGRepresentation(image!,1.0)!.writeToFile(destinationPath, atomically: true)
             
-    
+            
             return destinationPath }
         else {
             return ""
@@ -240,11 +240,11 @@ class DataManager {
                 let imgURLString:String!
                 if (fid == myUser.facebookID) {
                     imgURLString = "http://graph.facebook.com/" + fid + "/picture?height=960" //type=normal
-
+                    
                 }else{
                     imgURLString = "http://graph.facebook.com/" + fid + "/picture?type=large" //type=normal
                 }
-                    
+                
                 let imgURL = NSURL(string: imgURLString)
                 let imageData = NSData(contentsOfURL: imgURL!)
                 fbImage = UIImage(data: imageData!)
@@ -267,7 +267,7 @@ class DataManager {
         else {
             return UIImage(named: "ovalVermelho.png")!
         }
-
+        
         
     }
     
@@ -289,7 +289,7 @@ class DataManager {
             
             array.append(dicMod)
             
-        
+            
         }
         
         let documents = findDocumentsDirectory()
@@ -307,7 +307,7 @@ class DataManager {
     
     
     func createJsonFile(name:String,json:AnyObject) {
-
+        
         print("inicio\(name)")
         let documents = DataManager.sharedInstance.findDocumentsDirectory()
         let path = documents.stringByAppendingString("/\(name).json")
@@ -332,7 +332,7 @@ class DataManager {
             outputStream?.open()
             NSJSONSerialization.writeJSONObject(dicMod, toStream: outputStream!, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
             outputStream?.close()
-        
+            
         } else {
             print("Arquivo com nome: \(name) criado")
         }
@@ -352,7 +352,7 @@ class DataManager {
             let data = try NSData(contentsOfFile: path, options: .DataReadingUncached)
             
             do {
-                let parse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) 
+                let parse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
                 return parse
                 
                 
@@ -369,39 +369,41 @@ class DataManager {
         catch _ {
         }
         return []
-
+        
     }
     
-
+    
     
     func convertJsonToUser(json:AnyObject) -> [User] {
         var userArray = [User]()
         if let dic = json as? [NSDictionary] {
             for user in dic {
-            let newUser = User()
-            newUser.altitude = user["altitude"] as? String
-            newUser.createdAt = user["created_at"] as? String
-            newUser.email = user["email"] as? String
-            newUser.facebookID = user["fbid"] as? String
-            let id = user["id"]
-            newUser.userID = "\(id!)"
-            if let locationString = user["location"] as? String {
-                if locationString.containsString(":") {
-                    let locationArray = locationString.componentsSeparatedByString(":") as [String]
-                    newUser.location.latitude = locationArray[0]
-                    newUser.location.longitude = locationArray[1]
+                let newUser = User()
+                newUser.altitude = user["altitude"] as? String
+                newUser.createdAt = user["created_at"] as? String
+                newUser.email = user["email"] as? String
+                newUser.facebookID = user["fbid"] as? String
+                let id = user["id"]
+                if id != nil {
+                    newUser.userID = "\(id!)"
+                    if let locationString = user["location"] as? String {
+                        if locationString.containsString(":") {
+                            let locationArray = locationString.componentsSeparatedByString(":") as [String]
+                            newUser.location.latitude = locationArray[0]
+                            newUser.location.longitude = locationArray[1]
+                        }
+                    }
+                    
+                    
+                    newUser.name = user["name"] as? String
+                    newUser.password = user["password"] as? String
+                    newUser.photo = user["photo"] as? String
+                    newUser.updatedAt = user["updated_at"] as? String
+                    newUser.username = user["username"] as? String
+                    userArray.append(newUser)
                 }
             }
             
-            
-            newUser.name = user["name"] as? String
-            newUser.password = user["password"] as? String
-            newUser.photo = user["photo"] as? String
-            newUser.updatedAt = user["updated_at"] as? String
-            newUser.username = user["username"] as? String
-            userArray.append(newUser)
-            }
-
         }
         
         return userArray
@@ -411,33 +413,33 @@ class DataManager {
     func convertJsonToUserUnique(json:AnyObject) -> User {
         let newUser = User()
         if let dic = json as? NSDictionary {
-
-                newUser.altitude = dic["altitude"] as? String
-                newUser.createdAt = dic["created_at"] as? String
-                newUser.email = dic["email"] as? String
-                newUser.facebookID = dic["fbid"] as? String
-                let id = dic["id"]
-                newUser.userID = "\(id!)"
-                if let locationString = dic["location"] as? String {
-                    if locationString.containsString(":") {
-                        let locationArray = locationString.componentsSeparatedByString(":") as [String]
-                        newUser.location.latitude = locationArray[0]
-                        newUser.location.longitude = locationArray[1]
-                    }
+            
+            newUser.altitude = dic["altitude"] as? String
+            newUser.createdAt = dic["created_at"] as? String
+            newUser.email = dic["email"] as? String
+            newUser.facebookID = dic["fbid"] as? String
+            let id = dic["id"]
+            newUser.userID = "\(id!)"
+            if let locationString = dic["location"] as? String {
+                if locationString.containsString(":") {
+                    let locationArray = locationString.componentsSeparatedByString(":") as [String]
+                    newUser.location.latitude = locationArray[0]
+                    newUser.location.longitude = locationArray[1]
                 }
-                
-                
-                newUser.name = dic["name"] as? String
-                newUser.password = dic["password"] as? String
-                newUser.photo = dic["photo"] as? String
-                newUser.updatedAt = dic["updated_at"] as? String
-                newUser.username = dic["username"] as? String
+            }
+            
+            
+            newUser.name = dic["name"] as? String
+            newUser.password = dic["password"] as? String
+            newUser.photo = dic["photo"] as? String
+            newUser.updatedAt = dic["updated_at"] as? String
+            newUser.username = dic["username"] as? String
             
         }
         
         return newUser
     }
-
+    
     
     func convertJsonToGroup(json:AnyObject) -> [Group] {
         var groupDic = [Group]()
@@ -512,7 +514,7 @@ class DataManager {
             catch _ {}
         }
     }
-
+    
     func updateLocationUsers(mapView:GMSMapView) {
         mapView.clear()
         for user in activeUsers {
@@ -524,7 +526,7 @@ class DataManager {
                 }
             }
             
-            
+            if actualSharer.status != nil {
             if actualSharer.status == "accepted" {
                 let name = user.name
                 let lat = user.location.latitude
@@ -564,7 +566,7 @@ class DataManager {
                 let resizedImage = imageResize(newImage, sizeChange: CGSizeMake(60,80.625))
                 marker.icon = resizedImage
             }
-            
+            }
         }
     }
     
@@ -594,32 +596,32 @@ class DataManager {
             }
             completion(result: JSON)
             print(JSON)
-//            } else {
-//                let dic = DataManager.sharedInstance.loadJsonFromDocuments("groups")
-//                DataManager.sharedInstance.convertJsonToGroup(dic)
-//            }
-
+            //            } else {
+            //                let dic = DataManager.sharedInstance.loadJsonFromDocuments("groups")
+            //                DataManager.sharedInstance.convertJsonToGroup(dic)
+            //            }
+            
         }
         
-
         
         
-//        
-//        Alamofire.request(.GET, "https://tranquil-coast-5554.herokuapp.com/users/\(DataManager.sharedInstance.idUser)/get_user_receiver_groups").responseJSON { response in
-//            if let JSON = response.result.value {
-//                self.usersInGroups.removeAll()
-//                DataManager.sharedInstance.createJsonFile("groups", json: JSON)
-//                DataManager.sharedInstance.convertJsonToGroup(JSON)
-//                for index in DataManager.sharedInstance.allGroup {
-//                    let id = index.id
-//                    self.requestUsersInGroupId(id)
-//                }
-//                print(self.usersInGroups)
-//            } else {
-//                let dic = DataManager.sharedInstance.loadJsonFromDocuments("groups")
-//                DataManager.sharedInstance.convertJsonToGroup(dic)
-//            }
-//        }
+        
+        //
+        //        Alamofire.request(.GET, "https://tranquil-coast-5554.herokuapp.com/users/\(DataManager.sharedInstance.idUser)/get_user_receiver_groups").responseJSON { response in
+        //            if let JSON = response.result.value {
+        //                self.usersInGroups.removeAll()
+        //                DataManager.sharedInstance.createJsonFile("groups", json: JSON)
+        //                DataManager.sharedInstance.convertJsonToGroup(JSON)
+        //                for index in DataManager.sharedInstance.allGroup {
+        //                    let id = index.id
+        //                    self.requestUsersInGroupId(id)
+        //                }
+        //                print(self.usersInGroups)
+        //            } else {
+        //                let dic = DataManager.sharedInstance.loadJsonFromDocuments("groups")
+        //                DataManager.sharedInstance.convertJsonToGroup(dic)
+        //            }
+        //        }
     }
     
     func requestUsersInGroupId(groupId:String,completion:(users:[User]) -> Void) {
@@ -646,7 +648,7 @@ class DataManager {
                         }
                         i++
                     }
-               
+                    
                     
                     DataManager.sharedInstance.allGroup[num].users = users
                     if DataManager.sharedInstance.allGroup[num].users.count < 1 {
@@ -657,16 +659,16 @@ class DataManager {
             }
             
             
-
-//            self.testIfGroupIsEmpty({ (result) -> Void in
-//                //completion do grupo apagado
+            
+            //            self.testIfGroupIsEmpty({ (result) -> Void in
+            //                //completion do grupo apagado
             var userForTest = [User()]
             let user1 = User()
             
             user1.name = "Test"
             userForTest.append(user1)
             completion(users: userForTest)
-//            })
+            //            })
         }
         
     }
@@ -688,7 +690,7 @@ class DataManager {
         textField.layer.addAnimation(animation, forKey: "position")
     }
     
-
+    
     func removeUserFromGroupInBackEnd(groupId:String,completion:(result:String) -> Void) {
         print("fazer aqui o delete do user em servidor")
         requestGroups { (result) -> Void in
@@ -732,9 +734,9 @@ class DataManager {
     
     func testIfGroupIsEmpty(completion:(result:String)->Void) {
         for group in DataManager.sharedInstance.allGroup {
-//            let groupq = group
-//            let usersInGroups = (group["users"] as! NSArray).count
-        
+            //            let groupq = group
+            //            let usersInGroups = (group["users"] as! NSArray).count
+            
             let users = group.users
             let id = group.id
             
@@ -785,7 +787,7 @@ class DataManager {
             let json = result
             DataManager.sharedInstance.createJsonFile("sharers", json: json)
             
-//            DataManager.sharedInstance.allSharers = self.convertJsonToSharer(json)
+            //            DataManager.sharedInstance.allSharers = self.convertJsonToSharer(json)
             let senderSharers = self.convertJsonToSharer(json)
             sharersArray = sharersArray + senderSharers
             if completedFirst {
@@ -796,7 +798,7 @@ class DataManager {
             else {
                 completedFirst = true
             }
-
+            
         }
         http.getInfoFromID(id, desiredInfo: HTTPHelper.DesiredInfo.userReceiverSharers) { (result) -> Void in
             let json = result
@@ -840,7 +842,7 @@ class DataManager {
                 }
                 
                 newSharer.updatedAt = sharer["updated_at"] as? String
-
+                
                 let ownerId = sharer["owner_user_id"]
                 let ownerIdFormat = "\(ownerId!)"
                 newSharer.owner = ownerIdFormat
@@ -862,108 +864,108 @@ class DataManager {
         let newSharer = Sharer()
         if let dic = json as? NSDictionary {
             
-                newSharer.createdAt = dic["created_at"] as? String
-                let id = dic["id"] as! Int
-                
-                newSharer.id = "\(id)"
-                newSharer.until = dic["until"] as? String
-                if dic["relation"] as? String == "u2u" {
-                    newSharer.relation = .userToUser
-                }
-                else if dic["relation"] as? String == "u2g" {
-                    newSharer.relation = .userToGroup
-                }
-                
-                newSharer.updatedAt = dic["updated_at"] as? String
-                newSharer.status = dic["sharer"] as? String
-                // newSharer.owner = //
-                let receiverId = dic["receiver_group_id"]
-                let receiverIdFormat = "\(receiverId!)"
-                newSharer.receiver = receiverIdFormat
-                newSharer.owner = dic["owner_user_id"] as? String
-                let ownerId = dic["owner_user_id"]
-                let ownerIdFormat = "\(ownerId!)"
-                newSharer.owner = ownerIdFormat
+            newSharer.createdAt = dic["created_at"] as? String
+            let id = dic["id"] as! Int
             
-                let status = dic["status"]
-                newSharer.status = status as? String
+            newSharer.id = "\(id)"
+            newSharer.until = dic["until"] as? String
+            if dic["relation"] as? String == "u2u" {
+                newSharer.relation = .userToUser
             }
+            else if dic["relation"] as? String == "u2g" {
+                newSharer.relation = .userToGroup
+            }
+            
+            newSharer.updatedAt = dic["updated_at"] as? String
+            newSharer.status = dic["sharer"] as? String
+            // newSharer.owner = //
+            let receiverId = dic["receiver_group_id"]
+            let receiverIdFormat = "\(receiverId!)"
+            newSharer.receiver = receiverIdFormat
+            newSharer.owner = dic["owner_user_id"] as? String
+            let ownerId = dic["owner_user_id"]
+            let ownerIdFormat = "\(ownerId!)"
+            newSharer.owner = ownerIdFormat
+            
+            let status = dic["status"]
+            newSharer.status = status as? String
+        }
         
         
         return newSharer
     }
     
     
-//    func findUntilBETA () {
-//        for sharer in DataManager.sharedInstance.allSharers {
-//            for group in DataManager.sharedInstance.allGroup {
-//                if sharer.receiver == group.id {
-//                    group.until = sharer.until
-//                    group.createdAt = sharer.createdAt
-//                }
-//            }
-//        }
-//    }
+    //    func findUntilBETA () {
+    //        for sharer in DataManager.sharedInstance.allSharers {
+    //            for group in DataManager.sharedInstance.allGroup {
+    //                if sharer.receiver == group.id {
+    //                    group.until = sharer.until
+    //                    group.createdAt = sharer.createdAt
+    //                }
+    //            }
+    //        }
+    //    }
     
     
-//    func linkSharerToGroup () {
-//        for sharer in DataManager.sharedInstance.allSharers {
-//            if sharer.relation == SharerType.userToGroup {
-//                for group in DataManager.sharedInstance.allGroup {
-//                    if sharer.receiver == group.id {
-//                        group.share = sharer
-//                        group.createdAt = sharer.createdAt
-//                    }
-//                }
-//            }
-//        }
-//    }
+    //    func linkSharerToGroup () {
+    //        for sharer in DataManager.sharedInstance.allSharers {
+    //            if sharer.relation == SharerType.userToGroup {
+    //                for group in DataManager.sharedInstance.allGroup {
+    //                    if sharer.receiver == group.id {
+    //                        group.share = sharer
+    //                        group.createdAt = sharer.createdAt
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
     
     func linkGroupAndUserToSharer (completion:(result:String)->Void) {
         for sharer in DataManager.sharedInstance.allSharers {
             if sharer.relation == SharerType.userToGroup {
                 for group in DataManager.sharedInstance.allGroup {
-                        if sharer.receiver == group.id {
-                            sharer.receiverObject = group
-                            group.share = sharer
+                    if sharer.receiver == group.id {
+                        sharer.receiverObject = group
+                        group.share = sharer
+                        
+                        let fileManager = NSFileManager.defaultManager()
+                        
+                        let documentsDirectory = findDocumentsDirectory()
+                        let destinationPath = documentsDirectory.stringByAppendingString("/users\(group.id).json")
+                        
+                        if fileManager.fileExistsAtPath(destinationPath) {
                             
-                            let fileManager = NSFileManager.defaultManager()
-                            
-                            let documentsDirectory = findDocumentsDirectory()
-                            let destinationPath = documentsDirectory.stringByAppendingString("/users\(group.id).json")
-                            
-                            if fileManager.fileExistsAtPath(destinationPath) {
-                                
-                                let userInGroup = loadJsonFromDocuments("users\(group.id)")
-                                var userInGroupUSER = convertJsonToUser(userInGroup)
-                                var i = 0
-                                for user in userInGroupUSER {
-                                    if user.userID == DataManager.sharedInstance.myUser.userID {
-                                        userInGroupUSER.removeAtIndex(i)
-                                        break
-                                    }
-                                    i++
+                            let userInGroup = loadJsonFromDocuments("users\(group.id)")
+                            var userInGroupUSER = convertJsonToUser(userInGroup)
+                            var i = 0
+                            for user in userInGroupUSER {
+                                if user.userID == DataManager.sharedInstance.myUser.userID {
+                                    userInGroupUSER.removeAtIndex(i)
+                                    break
                                 }
-                                group.users = userInGroupUSER
-                                
-                                
+                                i++
                             }
-                            
-                            
+                            group.users = userInGroupUSER
                             
                             
                         }
+                        
+                        
+                        
+                        
+                    }
                 }
             }
             //else if sharer.relation == SharerType.userToUser {
-                //ainda nao tem
+            //ainda nao tem
             //}
             
         }
         completion(result: "Linkou tudo")
     }
     
-
+    
     
     func saveMyInfo () {
         let myInfo = DataManager.sharedInstance.myUser
@@ -1046,7 +1048,7 @@ class DataManager {
         }
     }
     
-
+    
     func saveSharersInGroup() {
         
         
@@ -1059,17 +1061,17 @@ class DataManager {
                 groupSharer["updatedAt"] = share.updatedAt
                 groupSharer["until"] = share.until
                 groupSharer["createdAt"] = share.createdAt
-            
+                
             }
         }
-//        DataManager.sharedInstance.createJsonFile(<#T##name: String##String#>, json: <#T##AnyObject#>)
+        //        DataManager.sharedInstance.createJsonFile(<#T##name: String##String#>, json: <#T##AnyObject#>)
     }
     
     func selectCharmsFromSharersArray(sharersArray:[Sharer]) -> [Charm] {
         var charmsArray = [Charm]()
         for sharer in sharersArray {
             if sharer.relation == SharerType.userToUser {
-//                charmsArray.append(sharer)
+                //                charmsArray.append(sharer)
                 for friend in allFriends {
                     if sharer.owner == friend.userID || sharer.receiver == friend.userID {
                         let newCharm = Charm()
@@ -1083,5 +1085,5 @@ class DataManager {
         return charmsArray
     }
     
-
+    
 }

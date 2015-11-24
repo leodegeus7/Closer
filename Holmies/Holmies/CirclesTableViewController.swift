@@ -19,7 +19,7 @@ class CirclesTableViewController: UITableViewController {
     var imageX = 0.0
     
     @IBOutlet var shareTypeSegmentedControl: UISegmentedControl!
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,60 +30,74 @@ class CirclesTableViewController: UITableViewController {
         refresh.addTarget(self,action:"refreshData",forControlEvents:.ValueChanged)
         self.refreshControl = refresh
         navigationBarGradient()
-//        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdated:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
-
-
+        //        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
+        //        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdated:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
         
-        DataManager.sharedInstance.linkGroupAndUserToSharer { (result) -> Void in
-            
-            
-        }
+        
+        
+        
         DataManager.sharedInstance.selectedFriends.removeAll()
+        
+        
+        
+        
+        
+        
+        
+        let timer = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("reloadData"), userInfo: nil, repeats: true)
+        
+        
+        
         
         //let ll = FBSDKAccessToken.currentAccessToken().tokenString
         if (FBSDKAccessToken.currentAccessToken() == nil) {
             print("Nao fez login face")
         }
         else {
-                    DataManager.sharedInstance.requestFacebook({ (result) -> Void in
-                    })
+            DataManager.sharedInstance.requestFacebook({ (result) -> Void in
+            })
         }
-
         
         
         
         
-//        DataManager.sharedInstance.requestFacebook { (result) -> Void in
-//            
-//        }
         
-//        for family: String in UIFont.familyNames()
-//        {
-//            print("\(family)")
-//            for names: String in UIFont.fontNamesForFamilyName(family)
-//            {
-//                print("== \(names)")
-//            }
-//        }
-
+        //        DataManager.sharedInstance.requestFacebook { (result) -> Void in
+        //
+        //        }
+        
+        //        for family: String in UIFont.familyNames()
+        //        {
+        //            print("\(family)")
+        //            for names: String in UIFont.fontNamesForFamilyName(family)
+        //            {
+        //                print("== \(names)")
+        //            }
+        //        }
+        
         
     }
     
-
-
+    override func viewDidAppear(animated: Bool) {
+        DataManager.sharedInstance.linkGroupAndUserToSharer { (result) -> Void in
+            self.tableView.reloadData()
+            
+        }
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         
@@ -95,11 +109,11 @@ class CirclesTableViewController: UITableViewController {
             return DataManager.sharedInstance.myCharms.count
         }
     }
-
-
+    
+    
     
     override func viewWillAppear(animated: Bool) {
-                DataManager.sharedInstance.selectedFriends.removeAll()
+        DataManager.sharedInstance.selectedFriends.removeAll()
         reloadData()
     }
     
@@ -116,21 +130,21 @@ class CirclesTableViewController: UITableViewController {
                 
                 DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
                     print("\(result)")
-//                    self.tableView.reloadData()
+                    //                    self.tableView.reloadData()
                 })
-
+                
                 DataManager.sharedInstance.requestSharerInGroups()
                 
                 let friends = DataManager.sharedInstance.loadJsonFromDocuments("friends")
-
-
+                
+                
                 let myPhoto = DataManager.sharedInstance.getProfPic(DataManager.sharedInstance.myUser.facebookID, serverId: DataManager.sharedInstance.myUser.userID)
                 DataManager.sharedInstance.saveImage(myPhoto, id: DataManager.sharedInstance.myUser.userID)
                 
                 DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(friends)
                 for index in DataManager.sharedInstance.allFriends {
                     
-
+                    
                     if !(index.facebookID == nil) && !(index.userID == nil) {
                         let image = DataManager.sharedInstance.getProfPic(index.facebookID, serverId: index.userID)
                         DataManager.sharedInstance.saveImage(image, id: index.userID)
@@ -141,39 +155,39 @@ class CirclesTableViewController: UITableViewController {
                     self.tableView.reloadData()
                 })
                 self.refreshControl!.endRefreshing()
-//
+                //
                 
                 
             }
         }
-            DataManager.sharedInstance.saveMyInfo()
-//        DataManager.sharedInstance.requestFacebook { (result) -> Void in
-//            
-//        }
+        DataManager.sharedInstance.saveMyInfo()
+        //        DataManager.sharedInstance.requestFacebook { (result) -> Void in
+        //
+        //        }
         
-
+        
         
     }
     
-
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let squareRed = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
         if shareTypeSegmentedControl.selectedSegmentIndex == 0 {
             for activeGroup in DataManager.sharedInstance.activeGroup {
                 if activeGroup.id == DataManager.sharedInstance.allGroup[indexPath.row].id {
-                        
-                        let cellActive = tableView.dequeueReusableCellWithIdentifier("groupCell", forIndexPath: indexPath) as! ActiveGroupTableViewCell
-                        //print(DataManager.sharedInstance.allGroup)
-
-                        
-                        
-                        //let sharers = DataManager.sharedInstance.allSharers
-                        
-                        
-                        
                     
-
+                    let cellActive = tableView.dequeueReusableCellWithIdentifier("groupCell", forIndexPath: indexPath) as! ActiveGroupTableViewCell
+                    //print(DataManager.sharedInstance.allGroup)
+                    
+                    
+                    
+                    //let sharers = DataManager.sharedInstance.allSharers
+                    
+                    
+                    
+                    
+                    
                     
                     cellActive.timeLabel.text = ""
                     cellActive.nameGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].name
@@ -187,9 +201,9 @@ class CirclesTableViewController: UITableViewController {
                     cellActive.numberLabel.font = UIFont(name: "SFUIDisplay-Ultralight", size: 47)
                     cellActive.timeLabel.font = UIFont(name: "SFUIText-Medium", size: 12)
                     cellActive.coloredSquare.layer.cornerRadius = 8.0
-                
                     
-
+                    
+                    
                     
                     
                     let spaceInCell = 10.0
@@ -198,13 +212,13 @@ class CirclesTableViewController: UITableViewController {
                     let scrollViewSizeWidth = Double(cellActive.scrollViewFriends.frame.size.width)
                     let sizeOfImageHeight = scrollViewSizeHeight
                     let sizeOfImageWidth = (scrollViewSizeWidth/numbersOfCellsInScrol) - spaceInCell/2
-
+                    
                     
                     
                     DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
                         
                     })
-                                   
+                    
                     let subViews = cellActive.scrollViewFriends.subviews
                     for subview in subViews {
                         subview.removeFromSuperview()
@@ -232,85 +246,83 @@ class CirclesTableViewController: UITableViewController {
                         }
                     }
                     
-
+                    
                     imageX = 0
                     
-                    DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
-                        
-                    })
+                    
                     
                     if let _ = DataManager.sharedInstance.allGroup[indexPath.row].share {
-                    
-                    if !(DataManager.sharedInstance.allGroup[indexPath.row].share.until == nil) {
                         
-                        
-                        
-                        
-                        
-                        let createdHour = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
-                        let dateFormatter = NSDateFormatter()
-                        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
-                        dateFormatter.timeZone = NSTimeZone(name: "UTC")
-                        let date = dateFormatter.dateFromString(createdHour)
-                        let durationString = DataManager.sharedInstance.allGroup[indexPath.row].share.until
-                        if !(durationString == "0") {
-                            let durationFloat = Float(durationString)
-                            let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!))
-                        
-                        
-                            let duration = finalDate?.timeIntervalSinceNow
-                            if duration < 0 {
-                                cellActive.numberLabel.text = "0"
-                                cellActive.timeLabel.text = "expired"
-                                cellActive.selectionStyle = UITableViewCellSelectionStyle.None
-                                // cellActive.userInteractionEnabled = false
-                                cellActive.coloredSquare.backgroundColor = UIColor.grayColor()
+                        if !(DataManager.sharedInstance.allGroup[indexPath.row].share.until == nil) {
                             
-                            }
-                            else if duration <= 3600 {
-                                let newDurationMin = Int(duration!/60)
-                                cellActive.numberLabel.text = "\(newDurationMin)"
-                                cellActive.timeLabel.text = "minutes"
-                            }
-                            else if duration > 3600 && duration <= 360000 {
-                                var newDurationHours = Int(duration!/3600)
-                                newDurationHours++
-                                cellActive.numberLabel.text = "\(newDurationHours)"
-                                cellActive.timeLabel.text = "hours"
-                            } else if duration > 360000 {
-                                let duration2 = duration!/86400
                             
-                                var newDurationDays = Int(duration2)
-                                newDurationDays++
-                                cellActive.numberLabel.text = "\(newDurationDays)"
+                            
+                            
+                            
+                            let createdHour = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
+                            let dateFormatter = NSDateFormatter()
+                            dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
+                            dateFormatter.timeZone = NSTimeZone(name: "UTC")
+                            let date = dateFormatter.dateFromString(createdHour)
+                            let durationString = DataManager.sharedInstance.allGroup[indexPath.row].share.until
+                            if !(durationString == "0") {
+                                let durationFloat = Float(durationString)
+                                let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!))
+                                
+                                
+                                let duration = finalDate?.timeIntervalSinceNow
+                                if duration < 0 {
+                                    cellActive.numberLabel.text = "0"
+                                    cellActive.timeLabel.text = "expired"
+                                    cellActive.selectionStyle = UITableViewCellSelectionStyle.None
+                                    // cellActive.userInteractionEnabled = false
+                                    cellActive.coloredSquare.backgroundColor = UIColor.grayColor()
+                                    
+                                }
+                                else if duration <= 3600 {
+                                    let newDurationMin = Int(duration!/60)
+                                    cellActive.numberLabel.text = "\(newDurationMin)"
+                                    cellActive.timeLabel.text = "minutes"
+                                }
+                                else if duration > 3600 && duration <= 360000 {
+                                    var newDurationHours = Int(duration!/3600)
+                                    newDurationHours++
+                                    cellActive.numberLabel.text = "\(newDurationHours)"
+                                    cellActive.timeLabel.text = "hours"
+                                } else if duration > 360000 {
+                                    let duration2 = duration!/86400
+                                    
+                                    var newDurationDays = Int(duration2)
+                                    newDurationDays++
+                                    cellActive.numberLabel.text = "\(newDurationDays)"
+                                    cellActive.timeLabel.text = "days"
+                                }
+                                
+                                
+                            } else {
+                                cellActive.numberLabel.text = "∞"
                                 cellActive.timeLabel.text = "days"
                             }
-                        
-                        
-                        } else {
-                            cellActive.numberLabel.text = "∞"
-                            cellActive.timeLabel.text = "days"
+                            
+                            
+                            
+                            //                    var durationHours = Int(duration!/3600)
+                            //                    durationHours++
+                            //                    cellActive.numberLabel.text = "\(durationHours)"
                         }
                         
-                        
-                        
-    //                    var durationHours = Int(duration!/3600)
-    //                    durationHours++
-    //                    cellActive.numberLabel.text = "\(durationHours)"
                     }
                     
-                    }
-
                     
                     
-
+                    
                     return cellActive
                     
-
+                    
                 }
             }
-
-
+            
+            
             
             let cellPendent = tableView.dequeueReusableCellWithIdentifier("pendentCell", forIndexPath: indexPath) as! NewGroupTableViewCell
             self.tableView.rowHeight = 75
@@ -330,14 +342,14 @@ class CirclesTableViewController: UITableViewController {
             if !(durationString == "0") {
                 let durationFloat = Float(durationString)
                 let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!))
-            
-            
+                
+                
                 let duration = finalDate?.timeIntervalSinceNow
-            
-            
+                
+                
                 if !(duration == nil) {
                     let duration = Int(duration!)
-                
+                    
                     if duration < 0 {
                         cellPendent.numberLabel.text = "0"
                         cellPendent.timeLabel.text = "expired"
@@ -365,7 +377,7 @@ class CirclesTableViewController: UITableViewController {
                 cellPendent.numberLabel.text = "∞"
                 cellPendent.timeLabel.text = "days"
             }
-
+            
             
             cellPendent.nameGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].name
             cellPendent.nameGroup.textColor = mainRed
@@ -376,9 +388,9 @@ class CirclesTableViewController: UITableViewController {
             cellPendent.coloredSquare.layer.cornerRadius = 8.0
             
             
-
-
-           // cellPendent.coloredSquare.backgroundColor = UIColor(patternImage: radialGradient!)
+            
+            
+            // cellPendent.coloredSquare.backgroundColor = UIColor(patternImage: radialGradient!)
             cellPendent.accepted = { [unowned self] (selectedCell) -> Void in
                 let path = tableView.indexPathForRowAtPoint(selectedCell.center)!
                 DataManager.sharedInstance.activeGroup.append(DataManager.sharedInstance.allGroup[path.row])
@@ -391,20 +403,20 @@ class CirclesTableViewController: UITableViewController {
                     let owner = DataManager.sharedInstance.myUser.userID
                     if sharer.receiver == DataManager.sharedInstance.allGroup[path.row].id && sharer.owner == DataManager.sharedInstance.myUser.userID {
                         self.http.updateSharerWithID(sharer.id, until: nil, status: "accepted", completion: { (result) -> Void in
-                                    self.reloadData()
+                            self.reloadData()
                         })
                     }
                 }
                 
-
                 
                 
-
+                
+                
                 DataManager.sharedInstance.createJsonFile("activeGroups", json: dic)
             }
             
             cellPendent.rejected = { [unowned self] (selectedCell) -> Void in
-    //            let path = tableVipew.indexPathForRowAtPoint(selectedCell.center)!
+                //            let path = tableVipew.indexPathForRowAtPoint(selectedCell.center)!
                 let path = tableView.indexPathForRowAtPoint(selectedCell.center)!
                 let id = DataManager.sharedInstance.allGroup[path.row].id as String
                 self.http.destroySharerWithSharerType(.userToGroup, ownerID: DataManager.sharedInstance.myUser.userID, receiverID: id, completion: { (result) -> Void in
@@ -413,10 +425,10 @@ class CirclesTableViewController: UITableViewController {
                 
             }
             return cellPendent
-
-    //        cell.groupName.text = DataManager.sharedInstance.allGroup[indexPath.row].name
-    //        cell.idGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].id
-    //        cell.createAtGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
+            
+            //        cell.groupName.text = DataManager.sharedInstance.allGroup[indexPath.row].name
+            //        cell.idGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].id
+            //        cell.createAtGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
             //cell.collectionView.numberOfItemsInSection()
             
         }
@@ -437,8 +449,8 @@ class CirclesTableViewController: UITableViewController {
             let imageView = UIImageView(image: imageName)
             
             imageView.layer.cornerRadius = 20.0
-//            imageView.layer.borderColor = mainRed.CGColor
-//            imageView.layer.borderWidth = 5.0
+            //            imageView.layer.borderColor = mainRed.CGColor
+            //            imageView.layer.borderWidth = 5.0
             imageView.clipsToBounds = true
             
             imageView.frame.size = charmCell.userPictureImageView.frame.size
@@ -463,14 +475,14 @@ class CirclesTableViewController: UITableViewController {
             }
             charmCell.backgroundImage.addSubview(bgImageView)
             
-
+            
             
             
             return charmCell
             
             
         }
-
+        
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -478,19 +490,19 @@ class CirclesTableViewController: UITableViewController {
         if cell?.tag == 2 {
             if (DataManager.sharedInstance.allGroup[indexPath.row].users == nil) {
                 DataManager.sharedInstance.createSimpleUIAlert(self, title: "Espere", message: "Espere terminar o request", button1: "OK")
-            
+                
             }
             else {
                 if shareTypeSegmentedControl.selectedSegmentIndex == 0 {
                     let users = DataManager.sharedInstance.allGroup[indexPath.row].users
                     DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
                     DataManager.sharedInstance.selectedGroup = DataManager.sharedInstance.allGroup[indexPath.row]
-                        for sharersInMap in DataManager.sharedInstance.sharesInGroups {
-                            if sharersInMap[0].receiver == DataManager.sharedInstance.selectedGroup.id {
-                                DataManager.sharedInstance.selectedSharer = sharersInMap
-                                break
-                            }
+                    for sharersInMap in DataManager.sharedInstance.sharesInGroups {
+                        if sharersInMap[0].receiver == DataManager.sharedInstance.selectedGroup.id {
+                            DataManager.sharedInstance.selectedSharer = sharersInMap
+                            break
                         }
+                    }
                     
                     
                     performSegueWithIdentifier("showMap", sender: self)
@@ -498,10 +510,10 @@ class CirclesTableViewController: UITableViewController {
                 else {
                     //
                 }
-
-               
+                
+                
             }
-
+            
         }
     }
     
@@ -530,7 +542,7 @@ class CirclesTableViewController: UITableViewController {
         UIGraphicsEndImageContext()
         return image
     }
- 
+    
     func navigationBarGradient () {
         self.navigationController?.navigationBar.translucent = true
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
@@ -538,7 +550,7 @@ class CirclesTableViewController: UITableViewController {
         self.navigationController?.navigationBar.titleTextAttributes = fontDictionary
         self.navigationController?.navigationBar.setBackgroundImage(imageLayerForGradientBackground(), forBarMetrics: UIBarMetrics.Default)
     }
-
+    
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         if cell?.tag == 2 {
@@ -548,33 +560,33 @@ class CirclesTableViewController: UITableViewController {
             return UITableViewCellEditingStyle.None
         }
     }
-
-
+    
+    
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-
-            if editingStyle == .Delete {
-                //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                if self.shareTypeSegmentedControl.selectedSegmentIndex == 0 {
-                    let id = DataManager.sharedInstance.allGroup[indexPath.row].id as String
-                    self.http.destroySharerWithSharerType(.userToGroup, ownerID: DataManager.sharedInstance.myUser.userID, receiverID: id, completion: { (result) -> Void in
-                        self.reloadData()
-                    })
-                }
-                else {
-                    let myId = DataManager.sharedInstance.myUser.userID
-                    let friendId = DataManager.sharedInstance.myCharms[indexPath.row].friend.userID as String
-                    self.http.destroySharerWithSharerType(.userToUser, ownerID: myId, receiverID: friendId, completion: { (result) -> Void in
-                        self.reloadData()
-                    })
-                }
         
+        if editingStyle == .Delete {
+            //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            if self.shareTypeSegmentedControl.selectedSegmentIndex == 0 {
+                let id = DataManager.sharedInstance.allGroup[indexPath.row].id as String
+                self.http.destroySharerWithSharerType(.userToGroup, ownerID: DataManager.sharedInstance.myUser.userID, receiverID: id, completion: { (result) -> Void in
+                    self.reloadData()
+                })
+            }
+            else {
+                let myId = DataManager.sharedInstance.myUser.userID
+                let friendId = DataManager.sharedInstance.myCharms[indexPath.row].friend.userID as String
+                self.http.destroySharerWithSharerType(.userToUser, ownerID: myId, receiverID: friendId, completion: { (result) -> Void in
+                    self.reloadData()
+                })
+            }
+            
         }
-//        else if editingStyle == .Insert {
-//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-//        }    
+        //        else if editingStyle == .Insert {
+        //            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        //        }
     }
-
+    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
         
@@ -594,31 +606,31 @@ class CirclesTableViewController: UITableViewController {
     
     
     
-
+    
     /*
     // Override to support rearranging the table view.
     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
+    
     }
     */
-
+    
     /*
     // Override to support conditional rearranging of the table view.
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    // Return false if you do not want the item to be re-orderable.
+    return true
     }
     */
-
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
-
+    
     */
     
     @IBAction func segmentedControlDidChangeValue(sender: AnyObject) {
@@ -630,7 +642,7 @@ class CirclesTableViewController: UITableViewController {
 
 
 
-    extension CAGradientLayer {
+extension CAGradientLayer {
     class func gradientLayerForBounds(bounds: CGRect) -> CAGradientLayer {
         let layer = CAGradientLayer()
         layer.frame = bounds
@@ -639,8 +651,8 @@ class CirclesTableViewController: UITableViewController {
         layer.colors = [navigationBarRed1.CGColor, navigationBarRed2.CGColor]
         return layer
     }
-
-
+    
+    
 }
 
 
