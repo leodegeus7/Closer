@@ -71,9 +71,11 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         mapView.mapType = kGMSTypeNormal
         self.setUpBackgrounGradient()
         DataManager.sharedInstance.updateLocationUsers(mapView)
-        
+        mapView.settings.compassButton = true
         self.compassView.hidden = true
         friendDistance.font = UIFont(name:"SFUIText-Regular", size: 15)
+        
+        
         
 
         /*
@@ -136,6 +138,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         DataManager.sharedInstance.myUser.location.longitude = "\(newLocation.coordinate.longitude)"
         DataManager.sharedInstance.myUser.location.latitude = "\(newLocation.coordinate.latitude)"
         DataManager.sharedInstance.saveMyInfo()
+        
         if UIApplication.sharedApplication().applicationState == .Active {
             print("Coord atualizada: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
         }
