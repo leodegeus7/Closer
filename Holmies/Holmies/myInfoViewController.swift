@@ -24,7 +24,10 @@ class myInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        myImage.image = DataManager.sharedInstance.findImage(DataManager.sharedInstance.myUser.userID)
+        let id = DataManager.sharedInstance.myUser.userID
+        let image = DataManager.sharedInstance.findImage(id)
+        myImage.image = image
+      //  myImage.image = DataManager.sharedInstance.findImage(DataManager.sharedInstance.myUser.userID)
         myUserName.text = "\(DataManager.sharedInstance.myUser.username)\né o seu username"
         let buttonContinue = UIBarButtonItem(title: "Update Username", style: .Plain, target: self, action: "continueAction")
         self.navigationItem.rightBarButtonItem = buttonContinue

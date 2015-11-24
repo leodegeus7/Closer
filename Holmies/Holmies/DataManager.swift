@@ -1064,7 +1064,6 @@ class DataManager {
                 
             }
         }
-        //        DataManager.sharedInstance.createJsonFile(<#T##name: String##String#>, json: <#T##AnyObject#>)
     }
     
     func selectCharmsFromSharersArray(sharersArray:[Sharer]) -> [Charm] {
