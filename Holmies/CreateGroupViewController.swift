@@ -16,6 +16,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addUserButton: UIButton!
     
+    @IBOutlet weak var timeSlider: UISlider!
     
     let redCheck = UIImage(named: "redCheck.png")
     let grayCheck = UIImage(named: "grayCheck.png")
@@ -27,6 +28,8 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     var resultSearchController = UISearchController()
     var chosenHour:Int!
     var chosenDay:Int!
+    var isCharm = false
+    var selectedUserIndex = Int?()
 
 
     override func viewDidLoad() {
@@ -39,6 +42,13 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         self.navigationController?.title = "Edit group \(DataManager.sharedInstance.selectedGroup.name)"
         applyDesign()
         startSearchController()
+        
+        if isCharm {
+            groupName.hidden = true
+            upSliderLabel.hidden = true
+            downSlideLabel.hidden = true
+            timeSlider.hidden = true
+        }
         
 
         // Do any additional setup after loading the view.
@@ -108,25 +118,41 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
             referenceArray = DataManager.sharedInstance.allFriends
         }
         
-        for friend in DataManager.sharedInstance.selectedFriends {
-            index++
-            if friend.userID == referenceArray[indexPath.row].userID {
-                alreadyExist = true
-                break
+        
+        if isCharm {
+            if indexPath.row == selectedUserIndex {
+                cell.checkImage.image = redCheck
+                cell.friendPhoto.layer.borderColor = mainRed.CGColor
+                cell.friendPhoto.layer.borderWidth = 1
+                cell.friendName.textColor = mainRed
+            }
+            else {
+                cell.checkImage.image = grayCheck
+                cell.friendPhoto.layer.borderWidth = 0
+                cell.friendName.textColor = lightGray
             }
         }
-        
-        if !(alreadyExist) {
-            cell.checkImage.image = grayCheck
-            cell.friendPhoto.layer.borderWidth = 0
-            cell.friendName.textColor = lightGray
-        }
-            
         else {
-            cell.checkImage.image = redCheck
-            cell.friendPhoto.layer.borderColor = mainRed.CGColor
-            cell.friendPhoto.layer.borderWidth = 1
-            cell.friendName.textColor = mainRed
+            for friend in DataManager.sharedInstance.selectedFriends {
+                index++
+                if friend.userID == referenceArray[indexPath.row].userID {
+                    alreadyExist = true
+                    break
+                }
+            }
+            
+            if !(alreadyExist) {
+                cell.checkImage.image = grayCheck
+                cell.friendPhoto.layer.borderWidth = 0
+                cell.friendName.textColor = lightGray
+            }
+                
+            else {
+                cell.checkImage.image = redCheck
+                cell.friendPhoto.layer.borderColor = mainRed.CGColor
+                cell.friendPhoto.layer.borderWidth = 1
+                cell.friendName.textColor = mainRed
+            }
         }
         
         
@@ -242,45 +268,62 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! CreateGroupTableViewCell
-        var alreadyExist = false
-        
-        var index = -1
-        
-        var referenceArray = [User]()
-        
-        
-        if (resultSearchController.active) {
-            referenceArray = filteredArray
+        if isCharm {
+            if selectedUserIndex == indexPath.row {
+                cell.checkImage.image = grayCheck
+                cell.friendPhoto.layer.borderWidth = 0
+                cell.friendName.textColor = lightGray
+                selectedUserIndex = nil
+            }
+            else {
+                cell.checkImage.image = redCheck
+                cell.friendPhoto.layer.borderColor = mainRed.CGColor
+                cell.friendPhoto.layer.borderWidth = 1
+                cell.friendName.textColor = mainRed
+                selectedUserIndex = indexPath.row
+                tableView.reloadData()
+            }
         }
         else {
-            referenceArray = DataManager.sharedInstance.allFriends
-        }
-        for friend in DataManager.sharedInstance.selectedFriends {
-            if !(alreadyExist) {
-                index++
-            }
- 
-            if friend.userID == referenceArray[indexPath.row].userID {
-                alreadyExist = true
-                break
-            }
-        }
-        
-        if alreadyExist {
-                        cell.checkImage.image = grayCheck
-                        cell.friendPhoto.layer.borderWidth = 0
-                        cell.friendName.textColor = lightGray
-                        DataManager.sharedInstance.selectedFriends.removeAtIndex(index)
-        }
+            var alreadyExist = false
             
-        else {
-            DataManager.sharedInstance.selectedFriends.append(referenceArray[indexPath.row])
-            cell.checkImage.image = redCheck
-            cell.friendPhoto.layer.borderColor = mainRed.CGColor
-            cell.friendPhoto.layer.borderWidth = 1
-            cell.friendName.textColor = mainRed
+            var index = -1
+            
+            var referenceArray = [User]()
+            
+            
+            if (resultSearchController.active) {
+                referenceArray = filteredArray
+            }
+            else {
+                referenceArray = DataManager.sharedInstance.allFriends
+            }
+            for friend in DataManager.sharedInstance.selectedFriends {
+                if !(alreadyExist) {
+                    index++
+                }
+     
+                if friend.userID == referenceArray[indexPath.row].userID {
+                    alreadyExist = true
+                    break
+                }
+            }
+            
+            if alreadyExist {
+                            cell.checkImage.image = grayCheck
+                            cell.friendPhoto.layer.borderWidth = 0
+                            cell.friendName.textColor = lightGray
+                            DataManager.sharedInstance.selectedFriends.removeAtIndex(index)
+            }
+                
+            else {
+                DataManager.sharedInstance.selectedFriends.append(referenceArray[indexPath.row])
+                cell.checkImage.image = redCheck
+                cell.friendPhoto.layer.borderColor = mainRed.CGColor
+                cell.friendPhoto.layer.borderWidth = 1
+                cell.friendName.textColor = mainRed
+            }
         }
-        
         
         
 
@@ -517,81 +560,95 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     
     func continueAction () {
         
-        if groupName.text?.isEmpty  == true {
-            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Alerta", message: "Digite um nome para o grupo", button1: "Ok")
-        } else if chosenHour == nil {
-            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Alerta", message: "Selecione uma duraçao", button1: "Ok")
+        if isCharm {
+            if let index = selectedUserIndex {
+                let myUser = DataManager.sharedInstance.myUser
+                let selectedFriend = DataManager.sharedInstance.allFriends[index]
+                http.createNewSharerWithType(.userToUser, ownerID: myUser.userID, receiverID: selectedFriend.userID, until: "\(900)", completion: { (result) -> Void in
+                    self.navigationController?.popToRootViewControllerAnimated(true)
+                })
+            }
+            else {
+                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Alerta", message: "Escolha um amigo para enviar o Charme", button1: "Ok")
+            }
         }
         else {
-            let groupNameText = groupName.text
-            
-            http.createNewGroupWithName("\(groupNameText!)", completion: { (result) -> Void in
+            if groupName.text?.isEmpty  == true {
+                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Alerta", message: "Digite um nome para o grupo", button1: "Ok")
+            } else if chosenHour == nil {
+                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Alerta", message: "Selecione uma duraçao", button1: "Ok")
+            }
+            else {
+                let groupNameText = groupName.text
                 
-                
-                
-                
-                
-                
-                let dic = result as NSDictionary
-                let id = dic["id"]
-                let formatId = "\(id!)"
-                //let hour = self.chosenHour
-                self.http.createNewSharerWithType(.userToGroup, ownerID: DataManager.sharedInstance.myUser.userID, receiverID: formatId, until: "\(self.chosenHour*3600)", completion: { (result) -> Void in
-                    
-                    let json = result
-                    
-                    let sharerID = json["id"]
+                http.createNewGroupWithName("\(groupNameText!)", completion: { (result) -> Void in
                     
                     
-                    self.http.updateSharerWithID("\(sharerID!)", until: nil, status: "accepted", completion: { (result) -> Void in
-                    })
                     
-                })
-                
-                for user in DataManager.sharedInstance.selectedFriends {
-                    let userId = user.userID
                     
-                    self.http.createNewSharerWithType(.userToGroup, ownerID: "\(userId)", receiverID: formatId, until: "\(self.chosenHour*3600)", completion: { (result) -> Void in
+                    
+                    
+                    let dic = result as NSDictionary
+                    let id = dic["id"]
+                    let formatId = "\(id!)"
+                    //let hour = self.chosenHour
+                    self.http.createNewSharerWithType(.userToGroup, ownerID: DataManager.sharedInstance.myUser.userID, receiverID: formatId, until: "\(self.chosenHour*3600)", completion: { (result) -> Void in
+                        
+                        let json = result
+                        
+                        let sharerID = json["id"]
+                        
+                        
+                        self.http.updateSharerWithID("\(sharerID!)", until: nil, status: "accepted", completion: { (result) -> Void in
+                        })
                         
                     })
-                   
-                }
-                
-                let group = Group()
-                group.id = formatId
-
-                
-                
-                DataManager.sharedInstance.activeGroup.append(group)
-                let activeGroup = DataManager.sharedInstance.activeGroup
-                
-                let dicio = DataManager.sharedInstance.convertGroupToNSDic(activeGroup)
-                
-                DataManager.sharedInstance.createJsonFile("activeGroups", json: dicio)
-                let idGroup = id as! Int
-                
-                for sharer in DataManager.sharedInstance.allSharers {
-                    if sharer.receiver == "\(idGroup)" && sharer.owner == DataManager.sharedInstance.myUser.userID {
-                        self.http.updateSharerWithID(sharer.id, until: nil, status: "accepted", completion: { (result) -> Void in
+                    
+                    for user in DataManager.sharedInstance.selectedFriends {
+                        let userId = user.userID
+                        
+                        self.http.createNewSharerWithType(.userToGroup, ownerID: "\(userId)", receiverID: formatId, until: "\(self.chosenHour*3600)", completion: { (result) -> Void in
+                            
                         })
+                       
                     }
-                }
-                
-                
-                DataManager.sharedInstance.requestUsersInGroupId("\(idGroup)", completion: { (users) -> Void in
-                    DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
-                        self.exitView()
+                    
+                    let group = Group()
+                    group.id = formatId
+
+                    
+                    
+                    DataManager.sharedInstance.activeGroup.append(group)
+                    let activeGroup = DataManager.sharedInstance.activeGroup
+                    
+                    let dicio = DataManager.sharedInstance.convertGroupToNSDic(activeGroup)
+                    
+                    DataManager.sharedInstance.createJsonFile("activeGroups", json: dicio)
+                    let idGroup = id as! Int
+                    
+                    for sharer in DataManager.sharedInstance.allSharers {
+                        if sharer.receiver == "\(idGroup)" && sharer.owner == DataManager.sharedInstance.myUser.userID {
+                            self.http.updateSharerWithID(sharer.id, until: nil, status: "accepted", completion: { (result) -> Void in
+                            })
+                        }
+                    }
+                    
+                    
+                    DataManager.sharedInstance.requestUsersInGroupId("\(idGroup)", completion: { (users) -> Void in
+                        DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
+                            self.navigationController?.popToRootViewControllerAnimated(true)
+                        })
+                        
+                        
                     })
+                    
                     
                     
                 })
                 
                 
-                
-            })
             
-            
-        
+            }
         }
         
         
