@@ -74,6 +74,9 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         
         DataManager.sharedInstance.updateLocationUsers(mapView)
         self.compassView.hidden = true
+        mapView.settings.compassButton = true
+
+        
         friendDistance.font = UIFont(name:"SFUIText-Regular", size: 15)
         
 
@@ -108,7 +111,6 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
             DataManager.sharedInstance.locationManager.startUpdatingLocation()   //inicia o locationmanager
             mapView.myLocationEnabled = true   //coloca a localizaçao do user no mapa com uma bolinha
             mapView.settings.myLocationButton = true    //coloca o botão de localizar user
-            mapView.settings.compassButton = true
             
 
         }
