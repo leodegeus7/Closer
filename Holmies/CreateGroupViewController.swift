@@ -458,7 +458,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         case 0:
             chosenHour = 1
             chosenDay = chosenHour / 24
-            upSliderLabel.text = "\(1) hours"
+            upSliderLabel.text = "\(1) hour"
             upSliderLabel.textColor = mainRed
             upSliderLabel.fadeIn(0.5)
             downSlideLabel.fadeOut(0.5)
@@ -594,7 +594,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
                     let id = dic["id"]
                     let formatId = "\(id!)"
                     //let hour = self.chosenHour
-                    self.http.createNewSharerWithType(.userToGroup, ownerID: DataManager.sharedInstance.myUser.userID, receiverID: formatId, until: "\(self.chosenHour*3600)", completion: { (result) -> Void in
+                    self.http.createNewSharerWithType(.userToGroup, ownerID: DataManager.sharedInstance.myUser.userID, receiverID: formatId, until: "\(1)", completion: { (result) -> Void in
                         
                         let json = result
                         

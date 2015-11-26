@@ -25,6 +25,9 @@ class CirclesTableViewController: UITableViewController {
         super.viewDidLoad()
         reloadData()
         
+        
+        
+        
         let refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refresh.addTarget(self,action:"refreshData",forControlEvents:.ValueChanged)
@@ -40,6 +43,7 @@ class CirclesTableViewController: UITableViewController {
         
         
         
+        self.refreshControl?.beginRefreshing()
         
         
         
@@ -155,6 +159,7 @@ class CirclesTableViewController: UITableViewController {
                     self.tableView.reloadData()
                 })
                 self.refreshControl!.endRefreshing()
+                DataManager.sharedInstance.finishedAllRequest = true
                 //
                 
                 
@@ -273,14 +278,16 @@ class CirclesTableViewController: UITableViewController {
                                     cellActive.numberLabel.text = "0"
                                     cellActive.timeLabel.text = "expired"
                                     cellActive.selectionStyle = UITableViewCellSelectionStyle.None
-                                    // cellActive.userInteractionEnabled = false
+                                    //cellActive.userInteractionEnabled = false
                                     cellActive.coloredSquare.backgroundColor = UIColor.grayColor()
+                                    cellActive.tag = 100
                                     
                                 }
                                 else if duration <= 3600 {
                                     let newDurationMin = Int(duration!/60)
                                     cellActive.numberLabel.text = "\(newDurationMin)"
                                     cellActive.timeLabel.text = "minutes"
+                                    
                                 }
                                 else if duration > 3600 && duration <= 360000 {
                                     var newDurationHours = Int(duration!/3600)
@@ -352,6 +359,7 @@ class CirclesTableViewController: UITableViewController {
                         cellPendent.numberLabel.text = "0"
                         cellPendent.timeLabel.text = "expired"
                         //DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+                        
                     }
                     else if duration <= 3600 {
                         let newDurationMin = Int(duration/60)
@@ -410,6 +418,8 @@ class CirclesTableViewController: UITableViewController {
                 
                 DataManager.sharedInstance.createJsonFile("activeGroups", json: dic)
             }
+            
+            
             
             cellPendent.rejected = { [unowned self] (selectedCell) -> Void in
                 //            let path = tableVipew.indexPathForRowAtPoint(selectedCell.center)!
@@ -483,6 +493,16 @@ class CirclesTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
+        if cell?.tag == 100 {
+            let groupName = DataManager.sharedInstance.allGroup[indexPath.row].name
+            let alert = UIAlertController(title: "Attention", message: "\(groupName) is empty.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Delete Group", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        
+        }
         if cell?.tag == 2 {
             if (DataManager.sharedInstance.allGroup[indexPath.row].users == nil) {
                 DataManager.sharedInstance.createSimpleUIAlert(self, title: "Espere", message: "Espere terminar o request", button1: "OK")
@@ -493,15 +513,27 @@ class CirclesTableViewController: UITableViewController {
                    
                     DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
                     DataManager.sharedInstance.selectedGroup = DataManager.sharedInstance.allGroup[indexPath.row]
-                    for sharersInMap in DataManager.sharedInstance.sharesInGroups {
-                        if sharersInMap[0].receiver == DataManager.sharedInstance.selectedGroup.id {
-                            DataManager.sharedInstance.selectedSharer = sharersInMap
-                            break
-                        }
+                    
+                    
+                    let sharersUniqueJson = DataManager.sharedInstance.loadJsonFromDocuments("sharers\(DataManager.sharedInstance.allGroup[indexPath.row].id)")
+                    let sharerUnique = DataManager.sharedInstance.convertJsonToSharer(sharersUniqueJson)
+                    DataManager.sharedInstance.selectedSharer = sharerUnique
+                    
+//                    for sharersInMap in DataManager.sharedInstance.sharesInGroups {
+//                        if sharersInMap[0].receiver == DataManager.sharedInstance.selectedGroup.id {
+//                            DataManager.sharedInstance.selectedSharer = sharersInMap
+//                            break
+//                        }
+//                    }
+                    
+                    
+                    if DataManager.sharedInstance.finishedAllRequest == true {
+                        
+                        performSegueWithIdentifier("showMap", sender: self)
                     }
-                    
-                    
-                    performSegueWithIdentifier("showMap", sender: self)
+                    else {
+                        //
+                    }
                 }
                 else {
                     //
