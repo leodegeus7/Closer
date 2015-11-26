@@ -587,7 +587,27 @@ class CirclesTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
-        return nil
+        let editGroup = UITableViewRowAction(style: .Normal, title: " Edit ", handler: {(rowAction:UITableViewRowAction, indexPath: NSIndexPath) -> Void in
+            
+            //Editar o grupo
+            DataManager.sharedInstance.selectedGroup = DataManager.sharedInstance.allGroup[indexPath.row]
+           
+            self.performSegueWithIdentifier("editGroupSegue", sender: self)
+            
+            
+            })
+        
+            editGroup.backgroundColor = lightBlue
+        
+        let deleteGroup = UITableViewRowAction(style: .Destructive, title: "Delete", handler: {(rowAction:UITableViewRowAction, indexPath: NSIndexPath) -> Void in
+            
+            //Deletar o grupo
+            
+            
+            })
+            deleteGroup.backgroundColor = mainRed
+        
+        return [editGroup,deleteGroup]
     }
     
     
