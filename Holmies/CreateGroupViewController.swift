@@ -458,7 +458,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         case 0:
             chosenHour = 1
             chosenDay = chosenHour / 24
-            upSliderLabel.text = "\(1) hours"
+            upSliderLabel.text = "\(1) hour"
             upSliderLabel.textColor = mainRed
             upSliderLabel.fadeIn(0.5)
             downSlideLabel.fadeOut(0.5)

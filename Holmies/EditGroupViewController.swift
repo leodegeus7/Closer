@@ -81,30 +81,34 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
             }
         }
         
-        if actualSharer.status == "pending" {
+        if actualSharer.status != nil {
+            
+            if actualSharer.status == "pending" {
                 cell.friendName.textColor = UIColor.orangeColor()
-        }
-        else if actualSharer.status == "accepted" {
-            cell.friendName.textColor = UIColor.greenColor()
-        }
-        else if actualSharer.status == "rejected" {
-            cell.friendName.textColor = UIColor.redColor()
-        }
-        
+            }
+            else if actualSharer.status == "accepted" {
+                cell.friendName.textColor = UIColor.greenColor()
+            }
+            else if actualSharer.status == "rejected" {
+                cell.friendName.textColor = UIColor.redColor()
+            }
+            
             cell.friendName.text = DataManager.sharedInstance.activeUsers[indexPath.row].name
             cell.friendPhoto.image = DataManager.sharedInstance.findImage("\(DataManager.sharedInstance.activeUsers[indexPath.row].userID)")
             
-        
-        //MARK - CRIAR METODO DE PERSISTIR NO DATAMANAGER PARA DEPOIS ACESSAR E VER SE PERMENECEU PERSISTIDO
-        
-        self.tableView.rowHeight = 45
-        
-        cell.friendName.font = UIFont(name: "SFUIText-Regular", size: 17)
-        //cell.friendName.textColor = lightGray
-        cell.friendPhoto.layer.cornerRadius = 19
-        cell.friendPhoto.clipsToBounds = true
-        cell.friendPhoto.layer.borderWidth = 0
+            
+            //MARK - CRIAR METODO DE PERSISTIR NO DATAMANAGER PARA DEPOIS ACESSAR E VER SE PERMENECEU PERSISTIDO
+            
+            self.tableView.rowHeight = 45
+            
+            cell.friendName.font = UIFont(name: "SFUIText-Regular", size: 17)
+            //cell.friendName.textColor = lightGray
+            cell.friendPhoto.layer.cornerRadius = 19
+            cell.friendPhoto.clipsToBounds = true
+            cell.friendPhoto.layer.borderWidth = 0
 
+        }
+        
         
         
         return cell

@@ -39,6 +39,9 @@ class DataManager {
     var selectedSharer = [Sharer]()
     
     
+    var finishedAllRequest = false
+    
+    
     
     lazy var locationManager: CLLocationManager! = {
         let manager = CLLocationManager()
@@ -170,42 +173,45 @@ class DataManager {
         friendRequest.startWithCompletionHandler{ (connection: FBSDKGraphRequestConnection!, result:AnyObject!, error:NSError!) -> Void in
             if error == nil {
                 self.friendsDictionaryFace = result as! Dictionary<String,AnyObject>
-                DataManager.sharedInstance.friendsArray = (self.friendsDictionaryFace["data"]) as! NSMutableArray
-                
-                for friend in DataManager.sharedInstance.friendsArray {
-                    let id = friend["id"] as! String
-                    self.http.signInWithFacebookID(id, completion: { (result) -> Void in
-                        let json = result
-                        let user = DataManager.sharedInstance.convertJsonToUserUnique(json)
-                        DataManager.sharedInstance.friendsInFace.append(user)
-                        
-                        var alreadyFriend = false
-                        
-                        for friend in DataManager.sharedInstance.allFriends {
-                            if friend.userID == user.userID {
-                                alreadyFriend = true
-                                break
+                if let friends = self.friendsDictionaryFace["data"] as? NSMutableArray{
+                    DataManager.sharedInstance.friendsArray = friends
+                    
+                    for friend in DataManager.sharedInstance.friendsArray {
+                        let id = friend["id"] as! String
+                        self.http.signInWithFacebookID(id, completion: { (result) -> Void in
+                            let json = result
+                            let user = DataManager.sharedInstance.convertJsonToUserUnique(json)
+                            DataManager.sharedInstance.friendsInFace.append(user)
+                            
+                            var alreadyFriend = false
+                            
+                            for friend in DataManager.sharedInstance.allFriends {
+                                if friend.userID == user.userID {
+                                    alreadyFriend = true
+                                    break
+                                }
+                                
                             }
                             
-                        }
-                        
-                        if !alreadyFriend {
+                            if !alreadyFriend {
+                                
+                                DataManager.sharedInstance.allFriends.append(user)
+                                let userdic = DataManager.sharedInstance.convertUserToNSDic(DataManager.sharedInstance.allFriends)
+                                DataManager.sharedInstance.createJsonFile("friends", json: userdic)
+                                
+                            }
                             
-                            DataManager.sharedInstance.allFriends.append(user)
-                            let userdic = DataManager.sharedInstance.convertUserToNSDic(DataManager.sharedInstance.allFriends)
-                            DataManager.sharedInstance.createJsonFile("friends", json: userdic)
                             
-                        }
-                        
-                        
-                        
-                    })
+                            
+                        })
+                    }
+                    
+                    
+                    
+                    
+                    completion(result: self.friendsArray)
                 }
                 
-                
-                
-                
-                completion(result: self.friendsArray)
                 
             }
             else {
@@ -896,6 +902,8 @@ class DataManager {
     }
     
     
+    
+    
     //    func findUntilBETA () {
     //        for sharer in DataManager.sharedInstance.allSharers {
     //            for group in DataManager.sharedInstance.allGroup {
@@ -962,6 +970,7 @@ class DataManager {
             //}
             
         }
+        sortGroupArray()
         completion(result: "Linkou tudo")
     }
     
@@ -1004,6 +1013,8 @@ class DataManager {
             DataManager.sharedInstance.myUser = myInfo
         }
     }
+    
+
     
     //    func updateFriends () {
     //        Alamofire.request(.GET, "https://tranquil-coast-5554.herokuapp.com/users/lista").responseJSON { response in
@@ -1083,6 +1094,57 @@ class DataManager {
         }
         return charmsArray
     }
+    
+    func sortGroupArray() {
+        var i = 0
+        
+        for group in DataManager.sharedInstance.allGroup {
+            for activeGroup in DataManager.sharedInstance.activeGroup {
+                if group.id == activeGroup.id {
+                    let oldGroup = group
+                    DataManager.sharedInstance.allGroup.removeAtIndex(i)
+                    DataManager.sharedInstance.allGroup.insert(oldGroup, atIndex: 0)
+                    break
+                }
+            }
+            i++
+        }
+
+        DataManager.sharedInstance.allGroup = DataManager.sharedInstance.allGroup.reverse()
+        DataManager.sharedInstance.allGroup = DataManager.sharedInstance.allGroup.reverse()
+        
+        
+        i = 0
+        for group in DataManager.sharedInstance.allGroup {
+            let createdHour = group.createdAt
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
+            dateFormatter.timeZone = NSTimeZone(name: "UTC")
+            let date = dateFormatter.dateFromString(createdHour)
+            let durationString = group.share.until
+            if !(durationString == "0") {
+                let durationFloat = Float(durationString)
+                let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!))
+                
+                
+                let duration = finalDate?.timeIntervalSinceNow
+                if duration < 0 {
+                    let oldGroup = group
+                    DataManager.sharedInstance.allGroup.removeAtIndex(i)
+                    DataManager.sharedInstance.allGroup.insert(oldGroup, atIndex: 0)
+                }
+                
+                
+            }
+            i++
+        }
+        
+
+        DataManager.sharedInstance.allGroup = DataManager.sharedInstance.allGroup.reverse()
+        
+        
+    }
+    
     
     
 }

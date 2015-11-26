@@ -25,6 +25,9 @@ class CirclesTableViewController: UITableViewController {
         super.viewDidLoad()
         reloadData()
         
+        
+        
+        
         let refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refresh.addTarget(self,action:"refreshData",forControlEvents:.ValueChanged)
@@ -40,6 +43,7 @@ class CirclesTableViewController: UITableViewController {
         
         
         
+        self.refreshControl?.beginRefreshing()
         
         
         
@@ -155,6 +159,7 @@ class CirclesTableViewController: UITableViewController {
                     self.tableView.reloadData()
                 })
                 self.refreshControl!.endRefreshing()
+                DataManager.sharedInstance.finishedAllRequest = true
                 //
                 
                 
@@ -411,6 +416,8 @@ class CirclesTableViewController: UITableViewController {
                 DataManager.sharedInstance.createJsonFile("activeGroups", json: dic)
             }
             
+            
+            
             cellPendent.rejected = { [unowned self] (selectedCell) -> Void in
                 //            let path = tableVipew.indexPathForRowAtPoint(selectedCell.center)!
                 let path = tableView.indexPathForRowAtPoint(selectedCell.center)!
@@ -493,15 +500,27 @@ class CirclesTableViewController: UITableViewController {
                    
                     DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
                     DataManager.sharedInstance.selectedGroup = DataManager.sharedInstance.allGroup[indexPath.row]
-                    for sharersInMap in DataManager.sharedInstance.sharesInGroups {
-                        if sharersInMap[0].receiver == DataManager.sharedInstance.selectedGroup.id {
-                            DataManager.sharedInstance.selectedSharer = sharersInMap
-                            break
-                        }
+                    
+                    
+                    let sharersUniqueJson = DataManager.sharedInstance.loadJsonFromDocuments("sharers\(DataManager.sharedInstance.allGroup[indexPath.row].id)")
+                    let sharerUnique = DataManager.sharedInstance.convertJsonToSharer(sharersUniqueJson)
+                    DataManager.sharedInstance.selectedSharer = sharerUnique
+                    
+//                    for sharersInMap in DataManager.sharedInstance.sharesInGroups {
+//                        if sharersInMap[0].receiver == DataManager.sharedInstance.selectedGroup.id {
+//                            DataManager.sharedInstance.selectedSharer = sharersInMap
+//                            break
+//                        }
+//                    }
+                    
+                    
+                    if DataManager.sharedInstance.finishedAllRequest == true {
+                        
+                        performSegueWithIdentifier("showMap", sender: self)
                     }
-                    
-                    
-                    performSegueWithIdentifier("showMap", sender: self)
+                    else {
+                        //
+                    }
                 }
                 else {
                     //

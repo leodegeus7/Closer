@@ -191,8 +191,8 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
                             let friendRequest = FBSDKGraphRequest(graphPath: "/me/friends", parameters: nil)
                             friendRequest.startWithCompletionHandler{ (connection: FBSDKGraphRequestConnection!, result:AnyObject!, error:NSError!) -> Void in
                                 if error == nil {
-                                    let  friendsDictionaryFace = result as! Dictionary<String,AnyObject>
-                                    DataManager.sharedInstance.friendsArray = (friendsDictionaryFace["data"]) as! NSMutableArray
+                                    //let  friendsDictionaryFace = result as! Dictionary<String,AnyObject>
+                                    //DataManager.sharedInstance.friendsArray = (friendsDictionaryFace["data"]) as! NSMutableArray
                                     
                                     
                                 }
