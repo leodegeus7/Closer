@@ -755,7 +755,7 @@ class DataManager {
     
     func destroyGroupWithNotification(groupObject:Group,view:UIViewController) {
         let idGroup = groupObject.id
-        createSimpleUIAlert(view, title: "Deletado", message: "O grupo \(groupObject.name) será deletado pois todos os usuarios sairam", button1: "Ok")
+        createSimpleUIAlert(view, title: "Deletado", message: "O grupo \(groupObject.name) foi deletado", button1: "Ok")
         http.destroyGroupWithID(idGroup) { (result) -> Void in
             print("apagado grupo \(idGroup)")
         }
@@ -1117,25 +1117,27 @@ class DataManager {
         
         i = 0
         for group in DataManager.sharedInstance.allGroup {
-            let createdHour = group.createdAt
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
-            dateFormatter.timeZone = NSTimeZone(name: "UTC")
-            let date = dateFormatter.dateFromString(createdHour)
-            let durationString = group.share.until
-            if !(durationString == "0") {
-                let durationFloat = Float(durationString)
-                let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!))
-                
-                
-                let duration = finalDate?.timeIntervalSinceNow
-                if duration < 0 {
-                    let oldGroup = group
-                    DataManager.sharedInstance.allGroup.removeAtIndex(i)
-                    DataManager.sharedInstance.allGroup.insert(oldGroup, atIndex: 0)
+            if group.share == nil {
+                let createdHour = group.createdAt
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
+                dateFormatter.timeZone = NSTimeZone(name: "UTC")
+                let date = dateFormatter.dateFromString(createdHour)
+                let durationString = group.share.until
+                if !(durationString == "0") {
+                    let durationFloat = Float(durationString)
+                    let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!))
+                    
+                    
+                    let duration = finalDate?.timeIntervalSinceNow
+                    if duration < 0 {
+                        let oldGroup = group
+                        DataManager.sharedInstance.allGroup.removeAtIndex(i)
+                        DataManager.sharedInstance.allGroup.insert(oldGroup, atIndex: 0)
+                    }
+                    
+                    
                 }
-                
-                
             }
             i++
         }

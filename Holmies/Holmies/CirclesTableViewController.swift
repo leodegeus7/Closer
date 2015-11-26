@@ -278,14 +278,16 @@ class CirclesTableViewController: UITableViewController {
                                     cellActive.numberLabel.text = "0"
                                     cellActive.timeLabel.text = "expired"
                                     cellActive.selectionStyle = UITableViewCellSelectionStyle.None
-                                    // cellActive.userInteractionEnabled = false
+                                    //cellActive.userInteractionEnabled = false
                                     cellActive.coloredSquare.backgroundColor = UIColor.grayColor()
+                                    cellActive.tag = 100
                                     
                                 }
                                 else if duration <= 3600 {
                                     let newDurationMin = Int(duration!/60)
                                     cellActive.numberLabel.text = "\(newDurationMin)"
                                     cellActive.timeLabel.text = "minutes"
+                                    
                                 }
                                 else if duration > 3600 && duration <= 360000 {
                                     var newDurationHours = Int(duration!/3600)
@@ -357,6 +359,7 @@ class CirclesTableViewController: UITableViewController {
                         cellPendent.numberLabel.text = "0"
                         cellPendent.timeLabel.text = "expired"
                         //DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+                        
                     }
                     else if duration <= 3600 {
                         let newDurationMin = Int(duration/60)
@@ -490,6 +493,16 @@ class CirclesTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
+        if cell?.tag == 100 {
+            let groupName = DataManager.sharedInstance.allGroup[indexPath.row].name
+            let alert = UIAlertController(title: "Attention", message: "\(groupName) is empty.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Delete Group", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        
+        }
         if cell?.tag == 2 {
             if (DataManager.sharedInstance.allGroup[indexPath.row].users == nil) {
                 DataManager.sharedInstance.createSimpleUIAlert(self, title: "Espere", message: "Espere terminar o request", button1: "OK")
