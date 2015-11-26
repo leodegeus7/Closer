@@ -41,13 +41,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Holmies/CirclesTableViewController.swift"
-            timestampString = "470252364.364639"
+            filePath = "Holmies/DataManager.swift"
+            timestampString = "470257629.363323"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "521"
-            endingLineNumber = "521"
-            landmarkName = "tableView(_:didSelectRowAtIndexPath:)"
+            startingLineNumber = "957"
+            endingLineNumber = "957"
+            landmarkName = "linkGroupAndUserToSharer(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,13 +57,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Holmies/DataManager.swift"
-            timestampString = "470250341.553444"
+            filePath = "Holmies/CirclesTableViewController.swift"
+            timestampString = "470257764.838861"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "949"
-            endingLineNumber = "949"
-            landmarkName = "linkGroupAndUserToSharer(_:)"
+            startingLineNumber = "540"
+            endingLineNumber = "540"
+            landmarkName = "tableView(_:didSelectRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

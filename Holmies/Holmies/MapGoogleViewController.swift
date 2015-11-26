@@ -79,6 +79,34 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         
         friendDistance.font = UIFont(name:"SFUIText-Regular", size: 15)
         
+        
+        
+        
+        
+        var existUserInGroup = false
+        for sharer in DataManager.sharedInstance.selectedSharer {
+            if sharer.status == "accepted" && sharer.owner != DataManager.sharedInstance.myUser.userID {
+                existUserInGroup = true
+                break
+            }
+        }
+        
+        if !existUserInGroup {
+            //DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Nenhum membro neste grupo aceitou o grupo", button1: "Ok")
+            
+            
+            let groupName = DataManager.sharedInstance.selectedGroup.name
+            let alert = UIAlertController(title: "Attention", message: "Nao há ninguem aceito no grupo: \(groupName). Peça a alguns de seus amigos para aceitarem em seus dispositivos", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                self.performSegueWithIdentifier("editGroup", sender: self)
+            }))
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+            
+        }
+        
+        
+        
 
         /*
         //background

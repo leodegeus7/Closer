@@ -101,7 +101,7 @@ class AddFriendTableViewController: UITableViewController, UITextFieldDelegate {
                 
                 if friendAlreadyExist == false {
                     DataManager.sharedInstance.allFriends.append(newUser)
-                    let friends = DataManager.sharedInstance.allFriends
+//                    let friends = DataManager.sharedInstance.allFriends
                     
                     let alertController = UIAlertController(title: "Sucesso", message: "Amigo \(newUser.username)", preferredStyle: .Alert)
                     let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {

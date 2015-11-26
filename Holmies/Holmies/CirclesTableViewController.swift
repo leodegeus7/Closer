@@ -50,7 +50,8 @@ class CirclesTableViewController: UITableViewController {
         
         let timer = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("reloadData"), userInfo: nil, repeats: true)
         
-        
+
+
         
         
         //let ll = FBSDKAccessToken.currentAccessToken().tokenString
@@ -268,6 +269,7 @@ class CirclesTableViewController: UITableViewController {
                             dateFormatter.timeZone = NSTimeZone(name: "UTC")
                             let date = dateFormatter.dateFromString(createdHour)
                             let durationString = DataManager.sharedInstance.allGroup[indexPath.row].share.until
+                            cellActive.tag = 2
                             if !(durationString == "0") {
                                 let durationFloat = Float(durationString)
                                 let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!))
@@ -343,7 +345,7 @@ class CirclesTableViewController: UITableViewController {
             dateFormatter.timeZone = NSTimeZone(name: "UTC")
             let date = dateFormatter.dateFromString(createdHour)
             let durationString = DataManager.sharedInstance.allGroup[indexPath.row].share.until
-            
+            cellPendent.tag = 1
             if !(durationString == "0") {
                 let durationFloat = Float(durationString)
                 let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!))
@@ -494,13 +496,16 @@ class CirclesTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         if cell?.tag == 100 {
-            let groupName = DataManager.sharedInstance.allGroup[indexPath.row].name
-            let alert = UIAlertController(title: "Attention", message: "\(groupName) is empty.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Delete Group", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
-                DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
-            }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+//            let groupName = DataManager.sharedInstance.allGroup[indexPath.row].name
+//            let alert = UIAlertController(title: "Attention", message: "\(groupName) is expired.", preferredStyle: UIAlertControllerStyle.Alert)
+//            alert.addAction(UIAlertAction(title: "Delete Group", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+//                //DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+//                DataManager.sharedInstance.destroySharerWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+//            }))
+//            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+//            alert.addAction(UIAlertAction(title: "Change Duration", style: UIAlertActionStyle.Default, handler: nil))
+//            self.presentViewController(alert, animated: true, completion: nil)
+            self.reloadData()
         
         }
         if cell?.tag == 2 {
@@ -509,15 +514,22 @@ class CirclesTableViewController: UITableViewController {
                 
             }
             else {
+                
+                
+                
+                
+                
+                
                 if shareTypeSegmentedControl.selectedSegmentIndex == 0 {
                    
                     DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
                     DataManager.sharedInstance.selectedGroup = DataManager.sharedInstance.allGroup[indexPath.row]
                     
                     
-                    let sharersUniqueJson = DataManager.sharedInstance.loadJsonFromDocuments("sharers\(DataManager.sharedInstance.allGroup[indexPath.row].id)")
-                    let sharerUnique = DataManager.sharedInstance.convertJsonToSharer(sharersUniqueJson)
-                    DataManager.sharedInstance.selectedSharer = sharerUnique
+                    DataManager.sharedInstance.selectedSharer = DataManager.sharedInstance.loadSharerInAGroupFromDocuments(DataManager.sharedInstance.allGroup[indexPath.row].id)
+                    
+
+                    
                     
 //                    for sharersInMap in DataManager.sharedInstance.sharesInGroups {
 //                        if sharersInMap[0].receiver == DataManager.sharedInstance.selectedGroup.id {
@@ -526,19 +538,13 @@ class CirclesTableViewController: UITableViewController {
 //                        }
 //                    }
                     
-                    
                     if DataManager.sharedInstance.finishedAllRequest == true {
                         
                         performSegueWithIdentifier("showMap", sender: self)
                     }
-                    else {
-                        //
-                    }
+
+                    
                 }
-                else {
-                    //
-                }
-                
                 
             }
             
@@ -583,6 +589,8 @@ class CirclesTableViewController: UITableViewController {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         if cell?.tag == 2 {
             return UITableViewCellEditingStyle.Delete
+        } else if cell?.tag == 100 {{
+            return UITableViewCellEditingStyle.Delete
         }
         else {
             return UITableViewCellEditingStyle.None
@@ -622,8 +630,11 @@ class CirclesTableViewController: UITableViewController {
         let editGroup = UITableViewRowAction(style: .Normal, title: " Edit ", handler: {(rowAction:UITableViewRowAction, indexPath: NSIndexPath) -> Void in
             
             //Editar o grupo
+            DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
             DataManager.sharedInstance.selectedGroup = DataManager.sharedInstance.allGroup[indexPath.row]
-           
+            
+            
+            DataManager.sharedInstance.selectedSharer = DataManager.sharedInstance.loadSharerInAGroupFromDocuments(DataManager.sharedInstance.allGroup[indexPath.row].id)
             self.performSegueWithIdentifier("editGroupSegue", sender: self)
             
             
@@ -633,7 +644,15 @@ class CirclesTableViewController: UITableViewController {
         
         let deleteGroup = UITableViewRowAction(style: .Destructive, title: "Delete", handler: {(rowAction:UITableViewRowAction, indexPath: NSIndexPath) -> Void in
             
-            //Deletar o grupo
+            let groupName = DataManager.sharedInstance.allGroup[indexPath.row].name
+            let alert = UIAlertController(title: "Attention", message: "\(groupName) will be delete", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Delete Group", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                //DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+                DataManager.sharedInstance.destroySharerWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            self.reloadData()
             
             
             })
