@@ -194,7 +194,7 @@ class CirclesTableViewController: UITableViewController {
                     cellActive.numberLabel.text = ""
                     
                     self.tableView.rowHeight = 75
-                    cellActive.nameGroup.textColor = mainRed
+                    cellActive.nameGroup.textColor = UIColor(red: 56.0/255.0, green: 56.0/255.0, blue: 56.0/255.0, alpha: 1.0)
                     cellActive.nameGroup.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
                     //print("celula: \(cellActive.nameGroup.font)")
                     cellActive.coloredSquare.backgroundColor = squareRed
@@ -230,7 +230,7 @@ class CirclesTableViewController: UITableViewController {
                             
                             let imageView = UIImageView(image: imageName)
                             
-                            imageView.layer.cornerRadius = 20.0
+                            imageView.layer.cornerRadius = 22.85
                             imageView.layer.borderColor = mainRed.CGColor
                             imageView.layer.borderWidth = 2.0
                             imageView.clipsToBounds = true
@@ -582,6 +582,14 @@ class CirclesTableViewController: UITableViewController {
         //            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         //        }
     }
+    
+
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        
+        return nil
+    }
+    
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
