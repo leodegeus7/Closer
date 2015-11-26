@@ -1031,6 +1031,7 @@ class DataManager {
     //                }
     //                DataManager.sharedInstance.updateLocationUsers(self.mapView)
     //                self.controlNet.alpha = 0
+    
     //                self.controlNet.enabled = false
     //            } else {
     //                let dic = DataManager.sharedInstance.loadJsonFromDocuments("users")
