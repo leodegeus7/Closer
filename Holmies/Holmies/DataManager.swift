@@ -761,6 +761,14 @@ class DataManager {
         }
     }
     
+    func destroySharerWithNotification(group:Group,view:UIViewController) {
+        createSimpleUIAlert(view, title: "Deletado", message: "Você foi deleteado do grupo \(group.name)", button1: "Ok")
+        self.http.destroySharerWithSharerType(.userToGroup, ownerID: DataManager.sharedInstance.myUser.userID, receiverID: group.id, completion: { (result) -> Void in
+            
+        })
+    
+    }
+    
     func destroyGroupWithGroup(groupObject:Group) {
         let idGroup = groupObject.id
         
@@ -1145,6 +1153,30 @@ class DataManager {
 
         DataManager.sharedInstance.allGroup = DataManager.sharedInstance.allGroup.reverse()
         
+        
+    }
+    
+    func loadSharerInAGroupFromDocuments(groupId:String) -> [Sharer]{
+        let sharersUniqueJson = DataManager.sharedInstance.loadJsonFromDocuments("sharers\(groupId)")
+        let sharerUnique = DataManager.sharedInstance.convertJsonToSharer(sharersUniqueJson)
+        return sharerUnique
+    
+    }
+    
+    func findStatusOfUserInGroup(userId:String,groupId:String) -> String {
+        let json = loadJsonFromDocuments("sharers\(groupId)")
+        let sharers  = convertJsonToSharer(json)
+        var status = ""
+        for sharer in sharers {
+            if userId == sharer.owner {
+                status = sharer.status
+                break
+            }
+        }
+        if status == "" {
+            status = "unexisting"
+        }
+        return status
         
     }
     
