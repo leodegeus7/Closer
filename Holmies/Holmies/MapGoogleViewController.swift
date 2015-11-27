@@ -23,8 +23,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     @IBOutlet weak var pinImageVerticalConstraint: NSLayoutConstraint!
     @IBOutlet weak var compassView: UIView!
     var gradient:UIImage!
-    
-    
+    var actualPhoneAngularPosition = Double()
+    var selectedFriend = User?()
 
     
     
@@ -76,10 +76,11 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         self.compassView.hidden = true
         mapView.settings.compassButton = true
 
+        DataManager.sharedInstance.locationManager.startUpdatingHeading()
         
         friendDistance.font = UIFont(name:"SFUIText-Regular", size: 15)
         
-
+        
         /*
         //background
         
@@ -346,6 +347,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 
             navigationController?.navigationBar.hidden = true
             let friend = marker.userData as! User
+            self.selectedFriend = friend
             let locationFriend = CLLocation(latitude: Double(friend.location.latitude)!, longitude: Double(friend.location.longitude)!)
             print("-1")
             let myCoordinate = CLLocation(latitude: Double(DataManager.sharedInstance.myUser.location.latitude)!, longitude: Double(DataManager.sharedInstance.myUser.location.longitude)!)
@@ -360,12 +362,32 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     func updateCompassPosition(myLocation:CLLocation,location:CLLocation) {
         let dx = location.coordinate.longitude - myLocation.coordinate.longitude
         let dy = location.coordinate.latitude - myLocation.coordinate.latitude
-        let rotationAngle = CGFloat(atan2(-dy, dx))
-        arrowCompass.transform = CGAffineTransformMakeRotation(rotationAngle)
+        let rotationAngle = CGFloat(atan2(dy, dx))
+        let balancedAngle = rotationAngle + CGFloat(actualPhoneAngularPosition * M_PI / 180 - M_PI_2)
+        
+        
+        arrowCompass.transform = CGAffineTransformMakeRotation(-balancedAngle)
         let distance = myLocation.distanceFromLocation(location)
         //let distance = Int(sqrt(pow(dx, 2) + pow(dy, 2))*1000)
         self.friendDistance.text = "\(distance) meters"
 
+    }
+    
+    
+    func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        self.actualPhoneAngularPosition = newHeading.magneticHeading
+        let myCoordinate = CLLocation(latitude: Double(DataManager.sharedInstance.myUser.location.latitude)!, longitude: Double(DataManager.sharedInstance.myUser.location.longitude)!)
+        
+        if let friend = self.selectedFriend {
+            let locationFriend = CLLocation(latitude: Double(friend.location.latitude)!, longitude: Double(friend.location.longitude)!)
+            updateCompassPosition(myCoordinate, location: locationFriend)
+        }
+
+        
+
+        
+        
+        
     }
 
 }
