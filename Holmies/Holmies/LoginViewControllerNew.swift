@@ -117,6 +117,8 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
                         DataManager.sharedInstance.myUser.username = dic["username"] as! String
                         DataManager.sharedInstance.myUser.email = dic["email"] as! String
                         let id = dic["id"]
+                        if let faceId = dic["fbid"] as? String{
+                            DataManager.sharedInstance.myUser.facebookID = faceId }
                         DataManager.sharedInstance.myUser.userID = "\(id!)"
                         DataManager.sharedInstance.saveID()
                         self.performSegueWithIdentifier("showTableView", sender: self)
@@ -203,37 +205,8 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
                         }
                         self.afterLogin()
                     })
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-//                    DataManager.sharedInstance.idFB = resultData["id"] as! String
-//                    DataManager.sharedInstance.email = resultData["email"] as! String
-//                    DataManager.sharedInstance.user = resultData["name"] as! String
-//                    DataManager.sharedInstance.name = resultData["name"] as! String
-//                    print("\(DataManager.sharedInstance.idFB) \(DataManager.sharedInstance.email) \(DataManager.sharedInstance.user)")
-//                    let data = ["id":DataManager.sharedInstance.idFB,"email":DataManager.sharedInstance.email,"user":DataManager.sharedInstance.user]
-//                    DataManager.sharedInstance.createJsonFile("myData", json: data)
-//                    let idUser = "\(DataManager.sharedInstance.idUser)"
-//                    let id = Int(idUser)
-//                    if !(id > 0) {
-//                        self.requestSignUp(DataManager.sharedInstance.name, email: DataManager.sharedInstance.email,faceId:DataManager.sharedInstance.idFB)
-//                    }
-                    
-                    
+
                 }
-//                else {
-//                    let myDic = DataManager.sharedInstance.loadJsonFromDocuments("myData") as! NSDictionary
-//                    DataManager.sharedInstance.idFB = myDic["id"] as! String
-//                    DataManager.sharedInstance.email = myDic["email"] as! String
-//                    DataManager.sharedInstance.user = myDic["user"] as! String
-//                    print("Informacoes OFFLINE \(DataManager.sharedInstance.idFB) \(DataManager.sharedInstance.email) \(DataManager.sharedInstance.user)")
-//                    if self.logged == false {
-//                        self.performSegueWithIdentifier("showTableView", sender: self)}
-//                }
                 self.afterLogin()
             }
         }
@@ -312,7 +285,12 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
     }
     
     func animateTextField(up: Bool) {
-        let movement = (up ? -kbHeight : kbHeight)
+
+        let viewSize = self.view.bounds.size.height
+        
+        let value = self.view.frame.size.height*226/736
+        
+        let movement = (up ? -CGFloat(value) : CGFloat(value))
         
         UIView.animateWithDuration(0.3, animations: {
             self.view.frame = CGRectOffset(self.view.frame, 0, movement)

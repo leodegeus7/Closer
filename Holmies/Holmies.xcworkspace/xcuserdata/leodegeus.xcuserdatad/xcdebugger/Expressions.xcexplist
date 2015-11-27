@@ -3,10 +3,13 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "DataManager.linkGroupAndUserToSharer((result : String) -&gt; ()) -&gt; ():DataManager.swift">
+         contextName = "DataManager.convertJsonToSharer(AnyObject) -&gt; [Sharer]:DataManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "LoginViewControllerNew.animateTextField(Bool) -&gt; ():LoginViewControllerNew.swift">
          <PersistentStrings>
             <PersistentString
-               value = "DataManager.sharedInstance.allGroup">
+               value = "kbHeight">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -32,6 +35,9 @@
       </ContextState>
       <ContextState
          contextName = "DataManager.createJsonFile(String, json : AnyObject) -&gt; ():DataManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "LoginViewControllerNew.(loginButton(LoginViewControllerNew) -&gt; (AnyObject) -&gt; ()).(closure #1):LoginViewControllerNew.swift">
       </ContextState>
       <ContextState
          contextName = "ActiveGroupTableViewCell.collectionView(UICollectionView, numberOfItemsInSection : Int) -&gt; Int:ActiveGroupTableViewCell.swift">
@@ -125,10 +131,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "myInfoViewController.animateTextField(Bool) -&gt; ():myInfoViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "keyboardControl">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "CirclesTableViewController.viewDidLoad() -&gt; ():CirclesTableViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "DataManager.sharedInstance.friendsArray">
+            </PersistentString>
+            <PersistentString
+               value = "DataManager.sharedInstance.myUser">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -141,7 +158,12 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DataManager.convertJsonToSharer(AnyObject) -&gt; [Sharer]:DataManager.swift">
+         contextName = "DataManager.linkGroupAndUserToSharer((result : String) -&gt; ()) -&gt; ():DataManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "DataManager.sharedInstance.allGroup">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

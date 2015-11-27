@@ -594,7 +594,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
                     let id = dic["id"]
                     let formatId = "\(id!)"
                     //let hour = self.chosenHour
-                    self.http.createNewSharerWithType(.userToGroup, ownerID: DataManager.sharedInstance.myUser.userID, receiverID: formatId, until: "\(1)", completion: { (result) -> Void in
+                    self.http.createNewSharerWithType(.userToGroup, ownerID: DataManager.sharedInstance.myUser.userID, receiverID: formatId, until: "\(self.chosenHour*3600)", completion: { (result) -> Void in
                         
                         let json = result
                         

@@ -1163,6 +1163,23 @@ class DataManager {
     
     }
     
+    func findStatusOfUserInGroup(userId:String,groupId:String) -> String {
+        let json = loadJsonFromDocuments("sharers\(groupId)")
+        let sharers  = convertJsonToSharer(json)
+        var status = ""
+        for sharer in sharers {
+            if userId == sharer.owner {
+                status = sharer.status
+                break
+            }
+        }
+        if status == "" {
+            status = "unexisting"
+        }
+        return status
+        
+    }
+    
     
     
 }

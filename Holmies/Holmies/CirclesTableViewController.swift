@@ -57,6 +57,36 @@ class CirclesTableViewController: UITableViewController {
         //let ll = FBSDKAccessToken.currentAccessToken().tokenString
         if (FBSDKAccessToken.currentAccessToken() == nil) {
             print("Nao fez login face")
+            if let fbId = DataManager.sharedInstance.myUser.facebookID {
+
+                
+                let alert = UIAlertController(title: "Attention", message: "We need to login again on your Facebook Account to sync", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Login", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                    self.getFBUserData({ (result) -> Void in
+                        let newFBID = result as String
+//                        if newFBID == fbId {
+                            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Dados do facebook resgatados com sucesso", button1: "Ok")
+                            DataManager.sharedInstance.requestFacebook({ (result) -> Void in
+                            })
+//                        }
+//                        else {
+//                            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Login com facebook não concluido, pois esta conta não condiz com nossos registros. Porfavor, deslogue de sua conta antiga para logar em uma nova", button1: "Ok")
+//                            let loginManager = FBSDKLoginManager()
+//                            loginManager.logOut()
+//                            
+//                        }
+                    })
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+                
+                
+                
+                
+                
+                
+
+            }
         }
         else {
             DataManager.sharedInstance.requestFacebook({ (result) -> Void in
@@ -89,6 +119,42 @@ class CirclesTableViewController: UITableViewController {
             
         }
     }
+    
+
+    
+    func getFBUserData(completion:(result:String)->Void){
+        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+        fbLoginManager .logInWithReadPermissions(["email"], handler: { (result, error) -> Void in
+            if (error == nil){
+                let fbloginresult : FBSDKLoginManagerLoginResult = result
+                if(fbloginresult.grantedPermissions.contains("email"))
+                {
+                    if (FBSDKAccessToken.currentAccessToken() == nil) {
+                        print("Nao fez login face")
+                    }
+                    else {
+                        print("Ja logado face")
+                        let loginButton = FBSDKLoginButton()
+                        loginButton.readPermissions = ["id","first_name","last_name","friends{id,name}","email"]
+                        let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name,friends{id,name}"], HTTPMethod: "GET")
+                        request.startWithCompletionHandler { (connection, result, error) -> Void in
+                            // print(error)
+                            if let resultData = result as? NSDictionary {
+                                
+                                let fbID = resultData["id"] as! String
+                                completion(result: fbID)
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        })
+
+        
+    }
+
+    
     
     
     override func didReceiveMemoryWarning() {
@@ -142,19 +208,22 @@ class CirclesTableViewController: UITableViewController {
                 
                 let friends = DataManager.sharedInstance.loadJsonFromDocuments("friends")
                 
-                
-                let myPhoto = DataManager.sharedInstance.getProfPic(DataManager.sharedInstance.myUser.facebookID, serverId: DataManager.sharedInstance.myUser.userID)
-                DataManager.sharedInstance.saveImage(myPhoto, id: DataManager.sharedInstance.myUser.userID)
-                
-                DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(friends)
-                for index in DataManager.sharedInstance.allFriends {
+                if DataManager.sharedInstance.myUser.facebookID != nil {
+                    let myPhoto = DataManager.sharedInstance.getProfPic(DataManager.sharedInstance.myUser.facebookID, serverId: DataManager.sharedInstance.myUser.userID)
+                    DataManager.sharedInstance.saveImage(myPhoto, id: DataManager.sharedInstance.myUser.userID)
                     
-                    
-                    if !(index.facebookID == nil) && !(index.userID == nil) {
-                        let image = DataManager.sharedInstance.getProfPic(index.facebookID, serverId: index.userID)
-                        DataManager.sharedInstance.saveImage(image, id: index.userID)
+                    for index in DataManager.sharedInstance.allFriends {
+                        
+                        
+                        if !(index.facebookID == nil) && !(index.userID == nil) {
+                            let image = DataManager.sharedInstance.getProfPic(index.facebookID, serverId: index.userID)
+                            DataManager.sharedInstance.saveImage(image, id: index.userID)
+                        }
                     }
+                    
                 }
+                DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(friends)
+
                 DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
                     print("\(result)")
                     self.tableView.reloadData()
@@ -232,12 +301,19 @@ class CirclesTableViewController: UITableViewController {
                         for user in DataManager.sharedInstance.allGroup[indexPath.row].users {
                             let imageName = DataManager.sharedInstance.findImage(user.userID)
                             
-                            
+                            let status = DataManager.sharedInstance.findStatusOfUserInGroup(user.userID, groupId: DataManager.sharedInstance.allGroup[indexPath.row].id)
                             
                             let imageView = UIImageView(image: imageName)
                             
                             imageView.layer.cornerRadius = 22.85
-                            imageView.layer.borderColor = mainRed.CGColor
+                            
+                            
+                            if status == "accepted" {
+                                imageView.layer.borderColor = mainRed.CGColor
+                            }
+                            
+                            
+
                             imageView.layer.borderWidth = 2.0
                             imageView.clipsToBounds = true
                             
@@ -589,7 +665,7 @@ class CirclesTableViewController: UITableViewController {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         if cell?.tag == 2 {
             return UITableViewCellEditingStyle.Delete
-        } else if cell?.tag == 100 {{
+        } else if cell?.tag == 100 {
             return UITableViewCellEditingStyle.Delete
         }
         else {
@@ -627,38 +703,65 @@ class CirclesTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
-        let editGroup = UITableViewRowAction(style: .Normal, title: " Edit ", handler: {(rowAction:UITableViewRowAction, indexPath: NSIndexPath) -> Void in
-            
-            //Editar o grupo
-            DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
-            DataManager.sharedInstance.selectedGroup = DataManager.sharedInstance.allGroup[indexPath.row]
-            
-            
-            DataManager.sharedInstance.selectedSharer = DataManager.sharedInstance.loadSharerInAGroupFromDocuments(DataManager.sharedInstance.allGroup[indexPath.row].id)
-            self.performSegueWithIdentifier("editGroupSegue", sender: self)
-            
-            
-            })
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        if cell?.tag == 2 {
         
-            editGroup.backgroundColor = lightBlue
         
-        let deleteGroup = UITableViewRowAction(style: .Destructive, title: "Delete", handler: {(rowAction:UITableViewRowAction, indexPath: NSIndexPath) -> Void in
             
-            let groupName = DataManager.sharedInstance.allGroup[indexPath.row].name
-            let alert = UIAlertController(title: "Attention", message: "\(groupName) will be delete", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Delete Group", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
-                //DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
-                DataManager.sharedInstance.destroySharerWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
-            }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
-            self.reloadData()
+            let editGroup = UITableViewRowAction(style: .Normal, title: " Edit ", handler: {(rowAction:UITableViewRowAction, indexPath: NSIndexPath) -> Void in
+                
+                //Editar o grupo
+                DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
+                DataManager.sharedInstance.selectedGroup = DataManager.sharedInstance.allGroup[indexPath.row]
+                
+                
+                DataManager.sharedInstance.selectedSharer = DataManager.sharedInstance.loadSharerInAGroupFromDocuments(DataManager.sharedInstance.allGroup[indexPath.row].id)
+                self.performSegueWithIdentifier("editGroupSegue", sender: self)
+                
+                
+                })
             
+                editGroup.backgroundColor = lightBlue
             
+            let deleteGroup = UITableViewRowAction(style: .Destructive, title: "Delete", handler: {(rowAction:UITableViewRowAction, indexPath: NSIndexPath) -> Void in
+                
+                let groupName = DataManager.sharedInstance.allGroup[indexPath.row].name
+                let alert = UIAlertController(title: "Attention", message: "\(groupName) will be delete", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Delete Group", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                    //DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+                    DataManager.sharedInstance.destroySharerWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+                self.reloadData()
+                
+                
+                })
+                deleteGroup.backgroundColor = mainRed
+            
+                return [editGroup,deleteGroup]
+        }
+        else if cell?.tag == 100 {
+            let deleteGroup = UITableViewRowAction(style: .Destructive, title: "Delete", handler: {(rowAction:UITableViewRowAction, indexPath: NSIndexPath) -> Void in
+                
+                let groupName = DataManager.sharedInstance.allGroup[indexPath.row].name
+                let alert = UIAlertController(title: "Attention", message: "\(groupName) will be delete", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Delete Group", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                    //DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+                    DataManager.sharedInstance.destroySharerWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+                self.reloadData()
+                
+                
             })
             deleteGroup.backgroundColor = mainRed
+            
+            return [deleteGroup]
+        }
         
-        return [editGroup,deleteGroup]
+        return []
     }
     
     
