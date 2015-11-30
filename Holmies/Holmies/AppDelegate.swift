@@ -22,20 +22,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
 
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch .
+        //setando parse, api google, registrando as notificacoes
         GMSServices.provideAPIKey(googleMapsApiKey)
         DataManager.sharedInstance.locationManager.delegate = nil
-        
         Parse.setApplicationId("52IjYIjvJ5BdIYDXr8SNqeVj5TZb15fnpaJkFDM2",
             clientKey: "ga7aF8AEO1vhF4x7KgTVcUsOk8uigdhXZZrCr5ez")
-        
         application.registerUserNotificationSettings(UIUserNotificationSettings (forTypes: UIUserNotificationType.Alert, categories: nil))
-        
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
-
         print(DataManager.sharedInstance.findDocumentsDirectory())
-        
-        
+        UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
+        DataManager.sharedInstance.locationManager.delegate = self
         
         
         
@@ -64,15 +60,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
             //let types = UIRemoteNotificationType.Badge | UIRemoteNotificationType.Alert | UIRemoteNotificationType.Sound
             application.registerForRemoteNotificationTypes([.Alert, .Badge,.Sound])
         }
-        
-        
 
         
+        //requests iniciais
         DataManager.sharedInstance.importID()
         let idUser = "\(DataManager.sharedInstance.myUser.userID)"
         let number = Int(idUser)
-
-        
         if !(number > 0) {
             let storyboard = UIStoryboard(name: "Design", bundle: nil)
             //let dest = storyboard.instantiateViewControllerWithIdentifier("loginVC")
@@ -80,7 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
             self.window?.rootViewController = viewController
             self.window?.makeKeyAndVisible()
         } else {
-            var timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "update", userInfo: nil, repeats: true)
+            let timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "update", userInfo: nil, repeats: true)
 
             let storyboard = UIStoryboard(name: "Design", bundle: nil)
             //let dest = storyboard.instantiateViewControllerWithIdentifier("loginVC")
@@ -109,27 +102,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
                 print(result)
             })
             
-//            if (DataManager.sharedInstance.testIfFileExistInDocuments("/groups.json")) {
-//                for group in DataManager.sharedInstance.allGroup {
-//                    let dicSharer = DataManager.sharedInstance.loadJsonFromDocuments("/sharers\(group).json")
-//                    let sharerServer = DataManager.sharedInstance.convertJsonToSharerUnique(dicSharer)
-//                    DataManager.sharedInstance.allSharers.append(sharerServer)
-//                }
-//            }
-            
-            
-//            DataManager.sharedInstance.requestGroups { (result) -> Void in
-//                print(1)
-//            }
         }
-        
 
-
-        
-        
-        
-        
-        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
@@ -205,38 +179,104 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         print(error)
 
     }
+    
+    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        
+        DataManager.sharedInstance.importID()
+        let idUser = "\(DataManager.sharedInstance.myUser.userID)"
+        let number = Int(idUser)
+        if (number > 0) {
+            
+            
+            DataManager.sharedInstance.requestSharers { (result) -> Void in
+                var index = 0
+                for charm in DataManager.sharedInstance.myCharms {
+                    if charm.sharer.status == "accepted" {
+                        let myDict: [String:AnyObject] = [ "charmIndex": index]
+                        NSNotificationCenter.defaultCenter().postNotificationName("charmAccepted", object: nil ,userInfo: myDict)
+                    }
+                    if charm.sharer.receiver == DataManager.sharedInstance.myUser.userID {
+                        if charm.sharer.status == "pending" {
+                            let myDict: [String:AnyObject] = [ "charmIndex": index]
+                            NSNotificationCenter.defaultCenter().postNotificationName("charmReceived", object: nil ,userInfo: myDict)
+                            if let charmIndex = myDict["charmIndex"] as? Int {
+                                
+                                let charm = DataManager.sharedInstance.myCharms[charmIndex]
+                                
+                                DataManager.sharedInstance.createLocalNotificationWithoutUserInfo("Charme Recebido de  \(charm.friend.name)", body: "Clique para visualizar")
+
+                            }
+                        }
+                        
+                    }
+                    index++
+                }
+            }
+            
+            
+            DataManager.sharedInstance.requestSharers { (result) -> Void in
+                DataManager.sharedInstance.requestGroups { (result) -> Void in
+                    DataManager.sharedInstance.allGroup = DataManager.sharedInstance.convertJsonToGroup(result)
+                    DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
+                        print("\(result)")
+                    })
+                    DataManager.sharedInstance.requestSharerInGroups()
+                    let friends = DataManager.sharedInstance.loadJsonFromDocuments("friends")
+                    if DataManager.sharedInstance.myUser.facebookID != nil {
+                        let myPhoto = DataManager.sharedInstance.getProfPic(DataManager.sharedInstance.myUser.facebookID, serverId: DataManager.sharedInstance.myUser.userID)
+                        DataManager.sharedInstance.saveImage(myPhoto, id: DataManager.sharedInstance.myUser.userID)
+                        for index in DataManager.sharedInstance.allFriends {
+                            if !(index.facebookID == nil) && !(index.userID == nil) {
+                                let image = DataManager.sharedInstance.getProfPic(index.facebookID, serverId: index.userID)
+                                DataManager.sharedInstance.saveImage(image, id: index.userID)
+                            }
+                        }
+                    }
+                    DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(friends)
+
+                    DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
+                        print("\(result)")
+
+                        DataManager.sharedInstance.finishedAllRequest = true
+                        completionHandler(.NewData)
+                    })
+                    
+                    
+                }
+            }
+            DataManager.sharedInstance.saveMyInfo()
+
+        }
+        
+        
+        
+        
+    }
+
 
     func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
         if !(DataManager.sharedInstance.myUser.userID == nil) {
-
-        DataManager.sharedInstance.myUser.location.longitude = "\(newLocation.coordinate.longitude)"
-        DataManager.sharedInstance.myUser.location.latitude = "\(newLocation.coordinate.latitude)"
-        DataManager.sharedInstance.saveMyInfo()
-        if UIApplication.sharedApplication().applicationState == .Active {
-            print("Coord atualizada: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
-        }
-        else {
-            print("App em background. Coord: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
-            let userInfoCoordinate = ["local":newLocation]
-            DataManager.sharedInstance.createLocalNotification("oi", body: "\(newLocation.coordinate.latitude)", timeAfterClose: 10,userInfo:userInfoCoordinate)
-        }
-        
-        
-        let location = "\(newLocation.coordinate.latitude):\(newLocation.coordinate.longitude)"
-        
-        helper.updateUserWithID(DataManager.sharedInstance.myUser.userID, username: nil, location: location, altitude: nil, fbid: nil, photo: nil, name: nil, email: nil, password: nil) { (result) -> Void in
-            //oi
-        }
-        
-        
-        DataManager.sharedInstance.reverseGeocodeCoordinate(newLocation.coordinate) //transforma a coordenada em endereco
-        
-        if DataManager.sharedInstance.end != nil {
-            let actualLocation = Location()
-            actualLocation.location = newLocation
-            actualLocation.address = DataManager.sharedInstance.end
-            DataManager.sharedInstance.locationUserArray.append(actualLocation)
-        }
+            DataManager.sharedInstance.myUser.location.longitude = "\(newLocation.coordinate.longitude)"
+            DataManager.sharedInstance.myUser.location.latitude = "\(newLocation.coordinate.latitude)"
+            DataManager.sharedInstance.saveMyInfo()
+            if UIApplication.sharedApplication().applicationState == .Active {
+                print("Coord atualizada: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
+            }
+            else {
+                print("App em background. Coord: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
+                let userInfoCoordinate = ["local":newLocation]
+                DataManager.sharedInstance.createLocalNotification("oi", body: "\(newLocation.coordinate.latitude)", timeAfterClose: 10,userInfo:userInfoCoordinate)
+            }
+            let location = "\(newLocation.coordinate.latitude):\(newLocation.coordinate.longitude)"
+            helper.updateUserWithID(DataManager.sharedInstance.myUser.userID, username: nil, location: location, altitude: nil, fbid: nil, photo: nil, name: nil, email: nil, password: nil) { (result) -> Void in
+            }
+            DataManager.sharedInstance.reverseGeocodeCoordinate(newLocation.coordinate) //transforma a coordenada em endereco
+            if DataManager.sharedInstance.end != nil {
+                let actualLocation = Location()
+                actualLocation.location = newLocation
+                actualLocation.address = DataManager.sharedInstance.end
+                DataManager.sharedInstance.locationUserArray.append(actualLocation)
+            }
         }
     }
     

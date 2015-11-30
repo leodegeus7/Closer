@@ -94,6 +94,15 @@ class DataManager {
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
     
+    func createLocalNotificationWithoutUserInfo(title:String,body:String) {
+        let localNotification:UILocalNotification = UILocalNotification()
+        localNotification.alertAction = title
+        localNotification.alertBody = body
+        localNotification.fireDate = NSDate(timeIntervalSinceNow: 1)
+        //localNotification.userInfo = userInfo as [NSObject : AnyObject]
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+    }
+    
     func findDocumentsDirectory() -> String {
         let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask, true)[0] as String
         return path

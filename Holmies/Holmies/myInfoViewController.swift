@@ -56,6 +56,12 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
         deleteAccountButton.titleLabel!.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
         
         
+        let loggoutButton = UIBarButtonItem(title: "Loggout", style: UIBarButtonItemStyle.Plain, target: self, action: "loggoutButton")
+        navigationItem.rightBarButtonItem = loggoutButton
+        navigationController!.navigationBar.barTintColor = UIColor.whiteColor()
+        
+        
+        
         if (FBSDKAccessToken.currentAccessToken() == nil) {
             facebookLogoutButton.setTitle("Login Facebbok", forState: .Normal)
         }
@@ -120,6 +126,41 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
     func keyboardWillHide(notification: NSNotification) {
             self.animateTextField(false)
         
+    }
+    
+    func loggoutButton() {
+        let alert = UIAlertController(title: "Attention", message: "Deseja fazer loggout?", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (UIAlertAction)in
+            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Attencion", message: "Conta deslogada", button1: "Ok")
+            
+            let documentsDirectory = DataManager.sharedInstance.findDocumentsDirectory()
+            let path = documentsDirectory + "/id.txt"
+            let path1 = documentsDirectory + "/groups.json"
+            let path2 = documentsDirectory + "/myInfo.json"
+            let path3 = documentsDirectory + "/myInfolog.json"
+            let path4 = documentsDirectory + "/receiverSharers.json"
+            let path5 = documentsDirectory + "/sharers.json"
+            let path6 = documentsDirectory + "/friends.json"
+            
+            let fileManager = NSFileManager.defaultManager()
+            do {try fileManager.removeItemAtPath(path)} catch {}
+            do {try fileManager.removeItemAtPath(path1)} catch {}
+            do {try fileManager.removeItemAtPath(path2)} catch {}
+            do {try fileManager.removeItemAtPath(path3)} catch {}
+            do {try fileManager.removeItemAtPath(path4)} catch {}
+            do {try fileManager.removeItemAtPath(path5)} catch {}
+            do {try fileManager.removeItemAtPath(path6)} catch {}
+            NSThread.mainThread()
+            exit(0)
+
+        
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+
     }
 
     @IBAction func deleteAccount(sender: AnyObject) {
