@@ -18,6 +18,7 @@
 		A71F7D151BD0288E00652750 /* photoButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A71F7D141BD0288E00652750 /* photoButton.png */; };
 		A71F7D171BD0298300652750 /* RegisterNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71F7D161BD0298300652750 /* RegisterNewViewController.swift */; };
 		A71F7D1F1BD183C200652750 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A71F7D1E1BD183C200652750 /* Main.storyboard */; };
+		A72BDBE71C0CC4BE00D0CA84 /* redLights.png in Resources */ = {isa = PBXBuildFile; fileRef = A72BDBE61C0CC4BE00D0CA84 /* redLights.png */; };
 		A73BE4CE1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */; };
 		A760AAB01BFA457A00214F06 /* MarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A760AAAF1BFA457A00214F06 /* MarkerView.xib */; };
 		A760AAB21BFA46DC00214F06 /* pin2.png in Resources */ = {isa = PBXBuildFile; fileRef = A760AAB11BFA46DC00214F06 /* pin2.png */; };
@@ -248,6 +249,7 @@
 		A71F7D141BD0288E00652750 /* photoButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoButton.png; sourceTree = "<group>"; };
 		A71F7D161BD0298300652750 /* RegisterNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterNewViewController.swift; sourceTree = "<group>"; };
 		A71F7D1E1BD183C200652750 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		A72BDBE61C0CC4BE00D0CA84 /* redLights.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redLights.png; sourceTree = "<group>"; };
 		A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveGroupTableViewCell.swift; sourceTree = "<group>"; };
 		A760AAAF1BFA457A00214F06 /* MarkerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarkerView.xib; sourceTree = "<group>"; };
 		A760AAB11BFA46DC00214F06 /* pin2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin2.png; sourceTree = "<group>"; };
@@ -588,6 +590,7 @@
 				CD0561E01BEA780D00130656 /* photos.png */,
 				A73BE4CC1BDEB68E0063C705 /* SF Fonts */,
 				A70592161BD6C5B600E737E3 /* DesignGroupsTableViewController.swift */,
+				A72BDBE61C0CC4BE00D0CA84 /* redLights.png */,
 				CD0561DA1BEA700900130656 /* x.png */,
 				CD0561D61BE9452E00130656 /* Red_Arrow_Right 3.png */,
 				CD0561DE1BEA715200130656 /* Line.png */,
@@ -944,7 +947,7 @@
 					};
 					CD6BAA4E1B98D946008614B0 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 6D9CUA9M4U;
+						DevelopmentTeam = H7C2V5GHBN;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -1060,6 +1063,7 @@
 				A71F7D151BD0288E00652750 /* photoButton.png in Resources */,
 				A7C37FA81BE00A8500FEE8D2 /* SF-Compact-Display-Heavy.otf in Resources */,
 				A7C37FAC1BE00A8500FEE8D2 /* SF-Compact-Display-Semibold.otf in Resources */,
+				A72BDBE71C0CC4BE00D0CA84 /* redLights.png in Resources */,
 				CDCCCD321BBF84A000A5AD03 /* 2.gpx in Resources */,
 				A70BF38C1BCE91EE00062246 /* facebookButton.png in Resources */,
 				A7C37FBC1BE00A8500FEE8D2 /* SF-UI-Text-Italic.otf in Resources */,

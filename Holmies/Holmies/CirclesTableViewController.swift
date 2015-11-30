@@ -40,6 +40,15 @@ class CirclesTableViewController: UITableViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmReceived:", name: "charmReceived", object: nil)
 
         
+                for family: String in UIFont.familyNames()
+                {
+                    print("\(family)")
+                    for names: String in UIFont.fontNamesForFamilyName(family)
+                    {
+                        print("== \(names)")
+                    }
+                }
+        
         
 
         
@@ -65,7 +74,7 @@ class CirclesTableViewController: UITableViewController {
         
         let timer = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("reloadData"), userInfo: nil, repeats: true)
         
-
+        
         
         //view auxiliar
         
@@ -74,13 +83,15 @@ class CirclesTableViewController: UITableViewController {
         imageUserInView.image = image
         usernameInView.text = "\(DataManager.sharedInstance.myUser.username)"
         //self.navigationItem.rightBarButtonItem = buttonContinue
-        imageUserInView.layer.cornerRadius = 100.0
-        imageUserInView.layer.borderColor = mainRed.CGColor
-        imageUserInView.layer.borderWidth = 3.0
+        imageUserInView.layer.cornerRadius = imageUserInView.frame.size.width / 2
+        imageUserInView.layer.borderColor = UIColor.whiteColor().CGColor
+        imageUserInView.layer.borderWidth = 1.0
         imageUserInView.clipsToBounds = true
         usernameInView.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
         usernameInView.textColor = UIColor.whiteColor()
-        userView.backgroundColor = mainRed
+//        let userViewBackgroundImage = DataManager.sharedInstance.imageResize(UIImage(named: "redLights.png")!, sizeChange: CGSize(width: self.view.frame.width, height: self.view.frame.height / 5.15))
+//        userView.backgroundColor = UIColor(patternImage: userViewBackgroundImage)
+        
         
         
         
@@ -150,6 +161,8 @@ class CirclesTableViewController: UITableViewController {
         DataManager.sharedInstance.activeView = "circles"
         DataManager.sharedInstance.linkGroupAndUserToSharer { (result) -> Void in
             self.tableView.reloadData()
+            
+            
             
             
         }
@@ -309,7 +322,16 @@ class CirclesTableViewController: UITableViewController {
             if noGroups == true {
                 
                 let emptyGroup = tableView.dequeueReusableCellWithIdentifier("noGroup", forIndexPath: indexPath) as! EmptyGroupTableViewCell
-                self.tableView.rowHeight = 75
+                self.tableView.rowHeight = 100
+                emptyGroup.imageEmpty.layer.cornerRadius = emptyGroup.imageEmpty.frame.size.width
+                emptyGroup.imageEmpty.layer.borderColor = lightBlue.CGColor
+                emptyGroup.imageEmpty.layer.borderWidth = 2.0
+                emptyGroup.firstLabel.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
+                emptyGroup.firstLabel.textColor = mainRed
+                emptyGroup.secondLabel.font = UIFont(name: "SFCompactDisplay-Light", size: 17)
+                emptyGroup.secondLabel.textColor = UIColor.blackColor()
+                    
+                
                 return emptyGroup
                 
             }
@@ -340,7 +362,7 @@ class CirclesTableViewController: UITableViewController {
                     cellActive.coloredSquare.backgroundColor = squareRed
                     cellActive.numberLabel.font = UIFont(name: "SFUIDisplay-Ultralight", size: 47)
                     cellActive.timeLabel.font = UIFont(name: "SFUIText-Medium", size: 12)
-                    cellActive.coloredSquare.layer.cornerRadius = 8.0
+                    cellActive.coloredSquare.layer.cornerRadius = 8.0 / 414.0 * self.view.frame.size.width
                     
                     
                     
@@ -370,16 +392,17 @@ class CirclesTableViewController: UITableViewController {
                             
                             let imageView = UIImageView(image: imageName)
                             
-                            imageView.layer.cornerRadius = 22.85
+                            imageView.layer.cornerRadius = 22.85 / 414 * self.view.frame.size.width
                             
+                            print("tamanho da tela: \(self.view.frame.size.width)")
                             
                             if status == "accepted" {
-                                imageView.layer.borderColor = mainRed.CGColor
+                                imageView.layer.borderWidth = 2.0
+                            } else {
+                                imageView.layer.borderWidth = 0
                             }
                             
-                            
-
-                            imageView.layer.borderWidth = 2.0
+                            imageView.layer.borderColor = mainRed.CGColor
                             imageView.clipsToBounds = true
                             
                             imageView.frame = CGRect(x: imageX, y: 0, width: sizeOfImageWidth, height: sizeOfImageHeight)
@@ -583,7 +606,8 @@ class CirclesTableViewController: UITableViewController {
         }
         else {
             let charmCell = tableView.dequeueReusableCellWithIdentifier("charmCell", forIndexPath: indexPath) as! CharmTableViewCell
-            
+            self.tableView.rowHeight = 200
+
             let actualCharm = DataManager.sharedInstance.myCharms[indexPath.row]
             let actualFriend = actualCharm.friend
             let actualSharer = actualCharm.sharer
