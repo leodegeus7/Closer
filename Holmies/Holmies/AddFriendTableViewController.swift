@@ -18,6 +18,7 @@ class AddFriendTableViewController: UITableViewController, UITextFieldDelegate {
         super.viewDidLoad()
         labelInfo.text = "\(DataManager.sharedInstance.myUser.username)\né o seu username"
 
+
         
         navigationController?.title = "Add Friend by Username"
         let confirm = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: "testUsername")

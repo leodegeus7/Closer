@@ -64,6 +64,7 @@
 		A7C37FC71BE11E3600FEE8D2 /* redCheck.png in Resources */ = {isa = PBXBuildFile; fileRef = A7C37FC51BE11E3600FEE8D2 /* redCheck.png */; };
 		A7C37FC81BE11E3600FEE8D2 /* grayCheck.png in Resources */ = {isa = PBXBuildFile; fileRef = A7C37FC61BE11E3600FEE8D2 /* grayCheck.png */; };
 		A7D2A4B01BCE90E6006A55D1 /* redBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D2A4AF1BCE90E6006A55D1 /* redBackground.png */; };
+		A7FA0E081C078E1A006D2CC5 /* compass2.png in Resources */ = {isa = PBXBuildFile; fileRef = A7FA0E071C078E1A006D2CC5 /* compass2.png */; };
 		A7FCC50B1BC4CCF600AEDA3F /* WidgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FCC50A1BC4CCF600AEDA3F /* WidgetViewController.swift */; };
 		A7FCC5121BC4CD1D00AEDA3F /* Main2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FCC5111BC4CD1D00AEDA3F /* Main2.storyboard */; };
 		A7FCC5191BC4CE5B00AEDA3F /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7FCC5181BC4CE5B00AEDA3F /* NotificationCenter.framework */; };
@@ -302,6 +303,7 @@
 		A7C37FC61BE11E3600FEE8D2 /* grayCheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayCheck.png; sourceTree = "<group>"; };
 		A7D2A4AF1BCE90E6006A55D1 /* redBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redBackground.png; sourceTree = "<group>"; };
 		A7F3899D1BD56F4500DF2D7C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7FA0E071C078E1A006D2CC5 /* compass2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compass2.png; sourceTree = "<group>"; };
 		A7FCC50A1BC4CCF600AEDA3F /* WidgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetViewController.swift; sourceTree = "<group>"; };
 		A7FCC5111BC4CD1D00AEDA3F /* Main2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main2.storyboard; sourceTree = "<group>"; };
 		A7FCC5171BC4CE5B00AEDA3F /* widget3.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widget3.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -589,6 +591,7 @@
 				CD0561DA1BEA700900130656 /* x.png */,
 				CD0561D61BE9452E00130656 /* Red_Arrow_Right 3.png */,
 				CD0561DE1BEA715200130656 /* Line.png */,
+				A7FA0E071C078E1A006D2CC5 /* compass2.png */,
 				CD0561DC1BEA700E00130656 /* compass.png */,
 				A78A97F31BE3F7F300D5994B /* Design.storyboard */,
 				A7CA149B1BD7FF80006E2428 /* Images */,
@@ -1112,6 +1115,7 @@
 				A7C37FBE1BE00A8500FEE8D2 /* SF-UI-Text-LightItalic.otf in Resources */,
 				A760AAB01BFA457A00214F06 /* MarkerView.xib in Resources */,
 				A7FCC5121BC4CD1D00AEDA3F /* Main2.storyboard in Resources */,
+				A7FA0E081C078E1A006D2CC5 /* compass2.png in Resources */,
 				A7FEFB551BDE9E3600DFEC1E /* radialGradient.png in Resources */,
 				A7C37FA91BE00A8500FEE8D2 /* SF-Compact-Display-Light.otf in Resources */,
 				A7C37F5D1BDFF86000FEE8D2 /* newUser3.png in Resources */,

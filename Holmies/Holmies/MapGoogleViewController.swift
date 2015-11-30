@@ -15,7 +15,7 @@ import FBSDKLoginKit
 import Alamofire
 import QuartzCore
 
-class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
+class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var controlNet: UILabel!
     @IBOutlet weak var mapView: GMSMapView!    //outlet do mapa como um mapa do google
@@ -23,10 +23,9 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     @IBOutlet weak var pinImageVerticalConstraint: NSLayoutConstraint!
     @IBOutlet weak var compassView: UIView!
     var gradient:UIImage!
-    
-    
-
-    
+    var actualPhoneAngularPosition = Double()
+    var selectedFriend = User?()
+    let panRec = UIPanGestureRecognizer()
     
     //background whetever
     var updateTimer: NSTimer?
@@ -43,6 +42,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     @IBOutlet weak var arrowCompass: UIImageView!
     @IBOutlet weak var friendPhoto: UIImageView!
     @IBOutlet weak var friendDistance: UILabel!
+    
     
     var mapRadius: Double {
         get {
@@ -62,9 +62,6 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     }
     
     
-
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self   //delegate das funçoes do google maps
@@ -76,38 +73,16 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         self.compassView.hidden = true
         mapView.settings.compassButton = true
 
+        DataManager.sharedInstance.locationManager.startUpdatingHeading()
         
         friendDistance.font = UIFont(name:"SFUIText-Regular", size: 15)
         
+        panRec.addTarget(self, action: "draggedView:")
+        compassView.addGestureRecognizer(panRec)
+        compassView.userInteractionEnabled = true
         
-        
-        
-        
-        var existUserInGroup = false
-        for sharer in DataManager.sharedInstance.selectedSharer {
-            if sharer.status == "accepted" && sharer.owner != DataManager.sharedInstance.myUser.userID {
-                existUserInGroup = true
-                break
-            }
-        }
-        
-        if !existUserInGroup {
-            //DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Nenhum membro neste grupo aceitou o grupo", button1: "Ok")
-            
-            
-            let groupName = DataManager.sharedInstance.selectedGroup.name
-            let alert = UIAlertController(title: "Attention", message: "Nao há ninguem aceito no grupo: \(groupName). Peça a alguns de seus amigos para aceitarem em seus dispositivos", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
-                self.performSegueWithIdentifier("editGroup", sender: self)
-            }))
-            self.presentViewController(alert, animated: true, completion: nil)
-            
-            
-        }
-        
-        
-        
-
+      
+    
         /*
         //background
         
@@ -133,6 +108,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         DataManager.sharedInstance.locationManager.delegate = nil
 
     }
+    
+    
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status ==  .AuthorizedWhenInUse || status == .AuthorizedAlways {    //se a autorizaçao do user estiver sendo pega pelo app
@@ -337,11 +314,10 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     override func viewWillDisappear(animated: Bool) {
         print("oi")
     }
+
+
+
     
-    
-
-
-
     func setUpBackgrounGradient () {
         //navigationController?.navigationBar.hidden = true
         let red1 = UIColor(red: 213/255, green: 45/255, blue: 73/255, alpha: 1)
@@ -364,6 +340,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         
 
 
+      
         
     }
 
@@ -374,6 +351,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 
             navigationController?.navigationBar.hidden = true
             let friend = marker.userData as! User
+            self.selectedFriend = friend
             let locationFriend = CLLocation(latitude: Double(friend.location.latitude)!, longitude: Double(friend.location.longitude)!)
             print("-1")
             let myCoordinate = CLLocation(latitude: Double(DataManager.sharedInstance.myUser.location.latitude)!, longitude: Double(DataManager.sharedInstance.myUser.location.longitude)!)
@@ -388,13 +366,39 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     func updateCompassPosition(myLocation:CLLocation,location:CLLocation) {
         let dx = location.coordinate.longitude - myLocation.coordinate.longitude
         let dy = location.coordinate.latitude - myLocation.coordinate.latitude
-        let rotationAngle = CGFloat(atan2(-dy, dx))
-        arrowCompass.transform = CGAffineTransformMakeRotation(rotationAngle)
+        let rotationAngle = CGFloat(atan2(dy, dx))
+        let balancedAngle = rotationAngle + CGFloat(actualPhoneAngularPosition * M_PI / 180 - M_PI_2)
+        
+        
+        arrowCompass.transform = CGAffineTransformMakeRotation(-balancedAngle)
         let distance = myLocation.distanceFromLocation(location)
         //let distance = Int(sqrt(pow(dx, 2) + pow(dy, 2))*1000)
         self.friendDistance.text = "\(distance) meters"
 
     }
+    
+    
+    func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        self.actualPhoneAngularPosition = newHeading.magneticHeading
+        let myCoordinate = CLLocation(latitude: Double(DataManager.sharedInstance.myUser.location.latitude)!, longitude: Double(DataManager.sharedInstance.myUser.location.longitude)!)
+        
+        if let friend = self.selectedFriend {
+            let locationFriend = CLLocation(latitude: Double(friend.location.latitude)!, longitude: Double(friend.location.longitude)!)
+            updateCompassPosition(myCoordinate, location: locationFriend)
+        }
+
+        
+    }
+    
+    func draggedView (sender:UIPanGestureRecognizer) {
+        self.view.bringSubviewToFront(sender.view!)
+        var translation = sender.translationInView(self.view)
+        sender.view?.center = CGPointMake((sender.view?.center.x)! + translation.x, (sender.view?.center.y)! + translation.y)
+        
+        
+    }
+    
+    
 
 }
 
