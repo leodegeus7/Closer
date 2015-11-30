@@ -22,6 +22,16 @@ class CirclesTableViewController: UITableViewController {
     @IBOutlet var shareTypeSegmentedControl: UISegmentedControl!
     
     
+    //view do user
+    @IBOutlet weak var imageUserInView: UIImageView!
+    @IBOutlet weak var usernameInView: UILabel!
+    @IBOutlet weak var userView: UIView!
+    
+    //variaveis controle de sem grupo
+    var noGroups = false
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         reloadData()
@@ -53,6 +63,27 @@ class CirclesTableViewController: UITableViewController {
         let timer = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("reloadData"), userInfo: nil, repeats: true)
         
 
+        
+        //view auxiliar
+        
+        let id = DataManager.sharedInstance.myUser.userID
+        let image = DataManager.sharedInstance.findImage(id)
+        imageUserInView.image = image
+        usernameInView.text = "\(DataManager.sharedInstance.myUser.username)"
+        //self.navigationItem.rightBarButtonItem = buttonContinue
+        imageUserInView.layer.cornerRadius = 100.0
+        imageUserInView.layer.borderColor = mainRed.CGColor
+        imageUserInView.layer.borderWidth = 3.0
+        imageUserInView.clipsToBounds = true
+        usernameInView.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
+        usernameInView.textColor = UIColor.whiteColor()
+        userView.backgroundColor = mainRed
+        
+        
+        
+        
+        
+        
 
         
         
@@ -60,15 +91,16 @@ class CirclesTableViewController: UITableViewController {
         if (FBSDKAccessToken.currentAccessToken() == nil) {
             print("Nao fez login face")
             if let fbId = DataManager.sharedInstance.myUser.facebookID {
-
+                print(fbId)
                 
                 let alert = UIAlertController(title: "Attention", message: "We need to login again on your Facebook Account to sync", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Login", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                     self.getFBUserData({ (result) -> Void in
                         let newFBID = result as String
+                            print(newFBID)
 //                        if newFBID == fbId {
                             DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Dados do facebook resgatados com sucesso", button1: "Ok")
-                            DataManager.sharedInstance.requestFacebook({ (result) -> Void in
+                            DataManager.sharedInstance.requestFacebook(self,completion: { (result) -> Void in
                             })
 //                        }
 //                        else {
@@ -91,26 +123,11 @@ class CirclesTableViewController: UITableViewController {
             }
         }
         else {
-            DataManager.sharedInstance.requestFacebook({ (result) -> Void in
+            DataManager.sharedInstance.requestFacebook(self,completion: { (result) -> Void in
             })
         }
         
-        
-        
-        
-        
-        //        DataManager.sharedInstance.requestFacebook { (result) -> Void in
-        //
-        //        }
-        
-        //        for family: String in UIFont.familyNames()
-        //        {
-        //            print("\(family)")
-        //            for names: String in UIFont.fontNamesForFamilyName(family)
-        //            {
-        //                print("== \(names)")
-        //            }
-        //        }
+    
         
         
     }
@@ -122,8 +139,19 @@ class CirclesTableViewController: UITableViewController {
             
             
         }
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "existGroups", name:"ExistGroup", object: nil)
+
+        
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        //NSNotificationCenter.defaultCenter().removeObserver(self, name: "ExistGroup", object: nil)
+    }
+    
+    func existGroups() {
+        noGroups = false
+    }
 
     
     func getFBUserData(completion:(result:String)->Void){
@@ -174,9 +202,11 @@ class CirclesTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        
         // #warning Incomplete implementation, return the number of rows
+        if noGroups {
+            return 1
+        }
+        
         if shareTypeSegmentedControl.selectedSegmentIndex == 0 {
             return DataManager.sharedInstance.allGroup.count
         }
@@ -234,9 +264,11 @@ class CirclesTableViewController: UITableViewController {
                 DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
                     print("\(result)")
                     self.tableView.reloadData()
+                    self.refreshControl!.endRefreshing()
+                    DataManager.sharedInstance.finishedAllRequest = true
+                    
                 })
-                self.refreshControl!.endRefreshing()
-                DataManager.sharedInstance.finishedAllRequest = true
+
                 //
                 
                 
@@ -253,6 +285,15 @@ class CirclesTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        if noGroups == true {
+            
+            let emptyGroup = tableView.dequeueReusableCellWithIdentifier("noGroup", forIndexPath: indexPath) as! EmptyGroupTableViewCell
+            self.tableView.rowHeight = 75
+            return emptyGroup
+
+        }
+        
         
         let squareRed = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
         if shareTypeSegmentedControl.selectedSegmentIndex == 0 {
@@ -720,6 +761,7 @@ class CirclesTableViewController: UITableViewController {
             //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             if self.shareTypeSegmentedControl.selectedSegmentIndex == 0 {
                 let id = DataManager.sharedInstance.allGroup[indexPath.row].id as String
+                
                 self.http.destroySharerWithSharerType(.userToGroup, ownerID: DataManager.sharedInstance.myUser.userID, receiverID: id, completion: { (result) -> Void in
                     self.reloadData()
                 })
@@ -824,8 +866,6 @@ class CirclesTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        
         if #available(iOS 9.0, *) {
             tableView.cellLayoutMarginsFollowReadableWidth = false
         } else {
@@ -836,38 +876,10 @@ class CirclesTableViewController: UITableViewController {
             cell.separatorInset = UIEdgeInsetsZero
             cell.layoutMargins = UIEdgeInsetsZero
         }
-        
     }
     
     
-    
-    
-    
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-    
-    }
-    */
-    
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return false if you do not want the item to be re-orderable.
-    return true
-    }
-    */
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    
-    */
+
     
     @IBAction func segmentedControlDidChangeValue(sender: AnyObject) {
         self.refreshData()

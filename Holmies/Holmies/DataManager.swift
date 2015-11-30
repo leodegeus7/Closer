@@ -171,7 +171,7 @@ class DataManager {
         
     }
     
-    func requestFacebook(completion:(result:NSMutableArray)->Void) {
+    func requestFacebook(view:UIViewController,completion:(result:NSMutableArray)->Void) {
         let friendRequest = FBSDKGraphRequest(graphPath: "/me/friends", parameters: nil)
         friendRequest.startWithCompletionHandler{ (connection: FBSDKGraphRequestConnection!, result:AnyObject!, error:NSError!) -> Void in
             if error == nil {
@@ -207,7 +207,6 @@ class DataManager {
                                 }
                                     
                             }
-                            
                             
                             
                         })
@@ -426,13 +425,17 @@ class DataManager {
     func convertJsonToUserUnique(json:AnyObject) -> User {
         let newUser = User()
         if let dic = json as? NSDictionary {
+            let id = dic["id"]
+            
+            
+            
+            newUser.userID = "\(id!)"
             
             newUser.altitude = dic["altitude"] as? String
             newUser.createdAt = dic["created_at"] as? String
             newUser.email = dic["email"] as? String
             newUser.facebookID = dic["fbid"] as? String
-            let id = dic["id"]
-            newUser.userID = "\(id!)"
+
             if let locationString = dic["location"] as? String {
                 if locationString.containsString(":") {
                     let locationArray = locationString.componentsSeparatedByString(":") as [String]
