@@ -3,7 +3,12 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "DataManager.convertJsonToSharer(AnyObject) -&gt; [Sharer]:DataManager.swift">
+         contextName = "DataManager.linkGroupAndUserToSharer((result : String) -&gt; ()) -&gt; ():DataManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "DataManager.sharedInstance.allGroup">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "LoginViewControllerNew.animateTextField(Bool) -&gt; ():LoginViewControllerNew.swift">
@@ -68,6 +73,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "DataManager.(requestFacebook(DataManager) -&gt; ((result : NSMutableArray) -&gt; ()) -&gt; ()).(closure #1).(closure #1):DataManager.swift">
+      </ContextState>
+      <ContextState
          contextName = "CirclesTableViewController.(reloadData(CirclesTableViewController) -&gt; () -&gt; ()).(closure #1).(closure #1).(closure #2):CirclesTableViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -87,6 +95,14 @@
          contextName = "LoginViewControllerNew.(getFBUserData(LoginViewControllerNew) -&gt; () -&gt; ()).(closure #1):LoginViewControllerNew.swift">
       </ContextState>
       <ContextState
+         contextName = "CirclesTableViewController.(tableView(CirclesTableViewController) -&gt; (UITableView, editActionsForRowAtIndexPath : NSIndexPath) -&gt; [UITableViewRowAction]?).(closure #2).(closure #1):CirclesTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "DataManager.sharedInstance.allGroup">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "DataManager.(requestFacebook(DataManager) -&gt; ((result : NSMutableArray) -&gt; ()) -&gt; ()).(closure #1):DataManager.swift">
          <PersistentStrings>
             <PersistentString
@@ -101,10 +117,15 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "CreateGroupViewController.(continueAction(CreateGroupViewController) -&gt; () -&gt; ()).(closure #1).(closure #1):CreateGroupViewController.swift">
+         contextName = "DataManager.(requestUsersInGroupId(DataManager) -&gt; (String, completion : (users : [User]) -&gt; ()) -&gt; ()).(closure #1):DataManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "DataManager.sharedInstance.allGroup[0].users">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DataManager.updateLocationUsers(GMSMapView) -&gt; ():DataManager.swift">
+         contextName = "CreateGroupViewController.(continueAction(CreateGroupViewController) -&gt; () -&gt; ()).(closure #1).(closure #1):CreateGroupViewController.swift">
       </ContextState>
       <ContextState
          contextName = "EditGroupViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:EditGroupViewController.swift">
@@ -115,10 +136,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DataManager.(requestUsersInGroupId(DataManager) -&gt; (String, completion : (users : [User]) -&gt; ()) -&gt; ()).(closure #1):DataManager.swift">
+         contextName = "DataManager.updateLocationUsers(GMSMapView) -&gt; ():DataManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DataManager.sortGroupArray() -&gt; ():DataManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "DataManager.sharedInstance.allGroup[0].users">
+               value = "DataManager.sharedInstance.allGroup">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -158,12 +182,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DataManager.linkGroupAndUserToSharer((result : String) -&gt; ()) -&gt; ():DataManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "DataManager.sharedInstance.allGroup">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "DataManager.convertJsonToSharer(AnyObject) -&gt; [Sharer]:DataManager.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

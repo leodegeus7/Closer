@@ -35,8 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
 
         print(DataManager.sharedInstance.findDocumentsDirectory())
         
-        var timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "update", userInfo: nil, repeats: true)
-
+        
         
         
         
@@ -81,6 +80,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
             self.window?.rootViewController = viewController
             self.window?.makeKeyAndVisible()
         } else {
+            var timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "update", userInfo: nil, repeats: true)
+
             let storyboard = UIStoryboard(name: "Design", bundle: nil)
             //let dest = storyboard.instantiateViewControllerWithIdentifier("loginVC")
             let viewController = storyboard.instantiateViewControllerWithIdentifier("inicial")
@@ -240,21 +241,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
     }
     
     func update() {
-        DataManager.sharedInstance.requestSharers { (result) -> Void in
-            var index = 0
-            for charm in DataManager.sharedInstance.myCharms {
-                if charm.sharer.status == "accepted" {
-                    let myDict: [String:AnyObject] = [ "charmIndex": index]
-                    NSNotificationCenter.defaultCenter().postNotificationName("charmAccepted", object: nil ,userInfo: myDict)
-                }
-                if charm.sharer.receiver == DataManager.sharedInstance.myUser.userID {
-                    if charm.sharer.status == "pending" {
+        if DataManager.sharedInstance.activeView != "login" {
+            DataManager.sharedInstance.requestSharers { (result) -> Void in
+                var index = 0
+                for charm in DataManager.sharedInstance.myCharms {
+                    if charm.sharer.status == "accepted" {
                         let myDict: [String:AnyObject] = [ "charmIndex": index]
-                        NSNotificationCenter.defaultCenter().postNotificationName("charmReceived", object: nil ,userInfo: myDict)
+                        NSNotificationCenter.defaultCenter().postNotificationName("charmAccepted", object: nil ,userInfo: myDict)
                     }
-                    
+                    if charm.sharer.receiver == DataManager.sharedInstance.myUser.userID {
+                        if charm.sharer.status == "pending" {
+                            let myDict: [String:AnyObject] = [ "charmIndex": index]
+                            NSNotificationCenter.defaultCenter().postNotificationName("charmReceived", object: nil ,userInfo: myDict)
+                        }
+                        
+                    }
+                    index++
                 }
-                index++
             }
         }
     }
