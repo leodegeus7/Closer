@@ -85,18 +85,6 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("friend", forIndexPath: indexPath) as! CreateGroupTableViewCell
         
-        //let data = DataManager.sharedInstance.selectedFriends
-        if (resultSearchController.active) {
-            cell.friendName.text = filteredArray[indexPath.row].name
-            cell.friendPhoto.image = DataManager.sharedInstance.findImage("\(filteredArray[indexPath.row].userID)")
-            
-        } else {
-            cell.friendName.text = DataManager.sharedInstance.allFriends[indexPath.row].name
-            cell.friendPhoto.image = DataManager.sharedInstance.findImage("\(DataManager.sharedInstance.allFriends[indexPath.row].userID)")
-
-            
-        }
-        
         //MARK - CRIAR METODO DE PERSISTIR NO DATAMANAGER PARA DEPOIS ACESSAR E VER SE PERMENECEU PERSISTIDO
         
         self.tableView.rowHeight = 45
@@ -120,6 +108,9 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
             referenceArray = DataManager.sharedInstance.allFriends
         }
         
+        cell.friendName.text = referenceArray[indexPath.row].name
+        cell.friendPhoto.image = DataManager.sharedInstance.findImage("\(referenceArray[indexPath.row].userID)")
+        
         
         if isCharm {
             if indexPath.row == selectedUserIndex {
@@ -129,6 +120,17 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
                 cell.friendName.textColor = mainRed
             }
             else {
+                for charm in DataManager.sharedInstance.myCharms {
+                    if charm.friend.userID == referenceArray[indexPath.row].userID {
+                        cell.selectionStyle = UITableViewCellSelectionStyle.None
+                        cell.userInteractionEnabled = false
+                        let barradoView = UIImageView()
+                        barradoView.frame.size = cell.friendPhoto.frame.size
+                        barradoView.backgroundColor = UIColor.grayColor()
+                        barradoView.alpha = 0.5
+                        cell.friendPhoto.addSubview(barradoView)
+                    }
+                }
                 cell.checkImage.image = grayCheck
                 cell.friendPhoto.layer.borderWidth = 0
                 cell.friendName.textColor = lightGray
@@ -566,7 +568,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
             if let index = selectedUserIndex {
                 let myUser = DataManager.sharedInstance.myUser
                 let selectedFriend = DataManager.sharedInstance.allFriends[index]
-                http.createNewSharerWithType(.userToUser, ownerID: myUser.userID, receiverID: selectedFriend.userID, until: "\(900)", completion: { (result) -> Void in
+                http.createNewSharerWithType(.userToUser, ownerID: myUser.userID, receiverID: selectedFriend.userID, until: "\(959)", completion: { (result) -> Void in
                     self.navigationController?.popToRootViewControllerAnimated(true)
                 })
             }

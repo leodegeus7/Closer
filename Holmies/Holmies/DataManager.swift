@@ -38,6 +38,9 @@ class DataManager {
     var selectedGroup = Group()
     var selectedSharer = [Sharer]()
     
+    var activeView = String()
+    var isCharm = false
+    
     
     var finishedAllRequest = false
     
@@ -180,25 +183,29 @@ class DataManager {
                         let id = friend["id"] as! String
                         self.http.signInWithFacebookID(id, completion: { (result) -> Void in
                             let json = result
-                            let user = DataManager.sharedInstance.convertJsonToUserUnique(json)
-                            DataManager.sharedInstance.friendsInFace.append(user)
-                            
-                            var alreadyFriend = false
-                            
-                            for friend in DataManager.sharedInstance.allFriends {
-                                if friend.userID == user.userID {
-                                    alreadyFriend = true
-                                    break
+                            if json["error"] == nil {
+                                let user = DataManager.sharedInstance.convertJsonToUserUnique(json)
+                                DataManager.sharedInstance.friendsInFace.append(user)
+                                
+                                var alreadyFriend = false
+                                
+                                for friend in DataManager.sharedInstance.allFriends {
+                                    if friend.userID == user.userID {
+                                        alreadyFriend = true
+                                        break
+                                    }
+                                    
                                 }
+                                    
                                 
-                            }
-                            
-                            if !alreadyFriend {
-                                
-                                DataManager.sharedInstance.allFriends.append(user)
-                                let userdic = DataManager.sharedInstance.convertUserToNSDic(DataManager.sharedInstance.allFriends)
-                                DataManager.sharedInstance.createJsonFile("friends", json: userdic)
-                                
+                                if !alreadyFriend {
+                                    
+                                    DataManager.sharedInstance.allFriends.append(user)
+                                    let userdic = DataManager.sharedInstance.convertUserToNSDic(DataManager.sharedInstance.allFriends)
+                                    DataManager.sharedInstance.createJsonFile("friends", json: userdic)
+                                    
+                                }
+                                    
                             }
                             
                             
@@ -525,10 +532,16 @@ class DataManager {
         mapView.clear()
         for user in activeUsers {
             var actualSharer = Sharer()
-            for sharer in DataManager.sharedInstance.selectedSharer {
-                if user.userID == sharer.owner {
-                    actualSharer = sharer
-                    break
+            
+            if isCharm {
+                actualSharer = selectedSharer[0]
+            }
+            else {
+                for sharer in DataManager.sharedInstance.selectedSharer {
+                    if user.userID == sharer.owner {
+                        actualSharer = sharer
+                        break
+                    }
                 }
             }
             
@@ -589,6 +602,7 @@ class DataManager {
     
     
     func requestGroups (completion:(result:[NSDictionary])->Void) {
+        let id = DataManager.sharedInstance.myUser.userID
         http.getInfoFromID(DataManager.sharedInstance.myUser.userID, desiredInfo: .userReceiverGroups) { (result) -> Void in
             let JSON = result
             self.usersInGroups.removeAll()
@@ -1178,6 +1192,30 @@ class DataManager {
         }
         return status
         
+    }
+    
+    func verifySharerStatus(sharer:Sharer) -> Int? {
+        let createdHour = sharer.createdAt
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
+        dateFormatter.timeZone = NSTimeZone(name: "UTC")
+        let date = dateFormatter.dateFromString(createdHour)
+        let durationString = sharer.until
+        if !(durationString == "0") {
+            let durationFloat = Float(durationString)
+            let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!))
+            
+            
+            if let duration = finalDate?.timeIntervalSinceNow {
+                return Int(duration)
+            }
+
+
+            
+            
+        }
+        return nil
+
     }
     
     

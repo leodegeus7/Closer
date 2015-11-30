@@ -89,6 +89,13 @@ class AddFriendTableViewController: UITableViewController, UITextFieldDelegate {
                 let id = dic["id"] as? Int
                 newUser.userID = "\(id!)"
                 newUser.name = dic["name"] as? String
+                if let locationString = dic["location"] as? String {
+                    if locationString.containsString(":") {
+                        let locationArray = locationString.componentsSeparatedByString(":") as [String]
+                        newUser.location.latitude = locationArray[0]
+                        newUser.location.longitude = locationArray[1]
+                    }
+                }
                 
                 var friendAlreadyExist = false
                 for friend in DataManager.sharedInstance.allFriends {

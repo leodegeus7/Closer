@@ -25,7 +25,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     var gradient:UIImage!
     
     
-
+    var isCharm = DataManager.sharedInstance.isCharm
     
     
     //background whetever
@@ -80,30 +80,32 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         friendDistance.font = UIFont(name:"SFUIText-Regular", size: 15)
         
         
-        
-        
-        
-        var existUserInGroup = false
-        for sharer in DataManager.sharedInstance.selectedSharer {
-            if sharer.status == "accepted" && sharer.owner != DataManager.sharedInstance.myUser.userID {
-                existUserInGroup = true
-                break
+        if !isCharm {
+            var existUserInGroup = false
+            for sharer in DataManager.sharedInstance.selectedSharer {
+                if sharer.status == "accepted" && sharer.owner != DataManager.sharedInstance.myUser.userID {
+                    existUserInGroup = true
+                    break
+                }
+            }
+            
+            if !existUserInGroup {
+                //DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Nenhum membro neste grupo aceitou o grupo", button1: "Ok")
+                
+                
+                let groupName = DataManager.sharedInstance.selectedGroup.name
+                let alert = UIAlertController(title: "Attention", message: "Nao há ninguem aceito no grupo: \(groupName). Peça a alguns de seus amigos para aceitarem em seus dispositivos", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                    self.performSegueWithIdentifier("editGroup", sender: self)
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+                
+                
             }
         }
         
-        if !existUserInGroup {
-            //DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Nenhum membro neste grupo aceitou o grupo", button1: "Ok")
-            
-            
-            let groupName = DataManager.sharedInstance.selectedGroup.name
-            let alert = UIAlertController(title: "Attention", message: "Nao há ninguem aceito no grupo: \(groupName). Peça a alguns de seus amigos para aceitarem em seus dispositivos", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
-                self.performSegueWithIdentifier("editGroup", sender: self)
-            }))
-            self.presentViewController(alert, animated: true, completion: nil)
-            
-            
-        }
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmAccepted:", name: "charmAccepted", object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmReceived:", name: "charmReceived", object: nil)
         
         
         
@@ -118,6 +120,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     }
     
     override func viewDidAppear(animated: Bool) {
+        DataManager.sharedInstance.activeView = "map"
         DataManager.sharedInstance.locationManager.delegate = self
         let status = CLLocationManager.authorizationStatus()
         if status ==  .AuthorizedWhenInUse || status == .AuthorizedAlways {
@@ -131,6 +134,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     override func viewDidDisappear(animated: Bool) {
         //NSNotificationCenter.defaultCenter().removeObserver(self, name: "goToUser", object: nil)
         DataManager.sharedInstance.locationManager.delegate = nil
+        DataManager.sharedInstance.activeView = "circles"
+
 
     }
     
@@ -395,8 +400,23 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         self.friendDistance.text = "\(distance) meters"
 
     }
-
+    
+    
+//    func charmAccepted(notification: NSNotification) {
+//        self.navigationController?.popToRootViewControllerAnimated()(true) { () -> Void in
+//            NSNotificationCenter.defaultCenter().postNotification(notification)
+//        }
+//    }
+//    
+//    func charmReceived(notification: NSNotification) {
+//        self.dismissViewControllerAnimated(true) { () -> Void in
+//            NSNotificationCenter.defaultCenter().postNotification(notification)
+//        }
+//    }
+    
 }
+
+
 
 
 

@@ -18,6 +18,7 @@ class CirclesTableViewController: UITableViewController {
     let mainRed: UIColor = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
     var imageX = 0.0
     
+    
     @IBOutlet var shareTypeSegmentedControl: UISegmentedControl!
     
     
@@ -25,8 +26,9 @@ class CirclesTableViewController: UITableViewController {
         super.viewDidLoad()
         reloadData()
         
-        
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmAccepted:", name: "charmAccepted", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmReceived:", name: "charmReceived", object: nil)
+
         
         let refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -114,8 +116,10 @@ class CirclesTableViewController: UITableViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        DataManager.sharedInstance.activeView = "circles"
         DataManager.sharedInstance.linkGroupAndUserToSharer { (result) -> Void in
             self.tableView.reloadData()
+            
             
         }
     }
@@ -193,8 +197,11 @@ class CirclesTableViewController: UITableViewController {
     }
     
     func reloadData() {
+        
         self.tableView.reloadData()
         DataManager.sharedInstance.requestSharers { (result) -> Void in
+            
+            
             DataManager.sharedInstance.requestGroups { (result) -> Void in
                 
                 DataManager.sharedInstance.allGroup = DataManager.sharedInstance.convertJsonToGroup(result)
@@ -524,8 +531,6 @@ class CirclesTableViewController: UITableViewController {
             let actualSharer = actualCharm.sharer
             
             charmCell.nameLabel.text = actualFriend.name
-            charmCell.remainingTimeLabel.text = "\(actualSharer.until) seconds remaining"
-            
             let imageName = DataManager.sharedInstance.findImage(actualFriend.userID)
             
             
@@ -551,12 +556,42 @@ class CirclesTableViewController: UITableViewController {
             bgImageView.clipsToBounds = true
             bgImageView.frame.size = charmCell.backgroundImage.frame.size
             bgImageView.frame.origin = CGPoint(x: 0, y: 0)
-            bgImageView.layer.borderColor = mainRed.CGColor
             bgImageView.layer.borderWidth = 2.0
             
             for subview in charmCell.backgroundImage.subviews {
                 subview.removeFromSuperview()
             }
+            
+            let duration = DataManager.sharedInstance.verifySharerStatus(actualSharer)
+            
+            if duration < 0 {
+                actualSharer.status = "expired"
+                http.updateSharerWithID(actualSharer.id, until: nil, status: "expired", completion: { (result) -> Void in
+                    DataManager.sharedInstance.requestSharers({ (result) -> Void in
+                    })
+                })
+            }
+            
+            if actualSharer.status == "pending" {
+                bgImageView.layer.borderColor = mainRed.CGColor
+                if duration > 60 {
+                    charmCell.remainingTimeLabel.text = "\(duration!/60) minutos restantes"
+                }
+                else {
+                    charmCell.remainingTimeLabel.text = "\(duration!) segundos restantes"
+                }
+            }
+            else if actualSharer.status == "active" || actualSharer.status == "accepted" {
+                charmCell.remainingTimeLabel.text = "Ativo"
+            }
+            else {
+                charmCell.remainingTimeLabel.text = "Expirado"
+                bgImageView.layer.borderColor = UIColor.grayColor().CGColor
+            }
+            
+
+            
+
             charmCell.backgroundImage.addSubview(bgImageView)
             
             
@@ -621,6 +656,9 @@ class CirclesTableViewController: UITableViewController {
 
                     
                 }
+                else {
+
+                }
                 
             }
             
@@ -630,6 +668,7 @@ class CirclesTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "showMap") {
             if let viewController: MapGoogleViewController = segue.destinationViewController as? MapGoogleViewController {
+                viewController.isCharm = DataManager.sharedInstance.isCharm
                 viewController.enterInView = true
             }
         }
@@ -707,39 +746,58 @@ class CirclesTableViewController: UITableViewController {
         if cell?.tag == 2 {
         
         
-            
-            let editGroup = UITableViewRowAction(style: .Normal, title: " Edit ", handler: {(rowAction:UITableViewRowAction, indexPath: NSIndexPath) -> Void in
+            if self.shareTypeSegmentedControl.selectedSegmentIndex == 0 {
                 
-                //Editar o grupo
-                DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
-                DataManager.sharedInstance.selectedGroup = DataManager.sharedInstance.allGroup[indexPath.row]
-                
-                
-                DataManager.sharedInstance.selectedSharer = DataManager.sharedInstance.loadSharerInAGroupFromDocuments(DataManager.sharedInstance.allGroup[indexPath.row].id)
-                self.performSegueWithIdentifier("editGroupSegue", sender: self)
-                
-                
+                let editGroup = UITableViewRowAction(style: .Normal, title: " Edit ", handler: {(rowAction:UITableViewRowAction, indexPath: NSIndexPath) -> Void in
+                    
+                    //Editar o grupo
+                    DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
+                    DataManager.sharedInstance.selectedGroup = DataManager.sharedInstance.allGroup[indexPath.row]
+                    
+                    
+                    DataManager.sharedInstance.selectedSharer = DataManager.sharedInstance.loadSharerInAGroupFromDocuments(DataManager.sharedInstance.allGroup[indexPath.row].id)
+                    self.performSegueWithIdentifier("editGroupSegue", sender: self)
+                    
+                    
                 })
-            
+                
                 editGroup.backgroundColor = lightBlue
-            
-            let deleteGroup = UITableViewRowAction(style: .Destructive, title: "Delete", handler: {(rowAction:UITableViewRowAction, indexPath: NSIndexPath) -> Void in
                 
-                let groupName = DataManager.sharedInstance.allGroup[indexPath.row].name
-                let alert = UIAlertController(title: "Attention", message: "\(groupName) will be delete", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Delete Group", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
-                    //DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
-                    DataManager.sharedInstance.destroySharerWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
-                }))
-                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
-                self.reloadData()
-                
-                
+                let deleteGroup = UITableViewRowAction(style: .Destructive, title: "Delete", handler: {(rowAction:UITableViewRowAction, indexPath: NSIndexPath) -> Void in
+                    
+                    let groupName = DataManager.sharedInstance.allGroup[indexPath.row].name
+                    let alert = UIAlertController(title: "Attention", message: "\(groupName) will be delete", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Delete Group", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                        //DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+                        DataManager.sharedInstance.destroySharerWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+                    }))
+                    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    self.reloadData()
+                    
+                    
                 })
                 deleteGroup.backgroundColor = mainRed
-            
+                
                 return [editGroup,deleteGroup]
+            }
+            else {
+                let charm = DataManager.sharedInstance.myCharms[indexPath.row]
+                if charm.sharer.status != "pending" {
+                    let deleteCharm = UITableViewRowAction(style: .Destructive, title: "Delete", handler: { (rowAction:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
+                        self.http.destroySharerWithSharerType(.userToUser, ownerID: charm.sharer.owner, receiverID: charm.sharer.receiver, completion: { (result) -> Void in
+                            self.reloadData()
+                            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Deletado", message: "O charme enviado para \(charm.friend.name) foi removido com sucesso.", button1: "Ok")
+
+                        })
+                    })
+                
+                return [deleteCharm]
+                }
+
+            }
+
+
         }
         else if cell?.tag == 100 {
             let deleteGroup = UITableViewRowAction(style: .Destructive, title: "Delete", handler: {(rowAction:UITableViewRowAction, indexPath: NSIndexPath) -> Void in
@@ -813,6 +871,78 @@ class CirclesTableViewController: UITableViewController {
     
     @IBAction func segmentedControlDidChangeValue(sender: AnyObject) {
         self.refreshData()
+    }
+    
+    func charmAccepted(notification: NSNotification) {
+        if DataManager.sharedInstance.activeView == "circles" {
+            if let info = notification.userInfo {
+                if let charmIndex = info["charmIndex"] as? Int {
+                    let charm = DataManager.sharedInstance.myCharms[charmIndex]
+                    
+                    let alert = UIAlertController(title: "Charme", message: "\(charm.friend.name) aceitou seu charme", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Ir", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                        DataManager.sharedInstance.selectedSharer = [charm.sharer]
+                        DataManager.sharedInstance.activeUsers = [charm.friend]
+                        
+                        DataManager.sharedInstance.isCharm = true
+                        
+                        self.performSegueWithIdentifier("showMap", sender: self)
+                    }))
+
+                    self.presentViewController(alert, animated: true, completion: nil)
+
+                    
+                    
+                }
+                
+            }
+        }
+    
+    }
+    
+    func charmReceived(notification: NSNotification) {
+        if DataManager.sharedInstance.activeView == "circles" {
+            if let info = notification.userInfo {
+                if let charmIndex = info["charmIndex"] as? Int {
+                    
+                    let charm = DataManager.sharedInstance.myCharms[charmIndex]
+                    
+                    
+                    let alert = UIAlertController(title: "Charme", message: "Você recebeu um charme de \(charm.friend.name)", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Aceitar", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                        
+                        charm.sharer.status = "accepted"
+                        self.http.updateSharerWithID(charm.sharer.id, until: nil, status: "accepted", completion: { (result) -> Void in
+                            DataManager.sharedInstance.selectedSharer = [charm.sharer]
+                            DataManager.sharedInstance.activeUsers = [charm.friend]
+                            
+                            DataManager.sharedInstance.isCharm = true
+                            
+                            self.performSegueWithIdentifier("showMap", sender: self)
+                        })
+                        
+
+                    }))
+                    alert.addAction(UIAlertAction(title: "Rejeitar", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+                        charm.sharer.status = "rejected"
+                        self.http.updateSharerWithID(charm.sharer.id, until: nil, status: "rejected", completion: { (result) -> Void in
+                            self.reloadData()
+                        })
+                    }))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    
+                    
+
+                    
+                }
+                
+            }
+        }
+        else {
+            self.navigationController?.popToRootViewControllerAnimated(true)
+        }
+        
+        
     }
     
 }
