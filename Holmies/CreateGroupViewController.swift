@@ -583,6 +583,9 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
             else {
                 let groupNameText = groupName.text
                 
+                NSNotificationCenter.defaultCenter().postNotificationName("ExistGroup", object: nil)
+
+                
                 http.createNewGroupWithName("\(groupNameText!)", completion: { (result) -> Void in
                     
                     

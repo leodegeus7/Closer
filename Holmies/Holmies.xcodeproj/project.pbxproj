@@ -100,6 +100,7 @@
 		CD4367491BBC75E200309FD0 /* AddGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4367481BBC75E200309FD0 /* AddGroupTableViewController.swift */; };
 		CD43674B1BBC771800309FD0 /* AddGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD43674A1BBC771800309FD0 /* AddGroupTableViewCell.swift */; };
 		CD4FC9401BED1F810086EC30 /* myInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4FC93F1BED1F810086EC30 /* myInfoViewController.swift */; };
+		CD669F731C0C9ED400E2BAC0 /* EmptyGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD669F721C0C9ED400E2BAC0 /* EmptyGroupTableViewCell.swift */; };
 		CD6BAA551B98D946008614B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA541B98D946008614B0 /* AppDelegate.swift */; };
 		CD6BAA5C1B98D946008614B0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAA5B1B98D946008614B0 /* Images.xcassets */; };
 		CD6BAA6B1B98D946008614B0 /* HolmiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA6A1B98D946008614B0 /* HolmiesTests.swift */; };
@@ -342,6 +343,7 @@
 		CD4367481BBC75E200309FD0 /* AddGroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewController.swift; sourceTree = "<group>"; };
 		CD43674A1BBC771800309FD0 /* AddGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewCell.swift; sourceTree = "<group>"; };
 		CD4FC93F1BED1F810086EC30 /* myInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myInfoViewController.swift; sourceTree = "<group>"; };
+		CD669F721C0C9ED400E2BAC0 /* EmptyGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyGroupTableViewCell.swift; sourceTree = "<group>"; };
 		CD6BAA4F1B98D946008614B0 /* Holmies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Holmies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD6BAA531B98D946008614B0 /* Info2.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info2.plist; sourceTree = "<group>"; };
 		CD6BAA541B98D946008614B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -763,6 +765,7 @@
 				CD4FC93F1BED1F810086EC30 /* myInfoViewController.swift */,
 				CDB0C9571BCEE5340020BFB5 /* UsersInGroupsCollectionViewCell.swift */,
 				CD721F901BF2641A0013A3C5 /* FriendsInMapTableViewController.swift */,
+				CD669F721C0C9ED400E2BAC0 /* EmptyGroupTableViewCell.swift */,
 			);
 			name = ControllerNew;
 			sourceTree = "<group>";
@@ -1205,6 +1208,7 @@
 				CD6BAA8D1B98DB5F008614B0 /* GoogleDataProvider.swift in Sources */,
 				CD0B59DD1BAB47720098AD88 /* LocationUserTableViewCell.swift in Sources */,
 				CDF84C6D1BE29C4300F91502 /* Sharer.swift in Sources */,
+				CD669F731C0C9ED400E2BAC0 /* EmptyGroupTableViewCell.swift in Sources */,
 				CD6BAA8F1B98DB70008614B0 /* GooglePlace.swift in Sources */,
 				A7C37F631BE0061000FEE8D2 /* CreateGroupTableViewCell.swift in Sources */,
 				CD8A8BDB1BB479CE00E9D471 /* GroupsTableViewController.swift in Sources */,

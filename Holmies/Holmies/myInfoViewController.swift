@@ -185,9 +185,11 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
                 self.http.updateUserWithID(DataManager.sharedInstance.myUser.userID, username: nil, location: nil, altitude: nil, fbid: newFBID, photo: nil, name: nil, email: nil, password: nil, completion: { (result) -> Void in
                     
                 })
+                
+                DataManager.sharedInstance.requestFacebook(self, completion: { (result) -> Void in
+                    
+                })
 
-                DataManager.sharedInstance.requestFacebook({ (result) -> Void in
-                    })
                 
             })
         }

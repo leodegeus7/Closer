@@ -21,12 +21,23 @@ class CirclesTableViewController: UITableViewController {
     @IBOutlet var shareTypeSegmentedControl: UISegmentedControl!
     
     
+    //view do user
+    @IBOutlet weak var imageUserInView: UIImageView!
+    @IBOutlet weak var usernameInView: UILabel!
+    @IBOutlet weak var userView: UIView!
+    
+    //variaveis controle de sem grupo
+    var noGroups = false
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         reloadData()
         
         
         
+
         
         let refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -51,6 +62,27 @@ class CirclesTableViewController: UITableViewController {
         let timer = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("reloadData"), userInfo: nil, repeats: true)
         
 
+        
+        //view auxiliar
+        
+        let id = DataManager.sharedInstance.myUser.userID
+        let image = DataManager.sharedInstance.findImage(id)
+        imageUserInView.image = image
+        usernameInView.text = "\(DataManager.sharedInstance.myUser.username)"
+        //self.navigationItem.rightBarButtonItem = buttonContinue
+        imageUserInView.layer.cornerRadius = 100.0
+        imageUserInView.layer.borderColor = mainRed.CGColor
+        imageUserInView.layer.borderWidth = 3.0
+        imageUserInView.clipsToBounds = true
+        usernameInView.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
+        usernameInView.textColor = UIColor.whiteColor()
+        userView.backgroundColor = mainRed
+        
+        
+        
+        
+        
+        
 
         
         
@@ -66,7 +98,7 @@ class CirclesTableViewController: UITableViewController {
                         let newFBID = result as String
 //                        if newFBID == fbId {
                             DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Dados do facebook resgatados com sucesso", button1: "Ok")
-                            DataManager.sharedInstance.requestFacebook({ (result) -> Void in
+                            DataManager.sharedInstance.requestFacebook(self,completion: { (result) -> Void in
                             })
 //                        }
 //                        else {
@@ -89,37 +121,40 @@ class CirclesTableViewController: UITableViewController {
             }
         }
         else {
-            DataManager.sharedInstance.requestFacebook({ (result) -> Void in
+            DataManager.sharedInstance.requestFacebook(self,completion: { (result) -> Void in
             })
         }
         
-        
-        
-        
-        
-        //        DataManager.sharedInstance.requestFacebook { (result) -> Void in
-        //
-        //        }
-        
-        //        for family: String in UIFont.familyNames()
-        //        {
-        //            print("\(family)")
-        //            for names: String in UIFont.fontNamesForFamilyName(family)
-        //            {
-        //                print("== \(names)")
-        //            }
-        //        }
+    
         
         
     }
     
     override func viewDidAppear(animated: Bool) {
+        if DataManager.sharedInstance.allGroup.count == 0 {
+            noGroups = true
+            self.viewDidLoad()
+        }
+        else {
+            noGroups = false
+        }
         DataManager.sharedInstance.linkGroupAndUserToSharer { (result) -> Void in
             self.tableView.reloadData()
             
         }
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "existGroups", name:"ExistGroup", object: nil)
+
+        
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        //NSNotificationCenter.defaultCenter().removeObserver(self, name: "ExistGroup", object: nil)
+    }
+    
+    func existGroups() {
+        noGroups = false
+    }
 
     
     func getFBUserData(completion:(result:String)->Void){
@@ -170,9 +205,11 @@ class CirclesTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        
         // #warning Incomplete implementation, return the number of rows
+        if noGroups {
+            return 1
+        }
+        
         if shareTypeSegmentedControl.selectedSegmentIndex == 0 {
             return DataManager.sharedInstance.allGroup.count
         }
@@ -246,6 +283,15 @@ class CirclesTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        if noGroups == true {
+            
+            let emptyGroup = tableView.dequeueReusableCellWithIdentifier("noGroup", forIndexPath: indexPath) as! EmptyGroupTableViewCell
+            self.tableView.rowHeight = 75
+            return emptyGroup
+
+        }
+        
         
         let squareRed = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
         if shareTypeSegmentedControl.selectedSegmentIndex == 0 {
@@ -681,6 +727,7 @@ class CirclesTableViewController: UITableViewController {
             //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             if self.shareTypeSegmentedControl.selectedSegmentIndex == 0 {
                 let id = DataManager.sharedInstance.allGroup[indexPath.row].id as String
+                
                 self.http.destroySharerWithSharerType(.userToGroup, ownerID: DataManager.sharedInstance.myUser.userID, receiverID: id, completion: { (result) -> Void in
                     self.reloadData()
                 })
@@ -730,7 +777,9 @@ class CirclesTableViewController: UITableViewController {
                 alert.addAction(UIAlertAction(title: "Delete Group", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                     //DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
                     DataManager.sharedInstance.destroySharerWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+                    self.noGroups = true
                 }))
+                
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
                 self.reloadData()
