@@ -25,7 +25,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     var gradient:UIImage!
     var actualPhoneAngularPosition = Double()
     var selectedFriend = User?()
-    let panRec = UIPanGestureRecognizer()
+    let swipeRec = UISwipeGestureRecognizer()
+    
     
     
     var isCharm = DataManager.sharedInstance.isCharm
@@ -81,8 +82,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         
         friendDistance.font = UIFont(name:"SFUIText-Regular", size: 15)
         
-        panRec.addTarget(self, action: "draggedView:")
-        compassView.addGestureRecognizer(panRec)
+        swipeRec.addTarget(self, action: "draggedView:")
+        compassView.addGestureRecognizer(swipeRec)
         compassView.userInteractionEnabled = true
         
         if !isCharm {
@@ -439,14 +440,21 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 //        }
 //    }
     
-    func draggedView (sender:UIPanGestureRecognizer) {
-        self.view.bringSubviewToFront(sender.view!)
-        var translation = sender.translationInView(self.view)
-        sender.view?.center = CGPointMake((sender.view?.center.x)! + translation.x, (sender.view?.center.y)! + translation.y)
-        
-        
-    }
-    
+//    func draggedView (sender:UIPanGestureRecognizer) {
+//        
+//        if (UISwipeGestureRecognizer == UISwipeGestureRecognizerDirection.Down) {
+//            
+//            print("pra baixoooooooo")
+//            
+//        }
+////        
+////        self.view.bringSubviewToFront(sender.view!)
+////        var translation = sender.translationInView(self.view)
+////        sender.view?.center = CGPointMake((sender.view?.center.x)! + translation.x, (sender.view?.center.y)! + translation.y)
+////        
+//        
+//    }
+//    
     
 
 }

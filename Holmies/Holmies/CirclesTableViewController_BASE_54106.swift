@@ -22,8 +22,6 @@ class CirclesTableViewController: UITableViewController {
     @IBOutlet var shareTypeSegmentedControl: UISegmentedControl!
     
     
-    
-    
     //view do user
     @IBOutlet weak var imageUserInView: UIImageView!
     @IBOutlet weak var usernameInView: UILabel!
@@ -41,18 +39,6 @@ class CirclesTableViewController: UITableViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmAccepted:", name: "charmAccepted", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmReceived:", name: "charmReceived", object: nil)
 
-        
-        self.navigationController?.navigationBar.translucent = false
-        self.navigationController?.navigationBar.barStyle = .Black
-        self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
-                for family: String in UIFont.familyNames()
-                {
-                    print("\(family)")
-                    for names: String in UIFont.fontNamesForFamilyName(family)
-                    {
-                        print("== \(names)")
-                    }
-                }
         
         
 
@@ -79,7 +65,7 @@ class CirclesTableViewController: UITableViewController {
         
         let timer = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("reloadData"), userInfo: nil, repeats: true)
         
-        
+
         
         //view auxiliar
         
@@ -88,15 +74,13 @@ class CirclesTableViewController: UITableViewController {
         imageUserInView.image = image
         usernameInView.text = "\(DataManager.sharedInstance.myUser.username)"
         //self.navigationItem.rightBarButtonItem = buttonContinue
-        imageUserInView.layer.cornerRadius = imageUserInView.frame.size.width / 2
-        imageUserInView.layer.borderColor = UIColor.whiteColor().CGColor
-        imageUserInView.layer.borderWidth = 1.0
+        imageUserInView.layer.cornerRadius = 100.0
+        imageUserInView.layer.borderColor = mainRed.CGColor
+        imageUserInView.layer.borderWidth = 3.0
         imageUserInView.clipsToBounds = true
         usernameInView.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
         usernameInView.textColor = UIColor.whiteColor()
-//        let userViewBackgroundImage = DataManager.sharedInstance.imageResize(UIImage(named: "redLights.png")!, sizeChange: CGSize(width: self.view.frame.width, height: self.view.frame.height / 5.15))
-//        userView.backgroundColor = UIColor(patternImage: userViewBackgroundImage)
-        
+        userView.backgroundColor = mainRed
         
         
         
@@ -168,8 +152,6 @@ class CirclesTableViewController: UITableViewController {
             self.tableView.reloadData()
             
             
-            
-            
         }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "existGroups", name:"ExistGroup", object: nil)
@@ -235,12 +217,7 @@ class CirclesTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if DataManager.sharedInstance.allGroup.count < 1 {
-            self.noGroups = true
-        }
-        else {
-            self.noGroups = false
-        }
+
         
         if shareTypeSegmentedControl.selectedSegmentIndex == 0 {
             if noGroups {
@@ -265,7 +242,7 @@ class CirclesTableViewController: UITableViewController {
     }
     
     func reloadData() {
-
+        
         self.tableView.reloadData()
         DataManager.sharedInstance.requestSharers { (result) -> Void in
             
@@ -299,12 +276,6 @@ class CirclesTableViewController: UITableViewController {
                 }
                 DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(friends)
 
-                if DataManager.sharedInstance.allGroup.count < 1 {
-                    self.noGroups = true
-                }
-                else {
-                    self.noGroups = false
-                }
                 DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
                     print("\(result)")
                     self.tableView.reloadData()
@@ -313,10 +284,18 @@ class CirclesTableViewController: UITableViewController {
                     
                 })
 
+                //
+                
                 
             }
         }
         DataManager.sharedInstance.saveMyInfo()
+        //        DataManager.sharedInstance.requestFacebook { (result) -> Void in
+        //
+        //        }
+        
+        
+        
     }
     
     
@@ -326,25 +305,11 @@ class CirclesTableViewController: UITableViewController {
         
         let squareRed = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
         if shareTypeSegmentedControl.selectedSegmentIndex == 0 {
-            if DataManager.sharedInstance.allGroup.count < 1 {
-                self.noGroups = true
-            }
-            else {
-                self.noGroups = false
-            }
+            
             if noGroups == true {
                 
                 let emptyGroup = tableView.dequeueReusableCellWithIdentifier("noGroup", forIndexPath: indexPath) as! EmptyGroupTableViewCell
-                self.tableView.rowHeight = 100
-                emptyGroup.imageEmpty.layer.cornerRadius = emptyGroup.imageEmpty.frame.size.width
-                emptyGroup.imageEmpty.layer.borderColor = lightBlue.CGColor
-                emptyGroup.imageEmpty.layer.borderWidth = 2.0
-                emptyGroup.firstLabel.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
-                emptyGroup.firstLabel.textColor = mainRed
-                emptyGroup.secondLabel.font = UIFont(name: "SFCompactDisplay-Light", size: 17)
-                emptyGroup.secondLabel.textColor = UIColor.blackColor()
-                    
-                
+                self.tableView.rowHeight = 75
                 return emptyGroup
                 
             }
@@ -375,7 +340,7 @@ class CirclesTableViewController: UITableViewController {
                     cellActive.coloredSquare.backgroundColor = squareRed
                     cellActive.numberLabel.font = UIFont(name: "SFUIDisplay-Ultralight", size: 47)
                     cellActive.timeLabel.font = UIFont(name: "SFUIText-Medium", size: 12)
-                    cellActive.coloredSquare.layer.cornerRadius = 8.0 / 414.0 * self.view.frame.size.width
+                    cellActive.coloredSquare.layer.cornerRadius = 8.0
                     
                     
                     
@@ -405,17 +370,16 @@ class CirclesTableViewController: UITableViewController {
                             
                             let imageView = UIImageView(image: imageName)
                             
-                            imageView.layer.cornerRadius = 22.85 / 414 * self.view.frame.size.width
+                            imageView.layer.cornerRadius = 22.85
                             
-                            print("tamanho da tela: \(self.view.frame.size.width)")
                             
                             if status == "accepted" {
-                                imageView.layer.borderWidth = 2.0
-                            } else {
-                                imageView.layer.borderWidth = 0
+                                imageView.layer.borderColor = mainRed.CGColor
                             }
                             
-                            imageView.layer.borderColor = mainRed.CGColor
+                            
+
+                            imageView.layer.borderWidth = 2.0
                             imageView.clipsToBounds = true
                             
                             imageView.frame = CGRect(x: imageX, y: 0, width: sizeOfImageWidth, height: sizeOfImageHeight)
@@ -619,8 +583,7 @@ class CirclesTableViewController: UITableViewController {
         }
         else {
             let charmCell = tableView.dequeueReusableCellWithIdentifier("charmCell", forIndexPath: indexPath) as! CharmTableViewCell
-            self.tableView.rowHeight = 200
-
+            
             let actualCharm = DataManager.sharedInstance.myCharms[indexPath.row]
             let actualFriend = actualCharm.friend
             let actualSharer = actualCharm.sharer
@@ -714,10 +677,7 @@ class CirclesTableViewController: UITableViewController {
             self.reloadData()
         
         }
-        else if cell?.tag == 200 {
-            performSegueWithIdentifier("addGroup", sender: self)
-        }
-        else if cell?.tag == 2 {
+        if cell?.tag == 2 {
             if (DataManager.sharedInstance.allGroup[indexPath.row].users == nil) {
                 DataManager.sharedInstance.createSimpleUIAlert(self, title: "Espere", message: "Espere terminar o request", button1: "OK")
                 
@@ -818,6 +778,7 @@ class CirclesTableViewController: UITableViewController {
             //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             if self.shareTypeSegmentedControl.selectedSegmentIndex == 0 {
                 let id = DataManager.sharedInstance.allGroup[indexPath.row].id as String
+                
                 self.http.destroySharerWithSharerType(.userToGroup, ownerID: DataManager.sharedInstance.myUser.userID, receiverID: id, completion: { (result) -> Void in
                     self.reloadData()
                 })
@@ -833,7 +794,7 @@ class CirclesTableViewController: UITableViewController {
         }
         //        else if editingStyle == .Insert {
         //            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        //       
+        //        }
     }
     
 
@@ -867,8 +828,6 @@ class CirclesTableViewController: UITableViewController {
                     alert.addAction(UIAlertAction(title: "Delete Group", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                         //DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
                         DataManager.sharedInstance.destroySharerWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
-                        DataManager.sharedInstance.allGroup.removeAtIndex(indexPath.row)
-                        self.tableView.reloadData()
                         self.noGroups = true
                     }))
                     
@@ -1019,7 +978,6 @@ class CirclesTableViewController: UITableViewController {
     }
     
 }
-
 
 
 

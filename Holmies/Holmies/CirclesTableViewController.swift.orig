@@ -42,9 +42,6 @@ class CirclesTableViewController: UITableViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmReceived:", name: "charmReceived", object: nil)
 
         
-        self.navigationController?.navigationBar.translucent = false
-        self.navigationController?.navigationBar.barStyle = .Black
-        self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
                 for family: String in UIFont.familyNames()
                 {
                     print("\(family)")
@@ -53,6 +50,9 @@ class CirclesTableViewController: UITableViewController {
                         print("== \(names)")
                     }
                 }
+        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.barStyle = .Black
+        self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
         
         
 
