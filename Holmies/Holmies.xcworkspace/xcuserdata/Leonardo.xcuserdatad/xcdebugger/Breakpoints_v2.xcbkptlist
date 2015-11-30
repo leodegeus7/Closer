@@ -79,7 +79,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "171"
             endingLineNumber = "171"
-            landmarkName = "requestFacebook(_:)"
+            landmarkName = "requestFacebook(_:completion:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -111,7 +111,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "172"
             endingLineNumber = "172"
-            landmarkName = "requestFacebook(_:)"
+            landmarkName = "requestFacebook(_:completion:)"
             landmarkType = "5">
             <Locations>
                <Location
@@ -159,8 +159,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "460"
             endingLineNumber = "460"
-            landmarkName = "convertJsonToGroup(_:)"
-            landmarkType = "5">
+            landmarkName = "DataManager"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -175,7 +175,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "458"
             endingLineNumber = "458"
-            landmarkName = "convertJsonToGroup(_:)"
+            landmarkName = "convertJsonToUserUnique(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -207,7 +207,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "473"
             endingLineNumber = "473"
-            landmarkName = "importID()"
+            landmarkName = "convertJsonToGroup(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -223,7 +223,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "474"
             endingLineNumber = "474"
-            landmarkName = "importID()"
+            landmarkName = "convertJsonToGroup(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
