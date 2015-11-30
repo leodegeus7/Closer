@@ -38,6 +38,9 @@ class DataManager {
     var selectedGroup = Group()
     var selectedSharer = [Sharer]()
     
+    var activeView = String()
+    var isCharm = false
+    
     
     var finishedAllRequest = false
     
@@ -207,6 +210,7 @@ class DataManager {
                                     DataManager.sharedInstance.createJsonFile("friends", json: userdic)
                                     
                                 }
+                                    
                             }
                             
                             
@@ -536,10 +540,16 @@ class DataManager {
         mapView.clear()
         for user in activeUsers {
             var actualSharer = Sharer()
-            for sharer in DataManager.sharedInstance.selectedSharer {
-                if user.userID == sharer.owner {
-                    actualSharer = sharer
-                    break
+            
+            if isCharm {
+                actualSharer = selectedSharer[0]
+            }
+            else {
+                for sharer in DataManager.sharedInstance.selectedSharer {
+                    if user.userID == sharer.owner {
+                        actualSharer = sharer
+                        break
+                    }
                 }
             }
             
@@ -600,6 +610,7 @@ class DataManager {
     
     
     func requestGroups (completion:(result:[NSDictionary])->Void) {
+        let id = DataManager.sharedInstance.myUser.userID
         http.getInfoFromID(DataManager.sharedInstance.myUser.userID, desiredInfo: .userReceiverGroups) { (result) -> Void in
             let JSON = result
             self.usersInGroups.removeAll()
@@ -1189,6 +1200,30 @@ class DataManager {
         }
         return status
         
+    }
+    
+    func verifySharerStatus(sharer:Sharer) -> Int? {
+        let createdHour = sharer.createdAt
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
+        dateFormatter.timeZone = NSTimeZone(name: "UTC")
+        let date = dateFormatter.dateFromString(createdHour)
+        let durationString = sharer.until
+        if !(durationString == "0") {
+            let durationFloat = Float(durationString)
+            let finalDate = date?.dateByAddingTimeInterval(NSTimeInterval(durationFloat!))
+            
+            
+            if let duration = finalDate?.timeIntervalSinceNow {
+                return Int(duration)
+            }
+
+
+            
+            
+        }
+        return nil
+
     }
     
     

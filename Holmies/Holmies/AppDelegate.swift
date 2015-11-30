@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch .
         GMSServices.provideAPIKey(googleMapsApiKey)
-        DataManager.sharedInstance.locationManager.delegate = self
+        DataManager.sharedInstance.locationManager.delegate = nil
         
         Parse.setApplicationId("52IjYIjvJ5BdIYDXr8SNqeVj5TZb15fnpaJkFDM2",
             clientKey: "ga7aF8AEO1vhF4x7KgTVcUsOk8uigdhXZZrCr5ez")
@@ -34,6 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
 
         print(DataManager.sharedInstance.findDocumentsDirectory())
+        
+        var timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "update", userInfo: nil, repeats: true)
+
         
         
         
@@ -236,6 +239,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         }
     }
     
+    func update() {
+        DataManager.sharedInstance.requestSharers { (result) -> Void in
+            var index = 0
+            for charm in DataManager.sharedInstance.myCharms {
+                if charm.sharer.status == "accepted" {
+                    let myDict: [String:AnyObject] = [ "charmIndex": index]
+                    NSNotificationCenter.defaultCenter().postNotificationName("charmAccepted", object: nil ,userInfo: myDict)
+                }
+                if charm.sharer.receiver == DataManager.sharedInstance.myUser.userID {
+                    if charm.sharer.status == "pending" {
+                        let myDict: [String:AnyObject] = [ "charmIndex": index]
+                        NSNotificationCenter.defaultCenter().postNotificationName("charmReceived", object: nil ,userInfo: myDict)
+                    }
+                    
+                }
+                index++
+            }
+        }
+    }
 
 
 }
