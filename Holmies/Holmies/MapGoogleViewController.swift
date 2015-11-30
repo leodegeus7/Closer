@@ -23,6 +23,9 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     @IBOutlet weak var pinImageVerticalConstraint: NSLayoutConstraint!
     @IBOutlet weak var compassView: UIView!
     var gradient:UIImage!
+    var actualPhoneAngularPosition = Double()
+    var selectedFriend = User?()
+    let panRec = UIPanGestureRecognizer()
     
     
     var isCharm = DataManager.sharedInstance.isCharm
@@ -410,6 +413,17 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     }
     
     
+    func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        self.actualPhoneAngularPosition = newHeading.magneticHeading
+        let myCoordinate = CLLocation(latitude: Double(DataManager.sharedInstance.myUser.location.latitude)!, longitude: Double(DataManager.sharedInstance.myUser.location.longitude)!)
+        
+        if let friend = self.selectedFriend {
+            let locationFriend = CLLocation(latitude: Double(friend.location.latitude)!, longitude: Double(friend.location.longitude)!)
+            updateCompassPosition(myCoordinate, location: locationFriend)
+        }
+
+        
+    }
 //    func charmAccepted(notification: NSNotification) {
 //        self.navigationController?.popToRootViewControllerAnimated()(true) { () -> Void in
 //            NSNotificationCenter.defaultCenter().postNotification(notification)
@@ -422,6 +436,16 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 //        }
 //    }
     
+    func draggedView (sender:UIPanGestureRecognizer) {
+        self.view.bringSubviewToFront(sender.view!)
+        var translation = sender.translationInView(self.view)
+        sender.view?.center = CGPointMake((sender.view?.center.x)! + translation.x, (sender.view?.center.y)! + translation.y)
+        
+        
+    }
+    
+    
+
 }
 
 

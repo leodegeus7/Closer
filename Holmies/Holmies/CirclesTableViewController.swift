@@ -40,6 +40,9 @@ class CirclesTableViewController: UITableViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmReceived:", name: "charmReceived", object: nil)
 
         
+        
+
+        
         let refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refresh.addTarget(self,action:"refreshData",forControlEvents:.ValueChanged)
@@ -133,6 +136,17 @@ class CirclesTableViewController: UITableViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        let id = DataManager.sharedInstance.myUser.userID
+        let image = DataManager.sharedInstance.findImage(id)
+        imageUserInView.image = image
+        
+        if DataManager.sharedInstance.allGroup.count == 0 {
+            noGroups = true
+            self.viewDidLoad()
+        }
+        else {
+            noGroups = false
+        }
         DataManager.sharedInstance.activeView = "circles"
         DataManager.sharedInstance.linkGroupAndUserToSharer { (result) -> Void in
             self.tableView.reloadData()
@@ -203,11 +217,12 @@ class CirclesTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if noGroups {
-            return 1
-        }
+
         
         if shareTypeSegmentedControl.selectedSegmentIndex == 0 {
+            if noGroups {
+                return 1
+            }
             return DataManager.sharedInstance.allGroup.count
         }
         else {
@@ -285,18 +300,20 @@ class CirclesTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        if noGroups == true {
-            
-            let emptyGroup = tableView.dequeueReusableCellWithIdentifier("noGroup", forIndexPath: indexPath) as! EmptyGroupTableViewCell
-            self.tableView.rowHeight = 75
-            return emptyGroup
 
-        }
         
         
         let squareRed = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
         if shareTypeSegmentedControl.selectedSegmentIndex == 0 {
+            
+            if noGroups == true {
+                
+                let emptyGroup = tableView.dequeueReusableCellWithIdentifier("noGroup", forIndexPath: indexPath) as! EmptyGroupTableViewCell
+                self.tableView.rowHeight = 75
+                return emptyGroup
+                
+            }
+            
             for activeGroup in DataManager.sharedInstance.activeGroup {
                 if activeGroup.id == DataManager.sharedInstance.allGroup[indexPath.row].id {
                     
@@ -805,20 +822,24 @@ class CirclesTableViewController: UITableViewController {
                 
                 editGroup.backgroundColor = lightBlue
                 
-                let deleteGroup = UITableViewRowAction(style: .Destructive, title: "Delete", handler: {(rowAction:UITableViewRowAction, indexPath: NSIndexPath) -> Void in
-                    
+                let deleteGroup = UITableViewRowAction(style: .Destructive, title: "Delete", handler: { (rowAction:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
                     let groupName = DataManager.sharedInstance.allGroup[indexPath.row].name
                     let alert = UIAlertController(title: "Attention", message: "\(groupName) will be delete", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "Delete Group", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                         //DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
                         DataManager.sharedInstance.destroySharerWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+                        self.noGroups = true
                     }))
+                    
                     alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
                     self.presentViewController(alert, animated: true, completion: nil)
                     self.reloadData()
                     
                     
+
                 })
+                
+
                 deleteGroup.backgroundColor = mainRed
                 
                 return [editGroup,deleteGroup]
@@ -838,7 +859,6 @@ class CirclesTableViewController: UITableViewController {
                 }
 
             }
-
 
         }
         else if cell?.tag == 100 {

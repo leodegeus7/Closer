@@ -183,7 +183,13 @@ class DataManager {
                         let id = friend["id"] as! String
                         self.http.signInWithFacebookID(id, completion: { (result) -> Void in
                             let json = result
-                            if json["error"] == nil {
+                            
+                            if json["error"] != nil {
+                                DataManager.sharedInstance.createSimpleUIAlert(view, title: "Error", message: json["error"] as! String, button1: "Ok")
+                                print("Nao Localizado")
+                            }
+                            
+                            else {
                                 let user = DataManager.sharedInstance.convertJsonToUserUnique(json)
                                 DataManager.sharedInstance.friendsInFace.append(user)
                                 
@@ -196,7 +202,6 @@ class DataManager {
                                     }
                                     
                                 }
-                                    
                                 
                                 if !alreadyFriend {
                                     
