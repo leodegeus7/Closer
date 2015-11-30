@@ -583,7 +583,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
             else {
                 let groupNameText = groupName.text
                 
-                NSNotificationCenter.defaultCenter().postNotificationName("ExistGroup", object: nil)
+                
 
                 
                 http.createNewGroupWithName("\(groupNameText!)", completion: { (result) -> Void in
@@ -641,7 +641,9 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
                     
                     DataManager.sharedInstance.requestUsersInGroupId("\(idGroup)", completion: { (users) -> Void in
                         DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
+                            NSNotificationCenter.defaultCenter().postNotificationName("ExistGroup", object: nil)
                             self.navigationController?.popToRootViewControllerAnimated(true)
+                            
                         })
                         
                         

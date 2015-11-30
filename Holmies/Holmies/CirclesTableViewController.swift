@@ -90,12 +90,13 @@ class CirclesTableViewController: UITableViewController {
         if (FBSDKAccessToken.currentAccessToken() == nil) {
             print("Nao fez login face")
             if let fbId = DataManager.sharedInstance.myUser.facebookID {
-
+                print(fbId)
                 
                 let alert = UIAlertController(title: "Attention", message: "We need to login again on your Facebook Account to sync", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Login", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                     self.getFBUserData({ (result) -> Void in
                         let newFBID = result as String
+                            print(newFBID)
 //                        if newFBID == fbId {
                             DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Dados do facebook resgatados com sucesso", button1: "Ok")
                             DataManager.sharedInstance.requestFacebook(self,completion: { (result) -> Void in
@@ -131,6 +132,10 @@ class CirclesTableViewController: UITableViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        let id = DataManager.sharedInstance.myUser.userID
+        let image = DataManager.sharedInstance.findImage(id)
+        imageUserInView.image = image
+        
         if DataManager.sharedInstance.allGroup.count == 0 {
             noGroups = true
             self.viewDidLoad()
@@ -264,9 +269,11 @@ class CirclesTableViewController: UITableViewController {
                 DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
                     print("\(result)")
                     self.tableView.reloadData()
+                    self.refreshControl!.endRefreshing()
+                    DataManager.sharedInstance.finishedAllRequest = true
+                    
                 })
-                self.refreshControl!.endRefreshing()
-                DataManager.sharedInstance.finishedAllRequest = true
+
                 //
                 
                 
@@ -815,8 +822,6 @@ class CirclesTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        
         if #available(iOS 9.0, *) {
             tableView.cellLayoutMarginsFollowReadableWidth = false
         } else {
@@ -827,38 +832,10 @@ class CirclesTableViewController: UITableViewController {
             cell.separatorInset = UIEdgeInsetsZero
             cell.layoutMargins = UIEdgeInsetsZero
         }
-        
     }
     
     
-    
-    
-    
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-    
-    }
-    */
-    
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return false if you do not want the item to be re-orderable.
-    return true
-    }
-    */
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    
-    */
+
     
     @IBAction func segmentedControlDidChangeValue(sender: AnyObject) {
         self.refreshData()
