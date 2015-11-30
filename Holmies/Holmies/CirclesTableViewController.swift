@@ -13,6 +13,7 @@ import FBSDKLoginKit
 
 class CirclesTableViewController: UITableViewController {
     
+    
     let http = HTTPHelper()
     let lightBlue:UIColor = UIColor(red: 61.0/255.0, green: 210.0/255.0, blue: 228.0/255.0, alpha: 1)
     let mainRed: UIColor = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
@@ -26,8 +27,6 @@ class CirclesTableViewController: UITableViewController {
         reloadData()
         
         
-        
-        
         let refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refresh.addTarget(self,action:"refreshData",forControlEvents:.ValueChanged)
@@ -35,7 +34,7 @@ class CirclesTableViewController: UITableViewController {
         navigationBarGradient()
         //        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         //        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdated:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
-        
+
         
         
         
@@ -814,6 +813,8 @@ class CirclesTableViewController: UITableViewController {
     @IBAction func segmentedControlDidChangeValue(sender: AnyObject) {
         self.refreshData()
     }
+    
+ 
     
 }
 

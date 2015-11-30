@@ -15,7 +15,7 @@ import FBSDKLoginKit
 import Alamofire
 import QuartzCore
 
-class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
+class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var controlNet: UILabel!
     @IBOutlet weak var mapView: GMSMapView!    //outlet do mapa como um mapa do google
@@ -25,8 +25,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     var gradient:UIImage!
     var actualPhoneAngularPosition = Double()
     var selectedFriend = User?()
-
-    
+    let panRec = UIPanGestureRecognizer()
     
     //background whetever
     var updateTimer: NSTimer?
@@ -43,6 +42,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     @IBOutlet weak var arrowCompass: UIImageView!
     @IBOutlet weak var friendPhoto: UIImageView!
     @IBOutlet weak var friendDistance: UILabel!
+    
     
     var mapRadius: Double {
         get {
@@ -62,9 +62,6 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     }
     
     
-
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self   //delegate das funçoes do google maps
@@ -80,7 +77,12 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         
         friendDistance.font = UIFont(name:"SFUIText-Regular", size: 15)
         
+        panRec.addTarget(self, action: "draggedView:")
+        compassView.addGestureRecognizer(panRec)
+        compassView.userInteractionEnabled = true
         
+      
+    
         /*
         //background
         
@@ -106,6 +108,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         DataManager.sharedInstance.locationManager.delegate = nil
 
     }
+    
+    
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status ==  .AuthorizedWhenInUse || status == .AuthorizedAlways {    //se a autorizaçao do user estiver sendo pega pelo app
@@ -310,11 +314,10 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     override func viewWillDisappear(animated: Bool) {
         print("oi")
     }
+
+
+
     
-    
-
-
-
     func setUpBackgrounGradient () {
         //navigationController?.navigationBar.hidden = true
         let red1 = UIColor(red: 213/255, green: 45/255, blue: 73/255, alpha: 1)
@@ -337,6 +340,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         
 
 
+      
         
     }
 
@@ -384,11 +388,17 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         }
 
         
-
-        
+    }
+    
+    func draggedView (sender:UIPanGestureRecognizer) {
+        self.view.bringSubviewToFront(sender.view!)
+        var translation = sender.translationInView(self.view)
+        sender.view?.center = CGPointMake((sender.view?.center.x)! + translation.x, (sender.view?.center.y)! + translation.y)
         
         
     }
+    
+    
 
 }
 
