@@ -125,6 +125,8 @@
 		CD6BAAB51B98E298008614B0 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6BAAB31B98E298008614B0 /* GoogleMaps.framework */; };
 		CD6BAAB61B98E298008614B0 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAAB41B98E298008614B0 /* GoogleMaps.bundle */; };
 		CD721F911BF2641A0013A3C5 /* FriendsInMapTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD721F901BF2641A0013A3C5 /* FriendsInMapTableViewController.swift */; };
+		CD73C0DB1C0E222F000730F1 /* FriendsInFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD73C0DA1C0E222F000730F1 /* FriendsInFriendsTableViewCell.swift */; };
+		CD73C0DD1C0E2478000730F1 /* AddFriendWithFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD73C0DC1C0E2478000730F1 /* AddFriendWithFriendsViewController.swift */; };
 		CD8A8BDB1BB479CE00E9D471 /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A8BDA1BB479CE00E9D471 /* GroupsTableViewController.swift */; };
 		CD8A8BDE1BB479E500E9D471 /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A8BDD1BB479E500E9D471 /* UsersTableViewController.swift */; };
 		CD900F811BDE9F260095CB85 /* AddFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900F801BDE9F260095CB85 /* AddFriendTableViewCell.swift */; };
@@ -376,6 +378,8 @@
 		CD6BAAB31B98E298008614B0 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		CD6BAAB41B98E298008614B0 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleMaps.bundle; sourceTree = "<group>"; };
 		CD721F901BF2641A0013A3C5 /* FriendsInMapTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsInMapTableViewController.swift; sourceTree = "<group>"; };
+		CD73C0DA1C0E222F000730F1 /* FriendsInFriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsInFriendsTableViewCell.swift; sourceTree = "<group>"; };
+		CD73C0DC1C0E2478000730F1 /* AddFriendWithFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendWithFriendsViewController.swift; sourceTree = "<group>"; };
 		CD8A8BDA1BB479CE00E9D471 /* GroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
 		CD8A8BDD1BB479E500E9D471 /* UsersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
 		CD900F801BDE9F260095CB85 /* AddFriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendTableViewCell.swift; sourceTree = "<group>"; };
@@ -772,6 +776,8 @@
 				CDB0C9571BCEE5340020BFB5 /* UsersInGroupsCollectionViewCell.swift */,
 				CD721F901BF2641A0013A3C5 /* FriendsInMapTableViewController.swift */,
 				CD669F721C0C9ED400E2BAC0 /* EmptyGroupTableViewCell.swift */,
+				CD73C0DA1C0E222F000730F1 /* FriendsInFriendsTableViewCell.swift */,
+				CD73C0DC1C0E2478000730F1 /* AddFriendWithFriendsViewController.swift */,
 			);
 			name = ControllerNew;
 			sourceTree = "<group>";
@@ -1229,6 +1235,7 @@
 				CDB0C94D1BCEE0290020BFB5 /* AESCrypt.m in Sources */,
 				CDB0C94E1BCEE0290020BFB5 /* NSData+Base64.m in Sources */,
 				CD4FC9401BED1F810086EC30 /* myInfoViewController.swift in Sources */,
+				CD73C0DD1C0E2478000730F1 /* AddFriendWithFriendsViewController.swift in Sources */,
 				CD21002A1B9DE7EF00485126 /* PlaceMarker.swift in Sources */,
 				CD6BAA551B98D946008614B0 /* AppDelegate.swift in Sources */,
 				CD721F911BF2641A0013A3C5 /* FriendsInMapTableViewController.swift in Sources */,
@@ -1237,6 +1244,7 @@
 				A705921B1BD6C65300E737E3 /* NewGroupTableViewCell.swift in Sources */,
 				CDB0FD621BBF0B4500BC6DFA /* AddGroupNameViewController.swift in Sources */,
 				CD1C036C1BA752290073524A /* DataManager.swift in Sources */,
+				CD73C0DB1C0E222F000730F1 /* FriendsInFriendsTableViewCell.swift in Sources */,
 				A70592171BD6C5B600E737E3 /* DesignGroupsTableViewController.swift in Sources */,
 				CDB0C94F1BCEE0290020BFB5 /* NSData+CommonCrypto.m in Sources */,
 				A73BE4CE1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift in Sources */,
