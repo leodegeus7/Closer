@@ -426,11 +426,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Holmies/AppDelegate.swift"
-            timestampString = "470680015.201978"
+            timestampString = "470687542.005892"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
             landmarkName = "locationManager(_:didUpdateToLocation:fromLocation:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -454,15 +454,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Holmies/AppDelegate.swift"
-            timestampString = "470683753.975461"
+            timestampString = "470687542.005892"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "266"
-            endingLineNumber = "266"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
             landmarkName = "locationManager(_:didUpdateToLocation:fromLocation:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -480,6 +480,86 @@
             startingLineNumber = "194"
             endingLineNumber = "194"
             landmarkName = "locationManager(_:didUpdateToLocation:fromLocation:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Holmies/AppDelegate.swift"
+            timestampString = "470687542.005892"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "279"
+            endingLineNumber = "279"
+            landmarkName = "locationManager(_:didUpdateToLocation:fromLocation:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Holmies.AppDelegate.locationManager (Holmies.AppDelegate)(__ObjC.CLLocationManager, didUpdateToLocation : __ObjC.CLLocation, fromLocation : __ObjC.CLLocation) -&gt; ()"
+                  moduleName = "Holmies"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/leodegeus/mainchallenge/Holmies/Holmies/AppDelegate.swift"
+                  timestampString = "470683984.693735"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "271"
+                  endingLineNumber = "271"
+                  offsetFromSymbolStart = "3188">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Holmies.AppDelegate.(locationManager (Holmies.AppDelegate) -&gt; (__ObjC.CLLocationManager, didUpdateToLocation : __ObjC.CLLocation, fromLocation : __ObjC.CLLocation) -&gt; ()).(closure #1)"
+                  moduleName = "Holmies"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/leodegeus/mainchallenge/Holmies/Holmies/AppDelegate.swift"
+                  timestampString = "470683984.694007"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "272"
+                  endingLineNumber = "272"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Holmies/AddFriendWithFriendsViewController.swift"
+            timestampString = "470690717.480895"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "continueAction()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Holmies/AddFriendWithFriendsViewController.swift"
+            timestampString = "470690796.930511"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "addFriend(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
