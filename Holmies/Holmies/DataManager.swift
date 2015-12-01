@@ -45,6 +45,8 @@ class DataManager {
     var finishedAllRequest = false
     
     
+    var badgeNumber = 0
+    
     
     lazy var locationManager: CLLocationManager! = {
         let manager = CLLocationManager()
