@@ -41,6 +41,8 @@ class DataManager {
     var activeView = String()
     var isCharm = false
     
+    var activeMap = GMSMapView?()
+    
     
     var finishedAllRequest = false
     
@@ -106,8 +108,7 @@ class DataManager {
     }
     
     func findDocumentsDirectory() -> String {
-        let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask, true)[0] as String
-        return path
+        return NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask, true)[0] as String
     }
     
     func readJsonFromBundle(nomeArquivo:String) -> NSDictionary {
@@ -1235,6 +1236,19 @@ class DataManager {
         }
         return nil
 
+    }
+    
+    func updateActiveFriendLocation() {
+        let friend = DataManager.sharedInstance.activeUsers[0]
+        http.findFriendWithUsername(friend.username) { (result) -> Void in
+            let newFriend = DataManager.sharedInstance.convertJsonToUserUnique(result)
+            DataManager.sharedInstance.activeUsers[0] = newFriend
+            
+            if let map = self.activeMap {
+                self.updateLocationUsers(map)
+            }
+            
+        }
     }
     
     

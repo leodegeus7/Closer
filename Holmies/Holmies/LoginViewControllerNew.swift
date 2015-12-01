@@ -27,7 +27,8 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let documents = DataManager.sharedInstance.findDocumentsDirectory()
+        let documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask, true)[0] as String
+
         print(documents)
         activityIndicator.stopAnimating()
         DataManager.sharedInstance.importID()

@@ -73,6 +73,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         mapView.mapType = kGMSTypeNormal
         self.setUpBackgrounGradient()
         
+        DataManager.sharedInstance.activeMap = self.mapView
+        
         
         DataManager.sharedInstance.updateLocationUsers(mapView)
         self.compassView.hidden = true
@@ -167,7 +169,36 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 
 
     func goBack () {
-        navigationController?.popViewControllerAnimated(true)
+        if self.isCharm {
+            let alert = UIAlertController(title: "Charme", message: "Você encontrou \(DataManager.sharedInstance.activeUsers[0].name)?", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Sim", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                
+                var charm = Charm()
+                
+                for testCharm in DataManager.sharedInstance.myCharms {
+                    if testCharm.sharer.id == DataManager.sharedInstance.selectedSharer[0].id {
+                        charm = testCharm
+                    }
+                }
+                
+                
+                charm.sharer.status = "found"
+                self.helper.updateSharerWithID(charm.sharer.id, until: nil, status: "found", completion: { (result) -> Void in
+                    self.navigationController?.popViewControllerAnimated(true)
+                    DataManager.sharedInstance.isCharm = false
+                })
+                
+                
+            }))
+            alert.addAction(UIAlertAction(title: "Não", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+
+            }))
+            self.presentViewController(alert, animated: true, completion: nil)
+
+        }
+        else {
+            navigationController?.popViewControllerAnimated(true)
+        }
     }
 
     

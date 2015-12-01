@@ -299,6 +299,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
                     index++
                 }
             }
+            if DataManager.sharedInstance.isCharm {
+                DataManager.sharedInstance.updateActiveFriendLocation()
+            }
         }
     }
 
