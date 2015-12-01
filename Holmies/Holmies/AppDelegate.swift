@@ -256,6 +256,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
 
     func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
         if !(DataManager.sharedInstance.myUser.userID == nil) {
+            
+//            var backgroundTask = UIBackgroundTaskIdentifier()
+//            
+//            backgroundTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({ () -> Void in
+//                backgroundTask = UIBackgroundTaskInvalid
+//                
+//                
+//            })
             DataManager.sharedInstance.myUser.location.longitude = "\(newLocation.coordinate.longitude)"
             DataManager.sharedInstance.myUser.location.latitude = "\(newLocation.coordinate.latitude)"
             DataManager.sharedInstance.saveMyInfo()
