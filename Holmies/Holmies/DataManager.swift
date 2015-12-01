@@ -45,6 +45,8 @@ class DataManager {
     var finishedAllRequest = false
     
     
+    var badgeNumber = 0
+    
     
     lazy var locationManager: CLLocationManager! = {
         let manager = CLLocationManager()
@@ -90,6 +92,15 @@ class DataManager {
         localNotification.alertAction = title
         localNotification.alertBody = body
         localNotification.fireDate = NSDate(timeIntervalSinceNow: timeAfterClose)
+        //localNotification.userInfo = userInfo as [NSObject : AnyObject]
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+    }
+    
+    func createLocalNotificationWithoutUserInfo(title:String,body:String) {
+        let localNotification:UILocalNotification = UILocalNotification()
+        localNotification.alertAction = title
+        localNotification.alertBody = body
+        localNotification.fireDate = NSDate(timeIntervalSinceNow: 1)
         //localNotification.userInfo = userInfo as [NSObject : AnyObject]
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }

@@ -28,9 +28,6 @@ class CirclesTableViewController: UITableViewController {
     @IBOutlet weak var imageUserInView: UIImageView!
     @IBOutlet weak var usernameInView: UILabel!
     @IBOutlet weak var userView: UIView!
-    @IBAction func buttonToEditGroup(sender: AnyObject) {
-        performSegueWithIdentifier("myUserInfo", sender: self)
-    }
     
     //variaveis controle de sem grupo
     var noGroups = false
@@ -45,9 +42,11 @@ class CirclesTableViewController: UITableViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmReceived:", name: "charmReceived", object: nil)
 
         
+<<<<<<< HEAD
         self.navigationController?.navigationBar.translucent = false
         self.navigationController?.navigationBar.barStyle = .Black
         self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+=======
                 for family: String in UIFont.familyNames()
                 {
                     print("\(family)")
@@ -57,6 +56,7 @@ class CirclesTableViewController: UITableViewController {
                     }
                 }
         
+>>>>>>> b24d7fa0cd338bfd7d8a5c88d9620c9e8c70e33c
         
 
         
@@ -102,11 +102,6 @@ class CirclesTableViewController: UITableViewController {
         
         
         
-        
-        
-        
-        
-
         
         
         //let ll = FBSDKAccessToken.currentAccessToken().tokenString
@@ -491,7 +486,11 @@ class CirclesTableViewController: UITableViewController {
                                 cellActive.timeLabel.text = "days"
                             }
                             
-
+                            
+                            
+                            //                    var durationHours = Int(duration!/3600)
+                            //                    durationHours++
+                            //                    cellActive.numberLabel.text = "\(durationHours)"
                         }
                         
                     }
@@ -512,7 +511,8 @@ class CirclesTableViewController: UITableViewController {
             
             cellPendent.timeLabel.text = ""
             
-
+            //let groups = DataManager.sharedInstance.allGroup
+            
             
             let createdHour = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
             let dateFormatter = NSDateFormatter()
@@ -535,7 +535,8 @@ class CirclesTableViewController: UITableViewController {
                     if duration < 0 {
                         cellPendent.numberLabel.text = "0"
                         cellPendent.timeLabel.text = "expired"
-
+                        //DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
+                        
                     }
                     else if duration <= 3600 {
                         let newDurationMin = Int(duration/60)
@@ -608,7 +609,10 @@ class CirclesTableViewController: UITableViewController {
             }
             return cellPendent
             
-
+            //        cell.groupName.text = DataManager.sharedInstance.allGroup[indexPath.row].name
+            //        cell.idGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].id
+            //        cell.createAtGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
+            //cell.collectionView.numberOfItemsInSection()
             
         }
         else {
@@ -622,16 +626,15 @@ class CirclesTableViewController: UITableViewController {
             charmCell.nameLabel.text = actualFriend.name
             let imageName = DataManager.sharedInstance.findImage(actualFriend.userID)
             
-            charmCell.userPictureImageView.layer.cornerRadius = 8.0
-            charmCell.userPictureImageView.layer.borderColor = mainRed.CGColor
-            charmCell.userPictureImageView.layer.borderWidth = 2
+            
             
             let imageView = UIImageView(image: imageName)
             
-            imageView.layer.cornerRadius = 8.0
+            imageView.layer.cornerRadius = 20.0
             //            imageView.layer.borderColor = mainRed.CGColor
             //            imageView.layer.borderWidth = 5.0
             imageView.clipsToBounds = true
+            
             imageView.frame.size = charmCell.userPictureImageView.frame.size
             imageView.frame.origin = CGPoint(x: 0, y: 0)
             
@@ -678,7 +681,15 @@ class CirclesTableViewController: UITableViewController {
                 charmCell.remainingTimeLabel.text = "Expirado"
                 bgImageView.layer.borderColor = UIColor.grayColor().CGColor
             }
+            
+
+            
+
             charmCell.backgroundImage.addSubview(bgImageView)
+            
+            
+            
+            
             return charmCell
             
             

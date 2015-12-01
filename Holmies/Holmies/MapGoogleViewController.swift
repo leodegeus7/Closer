@@ -115,10 +115,11 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
             }
         }
         
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmAccepted:", name: "charmAccepted", object: nil)
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmReceived:", name: "charmReceived", object: nil)
         
         
+        
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "< Back", style: UIBarButtonItemStyle.Plain, target: self, action: "goBack")
         
 
         /*
@@ -170,7 +171,9 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     }
 
 
-
+    func goBack () {
+        navigationController?.popViewControllerAnimated(true)
+    }
 
     
     

@@ -37,6 +37,7 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
             performSegueWithIdentifier("showTableView", sender: self)
             logged = true
         }
+        DataManager.sharedInstance.activeView = "login"
         
         
 //        if (FBSDKAccessToken.currentAccessToken() == nil) {
