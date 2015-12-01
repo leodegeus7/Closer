@@ -21,8 +21,8 @@ class CirclesTableViewController: UITableViewController {
     
     @IBOutlet var shareTypeSegmentedControl: UISegmentedControl!
     
-    
-    
+
+    let app = UIApplication.sharedApplication()
     
     //view do user
     @IBOutlet weak var imageUserInView: UIImageView!
@@ -41,9 +41,7 @@ class CirclesTableViewController: UITableViewController {
         super.viewDidLoad()
         reloadData()
         
-        let navigationBarBackgroundImage = DataManager.sharedInstance.imageResize(UIImage(named: "redLights.png")!, sizeChange: CGSizeMake((self.navigationController?.navigationBar.frame.size.width)!, (self.navigationController?.navigationBar.frame.height)!))
-        
-        self.navigationController?.navigationBar.setBackgroundImage(navigationBarBackgroundImage, forBarMetrics: .Default)
+       
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmAccepted:", name: "charmAccepted", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmReceived:", name: "charmReceived", object: nil)
@@ -68,7 +66,7 @@ class CirclesTableViewController: UITableViewController {
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refresh.addTarget(self,action:"refreshData",forControlEvents:.ValueChanged)
         self.refreshControl = refresh
-       // navigationBarGradient()
+    navigationBarGradient()
         //        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         //        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdated:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
         
@@ -265,6 +263,11 @@ class CirclesTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         DataManager.sharedInstance.selectedFriends.removeAll()
         reloadData()
+        
+        let navigationBarBackgroundImage = DataManager.sharedInstance.imageResize(UIImage(named: "topNavigationBackground.png")!, sizeChange: CGSizeMake((self.navigationController?.navigationBar.frame.size.width)!, ((self.navigationController?.navigationBar.frame.height)! + app.statusBarFrame.size.height)))
+        
+        self.navigationController?.navigationBar.setBackgroundImage(navigationBarBackgroundImage, forBarMetrics: .Default)
+        
     }
     
     func refreshData() {
@@ -782,11 +785,11 @@ class CirclesTableViewController: UITableViewController {
     }
     
     func navigationBarGradient () {
-        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.navigationBar.translucent = false
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         let fontDictionary = [ NSForegroundColorAttributeName:UIColor.whiteColor() ]
         self.navigationController?.navigationBar.titleTextAttributes = fontDictionary
-        self.navigationController?.navigationBar.setBackgroundImage(imageLayerForGradientBackground(), forBarMetrics: UIBarMetrics.Default)
+      // self.navigationController?.navigationBar.setBackgroundImage(imageLayerForGradientBackground(), forBarMetrics: UIBarMetrics.Default)
     }
     
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {

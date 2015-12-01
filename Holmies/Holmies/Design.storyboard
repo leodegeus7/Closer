@@ -745,8 +745,8 @@
                             <rect key="frame" x="0.0" y="64" width="600" height="143"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="redLights.png" translatesAutoresizingMaskIntoConstraints="NO" id="ELs-iz-1p4">
-                                    <rect key="frame" x="-20" y="-1" width="640" height="145"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottomNavigationBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="ELs-iz-1p4">
+                                    <rect key="frame" x="-20" y="0.0" width="640" height="143"/>
                                     <animations/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Em-g6-IOa">
@@ -793,10 +793,10 @@
                                 <constraint firstItem="8Em-g6-IOa" firstAttribute="centerX" secondItem="TL4-XL-TGG" secondAttribute="centerX" id="fNZ-TB-Nrm"/>
                                 <constraint firstItem="Elv-DY-faw" firstAttribute="top" secondItem="TL4-XL-TGG" secondAttribute="top" constant="5" id="frU-aw-AKP"/>
                                 <constraint firstItem="vmU-2t-NNE" firstAttribute="top" secondItem="Elv-DY-faw" secondAttribute="top" id="h69-rZ-rtF"/>
-                                <constraint firstItem="ELs-iz-1p4" firstAttribute="top" secondItem="TL4-XL-TGG" secondAttribute="top" constant="-1" id="jMh-TC-hzc"/>
+                                <constraint firstItem="ELs-iz-1p4" firstAttribute="top" secondItem="TL4-XL-TGG" secondAttribute="top" id="jMh-TC-hzc"/>
                                 <constraint firstItem="vmU-2t-NNE" firstAttribute="leading" secondItem="Elv-DY-faw" secondAttribute="leading" id="oPB-Gg-SWq"/>
                                 <constraint firstItem="Elv-DY-faw" firstAttribute="centerX" secondItem="TL4-XL-TGG" secondAttribute="centerX" id="ozT-v5-wUu"/>
-                                <constraint firstAttribute="bottom" secondItem="ELs-iz-1p4" secondAttribute="bottom" constant="-1" id="ryd-Qj-ER7"/>
+                                <constraint firstAttribute="bottom" secondItem="ELs-iz-1p4" secondAttribute="bottom" id="ryd-Qj-ER7"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
@@ -1887,14 +1887,14 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="kHZ-Hv-kEB"/>
-                                                    <exclude reference="H6S-TM-SYG"/>
-                                                    <exclude reference="EVk-Gg-X9y"/>
-                                                    <exclude reference="Df1-Kd-ujG"/>
                                                     <exclude reference="D7K-9e-ctS"/>
-                                                    <exclude reference="eBG-wF-c9B"/>
-                                                    <exclude reference="PkV-Ys-eKQ"/>
+                                                    <exclude reference="Df1-Kd-ujG"/>
+                                                    <exclude reference="EVk-Gg-X9y"/>
+                                                    <exclude reference="H6S-TM-SYG"/>
+                                                    <exclude reference="kHZ-Hv-kEB"/>
                                                     <exclude reference="Jdr-vF-Qab"/>
+                                                    <exclude reference="PkV-Ys-eKQ"/>
+                                                    <exclude reference="eBG-wF-c9B"/>
                                                     <exclude reference="wMw-G5-E0i"/>
                                                 </mask>
                                             </variation>
@@ -1960,6 +1960,7 @@
     </scenes>
     <resources>
         <image name="Line.png" width="2" height="140"/>
+        <image name="bottomNavigationBackground.png" width="750" height="378"/>
         <image name="charm.png" width="24" height="24"/>
         <image name="charmButton.png" width="295" height="66"/>
         <image name="compass.png" width="520" height="611"/>
@@ -1971,13 +1972,12 @@
         <image name="newUser.png" width="295" height="66"/>
         <image name="newUser2.png" width="295" height="66"/>
         <image name="photoButton.png" width="610" height="309"/>
-        <image name="redLights.png" width="750" height="507"/>
         <image name="reject.png" width="603" height="186"/>
         <image name="x.png" width="27" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="J2K-4A-5cw"/>
+        <segue reference="eG6-Gp-hmm"/>
         <segue reference="s8S-m1-5jX"/>
-        <segue reference="oOO-bc-W4L"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -67,10 +67,25 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewWillAppear(animated: Bool) {
         tableView.reloadData()
         resultSearchController.searchBar.hidden = false
-
+        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        let fontDictionary = [ NSForegroundColorAttributeName:UIColor.whiteColor() ]
+        self.navigationController?.navigationBar.titleTextAttributes = fontDictionary
+        self.navigationController?.navigationBar.setBackgroundImage(imageLayerForGradientBackground(), forBarMetrics: UIBarMetrics.Default)
         
     }
     
+    private func imageLayerForGradientBackground() -> UIImage {
+        
+        var updatedFrame = self.navigationController?.navigationBar.bounds
+        updatedFrame!.size.height += 20
+        let layer = CAGradientLayer.gradientLayerForBounds(updatedFrame!)
+        UIGraphicsBeginImageContext(layer.bounds.size)
+        layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (resultSearchController.active) {

@@ -57,7 +57,26 @@ class FriendsInMapTableViewController: UITableViewController {
         NSNotificationCenter.defaultCenter().postNotificationName("goToUser", object: nil ,userInfo: myDict)
         navigationController?.popViewControllerAnimated(true)
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        let fontDictionary = [ NSForegroundColorAttributeName:UIColor.whiteColor() ]
+        self.navigationController?.navigationBar.titleTextAttributes = fontDictionary
+        self.navigationController?.navigationBar.setBackgroundImage(imageLayerForGradientBackground(), forBarMetrics: UIBarMetrics.Default)
+    }
 
+    private func imageLayerForGradientBackground() -> UIImage {
+        
+        var updatedFrame = self.navigationController?.navigationBar.bounds
+        updatedFrame!.size.height += 20
+        let layer = CAGradientLayer.gradientLayerForBounds(updatedFrame!)
+        UIGraphicsBeginImageContext(layer.bounds.size)
+        layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
 
     /*
     // Override to support conditional editing of the table view.

@@ -23,6 +23,10 @@
 		A760AAB01BFA457A00214F06 /* MarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A760AAAF1BFA457A00214F06 /* MarkerView.xib */; };
 		A760AAB21BFA46DC00214F06 /* pin2.png in Resources */ = {isa = PBXBuildFile; fileRef = A760AAB11BFA46DC00214F06 /* pin2.png */; };
 		A760AAB41BFA488100214F06 /* pin025.png in Resources */ = {isa = PBXBuildFile; fileRef = A760AAB31BFA488100214F06 /* pin025.png */; };
+		A77F58671C0E30C4008670B7 /* redLightsUpside.png in Resources */ = {isa = PBXBuildFile; fileRef = A77F58661C0E30C4008670B7 /* redLightsUpside.png */; };
+		A77F586A1C0E332F008670B7 /* bottomNavigationBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A77F58681C0E332F008670B7 /* bottomNavigationBackground.png */; };
+		A77F586B1C0E332F008670B7 /* topNavigationBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A77F58691C0E332F008670B7 /* topNavigationBackground.png */; };
+		A77F586D1C0E36A7008670B7 /* people.png in Resources */ = {isa = PBXBuildFile; fileRef = A77F586C1C0E36A7008670B7 /* people.png */; };
 		A78EA4831BDAABAC0001E946 /* CirclesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78EA4821BDAABAC0001E946 /* CirclesTableViewController.swift */; };
 		A78EA4861BDAB3C30001E946 /* reject.png in Resources */ = {isa = PBXBuildFile; fileRef = A78EA4841BDAB3C30001E946 /* reject.png */; };
 		A78EA4871BDAB3C30001E946 /* confirm.png in Resources */ = {isa = PBXBuildFile; fileRef = A78EA4851BDAB3C30001E946 /* confirm.png */; };
@@ -256,6 +260,10 @@
 		A760AAAF1BFA457A00214F06 /* MarkerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarkerView.xib; sourceTree = "<group>"; };
 		A760AAB11BFA46DC00214F06 /* pin2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin2.png; sourceTree = "<group>"; };
 		A760AAB31BFA488100214F06 /* pin025.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin025.png; sourceTree = "<group>"; };
+		A77F58661C0E30C4008670B7 /* redLightsUpside.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redLightsUpside.png; sourceTree = "<group>"; };
+		A77F58681C0E332F008670B7 /* bottomNavigationBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottomNavigationBackground.png; sourceTree = "<group>"; };
+		A77F58691C0E332F008670B7 /* topNavigationBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topNavigationBackground.png; sourceTree = "<group>"; };
+		A77F586C1C0E36A7008670B7 /* people.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = people.png; sourceTree = "<group>"; };
 		A78A97F31BE3F7F300D5994B /* Design.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Design.storyboard; sourceTree = "<group>"; };
 		A78EA4821BDAABAC0001E946 /* CirclesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CirclesTableViewController.swift; sourceTree = "<group>"; };
 		A78EA4841BDAB3C30001E946 /* reject.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reject.png; sourceTree = "<group>"; };
@@ -589,11 +597,15 @@
 		A7D2A4B11BCE90EF006A55D1 /* Design */ = {
 			isa = PBXGroup;
 			children = (
+				A77F586C1C0E36A7008670B7 /* people.png */,
 				AF5F33F51C001EED00BC1622 /* group.png */,
 				AF5F33F31C001EE700BC1622 /* charm.png */,
 				CD0561E01BEA780D00130656 /* photos.png */,
 				A73BE4CC1BDEB68E0063C705 /* SF Fonts */,
 				A70592161BD6C5B600E737E3 /* DesignGroupsTableViewController.swift */,
+				A77F58681C0E332F008670B7 /* bottomNavigationBackground.png */,
+				A77F58691C0E332F008670B7 /* topNavigationBackground.png */,
+				A77F58661C0E30C4008670B7 /* redLightsUpside.png */,
 				A72BDBE61C0CC4BE00D0CA84 /* redLights.png */,
 				CD0561DA1BEA700900130656 /* x.png */,
 				CD0561D61BE9452E00130656 /* Red_Arrow_Right 3.png */,
@@ -1074,6 +1086,7 @@
 				A70BF38C1BCE91EE00062246 /* facebookButton.png in Resources */,
 				A7C37FBC1BE00A8500FEE8D2 /* SF-UI-Text-Italic.otf in Resources */,
 				A7C37FC21BE00A8500FEE8D2 /* SF-UI-Text-Semibold.otf in Resources */,
+				A77F586A1C0E332F008670B7 /* bottomNavigationBackground.png in Resources */,
 				A7C37FC31BE00A8500FEE8D2 /* SF-UI-Text-SemiboldItalic.otf in Resources */,
 				A7C37F571BDFF44C00FEE8D2 /* charmButton.png in Resources */,
 				CD0561DF1BEA715200130656 /* Line.png in Resources */,
@@ -1103,9 +1116,11 @@
 				A7C37FBB1BE00A8500FEE8D2 /* SF-UI-Text-HeavyItalic.otf in Resources */,
 				A7C37FB31BE00A8500FEE8D2 /* SF-UI-Display-Medium.otf in Resources */,
 				A70BF38D1BCE91EE00062246 /* newUser.png in Resources */,
+				A77F586B1C0E332F008670B7 /* topNavigationBackground.png in Resources */,
 				CD6BAA5C1B98D946008614B0 /* Images.xcassets in Resources */,
 				A7C37FB51BE00A8500FEE8D2 /* SF-UI-Display-Semibold.otf in Resources */,
 				A70BF38E1BCE91EE00062246 /* connectButton.png in Resources */,
+				A77F58671C0E30C4008670B7 /* redLightsUpside.png in Resources */,
 				A7C37FB41BE00A8500FEE8D2 /* SF-UI-Display-Regular.otf in Resources */,
 				A7C37FB11BE00A8500FEE8D2 /* SF-UI-Display-Heavy.otf in Resources */,
 				A7C37FAF1BE00A8500FEE8D2 /* SF-UI-Display-Black.otf in Resources */,
@@ -1127,6 +1142,7 @@
 				A7FCC5121BC4CD1D00AEDA3F /* Main2.storyboard in Resources */,
 				A7FA0E081C078E1A006D2CC5 /* compass2.png in Resources */,
 				A7FEFB551BDE9E3600DFEC1E /* radialGradient.png in Resources */,
+				A77F586D1C0E36A7008670B7 /* people.png in Resources */,
 				A7C37FA91BE00A8500FEE8D2 /* SF-Compact-Display-Light.otf in Resources */,
 				A7C37F5D1BDFF86000FEE8D2 /* newUser3.png in Resources */,
 				A7C37FB01BE00A8500FEE8D2 /* SF-UI-Display-Bold.otf in Resources */,

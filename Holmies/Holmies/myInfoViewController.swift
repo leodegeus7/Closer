@@ -106,6 +106,24 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
     override func viewWillAppear(animated: Bool) {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        let fontDictionary = [ NSForegroundColorAttributeName:UIColor.whiteColor() ]
+        self.navigationController?.navigationBar.titleTextAttributes = fontDictionary
+        self.navigationController?.navigationBar.setBackgroundImage(imageLayerForGradientBackground(), forBarMetrics: UIBarMetrics.Default)
+        
+    }
+    
+    private func imageLayerForGradientBackground() -> UIImage {
+        
+        var updatedFrame = self.navigationController?.navigationBar.bounds
+        updatedFrame!.size.height += 20
+        let layer = CAGradientLayer.gradientLayerForBounds(updatedFrame!)
+        UIGraphicsBeginImageContext(layer.bounds.size)
+        layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
 
     override func viewWillDisappear(animated: Bool) {
