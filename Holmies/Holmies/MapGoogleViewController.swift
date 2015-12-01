@@ -45,6 +45,17 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     @IBOutlet weak var friendPhoto: UIImageView!
     @IBOutlet weak var friendDistance: UILabel!
     
+    @IBOutlet weak var compassViewLeftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var compassViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var compassViewRightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var compassViewBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var arrowCompassRightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var arrowCompassLeftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var arrowCompassTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var arrowCompassBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var northLine: UIImageView!
     
     var mapRadius: Double {
         get {
@@ -70,13 +81,15 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         mapView.mapType = kGMSTypeNormal
         self.setUpBackgrounGradient()
         
-        var swipeDown = UISwipeGestureRecognizer(target: self, action: "draggedView")
-        swipeDown.direction = UISwipeGestureRecognizerDirection.Down
-        compassView.addGestureRecognizer(swipeDown)
+//        var swipeDown = UISwipeGestureRecognizer(target: self, action: "draggedViewDown:")
+//        swipeDown.direction = UISwipeGestureRecognizerDirection.Down
+//        compassView.addGestureRecognizer(swipeDown)
+//        
+//        var swipeUp = UISwipeGestureRecognizer(target: self, action: "draggedViewUp:")
+//        swipeUp.direction = UISwipeGestureRecognizerDirection.Up
+//        arrowCompass.addGestureRecognizer(swipeUp)
         
-        var swipeUp = UISwipeGestureRecognizer(target: self, action: "draggedView")
-        swipeUp.direction = UISwipeGestureRecognizerDirection.Up
-        compassView.addGestureRecognizer(swipeUp)
+
         
         
         DataManager.sharedInstance.updateLocationUsers(mapView)
@@ -445,27 +458,41 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 //        }
 //    }
     
-    func draggedView (sender:UIGestureRecognizer) {
+    func draggedViewDown(sender:UISwipeGestureRecognizer) {
+        print("swipe down")
+        compassViewTopConstraint.constant = self.view.frame.height - arrowCompass.frame.height
+        compassViewLeftConstraint.constant = self.view.frame.width - (arrowCompass.frame.width / 2)
+        compassViewRightConstraint.constant = self.view.frame.width - (arrowCompass.frame.width / 2)
         
-        let swipeGesture = UISwipeGestureRecognizer()
+        arrowCompassTopConstraint.constant = self.view.frame.height * 0.6
+        arrowCompassLeftConstraint.constant = self.view.frame.width * 0.25
+        arrowCompassRightConstraint.constant = self.view.frame.width * 0.25
         
-        switch swipeGesture.direction {
-        case UISwipeGestureRecognizerDirection.Down:
-            print("swipe down")
-        case UISwipeGestureRecognizerDirection.Up:
-            print("swipe up")
-        case UISwipeGestureRecognizerDirection.Left:
-            print("swipe left")
-        case UISwipeGestureRecognizerDirection.Right:
-            print("swipe right")
-        default:
-            break
-            
-            
-            
-        }
+//        
+//        for view in compassView.subviews {
+//            view.hidden = true
+//        }
+        
+        northLine.hidden = true
+        friendPhoto.hidden = true
+        friendDistance.hidden = true
         
     
+    }
+    
+
+    
+    func draggedViewUp(sender:UIGestureRecognizer) {
+        print("swipe up")
+        
+        compassViewTopConstraint.constant = -20
+        compassViewLeftConstraint.constant = -20
+        arrowCompassTopConstraint.constant = 30
+        arrowCompassLeftConstraint.constant = 40
+        arrowCompassRightConstraint.constant = 40
+        
+    
+        
         }
         
         

@@ -1538,30 +1538,10 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="ZKI-Ms-hG9" firstAttribute="leading" secondItem="kb0-Q3-BAK" secondAttribute="leading" constant="50" id="5Hw-Iq-QFh"/>
                                     <constraint firstItem="ZKI-Ms-hG9" firstAttribute="top" secondItem="LcA-ah-aqO" secondAttribute="bottom" constant="30" id="A7v-Js-VUK"/>
                                     <constraint firstItem="9CG-qS-3qq" firstAttribute="centerX" secondItem="ZKI-Ms-hG9" secondAttribute="centerX" id="EYH-nh-6jE"/>
-                                    <constraint firstItem="ZKI-Ms-hG9" firstAttribute="top" secondItem="9CG-qS-3qq" secondAttribute="bottom" constant="10" id="GCy-y9-wm0"/>
-                                    <constraint firstItem="ZKI-Ms-hG9" firstAttribute="centerX" secondItem="kb0-Q3-BAK" secondAttribute="centerX" id="LhL-yH-Gcs"/>
-                                    <constraint firstItem="Ec2-Ic-ELG" firstAttribute="leading" secondItem="ZKI-Ms-hG9" secondAttribute="trailing" constant="10" id="O5y-dt-g7N"/>
-                                    <constraint firstItem="LcA-ah-aqO" firstAttribute="top" secondItem="kb0-Q3-BAK" secondAttribute="top" constant="88" id="PtD-mX-6Ui"/>
-                                    <constraint firstItem="ZKI-Ms-hG9" firstAttribute="top" secondItem="LcA-ah-aqO" secondAttribute="bottom" constant="30" id="YqO-eu-BF4"/>
-                                    <constraint firstItem="Ec2-Ic-ELG" firstAttribute="top" secondItem="ZKI-Ms-hG9" secondAttribute="bottom" constant="15" id="ecB-JZ-qz2"/>
-                                    <constraint firstAttribute="trailing" secondItem="ZKI-Ms-hG9" secondAttribute="trailing" constant="50" id="gaL-b9-9d0"/>
                                     <constraint firstItem="Ec2-Ic-ELG" firstAttribute="top" secondItem="ZKI-Ms-hG9" secondAttribute="bottom" constant="30" id="lcF-rY-SNN"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="5Hw-Iq-QFh"/>
-                                        <exclude reference="GCy-y9-wm0"/>
-                                        <exclude reference="LhL-yH-Gcs"/>
-                                        <exclude reference="YqO-eu-BF4"/>
-                                        <exclude reference="gaL-b9-9d0"/>
-                                        <exclude reference="PtD-mX-6Ui"/>
-                                        <exclude reference="O5y-dt-g7N"/>
-                                        <exclude reference="ecB-JZ-qz2"/>
-                                    </mask>
-                                </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sem Internet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y2Z-Pc-wCm">
                                 <rect key="frame" x="200" y="514" width="200" height="36"/>
@@ -1623,12 +1603,21 @@
                     </navigationItem>
                     <connections>
                         <outlet property="arrowCompass" destination="ZKI-Ms-hG9" id="OFG-fa-pJK"/>
+                        <outlet property="arrowCompassBottomConstraint" destination="lcF-rY-SNN" id="hyn-Ny-MMo"/>
+                        <outlet property="arrowCompassLeftConstraint" destination="y1I-MB-wCr" id="zgY-At-rWO"/>
+                        <outlet property="arrowCompassRightConstraint" destination="2o0-f4-Gap" id="8wA-iC-1Dl"/>
+                        <outlet property="arrowCompassTopConstraint" destination="A7v-Js-VUK" id="Uan-Zi-Wg3"/>
                         <outlet property="compassView" destination="kb0-Q3-BAK" id="Y9x-A1-5Vr"/>
+                        <outlet property="compassViewBottomConstraint" destination="AOc-DD-ePp" id="Y7d-FT-bxV"/>
+                        <outlet property="compassViewLeftConstraint" destination="Ly5-rR-0ay" id="Dun-M1-6u5"/>
+                        <outlet property="compassViewRightConstraint" destination="lN0-Pg-B15" id="Ibw-8E-beq"/>
+                        <outlet property="compassViewTopConstraint" destination="TaH-10-zDU" id="TE5-Nf-rCf"/>
                         <outlet property="controlNet" destination="y2Z-Pc-wCm" id="cF8-IK-9Bb"/>
                         <outlet property="friendDistance" destination="9CG-qS-3qq" id="c5Y-pf-QMU"/>
                         <outlet property="friendPhoto" destination="Ec2-Ic-ELG" id="5Hm-aR-lul"/>
                         <outlet property="mapCenterPinImage" destination="MdR-2A-Cum" id="mU2-k5-dZ8"/>
                         <outlet property="mapView" destination="J4n-KI-g0a" id="Bc2-HT-TqR"/>
+                        <outlet property="northLine" destination="LcA-ah-aqO" id="aMS-bi-5g8"/>
                         <outlet property="pinImageVerticalConstraint" destination="hnh-gZ-JAP" id="d0e-TY-dDn"/>
                     </connections>
                 </viewController>

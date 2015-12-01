@@ -41,6 +41,10 @@ class CirclesTableViewController: UITableViewController {
         super.viewDidLoad()
         reloadData()
         
+        let navigationBarBackgroundImage = DataManager.sharedInstance.imageResize(UIImage(named: "redLights.png")!, sizeChange: CGSizeMake((self.navigationController?.navigationBar.frame.size.width)!, (self.navigationController?.navigationBar.frame.height)!))
+        
+        self.navigationController?.navigationBar.setBackgroundImage(navigationBarBackgroundImage, forBarMetrics: .Default)
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmAccepted:", name: "charmAccepted", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmReceived:", name: "charmReceived", object: nil)
 
@@ -64,7 +68,7 @@ class CirclesTableViewController: UITableViewController {
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refresh.addTarget(self,action:"refreshData",forControlEvents:.ValueChanged)
         self.refreshControl = refresh
-        navigationBarGradient()
+       // navigationBarGradient()
         //        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         //        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdated:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
         
