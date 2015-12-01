@@ -25,10 +25,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     var gradient:UIImage!
     var actualPhoneAngularPosition = Double()
     var selectedFriend = User?()
-    let swipeRec = UISwipeGestureRecognizer()
-    
-    
-    
+
     var isCharm = DataManager.sharedInstance.isCharm
     
     
@@ -73,6 +70,14 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         mapView.mapType = kGMSTypeNormal
         self.setUpBackgrounGradient()
         
+        var swipeDown = UISwipeGestureRecognizer(target: self, action: "draggedView")
+        swipeDown.direction = UISwipeGestureRecognizerDirection.Down
+        compassView.addGestureRecognizer(swipeDown)
+        
+        var swipeUp = UISwipeGestureRecognizer(target: self, action: "draggedView")
+        swipeUp.direction = UISwipeGestureRecognizerDirection.Up
+        compassView.addGestureRecognizer(swipeUp)
+        
         
         DataManager.sharedInstance.updateLocationUsers(mapView)
         self.compassView.hidden = true
@@ -82,9 +87,9 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         
         friendDistance.font = UIFont(name:"SFUIText-Regular", size: 15)
         
-        swipeRec.addTarget(self, action: "draggedView:")
-        compassView.addGestureRecognizer(swipeRec)
-        compassView.userInteractionEnabled = true
+//        swipeRec.addTarget(self, action: "draggedView:")
+//        compassView.addGestureRecognizer(swipeRec)
+//        compassView.userInteractionEnabled = true
         
         if !isCharm {
             var existUserInGroup = false
@@ -437,21 +442,39 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 //        }
 //    }
     
-//    func draggedView (sender:UIPanGestureRecognizer) {
+    func draggedView (sender:UIGestureRecognizer) {
+        
+        let swipeGesture = UISwipeGestureRecognizer()
+        
+        switch swipeGesture.direction {
+        case UISwipeGestureRecognizerDirection.Down:
+            print("swipe down")
+        case UISwipeGestureRecognizerDirection.Up:
+            print("swipe up")
+        case UISwipeGestureRecognizerDirection.Left:
+            print("swipe left")
+        case UISwipeGestureRecognizerDirection.Right:
+            print("swipe right")
+        default:
+            break
+            
+            
+            
+        }
+        
+    
+        }
+        
+        
+        
+        //
+//        self.view.bringSubviewToFront(sender.view!)
+//        var translation = sender.translationInView(self.view)
+//        sender.view?.center = CGPointMake((sender.view?.center.x)! + translation.x, (sender.view?.center.y)! + translation.y)
 //        
-//        if (UISwipeGestureRecognizer == UISwipeGestureRecognizerDirection.Down) {
-//            
-//            print("pra baixoooooooo")
-//            
-//        }
-////        
-////        self.view.bringSubviewToFront(sender.view!)
-////        var translation = sender.translationInView(self.view)
-////        sender.view?.center = CGPointMake((sender.view?.center.x)! + translation.x, (sender.view?.center.y)! + translation.y)
-////        
-//        
-//    }
-//    
+        
+
+    
     
 
 }

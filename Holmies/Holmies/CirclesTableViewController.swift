@@ -615,11 +615,13 @@ class CirclesTableViewController: UITableViewController {
             charmCell.nameLabel.text = actualFriend.name
             let imageName = DataManager.sharedInstance.findImage(actualFriend.userID)
             
-            
+            charmCell.userPictureImageView.layer.cornerRadius = 8.0
+            charmCell.userPictureImageView.layer.borderColor = mainRed.CGColor
+            charmCell.userPictureImageView.layer.borderWidth = 2
             
             let imageView = UIImageView(image: imageName)
             
-            imageView.layer.cornerRadius = 20.0
+            imageView.layer.cornerRadius = 8.0
             //            imageView.layer.borderColor = mainRed.CGColor
             //            imageView.layer.borderWidth = 5.0
             imageView.clipsToBounds = true
