@@ -406,8 +406,11 @@ class CirclesTableViewController: UITableViewController {
                             
                             let status = DataManager.sharedInstance.findStatusOfUserInGroup(user.userID, groupId: DataManager.sharedInstance.allGroup[indexPath.row].id)
                             
-                            let imageView = UIImageView(image: imageName)
+                          
+                            let imageView = UIImageView(frame: CGRect(x: imageX, y: 0, width: sizeOfImageWidth, height: sizeOfImageHeight))
+                            imageView.image = imageName
                             
+                            imageView.frame = CGRect(x: imageX, y: 0, width: sizeOfImageWidth, height: sizeOfImageHeight)
                             imageView.layer.cornerRadius = 22.85 / 414 * self.view.frame.size.width
                             
                             print("tamanho da tela: \(self.view.frame.size.width)")
@@ -421,7 +424,7 @@ class CirclesTableViewController: UITableViewController {
                             imageView.layer.borderColor = mainRed.CGColor
                             imageView.clipsToBounds = true
                             
-                            imageView.frame = CGRect(x: imageX, y: 0, width: sizeOfImageWidth, height: sizeOfImageHeight)
+
                             
                             
                             cellActive.scrollViewFriends.addSubview(imageView)

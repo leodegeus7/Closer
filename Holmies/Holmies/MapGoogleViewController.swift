@@ -192,9 +192,9 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         }
         else {
             print("App em background. Coord: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
-            let marker = GMSMarker(position: CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude))
-            marker.title = "\(newLocation.coordinate.latitude) e \(newLocation.coordinate.longitude)"
-            marker.map = mapView
+//            let marker = GMSMarker(position: CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude))
+//            marker.title = "\(newLocation.coordinate.latitude) e \(newLocation.coordinate.longitude)"
+//            marker.map = mapView
             let userInfoCoordinate = ["local":newLocation]
             DataManager.sharedInstance.createLocalNotification("oi", body: "\(newLocation.coordinate.latitude)", timeAfterClose: 10,userInfo:userInfoCoordinate)
         }
