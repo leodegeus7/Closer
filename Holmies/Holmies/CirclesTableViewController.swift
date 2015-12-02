@@ -40,9 +40,13 @@ class CirclesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         reloadData()
+       let screenSize = self.view.frame.size.width
+        let peopleButton = DataManager.sharedInstance.imageResize(UIImage(named: "people32.png")!, sizeChange: CGSizeMake(46 * 0.6 * screenSize / 414, 34 * 0.6 * screenSize / 414))
         
-       
         
+        
+        self.navigationItem.leftBarButtonItem?.image = peopleButton
+       self.navigationItem.leftBarButtonItem?.title = ""
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmAccepted:", name: "charmAccepted", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmReceived:", name: "charmReceived", object: nil)
 

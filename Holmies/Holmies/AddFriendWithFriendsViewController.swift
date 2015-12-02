@@ -12,12 +12,27 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
 
     @IBOutlet weak var FriendsTableView: UITableView!
     @IBOutlet weak var addFriendTextField: UITextField!
+    let lightBlue:UIColor = UIColor(red: 61.0/255.0, green: 210.0/255.0, blue: 228.0/255.0, alpha: 1)
+    let mainRed: UIColor = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
+    let lightGray = UIColor(red: 170.0/255.0, green: 170.0/255.0, blue: 170.0/255.0, alpha: 1.0)
+
+    
     let http = HTTPHelper()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         FriendsTableView.separatorInset = UIEdgeInsetsZero
         FriendsTableView.layoutMargins = UIEdgeInsetsZero
+        
+        addFriendTextField.layer.borderColor = mainRed.CGColor
+        addFriendTextField.layer.borderWidth = 1
+        addFriendTextField.layer.cornerRadius = 8
+        addFriendTextField.tintColor = mainRed
+        addFriendTextField.textColor = mainRed
+        addFriendTextField.attributedPlaceholder = NSAttributedString(string: "New friend username", attributes: [NSForegroundColorAttributeName: lightGray])
+        
+    
+        self.FriendsTableView.rowHeight = 45
         
         // Do any additional setup after loading the view.
     }
@@ -38,6 +53,9 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
         self.navigationController?.navigationBar.titleTextAttributes = fontDictionary
         self.navigationController?.navigationBar.setBackgroundImage(imageLayerForGradientBackground(), forBarMetrics: UIBarMetrics.Default)
         FriendsTableView.reloadData()
+        
+        
+        
         
     }
     
@@ -62,20 +80,48 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("friend", forIndexPath: indexPath) as! FriendsInFriendsTableViewCell
         
+        let frameSize = cell.imageUser.frame.size.height
         //MARK - CRIAR METODO DE PERSISTIR NO DATAMANAGER PARA DEPOIS ACESSAR E VER SE PERMENECEU PERSISTIDO
         
-        self.FriendsTableView.rowHeight = 45
         
-        cell.friendUsername.font = UIFont(name: "SFUIText-Regular", size: 17)
-        cell.friendUsername.textColor = UIColor.grayColor()
         
-        cell.imageUser.layer.cornerRadius = 19
+        
+        cell.imageUser.layer.cornerRadius = frameSize / 3.1
         cell.imageUser.clipsToBounds = true
         cell.imageUser.layer.borderWidth = 0
+        cell.imageUser.image = DataManager.sharedInstance.findImage(DataManager.sharedInstance.allFriends[indexPath.row].userID)
 
         
-        cell.friendUsername.text = DataManager.sharedInstance.allFriends[indexPath.row].username
-        cell.imageUser.image = DataManager.sharedInstance.findImage(DataManager.sharedInstance.allFriends[indexPath.row].userID)
+        
+        
+        
+        
+        
+        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        cell.imageUser.layer.cornerRadius = cell.imageUser.frame.width / 2
+//        cell.imageUser.clipsToBounds = true
+//        cell.imageUser.layer.borderWidth = 0
+
+
+        cell.friendUsername.text = DataManager.sharedInstance.allFriends[indexPath.row].username + "  \(cell.frame.height)" + "  \(cell.frame.width)"
+        //cell.imageUser.image = DataManager.sharedInstance.findImage(DataManager.sharedInstance.allFriends[indexPath.row].userID)
+        
+        cell.friendUsername.font = UIFont(name: "SFUIText-Regular", size: 17)
+        cell.friendUsername.textColor = mainRed
+        
+        
+        
+        print("height: \(cell.imageUser.frame.height)")
+        print("width: \(cell.imageUser.frame.width)")
+        print("corner: \(cell.imageUser.layer.cornerRadius)")
         
         return cell
     }

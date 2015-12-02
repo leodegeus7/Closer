@@ -485,7 +485,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="saG-MU-ubN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1888" y="820"/>
+            <point key="canvasLocation" x="1900" y="954"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="njN-K5-nbo">
@@ -1321,7 +1321,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="zfy-NC-k1J">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" title="Add Friend" id="DDp-4q-UYr">
+                        <barButtonItem key="leftBarButtonItem" title="addFriend" id="DDp-4q-UYr">
                             <connections>
                                 <segue destination="2HD-KN-Uw9" kind="show" id="eG6-Gp-hmm"/>
                             </connections>
@@ -1841,10 +1841,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="70" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Rhj-Ei-kc9">
-                                <rect key="frame" x="30" y="75" width="540" height="479"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="70" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Rhj-Ei-kc9">
+                                <rect key="frame" x="30" y="119" width="540" height="435"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="20" reuseIdentifier="friend" rowHeight="70" id="k6k-uo-ao2" customClass="FriendsInFriendsTableViewCell" customModule="Holmies" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1" width="540" height="70"/>
@@ -1913,8 +1914,8 @@
                                     <outlet property="delegate" destination="2HD-KN-Uw9" id="QV3-i9-gBR"/>
                                 </connections>
                             </tableView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WoO-Qq-peU">
-                                <rect key="frame" x="30" y="40" width="540" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WoO-Qq-peU">
+                                <rect key="frame" x="30" y="84" width="540" height="30"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1977,7 +1978,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="J2K-4A-5cw"/>
-        <segue reference="eG6-Gp-hmm"/>
         <segue reference="s8S-m1-5jX"/>
+        <segue reference="bBG-UZ-oZK"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -39,6 +39,8 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         let buttonContinue = UIBarButtonItem(title: "Continue", style: .Plain, target: self, action: "continueAction")
         self.navigationItem.rightBarButtonItem = buttonContinue
         
+        self.tableView.rowHeight = 45
+        
         self.navigationController?.title = "Edit group \(DataManager.sharedInstance.selectedGroup.name)"
         applyDesign()
         startSearchController()
@@ -103,12 +105,12 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         
         //MARK - CRIAR METODO DE PERSISTIR NO DATAMANAGER PARA DEPOIS ACESSAR E VER SE PERMENECEU PERSISTIDO
         
-        self.tableView.rowHeight = 45
+
         
         cell.friendName.font = UIFont(name: "SFUIText-Regular", size: 17)
         cell.friendName.textColor = lightGray
     
-        cell.friendPhoto.layer.cornerRadius = 19
+        cell.friendPhoto.layer.cornerRadius = cell.friendPhoto.frame.size.width / 3.1
         cell.friendPhoto.clipsToBounds = true
         cell.checkImage.image = grayCheck
         cell.friendPhoto.layer.borderWidth = 0

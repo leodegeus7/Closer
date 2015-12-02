@@ -82,6 +82,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         mapView.mapType = kGMSTypeNormal
         self.setUpBackgrounGradient()
         
+        DataManager.sharedInstance.activeMap = self.mapView
 //        var swipeDown = UISwipeGestureRecognizer(target: self, action: "draggedViewDown:")
 //        swipeDown.direction = UISwipeGestureRecognizerDirection.Down
 //        compassView.addGestureRecognizer(swipeDown)

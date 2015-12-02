@@ -23,10 +23,13 @@
 		A760AAB01BFA457A00214F06 /* MarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A760AAAF1BFA457A00214F06 /* MarkerView.xib */; };
 		A760AAB21BFA46DC00214F06 /* pin2.png in Resources */ = {isa = PBXBuildFile; fileRef = A760AAB11BFA46DC00214F06 /* pin2.png */; };
 		A760AAB41BFA488100214F06 /* pin025.png in Resources */ = {isa = PBXBuildFile; fileRef = A760AAB31BFA488100214F06 /* pin025.png */; };
+		A766B4881C0F69B000F69754 /* whiteChar.png in Resources */ = {isa = PBXBuildFile; fileRef = A766B4871C0F69B000F69754 /* whiteChar.png */; };
+		A766B48A1C0F69B400F69754 /* mainRedChar.png in Resources */ = {isa = PBXBuildFile; fileRef = A766B4891C0F69B400F69754 /* mainRedChar.png */; };
 		A77F58671C0E30C4008670B7 /* redLightsUpside.png in Resources */ = {isa = PBXBuildFile; fileRef = A77F58661C0E30C4008670B7 /* redLightsUpside.png */; };
 		A77F586A1C0E332F008670B7 /* bottomNavigationBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A77F58681C0E332F008670B7 /* bottomNavigationBackground.png */; };
 		A77F586B1C0E332F008670B7 /* topNavigationBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A77F58691C0E332F008670B7 /* topNavigationBackground.png */; };
 		A77F586D1C0E36A7008670B7 /* people.png in Resources */ = {isa = PBXBuildFile; fileRef = A77F586C1C0E36A7008670B7 /* people.png */; };
+		A77F58701C0E3F7D008670B7 /* people32.png in Resources */ = {isa = PBXBuildFile; fileRef = A77F586F1C0E3F7D008670B7 /* people32.png */; };
 		A78EA4831BDAABAC0001E946 /* CirclesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78EA4821BDAABAC0001E946 /* CirclesTableViewController.swift */; };
 		A78EA4861BDAB3C30001E946 /* reject.png in Resources */ = {isa = PBXBuildFile; fileRef = A78EA4841BDAB3C30001E946 /* reject.png */; };
 		A78EA4871BDAB3C30001E946 /* confirm.png in Resources */ = {isa = PBXBuildFile; fileRef = A78EA4851BDAB3C30001E946 /* confirm.png */; };
@@ -260,10 +263,13 @@
 		A760AAAF1BFA457A00214F06 /* MarkerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarkerView.xib; sourceTree = "<group>"; };
 		A760AAB11BFA46DC00214F06 /* pin2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin2.png; sourceTree = "<group>"; };
 		A760AAB31BFA488100214F06 /* pin025.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin025.png; sourceTree = "<group>"; };
+		A766B4871C0F69B000F69754 /* whiteChar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteChar.png; sourceTree = "<group>"; };
+		A766B4891C0F69B400F69754 /* mainRedChar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainRedChar.png; sourceTree = "<group>"; };
 		A77F58661C0E30C4008670B7 /* redLightsUpside.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redLightsUpside.png; sourceTree = "<group>"; };
 		A77F58681C0E332F008670B7 /* bottomNavigationBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottomNavigationBackground.png; sourceTree = "<group>"; };
 		A77F58691C0E332F008670B7 /* topNavigationBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topNavigationBackground.png; sourceTree = "<group>"; };
 		A77F586C1C0E36A7008670B7 /* people.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = people.png; sourceTree = "<group>"; };
+		A77F586F1C0E3F7D008670B7 /* people32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = people32.png; sourceTree = "<group>"; };
 		A78A97F31BE3F7F300D5994B /* Design.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Design.storyboard; sourceTree = "<group>"; };
 		A78EA4821BDAABAC0001E946 /* CirclesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CirclesTableViewController.swift; sourceTree = "<group>"; };
 		A78EA4841BDAB3C30001E946 /* reject.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reject.png; sourceTree = "<group>"; };
@@ -597,12 +603,15 @@
 		A7D2A4B11BCE90EF006A55D1 /* Design */ = {
 			isa = PBXGroup;
 			children = (
+				A77F586F1C0E3F7D008670B7 /* people32.png */,
 				A77F586C1C0E36A7008670B7 /* people.png */,
 				AF5F33F51C001EED00BC1622 /* group.png */,
 				AF5F33F31C001EE700BC1622 /* charm.png */,
 				CD0561E01BEA780D00130656 /* photos.png */,
 				A73BE4CC1BDEB68E0063C705 /* SF Fonts */,
 				A70592161BD6C5B600E737E3 /* DesignGroupsTableViewController.swift */,
+				A766B4891C0F69B400F69754 /* mainRedChar.png */,
+				A766B4871C0F69B000F69754 /* whiteChar.png */,
 				A77F58681C0E332F008670B7 /* bottomNavigationBackground.png */,
 				A77F58691C0E332F008670B7 /* topNavigationBackground.png */,
 				A77F58661C0E30C4008670B7 /* redLightsUpside.png */,
@@ -1081,6 +1090,7 @@
 				A71F7D151BD0288E00652750 /* photoButton.png in Resources */,
 				A7C37FA81BE00A8500FEE8D2 /* SF-Compact-Display-Heavy.otf in Resources */,
 				A7C37FAC1BE00A8500FEE8D2 /* SF-Compact-Display-Semibold.otf in Resources */,
+				A766B4881C0F69B000F69754 /* whiteChar.png in Resources */,
 				A72BDBE71C0CC4BE00D0CA84 /* redLights.png in Resources */,
 				CDCCCD321BBF84A000A5AD03 /* 2.gpx in Resources */,
 				A70BF38C1BCE91EE00062246 /* facebookButton.png in Resources */,
@@ -1102,6 +1112,7 @@
 				A7C37F561BDFF44C00FEE8D2 /* newUser2.png in Resources */,
 				CD0561E11BEA780D00130656 /* photos.png in Resources */,
 				CD0561DD1BEA700E00130656 /* compass.png in Resources */,
+				A766B48A1C0F69B400F69754 /* mainRedChar.png in Resources */,
 				A7C37FAE1BE00A8500FEE8D2 /* SF-Compact-Display-Ultralight.otf in Resources */,
 				A7C37FC01BE00A8500FEE8D2 /* SF-UI-Text-MediumItalic.otf in Resources */,
 				CD0561D71BE9452E00130656 /* Red_Arrow_Right 3.png in Resources */,
@@ -1132,6 +1143,7 @@
 				AF5F33F41C001EE700BC1622 /* charm.png in Resources */,
 				A760AAB21BFA46DC00214F06 /* pin2.png in Resources */,
 				A7C37FA71BE00A8500FEE8D2 /* SF-Compact-Display-Bold.otf in Resources */,
+				A77F58701C0E3F7D008670B7 /* people32.png in Resources */,
 				A7C37FAD1BE00A8500FEE8D2 /* SF-Compact-Display-Thin.otf in Resources */,
 				A7D2A4B01BCE90E6006A55D1 /* redBackground.png in Resources */,
 				CD6BAAB61B98E298008614B0 /* GoogleMaps.bundle in Resources */,
