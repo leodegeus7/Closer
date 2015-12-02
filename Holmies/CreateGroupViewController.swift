@@ -76,7 +76,8 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         if (resultSearchController.active) {
             return filteredArray.count
         }
-        let count = DataManager.sharedInstance.allFriends.count
+        let friends = DataManager.sharedInstance.allFriends
+        let count = friends.count
         
         return count
     }
