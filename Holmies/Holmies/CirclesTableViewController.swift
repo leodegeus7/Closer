@@ -286,18 +286,27 @@ class CirclesTableViewController: UITableViewController {
                 
                 let friends = DataManager.sharedInstance.loadJsonFromDocuments("friends")
                 
+                for index in DataManager.sharedInstance.allFriends {
+                    
+                    
+                    if !(index.facebookID == nil) && !(index.userID == nil) {
+                        let image = DataManager.sharedInstance.getProfPic(index.facebookID, serverId: index.userID)
+                        DataManager.sharedInstance.saveImage(image, id: index.userID)
+                    }
+                }
+                
                 if DataManager.sharedInstance.myUser.facebookID != nil {
                     let myPhoto = DataManager.sharedInstance.getProfPic(DataManager.sharedInstance.myUser.facebookID, serverId: DataManager.sharedInstance.myUser.userID)
                     DataManager.sharedInstance.saveImage(myPhoto, id: DataManager.sharedInstance.myUser.userID)
                     
-                    for index in DataManager.sharedInstance.allFriends {
-                        
-                        
-                        if !(index.facebookID == nil) && !(index.userID == nil) {
-                            let image = DataManager.sharedInstance.getProfPic(index.facebookID, serverId: index.userID)
-                            DataManager.sharedInstance.saveImage(image, id: index.userID)
-                        }
-                    }
+//                    for index in TE {
+//                        
+//                        
+//                        if !(index.facebookID == nil) && !(index.userID == nil) {
+//                            let image = DataManager.sharedInstance.getProfPic(index.facebookID, serverId: index.userID)
+//                            DataManager.sharedInstance.saveImage(image, id: index.userID)
+//                        }
+//                    }
                     
                 }
                 DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(friends)
@@ -401,6 +410,7 @@ class CirclesTableViewController: UITableViewController {
                     }
                     
                     if let _ = DataManager.sharedInstance.allGroup[indexPath.row].users {
+                        var  i = 0
                         for user in DataManager.sharedInstance.allGroup[indexPath.row].users {
                             let imageName = DataManager.sharedInstance.findImage(user.userID)
                             
@@ -412,23 +422,26 @@ class CirclesTableViewController: UITableViewController {
                             
                             imageView.frame = CGRect(x: imageX, y: 0, width: sizeOfImageWidth, height: sizeOfImageHeight)
                             imageView.layer.cornerRadius = 22.85 / 414 * self.view.frame.size.width
-                            
+                        
                             print("tamanho da tela: \(self.view.frame.size.width)")
                             
                             if status == "accepted" {
                                 imageView.layer.borderWidth = 2.0
                             } else {
                                 imageView.layer.borderWidth = 0
+                                imageView.alpha = 0.6
+
                             }
                             
                             imageView.layer.borderColor = mainRed.CGColor
                             imageView.clipsToBounds = true
                             
 
+                            if i < 5 {
                             
-                            
-                            cellActive.scrollViewFriends.addSubview(imageView)
-                            imageX += sizeOfImageWidth + spaceInCell
+                                cellActive.scrollViewFriends.addSubview(imageView)
+                                imageX += sizeOfImageWidth + spaceInCell}
+                            i++
                             
                         }
                     }

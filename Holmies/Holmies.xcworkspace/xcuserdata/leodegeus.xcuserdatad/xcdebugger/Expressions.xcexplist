@@ -20,6 +20,9 @@
          contextName = "CirclesTableViewController.(reloadData(CirclesTableViewController) -&gt; () -&gt; ()).(closure #1).(closure #1):CirclesTableViewController.swift">
          <PersistentStrings>
             <PersistentString
+               value = "DataManager.sharedInstance.allFriends">
+            </PersistentString>
+            <PersistentString
                value = "DataManager.sharedInstance.sharesInGroups">
             </PersistentString>
             <PersistentString
@@ -90,6 +93,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "EditGroupViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:EditGroupViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "DataManager.sharedInstance.activeUsers">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "LoginViewControllerNew.(getFBUserData(LoginViewControllerNew) -&gt; () -&gt; ()).(closure #1):LoginViewControllerNew.swift">
       </ContextState>
       <ContextState
@@ -150,6 +161,9 @@
             <PersistentString
                value = "DataManager.sharedInstance.friendsArray ">
             </PersistentString>
+            <PersistentString
+               value = "DataManager.sharedInstance.allFriends">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
@@ -176,6 +190,14 @@
          <PersistentStrings>
             <PersistentString
                value = "DataManager.sharedInstance.allGroup">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GLOBAL">
+         <PersistentStrings>
+            <PersistentString
+               value = "DataManager.sharedInstance.allFriends">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

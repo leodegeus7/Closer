@@ -111,6 +111,9 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
                 
             }
         }
+        else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem()
+        }
         
         
         
