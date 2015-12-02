@@ -28,6 +28,7 @@ class DataManager {
     var allFriends = [User]()
     var allSharers = [Sharer]()
     var myCharms = [Charm]()
+    var lastCharms = [Charm]()
     var myUser = User()
     let http = HTTPHelper()
     var actualCell = 0
