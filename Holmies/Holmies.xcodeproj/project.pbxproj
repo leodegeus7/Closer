@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0D3B22DFA20BE110F131088B /* Pods_Holmies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49A1231FEAA34E173CC60B8D /* Pods_Holmies.framework */; };
-		A7049A9E1BB08BA300A2CDCD /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7049A9D1BB08BA300A2CDCD /* FriendsTableViewCell.swift */; };
 		A70592171BD6C5B600E737E3 /* DesignGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70592161BD6C5B600E737E3 /* DesignGroupsTableViewController.swift */; };
 		A705921B1BD6C65300E737E3 /* NewGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A705921A1BD6C65300E737E3 /* NewGroupTableViewCell.swift */; };
 		A70BF38C1BCE91EE00062246 /* facebookButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A70BF3891BCE91EE00062246 /* facebookButton.png */; };
@@ -66,7 +65,6 @@
 		A7C37FC81BE11E3600FEE8D2 /* grayCheck.png in Resources */ = {isa = PBXBuildFile; fileRef = A7C37FC61BE11E3600FEE8D2 /* grayCheck.png */; };
 		A7D2A4B01BCE90E6006A55D1 /* redBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D2A4AF1BCE90E6006A55D1 /* redBackground.png */; };
 		A7FA0E081C078E1A006D2CC5 /* compass2.png in Resources */ = {isa = PBXBuildFile; fileRef = A7FA0E071C078E1A006D2CC5 /* compass2.png */; };
-		A7FCC50B1BC4CCF600AEDA3F /* WidgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FCC50A1BC4CCF600AEDA3F /* WidgetViewController.swift */; };
 		A7FCC5121BC4CD1D00AEDA3F /* Main2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FCC5111BC4CD1D00AEDA3F /* Main2.storyboard */; };
 		A7FCC5191BC4CE5B00AEDA3F /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7FCC5181BC4CE5B00AEDA3F /* NotificationCenter.framework */; };
 		A7FCC51C1BC4CE5B00AEDA3F /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FCC51B1BC4CE5B00AEDA3F /* TodayViewController.swift */; };
@@ -81,26 +79,18 @@
 		CD0561DD1BEA700E00130656 /* compass.png in Resources */ = {isa = PBXBuildFile; fileRef = CD0561DC1BEA700E00130656 /* compass.png */; };
 		CD0561DF1BEA715200130656 /* Line.png in Resources */ = {isa = PBXBuildFile; fileRef = CD0561DE1BEA715200130656 /* Line.png */; };
 		CD0561E11BEA780D00130656 /* photos.png in Resources */ = {isa = PBXBuildFile; fileRef = CD0561E01BEA780D00130656 /* photos.png */; };
-		CD0B59DD1BAB47720098AD88 /* LocationUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0B59DC1BAB47720098AD88 /* LocationUserTableViewCell.swift */; };
-		CD0B59DF1BAB50360098AD88 /* LocatioUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0B59DE1BAB50360098AD88 /* LocatioUserTableViewController.swift */; };
 		CD0B59E11BAB57750098AD88 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0B59E01BAB57750098AD88 /* Location.swift */; };
 		CD0D132D1BB9C29D000D0656 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0D132C1BB9C29D000D0656 /* User.swift */; };
-		CD103A6A1BB9D88D0044166F /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD103A691BB9D88D0044166F /* RegisterViewController.swift */; };
 		CD103A741BBB07470044166F /* ovalLaranja.png in Resources */ = {isa = PBXBuildFile; fileRef = CD103A701BBB07470044166F /* ovalLaranja.png */; };
 		CD103A751BBB07470044166F /* ovalRosa.png in Resources */ = {isa = PBXBuildFile; fileRef = CD103A711BBB07470044166F /* ovalRosa.png */; };
 		CD103A761BBB07470044166F /* ovalVerde.png in Resources */ = {isa = PBXBuildFile; fileRef = CD103A721BBB07470044166F /* ovalVerde.png */; };
 		CD103A771BBB07470044166F /* ovalVermelho.png in Resources */ = {isa = PBXBuildFile; fileRef = CD103A731BBB07470044166F /* ovalVermelho.png */; };
-		CD112EC91BC30975000B353C /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD112EC81BC30975000B353C /* GroupTableViewCell.swift */; };
 		CD1C03651BA749BD0073524A /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1C03631BA749BD0073524A /* FBSDKCoreKit.framework */; };
 		CD1C03661BA749BD0073524A /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1C03641BA749BD0073524A /* FBSDKLoginKit.framework */; };
-		CD1C03681BA74A590073524A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C03671BA74A590073524A /* LoginViewController.swift */; };
 		CD1C036C1BA752290073524A /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C036B1BA752290073524A /* DataManager.swift */; };
-		CD1C036E1BA761550073524A /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C036D1BA761550073524A /* FriendsTableViewController.swift */; };
 		CD1E19101BFD08F800179D5F /* HTTPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1E190F1BFD08F800179D5F /* HTTPHelper.swift */; };
 		CD21002A1B9DE7EF00485126 /* PlaceMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2100291B9DE7EF00485126 /* PlaceMarker.swift */; };
 		CD43673F1BBC531E00309FD0 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD43673E1BBC531E00309FD0 /* Group.swift */; };
-		CD4367491BBC75E200309FD0 /* AddGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4367481BBC75E200309FD0 /* AddGroupTableViewController.swift */; };
-		CD43674B1BBC771800309FD0 /* AddGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD43674A1BBC771800309FD0 /* AddGroupTableViewCell.swift */; };
 		CD4FC9401BED1F810086EC30 /* myInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4FC93F1BED1F810086EC30 /* myInfoViewController.swift */; };
 		CD669F731C0C9ED400E2BAC0 /* EmptyGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD669F721C0C9ED400E2BAC0 /* EmptyGroupTableViewCell.swift */; };
 		CD6BAA551B98D946008614B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA541B98D946008614B0 /* AppDelegate.swift */; };
@@ -117,7 +107,6 @@
 		CD6BAA8B1B98DAB6008614B0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6BAA8A1B98DAB6008614B0 /* SystemConfiguration.framework */; };
 		CD6BAA8D1B98DB5F008614B0 /* GoogleDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA8C1B98DB5F008614B0 /* GoogleDataProvider.swift */; };
 		CD6BAA8F1B98DB70008614B0 /* GooglePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA8E1B98DB70008614B0 /* GooglePlace.swift */; };
-		CD6BAA931B98DB7F008614B0 /* TypesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA911B98DB7F008614B0 /* TypesTableViewController.swift */; };
 		CD6BAA971B98DB8A008614B0 /* MarkerInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA941B98DB8A008614B0 /* MarkerInfoView.swift */; };
 		CD6BAA981B98DB8A008614B0 /* MarkerInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD6BAA951B98DB8A008614B0 /* MarkerInfoView.xib */; };
 		CD6BAA991B98DB8A008614B0 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BAA961B98DB8A008614B0 /* UIViewExtension.swift */; };
@@ -127,8 +116,6 @@
 		CD721F911BF2641A0013A3C5 /* FriendsInMapTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD721F901BF2641A0013A3C5 /* FriendsInMapTableViewController.swift */; };
 		CD73C0DB1C0E222F000730F1 /* FriendsInFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD73C0DA1C0E222F000730F1 /* FriendsInFriendsTableViewCell.swift */; };
 		CD73C0DD1C0E2478000730F1 /* AddFriendWithFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD73C0DC1C0E2478000730F1 /* AddFriendWithFriendsViewController.swift */; };
-		CD8A8BDB1BB479CE00E9D471 /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A8BDA1BB479CE00E9D471 /* GroupsTableViewController.swift */; };
-		CD8A8BDE1BB479E500E9D471 /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A8BDD1BB479E500E9D471 /* UsersTableViewController.swift */; };
 		CD900F811BDE9F260095CB85 /* AddFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900F801BDE9F260095CB85 /* AddFriendTableViewCell.swift */; };
 		CD900F831BDE9F520095CB85 /* AddFriendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900F821BDE9F520095CB85 /* AddFriendTableViewController.swift */; };
 		CDA9A82D1B9DE9E300D93572 /* MapGoogleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */; };
@@ -149,8 +136,6 @@
 		CDB0C94F1BCEE0290020BFB5 /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB0C94A1BCEE0290020BFB5 /* NSData+CommonCrypto.m */; };
 		CDB0C9501BCEE0290020BFB5 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB0C94C1BCEE0290020BFB5 /* NSString+Base64.m */; };
 		CDB0C9581BCEE5340020BFB5 /* UsersInGroupsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB0C9571BCEE5340020BFB5 /* UsersInGroupsCollectionViewCell.swift */; };
-		CDB0C95A1BCEE8730020BFB5 /* UserInGroupsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB0C9591BCEE8730020BFB5 /* UserInGroupsCollectionView.swift */; };
-		CDB0FD621BBF0B4500BC6DFA /* AddGroupNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB0FD611BBF0B4500BC6DFA /* AddGroupNameViewController.swift */; };
 		CDCCCD2B1BBF83F500A5AD03 /* default.gpx in Resources */ = {isa = PBXBuildFile; fileRef = CDCCCD2A1BBF83F500A5AD03 /* default.gpx */; };
 		CDCCCD321BBF84A000A5AD03 /* 2.gpx in Resources */ = {isa = PBXBuildFile; fileRef = CDCCCD311BBF84A000A5AD03 /* 2.gpx */; };
 		CDE102611BE3F4E30042B180 /* Design.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDE102601BE3F4E30042B180 /* Design.storyboard */; };
@@ -241,7 +226,6 @@
 /* Begin PBXFileReference section */
 		27C29F8694868BB9197FEBBE /* Pods-Holmies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Holmies.release.xcconfig"; path = "Pods/Target Support Files/Pods-Holmies/Pods-Holmies.release.xcconfig"; sourceTree = "<group>"; };
 		49A1231FEAA34E173CC60B8D /* Pods_Holmies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Holmies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A7049A9D1BB08BA300A2CDCD /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
 		A70592161BD6C5B600E737E3 /* DesignGroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignGroupsTableViewController.swift; sourceTree = "<group>"; };
 		A705921A1BD6C65300E737E3 /* NewGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupTableViewCell.swift; sourceTree = "<group>"; };
 		A70BF3891BCE91EE00062246 /* facebookButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebookButton.png; sourceTree = "<group>"; };
@@ -308,7 +292,6 @@
 		A7D2A4AF1BCE90E6006A55D1 /* redBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redBackground.png; sourceTree = "<group>"; };
 		A7F3899D1BD56F4500DF2D7C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7FA0E071C078E1A006D2CC5 /* compass2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compass2.png; sourceTree = "<group>"; };
-		A7FCC50A1BC4CCF600AEDA3F /* WidgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetViewController.swift; sourceTree = "<group>"; };
 		A7FCC5111BC4CD1D00AEDA3F /* Main2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main2.storyboard; sourceTree = "<group>"; };
 		A7FCC5171BC4CE5B00AEDA3F /* widget3.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widget3.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7FCC5181BC4CE5B00AEDA3F /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -328,26 +311,18 @@
 		CD0561DC1BEA700E00130656 /* compass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compass.png; sourceTree = "<group>"; };
 		CD0561DE1BEA715200130656 /* Line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Line.png; sourceTree = "<group>"; };
 		CD0561E01BEA780D00130656 /* photos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photos.png; sourceTree = "<group>"; };
-		CD0B59DC1BAB47720098AD88 /* LocationUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationUserTableViewCell.swift; sourceTree = "<group>"; };
-		CD0B59DE1BAB50360098AD88 /* LocatioUserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocatioUserTableViewController.swift; sourceTree = "<group>"; };
 		CD0B59E01BAB57750098AD88 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		CD0D132C1BB9C29D000D0656 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		CD103A691BB9D88D0044166F /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		CD103A701BBB07470044166F /* ovalLaranja.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ovalLaranja.png; sourceTree = "<group>"; };
 		CD103A711BBB07470044166F /* ovalRosa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ovalRosa.png; sourceTree = "<group>"; };
 		CD103A721BBB07470044166F /* ovalVerde.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ovalVerde.png; sourceTree = "<group>"; };
 		CD103A731BBB07470044166F /* ovalVermelho.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ovalVermelho.png; sourceTree = "<group>"; };
-		CD112EC81BC30975000B353C /* GroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
 		CD1C03631BA749BD0073524A /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		CD1C03641BA749BD0073524A /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		CD1C03671BA74A590073524A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CD1C036B1BA752290073524A /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		CD1C036D1BA761550073524A /* FriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		CD1E190F1BFD08F800179D5F /* HTTPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHelper.swift; sourceTree = "<group>"; };
 		CD2100291B9DE7EF00485126 /* PlaceMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceMarker.swift; sourceTree = "<group>"; };
 		CD43673E1BBC531E00309FD0 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
-		CD4367481BBC75E200309FD0 /* AddGroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewController.swift; sourceTree = "<group>"; };
-		CD43674A1BBC771800309FD0 /* AddGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewCell.swift; sourceTree = "<group>"; };
 		CD4FC93F1BED1F810086EC30 /* myInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myInfoViewController.swift; sourceTree = "<group>"; };
 		CD669F721C0C9ED400E2BAC0 /* EmptyGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyGroupTableViewCell.swift; sourceTree = "<group>"; };
 		CD6BAA4F1B98D946008614B0 /* Holmies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Holmies.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -369,7 +344,6 @@
 		CD6BAA8A1B98DAB6008614B0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CD6BAA8C1B98DB5F008614B0 /* GoogleDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDataProvider.swift; sourceTree = "<group>"; };
 		CD6BAA8E1B98DB70008614B0 /* GooglePlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlace.swift; sourceTree = "<group>"; };
-		CD6BAA911B98DB7F008614B0 /* TypesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypesTableViewController.swift; sourceTree = "<group>"; };
 		CD6BAA941B98DB8A008614B0 /* MarkerInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerInfoView.swift; sourceTree = "<group>"; };
 		CD6BAA951B98DB8A008614B0 /* MarkerInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarkerInfoView.xib; sourceTree = "<group>"; };
 		CD6BAA961B98DB8A008614B0 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
@@ -380,8 +354,6 @@
 		CD721F901BF2641A0013A3C5 /* FriendsInMapTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsInMapTableViewController.swift; sourceTree = "<group>"; };
 		CD73C0DA1C0E222F000730F1 /* FriendsInFriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsInFriendsTableViewCell.swift; sourceTree = "<group>"; };
 		CD73C0DC1C0E2478000730F1 /* AddFriendWithFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendWithFriendsViewController.swift; sourceTree = "<group>"; };
-		CD8A8BDA1BB479CE00E9D471 /* GroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
-		CD8A8BDD1BB479E500E9D471 /* UsersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
 		CD900F801BDE9F260095CB85 /* AddFriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendTableViewCell.swift; sourceTree = "<group>"; };
 		CD900F821BDE9F520095CB85 /* AddFriendTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendTableViewController.swift; sourceTree = "<group>"; };
 		CD92FB331BDEBE1200BEAA8E /* SF-Compact-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Display-Black.otf"; sourceTree = "<group>"; };
@@ -436,8 +408,6 @@
 		CDB0C94B1BCEE0290020BFB5 /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
 		CDB0C94C1BCEE0290020BFB5 /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
 		CDB0C9571BCEE5340020BFB5 /* UsersInGroupsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersInGroupsCollectionViewCell.swift; sourceTree = "<group>"; };
-		CDB0C9591BCEE8730020BFB5 /* UserInGroupsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInGroupsCollectionView.swift; sourceTree = "<group>"; };
-		CDB0FD611BBF0B4500BC6DFA /* AddGroupNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupNameViewController.swift; sourceTree = "<group>"; };
 		CDCCCD2A1BBF83F500A5AD03 /* default.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = default.gpx; sourceTree = "<group>"; };
 		CDCCCD311BBF84A000A5AD03 /* 2.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2.gpx; sourceTree = "<group>"; };
 		CDE102601BE3F4E30042B180 /* Design.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Design.storyboard; sourceTree = "<group>"; };
@@ -589,18 +559,16 @@
 		A7D2A4B11BCE90EF006A55D1 /* Design */ = {
 			isa = PBXGroup;
 			children = (
+				A73BE4CC1BDEB68E0063C705 /* SF Fonts */,
 				AF5F33F51C001EED00BC1622 /* group.png */,
 				AF5F33F31C001EE700BC1622 /* charm.png */,
 				CD0561E01BEA780D00130656 /* photos.png */,
-				A73BE4CC1BDEB68E0063C705 /* SF Fonts */,
-				A70592161BD6C5B600E737E3 /* DesignGroupsTableViewController.swift */,
 				A72BDBE61C0CC4BE00D0CA84 /* redLights.png */,
 				CD0561DA1BEA700900130656 /* x.png */,
 				CD0561D61BE9452E00130656 /* Red_Arrow_Right 3.png */,
 				CD0561DE1BEA715200130656 /* Line.png */,
 				A7FA0E071C078E1A006D2CC5 /* compass2.png */,
 				CD0561DC1BEA700E00130656 /* compass.png */,
-				A78A97F31BE3F7F300D5994B /* Design.storyboard */,
 				A7CA149B1BD7FF80006E2428 /* Images */,
 			);
 			name = Design;
@@ -681,9 +649,9 @@
 				A7FCC52A1BC4CF4100AEDA3F /* Holmies.entitlements */,
 				CD103A701BBB07470044166F /* ovalLaranja.png */,
 				CD103A711BBB07470044166F /* ovalRosa.png */,
+				CD103A721BBB07470044166F /* ovalVerde.png */,
 				CD103A731BBB07470044166F /* ovalVermelho.png */,
-				CDAA87791BD55C7A00C883B4 /* ControllerNew */,
-				CDE670681BB1D280008D1E18 /* Controller */,
+				CDAA87791BD55C7A00C883B4 /* Controller */,
 				CDE670671BB1D27C008D1E18 /* View */,
 				CDE670661BB1D275008D1E18 /* Model */,
 				CD6BAA671B98D946008614B0 /* HolmiesTests */,
@@ -756,30 +724,24 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
-		CDAA87791BD55C7A00C883B4 /* ControllerNew */ = {
+		CDAA87791BD55C7A00C883B4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CD6BAA541B98D946008614B0 /* AppDelegate.swift */,
 				A7C37F581BDFF79200FEE8D2 /* EditGroupViewController.swift */,
 				A7C37F5A1BDFF7CD00FEE8D2 /* CreateGroupViewController.swift */,
-				A7C37F621BE0061000FEE8D2 /* CreateGroupTableViewCell.swift */,
-				CD103A721BBB07470044166F /* ovalVerde.png */,
-				CD6BAA541B98D946008614B0 /* AppDelegate.swift */,
 				CDAA877F1BD55CBE00C883B4 /* LoginViewControllerNew.swift */,
 				A78EA4821BDAABAC0001E946 /* CirclesTableViewController.swift */,
-				A705921A1BD6C65300E737E3 /* NewGroupTableViewCell.swift */,
 				A71F7D161BD0298300652750 /* RegisterNewViewController.swift */,
 				CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */,
-				CD900F801BDE9F260095CB85 /* AddFriendTableViewCell.swift */,
 				CD900F821BDE9F520095CB85 /* AddFriendTableViewController.swift */,
-				A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */,
 				CD4FC93F1BED1F810086EC30 /* myInfoViewController.swift */,
-				CDB0C9571BCEE5340020BFB5 /* UsersInGroupsCollectionViewCell.swift */,
+				A70592161BD6C5B600E737E3 /* DesignGroupsTableViewController.swift */,
 				CD721F901BF2641A0013A3C5 /* FriendsInMapTableViewController.swift */,
-				CD669F721C0C9ED400E2BAC0 /* EmptyGroupTableViewCell.swift */,
-				CD73C0DA1C0E222F000730F1 /* FriendsInFriendsTableViewCell.swift */,
 				CD73C0DC1C0E2478000730F1 /* AddFriendWithFriendsViewController.swift */,
+				CD6BAA941B98DB8A008614B0 /* MarkerInfoView.swift */,
 			);
-			name = ControllerNew;
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		CDB0C93F1BCEE01D0020BFB5 /* AESCrypt */ = {
@@ -800,8 +762,16 @@
 		CDE670661BB1D275008D1E18 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CD6BAAA81B98DE23008614B0 /* Holmies-Bridging-Header.h */,
 				CD1C036B1BA752290073524A /* DataManager.swift */,
+				CD6BAAA91B98DE23008614B0 /* Holmies-Bridging.m */,
+				A7C37F621BE0061000FEE8D2 /* CreateGroupTableViewCell.swift */,
+				A705921A1BD6C65300E737E3 /* NewGroupTableViewCell.swift */,
+				CD900F801BDE9F260095CB85 /* AddFriendTableViewCell.swift */,
+				A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */,
+				CDB0C9571BCEE5340020BFB5 /* UsersInGroupsCollectionViewCell.swift */,
+				CD669F721C0C9ED400E2BAC0 /* EmptyGroupTableViewCell.swift */,
+				CD73C0DA1C0E222F000730F1 /* FriendsInFriendsTableViewCell.swift */,
+				CD6BAAA81B98DE23008614B0 /* Holmies-Bridging-Header.h */,
 				CD1E190F1BFD08F800179D5F /* HTTPHelper.swift */,
 				CD6BAA8C1B98DB5F008614B0 /* GoogleDataProvider.swift */,
 				CD6BAA8E1B98DB70008614B0 /* GooglePlace.swift */,
@@ -822,39 +792,16 @@
 		CDE670671BB1D27C008D1E18 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CD6BAAA91B98DE23008614B0 /* Holmies-Bridging.m */,
 				CD6BAA5B1B98D946008614B0 /* Images.xcassets */,
+				A78A97F31BE3F7F300D5994B /* Design.storyboard */,
 				CD6BAA5D1B98D946008614B0 /* LaunchScreen.xib */,
 				A71F7D1E1BD183C200652750 /* Main.storyboard */,
-				A7D2A4B11BCE90EF006A55D1 /* Design */,
 				A7FCC5111BC4CD1D00AEDA3F /* Main2.storyboard */,
-				CD6BAA941B98DB8A008614B0 /* MarkerInfoView.swift */,
 				A760AAAF1BFA457A00214F06 /* MarkerView.xib */,
 				CD6BAA951B98DB8A008614B0 /* MarkerInfoView.xib */,
+				A7D2A4B11BCE90EF006A55D1 /* Design */,
 			);
 			name = View;
-			sourceTree = "<group>";
-		};
-		CDE670681BB1D280008D1E18 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				A7049A9D1BB08BA300A2CDCD /* FriendsTableViewCell.swift */,
-				CD1C036D1BA761550073524A /* FriendsTableViewController.swift */,
-				CD8A8BDA1BB479CE00E9D471 /* GroupsTableViewController.swift */,
-				CD112EC81BC30975000B353C /* GroupTableViewCell.swift */,
-				CD0B59DC1BAB47720098AD88 /* LocationUserTableViewCell.swift */,
-				CD0B59DE1BAB50360098AD88 /* LocatioUserTableViewController.swift */,
-				CD1C03671BA74A590073524A /* LoginViewController.swift */,
-				CD103A691BB9D88D0044166F /* RegisterViewController.swift */,
-				CD6BAA911B98DB7F008614B0 /* TypesTableViewController.swift */,
-				CD8A8BDD1BB479E500E9D471 /* UsersTableViewController.swift */,
-				CD4367481BBC75E200309FD0 /* AddGroupTableViewController.swift */,
-				CD43674A1BBC771800309FD0 /* AddGroupTableViewCell.swift */,
-				CDB0FD611BBF0B4500BC6DFA /* AddGroupNameViewController.swift */,
-				A7FCC50A1BC4CCF600AEDA3F /* WidgetViewController.swift */,
-				CDB0C9591BCEE8730020BFB5 /* UserInGroupsCollectionView.swift */,
-			);
-			name = Controller;
 			sourceTree = "<group>";
 		};
 		CDE931991BE928F0007DEF95 /* Products */ = {
@@ -1205,31 +1152,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD1C03681BA74A590073524A /* LoginViewController.swift in Sources */,
 				A7C37F5B1BDFF7CD00FEE8D2 /* CreateGroupViewController.swift in Sources */,
 				CD6BAA971B98DB8A008614B0 /* MarkerInfoView.swift in Sources */,
 				A7C37F591BDFF79200FEE8D2 /* EditGroupViewController.swift in Sources */,
-				CD8A8BDE1BB479E500E9D471 /* UsersTableViewController.swift in Sources */,
 				CD1E19101BFD08F800179D5F /* HTTPHelper.swift in Sources */,
 				CD6BAAAA1B98DE23008614B0 /* Holmies-Bridging.m in Sources */,
 				CD0B59E11BAB57750098AD88 /* Location.swift in Sources */,
 				CD900F811BDE9F260095CB85 /* AddFriendTableViewCell.swift in Sources */,
 				CDB0C9581BCEE5340020BFB5 /* UsersInGroupsCollectionViewCell.swift in Sources */,
 				A78EA4831BDAABAC0001E946 /* CirclesTableViewController.swift in Sources */,
-				CD0B59DF1BAB50360098AD88 /* LocatioUserTableViewController.swift in Sources */,
-				A7049A9E1BB08BA300A2CDCD /* FriendsTableViewCell.swift in Sources */,
-				CD43674B1BBC771800309FD0 /* AddGroupTableViewCell.swift in Sources */,
 				CD6BAA8D1B98DB5F008614B0 /* GoogleDataProvider.swift in Sources */,
-				CD0B59DD1BAB47720098AD88 /* LocationUserTableViewCell.swift in Sources */,
 				CDF84C6D1BE29C4300F91502 /* Sharer.swift in Sources */,
 				CD669F731C0C9ED400E2BAC0 /* EmptyGroupTableViewCell.swift in Sources */,
 				CD6BAA8F1B98DB70008614B0 /* GooglePlace.swift in Sources */,
 				A7C37F631BE0061000FEE8D2 /* CreateGroupTableViewCell.swift in Sources */,
-				CD8A8BDB1BB479CE00E9D471 /* GroupsTableViewController.swift in Sources */,
-				A7FCC50B1BC4CCF600AEDA3F /* WidgetViewController.swift in Sources */,
-				CD4367491BBC75E200309FD0 /* AddGroupTableViewController.swift in Sources */,
 				CD900F831BDE9F520095CB85 /* AddFriendTableViewController.swift in Sources */,
-				CD103A6A1BB9D88D0044166F /* RegisterViewController.swift in Sources */,
 				A71F7D171BD0298300652750 /* RegisterNewViewController.swift in Sources */,
 				CDA9A82D1B9DE9E300D93572 /* MapGoogleViewController.swift in Sources */,
 				CDB0C94D1BCEE0290020BFB5 /* AESCrypt.m in Sources */,
@@ -1242,21 +1179,16 @@
 				CD6BAA991B98DB8A008614B0 /* UIViewExtension.swift in Sources */,
 				AF5E10A21C003063003C0B13 /* CharmTableViewCell.swift in Sources */,
 				A705921B1BD6C65300E737E3 /* NewGroupTableViewCell.swift in Sources */,
-				CDB0FD621BBF0B4500BC6DFA /* AddGroupNameViewController.swift in Sources */,
 				CD1C036C1BA752290073524A /* DataManager.swift in Sources */,
 				CD73C0DB1C0E222F000730F1 /* FriendsInFriendsTableViewCell.swift in Sources */,
 				A70592171BD6C5B600E737E3 /* DesignGroupsTableViewController.swift in Sources */,
 				CDB0C94F1BCEE0290020BFB5 /* NSData+CommonCrypto.m in Sources */,
 				A73BE4CE1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift in Sources */,
 				CDB0C9501BCEE0290020BFB5 /* NSString+Base64.m in Sources */,
-				CD1C036E1BA761550073524A /* FriendsTableViewController.swift in Sources */,
-				CD6BAA931B98DB7F008614B0 /* TypesTableViewController.swift in Sources */,
 				AF5E10A41C003394003C0B13 /* Charm.swift in Sources */,
 				CD0D132D1BB9C29D000D0656 /* User.swift in Sources */,
 				CD43673F1BBC531E00309FD0 /* Group.swift in Sources */,
 				CDAA87801BD55CBE00C883B4 /* LoginViewControllerNew.swift in Sources */,
-				CDB0C95A1BCEE8730020BFB5 /* UserInGroupsCollectionView.swift in Sources */,
-				CD112EC91BC30975000B353C /* GroupTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

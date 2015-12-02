@@ -870,41 +870,51 @@ class DataManager {
     func convertJsonToSharer(json:AnyObject) -> [Sharer] {
         var sharers = [Sharer]()
         if let dic = json as? [NSDictionary] {
-            for sharer in dic {
-                let newSharer = Sharer()
-                newSharer.createdAt = sharer["created_at"] as? String
-                let id = sharer["id"] as! Int
-                
-                newSharer.id = "\(id)"
-                newSharer.until = sharer["until"] as? String
-                if sharer["relation"] as? String == "u2u" {
-                    newSharer.relation = .userToUser
-                    let receiverId = sharer["receiver_user_id"]
-                    let receiverIdFormat = "\(receiverId!)"
-                    newSharer.receiver = receiverIdFormat
+            print(dic)
+
+            if dic.count != 0 {
+                if dic[0]["error"] != nil {
+                    
+                    print("erro")
                 }
-                else if sharer["relation"] as? String == "u2g" {
-                    newSharer.relation = .userToGroup
-                    let receiverId = sharer["receiver_group_id"]
-                    let receiverIdFormat = "\(receiverId!)"
-                    newSharer.receiver = receiverIdFormat
+                else {
+                    for sharer in dic {
+                        let newSharer = Sharer()
+                        newSharer.createdAt = sharer["created_at"] as? String
+                        let id = sharer["id"] as! Int
+                        
+                        newSharer.id = "\(id)"
+                        newSharer.until = sharer["until"] as? String
+                        if sharer["relation"] as? String == "u2u" {
+                            newSharer.relation = .userToUser
+                            let receiverId = sharer["receiver_user_id"]
+                            let receiverIdFormat = "\(receiverId!)"
+                            newSharer.receiver = receiverIdFormat
+                        }
+                        else if sharer["relation"] as? String == "u2g" {
+                            newSharer.relation = .userToGroup
+                            let receiverId = sharer["receiver_group_id"]
+                            let receiverIdFormat = "\(receiverId!)"
+                            newSharer.receiver = receiverIdFormat
+                        }
+                        
+                        newSharer.updatedAt = sharer["updated_at"] as? String
+                        
+                        let ownerId = sharer["owner_user_id"]
+                        let ownerIdFormat = "\(ownerId!)"
+                        newSharer.owner = ownerIdFormat
+                        if let status = sharer["status"] {
+                            let statusString  = status as! String
+                            newSharer.status = statusString
+                        }
+                        
+                        
+                        
+                        sharers.append(newSharer)
+                    }
                 }
-                
-                newSharer.updatedAt = sharer["updated_at"] as? String
-                
-                let ownerId = sharer["owner_user_id"]
-                let ownerIdFormat = "\(ownerId!)"
-                newSharer.owner = ownerIdFormat
-                if let status = sharer["status"] {
-                    let statusString  = status as! String
-                    newSharer.status = statusString
-                }
-                
-                
-                
-                sharers.append(newSharer)
-            }
             
+            }
         }
         return sharers
     }

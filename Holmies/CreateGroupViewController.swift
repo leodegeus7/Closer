@@ -109,7 +109,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
             referenceArray = DataManager.sharedInstance.allFriends
         }
         
-        cell.friendName.text = referenceArray[indexPath.row].name
+        cell.friendName.text = referenceArray[indexPath.row].username
         cell.friendPhoto.image = DataManager.sharedInstance.findImage("\(referenceArray[indexPath.row].userID)")
         
         

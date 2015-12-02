@@ -241,7 +241,7 @@ class CirclesTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if DataManager.sharedInstance.allGroup.count < 1 {
+        if DataManager.sharedInstance.allGroup.count == 0 {
             self.noGroups = true
         }
         else {
@@ -405,31 +405,38 @@ class CirclesTableViewController: UITableViewController {
                     }
                     
                     if let _ = DataManager.sharedInstance.allGroup[indexPath.row].users {
+                        var  i = 0
                         for user in DataManager.sharedInstance.allGroup[indexPath.row].users {
                             let imageName = DataManager.sharedInstance.findImage(user.userID)
                             
                             let status = DataManager.sharedInstance.findStatusOfUserInGroup(user.userID, groupId: DataManager.sharedInstance.allGroup[indexPath.row].id)
                             
-                            let imageView = UIImageView(image: imageName)
+                          
+                            let imageView = UIImageView(frame: CGRect(x: imageX, y: 0, width: sizeOfImageWidth, height: sizeOfImageHeight))
+                            imageView.image = imageName
                             
+                            imageView.frame = CGRect(x: imageX, y: 0, width: sizeOfImageWidth, height: sizeOfImageHeight)
                             imageView.layer.cornerRadius = 22.85 / 414 * self.view.frame.size.width
-                            
+                        
                             print("tamanho da tela: \(self.view.frame.size.width)")
                             
                             if status == "accepted" {
                                 imageView.layer.borderWidth = 2.0
                             } else {
                                 imageView.layer.borderWidth = 0
+                                imageView.alpha = 0.6
+
                             }
                             
                             imageView.layer.borderColor = mainRed.CGColor
                             imageView.clipsToBounds = true
                             
-                            imageView.frame = CGRect(x: imageX, y: 0, width: sizeOfImageWidth, height: sizeOfImageHeight)
+
+                            if i < 5 {
                             
-                            
-                            cellActive.scrollViewFriends.addSubview(imageView)
-                            imageX += sizeOfImageWidth + spaceInCell
+                                cellActive.scrollViewFriends.addSubview(imageView)
+                                imageX += sizeOfImageWidth + spaceInCell}
+                            i++
                             
                         }
                     }

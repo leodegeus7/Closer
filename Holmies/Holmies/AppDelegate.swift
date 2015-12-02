@@ -83,6 +83,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
             self.window?.rootViewController = viewController
             self.window?.makeKeyAndVisible()
             
+            if (DataManager.sharedInstance.testIfFileExistInDocuments("/friends.json")) {
+                let dic = DataManager.sharedInstance.loadJsonFromDocuments("friends")
+                DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(dic)
+            }
+            
             if (DataManager.sharedInstance.testIfFileExistInDocuments("/sharers.json")) {
                 let dic = DataManager.sharedInstance.loadJsonFromDocuments("sharers")
                 DataManager.sharedInstance.allSharers = DataManager.sharedInstance.convertJsonToSharer(dic)
@@ -96,6 +101,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
                 let dic = DataManager.sharedInstance.loadJsonFromDocuments("activeGroups")
                 DataManager.sharedInstance.activeGroup = DataManager.sharedInstance.convertJsonToGroup(dic)
             }
+            
+
             
             if (DataManager.sharedInstance.testIfFileExistInDocuments("/myInfo.json")) {
                 DataManager.sharedInstance.loadMyInfo()
