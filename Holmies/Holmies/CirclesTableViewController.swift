@@ -238,7 +238,7 @@ class CirclesTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if DataManager.sharedInstance.allGroup.count < 1 {
+        if DataManager.sharedInstance.allGroup.count == 0 {
             self.noGroups = true
         }
         else {
