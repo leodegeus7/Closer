@@ -110,7 +110,7 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
                 cell.friendName.textColor = UIColor.redColor()
             }
             
-            cell.friendName.text = DataManager.sharedInstance.activeUsers[indexPath.row].name
+            cell.friendName.text = DataManager.sharedInstance.activeUsers[indexPath.row].username
             cell.friendPhoto.image = DataManager.sharedInstance.findImage("\(DataManager.sharedInstance.activeUsers[indexPath.row].userID)")
             
             

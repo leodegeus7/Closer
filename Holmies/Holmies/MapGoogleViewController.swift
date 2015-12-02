@@ -78,6 +78,12 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmAccepted:", name: "charmAccepted", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmReceived:", name: "charmReceived", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmFound:", name: "charmFound", object: nil)
+
+        
         mapView.delegate = self   //delegate das funçoes do google maps
         mapView.mapType = kGMSTypeNormal
         self.setUpBackgrounGradient()
@@ -128,6 +134,9 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
                 
                 
             }
+        }
+        else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem()
         }
         
         
@@ -188,15 +197,22 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 
     func goBack () {
         if self.isCharm {
-            let alert = UIAlertController(title: "Charme", message: "Você encontrou \(DataManager.sharedInstance.activeUsers[0].name)?", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Sim", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+            let alert = UIAlertController(title: "Charm", message: "Did you find \(DataManager.sharedInstance.activeUsers[0].name)?", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                 
                 var charm = Charm()
-                
+                var charmIndex = 0
+                var index = 0
                 for testCharm in DataManager.sharedInstance.myCharms {
                     if testCharm.sharer.id == DataManager.sharedInstance.selectedSharer[0].id {
                         charm = testCharm
+                        charmIndex = index
                     }
+                    index++
                 }
                 
                 
@@ -204,13 +220,14 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
                 self.helper.updateSharerWithID(charm.sharer.id, until: nil, status: "found", completion: { (result) -> Void in
                     self.navigationController?.popViewControllerAnimated(true)
                     DataManager.sharedInstance.isCharm = false
+                    if DataManager.sharedInstance.lastCharms.count != 0 {
+                        DataManager.sharedInstance.lastCharms[charmIndex] = charm
+                    }
                 })
                 
                 
             }))
-            alert.addAction(UIAlertAction(title: "Não", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
 
-            }))
             self.presentViewController(alert, animated: true, completion: nil)
 
         }
@@ -241,9 +258,9 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         }
         else {
             print("App em background. Coord: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
-            let marker = GMSMarker(position: CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude))
-            marker.title = "\(newLocation.coordinate.latitude) e \(newLocation.coordinate.longitude)"
-            marker.map = mapView
+//            let marker = GMSMarker(position: CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude))
+//            marker.title = "\(newLocation.coordinate.latitude) e \(newLocation.coordinate.longitude)"
+//            marker.map = mapView
             let userInfoCoordinate = ["local":newLocation]
             DataManager.sharedInstance.createLocalNotification("oi", body: "\(newLocation.coordinate.latitude)", timeAfterClose: 10,userInfo:userInfoCoordinate)
         }
@@ -499,17 +516,24 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 
         
     }
-//    func charmAccepted(notification: NSNotification) {
-//        self.navigationController?.popToRootViewControllerAnimated()(true) { () -> Void in
-//            NSNotificationCenter.defaultCenter().postNotification(notification)
-//        }
-//    }
-//    
-//    func charmReceived(notification: NSNotification) {
-//        self.dismissViewControllerAnimated(true) { () -> Void in
-//            NSNotificationCenter.defaultCenter().postNotification(notification)
-//        }
-//    }
+    func charmAccepted(notification: NSNotification) {
+//        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
+    func charmReceived(notification: NSNotification) {
+//        self.navigationController?.popToRootViewControllerAnimated(true)
+
+    }
+    
+    func charmFound(notification: NSNotification) {
+        let friendName = DataManager.sharedInstance.activeUsers[0].name
+        let alert = UIAlertController(title: "Found", message: "\(friendName) has found you", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+            self.navigationController?.popToRootViewControllerAnimated(true)
+        }))
+        self.presentViewController(alert, animated: true, completion: nil)
+
+    }
     
     func draggedViewDown(sender:UISwipeGestureRecognizer) {
         print("swipe down")
