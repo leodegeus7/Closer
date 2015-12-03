@@ -24,7 +24,8 @@ class GoogleDataProvider {
     var urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=\(apiKey)&location=\(coordinate.latitude),\(coordinate.longitude)&radius=\(radius)&rankby=prominence&sensor=true"
     let typesString = types.count > 0 ? types.joinWithSeparator("|") : "food"
     urlString += "&types=\(typesString)"
-    urlString = urlString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+    //urlString = urlString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+    urlString = urlString.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!
 
     
     if placesTask.taskIdentifier > 0 && placesTask.state == .Running {

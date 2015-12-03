@@ -34,7 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         DataManager.sharedInstance.locationManager.delegate = self
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "update", name: "delegateUpdate", object: nil)
-        
+        DataManager.sharedInstance.windows = window?.rootViewController
+
         
         
         // Register for Push Notitications

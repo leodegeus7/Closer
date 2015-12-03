@@ -737,7 +737,6 @@
 				A70592161BD6C5B600E737E3 /* DesignGroupsTableViewController.swift */,
 				CD721F901BF2641A0013A3C5 /* FriendsInMapTableViewController.swift */,
 				CD73C0DC1C0E2478000730F1 /* AddFriendWithFriendsViewController.swift */,
-				CD6BAA941B98DB8A008614B0 /* MarkerInfoView.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -763,6 +762,7 @@
 				CD1C036B1BA752290073524A /* DataManager.swift */,
 				CD6BAAA91B98DE23008614B0 /* Holmies-Bridging.m */,
 				A7C37F621BE0061000FEE8D2 /* CreateGroupTableViewCell.swift */,
+				CD6BAA941B98DB8A008614B0 /* MarkerInfoView.swift */,
 				A705921A1BD6C65300E737E3 /* NewGroupTableViewCell.swift */,
 				CD900F801BDE9F260095CB85 /* AddFriendTableViewCell.swift */,
 				A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */,

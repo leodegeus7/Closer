@@ -48,6 +48,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     @IBOutlet weak var friendPhoto: UIImageView!
     @IBOutlet weak var friendDistance: UILabel!
     
+    var timer = NSTimer()
+    
     
     var mapRadius: Double {
         get {
@@ -69,11 +71,13 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmAccepted:", name: "charmAccepted", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmReceived:", name: "charmReceived", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmFound:", name: "charmFound", object: nil)
-
+        
+        
+        DataManager.sharedInstance.updateLocationUsers(mapView)
         
         mapView.delegate = self   //delegate das funçoes do google maps
         mapView.mapType = kGMSTypeNormal
@@ -82,7 +86,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         DataManager.sharedInstance.activeMap = self.mapView
         
         
-        DataManager.sharedInstance.updateLocationUsers(mapView)
+
         self.compassView.hidden = true
         mapView.settings.compassButton = true
 
@@ -138,6 +142,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     }
     
     override func viewDidAppear(animated: Bool) {
+
+        
         DataManager.sharedInstance.activeView = "map"
         DataManager.sharedInstance.locationManager.delegate = self
         let status = CLLocationManager.authorizationStatus()
@@ -147,13 +153,15 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
             mapView.settings.myLocationButton = true    //coloca o botão de localizar user
         }
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToSelectedFriend:", name: "goToUser", object: nil)
+        
+        timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("updateLocationInMap"), userInfo: nil, repeats: true)
     }
     
     override func viewDidDisappear(animated: Bool) {
         //NSNotificationCenter.defaultCenter().removeObserver(self, name: "goToUser", object: nil)
         DataManager.sharedInstance.locationManager.delegate = nil
         DataManager.sharedInstance.activeView = "circles"
-
+        timer.invalidate()
 
     }
     
@@ -388,8 +396,25 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         
         if let infoView = UIView.viewFromNibName("MarkerInfoView") as? MarkerInfoView {
             let userInMarker = marker.userData as! User
-            infoView.nameLabel.text = userInMarker.name
+            
+            let updateHour = userInMarker.updatedAt
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
+            dateFormatter.timeZone = NSTimeZone(name: "UTC")
+            
+            let date = dateFormatter.dateFromString(updateHour)
+
+            var shortDate: String {
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "dd-MM-yyyy HH::mm:ss"
+                return dateFormatter.stringFromDate(date!)
+            }
+            
+
+            
+            infoView.nameLabel.text = "\(userInMarker.name)\nLast Update:\n\(shortDate)"
             infoView.userPhoto.image = DataManager.sharedInstance.findImage("\(userInMarker.userID)")
+            
             return infoView
         } else {
             
@@ -509,7 +534,12 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 ////        
 //        
 //    }
-//    
+    
+//  
+    
+    func updateLocationInMap() {
+         DataManager.sharedInstance.updateLocationUsers(mapView)
+    }
     
 
 }
