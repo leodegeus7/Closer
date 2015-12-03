@@ -67,6 +67,7 @@ class CirclesTableViewController: UITableViewController {
                 }
         
         
+        self.refreshControl?.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
 
         
         let refresh = UIRefreshControl()
@@ -82,14 +83,13 @@ class CirclesTableViewController: UITableViewController {
         
         DataManager.sharedInstance.selectedFriends.removeAll()
         
+        if refreshControl?.refreshing == false {
         
+            self.refreshControl?.beginRefreshing()
+        }
+
         
-        self.refreshControl?.beginRefreshing()
-        
-        
-        
-        
-        let timer = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("reloadData"), userInfo: nil, repeats: true)
+        timer2 = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("reloadData"), userInfo: nil, repeats: true)
         
         
         
@@ -179,22 +179,27 @@ class CirclesTableViewController: UITableViewController {
         DataManager.sharedInstance.linkGroupAndUserToSharer { (result) -> Void in
             self.tableView.reloadData()
             
-            
+        
             
             
         }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "existGroups", name:"ExistGroup", object: nil)
-
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "UpdateTableView", userInfo: nil, repeats: true)
         
     }
     
     override func viewDidDisappear(animated: Bool) {
         //NSNotificationCenter.defaultCenter().removeObserver(self, name: "ExistGroup", object: nil)
+        timer.invalidate()
     }
     
     func existGroups() {
         noGroups = false
+    }
+    
+    func UpdateTableView() {
+        tableView.reloadData()
     }
 
     
@@ -261,6 +266,9 @@ class CirclesTableViewController: UITableViewController {
             return DataManager.sharedInstance.allGroup.count
         }
         else {
+            if DataManager.sharedInstance.myCharms.count == 0 {
+                return 1
+            }
             return DataManager.sharedInstance.myCharms.count
         }
     }
@@ -282,11 +290,15 @@ class CirclesTableViewController: UITableViewController {
     }
     
     func reloadData() {
-        NSNotificationCenter.defaultCenter().postNotificationName("delegateUpdate", object: nil)
-
         self.tableView.reloadData()
-            DataManager.sharedInstance.requestSharers { (result) -> Void in
+        NSNotificationCenter.defaultCenter().postNotificationName("delegateUpdate", object: nil)
+        
+        DataManager.sharedInstance.requestSharers { (result) -> Void in
+            
+            
+            DataManager.sharedInstance.requestGroups { (result) -> Void in
                 
+                DataManager.sharedInstance.allGroup = DataManager.sharedInstance.convertJsonToGroup(result)
                 
                 DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
                     print("\(result)")
@@ -310,18 +322,39 @@ class CirclesTableViewController: UITableViewController {
                     let myPhoto = DataManager.sharedInstance.getProfPic(DataManager.sharedInstance.myUser.facebookID, serverId: DataManager.sharedInstance.myUser.userID)
                     DataManager.sharedInstance.saveImage(myPhoto, id: DataManager.sharedInstance.myUser.userID)
                     
-//                    for index in TE {
-//                        
-//                        
-//                        if !(index.facebookID == nil) && !(index.userID == nil) {
-//                            let image = DataManager.sharedInstance.getProfPic(index.facebookID, serverId: index.userID)
-//                            DataManager.sharedInstance.saveImage(image, id: index.userID)
-//                        }
-//                    }
+                    //                    for index in TE {
+                    //
+                    //
+                    //                        if !(index.facebookID == nil) && !(index.userID == nil) {
+                    //                            let image = DataManager.sharedInstance.getProfPic(index.facebookID, serverId: index.userID)
+                    //                            DataManager.sharedInstance.saveImage(image, id: index.userID)
+                    //                        }
+                    //                    }
                     
                 }
-            DataManager.sharedInstance.saveMyInfo()
+                DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(friends)
+                
+                if DataManager.sharedInstance.allGroup.count < 1 {
+                    self.noGroups = true
+                }
+                else {
+                    self.noGroups = false
+                }
+                DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
+                    print("\(result)")
+                    self.tableView.reloadData()
+                    if self.refreshControl?.refreshing == true {
+                        
+                        self.refreshControl?.endRefreshing()
+                    }
+                    DataManager.sharedInstance.finishedAllRequest = true
+                    
+                })
+                
+                
+            }
         }
+        DataManager.sharedInstance.saveMyInfo()
     }
     
     
@@ -341,15 +374,17 @@ class CirclesTableViewController: UITableViewController {
                 
                 let emptyGroup = tableView.dequeueReusableCellWithIdentifier("noGroup", forIndexPath: indexPath) as! EmptyGroupTableViewCell
                 self.tableView.rowHeight = 100
+                emptyGroup.imageEmpty.layer.borderWidth = 2.0
                 emptyGroup.imageEmpty.layer.cornerRadius = emptyGroup.imageEmpty.frame.size.width
                 emptyGroup.imageEmpty.layer.borderColor = lightBlue.CGColor
-                emptyGroup.imageEmpty.layer.borderWidth = 2.0
+
                 emptyGroup.firstLabel.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
                 emptyGroup.firstLabel.textColor = mainRed
                 emptyGroup.secondLabel.font = UIFont(name: "SFCompactDisplay-Light", size: 17)
                 emptyGroup.secondLabel.textColor = UIColor.blackColor()
-                    
-                
+                emptyGroup.firstLabel.text = "No groups"
+                emptyGroup.secondLabel.text = "Click here to create a group"
+                emptyGroup.tag = 999
                 return emptyGroup
                 
             }
@@ -621,6 +656,33 @@ class CirclesTableViewController: UITableViewController {
             
         }
         else {
+            
+            
+            
+            if DataManager.sharedInstance.myCharms.count == 0 {
+                let emptyGroup = tableView.dequeueReusableCellWithIdentifier("noGroup", forIndexPath: indexPath) as! EmptyGroupTableViewCell
+                self.tableView.rowHeight = 100
+                emptyGroup.imageEmpty.layer.cornerRadius = emptyGroup.imageEmpty.frame.size.width
+                emptyGroup.imageEmpty.layer.borderColor = lightBlue.CGColor
+                emptyGroup.imageEmpty.layer.borderWidth = 2.0
+                emptyGroup.firstLabel.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
+                emptyGroup.firstLabel.textColor = mainRed
+                emptyGroup.firstLabel.text = "No charms"
+                emptyGroup.secondLabel.font = UIFont(name: "SFCompactDisplay-Light", size: 17)
+                emptyGroup.secondLabel.textColor = UIColor.blackColor()
+                emptyGroup.secondLabel.text = "Click here to send a charm"
+                emptyGroup.tag = 998
+                
+                
+                return emptyGroup
+            }
+            
+            
+            
+            
+            
+            
+            
             let charmCell = tableView.dequeueReusableCellWithIdentifier("charmCell", forIndexPath: indexPath) as! CharmTableViewCell
             self.tableView.rowHeight = 200
 
@@ -719,7 +781,10 @@ class CirclesTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+
         let cell = tableView.cellForRowAtIndexPath(indexPath)
+                print(cell!.tag)
         if cell?.tag == 100 {
 //            let groupName = DataManager.sharedInstance.allGroup[indexPath.row].name
 //            let alert = UIAlertController(title: "Attention", message: "\(groupName) is expired.", preferredStyle: UIAlertControllerStyle.Alert)
@@ -737,17 +802,7 @@ class CirclesTableViewController: UITableViewController {
             performSegueWithIdentifier("addGroup", sender: self)
         }
         else if cell?.tag == 2 {
-            if (DataManager.sharedInstance.allGroup[indexPath.row].users == nil) {
-                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Espere", message: "Espere terminar o request", button1: "OK")
-                
-            }
-            else {
-                
-                
-                
-                
-                
-                
+
                 if shareTypeSegmentedControl.selectedSegmentIndex == 0 {
                    
                     DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
@@ -777,8 +832,11 @@ class CirclesTableViewController: UITableViewController {
 
                 }
                 
-            }
             
+            
+        }
+        else if cell?.tag == 999 || cell?.tag == 998 {
+            performSegueWithIdentifier("addGroup", sender: self)
         }
     }
     

@@ -19,21 +19,21 @@
                         <constraint firstAttribute="height" constant="60" id="xZw-Dg-eb3"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" preferredMaxLayoutWidth="134" translatesAutoresizingMaskIntoConstraints="NO" id="Ggu-GN-94s">
-                    <rect key="frame" x="8" y="0.0" width="134" height="38"/>
-                    <animations/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="38" id="3yP-OK-bTC"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hu1-vd-baI">
                     <rect key="frame" x="54" y="106" width="42" height="44"/>
                     <animations/>
                     <state key="normal" image="pin.png"/>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" preferredMaxLayoutWidth="134" translatesAutoresizingMaskIntoConstraints="NO" id="Ggu-GN-94s">
+                    <rect key="frame" x="8" y="0.0" width="134" height="38"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="38" id="3yP-OK-bTC"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

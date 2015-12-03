@@ -50,6 +50,9 @@ class DataManager {
     
     var badgeNumber = 0
     
+    var windows:UIViewController!
+    let mainRed: UIColor = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
+    let lightBlue:UIColor = UIColor(red: 61.0/255.0, green: 210.0/255.0, blue: 228.0/255.0, alpha: 1)
     
     lazy var locationManager: CLLocationManager! = {
         let manager = CLLocationManager()
@@ -572,40 +575,44 @@ class DataManager {
                 let lat = user.location.latitude
                 let long = user.location.longitude
                 let date = user.updatedAt
+                if lat != "" {
                 
                 
                 
-                
-                let latitudeConvertida = (lat as NSString).doubleValue as CLLocationDegrees
-                let longitudeConvertida = (long as NSString).doubleValue as CLLocationDegrees
-                let position = CLLocationCoordinate2D(latitude: latitudeConvertida, longitude: longitudeConvertida)
-                let marker = GMSMarker(position: position)
-                marker.title = name
-                marker.snippet = date
-                marker.icon = GMSMarker.markerImageWithColor(UIColor.blueColor())
-                marker.infoWindowAnchor = CGPointMake(0.5, 0.5)
-                marker.map = mapView
-                marker.userData = user
-                
-                
-                let topImage = findImage(user.userID)
-                let topImageView = UIImageView(image: topImage)
-                let bottomImage = UIImage(named: "pin2.png")
-                topImageView.bounds.size = CGSizeMake(120, 120)
-                topImageView.layer.cornerRadius = 60
-                topImageView.clipsToBounds = true
-                let newSize = CGSizeMake((bottomImage!.size.width), (bottomImage!.size.height))
-                UIGraphicsBeginImageContext(newSize)
-                bottomImage!.drawInRect(CGRectMake(0, 0, newSize.width, newSize.height))
-                UIGraphicsBeginImageContextWithOptions(topImageView.bounds.size, topImageView.opaque, 0.0)
-                topImageView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
-                let ui2 = UIGraphicsGetImageFromCurrentImageContext()
-                UIGraphicsEndImageContext()
-                ui2.drawAtPoint(CGPointMake(12,15), blendMode: CGBlendMode.Normal, alpha: 1.0)
-                let newImage = UIGraphicsGetImageFromCurrentImageContext()
-                let resizedImage = imageResize(newImage, sizeChange: CGSizeMake(60,80.625))
-                marker.icon = resizedImage
-            }
+                    let latitudeConvertida = (lat as NSString).doubleValue as CLLocationDegrees
+                    let longitudeConvertida = (long as NSString).doubleValue as CLLocationDegrees
+                    let position = CLLocationCoordinate2D(latitude: latitudeConvertida, longitude: longitudeConvertida)
+                    let marker = GMSMarker(position: position)
+                    marker.title = name
+                    marker.snippet = date
+                    marker.icon = GMSMarker.markerImageWithColor(UIColor.blueColor())
+                    marker.infoWindowAnchor = CGPointMake(0.5, 0.5)
+                    marker.map = mapView
+                    marker.userData = user
+                    
+                    
+                    let topImage = findImage(user.userID)
+                    let topImageView = UIImageView(image: topImage)
+                    let bottomImage = UIImage(named: "pin2.png")
+                    topImageView.bounds.size = CGSizeMake(120, 120)
+                    topImageView.layer.cornerRadius = 60
+                    topImageView.clipsToBounds = true
+                    let newSize = CGSizeMake((bottomImage!.size.width), (bottomImage!.size.height))
+                    UIGraphicsBeginImageContext(newSize)
+                    bottomImage!.drawInRect(CGRectMake(0, 0, newSize.width, newSize.height))
+                    UIGraphicsBeginImageContextWithOptions(topImageView.bounds.size, topImageView.opaque, 0.0)
+                    topImageView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+                    let ui2 = UIGraphicsGetImageFromCurrentImageContext()
+                    UIGraphicsEndImageContext()
+                    ui2.drawAtPoint(CGPointMake(12,15), blendMode: CGBlendMode.Normal, alpha: 1.0)
+                    let newImage = UIGraphicsGetImageFromCurrentImageContext()
+                    let resizedImage = imageResize(newImage, sizeChange: CGSizeMake(60,80.625))
+                    marker.icon = resizedImage
+                }
+                else {
+                    createSimpleUIAlert(windows, title: "Attencion", message: "\(user.name) nao foi localizado", button1: "Ok")
+                }
+                }
             }
         }
     }
