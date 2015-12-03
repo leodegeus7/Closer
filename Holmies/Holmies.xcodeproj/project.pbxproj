@@ -16,7 +16,6 @@
 		A71F7D0E1BD0215E00652750 /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = A71F7D0D1BD0215E00652750 /* pin.png */; };
 		A71F7D151BD0288E00652750 /* photoButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A71F7D141BD0288E00652750 /* photoButton.png */; };
 		A71F7D171BD0298300652750 /* RegisterNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71F7D161BD0298300652750 /* RegisterNewViewController.swift */; };
-		A71F7D1F1BD183C200652750 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A71F7D1E1BD183C200652750 /* Main.storyboard */; };
 		A72BDBE71C0CC4BE00D0CA84 /* redLights.png in Resources */ = {isa = PBXBuildFile; fileRef = A72BDBE61C0CC4BE00D0CA84 /* redLights.png */; };
 		A73BE4CE1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */; };
 		A760AAB01BFA457A00214F06 /* MarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A760AAAF1BFA457A00214F06 /* MarkerView.xib */; };
@@ -65,7 +64,6 @@
 		A7C37FC81BE11E3600FEE8D2 /* grayCheck.png in Resources */ = {isa = PBXBuildFile; fileRef = A7C37FC61BE11E3600FEE8D2 /* grayCheck.png */; };
 		A7D2A4B01BCE90E6006A55D1 /* redBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D2A4AF1BCE90E6006A55D1 /* redBackground.png */; };
 		A7FA0E081C078E1A006D2CC5 /* compass2.png in Resources */ = {isa = PBXBuildFile; fileRef = A7FA0E071C078E1A006D2CC5 /* compass2.png */; };
-		A7FCC5121BC4CD1D00AEDA3F /* Main2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FCC5111BC4CD1D00AEDA3F /* Main2.storyboard */; };
 		A7FCC5191BC4CE5B00AEDA3F /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7FCC5181BC4CE5B00AEDA3F /* NotificationCenter.framework */; };
 		A7FCC51C1BC4CE5B00AEDA3F /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FCC51B1BC4CE5B00AEDA3F /* TodayViewController.swift */; };
 		A7FCC5291BC4CE9B00AEDA3F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FCC5281BC4CE9B00AEDA3F /* MainInterface.storyboard */; };
@@ -116,6 +114,7 @@
 		CD721F911BF2641A0013A3C5 /* FriendsInMapTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD721F901BF2641A0013A3C5 /* FriendsInMapTableViewController.swift */; };
 		CD73C0DB1C0E222F000730F1 /* FriendsInFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD73C0DA1C0E222F000730F1 /* FriendsInFriendsTableViewCell.swift */; };
 		CD73C0DD1C0E2478000730F1 /* AddFriendWithFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD73C0DC1C0E2478000730F1 /* AddFriendWithFriendsViewController.swift */; };
+		CD73C0E01C105F8B000730F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD73C0DF1C105F8B000730F1 /* Main.storyboard */; };
 		CD900F811BDE9F260095CB85 /* AddFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900F801BDE9F260095CB85 /* AddFriendTableViewCell.swift */; };
 		CD900F831BDE9F520095CB85 /* AddFriendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900F821BDE9F520095CB85 /* AddFriendTableViewController.swift */; };
 		CDA9A82D1B9DE9E300D93572 /* MapGoogleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */; };
@@ -234,7 +233,6 @@
 		A71F7D0D1BD0215E00652750 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = "<group>"; };
 		A71F7D141BD0288E00652750 /* photoButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoButton.png; sourceTree = "<group>"; };
 		A71F7D161BD0298300652750 /* RegisterNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterNewViewController.swift; sourceTree = "<group>"; };
-		A71F7D1E1BD183C200652750 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A72BDBE61C0CC4BE00D0CA84 /* redLights.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redLights.png; sourceTree = "<group>"; };
 		A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveGroupTableViewCell.swift; sourceTree = "<group>"; };
 		A760AAAF1BFA457A00214F06 /* MarkerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarkerView.xib; sourceTree = "<group>"; };
@@ -292,7 +290,6 @@
 		A7D2A4AF1BCE90E6006A55D1 /* redBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redBackground.png; sourceTree = "<group>"; };
 		A7F3899D1BD56F4500DF2D7C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7FA0E071C078E1A006D2CC5 /* compass2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compass2.png; sourceTree = "<group>"; };
-		A7FCC5111BC4CD1D00AEDA3F /* Main2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main2.storyboard; sourceTree = "<group>"; };
 		A7FCC5171BC4CE5B00AEDA3F /* widget3.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widget3.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7FCC5181BC4CE5B00AEDA3F /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		A7FCC51B1BC4CE5B00AEDA3F /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -354,6 +351,7 @@
 		CD721F901BF2641A0013A3C5 /* FriendsInMapTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsInMapTableViewController.swift; sourceTree = "<group>"; };
 		CD73C0DA1C0E222F000730F1 /* FriendsInFriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsInFriendsTableViewCell.swift; sourceTree = "<group>"; };
 		CD73C0DC1C0E2478000730F1 /* AddFriendWithFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendWithFriendsViewController.swift; sourceTree = "<group>"; };
+		CD73C0DF1C105F8B000730F1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CD900F801BDE9F260095CB85 /* AddFriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendTableViewCell.swift; sourceTree = "<group>"; };
 		CD900F821BDE9F520095CB85 /* AddFriendTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendTableViewController.swift; sourceTree = "<group>"; };
 		CD92FB331BDEBE1200BEAA8E /* SF-Compact-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Display-Black.otf"; sourceTree = "<group>"; };
@@ -795,9 +793,8 @@
 				CD6BAA5B1B98D946008614B0 /* Images.xcassets */,
 				A78A97F31BE3F7F300D5994B /* Design.storyboard */,
 				CD6BAA5D1B98D946008614B0 /* LaunchScreen.xib */,
-				A71F7D1E1BD183C200652750 /* Main.storyboard */,
-				A7FCC5111BC4CD1D00AEDA3F /* Main2.storyboard */,
 				A760AAAF1BFA457A00214F06 /* MarkerView.xib */,
+				CD73C0DF1C105F8B000730F1 /* Main.storyboard */,
 				CD6BAA951B98DB8A008614B0 /* MarkerInfoView.xib */,
 				A7D2A4B11BCE90EF006A55D1 /* Design */,
 			);
@@ -1043,7 +1040,6 @@
 				A760AAB41BFA488100214F06 /* pin025.png in Resources */,
 				A7C37FB21BE00A8500FEE8D2 /* SF-UI-Display-Light.otf in Resources */,
 				A7C37FB71BE00A8500FEE8D2 /* SF-UI-Display-Ultralight.otf in Resources */,
-				A71F7D1F1BD183C200652750 /* Main.storyboard in Resources */,
 				A7C37FB81BE00A8500FEE8D2 /* SF-UI-Text-Bold.otf in Resources */,
 				A7C37FBF1BE00A8500FEE8D2 /* SF-UI-Text-Medium.otf in Resources */,
 				CD6BAA981B98DB8A008614B0 /* MarkerInfoView.xib in Resources */,
@@ -1071,11 +1067,11 @@
 				A7C37FA61BE00A8500FEE8D2 /* SF-Compact-Display-Black.otf in Resources */,
 				A7C37FBE1BE00A8500FEE8D2 /* SF-UI-Text-LightItalic.otf in Resources */,
 				A760AAB01BFA457A00214F06 /* MarkerView.xib in Resources */,
-				A7FCC5121BC4CD1D00AEDA3F /* Main2.storyboard in Resources */,
 				A7FA0E081C078E1A006D2CC5 /* compass2.png in Resources */,
 				A7FEFB551BDE9E3600DFEC1E /* radialGradient.png in Resources */,
 				A7C37FA91BE00A8500FEE8D2 /* SF-Compact-Display-Light.otf in Resources */,
 				A7C37F5D1BDFF86000FEE8D2 /* newUser3.png in Resources */,
+				CD73C0E01C105F8B000730F1 /* Main.storyboard in Resources */,
 				A7C37FB01BE00A8500FEE8D2 /* SF-UI-Display-Bold.otf in Resources */,
 				A7C37FB91BE00A8500FEE8D2 /* SF-UI-Text-BoldItalic.otf in Resources */,
 				CD103A741BBB07470044166F /* ovalLaranja.png in Resources */,
