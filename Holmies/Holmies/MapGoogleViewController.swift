@@ -80,11 +80,9 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmAccepted:", name: "charmAccepted", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmReceived:", name: "charmReceived", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmFound:", name: "charmFound", object: nil)
         
-        
+        DataManager.sharedInstance.activeView = "map"
         DataManager.sharedInstance.updateLocationUsers(mapView)
         
         mapView.delegate = self   //delegate das funçoes do google maps
@@ -559,12 +557,24 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     }
     
     func charmFound(notification: NSNotification) {
-        let friendName = DataManager.sharedInstance.activeUsers[0].name
-        let alert = UIAlertController(title: "Found", message: "\(friendName) has found you", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
-            self.navigationController?.popToRootViewControllerAnimated(true)
-        }))
-        self.presentViewController(alert, animated: true, completion: nil)
+        if DataManager.sharedInstance.activeView == "map" {
+            if let info = notification.userInfo {
+                if let charmIndex = info["charmIndex"] as? Int {
+                    let charm = DataManager.sharedInstance.myCharms[charmIndex]
+            
+                    let friendName = DataManager.sharedInstance.activeUsers[0].name
+                    let alert = UIAlertController(title: "Found", message: "\(friendName) has found you", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                        self.helper.destroySharerWithSharerType(.userToUser, ownerID: charm.sharer.owner, receiverID: charm.sharer.receiver, completion: { (result) -> Void in
+                            self.navigationController?.popToRootViewControllerAnimated(true)
+                        })
+
+                    }))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                            
+                }
+            }
+        }
 
     }
     

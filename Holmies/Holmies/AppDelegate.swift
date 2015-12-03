@@ -305,7 +305,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
             DataManager.sharedInstance.requestSharers { (result) -> Void in
                 var index = 0
                 for charm in DataManager.sharedInstance.myCharms {
-                    if lastCharms.count == 0 || charm.sharer.status != lastCharms[index].sharer.status {
+                    
+                    if charm.sharer.status == "pending" {
+                        if charm.sharer.receiver == DataManager.sharedInstance.myUser.userID {
+                            let myDict: [String:AnyObject] = [ "charmIndex": index]
+                            NSNotificationCenter.defaultCenter().postNotificationName("charmReceived", object: nil ,userInfo: myDict)
+                        }
+                        else {
+                            let duration = DataManager.sharedInstance.verifySharerStatus(charm.sharer)
+                            
+                            if duration <= 0 {
+                                charm.sharer.status = "expired"
+                                DataManager.sharedInstance.myCharms[index] = charm
+                                self.helper.updateSharerWithID(charm.sharer.id, until: nil, status: "expired", completion: { (result) -> Void in
+                                    
+                                })
+                            }
+                        }
+                    }
+                    
+                    
+                    if lastCharms.count == 0 || charm.sharer.status != lastCharms[index].sharer.status && DataManager.sharedInstance.myCharms.count != 0 {
                         if charm.sharer.status == "accepted" {
                             let myDict: [String:AnyObject] = [ "charmIndex": index]
                             NSNotificationCenter.defaultCenter().postNotificationName("charmAccepted", object: nil ,userInfo: myDict)
@@ -322,12 +342,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
                             let myDict: [String:AnyObject] = [ "charmIndex": index]
                             NSNotificationCenter.defaultCenter().postNotificationName("charmExpired", object: nil ,userInfo: myDict)
                         }
-                        else if charm.sharer.receiver == DataManager.sharedInstance.myUser.userID {
-                            if charm.sharer.status == "pending" {
-                                let myDict: [String:AnyObject] = [ "charmIndex": index]
-                                NSNotificationCenter.defaultCenter().postNotificationName("charmReceived", object: nil ,userInfo: myDict)
-                            }
-                        }
+                        
                     }
                     index++
                 }

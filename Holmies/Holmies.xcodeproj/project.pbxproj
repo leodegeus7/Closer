@@ -760,7 +760,6 @@
 				CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */,
 				CD900F821BDE9F520095CB85 /* AddFriendTableViewController.swift */,
 				CD4FC93F1BED1F810086EC30 /* myInfoViewController.swift */,
-				A70592161BD6C5B600E737E3 /* DesignGroupsTableViewController.swift */,
 				CD721F901BF2641A0013A3C5 /* FriendsInMapTableViewController.swift */,
 				CD73C0DC1C0E2478000730F1 /* AddFriendWithFriendsViewController.swift */,
 			);
@@ -925,7 +924,7 @@
 					};
 					CD6BAA4E1B98D946008614B0 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = H7C2V5GHBN;
+						DevelopmentTeam = 6D9CUA9M4U;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;

@@ -589,6 +589,10 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
                 http.createNewSharerWithType(.userToUser, ownerID: myUser.userID, receiverID: selectedFriend.userID, until: "\(959)", completion: { (result) -> Void in
                     self.navigationController?.popToRootViewControllerAnimated(true)
                 })
+//                http.createNewSharerWithType(.userToUser, ownerID: myUser.userID, receiverID: selectedFriend.userID, until: "\(30)", completion: { (result) -> Void in
+//                    self.navigationController?.popToRootViewControllerAnimated(true)
+//                })
+
             }
             else {
                 DataManager.sharedInstance.createSimpleUIAlert(self, title: "Alerta", message: "Escolha um amigo para enviar o Charme", button1: "Ok")
