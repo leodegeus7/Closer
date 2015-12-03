@@ -45,6 +45,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     @IBOutlet weak var friendPhoto: UIImageView!
     @IBOutlet weak var friendDistance: UILabel!
     
+    var timer = NSTimer()
     @IBOutlet weak var compassViewLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var compassViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var compassViewRightConstraint: NSLayoutConstraint!
@@ -100,7 +101,6 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 //        arrowCompass.addGestureRecognizer(swipeUp)
         
 
-        
         
 
         self.compassView.hidden = true
@@ -603,9 +603,13 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 //        var translation = sender.translationInView(self.view)
 //        sender.view?.center = CGPointMake((sender.view?.center.x)! + translation.x, (sender.view?.center.y)! + translation.y)
 //        
-        
-
+//    }
     
+//  
+    
+    func updateLocationInMap() {
+         DataManager.sharedInstance.updateLocationUsers(mapView)
+    }
     
 
 }

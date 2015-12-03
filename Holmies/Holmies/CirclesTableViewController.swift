@@ -24,6 +24,9 @@ class CirclesTableViewController: UITableViewController {
 
     let app = UIApplication.sharedApplication()
     
+    
+    var timer = NSTimer()
+    var timer2 = NSTimer()
     //view do user
     @IBOutlet weak var imageUserInView: UIImageView!
     @IBOutlet weak var usernameInView: UILabel!
@@ -697,11 +700,10 @@ class CirclesTableViewController: UITableViewController {
             charmCell.userPictureImageView.layer.borderColor = mainRed.CGColor
             charmCell.userPictureImageView.layer.borderWidth = 2
             
+            
             let imageView = UIImageView(image: imageName)
             
-            imageView.layer.cornerRadius = 8.0
-            //            imageView.layer.borderColor = mainRed.CGColor
-            //            imageView.layer.borderWidth = 5.0
+            imageView.layer.cornerRadius = 20.0
             imageView.clipsToBounds = true
             imageView.frame.size = charmCell.userPictureImageView.frame.size
             imageView.frame.origin = CGPoint(x: 0, y: 0)
@@ -1067,12 +1069,16 @@ class CirclesTableViewController: UITableViewController {
                             DataManager.sharedInstance.isCharm = true
                             
                             self.performSegueWithIdentifier("showMap", sender: self)
+    
                         })
                         
 
                     }))
                     alert.addAction(UIAlertAction(title: "Reject", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
                         charm.sharer.status = "rejected"
+                        
+                        DataManager.sharedInstance.myCharms[charmIndex] = charm
+                        
                         self.http.updateSharerWithID(charm.sharer.id, until: nil, status: "rejected", completion: { (result) -> Void in
                             self.reloadData()
                         })
@@ -1097,7 +1103,7 @@ class CirclesTableViewController: UITableViewController {
             if let info = notification.userInfo {
                 if let charmIndex = info["charmIndex"] as? Int {
                     let charm = DataManager.sharedInstance.myCharms[charmIndex]
-                    
+
                     let alert = UIAlertController(title: "Charm", message: "\(charm.friend.name) rejected your charm", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                         
