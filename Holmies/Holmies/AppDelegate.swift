@@ -33,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         DataManager.sharedInstance.locationManager.delegate = self
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "update", name: "delegateUpdate", object: nil)
+        
         
         
         // Register for Push Notitications
@@ -297,19 +299,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
     
     func update() {
         if DataManager.sharedInstance.activeView != "login" {
+            DataManager.sharedInstance.lastCharms = DataManager.sharedInstance.myCharms
+            let lastCharms = DataManager.sharedInstance.lastCharms
             DataManager.sharedInstance.requestSharers { (result) -> Void in
                 var index = 0
                 for charm in DataManager.sharedInstance.myCharms {
-                    if charm.sharer.status == "accepted" {
-                        let myDict: [String:AnyObject] = [ "charmIndex": index]
-                        NSNotificationCenter.defaultCenter().postNotificationName("charmAccepted", object: nil ,userInfo: myDict)
-                    }
-                    if charm.sharer.receiver == DataManager.sharedInstance.myUser.userID {
-                        if charm.sharer.status == "pending" {
+                    if lastCharms.count == 0 || charm.sharer.status != lastCharms[index].sharer.status {
+                        if charm.sharer.status == "accepted" {
                             let myDict: [String:AnyObject] = [ "charmIndex": index]
-                            NSNotificationCenter.defaultCenter().postNotificationName("charmReceived", object: nil ,userInfo: myDict)
+                            NSNotificationCenter.defaultCenter().postNotificationName("charmAccepted", object: nil ,userInfo: myDict)
                         }
-                        
+                        else if charm.sharer.status == "found" {
+                            let myDict: [String:AnyObject] = [ "charmIndex": index]
+                            NSNotificationCenter.defaultCenter().postNotificationName("charmFound", object: nil ,userInfo: myDict)
+                        }
+                        else if charm.sharer.status == "rejected" {
+                            let myDict: [String:AnyObject] = [ "charmIndex": index]
+                            NSNotificationCenter.defaultCenter().postNotificationName("charmRejected", object: nil ,userInfo: myDict)
+                        }
+                        else if charm.sharer.status == "expired" {
+                            let myDict: [String:AnyObject] = [ "charmIndex": index]
+                            NSNotificationCenter.defaultCenter().postNotificationName("charmExpired", object: nil ,userInfo: myDict)
+                        }
+                        else if charm.sharer.receiver == DataManager.sharedInstance.myUser.userID {
+                            if charm.sharer.status == "pending" {
+                                let myDict: [String:AnyObject] = [ "charmIndex": index]
+                                NSNotificationCenter.defaultCenter().postNotificationName("charmReceived", object: nil ,userInfo: myDict)
+                            }
+                        }
                     }
                     index++
                 }

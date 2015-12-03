@@ -43,6 +43,9 @@ class CirclesTableViewController: UITableViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmAccepted:", name: "charmAccepted", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmReceived:", name: "charmReceived", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmRejected:", name: "charmRejected", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmExpired:", name: "charmExpired", object: nil)
+        
 
         
         self.navigationController?.navigationBar.translucent = false
@@ -268,14 +271,11 @@ class CirclesTableViewController: UITableViewController {
     }
     
     func reloadData() {
+        NSNotificationCenter.defaultCenter().postNotificationName("delegateUpdate", object: nil)
 
         self.tableView.reloadData()
-        DataManager.sharedInstance.requestSharers { (result) -> Void in
-            
-            
-            DataManager.sharedInstance.requestGroups { (result) -> Void in
+            DataManager.sharedInstance.requestSharers { (result) -> Void in
                 
-                DataManager.sharedInstance.allGroup = DataManager.sharedInstance.convertJsonToGroup(result)
                 
                 DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
                     print("\(result)")
@@ -309,26 +309,8 @@ class CirclesTableViewController: UITableViewController {
 //                    }
                     
                 }
-                DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(friends)
-
-                if DataManager.sharedInstance.allGroup.count < 1 {
-                    self.noGroups = true
-                }
-                else {
-                    self.noGroups = false
-                }
-                DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
-                    print("\(result)")
-                    self.tableView.reloadData()
-                    self.refreshControl!.endRefreshing()
-                    DataManager.sharedInstance.finishedAllRequest = true
-                    
-                })
-
-                
-            }
+            DataManager.sharedInstance.saveMyInfo()
         }
-        DataManager.sharedInstance.saveMyInfo()
     }
     
     
@@ -653,6 +635,7 @@ class CirclesTableViewController: UITableViewController {
             charmCell.userPictureImageView.addSubview(imageView)
             
             let bgImageView = UIImageView()
+            bgImageView.layer.borderColor = mainRed.CGColor
             bgImageView.layer.cornerRadius = 20.0
             bgImageView.clipsToBounds = true
             bgImageView.frame.size = charmCell.backgroundImage.frame.size
@@ -674,20 +657,42 @@ class CirclesTableViewController: UITableViewController {
             }
             
             if actualSharer.status == "pending" {
-                bgImageView.layer.borderColor = mainRed.CGColor
-                if duration > 60 {
-                    charmCell.remainingTimeLabel.text = "\(duration!/60) minutos restantes"
+                if actualSharer.owner == DataManager.sharedInstance.myUser.userID {
+                    bgImageView.layer.borderColor = mainRed.CGColor
+                    if duration > 60 {
+                        charmCell.remainingTimeLabel.text = "\(duration!/60) minutes remaining"
+                    }
+                    else {
+                        charmCell.remainingTimeLabel.text = "\(duration!) seconds remaining"
+                    }
                 }
                 else {
-                    charmCell.remainingTimeLabel.text = "\(duration!) segundos restantes"
+                    charmCell.remainingTimeLabel.text = "Waiting for approval"
                 }
             }
             else if actualSharer.status == "active" || actualSharer.status == "accepted" {
-                charmCell.remainingTimeLabel.text = "Ativo"
+                charmCell.remainingTimeLabel.text = "Active"
+            }
+            else if actualSharer.status == "found"{
+                charmCell.remainingTimeLabel.text = "Found"
+                bgImageView.layer.borderColor = lightBlue.CGColor
+                self.http.destroySharerWithSharerType(.userToUser, ownerID: actualSharer.owner, receiverID: actualSharer.receiver, completion: { (result) -> Void in
+                    
+                })
+            }
+            else if actualSharer.status == "rejected"{
+                charmCell.remainingTimeLabel.text = "Rejected"
+                bgImageView.layer.borderColor = UIColor.grayColor().CGColor
+                self.http.destroySharerWithSharerType(.userToUser, ownerID: actualSharer.owner, receiverID: actualSharer.receiver, completion: { (result) -> Void in
+                    
+                })
             }
             else {
-                charmCell.remainingTimeLabel.text = "Expirado"
+                charmCell.remainingTimeLabel.text = "Expired"
                 bgImageView.layer.borderColor = UIColor.grayColor().CGColor
+                self.http.destroySharerWithSharerType(.userToUser, ownerID: actualSharer.owner, receiverID: actualSharer.receiver, completion: { (result) -> Void in
+                    
+                })
             }
             charmCell.backgroundImage.addSubview(bgImageView)
             return charmCell
@@ -889,7 +894,7 @@ class CirclesTableViewController: UITableViewController {
                     let deleteCharm = UITableViewRowAction(style: .Destructive, title: "Delete", handler: { (rowAction:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
                         self.http.destroySharerWithSharerType(.userToUser, ownerID: charm.sharer.owner, receiverID: charm.sharer.receiver, completion: { (result) -> Void in
                             self.reloadData()
-                            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Deletado", message: "O charme enviado para \(charm.friend.name) foi removido com sucesso.", button1: "Ok")
+                            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Removed", message: "The charm with \(charm.friend.name) has been removed successfully.", button1: "Ok")
 
                         })
                     })
@@ -945,13 +950,12 @@ class CirclesTableViewController: UITableViewController {
     }
     
     func charmAccepted(notification: NSNotification) {
-        if DataManager.sharedInstance.activeView == "circles" {
             if let info = notification.userInfo {
                 if let charmIndex = info["charmIndex"] as? Int {
                     let charm = DataManager.sharedInstance.myCharms[charmIndex]
                     
-                    let alert = UIAlertController(title: "Charme", message: "\(charm.friend.name) aceitou seu charme", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "Ir", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                    let alert = UIAlertController(title: "Charm", message: "\(charm.friend.name) accepted your charm", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Go", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                         DataManager.sharedInstance.selectedSharer = [charm.sharer]
                         DataManager.sharedInstance.activeUsers = [charm.friend]
                         
@@ -967,20 +971,19 @@ class CirclesTableViewController: UITableViewController {
                 }
                 
             }
-        }
     
     }
     
     func charmReceived(notification: NSNotification) {
-        if DataManager.sharedInstance.activeView == "circles" {
+
             if let info = notification.userInfo {
                 if let charmIndex = info["charmIndex"] as? Int {
                     
                     let charm = DataManager.sharedInstance.myCharms[charmIndex]
                     
                     
-                    let alert = UIAlertController(title: "Charme", message: "Você recebeu um charme de \(charm.friend.name)", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "Aceitar", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                    let alert = UIAlertController(title: "Charm", message: "You have received a charm from \(charm.friend.name)", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Accept", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                         
                         charm.sharer.status = "accepted"
                         self.http.updateSharerWithID(charm.sharer.id, until: nil, status: "accepted", completion: { (result) -> Void in
@@ -994,7 +997,7 @@ class CirclesTableViewController: UITableViewController {
                         
 
                     }))
-                    alert.addAction(UIAlertAction(title: "Rejeitar", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+                    alert.addAction(UIAlertAction(title: "Reject", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
                         charm.sharer.status = "rejected"
                         self.http.updateSharerWithID(charm.sharer.id, until: nil, status: "rejected", completion: { (result) -> Void in
                             self.reloadData()
@@ -1007,12 +1010,52 @@ class CirclesTableViewController: UITableViewController {
                     
                 }
                 
-            }
+
         }
         else {
             self.navigationController?.popToRootViewControllerAnimated(true)
         }
         
+        
+    }
+    
+    func charmRejected(notification: NSNotification) {
+            if let info = notification.userInfo {
+                if let charmIndex = info["charmIndex"] as? Int {
+                    let charm = DataManager.sharedInstance.myCharms[charmIndex]
+                    
+                    let alert = UIAlertController(title: "Charm", message: "\(charm.friend.name) rejected your charm", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                        
+                    }))
+                    
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    
+                    
+                    
+                }
+                
+            }
+        
+    }
+    
+    func charmExpired(notification: NSNotification) {
+        if let info = notification.userInfo {
+            if let charmIndex = info["charmIndex"] as? Int {
+                let charm = DataManager.sharedInstance.myCharms[charmIndex]
+                
+                let alert = UIAlertController(title: "Charm", message: "The charm you sent to \(charm.friend.name) has expired", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                    
+                }))
+                
+                self.presentViewController(alert, animated: true, completion: nil)
+                
+                
+                
+            }
+            
+        }
         
     }
     
