@@ -42,6 +42,9 @@ class CirclesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        DataManager.sharedInstance.activeView = "circles"
+        
         reloadData()
        let screenSize = self.view.frame.size.width
         let peopleButton = DataManager.sharedInstance.imageResize(UIImage(named: "people32.png")!, sizeChange: CGSizeMake(46 * 0.6 * screenSize / 414, 34 * 0.6 * screenSize / 414))
@@ -54,6 +57,7 @@ class CirclesTableViewController: UITableViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmReceived:", name: "charmReceived", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmRejected:", name: "charmRejected", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmExpired:", name: "charmExpired", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmFound:", name: "charmFound", object: nil)
         
 
         
@@ -727,20 +731,19 @@ class CirclesTableViewController: UITableViewController {
             }
             
             let duration = DataManager.sharedInstance.verifySharerStatus(actualSharer)
-            
-            if duration < 0 {
-                actualSharer.status = "expired"
-                http.updateSharerWithID(actualSharer.id, until: nil, status: "expired", completion: { (result) -> Void in
-                    DataManager.sharedInstance.requestSharers({ (result) -> Void in
-                    })
-                })
-            }
+
             
             if actualSharer.status == "pending" {
                 if actualSharer.owner == DataManager.sharedInstance.myUser.userID {
                     bgImageView.layer.borderColor = mainRed.CGColor
                     if duration > 60 {
                         charmCell.remainingTimeLabel.text = "\(duration!/60) minutes remaining"
+                    }
+                    else if duration <= 0 {
+                        charmCell.remainingTimeLabel.text = "Expired"
+                        actualSharer.status = "Expired"
+                        NSNotificationCenter.defaultCenter().postNotificationName("delegateUpdate", object: nil)
+                        
                     }
                     else {
                         charmCell.remainingTimeLabel.text = "\(duration!) seconds remaining"
@@ -756,23 +759,15 @@ class CirclesTableViewController: UITableViewController {
             else if actualSharer.status == "found"{
                 charmCell.remainingTimeLabel.text = "Found"
                 bgImageView.layer.borderColor = lightBlue.CGColor
-                self.http.destroySharerWithSharerType(.userToUser, ownerID: actualSharer.owner, receiverID: actualSharer.receiver, completion: { (result) -> Void in
-                    
-                })
             }
             else if actualSharer.status == "rejected"{
                 charmCell.remainingTimeLabel.text = "Rejected"
                 bgImageView.layer.borderColor = UIColor.grayColor().CGColor
-                self.http.destroySharerWithSharerType(.userToUser, ownerID: actualSharer.owner, receiverID: actualSharer.receiver, completion: { (result) -> Void in
-                    
-                })
             }
             else {
                 charmCell.remainingTimeLabel.text = "Expired"
                 bgImageView.layer.borderColor = UIColor.grayColor().CGColor
-                self.http.destroySharerWithSharerType(.userToUser, ownerID: actualSharer.owner, receiverID: actualSharer.receiver, completion: { (result) -> Void in
-                    
-                })
+                
             }
             charmCell.backgroundImage.addSubview(bgImageView)
             return charmCell
@@ -904,11 +899,11 @@ class CirclesTableViewController: UITableViewController {
                 })
             }
             else {
-                let myId = DataManager.sharedInstance.myUser.userID
-                let friendId = DataManager.sharedInstance.myCharms[indexPath.row].friend.userID as String
-                self.http.destroySharerWithSharerType(.userToUser, ownerID: myId, receiverID: friendId, completion: { (result) -> Void in
-                    self.reloadData()
-                })
+//                let myId = DataManager.sharedInstance.myUser.userID
+//                let friendId = DataManager.sharedInstance.myCharms[indexPath.row].friend.userID as String
+//                self.http.destroySharerWithSharerType(.userToUser, ownerID: myId, receiverID: friendId, completion: { (result) -> Void in
+//                    self.reloadData()
+//                })
             }
             
         }
@@ -966,21 +961,21 @@ class CirclesTableViewController: UITableViewController {
                 
                 return [editGroup,deleteGroup]
             }
-            else {
-                let charm = DataManager.sharedInstance.myCharms[indexPath.row]
-                if charm.sharer.status != "pending" {
-                    let deleteCharm = UITableViewRowAction(style: .Destructive, title: "Delete", handler: { (rowAction:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
-                        self.http.destroySharerWithSharerType(.userToUser, ownerID: charm.sharer.owner, receiverID: charm.sharer.receiver, completion: { (result) -> Void in
-                            self.reloadData()
-                            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Removed", message: "The charm with \(charm.friend.name) has been removed successfully.", button1: "Ok")
-
-                        })
-                    })
-                
-                return [deleteCharm]
-                }
-
-            }
+//            else {
+//                let charm = DataManager.sharedInstance.myCharms[indexPath.row]
+//                if charm.sharer.status != "pending" {
+//                    let deleteCharm = UITableViewRowAction(style: .Destructive, title: "Delete", handler: { (rowAction:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
+//                        self.http.destroySharerWithSharerType(.userToUser, ownerID: charm.sharer.owner, receiverID: charm.sharer.receiver, completion: { (result) -> Void in
+//                            self.reloadData()
+//                            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Removed", message: "The charm with \(charm.friend.name) has been removed successfully.", button1: "Ok")
+//
+//                        })
+//                    })
+//                
+//                return [deleteCharm]
+//                }
+//
+//            }
 
         }
         else if cell?.tag == 100 {
@@ -1108,7 +1103,9 @@ class CirclesTableViewController: UITableViewController {
 
                     let alert = UIAlertController(title: "Charm", message: "\(charm.friend.name) rejected your charm", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
-                        
+                        self.http.destroySharerWithSharerType(.userToUser, ownerID: charm.sharer.owner, receiverID: charm.sharer.receiver, completion: { (result) -> Void in
+                            
+                        })
                     }))
                     
                     self.presentViewController(alert, animated: true, completion: nil)
@@ -1128,7 +1125,9 @@ class CirclesTableViewController: UITableViewController {
                 
                 let alert = UIAlertController(title: "Charm", message: "The charm you sent to \(charm.friend.name) has expired", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
-                    
+                    self.http.destroySharerWithSharerType(.userToUser, ownerID: charm.sharer.owner, receiverID: charm.sharer.receiver, completion: { (result) -> Void in
+                        
+                    })
                 }))
                 
                 self.presentViewController(alert, animated: true, completion: nil)
@@ -1137,6 +1136,28 @@ class CirclesTableViewController: UITableViewController {
                 
             }
             
+        }
+        
+    }
+    
+    func charmFound(notification: NSNotification) {
+        if DataManager.sharedInstance.activeView == "circles" {
+            if let info = notification.userInfo {
+                if let charmIndex = info["charmIndex"] as? Int {
+                    let charm = DataManager.sharedInstance.myCharms[charmIndex]
+                    
+                    let friendName = charm.friend.name
+                    let alert = UIAlertController(title: "Found", message: "\(friendName) has found you", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                        self.http.destroySharerWithSharerType(.userToUser, ownerID: charm.sharer.owner, receiverID: charm.sharer.receiver, completion: { (result) -> Void in
+                            self.navigationController?.popToRootViewControllerAnimated(true)
+                        })
+                        
+                    }))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    
+                }
+            }
         }
         
     }
