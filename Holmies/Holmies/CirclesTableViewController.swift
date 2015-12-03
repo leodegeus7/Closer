@@ -82,7 +82,7 @@ class CirclesTableViewController: UITableViewController {
         //        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdated:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
         
         
-        
+        userView.layer.borderWidth = 0
         
         DataManager.sharedInstance.selectedFriends.removeAll()
         
@@ -378,7 +378,7 @@ class CirclesTableViewController: UITableViewController {
                 let emptyGroup = tableView.dequeueReusableCellWithIdentifier("noGroup", forIndexPath: indexPath) as! EmptyGroupTableViewCell
                 self.tableView.rowHeight = 100
                 emptyGroup.imageEmpty.layer.borderWidth = 2.0
-                emptyGroup.imageEmpty.layer.cornerRadius = emptyGroup.imageEmpty.frame.size.width
+                emptyGroup.imageEmpty.layer.cornerRadius = 8 / 414 * self.view.frame.size.width
                 emptyGroup.imageEmpty.layer.borderColor = lightBlue.CGColor
 
                 emptyGroup.firstLabel.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
@@ -665,7 +665,7 @@ class CirclesTableViewController: UITableViewController {
             if DataManager.sharedInstance.myCharms.count == 0 {
                 let emptyGroup = tableView.dequeueReusableCellWithIdentifier("noGroup", forIndexPath: indexPath) as! EmptyGroupTableViewCell
                 self.tableView.rowHeight = 100
-                emptyGroup.imageEmpty.layer.cornerRadius = emptyGroup.imageEmpty.frame.size.width
+                emptyGroup.imageEmpty.layer.cornerRadius = emptyGroup.imageEmpty.frame.size.width / 2
                 emptyGroup.imageEmpty.layer.borderColor = lightBlue.CGColor
                 emptyGroup.imageEmpty.layer.borderWidth = 2.0
                 emptyGroup.firstLabel.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
@@ -874,6 +874,8 @@ class CirclesTableViewController: UITableViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         let fontDictionary = [ NSForegroundColorAttributeName:UIColor.whiteColor() ]
         self.navigationController?.navigationBar.titleTextAttributes = fontDictionary
+//        self.navigationController?.navigationBar.layer.borderWidth = 4
+//        self.navigationController?.navigationBar.layer.borderColor = UIColor.clearColor().CGColor
       // self.navigationController?.navigationBar.setBackgroundImage(imageLayerForGradientBackground(), forBarMetrics: UIBarMetrics.Default)
     }
     

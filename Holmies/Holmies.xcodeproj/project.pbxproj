@@ -17,6 +17,8 @@
 		A71F7D151BD0288E00652750 /* photoButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A71F7D141BD0288E00652750 /* photoButton.png */; };
 		A71F7D171BD0298300652750 /* RegisterNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71F7D161BD0298300652750 /* RegisterNewViewController.swift */; };
 		A72BDBE71C0CC4BE00D0CA84 /* redLights.png in Resources */ = {isa = PBXBuildFile; fileRef = A72BDBE61C0CC4BE00D0CA84 /* redLights.png */; };
+		A731F55D1C10CAD700B5B55E /* compassViewBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A731F55C1C10CAD700B5B55E /* compassViewBackground.png */; };
+		A731F55F1C10CBCE00B5B55E /* whiteLine.png in Resources */ = {isa = PBXBuildFile; fileRef = A731F55E1C10CBCE00B5B55E /* whiteLine.png */; };
 		A73BE4CE1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */; };
 		A760AAB01BFA457A00214F06 /* MarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A760AAAF1BFA457A00214F06 /* MarkerView.xib */; };
 		A760AAB21BFA46DC00214F06 /* pin2.png in Resources */ = {isa = PBXBuildFile; fileRef = A760AAB11BFA46DC00214F06 /* pin2.png */; };
@@ -243,6 +245,8 @@
 		A71F7D141BD0288E00652750 /* photoButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoButton.png; sourceTree = "<group>"; };
 		A71F7D161BD0298300652750 /* RegisterNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterNewViewController.swift; sourceTree = "<group>"; };
 		A72BDBE61C0CC4BE00D0CA84 /* redLights.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redLights.png; sourceTree = "<group>"; };
+		A731F55C1C10CAD700B5B55E /* compassViewBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compassViewBackground.png; sourceTree = "<group>"; };
+		A731F55E1C10CBCE00B5B55E /* whiteLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteLine.png; sourceTree = "<group>"; };
 		A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveGroupTableViewCell.swift; sourceTree = "<group>"; };
 		A760AAAF1BFA457A00214F06 /* MarkerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarkerView.xib; sourceTree = "<group>"; };
 		A760AAB11BFA46DC00214F06 /* pin2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin2.png; sourceTree = "<group>"; };
@@ -575,7 +579,9 @@
 		A7D2A4B11BCE90EF006A55D1 /* Design */ = {
 			isa = PBXGroup;
 			children = (
+				A731F55C1C10CAD700B5B55E /* compassViewBackground.png */,
 				A77F586F1C0E3F7D008670B7 /* people32.png */,
+				A731F55E1C10CBCE00B5B55E /* whiteLine.png */,
 				A77F586C1C0E36A7008670B7 /* people.png */,
 				AF5F33F51C001EED00BC1622 /* group.png */,
 				AF5F33F31C001EE700BC1622 /* charm.png */,
@@ -760,7 +766,6 @@
 				CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */,
 				CD900F821BDE9F520095CB85 /* AddFriendTableViewController.swift */,
 				CD4FC93F1BED1F810086EC30 /* myInfoViewController.swift */,
-				A70592161BD6C5B600E737E3 /* DesignGroupsTableViewController.swift */,
 				CD721F901BF2641A0013A3C5 /* FriendsInMapTableViewController.swift */,
 				CD73C0DC1C0E2478000730F1 /* AddFriendWithFriendsViewController.swift */,
 			);
@@ -1071,6 +1076,7 @@
 				A7C37FBA1BE00A8500FEE8D2 /* SF-UI-Text-Heavy.otf in Resources */,
 				A760AAB41BFA488100214F06 /* pin025.png in Resources */,
 				A7C37FB21BE00A8500FEE8D2 /* SF-UI-Display-Light.otf in Resources */,
+				A731F55F1C10CBCE00B5B55E /* whiteLine.png in Resources */,
 				A7C37FB71BE00A8500FEE8D2 /* SF-UI-Display-Ultralight.otf in Resources */,
 				A7C37FB81BE00A8500FEE8D2 /* SF-UI-Text-Bold.otf in Resources */,
 				A7C37FBF1BE00A8500FEE8D2 /* SF-UI-Text-Medium.otf in Resources */,
@@ -1093,6 +1099,7 @@
 				A7C37FBD1BE00A8500FEE8D2 /* SF-UI-Text-Light.otf in Resources */,
 				AF5F33F41C001EE700BC1622 /* charm.png in Resources */,
 				A760AAB21BFA46DC00214F06 /* pin2.png in Resources */,
+				A731F55D1C10CAD700B5B55E /* compassViewBackground.png in Resources */,
 				A7C37FA71BE00A8500FEE8D2 /* SF-Compact-Display-Bold.otf in Resources */,
 				A77F58701C0E3F7D008670B7 /* people32.png in Resources */,
 				A7C37FAD1BE00A8500FEE8D2 /* SF-Compact-Display-Thin.otf in Resources */,

@@ -32,7 +32,16 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
         addFriendTextField.layer.cornerRadius = 8
         addFriendTextField.tintColor = mainRed
         addFriendTextField.textColor = mainRed
-        addFriendTextField.attributedPlaceholder = NSAttributedString(string: "New friend username", attributes: [NSForegroundColorAttributeName: lightGray])
+        addFriendTextField.attributedPlaceholder = NSAttributedString(string: "New friend username", attributes: [NSForegroundColorAttributeName: lightGray, NSFontAttributeName: UIFont(name: "SFCompactDisplay-Light", size: 15)!])
+        addFriendTextField.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
+        
+        FriendsTableView.backgroundColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1)
+        FriendsTableView.layer.borderWidth = 1
+        FriendsTableView.layer.borderColor = mainRed.CGColor
+        FriendsTableView.separatorColor = mainRed
+        FriendsTableView.layer.cornerRadius = 8
+        
+
         
     
         self.FriendsTableView.rowHeight = 45
@@ -57,7 +66,8 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
         self.navigationController?.navigationBar.setBackgroundImage(imageLayerForGradientBackground(), forBarMetrics: UIBarMetrics.Default)
         FriendsTableView.reloadData()
         
-        
+        self.navigationItem.title = "Friends"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "SFCompactDisplay-Light", size: 17)!]
         
         
     }
@@ -114,11 +124,11 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
 //        cell.imageUser.layer.borderWidth = 0
 
 
-        cell.friendUsername.text = DataManager.sharedInstance.allFriends[indexPath.row].username + "  \(cell.frame.height)" + "  \(cell.frame.width)"
+        cell.friendUsername.text = DataManager.sharedInstance.allFriends[indexPath.row].username
         //cell.imageUser.image = DataManager.sharedInstance.findImage(DataManager.sharedInstance.allFriends[indexPath.row].userID)
         
-        cell.friendUsername.font = UIFont(name: "SFUIText-Regular", size: 17)
-        cell.friendUsername.textColor = mainRed
+        cell.friendUsername.font = UIFont(name: "SFCompactDisplay-Light", size: 17)
+        cell.friendUsername.textColor = UIColor.blackColor()
         
         
         
