@@ -520,6 +520,16 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 //        self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
+    func draggedViewDown(sender:UISwipeGestureRecognizer) {
+        print("swipe down")
+        compassViewTopConstraint.constant = self.view.frame.height - arrowCompass.frame.height
+        compassViewLeftConstraint.constant = self.view.frame.width - (arrowCompass.frame.width / 2)
+        compassViewRightConstraint.constant = self.view.frame.width - (arrowCompass.frame.width / 2)
+        
+        arrowCompassTopConstraint.constant = self.view.frame.height * 0.6
+        arrowCompassLeftConstraint.constant = self.view.frame.width * 0.25
+        arrowCompassRightConstraint.constant = self.view.frame.width * 0.25
+        
     func charmReceived(notification: NSNotification) {
 //        self.navigationController?.popToRootViewControllerAnimated(true)
 
@@ -535,16 +545,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 
     }
     
-    func draggedViewDown(sender:UISwipeGestureRecognizer) {
-        print("swipe down")
-        compassViewTopConstraint.constant = self.view.frame.height - arrowCompass.frame.height
-        compassViewLeftConstraint.constant = self.view.frame.width - (arrowCompass.frame.width / 2)
-        compassViewRightConstraint.constant = self.view.frame.width - (arrowCompass.frame.width / 2)
-        
-        arrowCompassTopConstraint.constant = self.view.frame.height * 0.6
-        arrowCompassLeftConstraint.constant = self.view.frame.width * 0.25
-        arrowCompassRightConstraint.constant = self.view.frame.width * 0.25
-        
+//    func draggedView (sender:UIPanGestureRecognizer) {
 //        
 //        for view in compassView.subviews {
 //            view.hidden = true

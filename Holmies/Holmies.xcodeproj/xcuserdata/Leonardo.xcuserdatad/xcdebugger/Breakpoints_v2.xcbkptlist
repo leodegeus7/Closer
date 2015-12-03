@@ -329,8 +329,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "227"
             endingLineNumber = "227"
-            landmarkName = "MapGoogleViewController"
-            landmarkType = "3">
+            landmarkName = "goBack()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
