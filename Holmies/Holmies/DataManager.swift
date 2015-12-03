@@ -51,6 +51,8 @@ class DataManager {
     var badgeNumber = 0
     
     var windows:UIViewController!
+    let mainRed: UIColor = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
+    let lightBlue:UIColor = UIColor(red: 61.0/255.0, green: 210.0/255.0, blue: 228.0/255.0, alpha: 1)
     
     lazy var locationManager: CLLocationManager! = {
         let manager = CLLocationManager()

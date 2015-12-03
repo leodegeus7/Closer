@@ -115,6 +115,8 @@
 		CD73C0DB1C0E222F000730F1 /* FriendsInFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD73C0DA1C0E222F000730F1 /* FriendsInFriendsTableViewCell.swift */; };
 		CD73C0DD1C0E2478000730F1 /* AddFriendWithFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD73C0DC1C0E2478000730F1 /* AddFriendWithFriendsViewController.swift */; };
 		CD73C0E01C105F8B000730F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD73C0DF1C105F8B000730F1 /* Main.storyboard */; };
+		CD73C0E81C108454000730F1 /* ShowFriendView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD73C0E71C108454000730F1 /* ShowFriendView.xib */; };
+		CD73C0EA1C108473000730F1 /* ShowFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD73C0E91C108473000730F1 /* ShowFriendView.swift */; };
 		CD900F811BDE9F260095CB85 /* AddFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900F801BDE9F260095CB85 /* AddFriendTableViewCell.swift */; };
 		CD900F831BDE9F520095CB85 /* AddFriendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900F821BDE9F520095CB85 /* AddFriendTableViewController.swift */; };
 		CDA9A82D1B9DE9E300D93572 /* MapGoogleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */; };
@@ -352,6 +354,8 @@
 		CD73C0DA1C0E222F000730F1 /* FriendsInFriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsInFriendsTableViewCell.swift; sourceTree = "<group>"; };
 		CD73C0DC1C0E2478000730F1 /* AddFriendWithFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendWithFriendsViewController.swift; sourceTree = "<group>"; };
 		CD73C0DF1C105F8B000730F1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		CD73C0E71C108454000730F1 /* ShowFriendView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowFriendView.xib; sourceTree = "<group>"; };
+		CD73C0E91C108473000730F1 /* ShowFriendView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowFriendView.swift; sourceTree = "<group>"; };
 		CD900F801BDE9F260095CB85 /* AddFriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendTableViewCell.swift; sourceTree = "<group>"; };
 		CD900F821BDE9F520095CB85 /* AddFriendTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendTableViewController.swift; sourceTree = "<group>"; };
 		CD92FB331BDEBE1200BEAA8E /* SF-Compact-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Display-Black.otf"; sourceTree = "<group>"; };
@@ -796,7 +800,9 @@
 				A760AAAF1BFA457A00214F06 /* MarkerView.xib */,
 				CD73C0DF1C105F8B000730F1 /* Main.storyboard */,
 				CD6BAA951B98DB8A008614B0 /* MarkerInfoView.xib */,
+				CD73C0E71C108454000730F1 /* ShowFriendView.xib */,
 				A7D2A4B11BCE90EF006A55D1 /* Design */,
+				CD73C0E91C108473000730F1 /* ShowFriendView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1011,6 +1017,7 @@
 				A7C37FC71BE11E3600FEE8D2 /* redCheck.png in Resources */,
 				CDE102611BE3F4E30042B180 /* Design.storyboard in Resources */,
 				A71F7D151BD0288E00652750 /* photoButton.png in Resources */,
+				CD73C0E81C108454000730F1 /* ShowFriendView.xib in Resources */,
 				A7C37FA81BE00A8500FEE8D2 /* SF-Compact-Display-Heavy.otf in Resources */,
 				A7C37FAC1BE00A8500FEE8D2 /* SF-Compact-Display-Semibold.otf in Resources */,
 				A72BDBE71C0CC4BE00D0CA84 /* redLights.png in Resources */,
@@ -1151,6 +1158,7 @@
 				A7C37F5B1BDFF7CD00FEE8D2 /* CreateGroupViewController.swift in Sources */,
 				CD6BAA971B98DB8A008614B0 /* MarkerInfoView.swift in Sources */,
 				A7C37F591BDFF79200FEE8D2 /* EditGroupViewController.swift in Sources */,
+				CD73C0EA1C108473000730F1 /* ShowFriendView.swift in Sources */,
 				CD1E19101BFD08F800179D5F /* HTTPHelper.swift in Sources */,
 				CD6BAAAA1B98DE23008614B0 /* Holmies-Bridging.m in Sources */,
 				CD0B59E11BAB57750098AD88 /* Location.swift in Sources */,

@@ -13,11 +13,14 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
     @IBOutlet weak var FriendsTableView: UITableView!
     @IBOutlet weak var addFriendTextField: UITextField!
     let http = HTTPHelper()
+    var viewIsOpen = false
+    var supportViewForFriend = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         FriendsTableView.separatorInset = UIEdgeInsetsZero
         FriendsTableView.layoutMargins = UIEdgeInsetsZero
+        initializeGestureRecognizer()
         
         // Do any additional setup after loading the view.
     }
@@ -159,6 +162,70 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
             }
         }
         
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            
+            
+            let alert = UIAlertController(title: "Attention", message: "\(DataManager.sharedInstance.allFriends[indexPath.row].username) will be delete", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Delete Friend", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                DataManager.sharedInstance.allFriends.removeAtIndex(indexPath.row)
+                let userdic = DataManager.sharedInstance.convertUserToNSDic(DataManager.sharedInstance.allFriends)
+                DataManager.sharedInstance.createJsonFile("friends", json: userdic)
+                tableView.reloadData()
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+            
+            
+
+        }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let view = UIView(frame: CGRect(x: self.view.frame.width/2-100, y: self.view.frame.height/2-100, width: 200, height: 200))
+        view.backgroundColor = UIColor.redColor()
+        self.view.addSubview(view)
+        //let friendViewController = self.storyboard!.instantiateViewControllerWithIdentifier("ShowFriendView")
+       // let friendView = friendViewController.view
+        supportViewForFriend = view
+        self.view.addSubview(supportViewForFriend)
+        if let infoView = UIView.viewFromNibName("ShowFriendView") as? ShowFriendView {
+            infoView.nameFriend.text = DataManager.sharedInstance.allFriends[indexPath.row].name
+            infoView.userName.text = DataManager.sharedInstance.allFriends[indexPath.row].username
+            infoView.userImage.image = DataManager.sharedInstance.findImage(DataManager.sharedInstance.allFriends[indexPath.row].userID)
+            infoView.backgroundColor = DataManager.sharedInstance.mainRed
+            infoView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+            infoView.userName.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
+            infoView.userName.textColor = DataManager.sharedInstance.lightBlue
+            infoView.nameFriend.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
+            infoView.nameFriend.textColor = UIColor.whiteColor()
+            infoView.userImage.layer.cornerRadius = 100.0
+            infoView.userImage.layer.borderColor = UIColor.whiteColor().CGColor
+            infoView.userImage.layer.borderWidth = 3.0
+            infoView.userImage.clipsToBounds = true
+            
+            view.addSubview(infoView)
+            viewIsOpen = true
+        }
+        
+        
+    }
+    
+    func initializeGestureRecognizer() {
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("recognizeTapGesture"))
+        tapGesture.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    func recognizeTapGesture() {
+        if viewIsOpen {
+           supportViewForFriend.hidden = true
+        }
     }
 
     
