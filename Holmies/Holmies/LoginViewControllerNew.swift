@@ -12,6 +12,7 @@ import FBSDKLoginKit
 
 class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UITextFieldDelegate {
 
+    @IBOutlet weak var closerTitleLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -19,6 +20,7 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var facebookLoginButton: UIButton!
     @IBOutlet weak var forgetButton: UIButton!
+    
     var kbHeight: CGFloat!
     var logged = false
     var position = false
@@ -28,7 +30,27 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
     override func viewDidLoad() {
         super.viewDidLoad()
         let documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask, true)[0] as String
-
+        closerTitleLabel.font = UIFont(name: "NexaRustScriptL-0", size: 110)
+        closerTitleLabel.alpha = 0
+        userNameTextField.alpha = 0
+        passwordTextField.alpha = 0
+        connectButton.alpha = 0
+        registerButton.alpha = 0
+        forgetButton.alpha = 0
+        facebookLoginButton.alpha = 0
+        
+        
+        //Fade IN
+        closerTitleLabel.fadeIn(1.5) { (didComplete) -> Void in
+            self.userNameTextField.fadeIn(0.5)
+            self.passwordTextField.fadeIn(0.5)
+            self.connectButton.fadeIn(0.5)
+            self.registerButton.fadeIn(0.5)
+            self.facebookLoginButton.fadeIn(0.5)
+            self.forgetButton.fadeIn(0.5)
+        }
+        
+        
         print(documents)
         activityIndicator.stopAnimating()
         DataManager.sharedInstance.importID()
@@ -37,8 +59,12 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
         if number > 0 {
             performSegueWithIdentifier("showTableView", sender: self)
             logged = true
+    
         }
         DataManager.sharedInstance.activeView = "login"
+        
+        
+        
         
         
 //        if (FBSDKAccessToken.currentAccessToken() == nil) {

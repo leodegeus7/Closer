@@ -54,6 +54,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>SF-Compact-Display-Black.otf</string>
+		<string>NexaRustScriptL-0.otf</string>
 		<string>SF-Compact-Display-Bold.otf</string>
 		<string>SF-Compact-Display-Heavy.otf</string>
 		<string>SF-Compact-Display-Light.otf</string>

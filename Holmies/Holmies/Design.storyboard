@@ -87,6 +87,20 @@
                                 <rect key="frame" x="282" y="142" width="37" height="37"/>
                                 <animations/>
                             </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="80" translatesAutoresizingMaskIntoConstraints="NO" id="9cx-Ao-LW5">
+                                <rect key="frame" x="40" y="170" width="520" height="143"/>
+                                <animations/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Closer">
+                                        <attributes>
+                                            <color key="NSColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="110" name="NexaRustScriptL-0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -100,9 +114,12 @@
                             <constraint firstItem="oWK-Dl-bnd" firstAttribute="top" secondItem="U7N-vm-TBe" secondAttribute="bottom" constant="10" id="HtL-KX-0Ik"/>
                             <constraint firstItem="oWK-Dl-bnd" firstAttribute="leading" secondItem="ZlY-FQ-hbt" secondAttribute="leading" id="Igx-XX-hMG"/>
                             <constraint firstItem="thL-cC-Z54" firstAttribute="top" secondItem="yma-kv-X1v" secondAttribute="bottom" id="K8z-3H-lNI"/>
+                            <constraint firstItem="9cx-Ao-LW5" firstAttribute="centerX" secondItem="JoR-Uh-fX8" secondAttribute="centerX" id="QFs-sV-FMF"/>
                             <constraint firstItem="fFd-fa-c8t" firstAttribute="trailing" secondItem="ZlY-FQ-hbt" secondAttribute="trailing" id="QGH-8R-gNI"/>
+                            <constraint firstItem="9cx-Ao-LW5" firstAttribute="trailing" secondItem="ZlY-FQ-hbt" secondAttribute="trailing" id="Rjq-K5-jUl"/>
                             <constraint firstItem="fFd-fa-c8t" firstAttribute="height" secondItem="oWK-Dl-bnd" secondAttribute="height" id="RnE-Cw-W4w"/>
                             <constraint firstItem="yma-kv-X1v" firstAttribute="top" secondItem="ZlY-FQ-hbt" secondAttribute="bottom" constant="10" id="WLm-0L-VRH"/>
+                            <constraint firstItem="9cx-Ao-LW5" firstAttribute="top" secondItem="GfC-Bv-KVc" secondAttribute="bottom" constant="150" id="WPg-6M-BDf"/>
                             <constraint firstItem="ZlY-FQ-hbt" firstAttribute="leading" secondItem="JoR-Uh-fX8" secondAttribute="leadingMargin" constant="20" id="Wmq-VU-0pW"/>
                             <constraint firstItem="fFd-fa-c8t" firstAttribute="bottom" secondItem="oWK-Dl-bnd" secondAttribute="bottom" id="Wrz-39-4vy"/>
                             <constraint firstItem="U7N-vm-TBe" firstAttribute="top" secondItem="yma-kv-X1v" secondAttribute="bottom" constant="65" id="WuF-Bl-lyJ"/>
@@ -113,6 +130,7 @@
                             <constraint firstItem="fFd-fa-c8t" firstAttribute="top" secondItem="U7N-vm-TBe" secondAttribute="bottom" constant="72" id="im0-Uo-Rdv"/>
                             <constraint firstItem="7Ao-wg-Dit" firstAttribute="top" secondItem="fFd-fa-c8t" secondAttribute="bottom" constant="80" id="jKg-l5-evH"/>
                             <constraint firstItem="pIW-Ob-vhc" firstAttribute="centerX" secondItem="JoR-Uh-fX8" secondAttribute="centerX" id="kvm-Ig-GTh"/>
+                            <constraint firstItem="9cx-Ao-LW5" firstAttribute="leading" secondItem="ZlY-FQ-hbt" secondAttribute="leading" id="lzT-Js-mQT"/>
                             <constraint firstItem="fFd-fa-c8t" firstAttribute="leading" secondItem="oWK-Dl-bnd" secondAttribute="trailing" constant="20" id="nh4-QS-0va"/>
                             <constraint firstItem="U7N-vm-TBe" firstAttribute="leading" secondItem="ZlY-FQ-hbt" secondAttribute="leading" id="o9f-H4-gIa"/>
                             <constraint firstItem="yma-kv-X1v" firstAttribute="leading" secondItem="ZlY-FQ-hbt" secondAttribute="leading" id="rdc-NJ-ML7"/>
@@ -124,6 +142,7 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="hIa-wD-Oey"/>
+                                <exclude reference="QFs-sV-FMF"/>
                                 <exclude reference="WLm-0L-VRH"/>
                                 <exclude reference="sqz-df-VmX"/>
                                 <exclude reference="t7m-Gx-jbw"/>
@@ -136,6 +155,7 @@
                     <navigationItem key="navigationItem" id="dB5-0k-1kU"/>
                     <connections>
                         <outlet property="activityIndicator" destination="pIW-Ob-vhc" id="eNT-ZS-0mG"/>
+                        <outlet property="closerTitleLabel" destination="9cx-Ao-LW5" id="lfp-NU-MYa"/>
                         <outlet property="connectButton" destination="U7N-vm-TBe" id="gaa-9z-0kP"/>
                         <outlet property="facebookLoginButton" destination="fFd-fa-c8t" id="XHT-TE-xHo"/>
                         <outlet property="forgetButton" destination="thL-cC-Z54" id="2Rh-d2-Dkf"/>
@@ -1167,7 +1187,7 @@
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0qL-2a-ywG">
-                                            <rect key="frame" x="108" y="5" width="476" height="62"/>
+                                            <rect key="frame" x="108" y="5" width="476" height="45"/>
                                             <animations/>
                                             <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
@@ -1187,7 +1207,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remaining Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8z-5o-BYw">
-                                            <rect key="frame" x="108" y="74" width="476" height="21"/>
+                                            <rect key="frame" x="108" y="50" width="476" height="45"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1211,8 +1231,8 @@
                                         <constraint firstAttribute="bottomMargin" secondItem="3qD-tX-WPr" secondAttribute="bottom" constant="5" id="cqJ-iG-1lr"/>
                                         <constraint firstItem="X3l-A6-IIB" firstAttribute="top" secondItem="0qL-2a-ywG" secondAttribute="top" id="f43-kv-yE3"/>
                                         <constraint firstItem="X3l-A6-IIB" firstAttribute="top" secondItem="0qL-2a-ywG" secondAttribute="top" constant="8" id="ffN-xl-EVn"/>
-                                        <constraint firstItem="G8z-5o-BYw" firstAttribute="height" secondItem="0qL-2a-ywG" secondAttribute="height" multiplier="1/3" id="gQX-ez-Mdr"/>
-                                        <constraint firstItem="G8z-5o-BYw" firstAttribute="top" secondItem="0qL-2a-ywG" secondAttribute="bottom" constant="8" id="iNT-Me-D2A"/>
+                                        <constraint firstItem="G8z-5o-BYw" firstAttribute="height" secondItem="0qL-2a-ywG" secondAttribute="height" multiplier="1/1" id="gQX-ez-Mdr"/>
+                                        <constraint firstItem="G8z-5o-BYw" firstAttribute="top" secondItem="0qL-2a-ywG" secondAttribute="bottom" id="iNT-Me-D2A"/>
                                         <constraint firstItem="3qD-tX-WPr" firstAttribute="top" secondItem="0qL-2a-ywG" secondAttribute="bottom" constant="-16" id="rmd-rJ-GlM"/>
                                         <constraint firstItem="X3l-A6-IIB" firstAttribute="bottom" secondItem="3qD-tX-WPr" secondAttribute="bottom" id="u8P-IG-Wkj"/>
                                     </constraints>

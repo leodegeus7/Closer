@@ -298,7 +298,14 @@ class DataManager {
             return image!
         }
         else {
-            return UIImage(named: "whiteChar.png")!
+            if id == DataManager.sharedInstance.myUser.userID {
+                return UIImage(named: "whiteChar.png")!
+            }
+            
+            else {
+            
+            return UIImage(named: "mainRedChar.png")!
+            }
         }
         
         

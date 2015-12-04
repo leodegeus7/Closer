@@ -53,7 +53,17 @@ extension UIView {
       self.alpha = 1.0
     }
   }
+
     
+    func fadeIn(duration: NSTimeInterval, completion: (didComplete: Bool) -> Void ) {
+        UIView.animateWithDuration(duration, animations: { () -> Void in
+            self.alpha = 1.0
+            })
+            { (animationCompleted) -> Void in
+                completion (didComplete: true)
+        }
+        
+    }
     
   
   class func viewFromNibName(name: String) -> UIView? {

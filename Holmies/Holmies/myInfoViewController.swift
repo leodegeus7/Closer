@@ -56,7 +56,7 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
         deleteAccountButton.titleLabel!.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
         
         
-        let loggoutButton = UIBarButtonItem(title: "Loggout", style: UIBarButtonItemStyle.Plain, target: self, action: "loggoutButton")
+        let loggoutButton = UIBarButtonItem(title: "Logout", style: UIBarButtonItemStyle.Plain, target: self, action: "loggoutButton")
         navigationItem.rightBarButtonItem = loggoutButton
         navigationController!.navigationBar.barTintColor = UIColor.whiteColor()
         
@@ -147,12 +147,12 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
     }
     
     func loggoutButton() {
-        let alert = UIAlertController(title: "Attention", message: "Deseja fazer loggout?", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Attention", message: "Do you want to log out?", preferredStyle: UIAlertControllerStyle.Alert)
         
         
         
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (UIAlertAction)in
-            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Attencion", message: "Conta deslogada", button1: "Ok")
+            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Attention", message: "Conta deslogada", button1: "Ok")
             
             let documentsDirectory = DataManager.sharedInstance.findDocumentsDirectory()
             let path = documentsDirectory + "/id.txt"
