@@ -90,7 +90,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         self.setUpBackgrounGradient()
         
         NSNotificationCenter.defaultCenter().postNotificationName("delegateUpdate", object: nil)
-        
+
+        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "NexaRustScriptL-0", size: 30)!]
         DataManager.sharedInstance.activeMap = self.mapView
 //        var swipeDown = UISwipeGestureRecognizer(target: self, action: "draggedViewDown:")
 //        swipeDown.direction = UISwipeGestureRecognizerDirection.Down
@@ -115,9 +116,14 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 //        compassView.addGestureRecognizer(swipeRec)
 //        compassView.userInteractionEnabled = true
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "< Back", style: UIBarButtonItemStyle.Plain, target: self, action: "goBack")
+        
         if !isCharm {
             var existUserInGroup = false
-            self.navigationItem.title = "\(DataManager.sharedInstance.selectedGroup.name)"
+            let titleGroup = DataManager.sharedInstance.selectedGroup.name
+            self.navigationItem.title = titleGroup
+            
+            self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "NexaRustScriptL-0", size: 30)!]
             for sharer in DataManager.sharedInstance.selectedSharer {
                 if sharer.status == "accepted" && sharer.owner != DataManager.sharedInstance.myUser.userID {
                     existUserInGroup = true
@@ -141,14 +147,19 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         }
         else {
             navigationItem.rightBarButtonItem = UIBarButtonItem()
-            self.navigationItem.title = "\(DataManager.sharedInstance.activeUsers[0].name)"
+            let titleName = DataManager.sharedInstance.activeUsers[0].name
+            self.navigationItem.title = titleName
+            self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "NexaRustScriptL-0", size: 30)!]
+            
+            
+            
         }
         
         
         
         
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "< Back", style: UIBarButtonItemStyle.Plain, target: self, action: "goBack")
+        
         
 
         /*

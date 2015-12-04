@@ -67,7 +67,7 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
         FriendsTableView.reloadData()
         
         self.navigationItem.title = "Friends"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "SFUIText-Medium", size: 20)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "NexaRustScriptL-0", size: 30)!]
         
         
     }
