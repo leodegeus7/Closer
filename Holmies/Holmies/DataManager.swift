@@ -298,7 +298,7 @@ class DataManager {
             return image!
         }
         else {
-            return UIImage(named: "mainRedChar.png")!
+            return UIImage(named: "whiteChar.png")!
         }
         
         

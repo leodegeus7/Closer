@@ -20,7 +20,6 @@
 		A731F55D1C10CAD700B5B55E /* compassViewBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A731F55C1C10CAD700B5B55E /* compassViewBackground.png */; };
 		A731F55F1C10CBCE00B5B55E /* whiteLine.png in Resources */ = {isa = PBXBuildFile; fileRef = A731F55E1C10CBCE00B5B55E /* whiteLine.png */; };
 		A73BE4CE1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */; };
-		A759EA3D1C11EF5900BB8B37 /* squareCompass2.png in Resources */ = {isa = PBXBuildFile; fileRef = A759EA3C1C11EF5900BB8B37 /* squareCompass2.png */; };
 		A759EA3F1C11F09A00BB8B37 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = A759EA3E1C11F09A00BB8B37 /* splash.png */; };
 		A760AAB01BFA457A00214F06 /* MarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A760AAAF1BFA457A00214F06 /* MarkerView.xib */; };
 		A760AAB21BFA46DC00214F06 /* pin2.png in Resources */ = {isa = PBXBuildFile; fileRef = A760AAB11BFA46DC00214F06 /* pin2.png */; };
@@ -35,6 +34,8 @@
 		A78EA4831BDAABAC0001E946 /* CirclesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78EA4821BDAABAC0001E946 /* CirclesTableViewController.swift */; };
 		A78EA4861BDAB3C30001E946 /* reject.png in Resources */ = {isa = PBXBuildFile; fileRef = A78EA4841BDAB3C30001E946 /* reject.png */; };
 		A78EA4871BDAB3C30001E946 /* confirm.png in Resources */ = {isa = PBXBuildFile; fileRef = A78EA4851BDAB3C30001E946 /* confirm.png */; };
+		A7ACC01B1C11F4F80090B6FA /* Launch Screen2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7ACC01A1C11F4F80090B6FA /* Launch Screen2.storyboard */; };
+		A7ACC01F1C11F7300090B6FA /* squareCompass4.png in Resources */ = {isa = PBXBuildFile; fileRef = A7ACC01E1C11F7300090B6FA /* squareCompass4.png */; };
 		A7C37F561BDFF44C00FEE8D2 /* newUser2.png in Resources */ = {isa = PBXBuildFile; fileRef = A7C37F541BDFF44C00FEE8D2 /* newUser2.png */; };
 		A7C37F571BDFF44C00FEE8D2 /* charmButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A7C37F551BDFF44C00FEE8D2 /* charmButton.png */; };
 		A7C37F591BDFF79200FEE8D2 /* EditGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C37F581BDFF79200FEE8D2 /* EditGroupViewController.swift */; };
@@ -250,7 +251,6 @@
 		A731F55C1C10CAD700B5B55E /* compassViewBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compassViewBackground.png; sourceTree = "<group>"; };
 		A731F55E1C10CBCE00B5B55E /* whiteLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteLine.png; sourceTree = "<group>"; };
 		A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveGroupTableViewCell.swift; sourceTree = "<group>"; };
-		A759EA3C1C11EF5900BB8B37 /* squareCompass2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = squareCompass2.png; sourceTree = "<group>"; };
 		A759EA3E1C11F09A00BB8B37 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
 		A760AAAF1BFA457A00214F06 /* MarkerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarkerView.xib; sourceTree = "<group>"; };
 		A760AAB11BFA46DC00214F06 /* pin2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin2.png; sourceTree = "<group>"; };
@@ -273,6 +273,8 @@
 		A792A56F1BFCF0BC00D5741C /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		A792A5711BFCF0BC00D5741C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A792A5731BFCF0BC00D5741C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7ACC01A1C11F4F80090B6FA /* Launch Screen2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen2.storyboard"; sourceTree = "<group>"; };
+		A7ACC01E1C11F7300090B6FA /* squareCompass4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = squareCompass4.png; sourceTree = "<group>"; };
 		A7C37F541BDFF44C00FEE8D2 /* newUser2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newUser2.png; sourceTree = "<group>"; };
 		A7C37F551BDFF44C00FEE8D2 /* charmButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = charmButton.png; sourceTree = "<group>"; };
 		A7C37F581BDFF79200FEE8D2 /* EditGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditGroupViewController.swift; path = ../EditGroupViewController.swift; sourceTree = "<group>"; };
@@ -585,6 +587,7 @@
 			children = (
 				A731F55C1C10CAD700B5B55E /* compassViewBackground.png */,
 				A77F586F1C0E3F7D008670B7 /* people32.png */,
+				A7ACC01E1C11F7300090B6FA /* squareCompass4.png */,
 				A731F55E1C10CBCE00B5B55E /* whiteLine.png */,
 				A77F586C1C0E36A7008670B7 /* people.png */,
 				AF5F33F51C001EED00BC1622 /* group.png */,
@@ -600,7 +603,6 @@
 				A72BDBE61C0CC4BE00D0CA84 /* redLights.png */,
 				CD0561DA1BEA700900130656 /* x.png */,
 				A759EA3E1C11F09A00BB8B37 /* splash.png */,
-				A759EA3C1C11EF5900BB8B37 /* squareCompass2.png */,
 				CD0561D61BE9452E00130656 /* Red_Arrow_Right 3.png */,
 				CD0561DE1BEA715200130656 /* Line.png */,
 				A7FA0E071C078E1A006D2CC5 /* compass2.png */,
@@ -700,6 +702,7 @@
 			isa = PBXGroup;
 			children = (
 				A7F3899D1BD56F4500DF2D7C /* Info.plist */,
+				A7ACC01A1C11F4F80090B6FA /* Launch Screen2.storyboard */,
 				CD6BAA531B98D946008614B0 /* Info2.plist */,
 			);
 			name = "Supporting Files";
@@ -1076,8 +1079,10 @@
 				CD0561E11BEA780D00130656 /* photos.png in Resources */,
 				CD0561DD1BEA700E00130656 /* compass.png in Resources */,
 				A766B48A1C0F69B400F69754 /* mainRedChar.png in Resources */,
+				A7ACC01B1C11F4F80090B6FA /* Launch Screen2.storyboard in Resources */,
 				A7C37FAE1BE00A8500FEE8D2 /* SF-Compact-Display-Ultralight.otf in Resources */,
 				A7C37FC01BE00A8500FEE8D2 /* SF-UI-Text-MediumItalic.otf in Resources */,
+				A7ACC01F1C11F7300090B6FA /* squareCompass4.png in Resources */,
 				CD0561D71BE9452E00130656 /* Red_Arrow_Right 3.png in Resources */,
 				A7C37FBA1BE00A8500FEE8D2 /* SF-UI-Text-Heavy.otf in Resources */,
 				A760AAB41BFA488100214F06 /* pin025.png in Resources */,
@@ -1096,7 +1101,6 @@
 				A7C37FB51BE00A8500FEE8D2 /* SF-UI-Display-Semibold.otf in Resources */,
 				A70BF38E1BCE91EE00062246 /* connectButton.png in Resources */,
 				A77F58671C0E30C4008670B7 /* redLightsUpside.png in Resources */,
-				A759EA3D1C11EF5900BB8B37 /* squareCompass2.png in Resources */,
 				A7C37FB41BE00A8500FEE8D2 /* SF-UI-Display-Regular.otf in Resources */,
 				A7C37FB11BE00A8500FEE8D2 /* SF-UI-Display-Heavy.otf in Resources */,
 				A7C37FAF1BE00A8500FEE8D2 /* SF-UI-Display-Black.otf in Resources */,
