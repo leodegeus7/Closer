@@ -1168,7 +1168,7 @@ class CirclesTableViewController: UITableViewController {
     }
     
     func charmFound(notification: NSNotification) {
-        if DataManager.sharedInstance.activeView == "circles" {
+        //if DataManager.sharedInstance.activeView == "circles" {
             if let info = notification.userInfo {
                 if let charmIndex = info["charmIndex"] as? Int {
                     let charm = DataManager.sharedInstance.myCharms[charmIndex]
@@ -1185,7 +1185,7 @@ class CirclesTableViewController: UITableViewController {
                     
                 }
             }
-        }
+        //}
         
     }
     
