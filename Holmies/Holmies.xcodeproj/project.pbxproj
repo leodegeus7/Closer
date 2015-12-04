@@ -936,7 +936,7 @@
 					};
 					CD6BAA4E1B98D946008614B0 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = H7C2V5GHBN;
+						DevelopmentTeam = 4V6XCMA27T;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -1399,7 +1399,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B702994F19B9686CF5BEEC1E /* Pods-Holmies.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1431,7 +1431,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 27C29F8694868BB9197FEBBE /* Pods-Holmies.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

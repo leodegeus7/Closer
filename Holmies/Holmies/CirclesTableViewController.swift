@@ -192,7 +192,7 @@ class CirclesTableViewController: UITableViewController {
         }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "existGroups", name:"ExistGroup", object: nil)
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "UpdateTableView", userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "UpdateTableView", userInfo: nil, repeats: true)
         
     }
     
@@ -1067,6 +1067,7 @@ class CirclesTableViewController: UITableViewController {
                     alert.addAction(UIAlertAction(title: "Accept", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                         
                         charm.sharer.status = "accepted"
+                        DataManager.sharedInstance.myCharms[charmIndex] = charm
                         self.http.updateSharerWithID(charm.sharer.id, until: nil, status: "accepted", completion: { (result) -> Void in
                             DataManager.sharedInstance.selectedSharer = [charm.sharer]
                             DataManager.sharedInstance.activeUsers = [charm.friend]

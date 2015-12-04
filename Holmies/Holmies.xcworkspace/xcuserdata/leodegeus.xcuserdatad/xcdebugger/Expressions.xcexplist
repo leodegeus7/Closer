@@ -31,13 +31,13 @@
          contextName = "CirclesTableViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:CirclesTableViewController.swift">
          <PersistentStrings>
             <PersistentString
+               value = "DataManager.sharedInstance.allGroup">
+            </PersistentString>
+            <PersistentString
                value = "DataManager.sharedInstance.allFriends">
             </PersistentString>
             <PersistentString
                value = "DataManager.sharedInstance.allSharers">
-            </PersistentString>
-            <PersistentString
-               value = "DataManager.sharedInstance.allGroup">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -84,7 +84,7 @@
          contextName = "CirclesTableViewController.(reloadData(CirclesTableViewController) -&gt; () -&gt; ()).(closure #1).(closure #1):CirclesTableViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "DataManager.sharedInstance.allFriends">
+               value = "DataManager.sharedInstance.allGroup">
             </PersistentString>
             <PersistentString
                value = "DataManager.sharedInstance.sharesInGroups">
@@ -96,7 +96,7 @@
                value = "sharerServer">
             </PersistentString>
             <PersistentString
-               value = "DataManager.sharedInstance.allGroup">
+               value = "DataManager.sharedInstance.allFriends">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -105,6 +105,14 @@
          <PersistentStrings>
             <PersistentString
                value = "DataManager.sharedInstance.allGroup">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MapGoogleViewController.viewDidLoad() -&gt; ():MapGoogleViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "DataManager.sharedInstance.selectedGroup.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

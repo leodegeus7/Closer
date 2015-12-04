@@ -79,7 +79,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmFound:", name: "charmFound", object: nil)
         
         DataManager.sharedInstance.activeView = "map"
@@ -88,6 +88,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         mapView.delegate = self   //delegate das funçoes do google maps
         mapView.mapType = kGMSTypeNormal
         self.setUpBackgrounGradient()
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("delegateUpdate", object: nil)
         
         DataManager.sharedInstance.activeMap = self.mapView
 //        var swipeDown = UISwipeGestureRecognizer(target: self, action: "draggedViewDown:")
@@ -98,9 +100,10 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 //        swipeUp.direction = UISwipeGestureRecognizerDirection.Up
 //        arrowCompass.addGestureRecognizer(swipeUp)
         
-
+        
         
 
+        
         self.compassView.hidden = true
         mapView.settings.compassButton = true
 
@@ -114,6 +117,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         
         if !isCharm {
             var existUserInGroup = false
+            self.navigationItem.title = "\(DataManager.sharedInstance.selectedGroup.name)"
             for sharer in DataManager.sharedInstance.selectedSharer {
                 if sharer.status == "accepted" && sharer.owner != DataManager.sharedInstance.myUser.userID {
                     existUserInGroup = true
@@ -137,6 +141,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         }
         else {
             navigationItem.rightBarButtonItem = UIBarButtonItem()
+            self.navigationItem.title = "\(DataManager.sharedInstance.activeUsers[0].name)"
         }
         
         
@@ -168,7 +173,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         }
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToSelectedFriend:", name: "goToUser", object: nil)
         
-        timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("updateLocationInMap"), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("updateLocationInMap"), userInfo: nil, repeats: true)
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -300,6 +305,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     
     @IBAction func mapTypeSegmentPressed(sender: AnyObject) {       //segment control para mudar o tipo de mapa
         let segmentedControl = sender as! UISegmentedControl
+        segmentedControl.hidden = true
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             mapView.mapType = kGMSTypeNormal  //mapa normal
