@@ -691,7 +691,7 @@ class CirclesTableViewController: UITableViewController {
             
             
             let charmCell = tableView.dequeueReusableCellWithIdentifier("charmCell", forIndexPath: indexPath) as! CharmTableViewCell
-            self.tableView.rowHeight = 200
+            self.tableView.rowHeight = 100
 
             let actualCharm = DataManager.sharedInstance.myCharms[indexPath.row]
             let actualFriend = actualCharm.friend
@@ -700,42 +700,47 @@ class CirclesTableViewController: UITableViewController {
             charmCell.nameLabel.text = actualFriend.name
             let imageName = DataManager.sharedInstance.findImage(actualFriend.userID)
             
-            charmCell.userPictureImageView.layer.cornerRadius = 8.0
+            charmCell.userPictureImageView.layer.cornerRadius = charmCell.userPictureImageView.frame.size.width / 2
             charmCell.userPictureImageView.layer.borderColor = mainRed.CGColor
-            charmCell.userPictureImageView.layer.borderWidth = 2
+            charmCell.userPictureImageView.layer.borderWidth = 3
+            charmCell.userPictureImageView.clipsToBounds = true
+            charmCell.userPictureImageView.image = imageName
             
             
-            let imageView = UIImageView(image: imageName)
             
-            imageView.layer.cornerRadius = 20.0
-            imageView.clipsToBounds = true
-            imageView.frame.size = charmCell.userPictureImageView.frame.size
-            imageView.frame.origin = CGPoint(x: 0, y: 0)
+//            let imageView = UIImageView(image: imageName)
+//            
+//            imageView.layer.cornerRadius = 20.0
+//            imageView.clipsToBounds = true
+//            imageView.frame.size = charmCell.userPictureImageView.frame.size
+//            imageView.frame.origin = CGPoint(x: 0, y: 0)
+//            
             
-            
-            for subview in charmCell.userPictureImageView.subviews {
-                subview.removeFromSuperview()
-            }
-            charmCell.userPictureImageView.addSubview(imageView)
-            
-            let bgImageView = UIImageView()
-            bgImageView.layer.borderColor = mainRed.CGColor
-            bgImageView.layer.cornerRadius = 20.0
-            bgImageView.clipsToBounds = true
-            bgImageView.frame.size = charmCell.backgroundImage.frame.size
-            bgImageView.frame.origin = CGPoint(x: 0, y: 0)
-            bgImageView.layer.borderWidth = 2.0
-            
-            for subview in charmCell.backgroundImage.subviews {
-                subview.removeFromSuperview()
-            }
+//            for subview in charmCell.userPictureImageView.subviews {
+//                subview.removeFromSuperview()
+//            }
+//            charmCell.userPictureImageView.addSubview(imageView)
+//            
+//            let bgImageView = UIImageView()
+//            bgImageView.layer.borderColor = mainRed.CGColor
+//            bgImageView.layer.cornerRadius = 20.0
+//            bgImageView.clipsToBounds = true
+//            bgImageView.frame.size = charmCell.backgroundImage.frame.size
+//            bgImageView.frame.origin = CGPoint(x: 0, y: 0)
+//            bgImageView.layer.borderWidth = 2.0
+//            
+//            for subview in charmCell.backgroundImage.subviews {
+//                subview.removeFromSuperview()
+//            }
             
             let duration = DataManager.sharedInstance.verifySharerStatus(actualSharer)
 
             
             if actualSharer.status == "pending" {
+                
                 if actualSharer.owner == DataManager.sharedInstance.myUser.userID {
-                    bgImageView.layer.borderColor = mainRed.CGColor
+                    charmCell.userPictureImageView.layer.borderColor = lightBlue.CGColor
+                    // bgImageView.layer.borderColor = mainRed.CGColor
                     if duration > 60 {
                         charmCell.remainingTimeLabel.text = "\(duration!/60) minutes remaining"
                     }
@@ -758,18 +763,21 @@ class CirclesTableViewController: UITableViewController {
             }
             else if actualSharer.status == "found"{
                 charmCell.remainingTimeLabel.text = "Found"
-                bgImageView.layer.borderColor = lightBlue.CGColor
+                charmCell.userPictureImageView.layer.borderColor = mainRed.CGColor
+                //bgImageView.layer.borderColor = lightBlue.CGColor
             }
             else if actualSharer.status == "rejected"{
                 charmCell.remainingTimeLabel.text = "Rejected"
-                bgImageView.layer.borderColor = UIColor.grayColor().CGColor
+                charmCell.userPictureImageView.layer.borderColor = UIColor.grayColor().CGColor
+               // bgImageView.layer.borderColor = UIColor.grayColor().CGColor
             }
             else {
                 charmCell.remainingTimeLabel.text = "Expired"
-                bgImageView.layer.borderColor = UIColor.grayColor().CGColor
+                charmCell.userPictureImageView.layer.borderColor = UIColor.grayColor().CGColor
+                //bgImageView.layer.borderColor = UIColor.grayColor().CGColor
                 
             }
-            charmCell.backgroundImage.addSubview(bgImageView)
+           // charmCell.backgroundImage.addSubview(bgImageView)
             return charmCell
             
             

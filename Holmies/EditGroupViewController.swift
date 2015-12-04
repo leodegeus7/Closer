@@ -20,6 +20,7 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
     let grayCheck = UIImage(named: "grayCheck.png")
     let mainRed = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1.0)
     let lightGray = UIColor(red: 170.0/255.0, green: 170.0/255.0, blue: 170.0/255.0, alpha: 1.0)
+    let lightBlue:UIColor = UIColor(red: 61.0/255.0, green: 210.0/255.0, blue: 228.0/255.0, alpha: 1)
     let http = HTTPHelper()
     var until = ""
     var chosenHour:Int!
@@ -101,10 +102,10 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
         if actualSharer.status != nil {
             
             if actualSharer.status == "pending" {
-                cell.friendName.textColor = UIColor.orangeColor()
+                cell.friendName.textColor = lightBlue
             }
             else if actualSharer.status == "accepted" {
-                cell.friendName.textColor = UIColor.greenColor()
+                cell.friendName.textColor = UIColor.grayColor()
             }
             else if actualSharer.status == "rejected" {
                 cell.friendName.textColor = UIColor.redColor()
@@ -199,7 +200,9 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
         addUserButton.layer.borderWidth = 1
         addUserButton.layer.cornerRadius = 8
         
-
+        tableView.backgroundColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1)
+        tableView.separatorColor = mainRed
+        
         
         
     }

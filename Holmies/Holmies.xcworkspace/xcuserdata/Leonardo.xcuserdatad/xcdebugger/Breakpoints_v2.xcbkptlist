@@ -415,8 +415,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "315"
             endingLineNumber = "315"
-            landmarkName = "mapTypeSegmentPressed(_:)"
-            landmarkType = "5">
+            landmarkName = "MapGoogleViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -511,8 +511,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "389"
             endingLineNumber = "389"
-            landmarkName = "MapGoogleViewController"
-            landmarkType = "3">
+            landmarkName = "registerBackgroundTask()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
