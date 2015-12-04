@@ -16,6 +16,8 @@ class CirclesTableViewController: UITableViewController {
     let http = HTTPHelper()
     let lightBlue:UIColor = UIColor(red: 61.0/255.0, green: 210.0/255.0, blue: 228.0/255.0, alpha: 1)
     let mainRed: UIColor = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
+    let lightGray = UIColor(red: 170.0/255.0, green: 170.0/255.0, blue: 170.0/255.0, alpha: 1.0)
+
     var imageX = 0.0
     
     
@@ -740,9 +742,20 @@ class CirclesTableViewController: UITableViewController {
                 
                 if actualSharer.owner == DataManager.sharedInstance.myUser.userID {
                     charmCell.userPictureImageView.layer.borderColor = lightBlue.CGColor
+                    charmCell.nameLabel.textColor = lightBlue
+                    charmCell.nameLabel.font = UIFont(name: "SFUIDisplay-Medium", size: 20)
+                    charmCell.remainingTimeLabel.textColor = lightGray
+                    charmCell.remainingTimeLabel.font = UIFont(name: "SFCompactDisplay-Light", size: 17)
                     // bgImageView.layer.borderColor = mainRed.CGColor
                     if duration > 60 {
+                        if duration == 1 {
+                            charmCell.remainingTimeLabel.text = "\(duration!/60) minute remaining"
+
+                        }else {
+                        
                         charmCell.remainingTimeLabel.text = "\(duration!/60) minutes remaining"
+                    }
+                        
                     }
                     else if duration <= 0 {
                         charmCell.remainingTimeLabel.text = "Expired"
@@ -764,16 +777,21 @@ class CirclesTableViewController: UITableViewController {
             else if actualSharer.status == "found"{
                 charmCell.remainingTimeLabel.text = "Found"
                 charmCell.userPictureImageView.layer.borderColor = mainRed.CGColor
+                charmCell.nameLabel.textColor = mainRed
+
                 //bgImageView.layer.borderColor = lightBlue.CGColor
             }
             else if actualSharer.status == "rejected"{
                 charmCell.remainingTimeLabel.text = "Rejected"
+                charmCell.nameLabel.textColor = UIColor.grayColor()
                 charmCell.userPictureImageView.layer.borderColor = UIColor.grayColor().CGColor
                // bgImageView.layer.borderColor = UIColor.grayColor().CGColor
             }
             else {
                 charmCell.remainingTimeLabel.text = "Expired"
                 charmCell.userPictureImageView.layer.borderColor = UIColor.grayColor().CGColor
+                charmCell.nameLabel.textColor = UIColor.grayColor()
+
                 //bgImageView.layer.borderColor = UIColor.grayColor().CGColor
                 
             }

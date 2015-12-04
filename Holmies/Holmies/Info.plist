@@ -54,6 +54,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>SF-Compact-Display-Black.otf</string>
+		<string>NexaRustScriptL-0.otf</string>
 		<string>SF-Compact-Display-Bold.otf</string>
 		<string>SF-Compact-Display-Heavy.otf</string>
 		<string>SF-Compact-Display-Light.otf</string>
@@ -84,6 +85,8 @@
 		<string>SF-UI-Text-Semibold.otf</string>
 		<string>SF-UI-Text-SemiboldItalic.otf</string>
 	</array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -91,7 +94,7 @@
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
+	<string>Launch Screen2</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

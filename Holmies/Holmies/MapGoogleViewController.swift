@@ -502,7 +502,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         if navigationController?.navigationBar.hidden == false {
             self.compassView.hidden = false
             compassView.fadeIn(0.5)
-
+            friendDistance.hidden = true
+            friendPhoto.hidden = true
             navigationController?.navigationBar.hidden = true
             let friend = marker.userData as! User
             self.selectedFriend = friend
