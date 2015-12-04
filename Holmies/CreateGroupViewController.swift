@@ -36,7 +36,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         super.viewDidLoad()
         tableView.separatorInset = UIEdgeInsetsZero
         tableView.layoutMargins = UIEdgeInsetsZero
-        let buttonContinue = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: "continueAction")
+        let buttonContinue = UIBarButtonItem(title: "Create", style: .Plain, target: self, action: "continueAction")
         self.navigationItem.rightBarButtonItem = buttonContinue
         
         self.tableView.rowHeight = 45

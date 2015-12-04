@@ -676,10 +676,10 @@ class CirclesTableViewController: UITableViewController {
                 emptyGroup.imageEmpty.layer.borderWidth = 2.0
                 emptyGroup.firstLabel.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
                 emptyGroup.firstLabel.textColor = mainRed
-                emptyGroup.firstLabel.text = "No charms"
+                emptyGroup.firstLabel.text = "No whistle"
                 emptyGroup.secondLabel.font = UIFont(name: "SFCompactDisplay-Light", size: 17)
                 emptyGroup.secondLabel.textColor = UIColor.blackColor()
-                emptyGroup.secondLabel.text = "Click here to send a charm"
+                emptyGroup.secondLabel.text = "Click here to send a whistle"
                 emptyGroup.tag = 998
                 
                 
@@ -1053,7 +1053,7 @@ class CirclesTableViewController: UITableViewController {
                 if let charmIndex = info["charmIndex"] as? Int {
                     let charm = DataManager.sharedInstance.myCharms[charmIndex]
                     
-                    let alert = UIAlertController(title: "Charm", message: "\(charm.friend.name) accepted your charm", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alert = UIAlertController(title: "Whistle", message: "\(charm.friend.name) accepted your whistle", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "Go", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                         DataManager.sharedInstance.selectedSharer = [charm.sharer]
                         DataManager.sharedInstance.activeUsers = [charm.friend]
@@ -1081,7 +1081,7 @@ class CirclesTableViewController: UITableViewController {
                     let charm = DataManager.sharedInstance.myCharms[charmIndex]
                     
                     
-                    let alert = UIAlertController(title: "Charm", message: "You have received a charm from \(charm.friend.name)", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alert = UIAlertController(title: "Whistle", message: "You have received a whistle from \(charm.friend.name)", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "Accept", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                         
                         charm.sharer.status = "accepted"
@@ -1128,7 +1128,7 @@ class CirclesTableViewController: UITableViewController {
                 if let charmIndex = info["charmIndex"] as? Int {
                     let charm = DataManager.sharedInstance.myCharms[charmIndex]
 
-                    let alert = UIAlertController(title: "Charm", message: "\(charm.friend.name) rejected your charm", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alert = UIAlertController(title: "Whistle", message: "\(charm.friend.name) rejected your Whistle", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                         self.http.destroySharerWithSharerType(.userToUser, ownerID: charm.sharer.owner, receiverID: charm.sharer.receiver, completion: { (result) -> Void in
                             
@@ -1150,7 +1150,7 @@ class CirclesTableViewController: UITableViewController {
             if let charmIndex = info["charmIndex"] as? Int {
                 let charm = DataManager.sharedInstance.myCharms[charmIndex]
                 
-                let alert = UIAlertController(title: "Charm", message: "The charm you sent to \(charm.friend.name) has expired", preferredStyle: UIAlertControllerStyle.Alert)
+                let alert = UIAlertController(title: "Whistle", message: "The whistle you sent to \(charm.friend.name) has expired", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                     self.http.destroySharerWithSharerType(.userToUser, ownerID: charm.sharer.owner, receiverID: charm.sharer.receiver, completion: { (result) -> Void in
                         
