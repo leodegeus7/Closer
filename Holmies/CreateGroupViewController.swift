@@ -586,7 +586,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
             if let index = selectedUserIndex {
                 let myUser = DataManager.sharedInstance.myUser
                 let selectedFriend = DataManager.sharedInstance.allFriends[index]
-                http.createNewSharerWithType(.userToUser, ownerID: myUser.userID, receiverID: selectedFriend.userID, until: "\(959)", completion: { (result) -> Void in
+                http.createNewSharerWithType(.userToUser, ownerID: myUser.userID, receiverID: selectedFriend.userID, until: "\(15)", completion: { (result) -> Void in
                     self.navigationController?.popToRootViewControllerAnimated(true)
                 })
 //                http.createNewSharerWithType(.userToUser, ownerID: myUser.userID, receiverID: selectedFriend.userID, until: "\(30)", completion: { (result) -> Void in
