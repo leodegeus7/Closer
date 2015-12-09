@@ -36,6 +36,10 @@
 		A78EA4831BDAABAC0001E946 /* CirclesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78EA4821BDAABAC0001E946 /* CirclesTableViewController.swift */; };
 		A78EA4861BDAB3C30001E946 /* reject.png in Resources */ = {isa = PBXBuildFile; fileRef = A78EA4841BDAB3C30001E946 /* reject.png */; };
 		A78EA4871BDAB3C30001E946 /* confirm.png in Resources */ = {isa = PBXBuildFile; fileRef = A78EA4851BDAB3C30001E946 /* confirm.png */; };
+		A7AB23BD1C17502500E3DC1C /* backArrowFlipped.png in Resources */ = {isa = PBXBuildFile; fileRef = A7AB23BC1C17502500E3DC1C /* backArrowFlipped.png */; };
+		A7AB23BF1C17516C00E3DC1C /* backArrowInversed.png in Resources */ = {isa = PBXBuildFile; fileRef = A7AB23BE1C17516C00E3DC1C /* backArrowInversed.png */; };
+		A7AB23C11C17551E00E3DC1C /* CustomSegueLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7AB23C01C17551E00E3DC1C /* CustomSegueLeft.swift */; };
+		A7AB23C31C17552A00E3DC1C /* CustomSegueRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7AB23C21C17552A00E3DC1C /* CustomSegueRight.swift */; };
 		A7ACC01B1C11F4F80090B6FA /* Launch Screen2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7ACC01A1C11F4F80090B6FA /* Launch Screen2.storyboard */; };
 		A7ACC01F1C11F7300090B6FA /* squareCompass4.png in Resources */ = {isa = PBXBuildFile; fileRef = A7ACC01E1C11F7300090B6FA /* squareCompass4.png */; };
 		A7C37F561BDFF44C00FEE8D2 /* newUser2.png in Resources */ = {isa = PBXBuildFile; fileRef = A7C37F541BDFF44C00FEE8D2 /* newUser2.png */; };
@@ -276,6 +280,10 @@
 		A792A56F1BFCF0BC00D5741C /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		A792A5711BFCF0BC00D5741C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A792A5731BFCF0BC00D5741C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7AB23BC1C17502500E3DC1C /* backArrowFlipped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backArrowFlipped.png; sourceTree = "<group>"; };
+		A7AB23BE1C17516C00E3DC1C /* backArrowInversed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backArrowInversed.png; sourceTree = "<group>"; };
+		A7AB23C01C17551E00E3DC1C /* CustomSegueLeft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSegueLeft.swift; sourceTree = "<group>"; };
+		A7AB23C21C17552A00E3DC1C /* CustomSegueRight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSegueRight.swift; sourceTree = "<group>"; };
 		A7ACC01A1C11F4F80090B6FA /* Launch Screen2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen2.storyboard"; sourceTree = "<group>"; };
 		A7ACC01E1C11F7300090B6FA /* squareCompass4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = squareCompass4.png; sourceTree = "<group>"; };
 		A7C37F541BDFF44C00FEE8D2 /* newUser2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newUser2.png; sourceTree = "<group>"; };
@@ -589,6 +597,8 @@
 			isa = PBXGroup;
 			children = (
 				A731F55C1C10CAD700B5B55E /* compassViewBackground.png */,
+				A7AB23BC1C17502500E3DC1C /* backArrowFlipped.png */,
+				A7AB23BE1C17516C00E3DC1C /* backArrowInversed.png */,
 				A77F586F1C0E3F7D008670B7 /* people32.png */,
 				A7ACC01E1C11F7300090B6FA /* squareCompass4.png */,
 				A731F55E1C10CBCE00B5B55E /* whiteLine.png */,
@@ -776,6 +786,8 @@
 				A78EA4821BDAABAC0001E946 /* CirclesTableViewController.swift */,
 				A71F7D161BD0298300652750 /* RegisterNewViewController.swift */,
 				CDA9A82C1B9DE9E300D93572 /* MapGoogleViewController.swift */,
+				A7AB23C01C17551E00E3DC1C /* CustomSegueLeft.swift */,
+				A7AB23C21C17552A00E3DC1C /* CustomSegueRight.swift */,
 				CD900F821BDE9F520095CB85 /* AddFriendTableViewController.swift */,
 				CD4FC93F1BED1F810086EC30 /* myInfoViewController.swift */,
 				CD721F901BF2641A0013A3C5 /* FriendsInMapTableViewController.swift */,
@@ -942,7 +954,7 @@
 					};
 					CD6BAA4E1B98D946008614B0 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 4V6XCMA27T;
+						DevelopmentTeam = H7C2V5GHBN;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -1111,6 +1123,7 @@
 				A7C37FC81BE11E3600FEE8D2 /* grayCheck.png in Resources */,
 				A71F7D0E1BD0215E00652750 /* pin.png in Resources */,
 				A7C37FC11BE00A8500FEE8D2 /* SF-UI-Text-Regular.otf in Resources */,
+				A7AB23BF1C17516C00E3DC1C /* backArrowInversed.png in Resources */,
 				CD103A751BBB07470044166F /* ovalRosa.png in Resources */,
 				A7C37FBD1BE00A8500FEE8D2 /* SF-UI-Text-Light.otf in Resources */,
 				AF5F33F41C001EE700BC1622 /* charm.png in Resources */,
@@ -1130,6 +1143,7 @@
 				A77F586D1C0E36A7008670B7 /* people.png in Resources */,
 				A7C37FA91BE00A8500FEE8D2 /* SF-Compact-Display-Light.otf in Resources */,
 				A7C37F5D1BDFF86000FEE8D2 /* newUser3.png in Resources */,
+				A7AB23BD1C17502500E3DC1C /* backArrowFlipped.png in Resources */,
 				CD73C0E01C105F8B000730F1 /* Main.storyboard in Resources */,
 				A7C37FB01BE00A8500FEE8D2 /* SF-UI-Display-Bold.otf in Resources */,
 				A7C37FB91BE00A8500FEE8D2 /* SF-UI-Text-BoldItalic.otf in Resources */,
@@ -1237,6 +1251,7 @@
 				A705921B1BD6C65300E737E3 /* NewGroupTableViewCell.swift in Sources */,
 				CD73C0DB1C0E222F000730F1 /* FriendsInFriendsTableViewCell.swift in Sources */,
 				A70592171BD6C5B600E737E3 /* DesignGroupsTableViewController.swift in Sources */,
+				A7AB23C11C17551E00E3DC1C /* CustomSegueLeft.swift in Sources */,
 				CDB0C94F1BCEE0290020BFB5 /* NSData+CommonCrypto.m in Sources */,
 				A73BE4CE1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift in Sources */,
 				CDB0C9501BCEE0290020BFB5 /* NSString+Base64.m in Sources */,
@@ -1245,6 +1260,7 @@
 				CD0D132D1BB9C29D000D0656 /* User.swift in Sources */,
 				CD43673F1BBC531E00309FD0 /* Group.swift in Sources */,
 				CDAA87801BD55CBE00C883B4 /* LoginViewControllerNew.swift in Sources */,
+				A7AB23C31C17552A00E3DC1C /* CustomSegueRight.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

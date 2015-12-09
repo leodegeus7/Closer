@@ -255,7 +255,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         
         addUserButton.setTitle("New User", forState: UIControlState.Normal)
         addUserButton.setTitleColor(mainRed, forState: UIControlState.Normal)
-        addUserButton.setAttributedTitle(NSAttributedString(string: "New User", attributes: [NSFontAttributeName: UIFont(name: "SFUIText-Medium", size: 17)!]), forState: UIControlState.Normal)
+        addUserButton.setAttributedTitle(NSAttributedString(string: "Add New User", attributes: [NSFontAttributeName: UIFont(name: "SFUIText-Medium", size: 17)!]), forState: UIControlState.Normal)
         addUserButton.titleLabel!.textColor = mainRed
         addUserButton.backgroundColor = UIColor.clearColor()
         addUserButton.layer.borderColor = mainRed.CGColor

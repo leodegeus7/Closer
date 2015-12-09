@@ -45,6 +45,8 @@ class CirclesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("PRINT PARA VER SE ESTA EMPLIHANDO MUITAS TELAS")
+        
         DataManager.sharedInstance.activeView = "circles"
         
         reloadData()
@@ -66,14 +68,14 @@ class CirclesTableViewController: UITableViewController {
         self.navigationController?.navigationBar.translucent = false
         self.navigationController?.navigationBar.barStyle = .Black
         self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
-                for family: String in UIFont.familyNames()
-                {
-                    print("\(family)")
-                    for names: String in UIFont.fontNamesForFamilyName(family)
-                    {
-                        print("== \(names)")
-                    }
-                }
+//                for family: String in UIFont.familyNames()
+//                {
+//                    print("\(family)")
+//                    for names: String in UIFont.fontNamesForFamilyName(family)
+//                    {
+//                        print("== \(names)")
+//                    }
+//                }
         
         
         self.refreshControl?.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
@@ -83,7 +85,9 @@ class CirclesTableViewController: UITableViewController {
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refresh.addTarget(self,action:"refreshData",forControlEvents:.ValueChanged)
         self.refreshControl = refresh
-    navigationBarGradient()
+        
+        
+        navigationBarGradient()
         //        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         //        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdated:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
         
@@ -1128,7 +1132,7 @@ class CirclesTableViewController: UITableViewController {
                 if let charmIndex = info["charmIndex"] as? Int {
                     let charm = DataManager.sharedInstance.myCharms[charmIndex]
 
-                    let alert = UIAlertController(title: "Whistle", message: "\(charm.friend.name) rejected your Whistle", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alert = UIAlertController(title: "Whistle", message: "\(charm.friend.name) rejected your whistle", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                         self.http.destroySharerWithSharerType(.userToUser, ownerID: charm.sharer.owner, receiverID: charm.sharer.receiver, completion: { (result) -> Void in
                             
@@ -1201,7 +1205,8 @@ extension CAGradientLayer {
         layer.frame = bounds
         let navigationBarRed1 = UIColor(red: 205.0/255.0, green: 16.0/255.0, blue: 34.0/255.0, alpha: 1.0)
         let navigationBarRed2 = UIColor(red: 213.0/250.0, green: 9.0/255.0, blue: 43.0/255.0, alpha: 1.0)
-        layer.colors = [navigationBarRed1.CGColor, navigationBarRed2.CGColor]
+        let mainRed: UIColor = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
+        layer.colors = [mainRed.CGColor, mainRed.CGColor]
         return layer
     }
     

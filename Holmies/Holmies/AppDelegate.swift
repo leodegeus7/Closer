@@ -109,7 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
                 DataManager.sharedInstance.loadMyInfo()
             }
             DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
-                print(result)
+                //print(result)
             })
             
         }

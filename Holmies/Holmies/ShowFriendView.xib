@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
@@ -12,6 +12,10 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="compassViewBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="MuU-nI-hRF">
+                    <rect key="frame" x="-20" y="-20" width="640" height="640"/>
+                    <animations/>
+                </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E2b-2h-CUM">
                     <rect key="frame" x="250" y="10" width="100" height="100"/>
                     <animations/>
@@ -20,7 +24,7 @@
                         <constraint firstAttribute="height" constant="100" id="dkX-2m-Yne"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0R2-ZW-lLR">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0R2-ZW-lLR">
                     <rect key="frame" x="279" y="130" width="42" height="21"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -38,19 +42,26 @@
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="MuU-nI-hRF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="-20" id="Tvt-M5-7Fy"/>
+                <constraint firstItem="MuU-nI-hRF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-20" id="WuS-Bh-TBB"/>
                 <constraint firstItem="Qoq-LP-144" firstAttribute="top" secondItem="0R2-ZW-lLR" secondAttribute="bottom" constant="20" id="f6J-5T-gZY"/>
                 <constraint firstItem="Qoq-LP-144" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="hAw-AO-iJ4"/>
+                <constraint firstAttribute="trailing" secondItem="MuU-nI-hRF" secondAttribute="trailing" constant="-20" id="iOW-zL-Hfq"/>
                 <constraint firstItem="0R2-ZW-lLR" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ile-UK-CDc"/>
                 <constraint firstItem="0R2-ZW-lLR" firstAttribute="top" secondItem="E2b-2h-CUM" secondAttribute="bottom" constant="20" id="okL-xc-RNf"/>
                 <constraint firstItem="E2b-2h-CUM" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="slJ-xL-uMy"/>
                 <constraint firstItem="E2b-2h-CUM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="sw2-T0-hR0"/>
+                <constraint firstAttribute="bottom" secondItem="MuU-nI-hRF" secondAttribute="bottom" constant="-20" id="y39-Ce-ucX"/>
             </constraints>
             <connections>
                 <outlet property="nameFriend" destination="0R2-ZW-lLR" id="3eV-Zc-VdX"/>
                 <outlet property="userImage" destination="E2b-2h-CUM" id="bdv-Gj-S7m"/>
                 <outlet property="userName" destination="Qoq-LP-144" id="7bq-Ch-gIy"/>
             </connections>
-            <point key="canvasLocation" x="308" y="555"/>
+            <point key="canvasLocation" x="420" y="471"/>
         </view>
     </objects>
+    <resources>
+        <image name="compassViewBackground.png" width="750" height="1334"/>
+    </resources>
 </document>

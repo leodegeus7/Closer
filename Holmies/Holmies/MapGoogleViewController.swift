@@ -217,7 +217,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 
     func goBack () {
         if self.isCharm {
-            let alert = UIAlertController(title: "Charm", message: "Did you find \(DataManager.sharedInstance.activeUsers[0].name)?", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Whistle", message: "Did you find \(DataManager.sharedInstance.activeUsers[0].name)?", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
                 
             }))

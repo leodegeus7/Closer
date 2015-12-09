@@ -21,6 +21,7 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
     var viewIsOpen = false
     var supportViewForFriend = UIView()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         FriendsTableView.separatorInset = UIEdgeInsetsZero
@@ -40,13 +41,30 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
         FriendsTableView.layer.borderColor = mainRed.CGColor
         FriendsTableView.separatorColor = mainRed
         FriendsTableView.layer.cornerRadius = 8
-        
-
-        
     
         self.FriendsTableView.rowHeight = 45
         
+        
+        let buttonName = UIButton()
+        buttonName.setImage(UIImage(named: "backArrowInversed.png"), forState: .Normal)
+        buttonName.frame = CGRect(x: 0, y: 0, width: 24 * 0.6, height: 41.29 * 0.6)
+        buttonName.addTarget(self, action: Selector("goBackToMain"), forControlEvents: .TouchUpInside)
+      //  buttonName.addTarget(self, action: Selector("dismissView"), forControlEvents: .TouchUpInside)
+        
+        let rightButton = UIBarButtonItem()
+        rightButton.customView = buttonName
+        self.navigationItem.rightBarButtonItem = rightButton
+        
+        self.navigationItem.hidesBackButton = true
+        
         // Do any additional setup after loading the view.
+    }
+    
+    func goBackToMain() {
+        self.performSegueWithIdentifier("backToMain", sender: self)
+
+
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -67,7 +85,7 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
         FriendsTableView.reloadData()
         
         self.navigationItem.title = "Friends"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "NexaRustScriptL-0", size: 30)!]
+      //  self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "NexaRustScriptL-0", size: 30)!]
         
         
     }
@@ -132,9 +150,9 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
         
         
         
-        print("height: \(cell.imageUser.frame.height)")
-        print("width: \(cell.imageUser.frame.width)")
-        print("corner: \(cell.imageUser.layer.cornerRadius)")
+//        print("height: \(cell.imageUser.frame.height)")
+//        print("width: \(cell.imageUser.frame.width)")
+//        print("corner: \(cell.imageUser.layer.cornerRadius)")
         
         return cell
     }
@@ -268,6 +286,7 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
        // let friendView = friendViewController.view
         supportViewForFriend = view
         self.view.addSubview(supportViewForFriend)
+        
         if let infoView = UIView.viewFromNibName("ShowFriendView") as? ShowFriendView {
             infoView.nameFriend.text = DataManager.sharedInstance.allFriends[indexPath.row].name
             infoView.userName.text = DataManager.sharedInstance.allFriends[indexPath.row].username
@@ -278,13 +297,18 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
             infoView.userName.textColor = DataManager.sharedInstance.lightBlue
             infoView.nameFriend.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
             infoView.nameFriend.textColor = UIColor.whiteColor()
-            infoView.userImage.layer.cornerRadius = 100.0
+            infoView.userImage.layer.cornerRadius = infoView.userImage.frame.size.width / 2
             infoView.userImage.layer.borderColor = UIColor.whiteColor().CGColor
-            infoView.userImage.layer.borderWidth = 3.0
+            infoView.userImage.layer.borderWidth = 2.0
             infoView.userImage.clipsToBounds = true
             
             view.addSubview(infoView)
             viewIsOpen = true
+            
+            self.view.fadeOut(0.5)
+            infoView.alpha = 1
+            
+            
         }
         
         
@@ -299,6 +323,8 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
     func recognizeTapGesture() {
         if viewIsOpen {
            supportViewForFriend.hidden = true
+           
+        
         }
     }
 

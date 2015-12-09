@@ -650,7 +650,7 @@ class DataManager {
                 })
             }
             completion(result: JSON)
-            print(JSON)
+           // print(JSON)
             //            } else {
             //                let dic = DataManager.sharedInstance.loadJsonFromDocuments("groups")
             //                DataManager.sharedInstance.convertJsonToGroup(dic)
@@ -884,7 +884,7 @@ class DataManager {
     func convertJsonToSharer(json:AnyObject) -> [Sharer] {
         var sharers = [Sharer]()
         if let dic = json as? [NSDictionary] {
-            print(dic)
+            //print(dic)
 
             if dic.count != 0 {
                 if dic[0]["error"] != nil {
