@@ -1044,7 +1044,7 @@ class DataManager {
             }
             sortGroupArray()
             
-            
+            verifyIfGroupIsActive()
             
             
 
