@@ -15,6 +15,7 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
     let lightBlue:UIColor = UIColor(red: 61.0/255.0, green: 210.0/255.0, blue: 228.0/255.0, alpha: 1)
     let mainRed: UIColor = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
     let lightGray = UIColor(red: 170.0/255.0, green: 170.0/255.0, blue: 170.0/255.0, alpha: 1.0)
+    let backgrounGrayAle = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1)
 
     
     let http = HTTPHelper()
@@ -26,7 +27,6 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
         super.viewDidLoad()
         FriendsTableView.separatorInset = UIEdgeInsetsZero
         FriendsTableView.layoutMargins = UIEdgeInsetsZero
-        initializeGestureRecognizer()
         
         addFriendTextField.layer.borderColor = mainRed.CGColor
         addFriendTextField.layer.borderWidth = 1
@@ -280,7 +280,7 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let view = UIView(frame: CGRect(x: self.view.frame.width/2-100, y: self.view.frame.height/2-100, width: 200, height: 200))
-        view.backgroundColor = UIColor.redColor()
+        view.backgroundColor = mainRed
         self.view.addSubview(view)
         //let friendViewController = self.storyboard!.instantiateViewControllerWithIdentifier("ShowFriendView")
        // let friendView = friendViewController.view
@@ -292,21 +292,49 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
             infoView.userName.text = DataManager.sharedInstance.allFriends[indexPath.row].username
             infoView.userImage.image = DataManager.sharedInstance.findImage(DataManager.sharedInstance.allFriends[indexPath.row].userID)
             infoView.backgroundColor = DataManager.sharedInstance.mainRed
-            infoView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+            
+            let viewSize = 300 / 414 * self.view.frame.size.width
+            
+            infoView.frame = CGRect(x: self.view.frame.size.width / 2 - viewSize / 2, y: self.view.frame.size.height / 2 - viewSize/2, width: viewSize, height: viewSize)
+            infoView.clipsToBounds = true
             infoView.userName.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
             infoView.userName.textColor = DataManager.sharedInstance.lightBlue
             infoView.nameFriend.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
             infoView.nameFriend.textColor = UIColor.whiteColor()
-            infoView.userImage.layer.cornerRadius = infoView.userImage.frame.size.width / 2
+            infoView.userImage.layer.cornerRadius = viewSize / 6
             infoView.userImage.layer.borderColor = UIColor.whiteColor().CGColor
             infoView.userImage.layer.borderWidth = 2.0
             infoView.userImage.clipsToBounds = true
+            infoView.layer.cornerRadius = 15
             
-            view.addSubview(infoView)
+            infoView.imageTopConstraint.constant = (viewSize / 4) - (viewSize / 6)
+            let ok = infoView.imageTopConstraint.constant
+            infoView.nameFriendTopConstraint.constant = (viewSize / 2) //+ (infoView.nameFriend.frame.size.height / 2)
+            
+            infoView.userNameTopConstant.constant = (viewSize * 3 / 4) //- (infoView.userName.frame.size.height / 2)
+
+            
+            let blackView = UIView()
+            blackView.frame = CGRect(x: 0 - (self.view.frame.size.width / 2), y: 0 - (self.view.frame.size.height / 2), width: self.view.frame.size.width * 10, height: self.view.frame.size.height * 10)
+            blackView.backgroundColor = UIColor.blackColor()
+            blackView.alpha = 0.45
+
+            
+            let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("recognizeTapGesture"))
+            tapGesture.cancelsTouchesInView = false
+            blackView.addGestureRecognizer(tapGesture)
+            blackView.tag = 37
+            
+            infoView.tag = 37
+            
+            self.view.addSubview(blackView)
+            self.view.addSubview(infoView)
             viewIsOpen = true
             
-            self.view.fadeOut(0.5)
-            infoView.alpha = 1
+           
+            
+            
+            
             
             
         }
@@ -314,15 +342,16 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
         
     }
     
-    func initializeGestureRecognizer() {
-        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("recognizeTapGesture"))
-        tapGesture.cancelsTouchesInView = false
-        self.view.addGestureRecognizer(tapGesture)
-    }
     
     func recognizeTapGesture() {
         if viewIsOpen {
            supportViewForFriend.hidden = true
+            
+            for view in self.view.subviews {
+                if view.tag == 37 {
+                    view.alpha = 0
+                }
+            }
            
         
         }

@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -17,22 +18,27 @@
                     <animations/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E2b-2h-CUM">
-                    <rect key="frame" x="250" y="10" width="100" height="100"/>
+                    <rect key="frame" x="200" y="250" width="200" height="200"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="E2b-2h-CUM" secondAttribute="height" multiplier="2:2" id="1gG-kT-iVa"/>
                         <constraint firstAttribute="height" constant="100" id="dkX-2m-Yne"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="dkX-2m-Yne"/>
+                        </mask>
+                    </variation>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0R2-ZW-lLR">
-                    <rect key="frame" x="279" y="130" width="42" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0R2-ZW-lLR">
+                    <rect key="frame" x="10" y="370" width="580" height="21"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qoq-LP-144">
-                    <rect key="frame" x="279" y="171" width="42" height="20"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qoq-LP-144">
+                    <rect key="frame" x="10" y="500" width="580" height="21"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -42,21 +48,27 @@
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="E2b-2h-CUM" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="1/3" id="Bvq-g1-NDY"/>
+                <constraint firstItem="Qoq-LP-144" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="500" id="Eaq-LT-jlV"/>
+                <constraint firstItem="0R2-ZW-lLR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="370" id="IDc-Kg-YI1"/>
+                <constraint firstItem="Qoq-LP-144" firstAttribute="trailing" secondItem="0R2-ZW-lLR" secondAttribute="trailing" id="K6N-To-Dzy"/>
                 <constraint firstItem="MuU-nI-hRF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="-20" id="Tvt-M5-7Fy"/>
                 <constraint firstItem="MuU-nI-hRF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-20" id="WuS-Bh-TBB"/>
-                <constraint firstItem="Qoq-LP-144" firstAttribute="top" secondItem="0R2-ZW-lLR" secondAttribute="bottom" constant="20" id="f6J-5T-gZY"/>
-                <constraint firstItem="Qoq-LP-144" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="hAw-AO-iJ4"/>
+                <constraint firstItem="E2b-2h-CUM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="250" id="XcM-PY-N3I"/>
+                <constraint firstAttribute="trailing" secondItem="Qoq-LP-144" secondAttribute="trailing" constant="10" id="e1K-sY-Skn"/>
                 <constraint firstAttribute="trailing" secondItem="MuU-nI-hRF" secondAttribute="trailing" constant="-20" id="iOW-zL-Hfq"/>
-                <constraint firstItem="0R2-ZW-lLR" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ile-UK-CDc"/>
-                <constraint firstItem="0R2-ZW-lLR" firstAttribute="top" secondItem="E2b-2h-CUM" secondAttribute="bottom" constant="20" id="okL-xc-RNf"/>
+                <constraint firstItem="Qoq-LP-144" firstAttribute="leading" secondItem="0R2-ZW-lLR" secondAttribute="leading" id="jQ1-8I-Y94"/>
+                <constraint firstItem="Qoq-LP-144" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="qAN-qF-5G1"/>
                 <constraint firstItem="E2b-2h-CUM" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="slJ-xL-uMy"/>
-                <constraint firstItem="E2b-2h-CUM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="sw2-T0-hR0"/>
                 <constraint firstAttribute="bottom" secondItem="MuU-nI-hRF" secondAttribute="bottom" constant="-20" id="y39-Ce-ucX"/>
             </constraints>
             <connections>
+                <outlet property="imageTopConstraint" destination="XcM-PY-N3I" id="dj5-JL-BKZ"/>
                 <outlet property="nameFriend" destination="0R2-ZW-lLR" id="3eV-Zc-VdX"/>
+                <outlet property="nameFriendTopConstraint" destination="IDc-Kg-YI1" id="jvj-WY-DYn"/>
                 <outlet property="userImage" destination="E2b-2h-CUM" id="bdv-Gj-S7m"/>
                 <outlet property="userName" destination="Qoq-LP-144" id="7bq-Ch-gIy"/>
+                <outlet property="userNameTopConstant" destination="Eaq-LT-jlV" id="pip-xI-8IS"/>
             </connections>
             <point key="canvasLocation" x="420" y="471"/>
         </view>
