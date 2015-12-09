@@ -72,9 +72,6 @@
             <PersistentString
                value = "DataManager.sharedInstance.allFriends">
             </PersistentString>
-            <PersistentString
-               value = "DataManager.sharedInstance.allGroup">
-            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
@@ -186,6 +183,20 @@
          contextName = "DataManager.updateLocationUsers(GMSMapView) -&gt; ():DataManager.swift">
       </ContextState>
       <ContextState
+         contextName = "EditGroupViewController.viewDidLoad() -&gt; ():EditGroupViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "DataManager.sharedInstance.activeUsers">
+            </PersistentString>
+            <PersistentString
+               value = "DataManager.sharedInstance.allFriends">
+            </PersistentString>
+            <PersistentString
+               value = "arrayWithAllPeople">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "LoginViewControllerNew.(getFBUserData(LoginViewControllerNew) -&gt; () -&gt; ()).(closure #1):LoginViewControllerNew.swift">
       </ContextState>
       <ContextState
@@ -234,6 +245,12 @@
          <PersistentStrings>
             <PersistentString
                value = "DataManager.sharedInstance.selectedSharer">
+            </PersistentString>
+            <PersistentString
+               value = "arrayWithAllPeople">
+            </PersistentString>
+            <PersistentString
+               value = "arrayWithAllPeople[indexPath.row].username">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
