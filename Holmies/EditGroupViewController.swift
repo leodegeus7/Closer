@@ -26,6 +26,8 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
     var chosenHour:Int!
     var chosenDay:Int!
     
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,6 +35,10 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.layoutMargins = UIEdgeInsetsZero
 //        let buttonContinue = UIBarButtonItem(title: "Update name of Group", style: .Plain, target: self, action: "continueAction")
 //        self.navigationItem.rightBarButtonItem = buttonContinue
+        
+        
+        
+        
         
         
         self.applyDesign()
@@ -103,9 +109,11 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
             
             if actualSharer.status == "pending" {
                 cell.friendName.textColor = lightBlue
+                cell.tag = 10
             }
             else if actualSharer.status == "accepted" {
                 cell.friendName.textColor = UIColor.grayColor()
+                cell.tag = 20
             }
             else if actualSharer.status == "rejected" {
                 cell.friendName.textColor = UIColor.redColor()
@@ -191,9 +199,9 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.layer.borderWidth = 1
         tableView.layer.cornerRadius = 8
         
-        addUserButton.setTitle("New User", forState: UIControlState.Normal)
+        addUserButton.setTitle("Add New User", forState: UIControlState.Normal)
         addUserButton.setTitleColor(mainRed, forState: UIControlState.Normal)
-        addUserButton.setAttributedTitle(NSAttributedString(string: "New User", attributes: [NSFontAttributeName: UIFont(name: "SFUIText-Medium", size: 17)!]), forState: UIControlState.Normal)
+        addUserButton.setAttributedTitle(NSAttributedString(string: "Add New User", attributes: [NSFontAttributeName: UIFont(name: "SFUIText-Medium", size: 17)!]), forState: UIControlState.Normal)
         addUserButton.titleLabel!.textColor = mainRed
         addUserButton.backgroundColor = UIColor.clearColor()
         addUserButton.layer.borderColor = mainRed.CGColor
@@ -227,10 +235,16 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let myDict: [String:AnyObject] = [ "user": DataManager.sharedInstance.activeUsers[indexPath.row]]
         
-        NSNotificationCenter.defaultCenter().postNotificationName("goToUser", object: nil ,userInfo: myDict)
-        navigationController?.popViewControllerAnimated(true)
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        if cell?.tag == 20 {
+        
+        
+            let myDict: [String:AnyObject] = [ "user": DataManager.sharedInstance.activeUsers[indexPath.row]]
+        
+            NSNotificationCenter.defaultCenter().postNotificationName("goToUser", object: nil ,userInfo: myDict)
+            navigationController?.popViewControllerAnimated(true)
+        }
     }
 
 

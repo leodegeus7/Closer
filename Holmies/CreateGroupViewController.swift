@@ -14,7 +14,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet weak var upSliderLabel: UILabel!
     @IBOutlet weak var downSlideLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var addUserButton: UIButton!
+   // @IBOutlet weak var addUserButton: UIButton!
     
     @IBOutlet weak var timeSlider: UISlider!
     
@@ -30,7 +30,6 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     var chosenDay:Int!
     var isCharm = false
     var selectedUserIndex = Int?()
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -183,55 +182,6 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         
         
         
-        
-//        
-//        
-//        var alreadyExist = false
-//        
-//        var index = 0
-//        var indexInAllFriends = 0
-//        
-//        
-//        if (resultSearchController.active) {
-//            let allfriend = DataManager.sharedInstance.allFriends
-//            let selected = DataManager.sharedInstance.selectedFriends
-//            let filtered = filteredArray
-//            for userInUser in DataManager.sharedInstance.allFriends {
-//                if userInUser.userID == filteredArray[indexPath.row].userID {
-//                    indexInAllFriends = index
-//                }
-//                index++
-//            }
-//        }
-//        else {
-//            indexInAllFriends = indexPath.row
-//        }
-//        
-//
-//        
-//        
-//        
-//        for friend in DataManager.sharedInstance.selectedFriends {
-//            if friend.userID == DataManager.sharedInstance.allFriends[indexInAllFriends].userID {
-//                        alreadyExist = true
-//                        break
-//            }
-//            
-//
-//        }
-//        
-//            if alreadyExist {
-//                
-//                self.tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
-//                cell.checkImage.image = redCheck
-//                cell.friendPhoto.layer.borderColor = mainRed.CGColor
-//                cell.friendPhoto.layer.borderWidth = 1
-//                cell.friendName.textColor = mainRed
-//                
-//            }
-        
-
-
     
         
         
@@ -457,7 +407,7 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         filteredArray.removeAll(keepCapacity: false)
-        let arrayTeste = DataManager.sharedInstance.allFriends.filter({$0.name.lowercaseString.rangeOfString(searchController.searchBar.text!.lowercaseString) != nil})
+        let arrayTeste = DataManager.sharedInstance.allFriends.filter({$0.username.lowercaseString.rangeOfString(searchController.searchBar.text!.lowercaseString) != nil})
         filteredArray = arrayTeste
         tableView.reloadData()
         

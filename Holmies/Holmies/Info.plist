@@ -85,8 +85,6 @@
 		<string>SF-UI-Text-Semibold.otf</string>
 		<string>SF-UI-Text-SemiboldItalic.otf</string>
 	</array>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleLightContent</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -101,6 +99,8 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

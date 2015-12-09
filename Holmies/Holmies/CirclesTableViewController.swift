@@ -314,36 +314,24 @@ class CirclesTableViewController: UITableViewController {
                 DataManager.sharedInstance.allGroup = DataManager.sharedInstance.convertJsonToGroup(result)
                 
                 DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
-                    print("\(result)")
-                    //                    self.tableView.reloadData()
                 })
                 
+
+                
+                
+                
+                
                 DataManager.sharedInstance.requestSharerInGroups()
-                
                 let friends = DataManager.sharedInstance.loadJsonFromDocuments("friends")
-                
                 for index in DataManager.sharedInstance.allFriends {
-                    
-                    
                     if !(index.facebookID == nil) && !(index.userID == nil) {
                         let image = DataManager.sharedInstance.getProfPic(index.facebookID, serverId: index.userID)
                         DataManager.sharedInstance.saveImage(image, id: index.userID)
                     }
                 }
-                
                 if DataManager.sharedInstance.myUser.facebookID != nil {
                     let myPhoto = DataManager.sharedInstance.getProfPic(DataManager.sharedInstance.myUser.facebookID, serverId: DataManager.sharedInstance.myUser.userID)
                     DataManager.sharedInstance.saveImage(myPhoto, id: DataManager.sharedInstance.myUser.userID)
-                    
-                    //                    for index in TE {
-                    //
-                    //
-                    //                        if !(index.facebookID == nil) && !(index.userID == nil) {
-                    //                            let image = DataManager.sharedInstance.getProfPic(index.facebookID, serverId: index.userID)
-                    //                            DataManager.sharedInstance.saveImage(image, id: index.userID)
-                    //                        }
-                    //                    }
-                    
                 }
                 DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(friends)
                 
@@ -353,11 +341,11 @@ class CirclesTableViewController: UITableViewController {
                 else {
                     self.noGroups = false
                 }
+                
                 DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
                     print("\(result)")
                     self.tableView.reloadData()
                     if self.refreshControl?.refreshing == true {
-                        
                         self.refreshControl?.endRefreshing()
                     }
                     DataManager.sharedInstance.finishedAllRequest = true
@@ -764,7 +752,7 @@ class CirclesTableViewController: UITableViewController {
                     else if duration <= 0 {
                         charmCell.remainingTimeLabel.text = "Expired"
                         actualSharer.status = "Expired"
-                        NSNotificationCenter.defaultCenter().postNotificationName("delegateUpdate", object: nil)
+                        //NSNotificationCenter.defaultCenter().postNotificationName("delegateUpdate", object: nil)
                         
                     }
                     else {

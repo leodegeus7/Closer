@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
     var window: UIWindow?
     let googleMapsApiKey = "AIzaSyAhjTqn1_2HX0FiQ0MW1_O7L1avjPIxP9g"
     let helper = HTTPHelper()
-
+    var timer = NSTimer()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //setando parse, api google, registrando as notificacoes
@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         DataManager.sharedInstance.locationManager.delegate = self
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "update", name: "delegateUpdate", object: nil)
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "update", name: "delegateUpdate", object: nil)
         DataManager.sharedInstance.windows = window?.rootViewController
 
         
@@ -76,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
             self.window?.rootViewController = viewController
             self.window?.makeKeyAndVisible()
         } else {
-            let timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "update", userInfo: nil, repeats: true)
+            timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "update", userInfo: nil, repeats: true)
 
             let storyboard = UIStoryboard(name: "Design", bundle: nil)
             //let dest = storyboard.instantiateViewControllerWithIdentifier("loginVC")
@@ -94,7 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
                 DataManager.sharedInstance.allSharers = DataManager.sharedInstance.convertJsonToSharer(dic)
             }
             if (DataManager.sharedInstance.testIfFileExistInDocuments("/groups.json")) {
-                let dic = DataManager.sharedInstance.loadJsonFromDocuments("groups")
+                let dic = DataManager.sharedInstance.loadJsonFromDocuments("groups" )
                 DataManager.sharedInstance.allGroup = DataManager.sharedInstance.convertJsonToGroup(dic)
                 
             }
@@ -132,6 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
+        timer.invalidate()
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
@@ -141,6 +142,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
+        DataManager.sharedInstance.importID()
+        let idUser = "\(DataManager.sharedInstance.myUser.userID)"
+        let number = Int(idUser)
+        if (number > 0)  {
+            timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "update", userInfo: nil, repeats: true)
+        }
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         UIApplication.sharedApplication().applicationIconBadgeNumber = DataManager.sharedInstance.myCharms.count
     }
@@ -189,6 +196,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         print(error)
 
     }
+
+//    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+//    
+//        
+//    }
+    
     
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         
@@ -266,35 +279,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
 
     func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
         if !(DataManager.sharedInstance.myUser.userID == nil) {
-            
-//            var backgroundTask = UIBackgroundTaskIdentifier()
-//            
-//            backgroundTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({ () -> Void in
-//                backgroundTask = UIBackgroundTaskInvalid
-//                
-//                
-//            })
+
             DataManager.sharedInstance.myUser.location.longitude = "\(newLocation.coordinate.longitude)"
             DataManager.sharedInstance.myUser.location.latitude = "\(newLocation.coordinate.latitude)"
             DataManager.sharedInstance.saveMyInfo()
             if UIApplication.sharedApplication().applicationState == .Active {
                 print("Coord atualizada: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
+                let location = "\(newLocation.coordinate.latitude):\(newLocation.coordinate.longitude)"
+                if newLocation.horizontalAccuracy < 100 {
+                    helper.updateUserWithID(DataManager.sharedInstance.myUser.userID, username: nil, location: location, altitude: nil, fbid: nil, photo: nil, name: nil, email: nil, password: nil) { (result) -> Void in
+                    }
+                }
             }
             else {
                 print("App em background. Coord: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
-                let userInfoCoordinate = ["local":newLocation]
-                DataManager.sharedInstance.createLocalNotification("oi", body: "\(newLocation.coordinate.latitude)", timeAfterClose: 10,userInfo:userInfoCoordinate)
+                //let userInfoCoordinate = ["local":newLocation]
+                print(newLocation.horizontalAccuracy)
+                if newLocation.horizontalAccuracy < 100 {
+                    let location = "\(newLocation.coordinate.latitude):\(newLocation.coordinate.longitude)"
+                    helper.updateUserWithID(DataManager.sharedInstance.myUser.userID, username: nil, location: location, altitude: nil, fbid: nil, photo: nil, name: nil, email: nil, password: nil) { (result) -> Void in
+                        
+                    }
+                }
+                
+                
+                //DataManager.sharedInstance.createLocalNotification("oi", body: "\(newLocation.coordinate.latitude)", timeAfterClose: 10,userInfo:userInfoCoordinate)
             }
-            let location = "\(newLocation.coordinate.latitude):\(newLocation.coordinate.longitude)"
-            helper.updateUserWithID(DataManager.sharedInstance.myUser.userID, username: nil, location: location, altitude: nil, fbid: nil, photo: nil, name: nil, email: nil, password: nil) { (result) -> Void in
-            }
-            DataManager.sharedInstance.reverseGeocodeCoordinate(newLocation.coordinate) //transforma a coordenada em endereco
-            if DataManager.sharedInstance.end != nil {
-                let actualLocation = Location()
-                actualLocation.location = newLocation
-                actualLocation.address = DataManager.sharedInstance.end
-                DataManager.sharedInstance.locationUserArray.append(actualLocation)
-            }
+
+            //DataManager.sharedInstance.reverseGeocodeCoordinate(newLocation.coordinate) //transforma a coordenada em endereco
+//            if DataManager.sharedInstance.end != nil {
+//                let actualLocation = Location()
+//                actualLocation.location = newLocation
+//                actualLocation.address = DataManager.sharedInstance.end
+//                DataManager.sharedInstance.locationUserArray.append(actualLocation)
+//            }
         }
     }
     
