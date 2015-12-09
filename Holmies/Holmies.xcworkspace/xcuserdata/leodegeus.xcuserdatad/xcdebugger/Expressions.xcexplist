@@ -31,13 +31,13 @@
          contextName = "CirclesTableViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:CirclesTableViewController.swift">
          <PersistentStrings>
             <PersistentString
+               value = "DataManager.sharedInstance.allSharers">
+            </PersistentString>
+            <PersistentString
                value = "DataManager.sharedInstance.allGroup">
             </PersistentString>
             <PersistentString
                value = "DataManager.sharedInstance.allFriends">
-            </PersistentString>
-            <PersistentString
-               value = "DataManager.sharedInstance.allSharers">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -84,7 +84,7 @@
          contextName = "CirclesTableViewController.(reloadData(CirclesTableViewController) -&gt; () -&gt; ()).(closure #1).(closure #1):CirclesTableViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "DataManager.sharedInstance.allGroup">
+               value = "DataManager.sharedInstance.allFriends">
             </PersistentString>
             <PersistentString
                value = "DataManager.sharedInstance.sharesInGroups">
@@ -96,14 +96,6 @@
                value = "sharerServer">
             </PersistentString>
             <PersistentString
-               value = "DataManager.sharedInstance.allFriends">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "CirclesTableViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:CirclesTableViewController.swift">
-         <PersistentStrings>
-            <PersistentString
                value = "DataManager.sharedInstance.allGroup">
             </PersistentString>
          </PersistentStrings>
@@ -113,6 +105,14 @@
          <PersistentStrings>
             <PersistentString
                value = "DataManager.sharedInstance.selectedGroup.name">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CirclesTableViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:CirclesTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "DataManager.sharedInstance.allGroup">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -141,6 +141,9 @@
             <PersistentString
                value = "DataManager.sharedInstance.allGroup">
             </PersistentString>
+            <PersistentString
+               value = "DataManager.sharedInstance.allSharers">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
@@ -167,6 +170,9 @@
                value = "viewIsOpen">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AppDelegate.locationManager(CLLocationManager, didUpdateToLocation : CLLocation, fromLocation : CLLocation) -&gt; ():AppDelegate.swift">
       </ContextState>
       <ContextState
          contextName = "EditGroupViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:EditGroupViewController.swift">

@@ -94,7 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
                 DataManager.sharedInstance.allSharers = DataManager.sharedInstance.convertJsonToSharer(dic)
             }
             if (DataManager.sharedInstance.testIfFileExistInDocuments("/groups.json")) {
-                let dic = DataManager.sharedInstance.loadJsonFromDocuments("groups")
+                let dic = DataManager.sharedInstance.loadJsonFromDocuments("groups" )
                 DataManager.sharedInstance.allGroup = DataManager.sharedInstance.convertJsonToGroup(dic)
                 
             }

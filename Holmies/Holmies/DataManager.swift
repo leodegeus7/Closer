@@ -997,48 +997,55 @@ class DataManager {
     //    }
     
     func linkGroupAndUserToSharer (completion:(result:String)->Void) {
-        for sharer in DataManager.sharedInstance.allSharers {
-            if sharer.relation == SharerType.userToGroup {
-                for group in DataManager.sharedInstance.allGroup {
-                    if sharer.receiver == group.id {
-                        sharer.receiverObject = group
-                        group.share = sharer
-                        
-                        let fileManager = NSFileManager.defaultManager()
-                        
-                        let documentsDirectory = findDocumentsDirectory()
-                        let destinationPath = documentsDirectory.stringByAppendingString("/users\(group.id).json")
-                        
-                        if fileManager.fileExistsAtPath(destinationPath) {
+        if DataManager.sharedInstance.allSharers.count == 0 {
+            completion(result: "FAIL, nenhum sharer no array")
+        }
+        else {
+            for sharer in DataManager.sharedInstance.allSharers {
+                if sharer.relation == SharerType.userToGroup {
+                    for group in DataManager.sharedInstance.allGroup {
+                        if sharer.receiver == group.id {
+                            sharer.receiverObject = group
+                            group.share = sharer
                             
-                            let userInGroup = loadJsonFromDocuments("users\(group.id)")
-                            var userInGroupUSER = convertJsonToUser(userInGroup)
-                            var i = 0
-                            for user in userInGroupUSER {
-                                if user.userID == DataManager.sharedInstance.myUser.userID {
-                                    userInGroupUSER.removeAtIndex(i)
-                                    break
+                            let fileManager = NSFileManager.defaultManager()
+                            
+                            let documentsDirectory = findDocumentsDirectory()
+                            let destinationPath = documentsDirectory.stringByAppendingString("/users\(group.id).json")
+                            
+                            if fileManager.fileExistsAtPath(destinationPath) {
+                                
+                                let userInGroup = loadJsonFromDocuments("users\(group.id)")
+                                var userInGroupUSER = convertJsonToUser(userInGroup)
+                                var i = 0
+                                for user in userInGroupUSER {
+                                    if user.userID == DataManager.sharedInstance.myUser.userID {
+                                        userInGroupUSER.removeAtIndex(i)
+                                        break
+                                    }
+                                    i++
                                 }
-                                i++
+                                group.users = userInGroupUSER
+                                
+                                
                             }
-                            group.users = userInGroupUSER
+                            
+                            
                             
                             
                         }
-                        
-                        
-                        
-                        
                     }
                 }
+                //else if sharer.relation == SharerType.userToUser {
+                //ainda nao tem
+                //}
+                
             }
-            //else if sharer.relation == SharerType.userToUser {
-            //ainda nao tem
-            //}
-            
+            sortGroupArray()
+            completion(result: "Linkou tudo")
+
+        
         }
-        sortGroupArray()
-        completion(result: "Linkou tudo")
     }
     
     
