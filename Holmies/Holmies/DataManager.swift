@@ -56,7 +56,7 @@ class DataManager {
     
     lazy var locationManager: CLLocationManager! = {
         let manager = CLLocationManager()
-        manager.desiredAccuracy = kCLLocationAccuracyKilometer
+        manager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         manager.requestAlwaysAuthorization()
         manager.distanceFilter = 0.5
         return manager

@@ -760,7 +760,7 @@ class CirclesTableViewController: UITableViewController {
                     else if duration <= 0 {
                         charmCell.remainingTimeLabel.text = "Expired"
                         actualSharer.status = "Expired"
-                        NSNotificationCenter.defaultCenter().postNotificationName("delegateUpdate", object: nil)
+                        //NSNotificationCenter.defaultCenter().postNotificationName("delegateUpdate", object: nil)
                         
                     }
                     else {

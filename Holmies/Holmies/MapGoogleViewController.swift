@@ -32,7 +32,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     //background whetever
     var updateTimer: NSTimer?
     var updateFriendsTimer: NSTimer?
-    var backgroundTask: UIBackgroundTaskIdentifier = UIBackgroundTaskInvalid
+    //var backgroundTask: UIBackgroundTaskIdentifier = UIBackgroundTaskInvalid
     var numero = 0
     var friendsDictionary:Dictionary<String,AnyObject>!
     var enterInView = true
@@ -276,32 +276,36 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         
         if UIApplication.sharedApplication().applicationState == .Active {
             print("Coord atualizada: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
+            let location = "\(newLocation.coordinate.latitude):\(newLocation.coordinate.longitude)"
+            if newLocation.horizontalAccuracy < 100 {
+                helper.updateUserWithID(DataManager.sharedInstance.myUser.userID, username: nil, location: location, altitude: nil, fbid: nil, photo: nil, name: nil, email: nil, password: nil) { (result) -> Void in
+                }
+            }
         }
         else {
             print("App em background. Coord: \(newLocation.coordinate.longitude) \(newLocation.coordinate.latitude)")
-//            let marker = GMSMarker(position: CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude))
-//            marker.title = "\(newLocation.coordinate.latitude) e \(newLocation.coordinate.longitude)"
-//            marker.map = mapView
-            let userInfoCoordinate = ["local":newLocation]
-            DataManager.sharedInstance.createLocalNotification("oi", body: "\(newLocation.coordinate.latitude)", timeAfterClose: 10,userInfo:userInfoCoordinate)
+            print(newLocation.horizontalAccuracy)
+            if newLocation.horizontalAccuracy < 100 {
+                let location = "\(newLocation.coordinate.latitude):\(newLocation.coordinate.longitude)"
+                helper.updateUserWithID(DataManager.sharedInstance.myUser.userID, username: nil, location: location, altitude: nil, fbid: nil, photo: nil, name: nil, email: nil, password: nil) { (result) -> Void in
+                    
+                }
+            }
+            
+            
+            //DataManager.sharedInstance.createLocalNotification("oi", body: "\(newLocation.coordinate.latitude)", timeAfterClose: 10,userInfo:userInfoCoordinate)
         }
 
-
-        let location = "\(newLocation.coordinate.latitude):\(newLocation.coordinate.longitude)"
-        
-        helper.updateUserWithID(DataManager.sharedInstance.myUser.userID, username: nil, location: location, altitude: nil, fbid: nil, photo: nil, name: nil, email: nil, password: nil) { (result) -> Void in
-            //oi
-        }
         
         
-        DataManager.sharedInstance.reverseGeocodeCoordinate(newLocation.coordinate) //transforma a coordenada em endereco
-        
-        if DataManager.sharedInstance.end != nil {
-            let actualLocation = Location()
-            actualLocation.location = newLocation
-            actualLocation.address = DataManager.sharedInstance.end
-            DataManager.sharedInstance.locationUserArray.append(actualLocation)
-        }
+//        DataManager.sharedInstance.reverseGeocodeCoordinate(newLocation.coordinate) //transforma a coordenada em endereco
+//        
+//        if DataManager.sharedInstance.end != nil {
+//            let actualLocation = Location()
+//            actualLocation.location = newLocation
+//            actualLocation.address = DataManager.sharedInstance.end
+//            DataManager.sharedInstance.locationUserArray.append(actualLocation)
+//        }
     }
     
     
@@ -395,32 +399,32 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     
 // MARK: CODIGO PARA BACKGROUND
     
-    func endBackgroundTask() {
-        NSLog("Background codigos encerrou")
-        UIApplication.sharedApplication().endBackgroundTask(backgroundTask)
-        backgroundTask = UIBackgroundTaskInvalid
-        
-    }
-    
-    
-    func registerBackgroundTask() {
-        backgroundTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler {
-            [unowned self] in
-            self.endBackgroundTask()
-        }
-        assert(backgroundTask != UIBackgroundTaskInvalid)
-    }
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-    
-    
-    
-    func reinstateBackgroundTask() {
-        if updateTimer != nil && (backgroundTask == UIBackgroundTaskInvalid) {
-            registerBackgroundTask()
-        }
-    }
+//    func endBackgroundTask() {
+//        NSLog("Background codigos encerrou")
+//        UIApplication.sharedApplication().endBackgroundTask(backgroundTask)
+//        backgroundTask = UIBackgroundTaskInvalid
+//        
+//    }
+//    
+//    
+//    func registerBackgroundTask() {
+//        backgroundTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler {
+//            [unowned self] in
+//            self.endBackgroundTask()
+//        }
+//        assert(backgroundTask != UIBackgroundTaskInvalid)
+//    }
+//    deinit {
+//        NSNotificationCenter.defaultCenter().removeObserver(self)
+//    }
+//    
+//    
+//    
+//    func reinstateBackgroundTask() {
+//        if updateTimer != nil && (backgroundTask == UIBackgroundTaskInvalid) {
+//            registerBackgroundTask()
+//        }
+//    }
     
 // MARK: CODIGO PARA BACKGROUND ATE AQUI
     
