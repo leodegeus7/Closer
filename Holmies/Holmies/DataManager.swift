@@ -1004,6 +1004,7 @@ class DataManager {
             for sharer in DataManager.sharedInstance.allSharers {
                 if sharer.relation == SharerType.userToGroup {
                     for group in DataManager.sharedInstance.allGroup {
+                        
                         if sharer.receiver == group.id {
                             sharer.receiverObject = group
                             group.share = sharer
@@ -1042,13 +1043,40 @@ class DataManager {
                 
             }
             sortGroupArray()
-            completion(result: "Linkou tudo")
+            
+            
+            
+            
 
+            
+            
+            completion(result: "Linkou tudo")
+            
         
         }
     }
     
-    
+    func verifyIfGroupIsActive() {
+        var groupisActive = false
+        for group in DataManager.sharedInstance.allGroup {
+            if group.share.status == "accepted" {
+                for active in DataManager.sharedInstance.activeGroup {
+                    if group == active {
+                        groupisActive = true
+                    }
+                }
+                if !groupisActive {
+                    DataManager.sharedInstance.activeGroup.append(group)
+                    let activeGroup = DataManager.sharedInstance.activeGroup
+                    let dicio = DataManager.sharedInstance.convertGroupToNSDic(activeGroup)
+                    DataManager.sharedInstance.createJsonFile("activeGroups", json: dicio)
+                    
+                    
+                }
+                groupisActive = false
+            }
+        }
+    }
     
     func saveMyInfo () {
         let myInfo = DataManager.sharedInstance.myUser
