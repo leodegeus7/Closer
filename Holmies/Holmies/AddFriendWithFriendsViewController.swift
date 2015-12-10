@@ -298,7 +298,7 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
             infoView.frame = CGRect(x: self.view.frame.size.width / 2 - viewSize / 2, y: self.view.frame.size.height / 2 - viewSize/2, width: viewSize, height: viewSize)
             infoView.clipsToBounds = true
             infoView.userName.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
-            infoView.userName.textColor = DataManager.sharedInstance.lightBlue
+            infoView.userName.textColor = lightGray
             infoView.nameFriend.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
             infoView.nameFriend.textColor = UIColor.whiteColor()
             infoView.userImage.layer.cornerRadius = viewSize / 6
