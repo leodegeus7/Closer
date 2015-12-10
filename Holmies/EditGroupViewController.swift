@@ -25,7 +25,7 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
     var until = ""
     var chosenHour:Int!
     var chosenDay:Int!
-    
+    var arrayWithAllPeople = [User]()
 
     
     override func viewDidLoad() {
@@ -38,6 +38,25 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
         
         
         
+        
+        arrayWithAllPeople = DataManager.sharedInstance.activeUsers
+        
+        var existFriendInActive = false
+        
+        for friend in DataManager.sharedInstance.allFriends {
+            for  active in DataManager.sharedInstance.activeUsers {
+                if friend.userID == active.userID {
+                    existFriendInActive = true
+                }
+                
+            }
+            if !existFriendInActive {
+                arrayWithAllPeople.append(friend)
+            }
+            existFriendInActive = false
+            
+        }
+
         
         
         
@@ -84,7 +103,7 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         
-        return DataManager.sharedInstance.activeUsers.count
+        return arrayWithAllPeople.count
     }
     
     
@@ -93,51 +112,66 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
         
         //let data = DataManager.sharedInstance.selectedFriends
        
+        var userIsActive = false
         
-        
-        
-        
-        var actualSharer = Sharer()
-        for sharer in DataManager.sharedInstance.selectedSharer {
-            if DataManager.sharedInstance.activeUsers[indexPath.row].userID == sharer.owner {
-                actualSharer = sharer
+        for active in DataManager.sharedInstance.activeUsers {
+            if active.userID == arrayWithAllPeople[indexPath.row].userID {
+                userIsActive = true
                 break
             }
         }
         
-        if actualSharer.status != nil {
-            
-            if actualSharer.status == "pending" {
-                cell.friendName.textColor = lightBlue
-                cell.tag = 10
-            }
-            else if actualSharer.status == "accepted" {
-                cell.friendName.textColor = UIColor.grayColor()
-                cell.tag = 20
-            }
-            else if actualSharer.status == "rejected" {
-                cell.friendName.textColor = UIColor.redColor()
+        if userIsActive {
+            var actualSharer = Sharer()
+            for sharer in DataManager.sharedInstance.selectedSharer {
+                if DataManager.sharedInstance.activeUsers[indexPath.row].userID == sharer.owner {
+                    actualSharer = sharer
+                    break
+                }
             }
             
-            cell.friendName.text = DataManager.sharedInstance.activeUsers[indexPath.row].username
-            cell.friendPhoto.image = DataManager.sharedInstance.findImage("\(DataManager.sharedInstance.activeUsers[indexPath.row].userID)")
-            
-            
-            //MARK - CRIAR METODO DE PERSISTIR NO DATAMANAGER PARA DEPOIS ACESSAR E VER SE PERMENECEU PERSISTIDO
-            
+            if actualSharer.status != nil {
+                
+                if actualSharer.status == "pending" {
+                    cell.friendName.textColor = lightBlue
+                    cell.tag = 10
+                }
+                else if actualSharer.status == "accepted" {
+                    cell.friendName.textColor = UIColor.grayColor()
+                    cell.tag = 20
+                }
+                else if actualSharer.status == "rejected" {
+                    cell.friendName.textColor = UIColor.redColor()
+                }
+                
+                cell.friendName.text = arrayWithAllPeople[indexPath.row].username
+                cell.friendPhoto.image = DataManager.sharedInstance.findImage("\(arrayWithAllPeople[indexPath.row].userID)")
+                
+                
+                //MARK - CRIAR METODO DE PERSISTIR NO DATAMANAGER PARA DEPOIS ACESSAR E VER SE PERMENECEU PERSISTIDO
+                
+                self.tableView.rowHeight = 45
+                
+                cell.friendName.font = UIFont(name: "SFUIText-Regular", size: 17)
+                //cell.friendName.textColor = lightGray
+                cell.friendPhoto.layer.cornerRadius = 19
+                cell.friendPhoto.clipsToBounds = true
+                cell.friendPhoto.layer.borderWidth = 0
+            }
+            return cell
+        }
+        else {
+            cell.friendName.text = arrayWithAllPeople[indexPath.row].username
+            cell.friendPhoto.image = DataManager.sharedInstance.findImage("\(arrayWithAllPeople[indexPath.row].userID)")
             self.tableView.rowHeight = 45
-            
             cell.friendName.font = UIFont(name: "SFUIText-Regular", size: 17)
-            //cell.friendName.textColor = lightGray
             cell.friendPhoto.layer.cornerRadius = 19
             cell.friendPhoto.clipsToBounds = true
             cell.friendPhoto.layer.borderWidth = 0
-
+            cell.friendName.textColor = UIColor.brownColor()
+            return cell
         }
         
-        
-        
-        return cell
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
