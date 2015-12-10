@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DTL-fJ-YqJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DTL-fJ-YqJ">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -1455,16 +1456,16 @@
                                 <rect key="frame" x="285" y="245" width="30" height="55"/>
                                 <animations/>
                             </imageView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J4n-KI-g0a" userLabel="View" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J4n-KI-g0a" userLabel="View" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="20" width="600" height="536"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.98431372549999996" green="0.33814931619999999" blue="0.18755587930000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="delegate" destination="cRu-Sx-wRT" id="BhY-2d-RhX"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kb0-Q3-BAK">
-                                <rect key="frame" x="0.0" y="-6" width="600" height="636"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kb0-Q3-BAK">
+                                <rect key="frame" x="0.0" y="-50" width="600" height="636"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="compassViewBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="lHC-dt-yWa">
                                         <rect key="frame" x="-16" y="0.0" width="632" height="636"/>
@@ -1476,6 +1477,37 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="ZKI-Ms-hG9" secondAttribute="height" multiplier="1:1" id="62J-Hh-lmB"/>
                                         </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQk-Hf-f3d" userLabel="Original Angle">
+                                        <rect key="frame" x="126" y="18" width="42" height="20"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="squareCompass4.png" translatesAutoresizingMaskIntoConstraints="NO" id="3oA-vN-EAc" userLabel="Original Arrow ">
+                                        <rect key="frame" x="20" y="43" width="254" height="254"/>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="3oA-vN-EAc" secondAttribute="height" multiplier="1:1" id="90z-kh-xce"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="90z-kh-xce"/>
+                                            </mask>
+                                        </variation>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="squareCompass4.png" translatesAutoresizingMaskIntoConstraints="NO" id="VMQ-3P-GCX" userLabel="Phone Rotation Arrow">
+                                        <rect key="frame" x="326" y="43" width="254" height="254"/>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="VMQ-3P-GCX" secondAttribute="height" multiplier="1:1" id="jrj-H6-dxv"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="jrj-H6-dxv"/>
+                                            </mask>
+                                        </variation>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O2i-Ve-OzV">
                                         <rect key="frame" x="548" y="60" width="27" height="27"/>
@@ -1516,21 +1548,54 @@
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZvY-Ei-nwL" userLabel="Phone Rotation Angle">
+                                        <rect key="frame" x="432" y="18" width="42" height="20"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="3oA-vN-EAc" firstAttribute="top" secondItem="cQk-Hf-f3d" secondAttribute="bottom" constant="5" id="49k-G4-zud"/>
+                                    <constraint firstItem="3oA-vN-EAc" firstAttribute="width" secondItem="ZKI-Ms-hG9" secondAttribute="width" multiplier="1/3" id="7Fh-7B-cS8"/>
                                     <constraint firstItem="ZKI-Ms-hG9" firstAttribute="top" secondItem="LcA-ah-aqO" secondAttribute="bottom" constant="30" id="A7v-Js-VUK"/>
                                     <constraint firstItem="9CG-qS-3qq" firstAttribute="centerX" secondItem="ZKI-Ms-hG9" secondAttribute="centerX" id="EYH-nh-6jE"/>
+                                    <constraint firstItem="VMQ-3P-GCX" firstAttribute="top" secondItem="ZvY-Ei-nwL" secondAttribute="bottom" constant="5" id="MeS-MP-JiA"/>
+                                    <constraint firstItem="VMQ-3P-GCX" firstAttribute="width" secondItem="VMQ-3P-GCX" secondAttribute="height" multiplier="1:1" id="RZh-wR-nbP"/>
+                                    <constraint firstItem="VMQ-3P-GCX" firstAttribute="centerY" secondItem="LcA-ah-aqO" secondAttribute="centerY" id="Wpf-LF-dd0"/>
                                     <constraint firstAttribute="bottom" secondItem="lHC-dt-yWa" secondAttribute="bottom" id="aBQ-78-VVn"/>
+                                    <constraint firstItem="ZvY-Ei-nwL" firstAttribute="centerX" secondItem="VMQ-3P-GCX" secondAttribute="centerX" id="alG-Se-bW2"/>
+                                    <constraint firstItem="ZvY-Ei-nwL" firstAttribute="centerY" secondItem="cQk-Hf-f3d" secondAttribute="centerY" id="cwV-dC-rAi"/>
+                                    <constraint firstItem="cQk-Hf-f3d" firstAttribute="centerX" secondItem="3oA-vN-EAc" secondAttribute="centerX" id="dJj-zo-gwT"/>
                                     <constraint firstItem="lHC-dt-yWa" firstAttribute="top" secondItem="kb0-Q3-BAK" secondAttribute="top" id="eN6-4T-uS7"/>
+                                    <constraint firstAttribute="trailing" secondItem="VMQ-3P-GCX" secondAttribute="trailing" constant="20" id="hbd-5W-yKC"/>
+                                    <constraint firstItem="VMQ-3P-GCX" firstAttribute="width" secondItem="3oA-vN-EAc" secondAttribute="width" id="jD6-jE-tQo"/>
+                                    <constraint firstItem="3oA-vN-EAc" firstAttribute="top" secondItem="kb0-Q3-BAK" secondAttribute="top" constant="200" id="jRB-hh-1kD"/>
+                                    <constraint firstItem="3oA-vN-EAc" firstAttribute="leading" secondItem="kb0-Q3-BAK" secondAttribute="leading" constant="20" id="lVa-yl-Ssj"/>
                                     <constraint firstItem="Ec2-Ic-ELG" firstAttribute="top" secondItem="ZKI-Ms-hG9" secondAttribute="bottom" constant="10" id="lcF-rY-SNN"/>
                                     <constraint firstItem="lHC-dt-yWa" firstAttribute="leading" secondItem="kb0-Q3-BAK" secondAttribute="leading" constant="-16" id="srh-tw-KTO"/>
+                                    <constraint firstItem="LcA-ah-aqO" firstAttribute="leading" secondItem="3oA-vN-EAc" secondAttribute="trailing" constant="-50" id="tPn-x1-ZZk"/>
+                                    <constraint firstItem="VMQ-3P-GCX" firstAttribute="leading" secondItem="LcA-ah-aqO" secondAttribute="leading" constant="100" id="uKc-AH-DfV"/>
+                                    <constraint firstItem="3oA-vN-EAc" firstAttribute="centerY" secondItem="LcA-ah-aqO" secondAttribute="centerY" id="uqR-f3-g2E"/>
+                                    <constraint firstItem="3oA-vN-EAc" firstAttribute="trailing" secondItem="LcA-ah-aqO" secondAttribute="trailing" constant="20" id="v7M-o2-1Gf"/>
+                                    <constraint firstItem="3oA-vN-EAc" firstAttribute="width" secondItem="3oA-vN-EAc" secondAttribute="height" multiplier="1:1" id="xK3-3E-7Ao"/>
                                     <constraint firstAttribute="trailing" secondItem="lHC-dt-yWa" secondAttribute="trailing" constant="-16" id="zWz-lN-slS"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="7Fh-7B-cS8"/>
+                                        <exclude reference="jRB-hh-1kD"/>
+                                        <exclude reference="v7M-o2-1Gf"/>
+                                        <exclude reference="MeS-MP-JiA"/>
+                                        <exclude reference="uKc-AH-DfV"/>
+                                    </mask>
+                                </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Sem Internet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y2Z-Pc-wCm">
-                                <rect key="frame" x="200" y="514" width="200" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sem Internet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y2Z-Pc-wCm">
+                                <rect key="frame" x="200" y="470" width="200" height="36"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="kGN-FN-Y7g"/>
@@ -1591,6 +1656,10 @@
                         <outlet property="mapCenterPinImage" destination="MdR-2A-Cum" id="mU2-k5-dZ8"/>
                         <outlet property="mapView" destination="J4n-KI-g0a" id="Bc2-HT-TqR"/>
                         <outlet property="northLine" destination="LcA-ah-aqO" id="aMS-bi-5g8"/>
+                        <outlet property="originalAngleArrow" destination="3oA-vN-EAc" id="Jbv-8G-LN8"/>
+                        <outlet property="originalAngleLabel" destination="cQk-Hf-f3d" id="2jE-z3-hcX"/>
+                        <outlet property="phoneRotationAngleLabel" destination="ZvY-Ei-nwL" id="nlY-0G-Leb"/>
+                        <outlet property="phoneRotationArrow" destination="VMQ-3P-GCX" id="a4r-5C-a9H"/>
                         <outlet property="pinImageVerticalConstraint" destination="hnh-gZ-JAP" id="d0e-TY-dDn"/>
                     </connections>
                 </viewController>
@@ -1954,8 +2023,8 @@
         <image name="x.png" width="27" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="AT9-Kv-2G4"/>
         <segue reference="Mz9-vL-dM2"/>
         <segue reference="oOO-bc-W4L"/>
-        <segue reference="s8S-m1-5jX"/>
     </inferredMetricsTieBreakers>
 </document>
