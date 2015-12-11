@@ -31,6 +31,12 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 
     var isCharm = DataManager.sharedInstance.isCharm
     
+    //Compass Test
+    @IBOutlet weak var originalAngleLabel: UILabel!
+    @IBOutlet weak var originalAngleArrow: UIImageView!
+    @IBOutlet weak var phoneRotationAngleLabel: UILabel!
+    @IBOutlet weak var phoneRotationArrow: UIImageView!
+    
     
     //background whetever
     var updateTimer: NSTimer?
@@ -550,7 +556,12 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         let dx = location.coordinate.longitude - myLocation.coordinate.longitude
         let dy = location.coordinate.latitude - myLocation.coordinate.latitude
         let rotationAngle = CGFloat(atan2(dy, dx))
-        let balancedAngle = rotationAngle + CGFloat(actualPhoneAngularPosition * M_PI / 180 - M_PI_2)
+        originalAngleLabel.text = "\(rotationAngle * 180 / CGFloat(M_PI))"
+        originalAngleArrow.transform = CGAffineTransformMakeRotation(rotationAngle)
+        
+        
+        
+        let balancedAngle = rotationAngle + CGFloat(actualPhoneAngularPosition * M_PI / 180)
         
         
         arrowCompass.transform = CGAffineTransformMakeRotation(-balancedAngle)
@@ -562,8 +573,13 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     
     
     func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        self.actualPhoneAngularPosition = newHeading.magneticHeading
+        let newPhoneAngularPosition = newHeading.magneticHeading
+        self.actualPhoneAngularPosition = newPhoneAngularPosition
+        let phonePositionInRadians = CGFloat(newPhoneAngularPosition * M_PI / 180 + M_PI)
+        phoneRotationAngleLabel.text = "\(newPhoneAngularPosition)"
+        phoneRotationArrow.transform = CGAffineTransformMakeRotation(phonePositionInRadians)
         let myCoordinate = CLLocation(latitude: Double(DataManager.sharedInstance.myUser.location.latitude)!, longitude: Double(DataManager.sharedInstance.myUser.location.longitude)!)
+        
         
         if let friend = self.selectedFriend {
             let locationFriend = CLLocation(latitude: Double(friend.location.latitude)!, longitude: Double(friend.location.longitude)!)

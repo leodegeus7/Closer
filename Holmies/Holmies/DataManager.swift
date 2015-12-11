@@ -1059,21 +1059,23 @@ class DataManager {
     func verifyIfGroupIsActive() {
         var groupisActive = false
         for group in DataManager.sharedInstance.allGroup {
-            if group.share.status == "accepted" {
-                for active in DataManager.sharedInstance.activeGroup {
-                    if group == active {
-                        groupisActive = true
+            if group.share != nil {
+                if group.share.status == "accepted" {
+                    for active in DataManager.sharedInstance.activeGroup {
+                        if group == active {
+                            groupisActive = true
+                        }
                     }
+                    if !groupisActive {
+                        DataManager.sharedInstance.activeGroup.append(group)
+                        let activeGroup = DataManager.sharedInstance.activeGroup
+                        let dicio = DataManager.sharedInstance.convertGroupToNSDic(activeGroup)
+                        DataManager.sharedInstance.createJsonFile("activeGroups", json: dicio)
+                        
+                        
+                    }
+                    groupisActive = false
                 }
-                if !groupisActive {
-                    DataManager.sharedInstance.activeGroup.append(group)
-                    let activeGroup = DataManager.sharedInstance.activeGroup
-                    let dicio = DataManager.sharedInstance.convertGroupToNSDic(activeGroup)
-                    DataManager.sharedInstance.createJsonFile("activeGroups", json: dicio)
-                    
-                    
-                }
-                groupisActive = false
             }
         }
     }
@@ -1219,7 +1221,7 @@ class DataManager {
         
         i = 0
         for group in DataManager.sharedInstance.allGroup {
-            if group.share == nil {
+            if group.share != nil {
                 let createdHour = group.createdAt
                 let dateFormatter = NSDateFormatter()
                 dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
@@ -1310,7 +1312,7 @@ class DataManager {
             
         }
     }
-    
+
     
     
 }
