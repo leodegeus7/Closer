@@ -20,6 +20,8 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var facebookLoginButton: UIButton!
     @IBOutlet weak var forgetButton: UIButton!
+    @IBOutlet weak var loadingToTextFieldConstraint: NSLayoutConstraint!
+    @IBOutlet weak var closerTitleLabelToLoadingConstraint: NSLayoutConstraint!
     
     var kbHeight: CGFloat!
     var logged = false
@@ -30,7 +32,16 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
     override func viewDidLoad() {
         super.viewDidLoad()
         let documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask, true)[0] as String
-        closerTitleLabel.font = UIFont(name: "NexaRustScriptL-0", size: 110)
+        
+        let screenSize = self.view.frame.size.height
+        
+//        switch screenSize {
+//        case 480:
+//            loadingToTextFieldConstraint.constant = 20
+//        }
+        
+        
+        closerTitleLabel.font = UIFont(name: "NexaRustScriptL-0", size: 110 / 736 * screenSize)
         closerTitleLabel.alpha = 0
         userNameTextField.alpha = 0
         passwordTextField.alpha = 0
@@ -137,7 +148,7 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
                     let dic = JSON as NSDictionary
                     if dic["error"] != nil {
                         let error = dic["error"]
-                        self.createSimpleUIAlert(self, title: "Login not conclued", message: "\(error!)", button1: "Ok")
+                        self.createSimpleUIAlert(self, title: "Login not concluded", message: "\(error!)", button1: "Ok")
                         
                     }
                     else {
@@ -283,6 +294,7 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
     }
 
     func keyboardWillShow(notification: NSNotification) {
+        closerTitleLabel.fadeOut(0.5)
         if controle == false {
         if let userInfo = notification.userInfo {
             if let keyboardSize =  (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
@@ -297,6 +309,7 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
     }
     
     func keyboardWillHide(notification: NSNotification) {
+        closerTitleLabel.fadeIn(0.5)
         if position == true {
             self.animateTextField(false)
             position = false

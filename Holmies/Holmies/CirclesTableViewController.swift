@@ -529,20 +529,15 @@ class CirclesTableViewController: UITableViewController {
                                     cellActive.numberLabel.text = "\(newDurationDays)"
                                     cellActive.timeLabel.text = "days"
                                 }
-                                
-                                
+                        
                             } else {
                                 cellActive.numberLabel.text = "∞"
                                 cellActive.timeLabel.text = "days"
                             }
-                            
-
+                    
                         }
                         
                     }
-                    
-                    
-                    
                     
                     return cellActive
                     
