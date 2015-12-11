@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DTL-fJ-YqJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DTL-fJ-YqJ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
@@ -1758,26 +1758,36 @@
                                                         <constraint firstAttribute="width" secondItem="sfd-yZ-HsT" secondAttribute="height" multiplier="1:1" id="SJb-gV-6qc"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IlL-0k-2ZI">
-                                                    <rect key="frame" x="75" y="25" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IlL-0k-2ZI">
+                                                    <rect key="frame" x="75" y="26" width="42" height="20"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TIE-5h-Om8">
+                                                    <rect key="frame" x="486" y="14" width="38" height="41"/>
+                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="TIE-5h-Om8" secondAttribute="height" multiplier="37:39" id="di8-pB-Yaj"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstItem="IlL-0k-2ZI" firstAttribute="centerY" secondItem="Gp8-On-QUT" secondAttribute="centerY" id="4ms-Ae-JCj"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="sfd-yZ-HsT" secondAttribute="bottom" constant="5" id="FLX-IG-C73"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="TIE-5h-Om8" secondAttribute="trailing" constant="8" id="H0i-pv-QrE"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="IlL-0k-2ZI" secondAttribute="trailing" constant="10" id="H1W-79-WdH"/>
                                                 <constraint firstItem="IlL-0k-2ZI" firstAttribute="leading" secondItem="sfd-yZ-HsT" secondAttribute="trailing" constant="5" id="HsJ-sF-VDk"/>
                                                 <constraint firstAttribute="leadingMargin" secondItem="sfd-yZ-HsT" secondAttribute="leading" constant="5" id="Ki9-Ch-Aiq"/>
+                                                <constraint firstItem="TIE-5h-Om8" firstAttribute="top" secondItem="Gp8-On-QUT" secondAttribute="topMargin" constant="6" id="Kwo-SE-LEi"/>
                                                 <constraint firstItem="sfd-yZ-HsT" firstAttribute="top" secondItem="Gp8-On-QUT" secondAttribute="topMargin" constant="-5" id="M20-xV-nie"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="sfd-yZ-HsT" secondAttribute="bottom" constant="-5" id="NbY-TS-9k1"/>
                                                 <constraint firstItem="sfd-yZ-HsT" firstAttribute="leading" secondItem="Gp8-On-QUT" secondAttribute="leadingMargin" id="U6i-0A-OlE"/>
                                                 <constraint firstItem="sfd-yZ-HsT" firstAttribute="top" secondItem="Gp8-On-QUT" secondAttribute="topMargin" constant="5" id="Uh8-WA-gsa"/>
                                                 <constraint firstAttribute="width" secondItem="sfd-yZ-HsT" secondAttribute="height" multiplier="1:1" id="WVq-VY-ASD"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="TIE-5h-Om8" secondAttribute="bottom" constant="6" id="YWA-Lg-MGi"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="IlL-0k-2ZI" secondAttribute="trailing" constant="10" id="aqb-VW-OYM"/>
                                                 <constraint firstAttribute="width" secondItem="sfd-yZ-HsT" secondAttribute="height" multiplier="1:1" id="pua-1Z-fiW"/>
                                                 <constraint firstItem="IlL-0k-2ZI" firstAttribute="leading" secondItem="sfd-yZ-HsT" secondAttribute="trailing" constant="3" id="qtA-9k-LzL"/>
@@ -1801,6 +1811,7 @@
                                         <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
+                                            <outlet property="checkImage" destination="TIE-5h-Om8" id="gO3-sa-HC5"/>
                                             <outlet property="friendName" destination="IlL-0k-2ZI" id="EU7-bA-NZj"/>
                                             <outlet property="friendPhoto" destination="sfd-yZ-HsT" id="sOq-um-qdh"/>
                                         </connections>
