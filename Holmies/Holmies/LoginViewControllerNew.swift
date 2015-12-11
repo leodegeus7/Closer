@@ -137,7 +137,7 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
                     let dic = JSON as NSDictionary
                     if dic["error"] != nil {
                         let error = dic["error"]
-                        self.createSimpleUIAlert(self, title: "Login not conclued", message: "\(error!)", button1: "Ok")
+                        self.createSimpleUIAlert(self, title: "Error", message: "\(error!)", button1: "Ok")
                         
                     }
                     else {
@@ -200,7 +200,7 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
                         let dic = JSON as NSDictionary
                         if dic["error"] != nil {
                             let error = dic["error"] as! String
-                            self.createSimpleUIAlert(self, title: "Login not conclued", message: "\(error)", button1: "Ok")
+                            self.createSimpleUIAlert(self, title: "Error", message: "\(error)", button1: "Ok")
                             if error.containsString("User with FacebookID") {
                                 self.requestSignUp(resultData["name"] as! String, email: resultData["name"] as! String, faceId: resultData["id"] as! String)
                             }

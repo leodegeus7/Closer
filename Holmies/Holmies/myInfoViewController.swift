@@ -81,7 +81,7 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
 
         if username.text?.isEmpty == true {
             DataManager.sharedInstance.shakeTextField(username)
-            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Digite um username para atualizar", button1: "OK")
+            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: "Please insert an username to update", button1: "OK")
         }
         else {
             http.updateUserWithID(DataManager.sharedInstance.myUser.userID, username: "\(username.text!)", location: nil, altitude: nil, fbid: nil, photo: nil, name: nil, email: nil, password: nil, completion: { (result) -> Void in
@@ -92,11 +92,11 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
                     print("erro aqui")
                 }
                 else {
-                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Usuário Atualizado: \(self.username.text!)", button1: "Ok")
+                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Username", message: "\(self.username.text!) is now your username", button1: "Ok")
                     DataManager.sharedInstance.myUser.username = "\(self.username.text!)"
                     DataManager.sharedInstance.saveMyInfo()
                     DataManager.sharedInstance.loadMyInfo()
-                    self.myUserName.text = "\(self.username.text!)\né o seu username"
+                    self.myUserName.text = "\(self.username.text!)\nis your username"
                     self.exitView()
                 }
             })
@@ -152,7 +152,7 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
         
         
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (UIAlertAction)in
-            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Attention", message: "Conta deslogada", button1: "Ok")
+            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Logout", message: "Successfully logged out", button1: "Ok")
             
             let documentsDirectory = DataManager.sharedInstance.findDocumentsDirectory()
             let path = documentsDirectory + "/id.txt"
@@ -184,7 +184,7 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
     @IBAction func deleteAccount(sender: AnyObject) {
 
         
-        let alert = UIAlertController(title: "Attention", message: "Type your key to delete your account", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Password", message: "Confirm your password to destroy your account", preferredStyle: UIAlertControllerStyle.Alert)
         
         alert.addTextFieldWithConfigurationHandler { (textField) -> Void in
             self.inputTextField = textField
@@ -201,7 +201,7 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
                     DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: dic["error"] as! String, button1: "Ok")
                 }
                 else {
-                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Attencion", message: "Sua conta \(DataManager.sharedInstance.myUser.username) foi deletada", button1: "Ok")
+                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Attention", message: "The account \(DataManager.sharedInstance.myUser.username) has been successfully destroyed", button1: "Ok")
                     
                     let documentsDirectory = DataManager.sharedInstance.findDocumentsDirectory()
                     let path = documentsDirectory + "/id.txt"
@@ -238,7 +238,7 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
         if (FBSDKAccessToken.currentAccessToken() == nil) {
             self.getFBUserData({ (result) -> Void in
                 let newFBID = result as String
-                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Dados do facebook resgatados com sucesso", button1: "Ok")
+                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Success", message: "Successfully connected to your Facebook Account", button1: "Ok")
                 DataManager.sharedInstance.myUser.facebookID = newFBID
                 DataManager.sharedInstance.saveMyInfo()
                 self.http.updateUserWithID(DataManager.sharedInstance.myUser.userID, username: nil, location: nil, altitude: nil, fbid: newFBID, photo: nil, name: nil, email: nil, password: nil, completion: { (result) -> Void in
@@ -253,12 +253,12 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
             })
         }
         else {
-            let alert = UIAlertController(title: "Attention", message: "Did you loggout your facebook Account? Your data will be unsync", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Facebook", message: "Do you want to logout from Facebook? All the information imported will be destroyed", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Loggout", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                 let loginManager = FBSDKLoginManager()
                 loginManager.logOut()
                 if (FBSDKAccessToken.currentAccessToken() == nil) {
-                    self.facebookLogoutButton.setTitle("Login Facebbok", forState: .Normal)
+                    self.facebookLogoutButton.setTitle("Logout", forState: .Normal)
                     self.http.updateUserWithID(DataManager.sharedInstance.myUser.userID, username: nil, location: nil, altitude: nil, fbid: "", photo: nil, name: nil, email: nil, password: nil, completion: { (result) -> Void in
                         
                     })

@@ -320,7 +320,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         if DataManager.sharedInstance.activeView != "login" {
             DataManager.sharedInstance.lastCharms = DataManager.sharedInstance.myCharms
             let lastCharms = DataManager.sharedInstance.lastCharms
-            DataManager.sharedInstance.requestSharers { (result) -> Void in
+            if DataManager.sharedInstance.didUpdateCharms {
                 var index = 0
                 for charm in DataManager.sharedInstance.myCharms {
                     
@@ -364,6 +364,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
                     }
                     index++
                 }
+                DataManager.sharedInstance.didUpdateCharms = false
             }
             if DataManager.sharedInstance.isCharm {
                 DataManager.sharedInstance.updateActiveFriendLocation()
