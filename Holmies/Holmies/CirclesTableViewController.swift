@@ -77,6 +77,9 @@ class CirclesTableViewController: UITableViewController {
 //                    }
 //                }
         
+        if screenSize == 480 {
+            
+        }
         
         self.refreshControl?.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
 

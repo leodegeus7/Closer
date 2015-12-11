@@ -17,6 +17,8 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var facebookLogoutButton: UIButton!
     @IBOutlet weak var deleteAccountButton: UIButton!
     @IBOutlet weak var myUserName: UILabel!
+    @IBOutlet weak var aboutButton: UIButton!
+    @IBOutlet weak var myPhotoHeightContraint: NSLayoutConstraint!
     
     var kbHeight: CGFloat!
     
@@ -24,9 +26,10 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
     let mainRed: UIColor = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
     let lightGray = UIColor(red: 170.0/255.0, green: 170.0/255.0, blue: 170.0/255.0, alpha: 1.0)
 
+    
     var keyboardControl = true
     var inputTextField: UITextField?
-    
+    var screenSize: CGFloat!
 
     
     override func viewDidLoad() {
@@ -34,8 +37,9 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
         let id = DataManager.sharedInstance.myUser.userID
         let image = DataManager.sharedInstance.findImage(id)
         myImage.image = image
+        
       //  myImage.image = DataManager.sharedInstance.findImage(DataManager.sharedInstance.myUser.userID)
-        myUserName.text = "\(DataManager.sharedInstance.myUser.username)\né o seu username"
+        myUserName.text = "\(DataManager.sharedInstance.myUser.username)\nit's you username"
         let buttonContinue = UIBarButtonItem(title: "Update Username", style: .Plain, target: self, action: "continueAction")
         //self.navigationItem.rightBarButtonItem = buttonContinue
         myImage.layer.cornerRadius = 100.0
@@ -54,6 +58,16 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
         facebookLogoutButton.titleLabel!.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
         deleteAccountButton.tintColor = mainRed
         deleteAccountButton.titleLabel!.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
+        aboutButton.titleLabel!.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
+        aboutButton.tintColor = mainRed
+        
+        screenSize = self.view.frame.size.height
+        
+        if screenSize == 480 {
+            myPhotoHeightContraint.constant = 100
+            myImage.layer.cornerRadius = 50
+            
+        }
         
         
         let loggoutButton = UIBarButtonItem(title: "Logout", style: UIBarButtonItemStyle.Plain, target: self, action: "loggoutButton")
@@ -81,22 +95,22 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
 
         if username.text?.isEmpty == true {
             DataManager.sharedInstance.shakeTextField(username)
-            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Digite um username para atualizar", button1: "OK")
+            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Attention", message: "Type a  username to update", button1: "OK")
         }
         else {
             http.updateUserWithID(DataManager.sharedInstance.myUser.userID, username: "\(username.text!)", location: nil, altitude: nil, fbid: nil, photo: nil, name: nil, email: nil, password: nil, completion: { (result) -> Void in
                 let JSON = result
                 let dic = JSON as NSDictionary
                 if dic["error"] != nil {
-                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: dic["error"] as! String, button1: "Ok")
+                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: dic["error"] as! String, button1: "OK")
                     print("erro aqui")
                 }
                 else {
-                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Usuário Atualizado: \(self.username.text!)", button1: "Ok")
+                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Attention", message: "Username updated: \(self.username.text!)", button1: "OK")
                     DataManager.sharedInstance.myUser.username = "\(self.username.text!)"
                     DataManager.sharedInstance.saveMyInfo()
                     DataManager.sharedInstance.loadMyInfo()
-                    self.myUserName.text = "\(self.username.text!)\né o seu username"
+                    self.myUserName.text = "\(self.username.text!)\nit's your username"
                     self.exitView()
                 }
             })
@@ -201,7 +215,7 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
                     DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: dic["error"] as! String, button1: "Ok")
                 }
                 else {
-                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Attencion", message: "Sua conta \(DataManager.sharedInstance.myUser.username) foi deletada", button1: "Ok")
+                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Attention", message: "Your account \(DataManager.sharedInstance.myUser.username) has been deleted", button1: "Ok")
                     
                     let documentsDirectory = DataManager.sharedInstance.findDocumentsDirectory()
                     let path = documentsDirectory + "/id.txt"
@@ -238,7 +252,7 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
         if (FBSDKAccessToken.currentAccessToken() == nil) {
             self.getFBUserData({ (result) -> Void in
                 let newFBID = result as String
-                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Dados do facebook resgatados com sucesso", button1: "Ok")
+                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Alert", message: "Facebook data imported with sucess", button1: "OK")
                 DataManager.sharedInstance.myUser.facebookID = newFBID
                 DataManager.sharedInstance.saveMyInfo()
                 self.http.updateUserWithID(DataManager.sharedInstance.myUser.userID, username: nil, location: nil, altitude: nil, fbid: newFBID, photo: nil, name: nil, email: nil, password: nil, completion: { (result) -> Void in
@@ -253,7 +267,7 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
             })
         }
         else {
-            let alert = UIAlertController(title: "Attention", message: "Did you loggout your facebook Account? Your data will be unsync", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Attention", message: "Did you logged out your Facebook Account? Your data will be unsync", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Loggout", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                 let loginManager = FBSDKLoginManager()
                 loginManager.logOut()

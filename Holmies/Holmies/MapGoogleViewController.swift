@@ -536,6 +536,15 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         if navigationController?.navigationBar.hidden == false {
             self.compassView.hidden = false
             compassView.fadeIn(0.5)
+            
+            
+            originalAngleArrow.hidden = true
+            originalAngleLabel.hidden = true
+            phoneRotationArrow.hidden = true
+            phoneRotationAngleLabel.hidden = true
+            
+            
+            
             friendDistance.hidden = true
             friendPhoto.hidden = true
             navigationController?.navigationBar.hidden = true
