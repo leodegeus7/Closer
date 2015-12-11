@@ -33,8 +33,8 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
         
         tableView.separatorInset = UIEdgeInsetsZero
         tableView.layoutMargins = UIEdgeInsetsZero
-//        let buttonContinue = UIBarButtonItem(title: "Update name of Group", style: .Plain, target: self, action: "continueAction")
-//        self.navigationItem.rightBarButtonItem = buttonContinue
+        let buttonContinue = UIBarButtonItem(title: "Refresh", style: .Plain, target: self, action: "refresh")
+        self.navigationItem.rightBarButtonItem = buttonContinue
         
         
         
@@ -56,6 +56,7 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
             existFriendInActive = false
             
         }
+
 
         
         
@@ -106,6 +107,9 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
         return arrayWithAllPeople.count
     }
     
+    func refresh() {
+        self.tableView.reloadData()
+    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("friend", forIndexPath: indexPath) as! CreateGroupTableViewCell
@@ -133,18 +137,22 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
             if actualSharer.status != nil {
                 
                 if actualSharer.status == "pending" {
-                    cell.friendName.textColor = lightBlue
+                    cell.friendName.text = arrayWithAllPeople[indexPath.row].username + " (pendent)"
+                    cell.friendName.textColor = UIColor.grayColor()
+                    cell.friendPhoto.alpha = 0.3
                     cell.tag = 10
                 }
                 else if actualSharer.status == "accepted" {
-                    cell.friendName.textColor = UIColor.grayColor()
+                    cell.friendName.text = arrayWithAllPeople[indexPath.row].username
+                    cell.friendName.textColor = DataManager.sharedInstance.mainRed
                     cell.tag = 20
                 }
                 else if actualSharer.status == "rejected" {
+                    cell.friendName.text = arrayWithAllPeople[indexPath.row].username
                     cell.friendName.textColor = UIColor.redColor()
                 }
                 
-                cell.friendName.text = arrayWithAllPeople[indexPath.row].username
+
                 cell.friendPhoto.image = DataManager.sharedInstance.findImage("\(arrayWithAllPeople[indexPath.row].userID)")
                 
                 
@@ -157,18 +165,28 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
                 cell.friendPhoto.layer.cornerRadius = 19
                 cell.friendPhoto.clipsToBounds = true
                 cell.friendPhoto.layer.borderWidth = 0
+                
             }
             return cell
         }
         else {
             cell.friendName.text = arrayWithAllPeople[indexPath.row].username
             cell.friendPhoto.image = DataManager.sharedInstance.findImage("\(arrayWithAllPeople[indexPath.row].userID)")
+            cell.friendPhoto.alpha = 0.3
             self.tableView.rowHeight = 45
             cell.friendName.font = UIFont(name: "SFUIText-Regular", size: 17)
             cell.friendPhoto.layer.cornerRadius = 19
             cell.friendPhoto.clipsToBounds = true
             cell.friendPhoto.layer.borderWidth = 0
-            cell.friendName.textColor = UIColor.brownColor()
+            cell.friendName.textColor = UIColor.grayColor()
+            let grayCheck = UIImage(named: "grayCheck.png")
+            cell.checkImage.image = grayCheck
+            cell.tag = 30
+            
+            
+            
+            
+            
             return cell
         }
         
@@ -278,6 +296,57 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
         
             NSNotificationCenter.defaultCenter().postNotificationName("goToUser", object: nil ,userInfo: myDict)
             navigationController?.popViewControllerAnimated(true)
+        }
+        else if cell?.tag == 30 {
+            
+            let alert = UIAlertController(title: "Attention", message: "\(arrayWithAllPeople[indexPath.row].username) will be add to group", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Add", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+
+                self.http.createNewSharerWithType(.userToGroup, ownerID: self.arrayWithAllPeople[indexPath.row].userID, receiverID: DataManager.sharedInstance.selectedGroup.id, until: "20", completion: { (result) -> Void in
+//                    DataManager.sharedInstance.requestGroups({ (result) -> Void in
+//                        DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
+//                            
+//                            for group in DataManager.sharedInstance.allGroup {
+//                                if group.id == DataManager.sharedInstance.selectedGroup.id {
+//                                    DataManager.sharedInstance.selectedGroup = group
+//                                    DataManager.sharedInstance.activeUsers = group.users
+//                                    break
+//                                }
+//                            }
+//                            self.arrayWithAllPeople = DataManager.sharedInstance.activeUsers
+//                            
+//                            var existFriendInActive = false
+//                            
+//                            for friend in DataManager.sharedInstance.allFriends {
+//                                for  active in DataManager.sharedInstance.activeUsers {
+//                                    if friend.userID == active.userID {
+//                                        existFriendInActive = true
+//                                    }
+//                                    
+//                                }
+//                                if !existFriendInActive {
+//                                    self.arrayWithAllPeople.append(friend)
+//                                }
+//                                existFriendInActive = false
+//                                
+//                            }
+//                            
+//                            self.tableView.reloadData()
+//
+//                        })
+//
+//                    })
+                    self.navigationController?.popViewControllerAnimated(true)
+                })
+
+                
+
+
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
 

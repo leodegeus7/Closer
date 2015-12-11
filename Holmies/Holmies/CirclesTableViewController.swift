@@ -441,7 +441,8 @@ class CirclesTableViewController: UITableViewController {
                     if let _ = DataManager.sharedInstance.allGroup[indexPath.row].users {
                         var  i = 0
                         for user in DataManager.sharedInstance.allGroup[indexPath.row].users {
-                            let imageName = DataManager.sharedInstance.findImage(user.userID)
+                            let userid = user.userID
+                            let imageName = DataManager.sharedInstance.findImage(userid)
                             
                             let status = DataManager.sharedInstance.findStatusOfUserInGroup(user.userID, groupId: DataManager.sharedInstance.allGroup[indexPath.row].id)
                             
