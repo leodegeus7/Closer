@@ -76,6 +76,9 @@ class CirclesTableViewController: UITableViewController {
 //                    }
 //                }
         
+        if screenSize == 480 {
+            
+        }
         
         self.refreshControl?.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
 
@@ -529,20 +532,15 @@ class CirclesTableViewController: UITableViewController {
                                     cellActive.numberLabel.text = "\(newDurationDays)"
                                     cellActive.timeLabel.text = "days"
                                 }
-                                
-                                
+                        
                             } else {
                                 cellActive.numberLabel.text = "∞"
                                 cellActive.timeLabel.text = "days"
                             }
-                            
-
+                    
                         }
                         
                     }
-                    
-                    
-                    
                     
                     return cellActive
                     

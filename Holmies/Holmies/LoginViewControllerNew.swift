@@ -20,17 +20,52 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var facebookLoginButton: UIButton!
     @IBOutlet weak var forgetButton: UIButton!
+    @IBOutlet weak var loadingToTextFieldConstraint: NSLayoutConstraint!
+    @IBOutlet weak var closerTitleLabelToLoadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var facebookButtonToBottomLayoutGuideConstraint: NSLayoutConstraint!
+
     
     var kbHeight: CGFloat!
     var logged = false
     var position = false
     var controle = false
     let helper = HTTPHelper()
+    var screenSize: CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask, true)[0] as String
-        closerTitleLabel.font = UIFont(name: "NexaRustScriptL-0", size: 110)
+        
+        screenSize = self.view.frame.size.height
+        
+        switch screenSize {
+        case 480:
+            closerTitleLabelToLoadingConstraint.constant = 10
+            loadingToTextFieldConstraint.constant = 20
+            facebookButtonToBottomLayoutGuideConstraint.constant = 50
+            break
+        case 568:
+            closerTitleLabelToLoadingConstraint.constant = 15
+            loadingToTextFieldConstraint.constant = 30
+            facebookButtonToBottomLayoutGuideConstraint.constant = 60
+            break
+        case 667:
+            closerTitleLabelToLoadingConstraint.constant = 20
+            loadingToTextFieldConstraint.constant = 50
+            facebookButtonToBottomLayoutGuideConstraint.constant = 75
+            break
+        case 736:
+            closerTitleLabelToLoadingConstraint.constant = 30
+            loadingToTextFieldConstraint.constant = 81
+            facebookButtonToBottomLayoutGuideConstraint.constant = 80
+            break
+        default:
+            print("oi")
+            break
+        }
+        
+        
+        closerTitleLabel.font = UIFont(name: "NexaRustScriptL-0", size: 110 / 736 * screenSize)
         closerTitleLabel.alpha = 0
         userNameTextField.alpha = 0
         passwordTextField.alpha = 0
@@ -48,6 +83,7 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
             self.registerButton.fadeIn(0.5)
             self.facebookLoginButton.fadeIn(0.5)
             self.forgetButton.fadeIn(0.5)
+
         }
         
         
@@ -137,7 +173,7 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
                     let dic = JSON as NSDictionary
                     if dic["error"] != nil {
                         let error = dic["error"]
-                        self.createSimpleUIAlert(self, title: "Login not conclued", message: "\(error!)", button1: "Ok")
+                        self.createSimpleUIAlert(self, title: "Login not concluded", message: "\(error!)", button1: "Ok")
                         
                     }
                     else {
@@ -283,6 +319,13 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
     }
 
     func keyboardWillShow(notification: NSNotification) {
+        closerTitleLabel.fadeOut(0.5)
+        
+        if screenSize == 480 {
+            registerButton.fadeOut(0.5)
+            facebookLoginButton.fadeOut(0.5)
+            
+        }
         if controle == false {
         if let userInfo = notification.userInfo {
             if let keyboardSize =  (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
@@ -297,6 +340,12 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
     }
     
     func keyboardWillHide(notification: NSNotification) {
+        closerTitleLabel.fadeIn(0.5)
+        
+        if screenSize == 480 {
+            registerButton.fadeIn(0.5)
+            facebookLoginButton.fadeIn(0.5)
+        }
         if position == true {
             self.animateTextField(false)
             position = false

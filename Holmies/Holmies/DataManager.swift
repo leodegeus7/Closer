@@ -619,7 +619,7 @@ class DataManager {
                     marker.icon = resizedImage
                 }
                 else {
-                    createSimpleUIAlert(windows, title: "Attencion", message: "\(user.name) nao foi localizado", button1: "Ok")
+                    createSimpleUIAlert(windows, title: "Attention", message: "\(user.name) not found", button1: "Ok")
                 }
                 }
             }

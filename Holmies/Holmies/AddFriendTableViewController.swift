@@ -131,7 +131,7 @@ class AddFriendTableViewController: UITableViewController, UITextFieldDelegate {
                     DataManager.sharedInstance.allFriends.append(newUser)
 //                    let friends = DataManager.sharedInstance.allFriends
                     
-                    let alertController = UIAlertController(title: "Sucesso", message: "Amigo \(newUser.username)", preferredStyle: .Alert)
+                    let alertController = UIAlertController(title: "Sucess", message: "Friend \(newUser.username)", preferredStyle: .Alert)
                     let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
                         UIAlertAction in
                         self.navigationController!.popViewControllerAnimated(true)

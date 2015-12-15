@@ -1680,7 +1680,12 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IlL-0k-2ZI">
+<<<<<<< HEAD
+                                                    <rect key="frame" x="75" y="25.5" width="42" height="20.5"/>
+                                                    <animations/>
+=======
                                                     <rect key="frame" x="75" y="26" width="42" height="20"/>
+>>>>>>> 0a98ad85b3f3963f356a6b722e1af2f80acee1c2
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
