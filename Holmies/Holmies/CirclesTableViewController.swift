@@ -27,9 +27,6 @@ class CirclesTableViewController: UITableViewController {
 
     let app = UIApplication.sharedApplication()
     
-    
-    var timer = NSTimer()
-    var timer2 = NSTimer()
     //view do user
     @IBOutlet weak var imageUserInView: UIImageView!
     @IBOutlet weak var usernameInView: UILabel!
@@ -45,7 +42,7 @@ class CirclesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        DataManager.sharedInstance.appIsActive = true
         print("PRINT PARA VER SE ESTA EMPLIHANDO MUITAS TELAS")
         
         DataManager.sharedInstance.activeView = "circles"
@@ -106,7 +103,7 @@ class CirclesTableViewController: UITableViewController {
         }
 
         
-        timer2 = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("reloadData"), userInfo: nil, repeats: true)
+        DataManager.sharedInstance.timer2 = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("reloadData"), userInfo: nil, repeats: true)
         
         
         
@@ -202,13 +199,13 @@ class CirclesTableViewController: UITableViewController {
         }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "existGroups", name:"ExistGroup", object: nil)
-        timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "UpdateTableView", userInfo: nil, repeats: true)
+        DataManager.sharedInstance.timer3 = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "UpdateTableView", userInfo: nil, repeats: true)
         
     }
     
     override func viewDidDisappear(animated: Bool) {
         //NSNotificationCenter.defaultCenter().removeObserver(self, name: "ExistGroup", object: nil)
-        timer.invalidate()
+        DataManager.sharedInstance.timer3.invalidate()
     }
     
     func existGroups() {
@@ -307,20 +304,24 @@ class CirclesTableViewController: UITableViewController {
     }
     
     func reloadData() {
-        self.tableView.reloadData()
-        
-        DataManager.sharedInstance.isUpdating = true
-        
-        DataManager.sharedInstance.requestSharers { (result) -> Void in
-            
-            
-            DataManager.sharedInstance.requestGroups { (result) -> Void in
+        if DataManager.sharedInstance.appIsActive {
+            self.tableView.reloadData()
+            DataManager.sharedInstance.isUpdating = true
+            if DataManager.sharedInstance.testIfFileExistInDocuments("/\(DataManager.sharedInstance.myUser.userID).jpg") {
+                let id = DataManager.sharedInstance.myUser.userID
+                let image = DataManager.sharedInstance.findImage(id)
+                imageUserInView.image = image
+            }
+            DataManager.sharedInstance.requestSharers { (result) -> Void in
                 
-                DataManager.sharedInstance.allGroup = DataManager.sharedInstance.convertJsonToGroup(result)
                 
-                DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
-                })
-                
+                DataManager.sharedInstance.requestGroups { (result) -> Void in
+                    
+                    DataManager.sharedInstance.allGroup = DataManager.sharedInstance.convertJsonToGroup(result)
+                    
+                    DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
+                    })
+                    
 
                 
                 
@@ -358,12 +359,36 @@ class CirclesTableViewController: UITableViewController {
                     DataManager.sharedInstance.finishedAllRequest = true
                     DataManager.sharedInstance.isUpdating = false
                     
-                })
-                
-                
+                    if DataManager.sharedInstance.allGroup.count < 1 {
+                        self.noGroups = true
+                    }
+                    else {
+                        self.noGroups = false
+                    }
+                    
+					DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
+                    	print("\(result)")
+                    	self.tableView.reloadData()
+                    	if self.refreshControl?.refreshing == true {
+                        	self.refreshControl?.endRefreshing()
+                        	if self.shareTypeSegmentedControl.selectedSegmentIndex == 1 {
+                            	DataManager.sharedInstance.didUpdateCharms = true
+                            	NSNotificationCenter.defaultCenter().postNotificationName("delegateUpdate", object: nil)
+                        	}
+                    	}
+                    	DataManager.sharedInstance.finishedAllRequest = true
+                    	DataManager.sharedInstance.isUpdating = false
+                    
+                	})
+                    
+                    
+                }
             }
+            DataManager.sharedInstance.saveMyInfo()
         }
-        DataManager.sharedInstance.saveMyInfo()
+        else {
+            DataManager.sharedInstance.eraseData()
+        }
     }
     
     

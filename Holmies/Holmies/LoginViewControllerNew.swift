@@ -37,7 +37,9 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
         let documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask, true)[0] as String
         
         screenSize = self.view.frame.size.height
-        
+        if DataManager.sharedInstance.appIsActive == false {
+            DataManager.sharedInstance.eraseData()
+        }
         switch screenSize {
         case 480:
             closerTitleLabelToLoadingConstraint.constant = 10
@@ -159,6 +161,9 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
 
     
     @IBAction func loginButton(sender: AnyObject) {
+        if DataManager.sharedInstance.appIsActive == false {
+            DataManager.sharedInstance.eraseData()
+        }
         if userNameTextField.text?.isEmpty == true {
             DataManager.sharedInstance.shakeTextField(userNameTextField)
         }

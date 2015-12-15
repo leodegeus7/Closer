@@ -92,8 +92,6 @@
 		AF5E10A41C003394003C0B13 /* Charm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5E10A31C003394003C0B13 /* Charm.swift */; };
 		AF5F33F41C001EE700BC1622 /* charm.png in Resources */ = {isa = PBXBuildFile; fileRef = AF5F33F31C001EE700BC1622 /* charm.png */; };
 		AF5F33F61C001EED00BC1622 /* group.png in Resources */ = {isa = PBXBuildFile; fileRef = AF5F33F51C001EED00BC1622 /* group.png */; };
-		AFDBFB101C1B465200B555CB /* whiteChar2.png in Resources */ = {isa = PBXBuildFile; fileRef = AFDBFB0F1C1B465200B555CB /* whiteChar2.png */; };
-		AFDBFB121C1B466000B555CB /* mainRedChar2.png in Resources */ = {isa = PBXBuildFile; fileRef = AFDBFB111C1B466000B555CB /* mainRedChar2.png */; };
 		CD0561D71BE9452E00130656 /* Red_Arrow_Right 3.png in Resources */ = {isa = PBXBuildFile; fileRef = CD0561D61BE9452E00130656 /* Red_Arrow_Right 3.png */; };
 		CD0561DB1BEA700900130656 /* x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD0561DA1BEA700900130656 /* x.png */; };
 		CD0561DD1BEA700E00130656 /* compass.png in Resources */ = {isa = PBXBuildFile; fileRef = CD0561DC1BEA700E00130656 /* compass.png */; };
@@ -344,8 +342,6 @@
 		AF5E10A31C003394003C0B13 /* Charm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Charm.swift; sourceTree = "<group>"; };
 		AF5F33F31C001EE700BC1622 /* charm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = charm.png; sourceTree = "<group>"; };
 		AF5F33F51C001EED00BC1622 /* group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = group.png; sourceTree = "<group>"; };
-		AFDBFB0F1C1B465200B555CB /* whiteChar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteChar2.png; sourceTree = "<group>"; };
-		AFDBFB111C1B466000B555CB /* mainRedChar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainRedChar2.png; sourceTree = "<group>"; };
 		B702994F19B9686CF5BEEC1E /* Pods-Holmies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Holmies.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Holmies/Pods-Holmies.debug.xcconfig"; sourceTree = "<group>"; };
 		CD0561D61BE9452E00130656 /* Red_Arrow_Right 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Red_Arrow_Right 3.png"; sourceTree = "<group>"; };
 		CD0561DA1BEA700900130656 /* x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = x.png; sourceTree = "<group>"; };
@@ -616,8 +612,6 @@
 				A73BE4CC1BDEB68E0063C705 /* SF Fonts */,
 				A70592161BD6C5B600E737E3 /* DesignGroupsTableViewController.swift */,
 				A766B4891C0F69B400F69754 /* mainRedChar.png */,
-				AFDBFB111C1B466000B555CB /* mainRedChar2.png */,
-				AFDBFB0F1C1B465200B555CB /* whiteChar2.png */,
 				A766B4871C0F69B000F69754 /* whiteChar.png */,
 				A77F58681C0E332F008670B7 /* bottomNavigationBackground.png */,
 				A77F58691C0E332F008670B7 /* topNavigationBackground.png */,
@@ -1076,7 +1070,6 @@
 			files = (
 				A7C37FC71BE11E3600FEE8D2 /* redCheck.png in Resources */,
 				CDE102611BE3F4E30042B180 /* Design.storyboard in Resources */,
-				AFDBFB121C1B466000B555CB /* mainRedChar2.png in Resources */,
 				A71F7D151BD0288E00652750 /* photoButton.png in Resources */,
 				CD73C0E81C108454000730F1 /* ShowFriendView.xib in Resources */,
 				A7C37FA81BE00A8500FEE8D2 /* SF-Compact-Display-Heavy.otf in Resources */,
@@ -1110,7 +1103,6 @@
 				A7567EA81C1B89BA004E7DF8 /* creditos.png in Resources */,
 				A7ACC01F1C11F7300090B6FA /* squareCompass4.png in Resources */,
 				CD0561D71BE9452E00130656 /* Red_Arrow_Right 3.png in Resources */,
-				AFDBFB101C1B465200B555CB /* whiteChar2.png in Resources */,
 				A7C37FBA1BE00A8500FEE8D2 /* SF-UI-Text-Heavy.otf in Resources */,
 				A760AAB41BFA488100214F06 /* pin025.png in Resources */,
 				A7C37FB21BE00A8500FEE8D2 /* SF-UI-Display-Light.otf in Resources */,

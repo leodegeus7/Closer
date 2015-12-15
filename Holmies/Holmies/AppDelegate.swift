@@ -19,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
     var window: UIWindow?
     let googleMapsApiKey = "AIzaSyAhjTqn1_2HX0FiQ0MW1_O7L1avjPIxP9g"
     let helper = HTTPHelper()
-    var timer = NSTimer()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //setando parse, api google, registrando as notificacoes
@@ -132,7 +131,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
-        timer.invalidate()
+        if DataManager.sharedInstance.timer.valid {
+            DataManager.sharedInstance.timer.invalidate()
+        }
+        if DataManager.sharedInstance.timer2.valid {
+            DataManager.sharedInstance.timer2.invalidate()
+        }
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
