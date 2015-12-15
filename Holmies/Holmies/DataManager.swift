@@ -64,7 +64,8 @@ class DataManager {
     
     var timer = NSTimer()
     var timer2 = NSTimer()
-    
+    var timer3 = NSTimer()
+    var appIsActive = true
     
     class var sharedInstance: DataManager {
         struct Static {
@@ -1313,6 +1314,18 @@ class DataManager {
             }
             
         }
+    }
+    
+    func eraseData() {
+        let fileManager = NSFileManager()
+        let documentsDirectory = findDocumentsDirectory()
+        do {let listOfItens = try fileManager.contentsOfDirectoryAtPath(documentsDirectory)
+            for filename in listOfItens {
+                let path = documentsDirectory + "/\(filename)"
+                do {try fileManager.removeItemAtPath(path)} catch {}
+            }
+        }
+        catch {}
     }
 
     

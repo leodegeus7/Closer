@@ -166,30 +166,21 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
         
         
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (UIAlertAction)in
-            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Attention", message: "Conta deslogada", button1: "Ok")
-            if DataManager.sharedInstance.timer.valid {
+            //DataManager.sharedInstance.createSimpleUIAlert(self, title: "Attention", message: "Conta deslogada", button1: "Ok")
+            DataManager.sharedInstance.locationManager = nil
+
                 DataManager.sharedInstance.timer.invalidate()
-            }
-            if DataManager.sharedInstance.timer2.valid {
+
                 DataManager.sharedInstance.timer2.invalidate()
-            }
-            let documentsDirectory = DataManager.sharedInstance.findDocumentsDirectory()
-            let path = documentsDirectory + "/id.txt"
-            let path1 = documentsDirectory + "/groups.json"
-            let path2 = documentsDirectory + "/myInfo.json"
-            let path3 = documentsDirectory + "/myInfolog.json"
-            let path4 = documentsDirectory + "/receiverSharers.json"
-            let path5 = documentsDirectory + "/sharers.json"
-            let path6 = documentsDirectory + "/friends.json"
+                DataManager.sharedInstance.timer3.invalidate()
+            DataManager.sharedInstance.appIsActive = false
+            DataManager.sharedInstance.eraseData()
+                    DataManager.sharedInstance.myUser = User()
             
-            let fileManager = NSFileManager.defaultManager()
-            do {try fileManager.removeItemAtPath(path)} catch {}
-            do {try fileManager.removeItemAtPath(path1)} catch {}
-            do {try fileManager.removeItemAtPath(path2)} catch {}
-            do {try fileManager.removeItemAtPath(path3)} catch {}
-            do {try fileManager.removeItemAtPath(path4)} catch {}
-            do {try fileManager.removeItemAtPath(path5)} catch {}
-            do {try fileManager.removeItemAtPath(path6)} catch {}
+           
+            
+            let loginManager = FBSDKLoginManager()
+            loginManager.logOut()
             
             let storyboard = UIStoryboard(name: "Design", bundle: nil)
             //let dest = storyboard.instantiateViewControllerWithIdentifier("loginVC")
@@ -222,28 +213,30 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
                     DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: dic["error"] as! String, button1: "Ok")
                 }
                 else {
-                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Attention", message: "Your account \(DataManager.sharedInstance.myUser.username) has been deleted", button1: "Ok")
+
                     
-                    let documentsDirectory = DataManager.sharedInstance.findDocumentsDirectory()
-                    let path = documentsDirectory + "/id.txt"
-                    let path1 = documentsDirectory + "/groups.json"
-                    let path2 = documentsDirectory + "/myInfo.json"
-                    let path3 = documentsDirectory + "/myInfolog.json"
-                    let path4 = documentsDirectory + "/receiverSharers.json"
-                    let path5 = documentsDirectory + "/sharers.json"
-                    let path6 = documentsDirectory + "/friends.json"
-
-                    let fileManager = NSFileManager.defaultManager()
-                    do {try fileManager.removeItemAtPath(path)} catch {}
-                    do {try fileManager.removeItemAtPath(path1)} catch {}
-                    do {try fileManager.removeItemAtPath(path2)} catch {}
-                    do {try fileManager.removeItemAtPath(path3)} catch {}
-                    do {try fileManager.removeItemAtPath(path4)} catch {}
-                    do {try fileManager.removeItemAtPath(path5)} catch {}
-                    do {try fileManager.removeItemAtPath(path6)} catch {}
-                    NSThread.mainThread()
-                    exit(0)
-
+                    
+                    
+                    DataManager.sharedInstance.locationManager = nil
+                    
+                    DataManager.sharedInstance.timer.invalidate()
+                    
+                    DataManager.sharedInstance.timer2.invalidate()
+                    DataManager.sharedInstance.timer3.invalidate()
+                    DataManager.sharedInstance.appIsActive = false
+                    DataManager.sharedInstance.eraseData()
+                    DataManager.sharedInstance.myUser = User()
+                    
+                    
+                    
+                    let loginManager = FBSDKLoginManager()
+                    loginManager.logOut()
+                    
+                    let storyboard = UIStoryboard(name: "Design", bundle: nil)
+                    //let dest = storyboard.instantiateViewControllerWithIdentifier("loginVC")
+                    let viewController = storyboard.instantiateViewControllerWithIdentifier("loginVC")
+                    self.presentViewController(viewController, animated: true, completion: nil)
+                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Attention", message: "Your account \(DataManager.sharedInstance.myUser.username) has been deleted", button1: "Ok")
 
                 }
                 
