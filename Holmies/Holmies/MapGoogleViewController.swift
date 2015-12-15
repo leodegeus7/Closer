@@ -25,6 +25,9 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     var gradient:UIImage!
     var actualPhoneAngularPosition = Double()
     var selectedFriend = User?()
+    
+    let mainRed: UIColor = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
+
 
     var isCharm = DataManager.sharedInstance.isCharm
     
@@ -448,14 +451,23 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 
             var shortDate: String {
                 let dateFormatter = NSDateFormatter()
-                dateFormatter.dateFormat = "dd-MM-yyyy HH::mm:ss"
+                dateFormatter.dateFormat = "dd/MM/yyyy HH::mm:ss"
                 return dateFormatter.stringFromDate(date!)
             }
             
-
-            
-            infoView.nameLabel.text = "\(userInMarker.name)\nLast Update:\n\(shortDate)"
+            infoView.nameLabel.text = "\(userInMarker.name)\nLast update:\n\(shortDate)"
+            infoView.nameLabel.font = UIFont(name: "SFUIDisplay-Light", size: 22)
             infoView.userPhoto.image = DataManager.sharedInstance.findImage("\(userInMarker.userID)")
+            infoView.userPhoto.clipsToBounds = true
+//            let ok = infoView.userPhoto.frame.height
+//            let ok2 = infoView.userPhoto.frame.size.height
+//            infoView.userPhoto.layer.cornerRadius = 30 //* 320 / self.view.frame.size.width
+//            
+//            infoView.layer.cornerRadius = infoView.frame.size.width / 4
+//            infoView.layer.borderColor = mainRed.CGColor
+//            infoView.layer.borderWidth = 2
+//            infoView.clipsToBounds = true
+
             
             return infoView
         } else {
@@ -524,6 +536,15 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
         if navigationController?.navigationBar.hidden == false {
             self.compassView.hidden = false
             compassView.fadeIn(0.5)
+            
+            
+            originalAngleArrow.hidden = true
+            originalAngleLabel.hidden = true
+            phoneRotationArrow.hidden = true
+            phoneRotationAngleLabel.hidden = true
+            
+            
+            
             friendDistance.hidden = true
             friendPhoto.hidden = true
             navigationController?.navigationBar.hidden = true

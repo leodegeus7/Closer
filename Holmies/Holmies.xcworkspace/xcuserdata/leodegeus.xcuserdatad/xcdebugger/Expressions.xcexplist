@@ -31,13 +31,13 @@
          contextName = "CirclesTableViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:CirclesTableViewController.swift">
          <PersistentStrings>
             <PersistentString
+               value = "DataManager.sharedInstance.allFriends">
+            </PersistentString>
+            <PersistentString
                value = "DataManager.sharedInstance.allSharers">
             </PersistentString>
             <PersistentString
                value = "DataManager.sharedInstance.allGroup">
-            </PersistentString>
-            <PersistentString
-               value = "DataManager.sharedInstance.allFriends">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -81,7 +81,7 @@
          contextName = "CirclesTableViewController.(reloadData(CirclesTableViewController) -&gt; () -&gt; ()).(closure #1).(closure #1):CirclesTableViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "DataManager.sharedInstance.allFriends">
+               value = "DataManager.sharedInstance.allGroup">
             </PersistentString>
             <PersistentString
                value = "DataManager.sharedInstance.sharesInGroups">
@@ -93,7 +93,7 @@
                value = "sharerServer">
             </PersistentString>
             <PersistentString
-               value = "DataManager.sharedInstance.allGroup">
+               value = "DataManager.sharedInstance.allFriends">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -122,6 +122,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "EditGroupViewController.(tableView(EditGroupViewController) -&gt; (UITableView, didSelectRowAtIndexPath : NSIndexPath) -&gt; ()).(closure #1).(closure #1).(closure #1).(closure #1):EditGroupViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "DataManager.sharedInstance.activeUsers">
+            </PersistentString>
+            <PersistentString
+               value = "DataManager.sharedInstance.allGroup">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "LoginViewControllerNew.(getFBUserData(LoginViewControllerNew) -&gt; () -&gt; ()).(closure #1).(closure #1):LoginViewControllerNew.swift">
       </ContextState>
       <ContextState
@@ -144,7 +155,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "AppDelegate.locationManager(CLLocationManager, didUpdateToLocation : CLLocation, fromLocation : CLLocation) -&gt; ():AppDelegate.swift">
+      </ContextState>
+      <ContextState
          contextName = "CirclesTableViewController.tableView(UITableView, didSelectRowAtIndexPath : NSIndexPath) -&gt; ():CirclesTableViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DataManager.convertJsonToSharer(AnyObject) -&gt; [Sharer]:DataManager.swift">
       </ContextState>
       <ContextState
          contextName = "DataManager.sortGroupArray() -&gt; ():DataManager.swift">
@@ -155,12 +172,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DataManager.convertJsonToSharer(AnyObject) -&gt; [Sharer]:DataManager.swift">
-      </ContextState>
-      <ContextState
-         contextName = "DataManager.findStatusOfUserInGroup(String, groupId : String) -&gt; String:DataManager.swift">
-      </ContextState>
-      <ContextState
          contextName = "AddFriendWithFriendsViewController.recognizeTapGesture() -&gt; ():AddFriendWithFriendsViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -169,7 +180,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "AppDelegate.locationManager(CLLocationManager, didUpdateToLocation : CLLocation, fromLocation : CLLocation) -&gt; ():AppDelegate.swift">
+         contextName = "DataManager.findStatusOfUserInGroup(String, groupId : String) -&gt; String:DataManager.swift">
       </ContextState>
       <ContextState
          contextName = "EditGroupViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:EditGroupViewController.swift">
@@ -248,9 +259,6 @@
             </PersistentString>
             <PersistentString
                value = "arrayWithAllPeople">
-            </PersistentString>
-            <PersistentString
-               value = "arrayWithAllPeople[indexPath.row].username">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

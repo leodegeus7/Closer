@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "MapGoogleViewController.mapView(GMSMapView!, markerInfoContents : GMSMarker!) -&gt; UIView!:MapGoogleViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.view.frame.size.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AddFriendWithFriendsViewController.tableView(UITableView, didSelectRowAtIndexPath : NSIndexPath) -&gt; ():AddFriendWithFriendsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "infoView.userImage.layer.frame.size.height">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LoginViewControllerNew.viewDidLoad() -&gt; ():LoginViewControllerNew.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.view.frame.size.height">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LoginViewControllerNew.(viewDidLoad(LoginViewControllerNew) -&gt; () -&gt; ()).(closure #1):LoginViewControllerNew.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.view.frame.size.height">
+            </PersistentString>
+            <PersistentString
+               value = "screenSize">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

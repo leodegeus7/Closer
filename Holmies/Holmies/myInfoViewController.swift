@@ -17,6 +17,8 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var facebookLogoutButton: UIButton!
     @IBOutlet weak var deleteAccountButton: UIButton!
     @IBOutlet weak var myUserName: UILabel!
+    @IBOutlet weak var aboutButton: UIButton!
+    @IBOutlet weak var myPhotoHeightContraint: NSLayoutConstraint!
     
     var kbHeight: CGFloat!
     
@@ -24,9 +26,10 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
     let mainRed: UIColor = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
     let lightGray = UIColor(red: 170.0/255.0, green: 170.0/255.0, blue: 170.0/255.0, alpha: 1.0)
 
+    
     var keyboardControl = true
     var inputTextField: UITextField?
-    
+    var screenSize: CGFloat!
 
     
     override func viewDidLoad() {
@@ -34,8 +37,9 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
         let id = DataManager.sharedInstance.myUser.userID
         let image = DataManager.sharedInstance.findImage(id)
         myImage.image = image
+        
       //  myImage.image = DataManager.sharedInstance.findImage(DataManager.sharedInstance.myUser.userID)
-        myUserName.text = "\(DataManager.sharedInstance.myUser.username)\né o seu username"
+        myUserName.text = "\(DataManager.sharedInstance.myUser.username)\nit's you username"
         let buttonContinue = UIBarButtonItem(title: "Update Username", style: .Plain, target: self, action: "continueAction")
         //self.navigationItem.rightBarButtonItem = buttonContinue
         myImage.layer.cornerRadius = 100.0
@@ -54,6 +58,16 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
         facebookLogoutButton.titleLabel!.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
         deleteAccountButton.tintColor = mainRed
         deleteAccountButton.titleLabel!.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
+        aboutButton.titleLabel!.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
+        aboutButton.tintColor = mainRed
+        
+        screenSize = self.view.frame.size.height
+        
+        if screenSize == 480 {
+            myPhotoHeightContraint.constant = 100
+            myImage.layer.cornerRadius = 50
+            
+        }
         
         
         let loggoutButton = UIBarButtonItem(title: "Logout", style: UIBarButtonItemStyle.Plain, target: self, action: "loggoutButton")
@@ -88,7 +102,7 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
                 let JSON = result
                 let dic = JSON as NSDictionary
                 if dic["error"] != nil {
-                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: dic["error"] as! String, button1: "Ok")
+                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: dic["error"] as! String, button1: "OK")
                     print("erro aqui")
                 }
                 else {

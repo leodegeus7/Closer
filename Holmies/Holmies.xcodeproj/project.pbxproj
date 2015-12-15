@@ -20,6 +20,7 @@
 		A731F55D1C10CAD700B5B55E /* compassViewBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A731F55C1C10CAD700B5B55E /* compassViewBackground.png */; };
 		A731F55F1C10CBCE00B5B55E /* whiteLine.png in Resources */ = {isa = PBXBuildFile; fileRef = A731F55E1C10CBCE00B5B55E /* whiteLine.png */; };
 		A73BE4CE1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */; };
+		A7567EA81C1B89BA004E7DF8 /* creditos.png in Resources */ = {isa = PBXBuildFile; fileRef = A7567EA71C1B89BA004E7DF8 /* creditos.png */; };
 		A759EA3F1C11F09A00BB8B37 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = A759EA3E1C11F09A00BB8B37 /* splash.png */; };
 		A760AAB01BFA457A00214F06 /* MarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A760AAAF1BFA457A00214F06 /* MarkerView.xib */; };
 		A760AAB21BFA46DC00214F06 /* pin2.png in Resources */ = {isa = PBXBuildFile; fileRef = A760AAB11BFA46DC00214F06 /* pin2.png */; };
@@ -258,6 +259,7 @@
 		A731F55C1C10CAD700B5B55E /* compassViewBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compassViewBackground.png; sourceTree = "<group>"; };
 		A731F55E1C10CBCE00B5B55E /* whiteLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteLine.png; sourceTree = "<group>"; };
 		A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveGroupTableViewCell.swift; sourceTree = "<group>"; };
+		A7567EA71C1B89BA004E7DF8 /* creditos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = creditos.png; sourceTree = "<group>"; };
 		A759EA3E1C11F09A00BB8B37 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
 		A760AAAF1BFA457A00214F06 /* MarkerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarkerView.xib; sourceTree = "<group>"; };
 		A760AAB11BFA46DC00214F06 /* pin2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin2.png; sourceTree = "<group>"; };
@@ -600,6 +602,7 @@
 		A7D2A4B11BCE90EF006A55D1 /* Design */ = {
 			isa = PBXGroup;
 			children = (
+				A7567EA71C1B89BA004E7DF8 /* creditos.png */,
 				A731F55C1C10CAD700B5B55E /* compassViewBackground.png */,
 				A7AB23BC1C17502500E3DC1C /* backArrowFlipped.png */,
 				A7AB23BE1C17516C00E3DC1C /* backArrowInversed.png */,
@@ -960,7 +963,7 @@
 					};
 					CD6BAA4E1B98D946008614B0 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 6D9CUA9M4U;
+						DevelopmentTeam = H7C2V5GHBN;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -1104,6 +1107,7 @@
 				A7ACC01B1C11F4F80090B6FA /* Launch Screen2.storyboard in Resources */,
 				A7C37FAE1BE00A8500FEE8D2 /* SF-Compact-Display-Ultralight.otf in Resources */,
 				A7C37FC01BE00A8500FEE8D2 /* SF-UI-Text-MediumItalic.otf in Resources */,
+				A7567EA81C1B89BA004E7DF8 /* creditos.png in Resources */,
 				A7ACC01F1C11F7300090B6FA /* squareCompass4.png in Resources */,
 				CD0561D71BE9452E00130656 /* Red_Arrow_Right 3.png in Resources */,
 				AFDBFB101C1B465200B555CB /* whiteChar2.png in Resources */,
