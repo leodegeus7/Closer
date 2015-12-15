@@ -323,37 +323,23 @@ class CirclesTableViewController: UITableViewController {
                     })
                     
 
-                
-                
-                
-                
-                DataManager.sharedInstance.requestSharerInGroups()
-                let friends = DataManager.sharedInstance.loadJsonFromDocuments("friends")
-                for index in DataManager.sharedInstance.allFriends {
-                    if !(index.facebookID == nil) && !(index.userID == nil) {
-                        let image = DataManager.sharedInstance.getProfPic(index.facebookID, serverId: index.userID)
-                        DataManager.sharedInstance.saveImage(image, id: index.userID)
+                    
+                    
+                    
+                    
+                    DataManager.sharedInstance.requestSharerInGroups()
+                    let friends = DataManager.sharedInstance.loadJsonFromDocuments("friends")
+                    for index in DataManager.sharedInstance.allFriends {
+                        if !(index.facebookID == nil) && !(index.userID == nil) {
+                            let image = DataManager.sharedInstance.getProfPic(index.facebookID, serverId: index.userID)
+                            DataManager.sharedInstance.saveImage(image, id: index.userID)
+                        }
                     }
-                }
-                if DataManager.sharedInstance.myUser.facebookID != nil {
-                    let myPhoto = DataManager.sharedInstance.getProfPic(DataManager.sharedInstance.myUser.facebookID, serverId: DataManager.sharedInstance.myUser.userID)
-                    DataManager.sharedInstance.saveImage(myPhoto, id: DataManager.sharedInstance.myUser.userID)
-                }
-                DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(friends)
-                
-                if DataManager.sharedInstance.allGroup.count < 1 {
-                    self.noGroups = true
-                }
-                else {
-                    self.noGroups = false
-                }
-                
-                DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
-                    print("\(result)")
-                    self.tableView.reloadData()
-                    if self.refreshControl?.refreshing == true {
-                        self.refreshControl?.endRefreshing()
+                    if DataManager.sharedInstance.myUser.facebookID != nil {
+                        let myPhoto = DataManager.sharedInstance.getProfPic(DataManager.sharedInstance.myUser.facebookID, serverId: DataManager.sharedInstance.myUser.userID)
+                        DataManager.sharedInstance.saveImage(myPhoto, id: DataManager.sharedInstance.myUser.userID)
                     }
+                    DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(friends)
                     DataManager.sharedInstance.didUpdateCharms = true
                     NSNotificationCenter.defaultCenter().postNotificationName("delegateUpdate", object: nil)
                     DataManager.sharedInstance.finishedAllRequest = true
