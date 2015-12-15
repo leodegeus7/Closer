@@ -145,7 +145,7 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
                 
                 
                 let groupName = DataManager.sharedInstance.selectedGroup.name
-                let alert = UIAlertController(title: "Attention", message: "Nao há ninguem aceito no grupo: \(groupName). Peça a alguns de seus amigos para aceitarem em seus dispositivos", preferredStyle: UIAlertControllerStyle.Alert)
+                let alert = UIAlertController(title: "Attention", message: "There are no friends sharing in \(groupName)", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                     self.performSegueWithIdentifier("editGroup", sender: self)
                 }))

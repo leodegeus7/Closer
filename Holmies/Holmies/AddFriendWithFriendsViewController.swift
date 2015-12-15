@@ -181,10 +181,10 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
         
         if (addFriendTextField.text == "") {
             DataManager.sharedInstance.shakeTextField(addFriendTextField)
-            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Digite um username de amigo para adicionar", button1: "OK")
+            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Friend", message: "Insert your friend's username", button1: "OK")
         } else {
             if addFriendTextField.text == DataManager.sharedInstance.myUser.username {
-                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Naoo add", message: "Esse username é você", button1: "Ok")
+                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: "This is your own username", button1: "Ok")
             }
             else {
                 addFriend({ (result) -> Void in
@@ -224,7 +224,7 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
                 var friendAlreadyExist = false
                 for friend in DataManager.sharedInstance.allFriends {
                     if friend.userID == newUser.userID {
-                        DataManager.sharedInstance.createSimpleUIAlert(self, title: "User ja amigo", message: "add outro user", button1: "Ok")
+                        DataManager.sharedInstance.createSimpleUIAlert(self, title: "Friend", message: "\(friend.name) is already your friend", button1: "Ok")
                         friendAlreadyExist = true
                     }
                     
@@ -234,7 +234,7 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
                     DataManager.sharedInstance.allFriends.append(newUser)
                     //                    let friends = DataManager.sharedInstance.allFriends
                     
-                    let alertController = UIAlertController(title: "Sucess", message: "Friend \(newUser.username)", preferredStyle: .Alert)
+                    let alertController = UIAlertController(title: "Success", message: "\(newUser.username) is your friend now", preferredStyle: .Alert)
                     let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
                         UIAlertAction in
                     }
@@ -260,7 +260,7 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
         if editingStyle == UITableViewCellEditingStyle.Delete {
             
             
-            let alert = UIAlertController(title: "Attention", message: "\(DataManager.sharedInstance.allFriends[indexPath.row].username) will be delete", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Attention", message: "\(DataManager.sharedInstance.allFriends[indexPath.row].username) will be removed from your friends. Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Delete Friend", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                 DataManager.sharedInstance.allFriends.removeAtIndex(indexPath.row)
                 let userdic = DataManager.sharedInstance.convertUserToNSDic(DataManager.sharedInstance.allFriends)

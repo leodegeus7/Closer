@@ -121,7 +121,7 @@ class AddFriendTableViewController: UITableViewController, UITextFieldDelegate {
                 var friendAlreadyExist = false
                 for friend in DataManager.sharedInstance.allFriends {
                     if friend.userID == newUser.userID {
-                        DataManager.sharedInstance.createSimpleUIAlert(self, title: "User ja amigo", message: "add outro user", button1: "Ok")
+                        DataManager.sharedInstance.createSimpleUIAlert(self, title: "Friend", message: "\(friend.name) is already your friend", button1: "Ok")
                         friendAlreadyExist = true
                     }
                     
@@ -131,7 +131,7 @@ class AddFriendTableViewController: UITableViewController, UITextFieldDelegate {
                     DataManager.sharedInstance.allFriends.append(newUser)
 //                    let friends = DataManager.sharedInstance.allFriends
                     
-                    let alertController = UIAlertController(title: "Sucess", message: "Friend \(newUser.username)", preferredStyle: .Alert)
+                    let alertController = UIAlertController(title: "Success", message: "\(newUser.username) is your friend now", preferredStyle: .Alert)
                     let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
                         UIAlertAction in
                         self.navigationController!.popViewControllerAnimated(true)
@@ -156,10 +156,10 @@ class AddFriendTableViewController: UITableViewController, UITextFieldDelegate {
     func testUsername() {
 
         if (username == "") {
-            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Naoo add", message: "Insira um username", button1: "Ok")
+            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: "Please insert an username", button1: "Ok")
         } else {
             if username == DataManager.sharedInstance.myUser.username {
-                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Naoo add", message: "Esse username é você", button1: "Ok")
+                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: "This is your own username", button1: "Ok")
             }
             else {
                 addFriend({ (result) -> Void in

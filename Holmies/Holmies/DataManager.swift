@@ -44,6 +44,8 @@ class DataManager {
     
     var activeMap = GMSMapView?()
     
+    var didUpdateCharms = false
+    var isUpdating = false
     
     var finishedAllRequest = false
     
@@ -302,12 +304,12 @@ class DataManager {
         }
         else {
             if id == DataManager.sharedInstance.myUser.userID {
-                return UIImage(named: "whiteChar.png")!
+                return UIImage(named: "whiteChar2.png")!
             }
             
             else {
             
-            return UIImage(named: "mainRedChar.png")!
+            return UIImage(named: "mainRedChar2.png")!
             }
         }
         
@@ -620,7 +622,7 @@ class DataManager {
                     marker.icon = resizedImage
                 }
                 else {
-                    createSimpleUIAlert(windows, title: "Attention", message: "\(user.name) not found", button1: "Ok")
+                    createSimpleUIAlert(windows, title: "Not Found", message: "\(user.name) couldn't be located", button1: "Ok")
                 }
                 }
             }
@@ -807,14 +809,14 @@ class DataManager {
     
     func destroyGroupWithNotification(groupObject:Group,view:UIViewController) {
         let idGroup = groupObject.id
-        createSimpleUIAlert(view, title: "Deletado", message: "O grupo \(groupObject.name) foi deletado", button1: "Ok")
+        createSimpleUIAlert(view, title: "Group Destroy", message: "The group \(groupObject.name) has been destroyed", button1: "Ok")
         http.destroyGroupWithID(idGroup) { (result) -> Void in
             print("apagado grupo \(idGroup)")
         }
     }
     
     func destroySharerWithNotification(group:Group,view:UIViewController) {
-        createSimpleUIAlert(view, title: "Deletado", message: "Você foi deleteado do grupo \(group.name)", button1: "Ok")
+        createSimpleUIAlert(view, title: "Removed", message: "You're not sharing with \(group.name) anymore", button1: "Ok")
         self.http.destroySharerWithSharerType(.userToGroup, ownerID: DataManager.sharedInstance.myUser.userID, receiverID: group.id, completion: { (result) -> Void in
             
         })
@@ -1200,6 +1202,7 @@ class DataManager {
                 }
             }
         }
+        DataManager.sharedInstance.didUpdateCharms = true
         return charmsArray
     }
     

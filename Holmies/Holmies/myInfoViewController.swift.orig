@@ -166,6 +166,7 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
         
         
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (UIAlertAction)in
+<<<<<<< HEAD
             //DataManager.sharedInstance.createSimpleUIAlert(self, title: "Attention", message: "Conta deslogada", button1: "Ok")
             DataManager.sharedInstance.locationManager = nil
 
@@ -176,7 +177,9 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
             DataManager.sharedInstance.appIsActive = false
             DataManager.sharedInstance.eraseData()
                     DataManager.sharedInstance.myUser = User()
+=======
             DataManager.sharedInstance.createSimpleUIAlert(self, title: "Logout", message: "Successfully logged out", button1: "Ok")
+>>>>>>> 7c3481c01bf7b8fbd0617aa65d2125bcdfd5622c
             
            
             
@@ -214,6 +217,30 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
                     DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: dic["error"] as! String, button1: "Ok")
                 }
                 else {
+<<<<<<< HEAD
+=======
+                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Attention", message: "The account \(DataManager.sharedInstance.myUser.username) has been successfully destroyed", button1: "Ok")
+                    
+                    let documentsDirectory = DataManager.sharedInstance.findDocumentsDirectory()
+                    let path = documentsDirectory + "/id.txt"
+                    let path1 = documentsDirectory + "/groups.json"
+                    let path2 = documentsDirectory + "/myInfo.json"
+                    let path3 = documentsDirectory + "/myInfolog.json"
+                    let path4 = documentsDirectory + "/receiverSharers.json"
+                    let path5 = documentsDirectory + "/sharers.json"
+                    let path6 = documentsDirectory + "/friends.json"
+
+                    let fileManager = NSFileManager.defaultManager()
+                    do {try fileManager.removeItemAtPath(path)} catch {}
+                    do {try fileManager.removeItemAtPath(path1)} catch {}
+                    do {try fileManager.removeItemAtPath(path2)} catch {}
+                    do {try fileManager.removeItemAtPath(path3)} catch {}
+                    do {try fileManager.removeItemAtPath(path4)} catch {}
+                    do {try fileManager.removeItemAtPath(path5)} catch {}
+                    do {try fileManager.removeItemAtPath(path6)} catch {}
+                    NSThread.mainThread()
+                    exit(0)
+>>>>>>> 7c3481c01bf7b8fbd0617aa65d2125bcdfd5622c
 
                     
                     

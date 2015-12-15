@@ -20,6 +20,7 @@ class CirclesTableViewController: UITableViewController {
 
     var imageX = 0.0
     
+    var lastSelectedIndex = 0
     
     @IBOutlet var shareTypeSegmentedControl: UISegmentedControl!
     
@@ -137,13 +138,13 @@ class CirclesTableViewController: UITableViewController {
             if let fbId = DataManager.sharedInstance.myUser.facebookID {
                 print(fbId)
                 
-                let alert = UIAlertController(title: "Attention", message: "We need to login again on your Facebook Account to sync", preferredStyle: UIAlertControllerStyle.Alert)
+                let alert = UIAlertController(title: "Facebook", message: "We need to link your Facebook Account again", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Login", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                     self.getFBUserData({ (result) -> Void in
                         let newFBID = result as String
                             print(newFBID)
 //                        if newFBID == fbId {
-                            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Dados do facebook resgatados com sucesso", button1: "Ok")
+                            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Success", message: "Successfully connected to your Facebook Account", button1: "Ok")
                             DataManager.sharedInstance.requestFacebook(self,completion: { (result) -> Void in
                             })
 //                        }
@@ -305,7 +306,7 @@ class CirclesTableViewController: UITableViewController {
     func reloadData() {
         if DataManager.sharedInstance.appIsActive {
             self.tableView.reloadData()
-            NSNotificationCenter.defaultCenter().postNotificationName("delegateUpdate", object: nil)
+            DataManager.sharedInstance.isUpdating = true
             if DataManager.sharedInstance.testIfFileExistInDocuments("/\(DataManager.sharedInstance.myUser.userID).jpg") {
                 let id = DataManager.sharedInstance.myUser.userID
                 let image = DataManager.sharedInstance.findImage(id)
@@ -347,15 +348,20 @@ class CirclesTableViewController: UITableViewController {
                         self.noGroups = false
                     }
                     
-                    DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
-                        print("\(result)")
-                        self.tableView.reloadData()
-                        if self.refreshControl?.refreshing == true {
-                            self.refreshControl?.endRefreshing()
-                        }
-                        DataManager.sharedInstance.finishedAllRequest = true
-                        
-                    })
+					DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
+                    	print("\(result)")
+                    	self.tableView.reloadData()
+                    	if self.refreshControl?.refreshing == true {
+                        	self.refreshControl?.endRefreshing()
+                        	if self.shareTypeSegmentedControl.selectedSegmentIndex == 1 {
+                            	DataManager.sharedInstance.didUpdateCharms = true
+                            	NSNotificationCenter.defaultCenter().postNotificationName("delegateUpdate", object: nil)
+                        	}
+                    	}
+                    	DataManager.sharedInstance.finishedAllRequest = true
+                    	DataManager.sharedInstance.isUpdating = false
+                    
+                	})
                     
                     
                 }
@@ -435,8 +441,17 @@ class CirclesTableViewController: UITableViewController {
                     let numbersOfCellsInScrol = 6.0
                     let scrollViewSizeHeight = Double(cellActive.scrollViewFriends.frame.size.height)
                     let scrollViewSizeWidth = Double(cellActive.scrollViewFriends.frame.size.width)
-                    let sizeOfImageHeight = scrollViewSizeHeight
-                    let sizeOfImageWidth = (scrollViewSizeWidth/numbersOfCellsInScrol) - spaceInCell/2
+                    var sizeOfImageHeight = Double()
+                    var sizeOfImageWidth = Double()
+                    
+                    if (scrollViewSizeWidth/numbersOfCellsInScrol) - spaceInCell/2 < scrollViewSizeHeight {
+                        sizeOfImageWidth = (scrollViewSizeWidth/numbersOfCellsInScrol) - spaceInCell/2
+                    }
+                    else {
+                        sizeOfImageWidth = scrollViewSizeWidth
+                    }
+                    
+                    sizeOfImageHeight = sizeOfImageWidth
                     
                     
                     
@@ -962,7 +977,7 @@ class CirclesTableViewController: UITableViewController {
                 
                 let deleteGroup = UITableViewRowAction(style: .Destructive, title: "Delete", handler: { (rowAction:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
                     let groupName = DataManager.sharedInstance.allGroup[indexPath.row].name
-                    let alert = UIAlertController(title: "Attention", message: "\(groupName) will be delete", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alert = UIAlertController(title: "Attention", message: "\(groupName) will be removed. Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "Delete Group", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                         //DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
                         DataManager.sharedInstance.destroySharerWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
@@ -1005,7 +1020,7 @@ class CirclesTableViewController: UITableViewController {
             let deleteGroup = UITableViewRowAction(style: .Destructive, title: "Delete", handler: {(rowAction:UITableViewRowAction, indexPath: NSIndexPath) -> Void in
                 
                 let groupName = DataManager.sharedInstance.allGroup[indexPath.row].name
-                let alert = UIAlertController(title: "Attention", message: "\(groupName) will be delete", preferredStyle: UIAlertControllerStyle.Alert)
+                let alert = UIAlertController(title: "Attention", message: "\(groupName) will be removed. Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Delete Group", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                     //DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
                     DataManager.sharedInstance.destroySharerWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
@@ -1042,7 +1057,13 @@ class CirclesTableViewController: UITableViewController {
 
     
     @IBAction func segmentedControlDidChangeValue(sender: AnyObject) {
-        self.refreshData()
+        if !DataManager.sharedInstance.isUpdating {
+            self.refreshData()
+            self.lastSelectedIndex = shareTypeSegmentedControl.selectedSegmentIndex
+        }
+        else {
+            shareTypeSegmentedControl.selectedSegmentIndex = lastSelectedIndex
+        }
     }
     
     func charmAccepted(notification: NSNotification) {

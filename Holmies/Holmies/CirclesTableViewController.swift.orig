@@ -16,18 +16,24 @@ class CirclesTableViewController: UITableViewController {
     let http = HTTPHelper()
     let lightBlue:UIColor = UIColor(red: 61.0/255.0, green: 210.0/255.0, blue: 228.0/255.0, alpha: 1)
     let mainRed: UIColor = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
+    let lightGray = UIColor(red: 170.0/255.0, green: 170.0/255.0, blue: 170.0/255.0, alpha: 1.0)
+
     var imageX = 0.0
     
+    var lastSelectedIndex = 0
     
     @IBOutlet var shareTypeSegmentedControl: UISegmentedControl!
     
-    
-    
+
+    let app = UIApplication.sharedApplication()
     
     //view do user
     @IBOutlet weak var imageUserInView: UIImageView!
     @IBOutlet weak var usernameInView: UILabel!
     @IBOutlet weak var userView: UIView!
+    @IBAction func buttonToEditGroup(sender: AnyObject) {
+        performSegueWithIdentifier("myUserInfo", sender: self)
+    }
     
     //variaveis controle de sem grupo
     var noGroups = false
@@ -36,48 +42,68 @@ class CirclesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        reloadData()
+        DataManager.sharedInstance.appIsActive = true
+        print("PRINT PARA VER SE ESTA EMPLIHANDO MUITAS TELAS")
         
+        DataManager.sharedInstance.activeView = "circles"
+        
+        reloadData()
+       let screenSize = self.view.frame.size.width
+        let peopleButton = DataManager.sharedInstance.imageResize(UIImage(named: "people32.png")!, sizeChange: CGSizeMake(46 * 0.6 * screenSize / 414, 34 * 0.6 * screenSize / 414))
+        
+        
+        
+        self.navigationItem.leftBarButtonItem?.image = peopleButton
+       self.navigationItem.leftBarButtonItem?.title = ""
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmAccepted:", name: "charmAccepted", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmReceived:", name: "charmReceived", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmRejected:", name: "charmRejected", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmExpired:", name: "charmExpired", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmFound:", name: "charmFound", object: nil)
+        
 
         
-                for family: String in UIFont.familyNames()
-                {
-                    print("\(family)")
-                    for names: String in UIFont.fontNamesForFamilyName(family)
-                    {
-                        print("== \(names)")
-                    }
-                }
         self.navigationController?.navigationBar.translucent = false
         self.navigationController?.navigationBar.barStyle = .Black
         self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+//                for family: String in UIFont.familyNames()
+//                {
+//                    print("\(family)")
+//                    for names: String in UIFont.fontNamesForFamilyName(family)
+//                    {
+//                        print("== \(names)")
+//                    }
+//                }
         
+        if screenSize == 480 {
+            
+        }
         
+        self.refreshControl?.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
 
         
         let refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refresh.addTarget(self,action:"refreshData",forControlEvents:.ValueChanged)
         self.refreshControl = refresh
+        
+        
         navigationBarGradient()
         //        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         //        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdated:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
         
         
-        
+        userView.layer.borderWidth = 0
         
         DataManager.sharedInstance.selectedFriends.removeAll()
         
+        if refreshControl?.refreshing == false {
         
+            self.refreshControl?.beginRefreshing()
+        }
+
         
-        self.refreshControl?.beginRefreshing()
-        
-        
-        
-        
-        let timer = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("reloadData"), userInfo: nil, repeats: true)
+        DataManager.sharedInstance.timer2 = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("reloadData"), userInfo: nil, repeats: true)
         
         
         
@@ -112,13 +138,13 @@ class CirclesTableViewController: UITableViewController {
             if let fbId = DataManager.sharedInstance.myUser.facebookID {
                 print(fbId)
                 
-                let alert = UIAlertController(title: "Attention", message: "We need to login again on your Facebook Account to sync", preferredStyle: UIAlertControllerStyle.Alert)
+                let alert = UIAlertController(title: "Facebook", message: "We need to link your Facebook Account again", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Login", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                     self.getFBUserData({ (result) -> Void in
                         let newFBID = result as String
                             print(newFBID)
 //                        if newFBID == fbId {
-                            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Atenção", message: "Dados do facebook resgatados com sucesso", button1: "Ok")
+                            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Success", message: "Successfully connected to your Facebook Account", button1: "Ok")
                             DataManager.sharedInstance.requestFacebook(self,completion: { (result) -> Void in
                             })
 //                        }
@@ -167,22 +193,27 @@ class CirclesTableViewController: UITableViewController {
         DataManager.sharedInstance.linkGroupAndUserToSharer { (result) -> Void in
             self.tableView.reloadData()
             
-            
+        
             
             
         }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "existGroups", name:"ExistGroup", object: nil)
-
+        DataManager.sharedInstance.timer3 = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "UpdateTableView", userInfo: nil, repeats: true)
         
     }
     
     override func viewDidDisappear(animated: Bool) {
         //NSNotificationCenter.defaultCenter().removeObserver(self, name: "ExistGroup", object: nil)
+        DataManager.sharedInstance.timer3.invalidate()
     }
     
     func existGroups() {
         noGroups = false
+    }
+    
+    func UpdateTableView() {
+        tableView.reloadData()
     }
 
     
@@ -235,7 +266,7 @@ class CirclesTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if DataManager.sharedInstance.allGroup.count < 1 {
+        if DataManager.sharedInstance.allGroup.count == 0 {
             self.noGroups = true
         }
         else {
@@ -249,6 +280,9 @@ class CirclesTableViewController: UITableViewController {
             return DataManager.sharedInstance.allGroup.count
         }
         else {
+            if DataManager.sharedInstance.myCharms.count == 0 {
+                return 1
+            }
             return DataManager.sharedInstance.myCharms.count
         }
     }
@@ -258,6 +292,11 @@ class CirclesTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         DataManager.sharedInstance.selectedFriends.removeAll()
         reloadData()
+        
+        let navigationBarBackgroundImage = DataManager.sharedInstance.imageResize(UIImage(named: "topNavigationBackground.png")!, sizeChange: CGSizeMake((self.navigationController?.navigationBar.frame.size.width)!, ((self.navigationController?.navigationBar.frame.height)! + app.statusBarFrame.size.height)))
+        
+        self.navigationController?.navigationBar.setBackgroundImage(navigationBarBackgroundImage, forBarMetrics: .Default)
+        
     }
     
     func refreshData() {
@@ -265,58 +304,73 @@ class CirclesTableViewController: UITableViewController {
     }
     
     func reloadData() {
-
-        self.tableView.reloadData()
-        DataManager.sharedInstance.requestSharers { (result) -> Void in
-            
-            
-            DataManager.sharedInstance.requestGroups { (result) -> Void in
+        if DataManager.sharedInstance.appIsActive {
+            self.tableView.reloadData()
+            DataManager.sharedInstance.isUpdating = true
+            if DataManager.sharedInstance.testIfFileExistInDocuments("/\(DataManager.sharedInstance.myUser.userID).jpg") {
+                let id = DataManager.sharedInstance.myUser.userID
+                let image = DataManager.sharedInstance.findImage(id)
+                imageUserInView.image = image
+            }
+            DataManager.sharedInstance.requestSharers { (result) -> Void in
                 
-                DataManager.sharedInstance.allGroup = DataManager.sharedInstance.convertJsonToGroup(result)
                 
-                DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
-                    print("\(result)")
-                    //                    self.tableView.reloadData()
-                })
-                
-                DataManager.sharedInstance.requestSharerInGroups()
-                
-                let friends = DataManager.sharedInstance.loadJsonFromDocuments("friends")
-                
-                if DataManager.sharedInstance.myUser.facebookID != nil {
-                    let myPhoto = DataManager.sharedInstance.getProfPic(DataManager.sharedInstance.myUser.facebookID, serverId: DataManager.sharedInstance.myUser.userID)
-                    DataManager.sharedInstance.saveImage(myPhoto, id: DataManager.sharedInstance.myUser.userID)
+                DataManager.sharedInstance.requestGroups { (result) -> Void in
                     
+                    DataManager.sharedInstance.allGroup = DataManager.sharedInstance.convertJsonToGroup(result)
+                    
+                    DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
+                    })
+                    
+
+                    
+                    
+                    
+                    
+                    DataManager.sharedInstance.requestSharerInGroups()
+                    let friends = DataManager.sharedInstance.loadJsonFromDocuments("friends")
                     for index in DataManager.sharedInstance.allFriends {
-                        
-                        
                         if !(index.facebookID == nil) && !(index.userID == nil) {
                             let image = DataManager.sharedInstance.getProfPic(index.facebookID, serverId: index.userID)
                             DataManager.sharedInstance.saveImage(image, id: index.userID)
                         }
                     }
+                    if DataManager.sharedInstance.myUser.facebookID != nil {
+                        let myPhoto = DataManager.sharedInstance.getProfPic(DataManager.sharedInstance.myUser.facebookID, serverId: DataManager.sharedInstance.myUser.userID)
+                        DataManager.sharedInstance.saveImage(myPhoto, id: DataManager.sharedInstance.myUser.userID)
+                    }
+                    DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(friends)
+                    
+                    if DataManager.sharedInstance.allGroup.count < 1 {
+                        self.noGroups = true
+                    }
+                    else {
+                        self.noGroups = false
+                    }
+                    
+					DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
+                    	print("\(result)")
+                    	self.tableView.reloadData()
+                    	if self.refreshControl?.refreshing == true {
+                        	self.refreshControl?.endRefreshing()
+                        	if self.shareTypeSegmentedControl.selectedSegmentIndex == 1 {
+                            	DataManager.sharedInstance.didUpdateCharms = true
+                            	NSNotificationCenter.defaultCenter().postNotificationName("delegateUpdate", object: nil)
+                        	}
+                    	}
+                    	DataManager.sharedInstance.finishedAllRequest = true
+                    	DataManager.sharedInstance.isUpdating = false
+                    
+                	})
+                    
                     
                 }
-                DataManager.sharedInstance.allFriends = DataManager.sharedInstance.convertJsonToUser(friends)
-
-                if DataManager.sharedInstance.allGroup.count < 1 {
-                    self.noGroups = true
-                }
-                else {
-                    self.noGroups = false
-                }
-                DataManager.sharedInstance.linkGroupAndUserToSharer({ (result) -> Void in
-                    print("\(result)")
-                    self.tableView.reloadData()
-                    self.refreshControl!.endRefreshing()
-                    DataManager.sharedInstance.finishedAllRequest = true
-                    
-                })
-
-                
             }
+            DataManager.sharedInstance.saveMyInfo()
         }
-        DataManager.sharedInstance.saveMyInfo()
+        else {
+            DataManager.sharedInstance.eraseData()
+        }
     }
     
     
@@ -336,15 +390,17 @@ class CirclesTableViewController: UITableViewController {
                 
                 let emptyGroup = tableView.dequeueReusableCellWithIdentifier("noGroup", forIndexPath: indexPath) as! EmptyGroupTableViewCell
                 self.tableView.rowHeight = 100
-                emptyGroup.imageEmpty.layer.cornerRadius = emptyGroup.imageEmpty.frame.size.width
-                emptyGroup.imageEmpty.layer.borderColor = lightBlue.CGColor
                 emptyGroup.imageEmpty.layer.borderWidth = 2.0
+                emptyGroup.imageEmpty.layer.cornerRadius = 8 / 414 * self.view.frame.size.width
+                emptyGroup.imageEmpty.layer.borderColor = lightBlue.CGColor
+
                 emptyGroup.firstLabel.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
                 emptyGroup.firstLabel.textColor = mainRed
                 emptyGroup.secondLabel.font = UIFont(name: "SFCompactDisplay-Light", size: 17)
                 emptyGroup.secondLabel.textColor = UIColor.blackColor()
-                    
-                
+                emptyGroup.firstLabel.text = "No groups"
+                emptyGroup.secondLabel.text = "Click here to create a group"
+                emptyGroup.tag = 999
                 return emptyGroup
                 
             }
@@ -385,8 +441,17 @@ class CirclesTableViewController: UITableViewController {
                     let numbersOfCellsInScrol = 6.0
                     let scrollViewSizeHeight = Double(cellActive.scrollViewFriends.frame.size.height)
                     let scrollViewSizeWidth = Double(cellActive.scrollViewFriends.frame.size.width)
-                    let sizeOfImageHeight = scrollViewSizeHeight
-                    let sizeOfImageWidth = (scrollViewSizeWidth/numbersOfCellsInScrol) - spaceInCell/2
+                    var sizeOfImageHeight = Double()
+                    var sizeOfImageWidth = Double()
+                    
+                    if (scrollViewSizeWidth/numbersOfCellsInScrol) - spaceInCell/2 < scrollViewSizeHeight {
+                        sizeOfImageWidth = (scrollViewSizeWidth/numbersOfCellsInScrol) - spaceInCell/2
+                    }
+                    else {
+                        sizeOfImageWidth = scrollViewSizeWidth
+                    }
+                    
+                    sizeOfImageHeight = sizeOfImageWidth
                     
                     
                     
@@ -398,31 +463,39 @@ class CirclesTableViewController: UITableViewController {
                     }
                     
                     if let _ = DataManager.sharedInstance.allGroup[indexPath.row].users {
+                        var  i = 0
                         for user in DataManager.sharedInstance.allGroup[indexPath.row].users {
-                            let imageName = DataManager.sharedInstance.findImage(user.userID)
+                            let userid = user.userID
+                            let imageName = DataManager.sharedInstance.findImage(userid)
                             
                             let status = DataManager.sharedInstance.findStatusOfUserInGroup(user.userID, groupId: DataManager.sharedInstance.allGroup[indexPath.row].id)
                             
-                            let imageView = UIImageView(image: imageName)
+                          
+                            let imageView = UIImageView(frame: CGRect(x: imageX, y: 0, width: sizeOfImageWidth, height: sizeOfImageHeight))
+                            imageView.image = imageName
                             
+                            imageView.frame = CGRect(x: imageX, y: 0, width: sizeOfImageWidth, height: sizeOfImageHeight)
                             imageView.layer.cornerRadius = 22.85 / 414 * self.view.frame.size.width
-                            
+                        
                             print("tamanho da tela: \(self.view.frame.size.width)")
                             
                             if status == "accepted" {
                                 imageView.layer.borderWidth = 2.0
                             } else {
                                 imageView.layer.borderWidth = 0
+                                imageView.alpha = 0.6
+
                             }
                             
                             imageView.layer.borderColor = mainRed.CGColor
                             imageView.clipsToBounds = true
                             
-                            imageView.frame = CGRect(x: imageX, y: 0, width: sizeOfImageWidth, height: sizeOfImageHeight)
+
+                            if i < 5 {
                             
-                            
-                            cellActive.scrollViewFriends.addSubview(imageView)
-                            imageX += sizeOfImageWidth + spaceInCell
+                                cellActive.scrollViewFriends.addSubview(imageView)
+                                imageX += sizeOfImageWidth + spaceInCell}
+                            i++
                             
                         }
                     }
@@ -481,24 +554,15 @@ class CirclesTableViewController: UITableViewController {
                                     cellActive.numberLabel.text = "\(newDurationDays)"
                                     cellActive.timeLabel.text = "days"
                                 }
-                                
-                                
+                        
                             } else {
                                 cellActive.numberLabel.text = "∞"
                                 cellActive.timeLabel.text = "days"
                             }
-                            
-                            
-                            
-                            //                    var durationHours = Int(duration!/3600)
-                            //                    durationHours++
-                            //                    cellActive.numberLabel.text = "\(durationHours)"
+                    
                         }
                         
                     }
-                    
-                    
-                    
                     
                     return cellActive
                     
@@ -513,8 +577,7 @@ class CirclesTableViewController: UITableViewController {
             
             cellPendent.timeLabel.text = ""
             
-            //let groups = DataManager.sharedInstance.allGroup
-            
+
             
             let createdHour = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
             let dateFormatter = NSDateFormatter()
@@ -537,8 +600,7 @@ class CirclesTableViewController: UITableViewController {
                     if duration < 0 {
                         cellPendent.numberLabel.text = "0"
                         cellPendent.timeLabel.text = "expired"
-                        //DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
-                        
+
                     }
                     else if duration <= 3600 {
                         let newDurationMin = Int(duration/60)
@@ -611,15 +673,39 @@ class CirclesTableViewController: UITableViewController {
             }
             return cellPendent
             
-            //        cell.groupName.text = DataManager.sharedInstance.allGroup[indexPath.row].name
-            //        cell.idGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].id
-            //        cell.createAtGroup.text = DataManager.sharedInstance.allGroup[indexPath.row].createdAt
-            //cell.collectionView.numberOfItemsInSection()
+
             
         }
         else {
+            
+            
+            
+            if DataManager.sharedInstance.myCharms.count == 0 {
+                let emptyGroup = tableView.dequeueReusableCellWithIdentifier("noGroup", forIndexPath: indexPath) as! EmptyGroupTableViewCell
+                self.tableView.rowHeight = 100
+                emptyGroup.imageEmpty.layer.cornerRadius = emptyGroup.imageEmpty.frame.size.width / 2
+                emptyGroup.imageEmpty.layer.borderColor = lightBlue.CGColor
+                emptyGroup.imageEmpty.layer.borderWidth = 2.0
+                emptyGroup.firstLabel.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
+                emptyGroup.firstLabel.textColor = mainRed
+                emptyGroup.firstLabel.text = "No whistle"
+                emptyGroup.secondLabel.font = UIFont(name: "SFCompactDisplay-Light", size: 17)
+                emptyGroup.secondLabel.textColor = UIColor.blackColor()
+                emptyGroup.secondLabel.text = "Click here to send a whistle"
+                emptyGroup.tag = 998
+                
+                
+                return emptyGroup
+            }
+            
+            
+            
+            
+            
+            
+            
             let charmCell = tableView.dequeueReusableCellWithIdentifier("charmCell", forIndexPath: indexPath) as! CharmTableViewCell
-            self.tableView.rowHeight = 200
+            self.tableView.rowHeight = 100
 
             let actualCharm = DataManager.sharedInstance.myCharms[indexPath.row]
             let actualFriend = actualCharm.friend
@@ -628,70 +714,100 @@ class CirclesTableViewController: UITableViewController {
             charmCell.nameLabel.text = actualFriend.name
             let imageName = DataManager.sharedInstance.findImage(actualFriend.userID)
             
+            charmCell.userPictureImageView.layer.cornerRadius = charmCell.userPictureImageView.frame.size.width / 2
+            charmCell.userPictureImageView.layer.borderColor = mainRed.CGColor
+            charmCell.userPictureImageView.layer.borderWidth = 3
+            charmCell.userPictureImageView.clipsToBounds = true
+            charmCell.userPictureImageView.image = imageName
             
             
-            let imageView = UIImageView(image: imageName)
             
-            imageView.layer.cornerRadius = 20.0
-            //            imageView.layer.borderColor = mainRed.CGColor
-            //            imageView.layer.borderWidth = 5.0
-            imageView.clipsToBounds = true
+//            let imageView = UIImageView(image: imageName)
+//            
+//            imageView.layer.cornerRadius = 20.0
+//            imageView.clipsToBounds = true
+//            imageView.frame.size = charmCell.userPictureImageView.frame.size
+//            imageView.frame.origin = CGPoint(x: 0, y: 0)
+//            
             
-            imageView.frame.size = charmCell.userPictureImageView.frame.size
-            imageView.frame.origin = CGPoint(x: 0, y: 0)
-            
-            
-            for subview in charmCell.userPictureImageView.subviews {
-                subview.removeFromSuperview()
-            }
-            charmCell.userPictureImageView.addSubview(imageView)
-            
-            let bgImageView = UIImageView()
-            bgImageView.layer.cornerRadius = 20.0
-            bgImageView.clipsToBounds = true
-            bgImageView.frame.size = charmCell.backgroundImage.frame.size
-            bgImageView.frame.origin = CGPoint(x: 0, y: 0)
-            bgImageView.layer.borderWidth = 2.0
-            
-            for subview in charmCell.backgroundImage.subviews {
-                subview.removeFromSuperview()
-            }
+//            for subview in charmCell.userPictureImageView.subviews {
+//                subview.removeFromSuperview()
+//            }
+//            charmCell.userPictureImageView.addSubview(imageView)
+//            
+//            let bgImageView = UIImageView()
+//            bgImageView.layer.borderColor = mainRed.CGColor
+//            bgImageView.layer.cornerRadius = 20.0
+//            bgImageView.clipsToBounds = true
+//            bgImageView.frame.size = charmCell.backgroundImage.frame.size
+//            bgImageView.frame.origin = CGPoint(x: 0, y: 0)
+//            bgImageView.layer.borderWidth = 2.0
+//            
+//            for subview in charmCell.backgroundImage.subviews {
+//                subview.removeFromSuperview()
+//            }
             
             let duration = DataManager.sharedInstance.verifySharerStatus(actualSharer)
-            
-            if duration < 0 {
-                actualSharer.status = "expired"
-                http.updateSharerWithID(actualSharer.id, until: nil, status: "expired", completion: { (result) -> Void in
-                    DataManager.sharedInstance.requestSharers({ (result) -> Void in
-                    })
-                })
-            }
+
             
             if actualSharer.status == "pending" {
-                bgImageView.layer.borderColor = mainRed.CGColor
-                if duration > 60 {
-                    charmCell.remainingTimeLabel.text = "\(duration!/60) minutos restantes"
+                
+                if actualSharer.owner == DataManager.sharedInstance.myUser.userID {
+                    charmCell.userPictureImageView.layer.borderColor = lightBlue.CGColor
+                    charmCell.nameLabel.textColor = lightBlue
+                    charmCell.nameLabel.font = UIFont(name: "SFUIDisplay-Medium", size: 20)
+                    charmCell.remainingTimeLabel.textColor = lightGray
+                    charmCell.remainingTimeLabel.font = UIFont(name: "SFCompactDisplay-Light", size: 17)
+                    // bgImageView.layer.borderColor = mainRed.CGColor
+                    if duration > 60 {
+                        if duration == 1 {
+                            charmCell.remainingTimeLabel.text = "\(duration!/60) minute remaining"
+
+                        }else {
+                        
+                        charmCell.remainingTimeLabel.text = "\(duration!/60) minutes remaining"
+                    }
+                        
+                    }
+                    else if duration <= 0 {
+                        charmCell.remainingTimeLabel.text = "Expired"
+                        actualSharer.status = "Expired"
+                        //NSNotificationCenter.defaultCenter().postNotificationName("delegateUpdate", object: nil)
+                        
+                    }
+                    else {
+                        charmCell.remainingTimeLabel.text = "\(duration!) seconds remaining"
+                    }
                 }
                 else {
-                    charmCell.remainingTimeLabel.text = "\(duration!) segundos restantes"
+                    charmCell.remainingTimeLabel.text = "Waiting for approval"
                 }
             }
             else if actualSharer.status == "active" || actualSharer.status == "accepted" {
-                charmCell.remainingTimeLabel.text = "Ativo"
+                charmCell.remainingTimeLabel.text = "Active"
+            }
+            else if actualSharer.status == "found"{
+                charmCell.remainingTimeLabel.text = "Found"
+                charmCell.userPictureImageView.layer.borderColor = mainRed.CGColor
+                charmCell.nameLabel.textColor = mainRed
+
+                //bgImageView.layer.borderColor = lightBlue.CGColor
+            }
+            else if actualSharer.status == "rejected"{
+                charmCell.remainingTimeLabel.text = "Rejected"
+                charmCell.nameLabel.textColor = UIColor.grayColor()
+                charmCell.userPictureImageView.layer.borderColor = UIColor.grayColor().CGColor
+               // bgImageView.layer.borderColor = UIColor.grayColor().CGColor
             }
             else {
-                charmCell.remainingTimeLabel.text = "Expirado"
-                bgImageView.layer.borderColor = UIColor.grayColor().CGColor
+                charmCell.remainingTimeLabel.text = "Expired"
+                charmCell.userPictureImageView.layer.borderColor = UIColor.grayColor().CGColor
+                charmCell.nameLabel.textColor = UIColor.grayColor()
+
+                //bgImageView.layer.borderColor = UIColor.grayColor().CGColor
+                
             }
-            
-
-            
-
-            charmCell.backgroundImage.addSubview(bgImageView)
-            
-            
-            
-            
+           // charmCell.backgroundImage.addSubview(bgImageView)
             return charmCell
             
             
@@ -700,7 +816,10 @@ class CirclesTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+
         let cell = tableView.cellForRowAtIndexPath(indexPath)
+                print(cell!.tag)
         if cell?.tag == 100 {
 //            let groupName = DataManager.sharedInstance.allGroup[indexPath.row].name
 //            let alert = UIAlertController(title: "Attention", message: "\(groupName) is expired.", preferredStyle: UIAlertControllerStyle.Alert)
@@ -718,17 +837,7 @@ class CirclesTableViewController: UITableViewController {
             performSegueWithIdentifier("addGroup", sender: self)
         }
         else if cell?.tag == 2 {
-            if (DataManager.sharedInstance.allGroup[indexPath.row].users == nil) {
-                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Espere", message: "Espere terminar o request", button1: "OK")
-                
-            }
-            else {
-                
-                
-                
-                
-                
-                
+
                 if shareTypeSegmentedControl.selectedSegmentIndex == 0 {
                    
                     DataManager.sharedInstance.activeUsers = DataManager.sharedInstance.allGroup[indexPath.row].users
@@ -758,8 +867,11 @@ class CirclesTableViewController: UITableViewController {
 
                 }
                 
-            }
             
+            
+        }
+        else if cell?.tag == 999 || cell?.tag == 998 {
+            performSegueWithIdentifier("addGroup", sender: self)
         }
     }
     
@@ -791,11 +903,13 @@ class CirclesTableViewController: UITableViewController {
     }
     
     func navigationBarGradient () {
-        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.navigationBar.translucent = false
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         let fontDictionary = [ NSForegroundColorAttributeName:UIColor.whiteColor() ]
         self.navigationController?.navigationBar.titleTextAttributes = fontDictionary
-        self.navigationController?.navigationBar.setBackgroundImage(imageLayerForGradientBackground(), forBarMetrics: UIBarMetrics.Default)
+//        self.navigationController?.navigationBar.layer.borderWidth = 4
+//        self.navigationController?.navigationBar.layer.borderColor = UIColor.clearColor().CGColor
+      // self.navigationController?.navigationBar.setBackgroundImage(imageLayerForGradientBackground(), forBarMetrics: UIBarMetrics.Default)
     }
     
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
@@ -823,11 +937,11 @@ class CirclesTableViewController: UITableViewController {
                 })
             }
             else {
-                let myId = DataManager.sharedInstance.myUser.userID
-                let friendId = DataManager.sharedInstance.myCharms[indexPath.row].friend.userID as String
-                self.http.destroySharerWithSharerType(.userToUser, ownerID: myId, receiverID: friendId, completion: { (result) -> Void in
-                    self.reloadData()
-                })
+//                let myId = DataManager.sharedInstance.myUser.userID
+//                let friendId = DataManager.sharedInstance.myCharms[indexPath.row].friend.userID as String
+//                self.http.destroySharerWithSharerType(.userToUser, ownerID: myId, receiverID: friendId, completion: { (result) -> Void in
+//                    self.reloadData()
+//                })
             }
             
         }
@@ -863,7 +977,7 @@ class CirclesTableViewController: UITableViewController {
                 
                 let deleteGroup = UITableViewRowAction(style: .Destructive, title: "Delete", handler: { (rowAction:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
                     let groupName = DataManager.sharedInstance.allGroup[indexPath.row].name
-                    let alert = UIAlertController(title: "Attention", message: "\(groupName) will be delete", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alert = UIAlertController(title: "Attention", message: "\(groupName) will be removed. Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "Delete Group", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                         //DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
                         DataManager.sharedInstance.destroySharerWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
@@ -885,28 +999,28 @@ class CirclesTableViewController: UITableViewController {
                 
                 return [editGroup,deleteGroup]
             }
-            else {
-                let charm = DataManager.sharedInstance.myCharms[indexPath.row]
-                if charm.sharer.status != "pending" {
-                    let deleteCharm = UITableViewRowAction(style: .Destructive, title: "Delete", handler: { (rowAction:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
-                        self.http.destroySharerWithSharerType(.userToUser, ownerID: charm.sharer.owner, receiverID: charm.sharer.receiver, completion: { (result) -> Void in
-                            self.reloadData()
-                            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Deletado", message: "O charme enviado para \(charm.friend.name) foi removido com sucesso.", button1: "Ok")
-
-                        })
-                    })
-                
-                return [deleteCharm]
-                }
-
-            }
+//            else {
+//                let charm = DataManager.sharedInstance.myCharms[indexPath.row]
+//                if charm.sharer.status != "pending" {
+//                    let deleteCharm = UITableViewRowAction(style: .Destructive, title: "Delete", handler: { (rowAction:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
+//                        self.http.destroySharerWithSharerType(.userToUser, ownerID: charm.sharer.owner, receiverID: charm.sharer.receiver, completion: { (result) -> Void in
+//                            self.reloadData()
+//                            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Removed", message: "The charm with \(charm.friend.name) has been removed successfully.", button1: "Ok")
+//
+//                        })
+//                    })
+//                
+//                return [deleteCharm]
+//                }
+//
+//            }
 
         }
         else if cell?.tag == 100 {
             let deleteGroup = UITableViewRowAction(style: .Destructive, title: "Delete", handler: {(rowAction:UITableViewRowAction, indexPath: NSIndexPath) -> Void in
                 
                 let groupName = DataManager.sharedInstance.allGroup[indexPath.row].name
-                let alert = UIAlertController(title: "Attention", message: "\(groupName) will be delete", preferredStyle: UIAlertControllerStyle.Alert)
+                let alert = UIAlertController(title: "Attention", message: "\(groupName) will be removed. Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Delete Group", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                     //DataManager.sharedInstance.destroyGroupWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
                     DataManager.sharedInstance.destroySharerWithNotification(DataManager.sharedInstance.allGroup[indexPath.row], view: self)
@@ -943,17 +1057,22 @@ class CirclesTableViewController: UITableViewController {
 
     
     @IBAction func segmentedControlDidChangeValue(sender: AnyObject) {
-        self.refreshData()
+        if !DataManager.sharedInstance.isUpdating {
+            self.refreshData()
+            self.lastSelectedIndex = shareTypeSegmentedControl.selectedSegmentIndex
+        }
+        else {
+            shareTypeSegmentedControl.selectedSegmentIndex = lastSelectedIndex
+        }
     }
     
     func charmAccepted(notification: NSNotification) {
-        if DataManager.sharedInstance.activeView == "circles" {
             if let info = notification.userInfo {
                 if let charmIndex = info["charmIndex"] as? Int {
                     let charm = DataManager.sharedInstance.myCharms[charmIndex]
                     
-                    let alert = UIAlertController(title: "Charme", message: "\(charm.friend.name) aceitou seu charme", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "Ir", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                    let alert = UIAlertController(title: "Whistle", message: "\(charm.friend.name) accepted your whistle", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Go", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                         DataManager.sharedInstance.selectedSharer = [charm.sharer]
                         DataManager.sharedInstance.activeUsers = [charm.friend]
                         
@@ -969,22 +1088,22 @@ class CirclesTableViewController: UITableViewController {
                 }
                 
             }
-        }
     
     }
     
     func charmReceived(notification: NSNotification) {
-        if DataManager.sharedInstance.activeView == "circles" {
+
             if let info = notification.userInfo {
                 if let charmIndex = info["charmIndex"] as? Int {
                     
                     let charm = DataManager.sharedInstance.myCharms[charmIndex]
                     
                     
-                    let alert = UIAlertController(title: "Charme", message: "Você recebeu um charme de \(charm.friend.name)", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "Aceitar", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                    let alert = UIAlertController(title: "Whistle", message: "You have received a whistle from \(charm.friend.name)", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Accept", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                         
                         charm.sharer.status = "accepted"
+                        DataManager.sharedInstance.myCharms[charmIndex] = charm
                         self.http.updateSharerWithID(charm.sharer.id, until: nil, status: "accepted", completion: { (result) -> Void in
                             DataManager.sharedInstance.selectedSharer = [charm.sharer]
                             DataManager.sharedInstance.activeUsers = [charm.friend]
@@ -992,12 +1111,16 @@ class CirclesTableViewController: UITableViewController {
                             DataManager.sharedInstance.isCharm = true
                             
                             self.performSegueWithIdentifier("showMap", sender: self)
+    
                         })
                         
 
                     }))
-                    alert.addAction(UIAlertAction(title: "Rejeitar", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
+                    alert.addAction(UIAlertAction(title: "Reject", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
                         charm.sharer.status = "rejected"
+                        
+                        DataManager.sharedInstance.myCharms[charmIndex] = charm
+                        
                         self.http.updateSharerWithID(charm.sharer.id, until: nil, status: "rejected", completion: { (result) -> Void in
                             self.reloadData()
                         })
@@ -1009,12 +1132,78 @@ class CirclesTableViewController: UITableViewController {
                     
                 }
                 
-            }
+
         }
         else {
             self.navigationController?.popToRootViewControllerAnimated(true)
         }
         
+        
+    }
+    
+    func charmRejected(notification: NSNotification) {
+            if let info = notification.userInfo {
+                if let charmIndex = info["charmIndex"] as? Int {
+                    let charm = DataManager.sharedInstance.myCharms[charmIndex]
+
+                    let alert = UIAlertController(title: "Whistle", message: "\(charm.friend.name) rejected your whistle", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                        self.http.destroySharerWithSharerType(.userToUser, ownerID: charm.sharer.owner, receiverID: charm.sharer.receiver, completion: { (result) -> Void in
+                            
+                        })
+                    }))
+                    
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    
+                    
+                    
+                }
+                
+            }
+        
+    }
+    
+    func charmExpired(notification: NSNotification) {
+        if let info = notification.userInfo {
+            if let charmIndex = info["charmIndex"] as? Int {
+                let charm = DataManager.sharedInstance.myCharms[charmIndex]
+                
+                let alert = UIAlertController(title: "Whistle", message: "The whistle you sent to \(charm.friend.name) has expired", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                    self.http.destroySharerWithSharerType(.userToUser, ownerID: charm.sharer.owner, receiverID: charm.sharer.receiver, completion: { (result) -> Void in
+                        
+                    })
+                }))
+                
+                self.presentViewController(alert, animated: true, completion: nil)
+                
+                
+                
+            }
+            
+        }
+        
+    }
+    
+    func charmFound(notification: NSNotification) {
+        //if DataManager.sharedInstance.activeView == "circles" {
+            if let info = notification.userInfo {
+                if let charmIndex = info["charmIndex"] as? Int {
+                    let charm = DataManager.sharedInstance.myCharms[charmIndex]
+                    
+                    let friendName = charm.friend.name
+                    let alert = UIAlertController(title: "Found", message: "\(friendName) has found you", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                        self.http.destroySharerWithSharerType(.userToUser, ownerID: charm.sharer.owner, receiverID: charm.sharer.receiver, completion: { (result) -> Void in
+                            self.navigationController?.popToRootViewControllerAnimated(true)
+                        })
+                        
+                    }))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    
+                }
+            }
+        //}
         
     }
     
@@ -1030,7 +1219,8 @@ extension CAGradientLayer {
         layer.frame = bounds
         let navigationBarRed1 = UIColor(red: 205.0/255.0, green: 16.0/255.0, blue: 34.0/255.0, alpha: 1.0)
         let navigationBarRed2 = UIColor(red: 213.0/250.0, green: 9.0/255.0, blue: 43.0/255.0, alpha: 1.0)
-        layer.colors = [navigationBarRed1.CGColor, navigationBarRed2.CGColor]
+        let mainRed: UIColor = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
+        layer.colors = [mainRed.CGColor, mainRed.CGColor]
         return layer
     }
     
