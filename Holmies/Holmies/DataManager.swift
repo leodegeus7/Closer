@@ -858,6 +858,7 @@ class DataManager {
             if completedFirst {
                 DataManager.sharedInstance.allSharers = sharersArray
                 DataManager.sharedInstance.myCharms = self.selectCharmsFromSharersArray(DataManager.sharedInstance.allSharers)
+                NSNotificationCenter.defaultCenter().postNotificationName("delegateUpdate", object: nil)
                 completion(result: "DEU")
             }
             else {

@@ -87,6 +87,7 @@
 		A7FCC51C1BC4CE5B00AEDA3F /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FCC51B1BC4CE5B00AEDA3F /* TodayViewController.swift */; };
 		A7FCC5291BC4CE9B00AEDA3F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FCC5281BC4CE9B00AEDA3F /* MainInterface.storyboard */; };
 		A7FEFB551BDE9E3600DFEC1E /* radialGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = A7FEFB541BDE9E3600DFEC1E /* radialGradient.png */; };
+		AF588EE71C2088F100016FE1 /* HTTPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF588EE61C2088F100016FE1 /* HTTPHelper.swift */; };
 		AF5E10A21C003063003C0B13 /* CharmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5E10A11C003063003C0B13 /* CharmTableViewCell.swift */; };
 		AF5E10A41C003394003C0B13 /* Charm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5E10A31C003394003C0B13 /* Charm.swift */; };
 		AF5F33F41C001EE700BC1622 /* charm.png in Resources */ = {isa = PBXBuildFile; fileRef = AF5F33F31C001EE700BC1622 /* charm.png */; };
@@ -106,7 +107,6 @@
 		CD103A771BBB07470044166F /* ovalVermelho.png in Resources */ = {isa = PBXBuildFile; fileRef = CD103A731BBB07470044166F /* ovalVermelho.png */; };
 		CD1C03651BA749BD0073524A /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1C03631BA749BD0073524A /* FBSDKCoreKit.framework */; };
 		CD1C03661BA749BD0073524A /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1C03641BA749BD0073524A /* FBSDKLoginKit.framework */; };
-		CD1E19101BFD08F800179D5F /* HTTPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1E190F1BFD08F800179D5F /* HTTPHelper.swift */; };
 		CD21002A1B9DE7EF00485126 /* PlaceMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2100291B9DE7EF00485126 /* PlaceMarker.swift */; };
 		CD43673F1BBC531E00309FD0 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD43673E1BBC531E00309FD0 /* Group.swift */; };
 		CD4FC9401BED1F810086EC30 /* myInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4FC93F1BED1F810086EC30 /* myInfoViewController.swift */; };
@@ -339,6 +339,7 @@
 		A7FCC52A1BC4CF4100AEDA3F /* Holmies.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Holmies.entitlements; sourceTree = "<group>"; };
 		A7FCC52B1BC4CFEE00AEDA3F /* widget3.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = widget3.entitlements; sourceTree = "<group>"; };
 		A7FEFB541BDE9E3600DFEC1E /* radialGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radialGradient.png; sourceTree = "<group>"; };
+		AF588EE61C2088F100016FE1 /* HTTPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHelper.swift; sourceTree = "<group>"; };
 		AF5E10A11C003063003C0B13 /* CharmTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharmTableViewCell.swift; sourceTree = "<group>"; };
 		AF5E10A31C003394003C0B13 /* Charm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Charm.swift; sourceTree = "<group>"; };
 		AF5F33F31C001EE700BC1622 /* charm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = charm.png; sourceTree = "<group>"; };
@@ -359,7 +360,6 @@
 		CD103A731BBB07470044166F /* ovalVermelho.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ovalVermelho.png; sourceTree = "<group>"; };
 		CD1C03631BA749BD0073524A /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		CD1C03641BA749BD0073524A /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		CD1E190F1BFD08F800179D5F /* HTTPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHelper.swift; sourceTree = "<group>"; };
 		CD2100291B9DE7EF00485126 /* PlaceMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceMarker.swift; sourceTree = "<group>"; };
 		CD43673E1BBC531E00309FD0 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		CD4FC93F1BED1F810086EC30 /* myInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myInfoViewController.swift; sourceTree = "<group>"; };
@@ -831,10 +831,10 @@
 				CD900F801BDE9F260095CB85 /* AddFriendTableViewCell.swift */,
 				A73BE4CD1BDEBAC60063C705 /* ActiveGroupTableViewCell.swift */,
 				CDB0C9571BCEE5340020BFB5 /* UsersInGroupsCollectionViewCell.swift */,
+				AF588EE61C2088F100016FE1 /* HTTPHelper.swift */,
 				CD669F721C0C9ED400E2BAC0 /* EmptyGroupTableViewCell.swift */,
 				CD73C0DA1C0E222F000730F1 /* FriendsInFriendsTableViewCell.swift */,
 				CD6BAAA81B98DE23008614B0 /* Holmies-Bridging-Header.h */,
-				CD1E190F1BFD08F800179D5F /* HTTPHelper.swift */,
 				CD6BAA8C1B98DB5F008614B0 /* GoogleDataProvider.swift */,
 				CD6BAA8E1B98DB70008614B0 /* GooglePlace.swift */,
 				CDCCCD2A1BBF83F500A5AD03 /* default.gpx */,
@@ -1237,7 +1237,6 @@
 				CD6BAA971B98DB8A008614B0 /* MarkerInfoView.swift in Sources */,
 				A7C37F591BDFF79200FEE8D2 /* EditGroupViewController.swift in Sources */,
 				CD73C0EA1C108473000730F1 /* ShowFriendView.swift in Sources */,
-				CD1E19101BFD08F800179D5F /* HTTPHelper.swift in Sources */,
 				CD6BAAAA1B98DE23008614B0 /* Holmies-Bridging.m in Sources */,
 				CD0B59E11BAB57750098AD88 /* Location.swift in Sources */,
 				CD900F811BDE9F260095CB85 /* AddFriendTableViewCell.swift in Sources */,
@@ -1261,6 +1260,7 @@
 				CD6BAA991B98DB8A008614B0 /* UIViewExtension.swift in Sources */,
 				AF5E10A21C003063003C0B13 /* CharmTableViewCell.swift in Sources */,
 				A705921B1BD6C65300E737E3 /* NewGroupTableViewCell.swift in Sources */,
+				AF588EE71C2088F100016FE1 /* HTTPHelper.swift in Sources */,
 				CD73C0DB1C0E222F000730F1 /* FriendsInFriendsTableViewCell.swift in Sources */,
 				A70592171BD6C5B600E737E3 /* DesignGroupsTableViewController.swift in Sources */,
 				A7AB23C11C17551E00E3DC1C /* CustomSegueLeft.swift in Sources */,

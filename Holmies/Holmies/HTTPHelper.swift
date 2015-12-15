@@ -408,6 +408,40 @@ class HTTPHelper: NSObject {
         
     }
     
+    func updateSharerWithID(id:String, until:String?,status:String?,updater:String?, completion:(result:Dictionary<String,AnyObject>)->Void) {
+        var parameters = [
+            "id":id
+        ]
+        
+        if let newUntil = until {
+            parameters["until"] = newUntil
+        }
+        
+        if let newStatus = status {
+            parameters["status"] = newStatus
+        }
+        
+        if let newUpdater = updater {
+            parameters["updater"] = newUpdater
+        }
+        
+        let url = "\(baseURL)/update_sharer"
+        
+        makeHttpPostRequestWithParameters(parameters, url: url) { (httpResult) -> Void in
+            if let formattedResult = httpResult as? Dictionary<String,AnyObject> {
+                completion(result: formattedResult)
+            }
+            else {
+                let error =  [
+                    "error":"Connection Error"
+                ]
+                completion(result: error)
+            }
+        }
+        
+    }
+
+    
     func destroySharerWithSharerType(sharerType:SharerType, ownerID:String, receiverID:String, completion:(result:Dictionary<String,AnyObject>)->Void) {
         var parameters = [
             "owner_user_id":ownerID

@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         DataManager.sharedInstance.locationManager.delegate = self
         
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "update", name: "delegateUpdate", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "update", name: "delegateUpdate", object: nil)
         DataManager.sharedInstance.windows = window?.rootViewController
 
         
@@ -76,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
             self.window?.rootViewController = viewController
             self.window?.makeKeyAndVisible()
         } else {
-            timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "update", userInfo: nil, repeats: true)
+//            timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "update", userInfo: nil, repeats: true)
 
             let storyboard = UIStoryboard(name: "Design", bundle: nil)
             //let dest = storyboard.instantiateViewControllerWithIdentifier("loginVC")
@@ -146,7 +146,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         let idUser = "\(DataManager.sharedInstance.myUser.userID)"
         let number = Int(idUser)
         if (number > 0)  {
-            timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "update", userInfo: nil, repeats: true)
+//            timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "update", userInfo: nil, repeats: true)
         }
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         UIApplication.sharedApplication().applicationIconBadgeNumber = DataManager.sharedInstance.myCharms.count
@@ -318,9 +318,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
     
     func update() {
         if DataManager.sharedInstance.activeView != "login" {
-            DataManager.sharedInstance.lastCharms = DataManager.sharedInstance.myCharms
-            let lastCharms = DataManager.sharedInstance.lastCharms
             if DataManager.sharedInstance.didUpdateCharms {
+                let lastCharms = DataManager.sharedInstance.lastCharms
+                let myCharms = DataManager.sharedInstance.myCharms
                 var index = 0
                 for charm in DataManager.sharedInstance.myCharms {
                     
@@ -342,8 +342,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
                         }
                     }
                     
+                    var charmsChanged = false
                     
-                    if lastCharms.count == 0 || charm.sharer.status != lastCharms[index].sharer.status && DataManager.sharedInstance.myCharms.count != 0 {
+                    if lastCharms.count == 0 && myCharms.count != 0 {
+                        charmsChanged = true
+                    }
+                    else if index > lastCharms.count {
+                        charmsChanged = true
+                    }
+                    else if charm.sharer.status != lastCharms[index].sharer.status {
+                        charmsChanged = true
+                    }
+                    
+                    if charmsChanged {
                         if charm.sharer.status == "accepted" {
                             let myDict: [String:AnyObject] = [ "charmIndex": index]
                             NSNotificationCenter.defaultCenter().postNotificationName("charmAccepted", object: nil ,userInfo: myDict)
@@ -365,6 +376,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
                     index++
                 }
                 DataManager.sharedInstance.didUpdateCharms = false
+                DataManager.sharedInstance.lastCharms = DataManager.sharedInstance.myCharms
             }
             if DataManager.sharedInstance.isCharm {
                 DataManager.sharedInstance.updateActiveFriendLocation()

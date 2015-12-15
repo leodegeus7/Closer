@@ -352,11 +352,9 @@ class CirclesTableViewController: UITableViewController {
                     self.tableView.reloadData()
                     if self.refreshControl?.refreshing == true {
                         self.refreshControl?.endRefreshing()
-                        if self.shareTypeSegmentedControl.selectedSegmentIndex == 1 {
-                            DataManager.sharedInstance.didUpdateCharms = true
-                            NSNotificationCenter.defaultCenter().postNotificationName("delegateUpdate", object: nil)
-                        }
                     }
+                    DataManager.sharedInstance.didUpdateCharms = true
+                    NSNotificationCenter.defaultCenter().postNotificationName("delegateUpdate", object: nil)
                     DataManager.sharedInstance.finishedAllRequest = true
                     DataManager.sharedInstance.isUpdating = false
                     
@@ -1114,7 +1112,7 @@ class CirclesTableViewController: UITableViewController {
                     alert.addAction(UIAlertAction(title: "Reject", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) -> Void in
                         charm.sharer.status = "rejected"
                         
-                        DataManager.sharedInstance.myCharms[charmIndex] = charm
+                        DataManager.sharedInstance.lastCharms[charmIndex] = charm
                         
                         self.http.updateSharerWithID(charm.sharer.id, until: nil, status: "rejected", completion: { (result) -> Void in
                             self.reloadData()
