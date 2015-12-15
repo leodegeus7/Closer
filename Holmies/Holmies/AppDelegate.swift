@@ -19,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
     var window: UIWindow?
     let googleMapsApiKey = "AIzaSyAhjTqn1_2HX0FiQ0MW1_O7L1avjPIxP9g"
     let helper = HTTPHelper()
-    var timer = NSTimer()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //setando parse, api google, registrando as notificacoes
@@ -76,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
             self.window?.rootViewController = viewController
             self.window?.makeKeyAndVisible()
         } else {
-            timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "update", userInfo: nil, repeats: true)
+            DataManager.sharedInstance.timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "update", userInfo: nil, repeats: true)
 
             let storyboard = UIStoryboard(name: "Design", bundle: nil)
             //let dest = storyboard.instantiateViewControllerWithIdentifier("loginVC")
@@ -132,7 +131,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
-        timer.invalidate()
+        if DataManager.sharedInstance.timer.valid {
+            DataManager.sharedInstance.timer.invalidate()
+        }
+        if DataManager.sharedInstance.timer2.valid {
+            DataManager.sharedInstance.timer2.invalidate()
+        }
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
@@ -146,7 +150,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         let idUser = "\(DataManager.sharedInstance.myUser.userID)"
         let number = Int(idUser)
         if (number > 0)  {
-            timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "update", userInfo: nil, repeats: true)
+            DataManager.sharedInstance.timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "update", userInfo: nil, repeats: true)
         }
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         UIApplication.sharedApplication().applicationIconBadgeNumber = DataManager.sharedInstance.myCharms.count

@@ -153,7 +153,12 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
         
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (UIAlertAction)in
             DataManager.sharedInstance.createSimpleUIAlert(self, title: "Attention", message: "Conta deslogada", button1: "Ok")
-            
+            if DataManager.sharedInstance.timer.valid {
+                DataManager.sharedInstance.timer.invalidate()
+            }
+            if DataManager.sharedInstance.timer2.valid {
+                DataManager.sharedInstance.timer2.invalidate()
+            }
             let documentsDirectory = DataManager.sharedInstance.findDocumentsDirectory()
             let path = documentsDirectory + "/id.txt"
             let path1 = documentsDirectory + "/groups.json"
@@ -171,9 +176,11 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
             do {try fileManager.removeItemAtPath(path4)} catch {}
             do {try fileManager.removeItemAtPath(path5)} catch {}
             do {try fileManager.removeItemAtPath(path6)} catch {}
-            NSThread.mainThread()
-            exit(0)
-
+            
+            let storyboard = UIStoryboard(name: "Design", bundle: nil)
+            //let dest = storyboard.instantiateViewControllerWithIdentifier("loginVC")
+            let viewController = storyboard.instantiateViewControllerWithIdentifier("loginVC")
+            self.presentViewController(viewController, animated: true, completion: nil)
         
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))

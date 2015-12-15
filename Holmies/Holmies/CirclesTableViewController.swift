@@ -28,7 +28,6 @@ class CirclesTableViewController: UITableViewController {
     
     
     var timer = NSTimer()
-    var timer2 = NSTimer()
     //view do user
     @IBOutlet weak var imageUserInView: UIImageView!
     @IBOutlet weak var usernameInView: UILabel!
@@ -102,7 +101,7 @@ class CirclesTableViewController: UITableViewController {
         }
 
         
-        timer2 = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("reloadData"), userInfo: nil, repeats: true)
+        DataManager.sharedInstance.timer2 = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("reloadData"), userInfo: nil, repeats: true)
         
         
         

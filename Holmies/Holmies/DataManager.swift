@@ -62,6 +62,8 @@ class DataManager {
         return manager
     }()
     
+    var timer = NSTimer()
+    var timer2 = NSTimer()
     
     
     class var sharedInstance: DataManager {
