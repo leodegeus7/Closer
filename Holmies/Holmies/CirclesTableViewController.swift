@@ -412,6 +412,22 @@ class CirclesTableViewController: UITableViewController {
                 emptyGroup.firstLabel.text = "No groups"
                 emptyGroup.secondLabel.text = "Click here to create a group"
                 emptyGroup.tag = 999
+                
+                switch self.view.frame.size.height {
+                    case 416:
+                    emptyGroup.secondLabel.font = UIFont(name: "SFCompactDisplay-Light", size: 12)
+                    break
+                    
+                    case 504:
+                    emptyGroup.secondLabel.font = UIFont(name: "SFCompactDisplay-Light", size: 12)
+                    break
+                    
+                    default:
+                    emptyGroup.secondLabel.font = UIFont(name: "SFCompactDisplay-Light", size: 17)
+                    break
+                }
+            
+            
                 return emptyGroup
                 
             }
@@ -704,12 +720,24 @@ class CirclesTableViewController: UITableViewController {
                 emptyGroup.firstLabel.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
                 emptyGroup.firstLabel.textColor = mainRed
                 emptyGroup.firstLabel.text = "No whistle"
-                emptyGroup.secondLabel.font = UIFont(name: "SFCompactDisplay-Light", size: 17)
+                
                 emptyGroup.secondLabel.textColor = UIColor.blackColor()
                 emptyGroup.secondLabel.text = "Click here to send a whistle"
                 emptyGroup.tag = 998
                 
-                
+                switch self.view.frame.size.height {
+                case 416:
+                    emptyGroup.secondLabel.font = UIFont(name: "SFCompactDisplay-Light", size: 12)
+                    break
+                case 504:
+                    emptyGroup.secondLabel.font = UIFont(name: "SFCompactDisplay-Light", size: 12)
+                    break
+                    
+                default:
+                    emptyGroup.secondLabel.font = UIFont(name: "SFCompactDisplay-Light", size: 17)
+                    break
+                }
+
                 return emptyGroup
             }
             
@@ -726,7 +754,7 @@ class CirclesTableViewController: UITableViewController {
             let actualFriend = actualCharm.friend
             let actualSharer = actualCharm.sharer
             
-            charmCell.nameLabel.text = actualFriend.name
+            charmCell.nameLabel.text = actualFriend.username
             let imageName = DataManager.sharedInstance.findImage(actualFriend.userID)
             
             charmCell.userPictureImageView.layer.cornerRadius = charmCell.userPictureImageView.frame.size.width / 2
@@ -734,7 +762,6 @@ class CirclesTableViewController: UITableViewController {
             charmCell.userPictureImageView.layer.borderWidth = 3
             charmCell.userPictureImageView.clipsToBounds = true
             charmCell.userPictureImageView.image = imageName
-            
             
             
 //            let imageView = UIImageView(image: imageName)

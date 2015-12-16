@@ -34,7 +34,7 @@
                value = "DataManager.sharedInstance.allFriends">
             </PersistentString>
             <PersistentString
-               value = "self.view.frame.size.width">
+               value = "self.view.frame.size.height">
             </PersistentString>
             <PersistentString
                value = "DataManager.sharedInstance.allSharers">
