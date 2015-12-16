@@ -34,7 +34,13 @@
                value = "DataManager.sharedInstance.allFriends">
             </PersistentString>
             <PersistentString
+               value = "self.view.frame.size.width">
+            </PersistentString>
+            <PersistentString
                value = "DataManager.sharedInstance.allSharers">
+            </PersistentString>
+            <PersistentString
+               value = "cellActive.scrollViewFriends.frame.size.height">
             </PersistentString>
             <PersistentString
                value = "DataManager.sharedInstance.allGroup">
@@ -81,7 +87,7 @@
          contextName = "CirclesTableViewController.(reloadData(CirclesTableViewController) -&gt; () -&gt; ()).(closure #1).(closure #1):CirclesTableViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "DataManager.sharedInstance.allGroup">
+               value = "DataManager.sharedInstance.allFriends">
             </PersistentString>
             <PersistentString
                value = "DataManager.sharedInstance.sharesInGroups">
@@ -93,7 +99,7 @@
                value = "sharerServer">
             </PersistentString>
             <PersistentString
-               value = "DataManager.sharedInstance.allFriends">
+               value = "DataManager.sharedInstance.allGroup">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

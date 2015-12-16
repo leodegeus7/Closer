@@ -448,11 +448,15 @@ class CirclesTableViewController: UITableViewController {
                     var sizeOfImageHeight = Double()
                     var sizeOfImageWidth = Double()
                     
+                    
+   
+                    
+                    
                     if (scrollViewSizeWidth/numbersOfCellsInScrol) - spaceInCell/2 < scrollViewSizeHeight {
                         sizeOfImageWidth = (scrollViewSizeWidth/numbersOfCellsInScrol) - spaceInCell/2
                     }
                     else {
-                        sizeOfImageWidth = scrollViewSizeWidth
+                        sizeOfImageWidth = (scrollViewSizeWidth/numbersOfCellsInScrol) - spaceInCell/2 - 8
                     }
                     
                     sizeOfImageHeight = sizeOfImageWidth
