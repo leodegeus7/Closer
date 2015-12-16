@@ -181,7 +181,7 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
             DataManager.sharedInstance.appIsActive = false
             DataManager.sharedInstance.eraseData()
                     DataManager.sharedInstance.myUser = User()
-            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Logout", message: "Successfully logged out", button1: "OK")
+
             
            
             
