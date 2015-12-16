@@ -120,6 +120,13 @@ class CirclesTableViewController: UITableViewController {
         imageUserInView.clipsToBounds = true
         usernameInView.font = UIFont(name: "SFUIDisplay-Medium", size: 17)
         usernameInView.textColor = UIColor.whiteColor()
+        
+       imageUserInView.autoresizingMask = [UIViewAutoresizing.FlexibleBottomMargin, UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleRightMargin, UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleWidth]
+        imageUserInView.contentMode = UIViewContentMode.ScaleAspectFill
+
+        
+
+        
 //        let userViewBackgroundImage = DataManager.sharedInstance.imageResize(UIImage(named: "redLights.png")!, sizeChange: CGSize(width: self.view.frame.width, height: self.view.frame.height / 5.15))
 //        userView.backgroundColor = UIColor(patternImage: userViewBackgroundImage)
         
