@@ -36,7 +36,12 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
         let id = DataManager.sharedInstance.myUser.userID
         let image = DataManager.sharedInstance.findImage(id)
-        myImage.image = image
+        if DataManager.sharedInstance.testIfFileExistInDocuments("/\(DataManager.sharedInstance.myUser.userID).jpg") {
+            myImage.image = image
+        }
+        else {
+            myImage.image = UIImage(named: "mainRedChar.png")
+        }
         
       //  myImage.image = DataManager.sharedInstance.findImage(DataManager.sharedInstance.myUser.userID)
         myUserName.text = "\(DataManager.sharedInstance.myUser.username)\nit's you username"
@@ -77,7 +82,7 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
         
         
         if (FBSDKAccessToken.currentAccessToken() == nil) {
-            facebookLogoutButton.setTitle("Login Facebbok", forState: .Normal)
+            facebookLogoutButton.setTitle("Login Facebook", forState: .Normal)
         }
         
         
@@ -176,7 +181,7 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
             DataManager.sharedInstance.appIsActive = false
             DataManager.sharedInstance.eraseData()
                     DataManager.sharedInstance.myUser = User()
-            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Logout", message: "Successfully logged out", button1: "Ok")
+
             
            
             

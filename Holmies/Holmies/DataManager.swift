@@ -273,10 +273,18 @@ class DataManager {
         let destinationPath = documentsDirectory.stringByAppendingString("/\(serverId).jpg")
         var fbImage:UIImage!
         
+        var myuser1 = String()
+        if let myUser = myUser.facebookID {
+            myuser1 = myUser
+        }
+        else {
+            myuser1 = "0"
+        }
+        
         if !(fileManager.fileExistsAtPath(destinationPath)) {
             if (fid != "") {
                 let imgURLString:String!
-                if (fid == myUser.facebookID) {
+                if (fid == myuser1) {
                     imgURLString = "http://graph.facebook.com/" + fid + "/picture?height=960" //type=normal
                     
                 }else{
