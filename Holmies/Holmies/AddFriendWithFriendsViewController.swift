@@ -331,7 +331,7 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
             self.view.addSubview(infoView)
             viewIsOpen = true
             
-           
+           addFriendTextField.userInteractionEnabled = false
             
             
             
@@ -345,7 +345,8 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
     
     func recognizeTapGesture() {
         if viewIsOpen {
-           supportViewForFriend.hidden = true
+        supportViewForFriend.hidden = true
+        addFriendTextField.userInteractionEnabled = true
             
             for view in self.view.subviews {
                 if view.tag == 37 {

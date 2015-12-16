@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Holmies/MapGoogleViewController.swift"
-            timestampString = "471463755.229497"
+            timestampString = "471978877.964169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "361"
-            endingLineNumber = "361"
+            startingLineNumber = "370"
+            endingLineNumber = "370"
             landmarkName = "goToSelectedFriend(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Holmies/MapGoogleViewController.swift"
-            timestampString = "471463755.229497"
+            timestampString = "471978877.964169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "371"
-            endingLineNumber = "371"
+            startingLineNumber = "380"
+            endingLineNumber = "380"
             landmarkName = "reverseGeocodeCoordinate(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Holmies/MapGoogleViewController.swift"
-            timestampString = "471463755.229497"
+            timestampString = "471978877.964169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "365"
-            endingLineNumber = "365"
+            startingLineNumber = "374"
+            endingLineNumber = "374"
             landmarkName = "goToSelectedFriend(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -394,11 +394,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Holmies/MapGoogleViewController.swift"
-            timestampString = "471463755.229497"
+            timestampString = "471978877.964169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "329"
-            endingLineNumber = "329"
+            startingLineNumber = "338"
+            endingLineNumber = "338"
             landmarkName = "mapView(_:willMove:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -474,11 +474,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Holmies/MapGoogleViewController.swift"
-            timestampString = "471463755.229497"
+            timestampString = "471978877.964169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "393"
-            endingLineNumber = "393"
+            startingLineNumber = "402"
+            endingLineNumber = "402"
             landmarkName = "ListaLocal(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -490,11 +490,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Holmies/MapGoogleViewController.swift"
-            timestampString = "471463755.229497"
+            timestampString = "471978877.964169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "403"
-            endingLineNumber = "403"
+            startingLineNumber = "412"
+            endingLineNumber = "412"
             landmarkName = "MapGoogleViewController"
             landmarkType = "3">
          </BreakpointContent>

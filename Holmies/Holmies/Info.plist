@@ -50,7 +50,7 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Usar a local</string>
+	<string>We would like to use current location</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SF-Compact-Display-Black.otf</string>
