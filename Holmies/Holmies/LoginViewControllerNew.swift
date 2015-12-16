@@ -178,7 +178,7 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
                     let dic = JSON as NSDictionary
                     if dic["error"] != nil {
                         let error = dic["error"]
-                        self.createSimpleUIAlert(self, title: "Error", message: "\(error!)", button1: "Ok")
+                        self.createSimpleUIAlert(self, title: "Error", message: "\(error!)", button1: "OK")
                         
                     }
                     else {
@@ -241,7 +241,7 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
                         let dic = JSON as NSDictionary
                         if dic["error"] != nil {
                             let error = dic["error"] as! String
-                            self.createSimpleUIAlert(self, title: "Error", message: "\(error)", button1: "Ok")
+                            self.createSimpleUIAlert(self, title: "Error", message: "\(error)", button1: "OK")
                             if error.containsString("User with FacebookID") {
                                 self.requestSignUp(resultData["name"] as! String, email: resultData["name"] as! String, faceId: resultData["id"] as! String)
                             }
@@ -423,7 +423,7 @@ class LoginViewControllerNew: UIViewController, FBSDKLoginButtonDelegate, UIText
             let dic = JSON as NSDictionary
             if dic["error"] != nil {
                 
-                self.createSimpleUIAlert(self, title: "Error", message: dic["error"] as! String, button1: "Ok")
+                self.createSimpleUIAlert(self, title: "Error", message: dic["error"] as! String, button1: "OK")
                 print("existe username ou email ja cadastrado")
             }
             else {

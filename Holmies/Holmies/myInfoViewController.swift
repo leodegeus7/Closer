@@ -106,7 +106,7 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
                     print("erro aqui")
                 }
                 else {
-                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Username", message: "\(self.username.text!) is now your username", button1: "Ok")
+                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Username", message: "\(self.username.text!) is now your username", button1: "OK")
                     DataManager.sharedInstance.myUser.username = "\(self.username.text!)"
                     DataManager.sharedInstance.saveMyInfo()
                     DataManager.sharedInstance.loadMyInfo()
@@ -165,7 +165,7 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
         
         
         
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (UIAlertAction)in
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:  { (UIAlertAction)in
             //DataManager.sharedInstance.createSimpleUIAlert(self, title: "Attention", message: "Conta deslogada", button1: "Ok")
             DataManager.sharedInstance.locationManager = nil
 
@@ -176,7 +176,7 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
             DataManager.sharedInstance.appIsActive = false
             DataManager.sharedInstance.eraseData()
                     DataManager.sharedInstance.myUser = User()
-            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Logout", message: "Successfully logged out", button1: "Ok")
+            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Logout", message: "Successfully logged out", button1: "OK")
             
            
             
@@ -211,7 +211,7 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
                 let dic = JSON as NSDictionary
                 
                 if dic["error"] != nil {
-                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: dic["error"] as! String, button1: "Ok")
+                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: dic["error"] as! String, button1: "OK")
                 }
                 else {
 
@@ -237,7 +237,7 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
                     //let dest = storyboard.instantiateViewControllerWithIdentifier("loginVC")
                     let viewController = storyboard.instantiateViewControllerWithIdentifier("loginVC")
                     self.presentViewController(viewController, animated: true, completion: nil)
-                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Attention", message: "Your account \(DataManager.sharedInstance.myUser.username) has been deleted", button1: "Ok")
+                    DataManager.sharedInstance.createSimpleUIAlert(self, title: "Attention", message: "Your account \(DataManager.sharedInstance.myUser.username) has been deleted", button1: "OK")
 
                 }
                 
@@ -253,7 +253,7 @@ class myInfoViewController: UIViewController,UITextFieldDelegate {
         if (FBSDKAccessToken.currentAccessToken() == nil) {
             self.getFBUserData({ (result) -> Void in
                 let newFBID = result as String
-                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Success", message: "Successfully connected to your Facebook Account", button1: "Ok")
+                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Success", message: "Successfully connected to your Facebook Account", button1: "OK")
                 DataManager.sharedInstance.myUser.facebookID = newFBID
                 DataManager.sharedInstance.saveMyInfo()
                 self.http.updateUserWithID(DataManager.sharedInstance.myUser.userID, username: nil, location: nil, altitude: nil, fbid: newFBID, photo: nil, name: nil, email: nil, password: nil, completion: { (result) -> Void in

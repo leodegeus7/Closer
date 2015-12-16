@@ -206,7 +206,7 @@ class DataManager {
                             let json = result
                             
                             if json["error"] != nil {
-                                DataManager.sharedInstance.createSimpleUIAlert(view, title: "Error", message: json["error"] as! String, button1: "Ok")
+                                DataManager.sharedInstance.createSimpleUIAlert(view, title: "Error", message: json["error"] as! String, button1: "OK")
                                 print("Nao Localizado")
                             }
                             
@@ -622,7 +622,7 @@ class DataManager {
                     marker.icon = resizedImage
                 }
                 else {
-                    createSimpleUIAlert(windows, title: "Not Found", message: "\(user.name) couldn't be located", button1: "Ok")
+                    createSimpleUIAlert(windows, title: "Not Found", message: "\(user.name) couldn't be located", button1: "OK")
                 }
                 }
             }
@@ -809,14 +809,14 @@ class DataManager {
     
     func destroyGroupWithNotification(groupObject:Group,view:UIViewController) {
         let idGroup = groupObject.id
-        createSimpleUIAlert(view, title: "Group Destroy", message: "The group \(groupObject.name) has been destroyed", button1: "Ok")
+        createSimpleUIAlert(view, title: "Group Destroy", message: "The group \(groupObject.name) has been destroyed", button1: "OK")
         http.destroyGroupWithID(idGroup) { (result) -> Void in
             print("apagado grupo \(idGroup)")
         }
     }
     
     func destroySharerWithNotification(group:Group,view:UIViewController) {
-        createSimpleUIAlert(view, title: "Removed", message: "You're not sharing with \(group.name) anymore", button1: "Ok")
+        createSimpleUIAlert(view, title: "Removed", message: "You're not sharing with \(group.name) anymore", button1: "OK")
         self.http.destroySharerWithSharerType(.userToGroup, ownerID: DataManager.sharedInstance.myUser.userID, receiverID: group.id, completion: { (result) -> Void in
             
         })

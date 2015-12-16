@@ -128,7 +128,7 @@ class RegisterNewViewController: UIViewController {
             let dic = JSON as NSDictionary
             if dic["error"] != nil {
                 
-                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: dic["error"] as! String, button1: "Ok")
+                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: dic["error"] as! String, button1: "OK")
                 print("existe username ou email ja cadastrado")
             }
             else {

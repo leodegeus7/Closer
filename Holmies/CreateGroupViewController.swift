@@ -545,14 +545,14 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
 
             }
             else {
-                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Friend", message: "Select a friend to receive your Whistle", button1: "Ok")
+                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Friend", message: "Select a friend to receive your Whistle", button1: "OK")
             }
         }
         else {
             if groupName.text?.isEmpty  == true {
-                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Group Name", message: "Please insert a name for this group", button1: "Ok")
+                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Group Name", message: "Please insert a name for this group", button1: "OK")
             } else if chosenHour == nil {
-                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Duration", message: "Please choose a duration for this group ", button1: "Ok")
+                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Duration", message: "Please choose a duration for this group ", button1: "OK")
             }
             else {
                 let groupNameText = groupName.text

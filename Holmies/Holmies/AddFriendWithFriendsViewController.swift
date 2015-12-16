@@ -35,6 +35,9 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
         addFriendTextField.textColor = mainRed
         addFriendTextField.attributedPlaceholder = NSAttributedString(string: "Type new friend username", attributes: [NSForegroundColorAttributeName: lightGray, NSFontAttributeName: UIFont(name: "SFCompactDisplay-Light", size: 15)!])
         addFriendTextField.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
+        addFriendTextField.autocorrectionType = .No
+        addFriendTextField.autocapitalizationType = .None
+        
         
         FriendsTableView.backgroundColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1)
         FriendsTableView.layer.borderWidth = 1
@@ -184,7 +187,7 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
             DataManager.sharedInstance.createSimpleUIAlert(self, title: "Friend", message: "Insert your friend's username", button1: "OK")
         } else {
             if addFriendTextField.text == DataManager.sharedInstance.myUser.username {
-                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: "This is your own username", button1: "Ok")
+                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: "This is your own username", button1: "OK")
             }
             else {
                 addFriend({ (result) -> Void in
@@ -199,7 +202,7 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
             let dic = JSON as NSDictionary
             
             if dic["error"] != nil {
-                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: dic["error"] as! String, button1: "Ok")
+                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: dic["error"] as! String, button1: "OK")
                 print("Nao Localizado")
             }
             else {
@@ -224,7 +227,7 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
                 var friendAlreadyExist = false
                 for friend in DataManager.sharedInstance.allFriends {
                     if friend.userID == newUser.userID {
-                        DataManager.sharedInstance.createSimpleUIAlert(self, title: "Friend", message: "\(friend.name) is already your friend", button1: "Ok")
+                        DataManager.sharedInstance.createSimpleUIAlert(self, title: "Friend", message: "\(friend.name) is already your friend", button1: "OK")
                         friendAlreadyExist = true
                     }
                     

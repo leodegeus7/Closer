@@ -198,17 +198,17 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
                 http.updateGroupWithID(DataManager.sharedInstance.selectedGroup.id, name: groupName.text, photo: nil, completion: { (result) -> Void in
                     
                     self.textFieldDismiss(textField, completion: { (result) -> Void in
-                        DataManager.sharedInstance.createSimpleUIAlert(self, title: "Group", message: "\(self.groupName.text!) is the new name for this group", button1: "Ok")
+                        DataManager.sharedInstance.createSimpleUIAlert(self, title: "Group", message: "\(self.groupName.text!) is the new name for this group", button1: "OK")
                     })
                     
                 })
             }
             else {
-                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: "Please insert a name for this group", button1: "Ok")
+                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: "Please insert a name for this group", button1: "OK")
             }
         }
         else {
-            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: "The new name must be different from the old one", button1: "Ok")
+            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: "The new name must be different from the old one", button1: "OK")
         }
         
         
@@ -271,18 +271,18 @@ class EditGroupViewController: UIViewController, UITableViewDataSource, UITableV
         if !(groupName.text == DataManager.sharedInstance.selectedGroup.name){
             if !(groupName.text == ""){
                     http.updateGroupWithID(DataManager.sharedInstance.selectedGroup.id, name: groupName.text, photo: nil, completion: { (result) -> Void in
-                        DataManager.sharedInstance.createSimpleUIAlert(self, title: "Group", message: "\(self.groupName.text!) is the new name for this group", button1: "Ok")
+                        DataManager.sharedInstance.createSimpleUIAlert(self, title: "Group", message: "\(self.groupName.text!) is the new name for this group", button1: "OK")
                         self.dismissViewControllerAnimated(true, completion: { () -> Void in
                             self.dismissViewControllerAnimated(true, completion: nil)
                         })
                     })
             }
             else {
-                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: "Please insert a name for this group", button1: "Ok")
+                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: "Please insert a name for this group", button1: "OK")
             }
         }
         else {
-            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: "The new name must be different from the old one", button1: "Ok")
+            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: "The new name must be different from the old one", button1: "OK")
         }
     }
     

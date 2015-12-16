@@ -96,7 +96,7 @@ class AddFriendTableViewController: UITableViewController, UITextFieldDelegate {
             let dic = JSON as NSDictionary
 
             if dic["error"] != nil {
-                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: dic["error"] as! String, button1: "Ok")
+                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: dic["error"] as! String, button1: "OK")
                 print("Nao Localizado")
             }
             else {
@@ -121,7 +121,7 @@ class AddFriendTableViewController: UITableViewController, UITextFieldDelegate {
                 var friendAlreadyExist = false
                 for friend in DataManager.sharedInstance.allFriends {
                     if friend.userID == newUser.userID {
-                        DataManager.sharedInstance.createSimpleUIAlert(self, title: "Friend", message: "\(friend.name) is already your friend", button1: "Ok")
+                        DataManager.sharedInstance.createSimpleUIAlert(self, title: "Friend", message: "\(friend.name) is already your friend", button1: "OK")
                         friendAlreadyExist = true
                     }
                     
@@ -156,10 +156,10 @@ class AddFriendTableViewController: UITableViewController, UITextFieldDelegate {
     func testUsername() {
 
         if (username == "") {
-            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: "Please insert an username", button1: "Ok")
+            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: "Please insert an username", button1: "OK")
         } else {
             if username == DataManager.sharedInstance.myUser.username {
-                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: "This is your own username", button1: "Ok")
+                DataManager.sharedInstance.createSimpleUIAlert(self, title: "Error", message: "This is your own username", button1: "OK")
             }
             else {
                 addFriend({ (result) -> Void in

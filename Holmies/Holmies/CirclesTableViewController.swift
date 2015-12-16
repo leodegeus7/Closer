@@ -151,7 +151,7 @@ class CirclesTableViewController: UITableViewController {
                         let newFBID = result as String
                             print(newFBID)
 //                        if newFBID == fbId {
-                            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Success", message: "Successfully connected to your Facebook Account", button1: "Ok")
+                            DataManager.sharedInstance.createSimpleUIAlert(self, title: "Success", message: "Successfully connected to your Facebook Account", button1: "OK")
                             DataManager.sharedInstance.requestFacebook(self,completion: { (result) -> Void in
                             })
 //                        }
@@ -1189,7 +1189,7 @@ class CirclesTableViewController: UITableViewController {
                     let charm = DataManager.sharedInstance.myCharms[charmIndex]
 
                     let alert = UIAlertController(title: "Whistle", message: "\(charm.friend.name) rejected your whistle", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                         self.http.destroySharerWithSharerType(.userToUser, ownerID: charm.sharer.owner, receiverID: charm.sharer.receiver, completion: { (result) -> Void in
                             
                         })
@@ -1211,7 +1211,7 @@ class CirclesTableViewController: UITableViewController {
                 let charm = DataManager.sharedInstance.myCharms[charmIndex]
                 
                 let alert = UIAlertController(title: "Whistle", message: "The whistle you sent to \(charm.friend.name) has expired", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                     self.http.destroySharerWithSharerType(.userToUser, ownerID: charm.sharer.owner, receiverID: charm.sharer.receiver, completion: { (result) -> Void in
                         
                     })
@@ -1235,7 +1235,7 @@ class CirclesTableViewController: UITableViewController {
                     
                     let friendName = charm.friend.name
                     let alert = UIAlertController(title: "Found", message: "\(friendName) has found you", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:  { (action: UIAlertAction!) in
                         self.http.destroySharerWithSharerType(.userToUser, ownerID: charm.sharer.owner, receiverID: charm.sharer.receiver, completion: { (result) -> Void in
                             self.navigationController?.popToRootViewControllerAnimated(true)
                         })
