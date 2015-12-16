@@ -460,12 +460,18 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 
             var shortDate: String {
                 let dateFormatter = NSDateFormatter()
-                dateFormatter.dateFormat = "dd/MM/yyyy HH::mm:ss"
+                dateFormatter.dateFormat = "dd/MM/yyyy"
                 return dateFormatter.stringFromDate(date!)
             }
             
-            infoView.nameLabel.text = "\(userInMarker.name)\nLast update:\n\(shortDate)"
-            infoView.nameLabel.font = UIFont(name: "SFUIDisplay-Light", size: 22)
+            var shortDate2: String {
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "HH::mm:ss"
+                return dateFormatter.stringFromDate(date!)
+            }
+            
+            infoView.nameLabel.text = "\(userInMarker.name)\nLast update:\(shortDate)\n\(shortDate2)"
+            infoView.nameLabel.font = UIFont(name: "SFUIDisplay-Light", size: 20)
             infoView.userPhoto.image = DataManager.sharedInstance.findImage("\(userInMarker.userID)")
             infoView.userPhoto.clipsToBounds = true
 //            let ok = infoView.userPhoto.frame.height
@@ -542,11 +548,12 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
     }
 
     func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
+        
         if navigationController?.navigationBar.hidden == false {
             self.compassView.hidden = false
-            compassView.fadeIn(0.5)
+           compassView.fadeIn(0.5)
             
-            
+        
             originalAngleArrow.hidden = true
             originalAngleLabel.hidden = true
             phoneRotationArrow.hidden = true
@@ -556,7 +563,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
             
             friendDistance.hidden = true
             friendPhoto.hidden = true
-            navigationController?.navigationBar.hidden = true
+            
+            
             let friend = marker.userData as! User
             self.selectedFriend = friend
             let locationFriend = CLLocation(latitude: Double(friend.location.latitude)!, longitude: Double(friend.location.longitude)!)

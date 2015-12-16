@@ -30,10 +30,18 @@
          contextName = "LoginViewControllerNew.(viewDidLoad(LoginViewControllerNew) -&gt; () -&gt; ()).(closure #1):LoginViewControllerNew.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.view.frame.size.height">
+               value = "screenSize">
             </PersistentString>
             <PersistentString
-               value = "screenSize">
+               value = "self.view.frame.size.height">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CirclesTableViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:CirclesTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cellActive.imageView?.image">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

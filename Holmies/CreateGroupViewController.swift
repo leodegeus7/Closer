@@ -35,8 +35,19 @@ class CreateGroupViewController: UIViewController, UITableViewDataSource, UITabl
         super.viewDidLoad()
         tableView.separatorInset = UIEdgeInsetsZero
         tableView.layoutMargins = UIEdgeInsetsZero
-        let buttonContinue = UIBarButtonItem(title: "Create", style: .Plain, target: self, action: "continueAction")
-        self.navigationItem.rightBarButtonItem = buttonContinue
+        
+        if isCharm {
+            let buttonSend = UIBarButtonItem(title: "Send", style: .Plain, target: self, action: "continueAction")
+            self.navigationItem.rightBarButtonItem = buttonSend
+
+        }
+        else{
+            
+            let buttonContinue = UIBarButtonItem(title: "Create", style: .Plain, target: self, action: "continueAction")
+            self.navigationItem.rightBarButtonItem = buttonContinue
+
+        }
+        
         
         self.tableView.rowHeight = 45
         

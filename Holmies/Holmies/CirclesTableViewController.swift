@@ -48,13 +48,26 @@ class CirclesTableViewController: UITableViewController {
         DataManager.sharedInstance.activeView = "circles"
         
         reloadData()
+        
+        
+        let buttonName = UIButton()
+        buttonName.setImage(UIImage(named:"people32.png"), forState: .Normal)
+        buttonName.frame = CGRect(x: 0, y: 0, width: 46 * 0.6, height: 34 * 0.6)
+        buttonName.addTarget(self, action: "addFriendSelector", forControlEvents: .TouchUpInside)
+        let leftButton = UIBarButtonItem()
+        leftButton.customView = buttonName
+        self.navigationItem.leftBarButtonItem = leftButton
+        self.navigationItem.hidesBackButton = true
+        
+    
+        
        let screenSize = self.view.frame.size.width
-        let peopleButton = DataManager.sharedInstance.imageResize(UIImage(named: "people32.png")!, sizeChange: CGSizeMake(46 * 0.6 * screenSize / 414, 34 * 0.6 * screenSize / 414))
-        
-        
-        
-        self.navigationItem.leftBarButtonItem?.image = peopleButton
-       self.navigationItem.leftBarButtonItem?.title = ""
+//        let peopleButton = DataManager.sharedInstance.imageResize(UIImage(named: "people32.png")!, sizeChange: CGSizeMake(46 * 0.6 * screenSize / 414, 34 * 0.6 * screenSize / 414))
+//        
+//        
+//        
+//        self.navigationItem.leftBarButtonItem?.image = peopleButton
+//       self.navigationItem.leftBarButtonItem?.title = ""
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmAccepted:", name: "charmAccepted", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmReceived:", name: "charmReceived", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "charmRejected:", name: "charmRejected", object: nil)
@@ -506,7 +519,7 @@ class CirclesTableViewController: UITableViewController {
                             imageView.image = imageName
                             
                             imageView.frame = CGRect(x: imageX, y: 0, width: sizeOfImageWidth, height: sizeOfImageHeight)
-                            imageView.layer.cornerRadius = 22.85 / 414 * self.view.frame.size.width
+                            imageView.layer.cornerRadius = 20 / 414 * self.view.frame.size.width
                         
                             print("tamanho da tela: \(self.view.frame.size.width)")
                             
@@ -1247,6 +1260,10 @@ class CirclesTableViewController: UITableViewController {
             }
         //}
         
+    }
+    
+    func addFriendSelector() {
+        self.performSegueWithIdentifier("addFriend", sender: self)
     }
     
 }
