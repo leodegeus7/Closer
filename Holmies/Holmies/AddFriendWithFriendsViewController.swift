@@ -33,7 +33,7 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
         addFriendTextField.layer.cornerRadius = 8
         addFriendTextField.tintColor = mainRed
         addFriendTextField.textColor = mainRed
-        addFriendTextField.attributedPlaceholder = NSAttributedString(string: "New friend username", attributes: [NSForegroundColorAttributeName: lightGray, NSFontAttributeName: UIFont(name: "SFCompactDisplay-Light", size: 15)!])
+        addFriendTextField.attributedPlaceholder = NSAttributedString(string: "Type new friend username", attributes: [NSForegroundColorAttributeName: lightGray, NSFontAttributeName: UIFont(name: "SFCompactDisplay-Light", size: 15)!])
         addFriendTextField.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
         
         FriendsTableView.backgroundColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1)
@@ -331,7 +331,7 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
             self.view.addSubview(infoView)
             viewIsOpen = true
             
-           
+           addFriendTextField.userInteractionEnabled = false
             
             
             
@@ -345,7 +345,8 @@ class AddFriendWithFriendsViewController: UIViewController, UITableViewDataSourc
     
     func recognizeTapGesture() {
         if viewIsOpen {
-           supportViewForFriend.hidden = true
+        supportViewForFriend.hidden = true
+        addFriendTextField.userInteractionEnabled = true
             
             for view in self.view.subviews {
                 if view.tag == 37 {

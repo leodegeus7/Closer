@@ -16,6 +16,7 @@
 		A71F7D0E1BD0215E00652750 /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = A71F7D0D1BD0215E00652750 /* pin.png */; };
 		A71F7D151BD0288E00652750 /* photoButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A71F7D141BD0288E00652750 /* photoButton.png */; };
 		A71F7D171BD0298300652750 /* RegisterNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71F7D161BD0298300652750 /* RegisterNewViewController.swift */; };
+		A72202851C21D24B00840A46 /* backButtonArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A72202841C21D24B00840A46 /* backButtonArrow.png */; };
 		A72BDBE71C0CC4BE00D0CA84 /* redLights.png in Resources */ = {isa = PBXBuildFile; fileRef = A72BDBE61C0CC4BE00D0CA84 /* redLights.png */; };
 		A731F55D1C10CAD700B5B55E /* compassViewBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A731F55C1C10CAD700B5B55E /* compassViewBackground.png */; };
 		A731F55F1C10CBCE00B5B55E /* whiteLine.png in Resources */ = {isa = PBXBuildFile; fileRef = A731F55E1C10CBCE00B5B55E /* whiteLine.png */; };
@@ -253,6 +254,7 @@
 		A71F7D0D1BD0215E00652750 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = "<group>"; };
 		A71F7D141BD0288E00652750 /* photoButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoButton.png; sourceTree = "<group>"; };
 		A71F7D161BD0298300652750 /* RegisterNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterNewViewController.swift; sourceTree = "<group>"; };
+		A72202841C21D24B00840A46 /* backButtonArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backButtonArrow.png; sourceTree = "<group>"; };
 		A72BDBE61C0CC4BE00D0CA84 /* redLights.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redLights.png; sourceTree = "<group>"; };
 		A731F55C1C10CAD700B5B55E /* compassViewBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compassViewBackground.png; sourceTree = "<group>"; };
 		A731F55E1C10CBCE00B5B55E /* whiteLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteLine.png; sourceTree = "<group>"; };
@@ -582,6 +584,7 @@
 				A7C37F551BDFF44C00FEE8D2 /* charmButton.png */,
 				A71F7D141BD0288E00652750 /* photoButton.png */,
 				A760AAB11BFA46DC00214F06 /* pin2.png */,
+				A72202841C21D24B00840A46 /* backButtonArrow.png */,
 				A7FEFB541BDE9E3600DFEC1E /* radialGradient.png */,
 				A760AAB31BFA488100214F06 /* pin025.png */,
 				A71F7D0D1BD0215E00652750 /* pin.png */,
@@ -1144,6 +1147,7 @@
 				A760AAB01BFA457A00214F06 /* MarkerView.xib in Resources */,
 				A7FA0E081C078E1A006D2CC5 /* compass2.png in Resources */,
 				A7FEFB551BDE9E3600DFEC1E /* radialGradient.png in Resources */,
+				A72202851C21D24B00840A46 /* backButtonArrow.png in Resources */,
 				A77F586D1C0E36A7008670B7 /* people.png in Resources */,
 				A7C37FA91BE00A8500FEE8D2 /* SF-Compact-Display-Light.otf in Resources */,
 				A7C37F5D1BDFF86000FEE8D2 /* newUser3.png in Resources */,

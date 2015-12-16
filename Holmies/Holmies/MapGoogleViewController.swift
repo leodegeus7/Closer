@@ -125,7 +125,16 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
 //        compassView.addGestureRecognizer(swipeRec)
 //        compassView.userInteractionEnabled = true
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "< Back", style: UIBarButtonItemStyle.Plain, target: self, action: "goBack")
+        let buttonName = UIButton()
+        buttonName.setImage(UIImage(named:"backButtonArrow.png"), forState: .Normal)
+        buttonName.frame = CGRect(x: 0, y: 0, width: 24 * 0.6, height: 41.29 * 0.6)
+        buttonName.addTarget(self, action: "goBack", forControlEvents: .TouchUpInside)
+        let leftButton = UIBarButtonItem()
+        leftButton.customView = buttonName
+        self.navigationItem.leftBarButtonItem = leftButton
+        self.navigationItem.hidesBackButton = true
+//        
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "< Back", style: UIBarButtonItemStyle.Plain, target: self, action: "goBack")
         
         if !isCharm {
             var existUserInGroup = false
