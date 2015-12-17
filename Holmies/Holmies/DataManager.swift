@@ -590,7 +590,7 @@ class DataManager {
             }
             
             if actualSharer.status != nil {
-            if actualSharer.status == "accepted" {
+            if actualSharer.status == "accepted" || actualSharer.status == "active" {
                 let name = user.name
                 let lat = user.location.latitude
                 let long = user.location.longitude
@@ -927,7 +927,7 @@ class DataManager {
                         }
                         
                         newSharer.updatedAt = sharer["updated_at"] as? String
-                        
+                        newSharer.updater = sharer["last_updater"] as? String
                         let ownerId = sharer["owner_user_id"]
                         let ownerIdFormat = "\(ownerId!)"
                         newSharer.owner = ownerIdFormat

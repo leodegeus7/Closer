@@ -25,4 +25,5 @@ class Sharer: NSObject {
     var updatedAt:String!
     var status:String!
     var receiver:String!
+    var updater:String!
 }
