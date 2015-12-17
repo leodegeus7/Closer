@@ -144,7 +144,6 @@
 		CDABC20A1BB1E9C500DE6A98 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDABC2091BB1E9C500DE6A98 /* CFNetwork.framework */; };
 		CDABC20C1BB1E9CD00DE6A98 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDABC20B1BB1E9CD00DE6A98 /* CoreGraphics.framework */; };
 		CDABC20E1BB1E9D600DE6A98 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDABC20D1BB1E9D600DE6A98 /* Security.framework */; };
-		CDABC2101BB1E9DB00DE6A98 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDABC20F1BB1E9DB00DE6A98 /* StoreKit.framework */; };
 		CDB0C94D1BCEE0290020BFB5 /* AESCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB0C9461BCEE0290020BFB5 /* AESCrypt.m */; };
 		CDB0C94E1BCEE0290020BFB5 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB0C9481BCEE0290020BFB5 /* NSData+Base64.m */; };
 		CDB0C94F1BCEE0290020BFB5 /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB0C94A1BCEE0290020BFB5 /* NSData+CommonCrypto.m */; };
@@ -417,7 +416,6 @@
 		CDABC2091BB1E9C500DE6A98 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		CDABC20B1BB1E9CD00DE6A98 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CDABC20D1BB1E9D600DE6A98 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		CDABC20F1BB1E9DB00DE6A98 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		CDB0C9451BCEE0290020BFB5 /* AESCrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESCrypt.h; sourceTree = "<group>"; };
 		CDB0C9461BCEE0290020BFB5 /* AESCrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESCrypt.m; sourceTree = "<group>"; };
 		CDB0C9471BCEE0290020BFB5 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
@@ -447,7 +445,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDABC2101BB1E9DB00DE6A98 /* StoreKit.framework in Frameworks */,
 				CDABC20E1BB1E9D600DE6A98 /* Security.framework in Frameworks */,
 				CDABC20C1BB1E9CD00DE6A98 /* CoreGraphics.framework in Frameworks */,
 				CDABC20A1BB1E9C500DE6A98 /* CFNetwork.framework in Frameworks */,
@@ -614,7 +611,6 @@
 				CDABC1FC1BB1E88200DE6A98 /* Parse.framework */,
 				CD6BAA881B98DAB0008614B0 /* QuartzCore.framework */,
 				CDABC20D1BB1E9D600DE6A98 /* Security.framework */,
-				CDABC20F1BB1E9DB00DE6A98 /* StoreKit.framework */,
 				CD6BAA8A1B98DAB6008614B0 /* SystemConfiguration.framework */,
 				A7FCC5181BC4CE5B00AEDA3F /* NotificationCenter.framework */,
 				49A1231FEAA34E173CC60B8D /* Pods_Holmies.framework */,
@@ -907,6 +903,9 @@
 							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
 							};
 							com.apple.Maps.iOS = {
 								enabled = 0;
