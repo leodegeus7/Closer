@@ -394,6 +394,7 @@ class CirclesTableViewController: UITableViewController {
                     
                     viewLoading.layer.cornerRadius = 20 / 672 * self.view.frame.size.height
                     tableView.userInteractionEnabled = false
+                    self.navigationController?.navigationBar.userInteractionEnabled = false
                     
                 
                     
@@ -465,6 +466,7 @@ class CirclesTableViewController: UITableViewController {
                                     self.viewLoading.fadeOut(0.3, completion: { (didComplete) -> Void in
                                         self.viewLoading.hidden = true
                                         self.tableView.userInteractionEnabled = true
+                                        self.navigationController?.navigationBar.userInteractionEnabled = true
                                     })
                                 }
                             }
