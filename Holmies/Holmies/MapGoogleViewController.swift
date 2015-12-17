@@ -255,8 +255,8 @@ class MapGoogleViewController: UIViewController, CLLocationManagerDelegate, GMSM
                 
                 
                 charm.sharer.status = "found"
-                DataManager.sharedInstance.lastCharms[charmIndex] = charm
-                self.helper.updateSharerWithID(charm.sharer.id, until: nil, status: "found", completion: { (result) -> Void in
+                DataManager.sharedInstance.myCharms[charmIndex] = charm
+                self.helper.updateSharerWithID(charm.sharer.id, until: nil, status: "found",updater: DataManager.sharedInstance.myUser.userID, completion: { (result) -> Void in
                     self.navigationController?.popViewControllerAnimated(true)
                     DataManager.sharedInstance.isCharm = false
 //                    if DataManager.sharedInstance.lastCharms.count != 0 {

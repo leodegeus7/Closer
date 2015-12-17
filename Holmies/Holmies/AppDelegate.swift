@@ -326,62 +326,107 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
                 let lastCharms = DataManager.sharedInstance.lastCharms
                 let myCharms = DataManager.sharedInstance.myCharms
                 var index = 0
-                for charm in DataManager.sharedInstance.myCharms {
-                    
-                    if charm.sharer.status == "pending" {
-                        if charm.sharer.receiver == DataManager.sharedInstance.myUser.userID {
-                            let myDict: [String:AnyObject] = [ "charmIndex": index]
-                            NSNotificationCenter.defaultCenter().postNotificationName("charmReceived", object: nil ,userInfo: myDict)
-                        }
-                        else {
-                            let duration = DataManager.sharedInstance.verifySharerStatus(charm.sharer)
-                            
-                            if duration <= 0 {
-                                charm.sharer.status = "expired"
-                                DataManager.sharedInstance.myCharms[index] = charm
-                                self.helper.updateSharerWithID(charm.sharer.id, until: nil, status: "expired", completion: { (result) -> Void in
-                                    
-                                })
+                    for charm in DataManager.sharedInstance.myCharms {
+                        if !DataManager.sharedInstance.isCharm {
+                            if charm.sharer.updater != DataManager.sharedInstance.myUser.userID {
+                                if charm.sharer.status == "active" {
+                                    let myDict: [String:AnyObject] = [ "charmIndex": index]
+                                    NSNotificationCenter.defaultCenter().postNotificationName("charmActive", object: nil ,userInfo: myDict)
+                                }
+                                else if charm.sharer.status == "pending" {
+                                    let myDict: [String:AnyObject] = [ "charmIndex": index]
+                                        NSNotificationCenter.defaultCenter().postNotificationName("charmReceived", object: nil ,userInfo: myDict)
+                                }
+                                else if charm.sharer.status == "found" {
+                                    let myDict: [String:AnyObject] = [ "charmIndex": index]
+                                    NSNotificationCenter.defaultCenter().postNotificationName("charmFound", object: nil ,userInfo: myDict)
+                                }
+                                else if charm.sharer.status == "accepted" {
+                                    let myDict: [String:AnyObject] = [ "charmIndex": index]
+                                    NSNotificationCenter.defaultCenter().postNotificationName("charmAccepted", object: nil ,userInfo: myDict)
+                                }
+                                else if charm.sharer.status == "rejected" {
+                                    let myDict: [String:AnyObject] = [ "charmIndex": index]
+                                    NSNotificationCenter.defaultCenter().postNotificationName("charmRejected", object: nil ,userInfo: myDict)
+                                }
+                            }
+                            else {
+                                if charm.sharer.status == "pending" {
+                                    let duration = DataManager.sharedInstance.verifySharerStatus(charm.sharer)
+                                    if duration <= 0 {
+                                        charm.sharer.status = "expired"
+                                        DataManager.sharedInstance.myCharms[index] = charm
+                                        let myDict: [String:AnyObject] = [ "charmIndex": index]
+                                        NSNotificationCenter.defaultCenter().postNotificationName("charmExpired", object: nil ,userInfo: myDict)
+                                    }
+                                }
+
                             }
                         }
-                    }
-                    
-                    var charmsChanged = false
-                    
-                    if lastCharms.count == 0 && myCharms.count != 0 {
-                        charmsChanged = true
-                    }
-                    else if index > lastCharms.count {
-                        charmsChanged = true
-                    }
-                    else if charm.sharer.status != lastCharms[index].sharer.status {
-                        charmsChanged = true
-                    }
-                    
-                    if charmsChanged {
-                        if charm.sharer.status == "accepted" {
-                            let myDict: [String:AnyObject] = [ "charmIndex": index]
-                            NSNotificationCenter.defaultCenter().postNotificationName("charmAccepted", object: nil ,userInfo: myDict)
-                        }
-                        else if charm.sharer.status == "found" {
+                        else if charm.sharer.status == "found" && charm.sharer.updater != DataManager.sharedInstance.myUser.userID {
                             let myDict: [String:AnyObject] = [ "charmIndex": index]
                             NSNotificationCenter.defaultCenter().postNotificationName("charmFound", object: nil ,userInfo: myDict)
                         }
-                        else if charm.sharer.status == "rejected" {
-                            let myDict: [String:AnyObject] = [ "charmIndex": index]
-                            NSNotificationCenter.defaultCenter().postNotificationName("charmRejected", object: nil ,userInfo: myDict)
-                        }
-                        else if charm.sharer.status == "expired" {
-                            let myDict: [String:AnyObject] = [ "charmIndex": index]
-                            NSNotificationCenter.defaultCenter().postNotificationName("charmExpired", object: nil ,userInfo: myDict)
-                        }
                         
+                        index++
                     }
-                    index++
                 }
-                DataManager.sharedInstance.didUpdateCharms = false
-                DataManager.sharedInstance.lastCharms = DataManager.sharedInstance.myCharms
             }
+            
+//                    if charm.sharer.status == "pending" {
+//                        if charm.sharer.receiver == DataManager.sharedInstance.myUser.userID {
+//                            let myDict: [String:AnyObject] = [ "charmIndex": index]
+//                            NSNotificationCenter.defaultCenter().postNotificationName("charmReceived", object: nil ,userInfo: myDict)
+//                        }
+//                        else {
+//                            let duration = DataManager.sharedInstance.verifySharerStatus(charm.sharer)
+//                            
+//                            if duration <= 0 {
+//                                charm.sharer.status = "expired"
+//                                DataManager.sharedInstance.myCharms[index] = charm
+//                                self.helper.updateSharerWithID(charm.sharer.id, until: nil, status: "expired", updater: DataManager.sharedInstance.myUser.userID, completion: { (result) -> Void in
+//            
+//                                })
+//                            }
+//                        }
+//                    }
+//                    
+//                    var charmsChanged = false
+//                    
+//                    if lastCharms.count == 0 && myCharms.count != 0 {
+//                        charmsChanged = true
+//                    }
+//                    else if index > lastCharms.count {
+//                        charmsChanged = true
+//                    }
+//                    else if charm.sharer.status != lastCharms[index].sharer.status {
+//                        charmsChanged = true
+//                    }
+//                    
+//                    if charmsChanged {
+//                        if charm.sharer.status == "accepted" {
+//                            let myDict: [String:AnyObject] = [ "charmIndex": index]
+//                            NSNotificationCenter.defaultCenter().postNotificationName("charmAccepted", object: nil ,userInfo: myDict)
+//                        }
+//                        else if charm.sharer.status == "found" {
+//                            let myDict: [String:AnyObject] = [ "charmIndex": index]
+//                            NSNotificationCenter.defaultCenter().postNotificationName("charmFound", object: nil ,userInfo: myDict)
+//                        }
+//                        else if charm.sharer.status == "rejected" {
+//                            let myDict: [String:AnyObject] = [ "charmIndex": index]
+//                            NSNotificationCenter.defaultCenter().postNotificationName("charmRejected", object: nil ,userInfo: myDict)
+//                        }
+//                        else if charm.sharer.status == "expired" {
+//                            let myDict: [String:AnyObject] = [ "charmIndex": index]
+//                            NSNotificationCenter.defaultCenter().postNotificationName("charmExpired", object: nil ,userInfo: myDict)
+//                        }
+//                        
+//                    }
+//                    index++
+//                }
+//                DataManager.sharedInstance.didUpdateCharms = false
+//                DataManager.sharedInstance.lastCharms = DataManager.sharedInstance.myCharms
+//            }
             if DataManager.sharedInstance.isCharm {
                 DataManager.sharedInstance.updateActiveFriendLocation()
             }
@@ -389,5 +434,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
     }
 
 
-}
+
 
