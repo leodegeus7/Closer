@@ -3,18 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "MapGoogleViewController.mapView(GMSMapView!, markerInfoContents : GMSMarker!) -&gt; UIView!:MapGoogleViewController.swift">
+         contextName = "CirclesTableViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:CirclesTableViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.view.frame.size.width">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "AddFriendWithFriendsViewController.tableView(UITableView, didSelectRowAtIndexPath : NSIndexPath) -&gt; ():AddFriendWithFriendsViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "infoView.userImage.layer.frame.size.height">
+               value = "cellActive.imageView?.image">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -27,10 +19,43 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "CirclesTableViewController.(reloadData(CirclesTableViewController) -&gt; () -&gt; ()).(closure #1).(closure #1).(closure #2):CirclesTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tableView.subViews">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "LoginViewControllerNew.(viewDidLoad(LoginViewControllerNew) -&gt; () -&gt; ()).(closure #1):LoginViewControllerNew.swift">
          <PersistentStrings>
             <PersistentString
+               value = "self.view.frame.size.height">
+            </PersistentString>
+            <PersistentString
                value = "screenSize">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AddFriendWithFriendsViewController.tableView(UITableView, didSelectRowAtIndexPath : NSIndexPath) -&gt; ():AddFriendWithFriendsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "infoView.userImage.layer.frame.size.height">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CirclesTableViewController.reloadData() -&gt; ():CirclesTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "viewLoading.frame.size.width ">
+            </PersistentString>
+            <PersistentString
+               value = "circle1.frame">
+            </PersistentString>
+            <PersistentString
+               value = "viewLoading.frame.size.height">
             </PersistentString>
             <PersistentString
                value = "self.view.frame.size.height">
@@ -38,10 +63,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "CirclesTableViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:CirclesTableViewController.swift">
+         contextName = "MapGoogleViewController.mapView(GMSMapView!, markerInfoContents : GMSMarker!) -&gt; UIView!:MapGoogleViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "cellActive.imageView?.image">
+               value = "self.view.frame.size.width">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

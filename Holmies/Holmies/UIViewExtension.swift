@@ -65,9 +65,51 @@ extension UIView {
         
     }
     
+    
+    func fadeOut(duration: NSTimeInterval, completion: (didComplete: Bool) -> Void ) {
+        UIView.animateWithDuration(duration, animations: { () -> Void in
+            self.alpha = 0.0
+            })
+            { (animationCompleted) -> Void in
+                completion (didComplete: true)
+        }
+        
+    }
+    
+    
+    
+//    func rotate360Degrees(duration: CFTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
+//        let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
+//        rotateAnimation.fromValue = 0.0
+//        rotateAnimation.toValue = CGFloat(M_PI)
+//        rotateAnimation.duration = duration
+//        
+//        
+//        if let delegate: AnyObject = completionDelegate {
+//            rotateAnimation.delegate = delegate
+//        }
+//        self.layer.addAnimation(rotateAnimation, forKey: nil)
+//
+//    }
+//    
+//    func rotateMinus360Degrees(duration: CFTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
+//        let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
+//        rotateAnimation.fromValue = 0.0
+//        rotateAnimation.toValue = -(CGFloat(M_PI))
+//        rotateAnimation.duration = duration
+//        
+//        
+//        if let delegate: AnyObject = completionDelegate {
+//            rotateAnimation.delegate = delegate
+//        }
+//        self.layer.addAnimation(rotateAnimation, forKey: nil)
+//        
+//    }
   
   class func viewFromNibName(name: String) -> UIView? {
     let views = NSBundle.mainBundle().loadNibNamed(name, owner: nil, options: nil)
     return views.first as? UIView
   }
+    
+    
 }

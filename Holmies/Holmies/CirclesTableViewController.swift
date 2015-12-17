@@ -17,7 +17,13 @@ class CirclesTableViewController: UITableViewController {
     let lightBlue:UIColor = UIColor(red: 61.0/255.0, green: 210.0/255.0, blue: 228.0/255.0, alpha: 1)
     let mainRed: UIColor = UIColor(red: 220.0/255.0, green: 32.0/255.0, blue: 63.0/255.0, alpha: 1)
     let lightGray = UIColor(red: 170.0/255.0, green: 170.0/255.0, blue: 170.0/255.0, alpha: 1.0)
-
+    
+    let viewLoading = UIView()
+    var viewLoadigOn = false
+    var circle1 = UIImageView()
+    var circle2 = UIImageView()
+    var rotation = false
+    
     var imageX = 0.0
     
     var lastSelectedIndex = 0
@@ -320,13 +326,80 @@ class CirclesTableViewController: UITableViewController {
     }
     
     func refreshData() {
+        viewLoadigOn = true
         reloadData()
+        viewLoadigOn = false
+
+        
+
+        
     }
+    
     
     func reloadData() {
         if DataManager.sharedInstance.appIsActive {
             self.tableView.reloadData()
             DataManager.sharedInstance.isUpdating = true
+            
+            if viewLoadigOn == true {
+                if DataManager.sharedInstance.isUpdating {
+                    let tableViewHeight = self.navigationController?.view.frame.size.height
+                    let tableViewWidth = self.navigationController?.view.frame.size.width
+                    
+                    viewLoading.frame = CGRect(x: (tableViewWidth! / 2) - (tableViewWidth! / 3), y: (tableViewHeight! / 2 - tableViewHeight! / 8), width: (tableViewWidth! / 1.5), height: (tableViewHeight! / 4))
+                    viewLoading.backgroundColor = mainRed
+                    viewLoading.layer.shadowColor = UIColor.blackColor().CGColor
+                    viewLoading.layer.shadowOpacity = 0.5
+                    viewLoading.layer.shadowOffset = CGSizeZero
+                    viewLoading.layer.shadowRadius = 10
+                    viewLoading.layer.shadowPath = UIBezierPath(rect: viewLoading.bounds).CGPath
+                    viewLoading.layer.shouldRasterize = true
+                    viewLoading.tag = 73
+                    viewLoading.hidden = false
+                    viewLoading.fadeIn(0.1)
+                    self.navigationController?.view.addSubview(viewLoading)
+                    
+                    
+                   circle1.frame = CGRect(x: (viewLoading.frame.size.width / 2) - (viewLoading.frame.size.height / 2), y: (viewLoading.frame.size.height / 2) - (viewLoading.frame.size
+                    .height / 2), width: (viewLoading.frame.size.height), height: (viewLoading.frame.size.height))
+                    circle1.image = UIImage(named: "circle1.png")
+                    viewLoading.addSubview(circle1)
+                    
+                    circle2.frame = CGRect(x: (viewLoading.frame.size.width / 2) - (viewLoading.frame.size.height / 2.35), y: (viewLoading.frame.size.height / 2) - (viewLoading.frame.size.height / 2.35), width: (viewLoading.frame.size.height * 0.85), height: (viewLoading.frame.size.height * 0.85))
+                    circle2.image = UIImage(named: "circle4.png")
+                    viewLoading.addSubview(circle2)
+                    
+//                    circle1.rotate360Degrees()
+//                    circle2.rotateMinus360Degrees()
+//                    circle1.rotate360Degrees()
+//                    circle2.rotateMinus360Degrees()
+                    
+                    let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
+                    rotationAnimation.fromValue = 0.0
+                    rotationAnimation.toValue = M_PI * 2
+                    rotationAnimation.duration = 1.0
+                    rotationAnimation.repeatCount = 50
+                    
+                    
+                    let rotationAnimation2 = CABasicAnimation(keyPath: "transform.rotation")
+                    rotationAnimation2.fromValue = 0.0
+                    rotationAnimation2.toValue = -(M_PI * 2)
+                    rotationAnimation2.duration = 1.0
+                    rotationAnimation2.repeatCount = 50
+                    
+                    self.circle1.layer.addAnimation(rotationAnimation2, forKey: nil)
+                    self.circle2.layer.addAnimation(rotationAnimation, forKey: nil)
+                    
+                    viewLoading.layer.cornerRadius = 20 / 672 * self.view.frame.size.height
+                    tableView.userInteractionEnabled = false
+                    
+                
+                    
+                }
+            }
+            
+            
+            
             if DataManager.sharedInstance.testIfFileExistInDocuments("/\(DataManager.sharedInstance.myUser.userID).jpg") {
                 let id = DataManager.sharedInstance.myUser.userID
                 let image = DataManager.sharedInstance.findImage(id)
@@ -383,8 +456,25 @@ class CirclesTableViewController: UITableViewController {
                         	}
                     	}
                     	DataManager.sharedInstance.finishedAllRequest = true
+                        
+                        if DataManager.sharedInstance.finishedAllRequest {
+                            for view in (self.navigationController?.view.subviews)! {
+                                if view.tag == 73 {
+                                    self.viewLoading.fadeOut(0.3, completion: { (didComplete) -> Void in
+                                        self.viewLoading.hidden = true
+                                        self.tableView.userInteractionEnabled = true
+                                    })
+                                }
+                            }
+                            
+                        
+
+                        }
+                        
                     	DataManager.sharedInstance.isUpdating = false
-                    
+                        
+                        
+                        
                 	})
                     
                     
@@ -1265,6 +1355,9 @@ class CirclesTableViewController: UITableViewController {
     func addFriendSelector() {
         self.performSegueWithIdentifier("addFriend", sender: self)
     }
+    
+    
+    
     
 }
 
