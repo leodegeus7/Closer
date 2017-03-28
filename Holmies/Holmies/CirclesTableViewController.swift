@@ -162,7 +162,7 @@ class CirclesTableViewController: UITableViewController {
         //let ll = FBSDKAccessToken.currentAccessToken().tokenString
         if (FBSDKAccessToken.currentAccessToken() == nil) {
             print("Nao fez login face")
-            if let fbId = DataManager.sharedInstance.myUser.facebookID {
+            if let fbId = DataManager.sharedInstance.myUser.ID {
                 print(fbId)
                 
                 let alert = UIAlertController(title: "Facebook", message: "We need to link your Facebook Account again", preferredStyle: UIAlertControllerStyle.Alert)
